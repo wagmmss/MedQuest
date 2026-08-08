@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "medquest",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["app/backend/app.py"],
+      "port": 5050
+    },
+    {
+      "name": "medquest-frontend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "app/frontend"],
+      "port": 3000
+    }
+  ]
+}
