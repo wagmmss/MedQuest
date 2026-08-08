@@ -8,3 +8,4 @@ libsql-client
 PyJWT
 cryptography
 gunicorn
+fsrs
