@@ -5,7 +5,10 @@ import {
   BatchAttemptItem, BatchAttemptResult, Flashcard, FlashcardGenerateResponse
 } from "@/types/api";
 
-const API_BASE = process.env.NEXT_PUBLIC_APP_URL || (typeof window !== "undefined" ? "" : "http://localhost:3000");
+const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
+  (typeof window !== "undefined" ? "" : "http://localhost:3000")));
 
 /**
  * Base fetch function with default headers
