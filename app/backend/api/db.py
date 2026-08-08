@@ -89,18 +89,19 @@ def init_db(app):
     """Cria tabelas de usuário se não existirem e garante colunas novas."""
     with app.app_context():
         db = get_db()
-        db.execute("CREATE TABLE IF NOT EXISTS favorites (question_id INTEGER PRIMARY KEY, user_id TEXT DEFAULT '1')")
+        db.execute("CREATE TABLE IF NOT EXISTS favorites (question_id INTEGER, user_id TEXT DEFAULT '1', PRIMARY KEY (question_id, user_id))")
         db.execute("""CREATE TABLE IF NOT EXISTS spaced_repetition (
-            question_id INTEGER PRIMARY KEY, efactor REAL, interval INTEGER,
-            next_review_date TEXT, user_id TEXT DEFAULT '1', fsrs_card TEXT)""")
+            question_id INTEGER, efactor REAL, interval INTEGER,
+            next_review_date TEXT, user_id TEXT DEFAULT '1', fsrs_card TEXT,
+            PRIMARY KEY (question_id, user_id))""")
         db.execute("""CREATE TABLE IF NOT EXISTS planner_progress (
-            week INTEGER PRIMARY KEY, studied INTEGER DEFAULT 0, studied_at TEXT,
+            week INTEGER, studied INTEGER DEFAULT 0, studied_at TEXT,
             rev24h INTEGER DEFAULT 0, rev7d INTEGER DEFAULT 0, rev30d INTEGER DEFAULT 0,
-            user_id TEXT DEFAULT '1')""")
+            user_id TEXT DEFAULT '1', PRIMARY KEY (week, user_id))""")
         db.execute("""CREATE TABLE IF NOT EXISTS planner_config (
-            id INTEGER PRIMARY KEY CHECK (id = 1), exam_date TEXT, start_date TEXT,
+            user_id TEXT PRIMARY KEY, exam_date TEXT, start_date TEXT,
             days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30,
-            updated_at TEXT, user_id TEXT DEFAULT '1')""")
+            updated_at TEXT)""")
         db.execute("""CREATE TABLE IF NOT EXISTS flashcards (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             question_id INTEGER NOT NULL,

@@ -214,7 +214,7 @@ def submit_attempt(qid):
     db.execute("""
         INSERT INTO spaced_repetition (question_id, next_review_date, fsrs_card, user_id)
         VALUES (?, ?, ?, ?)
-        ON CONFLICT(question_id) DO UPDATE SET
+        ON CONFLICT(question_id, user_id) DO UPDATE SET
             next_review_date = excluded.next_review_date, fsrs_card = excluded.fsrs_card
     """, (qid, next_review, card_json, g.user_id))
     db.commit()
@@ -287,7 +287,7 @@ def submit_attempt_batch():
         db.execute("""
             INSERT INTO spaced_repetition (question_id, next_review_date, fsrs_card, user_id)
             VALUES (?, ?, ?, ?)
-            ON CONFLICT(question_id) DO UPDATE SET
+            ON CONFLICT(question_id, user_id) DO UPDATE SET
                 next_review_date = excluded.next_review_date, fsrs_card = excluded.fsrs_card
         """, (item.question_id, next_review, card_json, g.user_id))
 

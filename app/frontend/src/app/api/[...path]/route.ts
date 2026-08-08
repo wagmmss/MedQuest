@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 
-const BACKEND_URL = process.env.FLASK_API_URL || "http://127.0.0.1:5000";
+const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "http://127.0.0.1:5000";
 
-export async function ANY(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+async function handler(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   const { path } = await params;
   const targetUrl = `${BACKEND_URL}/api/${path.join("/")}${req.nextUrl.search}`;
 
@@ -34,9 +34,9 @@ export async function ANY(req: NextRequest, { params }: { params: Promise<{ path
   });
 }
 
-export const GET = ANY;
-export const POST = ANY;
-export const PUT = ANY;
-export const PATCH = ANY;
-export const DELETE = ANY;
-export const OPTIONS = ANY;
+export const GET = handler;
+export const POST = handler;
+export const PUT = handler;
+export const PATCH = handler;
+export const DELETE = handler;
+export const OPTIONS = handler;

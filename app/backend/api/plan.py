@@ -29,14 +29,14 @@ def planner_config():
         except ValidationError as e:
             return jsonify({"error": "invalid input", "details": e.errors()}), 400
         db.execute("""
-            INSERT INTO planner_config (id, exam_date, start_date, days_per_week, questions_per_day, updated_at, user_id)
-            VALUES (1, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(id) DO UPDATE SET
+            INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?)
+            ON CONFLICT(user_id) DO UPDATE SET
                 exam_date = excluded.exam_date, start_date = excluded.start_date,
                 days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
                 updated_at = excluded.updated_at
-        """, (cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
-              datetime.now(timezone.utc).isoformat(), g.user_id))
+        """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
+              datetime.now(timezone.utc).isoformat()))
         db.commit()
         return jsonify({"success": True})
 
@@ -71,13 +71,13 @@ def planner_study(week):
     if studied:
         db.execute("""
             INSERT INTO planner_progress (week, studied, studied_at, user_id) VALUES (?, 1, ?, ?)
-            ON CONFLICT(week) DO UPDATE SET studied = 1, studied_at = excluded.studied_at
+            ON CONFLICT(week, user_id) DO UPDATE SET studied = 1, studied_at = excluded.studied_at
         """, (week, studied_at, g.user_id))
     else:
         db.execute("""
             INSERT INTO planner_progress (week, studied, studied_at, rev24h, rev7d, rev30d, user_id)
             VALUES (?, 0, NULL, 0, 0, 0, ?)
-            ON CONFLICT(week) DO UPDATE SET studied = 0, studied_at = NULL, rev24h = 0, rev7d = 0, rev30d = 0
+            ON CONFLICT(week, user_id) DO UPDATE SET studied = 0, studied_at = NULL, rev24h = 0, rev7d = 0, rev30d = 0
         """, (week, g.user_id))
     db.commit()
     return jsonify({"success": True, "studied": bool(studied), "studied_at": studied_at})
@@ -98,7 +98,7 @@ def planner_revision(week):
     checked = 1 if data.checked else 0
     db.execute(f"""
         INSERT INTO planner_progress (week, {data.type}, user_id) VALUES (?, ?, ?)
-        ON CONFLICT(week) DO UPDATE SET {data.type} = excluded.{data.type}
+        ON CONFLICT(week, user_id) DO UPDATE SET {data.type} = excluded.{data.type}
     """, (week, checked, g.user_id))
     db.commit()
     return jsonify({"success": True, "type": data.type, "checked": bool(checked)})
