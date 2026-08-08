@@ -93,7 +93,8 @@
       "Bash(python -c \"from app import app; print\\('import OK,', len\\(list\\(app.url_map.iter_rules\\(\\)\\)\\), 'rotas'\\)\")",
       "Bash(PYTHONIOENCODING=utf-8 python -c \"import zipfile; z=zipfile.ZipFile\\('../../medquest_deploy.zip'\\); api=[n for n in z.namelist\\(\\) if n.startswith\\('backend/api/'\\)]; print\\('\\\\n'.join\\(api\\)\\)\")",
       "Bash(git commit -q -m '@ *)",
-      "Bash(PYTHONIOENCODING=utf-8 python -c \"import sqlite3;c=sqlite3.connect\\('medquest.db'\\);r=c.execute\\('SELECT question_id, selected_letter, is_correct, confidence, time_spent_ms, answered_at FROM attempts ORDER BY id DESC LIMIT 1'\\).fetchone\\(\\);print\\('última tentativa:', r\\)\")"
+      "Bash(PYTHONIOENCODING=utf-8 python -c \"import sqlite3;c=sqlite3.connect\\('medquest.db'\\);r=c.execute\\('SELECT question_id, selected_letter, is_correct, confidence, time_spent_ms, answered_at FROM attempts ORDER BY id DESC LIMIT 1'\\).fetchone\\(\\);print\\('última tentativa:', r\\)\")",
+      "Bash(PYTHONIOENCODING=utf-8 python -c \"import json;d=json.load\\(open\\('package.json'\\)\\);print\\({k:v for k,v in {**d.get\\('dependencies',{}\\),**d.get\\('devDependencies',{}\\)}.items\\(\\) if k in \\('next','react','tailwindcss','@tailwindcss/postcss','typescript'\\)}\\)\")"
     ]
   }
 }

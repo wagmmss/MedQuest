@@ -16,7 +16,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import extract  # reaproveita parse_pdf, collect_image_candidates, filter_decorative_and_save, assign_images_to_questions
 
-SRC_DIR = r"C:\Users\wmors\OneDrive\Documentos\MedQuest"
+SRC_DIR = os.environ.get("MEDQUEST_PDF_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "medquest.db")
 
 DECORATIVE_REPEAT_THRESHOLD = 3

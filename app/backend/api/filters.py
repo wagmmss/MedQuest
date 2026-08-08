@@ -1,5 +1,6 @@
 """Construção das cláusulas de filtro da fila de estudo (compartilhado por rotas)."""
 from datetime import datetime, timezone
+from flask import g
 
 
 def question_filter_clauses(args):
@@ -33,19 +34,27 @@ def question_filter_clauses(args):
 
     status = args.get("status", "all")
     if status == "unanswered":
-        clauses.append("q.id NOT IN (SELECT question_id FROM attempts)")
+        clauses.append("q.id NOT IN (SELECT question_id FROM attempts WHERE user_id = ?)")
+        params.append(g.user_id)
     elif status == "wrong":
         clauses.append("""q.id IN (
-            SELECT question_id FROM attempts a1 WHERE a1.is_correct = 0
-            AND a1.id = (SELECT MAX(a2.id) FROM attempts a2 WHERE a2.question_id = a1.question_id)
+            SELECT question_id FROM attempts a1 WHERE a1.user_id = ? AND a1.is_correct = 0
+            AND a1.id = (SELECT MAX(a2.id) FROM attempts a2 WHERE a2.user_id = ? AND a2.question_id = a1.question_id)
         )""")
+        params.extend([g.user_id, g.user_id])
     elif status == "answered":
-        clauses.append("q.id IN (SELECT question_id FROM attempts)")
+        clauses.append("q.id IN (SELECT question_id FROM attempts WHERE user_id = ?)")
+        params.append(g.user_id)
     elif status == "srs_due":
-        clauses.append("q.id IN (SELECT question_id FROM spaced_repetition WHERE next_review_date <= ?)")
-        params.append(datetime.now(timezone.utc).isoformat())
+        clauses.append("q.id IN (SELECT question_id FROM spaced_repetition WHERE user_id = ? AND next_review_date <= ?)")
+        params.extend([g.user_id, datetime.now(timezone.utc).isoformat()])
 
     if args.get("favorite") == "1":
-        clauses.append("q.id IN (SELECT question_id FROM favorites)")
+        clauses.append("q.id IN (SELECT question_id FROM favorites WHERE user_id = ?)")
+        params.append(g.user_id)
+
+    if args.get("id"):
+        clauses.append("q.id = ?")
+        params.append(args.get("id"))
 
     return clauses, params

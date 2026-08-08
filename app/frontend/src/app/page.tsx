@@ -1,171 +1,98 @@
-"use client";
+import { api } from "@/lib/api";
+import { BrainCircuit, Flame, Target, Trophy, Clock } from "lucide-react";
+import Link from "next/link";
+import { OverviewStats } from "@/types/api";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Activity, BookOpen, BrainCircuit, Calendar, Target, Trophy } from "lucide-react";
+// This is a Server Component. Next.js 16.3 supports async server components naturally.
+export default async function Dashboard() {
+  const stats: OverviewStats = await api.stats.getOverview();
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5050";
+  const accuracyFormatted = stats.accuracy_all_attempts != null 
+    ? (stats.accuracy_all_attempts * 100).toFixed(1) + "%" 
+    : "--";
 
-interface PlanTopic {
-  area: string;
-  subtema: string;
-  questions_available: number;
-}
-
-interface PlanWeek {
-  week: number;
-  date: string;
-  topics: PlanTopic[];
-  recommended_hours: number;
-}
-
-export default function Dashboard() {
-  const [plan, setPlan] = useState<PlanWeek[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [examDate, setExamDate] = useState("2027-01-15");
-
-  const generatePlan = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`${API_URL}/api/v1/generate_plan`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          exam_date: examDate,
-          hours_per_week: 25,
-        }),
-      });
-      const data = await res.json();
-      if (data.plan) {
-        setPlan(data.plan);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-    setLoading(false);
-  };
+  const coverageFormatted = stats.coverage_pct != null
+    ? (stats.coverage_pct * 100).toFixed(1) + "%"
+    : "--";
 
   return (
-    <div className="min-h-screen p-8 max-w-7xl mx-auto space-y-12">
-      <header className="flex justify-between items-center animate-fade-in">
+    <div className="flex flex-col gap-8 animate-in fade-in duration-500 pb-10">
+      
+      {/* Header section with Hero Number and Primary Action */}
+      <section className="bg-card border border-border shadow-1 rounded-xl p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+        {/* Subtle accent line */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-primary/80" />
+        
         <div>
-          <h1 className="text-4xl font-bold text-white flex items-center gap-3">
-            <Activity className="text-primary w-8 h-8" />
-            MedQuest
+          <h1 className="text-display font-bold text-foreground tracking-tight mb-2 flex items-center gap-3">
+            <span className="text-primary">{stats.srs_due_count}</span>
+            <span className="text-h2 font-semibold text-muted-foreground">revisões hoje</span>
           </h1>
-          <p className="text-muted-foreground mt-2 text-lg">
-            Sua preparação premium para a Residência Médica USP.
+          <p className="text-muted-foreground text-body-l max-w-xl">
+            O algoritmo de repetição espaçada separou {stats.srs_due_count} {stats.srs_due_count === 1 ? 'questão' : 'questões'} para fixação de longo prazo. A consistência diária é o fator número 1 de aprovação.
           </p>
         </div>
-        <div className="flex gap-4 items-center">
-          <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full border border-border">
-            <Trophy className="text-accent w-5 h-5" />
-            <span className="font-bold text-white">12 Dias Ofensiva</span>
-          </div>
-          <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center font-bold text-white shadow-lg">
-            WM
-          </div>
-        </div>
-      </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-slide-up">
-        {/* Planner Config Card */}
-        <motion.div 
-          whileHover={{ scale: 1.02 }}
-          className="bg-card p-6 rounded-2xl border border-border shadow-xl flex flex-col justify-between"
+        <Link 
+          href="/estudar?status=srs_due&limit=100"
+          className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-lg font-medium text-lg shadow-1 transition-all hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3 whitespace-nowrap shrink-0"
         >
-          <div>
-            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-              <Calendar className="text-secondary w-5 h-5" />
-              Alvo USP
-            </h3>
-            <p className="text-muted-foreground text-sm mb-4">
-              Defina a data da prova para gerarmos o seu cronograma ideal de estudos.
-            </p>
-            <input 
-              type="date"
-              value={examDate}
-              onChange={(e) => setExamDate(e.target.value)}
-              className="w-full bg-background border border-border rounded-lg p-3 text-white focus:outline-none focus:border-primary transition-colors"
-            />
-          </div>
-          <button 
-            onClick={generatePlan}
-            disabled={loading}
-            className="mt-6 w-full bg-primary text-primary-foreground font-bold py-3 rounded-xl hover:bg-emerald-400 transition-colors flex justify-center items-center gap-2"
-          >
-            {loading ? "Gerando..." : "Gerar Plano Anual"}
-            <Target className="w-4 h-4" />
-          </button>
-        </motion.div>
+          <BrainCircuit size={24} />
+          Iniciar Revisão
+        </Link>
+      </section>
 
-        {/* Stats Summary */}
-        <motion.div 
-          whileHover={{ scale: 1.02 }}
-          className="bg-card p-6 rounded-2xl border border-border shadow-xl col-span-2 flex flex-col justify-center relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 p-8 opacity-10">
-            <BrainCircuit className="w-32 h-32 text-primary" />
-          </div>
-          <h3 className="text-2xl font-bold text-white mb-6">Desempenho Geral</h3>
-          <div className="grid grid-cols-3 gap-4 relative z-10">
-            <div>
-              <p className="text-muted-foreground text-sm">Questões Resolvidas</p>
-              <p className="text-4xl font-bold text-white mt-1">1,245</p>
+      {/* Secondary Grid */}
+      <section>
+        <h2 className="text-h2 font-semibold mb-4 text-foreground">Visão Geral</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div className="bg-card border border-border rounded-lg p-5 flex flex-col justify-between group hover:shadow-1 transition-shadow">
+            <div className="flex items-start justify-between mb-2">
+              <span className="text-muted-foreground font-medium">Ofensiva</span>
+              <Flame size={20} className={stats.streak_days > 0 ? "text-warning" : "text-muted-foreground"} />
             </div>
-            <div>
-              <p className="text-muted-foreground text-sm">Precisão Média</p>
-              <p className="text-4xl font-bold text-secondary mt-1">78.4%</p>
-            </div>
-            <div>
-              <p className="text-muted-foreground text-sm">Assuntos Dominados</p>
-              <p className="text-4xl font-bold text-primary mt-1">34</p>
+            <div className="flex items-baseline gap-2 mt-auto">
+              <span className="text-h1 font-bold text-foreground">{stats.streak_days}</span>
+              <span className="text-sm text-muted-foreground">dias</span>
             </div>
           </div>
-        </motion.div>
-      </div>
 
-      {/* Generated Plan */}
-      {plan.length > 0 && (
-        <div className="animate-slide-up space-y-6">
-          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <BookOpen className="text-accent w-6 h-6" />
-            Seu Roteiro de Estudos
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {plan.map((weekData) => (
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: weekData.week * 0.05 }}
-                key={weekData.week} 
-                className="bg-background border border-border p-5 rounded-xl hover:border-primary transition-colors group cursor-pointer"
-              >
-                <div className="flex justify-between items-center mb-4">
-                  <span className="bg-muted text-white text-xs font-bold px-2 py-1 rounded-md">
-                    Semana {weekData.week}
-                  </span>
-                  <span className="text-muted-foreground text-sm">
-                    {new Date(weekData.date).toLocaleDateString('pt-BR')}
-                  </span>
-                </div>
-                <ul className="space-y-3">
-                  {weekData.topics.map((t: PlanTopic, i: number) => (
-                    <li key={i} className="flex flex-col gap-1">
-                      <span className="text-sm font-semibold text-white group-hover:text-primary transition-colors">
-                        {t.subtema}
-                      </span>
-                      <span className="text-xs text-muted-foreground flex justify-between">
-                        {t.area} <span>{t.questions_available} q</span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
+          <div className="bg-card border border-border rounded-lg p-5 flex flex-col justify-between group hover:shadow-1 transition-shadow">
+            <div className="flex items-start justify-between mb-2">
+              <span className="text-muted-foreground font-medium">Acurácia Geral</span>
+              <Target size={20} className="text-primary" />
+            </div>
+            <div className="flex items-baseline gap-2 mt-auto">
+              <span className="text-h1 font-bold text-foreground">{accuracyFormatted}</span>
+            </div>
           </div>
+
+          <div className="bg-card border border-border rounded-lg p-5 flex flex-col justify-between group hover:shadow-1 transition-shadow">
+            <div className="flex items-start justify-between mb-2">
+              <span className="text-muted-foreground font-medium">Cobertura do Banco</span>
+              <Trophy size={20} className="text-success" />
+            </div>
+            <div className="flex items-baseline gap-2 mt-auto">
+              <span className="text-h1 font-bold text-foreground">{coverageFormatted}</span>
+              <span className="text-sm text-muted-foreground">de {stats.total_questions} Qs</span>
+            </div>
+          </div>
+
+          <div className="bg-card border border-border rounded-lg p-5 flex flex-col justify-between group hover:shadow-1 transition-shadow">
+            <div className="flex items-start justify-between mb-2">
+              <span className="text-muted-foreground font-medium">Questões Feitas</span>
+              <Clock size={20} className="text-secondary" />
+            </div>
+            <div className="flex items-baseline gap-2 mt-auto">
+              <span className="text-h1 font-bold text-foreground">{stats.distinct_answered}</span>
+              <span className="text-sm text-muted-foreground">únicas</span>
+            </div>
+          </div>
+
         </div>
-      )}
+      </section>
+
     </div>
   );
 }

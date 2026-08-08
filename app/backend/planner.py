@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 import sqlite3
 import math
+import json
+import os
 
 USP_WEIGHTS = {
     "Clínica Médica": 0.30,
@@ -10,7 +12,17 @@ USP_WEIGHTS = {
     "Preventiva": 0.20
 }
 
-def generate_annual_plan(db_path, start_date_str, exam_date_str, hours_per_week):
+def get_normalized_area(raw_area):
+    if not raw_area: return "Outros"
+    # Using substrings to avoid encoding issues with the SQLite output
+    if "Cirurgia" in raw_area: return "Cirurgia"
+    if "nica" in raw_area: return "Clínica Médica"
+    if "Ginecologia" in raw_area: return "Ginecologia e Obstetrícia"
+    if "Preventiva" in raw_area: return "Preventiva"
+    if "Pediatria" in raw_area: return "Pediatria"
+    return "Outros"
+
+def generate_annual_plan(db_path, start_date_str, exam_date_str, hours_per_week, intensive=False):
     """
     Gera um plano de estudos fatiado por semanas com base no tempo disponível
     e no peso histórico das áreas na prova de Residência da USP.
@@ -28,6 +40,34 @@ def generate_annual_plan(db_path, start_date_str, exam_date_str, hours_per_week)
     total_weeks = math.ceil((exam_date - start_date).days / 7)
     if total_weeks <= 0:
         return {"error": "A data da prova deve ser no futuro."}
+        
+    # Cap at 5 years to prevent memory/rendering issues in frontend
+    if total_weeks > 260:
+        total_weeks = 260
+
+    # Carrega dados enriquecidos (highYield e details_times)
+    planner_data_path = os.path.join(os.path.dirname(__file__), "plannerData.json")
+    try:
+        with open(planner_data_path, "r", encoding="utf-8") as f:
+            planner_meta = json.load(f)
+    except Exception:
+        planner_meta = []
+
+    # Cria dicionário de subtemas para fácil acesso
+    meta_dict = {}
+    for w in planner_meta:
+        is_high_yield = w.get("highYield", False)
+        # Calcula tempo teórico (soma de details_times em horas)
+        # Se não tiver details, assume 1 hora.
+        theory_hours = sum(w.get("details_times", [])) / 60.0
+        if theory_hours == 0:
+            theory_hours = 1.0
+            
+        for db_subtema in w.get("dbSubtemas", []):
+            meta_dict[db_subtema] = {
+                "highYield": is_high_yield,
+                "theory_hours": theory_hours
+            }
 
     # Fetch available subtopics per area
     conn = sqlite3.connect(db_path)
@@ -40,36 +80,108 @@ def generate_annual_plan(db_path, start_date_str, exam_date_str, hours_per_week)
     """).fetchall()
     conn.close()
 
-    area_subtemas = {}
-    for r in rows:
-        area = r['area']
-        if area not in area_subtemas:
-            area_subtemas[area] = []
-        area_subtemas[area].append({"name": r['subtema'], "questions": r['q_count']})
+    # Prepara a lista de todos os tópicos disponíveis, calculando as horas de cada um
+    all_topics = []
+    total_required_hours = 0.0
 
-    # Simplistic slicing algorithm:
-    # Distribute topics across total_weeks based on area weight.
+    for r in rows:
+        raw_area = r['area']
+        norm_area = get_normalized_area(raw_area)
+        subtema = r['subtema']
+        q_count = r['q_count']
+        
+        meta = meta_dict.get(subtema, {"highYield": False, "theory_hours": 1.0})
+        
+        if intensive and not meta["highYield"]:
+            continue
+            
+        # 3 mins (0.05h) per question
+        practice_hours = q_count * 0.05
+        total_topic_hours = meta["theory_hours"] + practice_hours
+        total_required_hours += total_topic_hours
+        
+        # Priority score: High Yield = 100, plus area weight
+        weight = USP_WEIGHTS.get(norm_area, 0.1)
+        priority = 100 if meta["highYield"] else 0
+        priority += weight * 10
+        
+        all_topics.append({
+            "area": norm_area,
+            "subtema": subtema,
+            "questions_available": q_count,
+            "estimated_hours": total_topic_hours,
+            "priority": priority
+        })
+
+    # Sort topics by priority (descending)
+    all_topics.sort(key=lambda x: x["priority"], reverse=True)
     
+    total_available_hours = total_weeks * hours_per_week
+    warning_msg = None
+    if total_required_hours > total_available_hours:
+        warning_msg = f"Você tem {total_available_hours} horas disponíveis, mas precisa de {round(total_required_hours)} horas para cobrir {'este plano' if intensive else 'todo o edital'}."
+
+    # Group by area
+    topics_by_area = {}
+    for t in all_topics:
+        topics_by_area.setdefault(t['area'], []).append(t)
+
     plan = []
+    
     for week in range(1, total_weeks + 1):
         week_topics = []
-        for area, weight in USP_WEIGHTS.items():
-            if area in area_subtemas and len(area_subtemas[area]) > 0:
-                # pick a topic proportionally
-                # (For the sake of MVP, we just take one topic from the highest weight areas)
-                if len(week_topics) < 3: # 3 topics per week
-                    topic = area_subtemas[area].pop(0)
-                    week_topics.append({
-                        "area": area,
-                        "subtema": topic["name"],
-                        "questions_available": topic["questions"]
-                    })
-                    
+        current_week_hours = 0.0
+        
+        areas_sorted = sorted(USP_WEIGHTS.keys(), key=lambda x: USP_WEIGHTS[x], reverse=True)
+        for area in topics_by_area.keys():
+            if area not in areas_sorted:
+                areas_sorted.append(area)
+        
+        added_in_cycle = True
+        while added_in_cycle and current_week_hours < hours_per_week:
+            added_in_cycle = False
+            for area in areas_sorted:
+                if len(topics_by_area.get(area, [])) > 0:
+                    topic = topics_by_area[area][0]
+                    # Permite um pequeno estouro de até 1.5h na semana total (não por área!)
+                    if current_week_hours + topic["estimated_hours"] <= hours_per_week + 1.5:
+                        week_topics.append(topic)
+                        current_week_hours += topic["estimated_hours"]
+                        topics_by_area[area].pop(0)
+                        added_in_cycle = True
+                        
+            # Se nenhum tópico coube, mas a semana está menos de 80% cheia, forçamos o menor tópico disponível
+            if not added_in_cycle and current_week_hours < hours_per_week * 0.8:
+                smallest = None
+                smallest_area = None
+                for area in areas_sorted:
+                    if len(topics_by_area.get(area, [])) > 0:
+                        t = topics_by_area[area][0]
+                        if smallest is None or t["estimated_hours"] < smallest["estimated_hours"]:
+                            smallest = t
+                            smallest_area = area
+                
+                if smallest:
+                    week_topics.append(smallest)
+                    current_week_hours += smallest["estimated_hours"]
+                    topics_by_area[smallest_area].pop(0)
+                    added_in_cycle = True
+                
+        if not week_topics:
+            break
+            
         plan.append({
             "week": week,
             "date": (start_date + timedelta(weeks=week-1)).isoformat(),
             "topics": week_topics,
-            "recommended_hours": hours_per_week
+            "recommended_hours": hours_per_week,
+            "allocated_hours": round(current_week_hours, 1)
         })
-
-    return plan
+        
+    result = {"plan": plan}
+    if warning_msg:
+        result["warning"] = warning_msg
+        result["total_required_hours"] = round(total_required_hours)
+        result["total_available_hours"] = round(total_available_hours)
+        
+    return result

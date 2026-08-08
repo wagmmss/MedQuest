@@ -2,3 +2,9 @@ flask
 flask-cors
 pdfplumber
 pymupdf
+groq
+python-dotenv
+libsql-client
+PyJWT
+cryptography
+gunicorn

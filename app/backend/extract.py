@@ -16,9 +16,9 @@ from datetime import datetime
 import fitz  # PyMuPDF
 import pdfplumber
 
-SRC_DIR = r"C:\Users\wmors\OneDrive\Documentos\MedQuest"
+SRC_DIR = os.environ.get("MEDQUEST_PDF_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 APP_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-IMG_DIR = os.path.join(APP_DIR, "static", "images")
+IMG_DIR = os.path.join(APP_DIR, "frontend", "public", "images")
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "medquest.db")
 
 SOURCE_FILES = [
@@ -342,16 +342,15 @@ def assign_images_to_questions(anchors, images):
 
 
 def build_db(all_records_by_source):
-    if os.path.exists(DB_PATH):
-        backup_path = DB_PATH + f".bak-{datetime.now().strftime('%Y%m%d%H%M%S')}"
-        print(f"AVISO: banco existente encontrado, fazendo backup em {backup_path} antes de recriar "
-              f"(classificações/explicações/tentativas gravadas nesse banco NÃO são migradas).")
-        shutil.copy2(DB_PATH, backup_path)
-        os.remove(DB_PATH)
+    if not os.path.exists(DB_PATH):
+        print(f"Criando novo banco de dados em {DB_PATH}")
+    else:
+        print(f"Banco existente {DB_PATH}. Usando UPSERT/INSERT IGNORE para preservar dados do usuário.")
+    
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
     cur.executescript("""
-    CREATE TABLE questions (
+    CREATE TABLE IF NOT EXISTS questions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         source_file TEXT NOT NULL,
         source_number INTEGER NOT NULL,
@@ -366,41 +365,48 @@ def build_db(all_records_by_source):
         page_start INTEGER,
         page_end INTEGER
     );
-    CREATE TABLE alternatives (
+    CREATE TABLE IF NOT EXISTS alternatives (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         question_id INTEGER NOT NULL REFERENCES questions(id),
         letter TEXT NOT NULL,
         text TEXT,
         is_correct INTEGER
     );
-    CREATE TABLE question_images (
+    CREATE TABLE IF NOT EXISTS question_images (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         question_id INTEGER NOT NULL REFERENCES questions(id),
         file_path TEXT NOT NULL,
         order_index INTEGER
     );
-    CREATE TABLE explanations (
+    CREATE TABLE IF NOT EXISTS explanations (
         question_id INTEGER PRIMARY KEY REFERENCES questions(id),
         explanation_text TEXT,
         generated_at TEXT
     );
-    CREATE TABLE attempts (
+    CREATE TABLE IF NOT EXISTS attempts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         question_id INTEGER NOT NULL REFERENCES questions(id),
         selected_letter TEXT,
         is_correct INTEGER,
         answered_at TEXT NOT NULL
     );
-    CREATE INDEX idx_alt_qid ON alternatives(question_id);
-    CREATE INDEX idx_img_qid ON question_images(question_id);
-    CREATE INDEX idx_att_qid ON attempts(question_id);
-    CREATE INDEX idx_q_inst ON questions(institution_code);
-    CREATE INDEX idx_q_year ON questions(year);
-    CREATE INDEX idx_q_source ON questions(source_file);
+    CREATE INDEX IF NOT EXISTS idx_alt_qid ON alternatives(question_id);
+    CREATE INDEX IF NOT EXISTS idx_img_qid ON question_images(question_id);
+    CREATE INDEX IF NOT EXISTS idx_att_qid ON attempts(question_id);
+    CREATE INDEX IF NOT EXISTS idx_q_inst ON questions(institution_code);
+    CREATE INDEX IF NOT EXISTS idx_q_year ON questions(year);
+    CREATE INDEX IF NOT EXISTS idx_q_source ON questions(source_file);
     """)
 
     for source_label, records, image_map in all_records_by_source:
         for r in records:
+            # Evita duplicatas se já existe questão do mesmo arquivo/número
+            cur.execute("SELECT id FROM questions WHERE source_file = ? AND source_number = ?", 
+                        (source_label, r["source_number"]))
+            existing_q = cur.fetchone()
+            if existing_q:
+                continue
+
             cur.execute(
                 """INSERT INTO questions
                 (source_file, source_number, year, institution_code, institution_label,
