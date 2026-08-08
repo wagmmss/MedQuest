@@ -464,6 +464,27 @@ function renderQuestion(q) {
     altBox.appendChild(btn);
   });
 
+  // ★ Rating de confiança (antes de responder): calibra o FSRS e separa acerto por sorte
+  state.currentConfidence = null;
+  const oldConf = document.getElementById("q-confidence");
+  if (oldConf) oldConf.remove();
+  const confBar = document.createElement("div");
+  confBar.id = "q-confidence";
+  confBar.className = "confidence-bar";
+  confBar.innerHTML =
+    '<span class="conf-label">Confiança:</span>' +
+    '<button class="conf-btn" data-conf="chutei"><i class="ph ph-dice-five"></i> Chutei</button>' +
+    '<button class="conf-btn" data-conf="duvida"><i class="ph ph-scales"></i> Na dúvida</button>' +
+    '<button class="conf-btn" data-conf="certeza"><i class="ph ph-seal-check"></i> Certeza</button>';
+  confBar.querySelectorAll(".conf-btn").forEach((b) => {
+    b.addEventListener("click", () => {
+      if (state.answered) return;
+      state.currentConfidence = b.dataset.conf;
+      confBar.querySelectorAll(".conf-btn").forEach((x) => x.classList.toggle("active", x === b));
+    });
+  });
+  altBox.parentNode.insertBefore(confBar, altBox);
+
   // hide feedback
   $("#q-feedback").classList.add("hidden");
   // hide time-taken badge until answered
@@ -485,13 +506,18 @@ async function submitAnswer(letter) {
   state.answered = true;
 
   // ★ stop per-question timer and capture elapsed
+  const timeSpentMs = state.qStartTime ? (Date.now() - state.qStartTime) : null;
   const elapsed = stopQuestionTimer();
   state.sessionQTimes.push(elapsed);
 
   const result = await api(`/api/questions/${state.current.id}/attempt`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ selected_letter: letter }),
+    body: JSON.stringify({
+      selected_letter: letter,
+      time_spent_ms: timeSpentMs,
+      confidence: state.currentConfidence || null,
+    }),
   });
 
   $$("#q-alternatives .alt-btn").forEach((btn) => {
