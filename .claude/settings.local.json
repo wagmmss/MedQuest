@@ -66,7 +66,32 @@
       "mcp__datagrip__list_database_connections",
       "mcp__datagrip__list_schema_objects",
       "mcp__datagrip__execute_sql_query",
-      "mcp__datagrip__fetch_query_result"
+      "mcp__datagrip__fetch_query_result",
+      "Bash(grep -iE \"\\\\.env$|\\\\.exe|\\\\.pdf|medquest\\\\.db|deploy\\\\.zip|node_modules|\\\\.bak\")",
+      "Bash(grep -E \"\\\\.env$\")",
+      "Bash(grep -iE \"\\\\.pdf$|\\\\.exe$\")",
+      "Bash(git diff *)",
+      "Bash(xargs -0 du -h)",
+      "Bash(git config *)",
+      "Bash(git commit -m '@ *)",
+      "Bash(PYTHONIOENCODING=utf-8 python -c \"import sqlite3;c=sqlite3.connect\\('medquest.db'\\);c.execute\\(\\\\\"UPDATE questions SET subtema='Anemias' WHERE id=830\\\\\"\\);c.commit\\(\\);print\\('QID 830 -> Anemias'\\)\")",
+      "Bash(python -c \"import sqlite3;c=sqlite3.connect\\('medquest.db'\\);c.executescript\\(open\\('migrations/001_indexes.sql',encoding='utf-8'\\).read\\(\\)\\);c.commit\\(\\);print\\('índices aplicados'\\)\")",
+      "Bash(PYTHONIOENCODING=utf-8 python -c \"import sqlite3;[print\\(' ',r[0]\\) for r in sqlite3.connect\\('medquest.db'\\).execute\\(\\\\\"SELECT name FROM sqlite_master WHERE type='index' AND name LIKE 'idx_%' ORDER BY name\\\\\"\\)]\")",
+      "Bash(PYTHONIOENCODING=utf-8 python -c \"import urllib.request,json; d=json.load\\(urllib.request.urlopen\\('http://localhost:5050/api/coverage',timeout=5\\)\\); print\\('App /api/coverage AO VIVO:'\\); [print\\(f\\\\\"  {a['area']}: {a['n_subtemas']} subtemas, {a['not_started']} não iniciados\\\\\"\\) for a in d['areas']]\")",
+      "Bash(PYTHONIOENCODING=utf-8 python -c \"import urllib.request,json; d=json.load\\(urllib.request.urlopen\\('http://localhost:5050/api/stats/overview',timeout=5\\)\\); print\\('App OK ao vivo — respondidas:', d.get\\('distinct_answered'\\), '| acurácia últimas:', d.get\\('accuracy_latest_attempt'\\)\\)\")",
+      "Bash(python -c \"import pydantic; print\\('pydantic', pydantic.VERSION\\)\")",
+      "Bash(python -c \"import fsrs; print\\('fsrs OK', getattr\\(fsrs,'__version__','?'\\)\\)\")",
+      "Bash(python -c \"import pytest; print\\('pytest OK'\\)\")",
+      "Bash(python -c \"import flask_cors; print\\('flask_cors OK'\\)\")",
+      "Bash(python -m pip install --quiet fsrs pytest)",
+      "Bash(python -c \"import fsrs; from fsrs import Scheduler, Card, Rating; print\\('fsrs OK'\\)\")",
+      "Bash(python -c \"import pytest; print\\('pytest', pytest.__version__\\)\")",
+      "Bash(cp app.py app_monolith_backup.py)",
+      "Bash(powershell.exe -NoProfile -Command 'Get-CimInstance Win32_Process -Filter \"Name='\\\\''python.exe'\\\\''\" | Where-Object { $_.CommandLine -like '\\\\''*app.py*'\\\\'' } | ForEach-Object { Write-Output \\('\\\\''parando Flask PID '\\\\'' + $_.ProcessId\\); Stop-Process -Id $_.ProcessId -Force }')",
+      "Bash(PYTHONIOENCODING=utf-8 python -m pytest tests/ -q)",
+      "Bash(rm -f app_monolith_backup.py)",
+      "Bash(python -c \"from app import app; print\\('import OK,', len\\(list\\(app.url_map.iter_rules\\(\\)\\)\\), 'rotas'\\)\")",
+      "Bash(PYTHONIOENCODING=utf-8 python -c \"import zipfile; z=zipfile.ZipFile\\('../../medquest_deploy.zip'\\); api=[n for n in z.namelist\\(\\) if n.startswith\\('backend/api/'\\)]; print\\('\\\\n'.join\\(api\\)\\)\")"
     ]
   }
 }

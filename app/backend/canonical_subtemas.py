@@ -64,6 +64,11 @@ CANONICAL = {
         "Febre Reumática e Doenças Pós-infecciosas",
         "Neoplasias na Infância",
         "Dermatologia Pediátrica",
+        "Hematologia Pediátrica",
+        "Ortopedia e Reumatologia Pediátrica",
+        "Oftalmologia e Otorrinolaringologia Pediátrica",
+        "Emergências e Intoxicações Pediátricas",
+        "Imunodeficiências",
     ],
     "Ginecologia e Obstetrícia": [
         "Ciclo Menstrual e Fisiologia Hormonal",
@@ -123,6 +128,8 @@ CANONICAL = {
         "Tireoide e Paratireoide",
         "Cirurgia Pediátrica",
         "Tumores de Pele e Partes Moles",
+        "Urologia",
+        "Oftalmologia",
     ],
     "Clínica Médica": [
         "Hipertensão Arterial Sistêmica",
@@ -163,5 +170,10 @@ CANONICAL = {
         "Arboviroses e Doenças Infecciosas Tropicais",
         "Emergências Clínicas e Intoxicações",
         "Transtornos Psiquiátricos",
+        "Dermatologia",
+        "Geriatria e Cuidados Paliativos",
+        "Oncologia e Neoplasias",
+        "Otorrinolaringologia",
+        "Osteoporose e Doença Óssea",
     ],
 }
