@@ -1,4 +1,4 @@
-import { api } from "@/lib/api";
+import { serverApi } from "@/lib/server-api";
 import { QuizClient } from "./QuizClient";
 
 export default async function EstudarPage({
@@ -6,7 +6,7 @@ export default async function EstudarPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  const meta = await api.questions.getMeta();
+  const meta = await serverApi.questions.getMeta();
   const rawParams = await searchParams;
 
   // Convert searchParams to a simple record of strings
