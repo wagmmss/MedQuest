@@ -11,6 +11,10 @@ export default async function Dashboard() {
     ? (stats.accuracy_all_attempts * 100).toFixed(1) + "%" 
     : "--";
 
+  const coverageFormatted = stats.coverage_pct != null
+    ? (stats.coverage_pct * 100).toFixed(1) + "%"
+    : "--";
+
   const firstName = user?.firstName || "Doutor(a)";
 
   return (
@@ -27,9 +31,9 @@ export default async function Dashboard() {
         </div>
         <div className="flex gap-3">
           <Link href="/estudar?status=srs_due&limit=100">
-            <button className="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-body-sm text-body-sm font-semibold hover:opacity-90 transition-opacity">
-              <span className="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
-              Revisar ({stats.srs_due_count})
+            <button className="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl shadow-[0_4px_14px_0_rgba(26,75,132,0.39)] hover:shadow-[0_6px_20px_rgba(26,75,132,0.23)] hover:-translate-y-1 transform transition-all duration-200 font-body-sm text-body-sm font-semibold">
+              <span className="material-symbols-outlined" data-icon="psychology">psychology</span>
+              Iniciar Revisão ({stats.srs_due_count})
             </button>
           </Link>
         </div>
@@ -37,8 +41,8 @@ export default async function Dashboard() {
 
       {/* Bento Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-        {/* Weekly Progress Summary */}
-        <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-gutter">
+        {/* Weekly Progress Summary (4 Stats) */}
+        <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-gutter">
           {/* Stat Card 1 */}
           <div className="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col justify-between hover:bg-surface-container-lowest transition-colors shadow-[0px_1px_3px_rgba(0,0,0,0.05)]">
             <div className="flex items-center gap-3 mb-4 text-primary">
@@ -73,85 +77,60 @@ export default async function Dashboard() {
               <span className="font-body-sm text-body-sm text-on-surface-variant ml-2">Dias</span>
             </div>
           </div>
+
+          {/* Stat Card 4 */}
+          <div className="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col justify-between hover:bg-surface-container-lowest transition-colors shadow-[0px_1px_3px_rgba(0,0,0,0.05)]">
+            <div className="flex items-center gap-3 mb-4 text-primary">
+              <span className="material-symbols-outlined" data-icon="pie_chart">pie_chart</span>
+              <span className="font-label-md text-label-md uppercase">Cobertura</span>
+            </div>
+            <div>
+              <span className="font-display-lg text-display-lg text-on-surface">{coverageFormatted}</span>
+              <span className="font-body-sm text-body-sm text-on-surface-variant ml-2">de {stats.total_questions} Qs</span>
+            </div>
+          </div>
         </div>
 
-        {/* Library Quick Access */}
+        {/* Quick Access List */}
         <div className="md:col-span-4 bg-surface border border-outline-variant rounded-xl p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.05)] flex flex-col">
           <div className="flex items-center justify-between mb-6 pb-2 border-b border-outline-variant">
-            <h3 className="font-headline-md text-headline-md text-on-surface">Biblioteca Médica</h3>
-            <Link className="text-primary font-label-md text-label-md hover:underline" href="/estudar">Ver Tudo</Link>
+            <h3 className="font-headline-md text-headline-md text-on-surface">Acesso Rápido</h3>
           </div>
           <ul className="flex flex-col gap-4">
-            <li className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer">
-              <div className="p-2 bg-primary-fixed rounded-lg text-on-primary-fixed">
-                <span className="material-symbols-outlined" data-icon="description">description</span>
-              </div>
-              <div>
-                <h4 className="font-body-md text-body-md font-semibold text-on-surface">Diretrizes de Cardiologia</h4>
-                <p className="font-body-sm text-body-sm text-on-surface-variant">Protocolo atualizado para IAM.</p>
-              </div>
-            </li>
-            <li className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer">
-              <div className="p-2 bg-secondary-fixed rounded-lg text-on-secondary-fixed">
-                <span className="material-symbols-outlined" data-icon="science">science</span>
-              </div>
-              <div>
-                <h4 className="font-body-md text-body-md font-semibold text-on-surface">Casos de Neurologia</h4>
-                <p className="font-body-sm text-body-sm text-on-surface-variant">Doenças desmielinizantes.</p>
-              </div>
-            </li>
+            <Link href="/estudar">
+              <li className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+                <div className="p-2 bg-primary-fixed rounded-lg text-on-primary-fixed group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                  <span className="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                </div>
+                <div>
+                  <h4 className="font-body-md text-body-md font-semibold text-on-surface">Estudar Banco de Questões</h4>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant">Filtre por especialidade ou tema.</p>
+                </div>
+              </li>
+            </Link>
+            <Link href="/simulado">
+              <li className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+                <div className="p-2 bg-secondary-fixed rounded-lg text-on-secondary-fixed group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+                  <span className="material-symbols-outlined" data-icon="description">description</span>
+                </div>
+                <div>
+                  <h4 className="font-body-md text-body-md font-semibold text-on-surface">Simulado USP</h4>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant">Realize provas na íntegra.</p>
+                </div>
+              </li>
+            </Link>
+            <Link href="/planner">
+              <li className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+                <div className="p-2 bg-tertiary-fixed rounded-lg text-on-tertiary-fixed group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
+                  <span className="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+                </div>
+                <div>
+                  <h4 className="font-body-md text-body-md font-semibold text-on-surface">Planner Anual</h4>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant">Acompanhe seu cronograma de estudos.</p>
+                </div>
+              </li>
+            </Link>
           </ul>
-        </div>
-
-        {/* Current Quests Section */}
-        <div className="md:col-span-12 mt-stack-lg">
-          <div className="flex items-center justify-between mb-6 border-b border-outline-variant pb-2">
-            <h3 className="font-headline-md text-headline-md text-on-surface">Quests Atuais</h3>
-            <div className="flex gap-2">
-              <button className="p-1 rounded text-on-surface-variant hover:bg-surface-container-low"><span className="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
-              <button className="p-1 rounded text-on-surface-variant hover:bg-surface-container-low"><span className="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-            {/* Quest Card 1 */}
-            <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-[0px_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0px_4px_12px_rgba(0,0,0,0.08)] transition-shadow">
-              <div className="h-32 bg-surface-variant relative">
-                <div className="absolute inset-0 bg-cover bg-center opacity-80 mix-blend-multiply" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCRYhsrNM1ei06N0OAx-9xLNS00RkTYrRX2vMkb-JJNOl9qY367zzpgNWKCE8-QdPLAQYbVGIgDxG5Nq37S7lF2-hKvA3cEIpIqNJMqw_-LLHk3QFE_a7REurHE9B4GPtrx_em4ql8PLXaeTGQbPYV4BRg3vDHc1ItBQDH_MmctV5geyKPvlvDRWfFz8Nr6VQOIWl4QVibKS3vCwINAWBOwp05uOQzxnhUte76VyyKaXoM08ARV6NYrxw')"}}></div>
-                <div className="absolute top-3 left-3 bg-error-container text-on-error-container font-label-md text-label-md px-2 py-1 rounded">Cardiologia</div>
-              </div>
-              <div className="p-5 flex flex-col h-[180px]">
-                <h4 className="font-headline-md text-headline-md font-semibold text-on-surface mb-2 truncate">Simulação IAM</h4>
-                <p className="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">Paciente com dor torácica irradiada. O tempo é crítico para o diagnóstico.</p>
-                <div className="flex items-center justify-between mt-auto">
-                  <div className="flex items-center gap-1 text-on-surface-variant font-label-md text-label-md">
-                    <span className="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
-                    15 mins
-                  </div>
-                  <button className="px-4 py-2 bg-surface-container-low hover:bg-surface-container-high text-primary font-body-sm text-body-sm font-semibold rounded-lg transition-colors border border-outline-variant">Retomar</button>
-                </div>
-              </div>
-            </div>
-
-            {/* Quest Card 2 */}
-            <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-[0px_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0px_4px_12px_rgba(0,0,0,0.08)] transition-shadow">
-              <div className="h-32 bg-surface-variant relative">
-                <div className="absolute inset-0 bg-cover bg-center opacity-80 mix-blend-multiply" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_yjKy71mfFnMPqKyvFKPqz5sqHbfAzpfR_siEP2WzMB5nO8SGJGdpmIt0cXjSqCl_WhFHRGv4_rEnMv7uWjcYm42_HzNtl7ikRSvBsYurEAwdJ3VTo6IH7owH3H0K59vjBuLYRSkcSMTgTBdyUAMai0IinzZGOejKX1SBPpqIPxPwkmBavxuwF9_SHQzq1nAnoZXgRDK1CWLwjyOdVZidR19dCJL-5_8zbFGm4d3Gt2tlhyRp3c6L5Q')"}}></div>
-                <div className="absolute top-3 left-3 bg-secondary-container text-on-secondary-container font-label-md text-label-md px-2 py-1 rounded">Endocrinologia</div>
-              </div>
-              <div className="p-5 flex flex-col h-[180px]">
-                <h4 className="font-headline-md text-headline-md font-semibold text-on-surface mb-2 truncate">Manejo Complexo DM</h4>
-                <p className="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">Ajuste de insulina em paciente com glicemia flutuante e disfunção renal.</p>
-                <div className="flex items-center justify-between mt-auto">
-                  <div className="flex items-center gap-1 text-on-surface-variant font-label-md text-label-md">
-                    <span className="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
-                    45 mins
-                  </div>
-                  <button className="px-4 py-2 bg-primary text-on-primary font-body-sm text-body-sm font-semibold rounded-lg transition-opacity hover:opacity-90">Iniciar</button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </>
