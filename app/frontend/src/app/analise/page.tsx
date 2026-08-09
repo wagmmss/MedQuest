@@ -1,4 +1,4 @@
-import { api } from "@/lib/api";
+import { serverApi } from "@/lib/server-api";
 import { Activity } from "lucide-react";
 import { AnalysisClient } from "./AnalysisClient";
 
@@ -11,11 +11,11 @@ export default async function AnalisePage() {
     breakdown,
     distractors
   ] = await Promise.all([
-    api.stats.getTimeline(),
-    api.stats.getWeakTopics(),
-    api.stats.getRecommendations(),
-    api.stats.getBreakdown("institution"),
-    api.stats.getDistractors(),
+    serverApi.stats.getTimeline(),
+    serverApi.stats.getWeakTopics(),
+    serverApi.stats.getRecommendations(),
+    serverApi.stats.getBreakdown("institution"),
+    serverApi.stats.getDistractors(),
   ]);
 
   return (

@@ -1,5 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
-import { OverviewStats, CoverageResponse, QuestionMeta, PlannerConfig } from "@/types/api";
+import { 
+  OverviewStats, CoverageResponse, QuestionMeta, PlannerConfig,
+  TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat
+} from "@/types/api";
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
 
@@ -45,6 +48,12 @@ export const serverApi = {
   stats: {
     getOverview: () => serverFetch<OverviewStats>("/api/stats/overview", { cache: 'no-store' }),
     getCoverage: () => serverFetch<CoverageResponse>("/api/coverage", { cache: 'no-store' }),
+    getTimeline: () => serverFetch<TimelineStat[]>("/api/stats/timeline", { cache: 'no-store' }),
+    getWeakTopics: () => serverFetch<WeakTopic[]>("/api/stats/weak-topics", { cache: 'no-store' }),
+    getRecommendations: () => serverFetch<Recommendation[]>("/api/stats/recommendations", { cache: 'no-store' }),
+    getDistractors: () => serverFetch<DistractorStat[]>("/api/stats/distractors", { cache: 'no-store' }),
+    getBreakdown: (by: 'institution' | 'area' | 'year') => 
+      serverFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { cache: 'no-store' }),
   },
   questions: {
     getMeta: () => serverFetch<QuestionMeta>("/api/meta", { next: { revalidate: 3600 } }),
