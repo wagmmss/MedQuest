@@ -7,17 +7,22 @@ async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<
   const { getToken } = await auth();
   const token = await getToken();
   
-  const response = await fetch(`${BACKEND_URL}${endpoint}`, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...options?.headers,
-    },
-  });
+  let response;
+  try {
+    response = await fetch(`${BACKEND_URL}${endpoint}`, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...options?.headers,
+      },
+    });
+  } catch (error: any) {
+    throw new Error(`Fetch failed for ${BACKEND_URL}${endpoint}: ${error.message}`);
+  }
 
   if (!response.ok) {
-    throw new Error(`Server API error: ${response.status} ${response.statusText}`);
+    throw new Error(`Server API error on ${BACKEND_URL}${endpoint}: ${response.status} ${response.statusText}`);
   }
 
   return response.json();

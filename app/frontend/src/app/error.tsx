@@ -22,6 +22,10 @@ export default function Error({
       <h2 className="text-xl font-bold mb-2">Algo deu errado</h2>
       <p className="text-muted-foreground mb-6 max-w-md">
         Não foi possível carregar os dados. Verifique se o servidor backend está rodando na porta 5050.
+        <br/><br/>
+        <span className="font-mono text-xs text-red-500 bg-red-100 p-2 rounded block text-left overflow-auto max-h-32">
+          {error.message}
+        </span>
       </p>
       <button
         onClick={() => reset()}
