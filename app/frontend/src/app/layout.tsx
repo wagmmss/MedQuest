@@ -4,7 +4,7 @@ import { ClerkProvider, SignIn } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
-import { TopNav } from "@/components/TopNav";
+import TopNav from "@/components/TopNav";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -61,7 +61,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <body className="font-body-md text-body-md h-screen flex overflow-hidden bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
           {!userId ? (
             <div className="flex w-full h-full items-center justify-center p-8">
-              <div>Acesso restrito (Faça login)</div>
+              <SignIn routing="hash" />
             </div>
           ) : (
             <>

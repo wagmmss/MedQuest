@@ -60,11 +60,11 @@ export const serverApi = {
   },
   planner: {
     getConfig: () => serverFetch<PlannerConfig>("/api/planner/config", { cache: 'no-store' }),
-    generatePlan: (params: any) => serverFetch<any>("/api/planner/generate", {
+    generatePlan: (params: any) => serverFetch<any>("/api/generate_plan", {
       method: 'POST',
       body: JSON.stringify(params),
       cache: 'no-store'
     }),
-    getProgress: () => serverFetch<any>("/api/planner/progress", { cache: 'no-store' }),
+    getProgress: () => serverFetch<any>("/api/planner", { cache: 'no-store' }),
   }
 };

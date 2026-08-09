@@ -1,6 +1,4 @@
-"use client";
-
-export function TopNav() {
+export default function TopNav() {
   return (
     <header className="md:hidden flex justify-between items-center w-full px-6 py-3 h-16 bg-surface border-b border-outline-variant z-10 sticky top-0">
       <h1 className="font-headline-md text-headline-md font-bold text-primary">MedQuest</h1>
@@ -13,3 +11,4 @@ export function TopNav() {
     </header>
   );
 }
+

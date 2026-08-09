@@ -10,13 +10,12 @@ from functools import wraps
 # OR fetch the JWKS from the Clerk Frontend API.
 CLERK_SECRET = os.getenv("CLERK_SECRET_KEY")
 
-# Extract domain from the publishable key (pk_test_bWFueS1sb3VzZS04Ny5jbGVyay5hY2NvdW50cy5kZXYk)
-# The decoded base64 is: many-louse-87.clerk.accounts.dev$
+# Extract domain from the publishable key
 import base64
 pk = os.getenv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "pk_test_bWFueS1sb3VzZS04Ny5jbGVyay5hY2NvdW50cy5kZXYk")
-if pk.startswith("pk_test_"):
+if pk.startswith("pk_test_") or pk.startswith("pk_live_"):
     try:
-        domain_b64 = pk.replace("pk_test_", "").strip("$")
+        domain_b64 = pk.split("_")[-1].strip("$")
         # Add padding if necessary
         domain_b64 += "=" * ((4 - len(domain_b64) % 4) % 4)
         domain = base64.b64decode(domain_b64).decode("utf-8")
