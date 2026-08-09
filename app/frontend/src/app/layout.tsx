@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { ClerkProvider, SignIn } from '@clerk/nextjs'
-import { auth } from '@clerk/nextjs/server'
+import { ClerkProvider, SignIn } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
-import { TopNavBar } from "@/components/TopNavBar";
-import { CommandPalette } from "@/components/CommandPalette";
+import { TopNav } from "@/components/TopNav";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -62,18 +61,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <body className="font-body-md text-body-md h-screen flex overflow-hidden bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
           {!userId ? (
             <div className="flex w-full h-full items-center justify-center p-8">
-              <SignIn routing="hash" />
+              <div>Acesso restrito (Faça login)</div>
             </div>
           ) : (
             <>
               <Sidebar />
               <div className="flex-1 flex flex-col w-full min-w-0 bg-background overflow-y-auto">
-                <TopNavBar />
+                <TopNav />
                 <main className="flex-1 max-w-[1440px] mx-auto w-full p-gutter md:p-margin gap-stack-lg flex flex-col pb-24 md:pb-margin relative">
                   {children}
                 </main>
               </div>
-              <CommandPalette />
             </>
           )}
         </body>
