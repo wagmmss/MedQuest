@@ -17,21 +17,33 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
     headers.set("Authorization", `Bearer ${token}`);
   }
 
-  const response = await fetch(targetUrl, {
-    method: req.method,
-    headers,
-    body: req.method !== "GET" && req.method !== "HEAD" ? await req.blob() : undefined,
-    redirect: "manual",
-  });
+  console.log(`[PROXY] Forwarding ${req.method} request to: ${targetUrl}`);
+
+  try {
+    const response = await fetch(targetUrl, {
+      method: req.method,
+      headers,
+      body: req.method !== "GET" && req.method !== "HEAD" ? await req.blob() : undefined,
+      redirect: "manual",
+    });
+
+    console.log(`[PROXY] Received response from backend: ${response.status} ${response.statusText}`);
 
   const responseHeaders = new Headers(response.headers);
   responseHeaders.delete("content-encoding");
 
-  return new NextResponse(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers: responseHeaders,
-  });
+    return new NextResponse(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: responseHeaders,
+    });
+  } catch (error: any) {
+    console.error(`[PROXY] Fetch error to ${targetUrl}:`, error.message);
+    return new NextResponse(JSON.stringify({ error: "Proxy fetch failed", details: error.message }), {
+      status: 502,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
 }
 
 export const GET = handler;
