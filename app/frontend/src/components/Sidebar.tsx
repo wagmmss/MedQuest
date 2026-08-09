@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import clsx from "clsx";
 import { UserButton } from "@clerk/nextjs";
 
@@ -10,9 +9,9 @@ const NAV_ITEMS = [
   { href: "/", label: "Dashboard", icon: "dashboard" },
   { href: "/cobertura", label: "Cobertura", icon: "my_location" },
   { href: "/analise", label: "Análise", icon: "analytics" },
-  { href: "/planner", label: "Planner", icon: "calendar_today" },
-  { href: "/estudar", label: "Estudar", icon: "clinical_notes" },
-  { href: "/revisao-ativa", label: "Revisão Ativa", icon: "task_alt" },
+  { href: "/planner", label: "Planner", icon: "calendar_month" },
+  { href: "/estudar", label: "Estudar", icon: "menu_book" },
+  { href: "/revisao-ativa", label: "Revisão Ativa", icon: "psychology" },
   { href: "/simulado", label: "Simulado USP", icon: "description" },
 ];
 
