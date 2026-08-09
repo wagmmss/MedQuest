@@ -1,6 +1,5 @@
 import { CoverageResponse } from "@/types/api";
 import { CoverageClient } from "./CoverageClient";
-import { CoverageChart } from "./CoverageChart";
 import { serverApi } from "@/lib/server-api";
 import { Target } from "lucide-react";
 
