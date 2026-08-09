@@ -237,6 +237,10 @@ def reset_stats():
     db = get_db()
     db.execute("DELETE FROM attempts WHERE user_id = ?", (g.user_id,))
     db.execute("DELETE FROM spaced_repetition WHERE user_id = ?", (g.user_id,))
+    db.execute("DELETE FROM flashcards WHERE user_id = ?", (g.user_id,))
+    db.execute("DELETE FROM planner_progress WHERE user_id = ?", (g.user_id,))
+    db.execute("DELETE FROM favorites WHERE user_id = ?", (g.user_id,))
+    db.execute("DELETE FROM planner_config WHERE user_id = ?", (g.user_id,))
     db.commit()
     return jsonify({"success": True})
 

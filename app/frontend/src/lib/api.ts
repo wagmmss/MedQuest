@@ -43,6 +43,10 @@ export const api = {
     getDistractors: () => apiFetch<DistractorStat[]>("/api/stats/distractors", { cache: 'no-store' }),
     getBreakdown: (by: 'institution' | 'area' | 'year') => 
       apiFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { cache: 'no-store' }),
+    resetProgress: () => 
+      apiFetch<{success: boolean}>("/api/stats/reset", {
+        method: "DELETE",
+      }),
   },
   planner: {
     getConfig: () => apiFetch<PlannerConfig>("/api/planner/config", { cache: 'no-store' }),
