@@ -1,11 +1,11 @@
-import { api } from "@/lib/api";
+import { serverApi } from "@/lib/server-api";
 import { BrainCircuit, Flame, Target, Trophy, Clock } from "lucide-react";
 import Link from "next/link";
 import { OverviewStats } from "@/types/api";
 
 // This is a Server Component. Next.js 16.3 supports async server components naturally.
 export default async function Dashboard() {
-  const stats: OverviewStats = await api.stats.getOverview();
+  const stats: OverviewStats = await serverApi.stats.getOverview();
 
   const accuracyFormatted = stats.accuracy_all_attempts != null 
     ? (stats.accuracy_all_attempts * 100).toFixed(1) + "%" 

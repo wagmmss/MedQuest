@@ -1,10 +1,11 @@
-import { api } from "@/lib/api";
 import { CoverageResponse } from "@/types/api";
 import { CoverageClient } from "./CoverageClient";
+import { CoverageChart } from "./CoverageChart";
+import { serverApi } from "@/lib/server-api";
 import { Target } from "lucide-react";
 
 export default async function CoberturaPage() {
-  const data: CoverageResponse = await api.stats.getCoverage();
+  const data: CoverageResponse = await serverApi.stats.getCoverage();
 
   const totalQuestions = data.areas.reduce((acc, a) => acc + a.n_questions, 0);
   const totalAnswered = data.areas.reduce((acc, a) => acc + a.answered_questions, 0);

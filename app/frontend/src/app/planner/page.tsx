@@ -1,9 +1,9 @@
-import { api } from "@/lib/api";
+import { serverApi } from "@/lib/server-api";
 import { PlannerWizard } from "./PlannerWizard";
 import { PlannerClient } from "./PlannerClient";
 
 export default async function PlannerPage({ searchParams }: { searchParams: Promise<{ intensive?: string }> }) {
-  const config = await api.planner.getConfig();
+  const config = await serverApi.planner.getConfig();
   const sp = await searchParams;
   const isIntensive = sp.intensive === 'true';
 
