@@ -114,7 +114,7 @@ export const api = {
       method: "POST"
     }),
     search: (q: string, semantic: boolean = false) => apiFetch<SearchResult[]>(`/api/search?q=${encodeURIComponent(q)}&semantic=${semantic}`, { cache: 'no-store' }),
-    getSimuladoUSP: () => apiFetch<QuestionListItem[]>("/api/questions/simulado/usp", { cache: 'no-store' }),
+    getSimuladoUSP: () => apiFetch<QuestionListItem[]>("/api/simulado/usp", { cache: 'no-store' }),
     submitAttemptBatch: (attempts: BatchAttemptItem[]) => apiFetch<BatchAttemptResult>(`/api/questions/attempt/batch`, {
       method: "POST",
       body: JSON.stringify({ attempts })
