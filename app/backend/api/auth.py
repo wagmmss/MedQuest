@@ -13,7 +13,7 @@ CLERK_SECRET = os.getenv("CLERK_SECRET_KEY")
 # Extract domain from the publishable key (pk_test_bWFueS1sb3VzZS04Ny5jbGVyay5hY2NvdW50cy5kZXYk)
 # The decoded base64 is: many-louse-87.clerk.accounts.dev$
 import base64
-pk = os.getenv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "")
+pk = os.getenv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "pk_test_bWFueS1sb3VzZS04Ny5jbGVyay5hY2NvdW50cy5kZXYk")
 if pk.startswith("pk_test_"):
     try:
         domain_b64 = pk.replace("pk_test_", "").strip("$")
