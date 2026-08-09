@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { OverviewStats, CoverageResponse, QuestionMeta, PlannerConfig } from "@/types/api";
 
-const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "http://127.0.0.1:5000";
+const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
 
 async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const { getToken } = await auth();
