@@ -91,7 +91,7 @@ def planner_revision(week):
     except ValidationError as e:
         return jsonify({"error": "invalid input", "details": e.errors()}), 400
         
-    allowed_columns = {'lesion', 'exercise', 'revision'}
+    allowed_columns = {'rev24h', 'rev7d', 'rev30d'}
     if data.type not in allowed_columns:
         return jsonify({'error': 'invalid type'}), 400
         
