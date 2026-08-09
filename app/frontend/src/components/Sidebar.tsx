@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { UserButton } from "@clerk/nextjs";
 
 const NAV_ITEMS = [
   { href: "/", label: "Dashboard", icon: "dashboard" },
@@ -63,7 +62,7 @@ export function Sidebar() {
             <span className="material-symbols-outlined" data-icon="person">person</span>
             <span className="font-label-md text-label-md">Conta</span>
           </div>
-          <UserButton appearance={{ elements: { userButtonAvatarBox: "w-8 h-8" } }} />
+          <div className="w-8 h-8 rounded-full bg-surface-container-high" />
         </div>
       </div>
     </aside>
