@@ -1,25 +1,16 @@
 import os
 import json
 import logging
-from groq import Groq
+import urllib.request
+import urllib.error
 
 logger = logging.getLogger(__name__)
 
 def generate_cloze_flashcard(stem: str, correct_text: str, wrong_text: str, explanation: str) -> dict:
     """
-    Calls Groq to generate a Cloze flashcard based on the user's mistake.
+    Calls Gemini (or fallback Groq) to generate a Cloze flashcard based on the user's mistake.
     Returns a dict with {"front": "...", "back": "..."}
     """
-    api_key = os.environ.get("GROQ_API_KEY")
-    if not api_key:
-        # Fallback se não tiver chave (mock para desenvolvimento local)
-        return {
-            "front": f"Atenção: Você marcou '{wrong_text}' mas o correto é {{{{c1::{correct_text}}}}}.",
-            "back": "Configure a GROQ_API_KEY no .env para gerar flashcards reais com IA."
-        }
-
-    client = Groq(api_key=api_key)
-    
     prompt = f"""
 Você é um tutor médico de alto nível focado na técnica de repetição espaçada (flashcards).
 O aluno errou uma questão importante e você precisa criar um flashcard PERFEITO no formato Cloze.
@@ -49,49 +40,65 @@ Responda EXCLUSIVAMENTE com um JSON válido no formato:
   "front": "texto do flashcard com a omissão cloze",
   "back": "explicação curta do erro vs acerto"
 }}
-Não inclua markdown ````json ou nenhum texto fora das chaves do JSON.
+Não inclua markdown ```json ou nenhum texto fora das chaves do JSON.
 """
 
-    try:
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": "Você responde apenas em JSON válido."},
-                {"role": "user", "content": prompt}
-            ],
-            model="llama-3.3-70b-versatile",
-            temperature=0.3,
-            max_tokens=200,
-            response_format={"type": "json_object"}
-        )
-        
-        result_str = chat_completion.choices[0].message.content
-        # Remove potential markdown block formatting from Groq response
-        result_str = result_str.replace("```json", "").replace("```", "").strip()
-        return json.loads(result_str)
-    except json.JSONDecodeError as e:
-        logger.error(f"Erro no parse JSON da geração do flashcard: {e}\nRetorno: {result_str}")
-        return {
-            "front": f"A alternativa correta era {{{{c1::{correct_text}}}}}.",
-            "back": "Houve um erro no parse da IA."
-        }
-    except Exception as e:
-        logger.error(f"Erro na geração do flashcard: {e}")
-        return {
-            "front": f"A alternativa correta era {{{{c1::{correct_text}}}}}.",
-            "back": "Houve um erro na geração via IA."
-        }
+    gemini_key = os.environ.get("GEMINI_API_KEY")
+    if gemini_key:
+        try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={gemini_key}"
+            payload = {
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {
+                    "responseMimeType": "application/json"
+                },
+                "systemInstruction": {
+                    "parts": [{"text": "Você responde apenas em JSON válido."}]
+                }
+            }
+            body = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req) as response:
+                res_data = response.read().decode("utf-8")
+                res_json = json.loads(res_data)
+                result_str = res_json["candidates"][0]["content"]["parts"][0]["text"].strip()
+                result_str = result_str.replace("```json", "").replace("```", "").strip()
+                return json.loads(result_str)
+        except Exception as e:
+            logger.error(f"Erro na geração via Gemini: {e}")
+
+    groq_key = os.environ.get("GROQ_API_KEY")
+    if groq_key:
+        try:
+            from groq import Groq
+            client = Groq(api_key=groq_key)
+            chat_completion = client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": "Você responde apenas em JSON válido."},
+                    {"role": "user", "content": prompt}
+                ],
+                model="llama-3.3-70b-versatile",
+                temperature=0.3,
+                max_tokens=200,
+                response_format={"type": "json_object"}
+            )
+            result_str = chat_completion.choices[0].message.content
+            result_str = result_str.replace("```json", "").replace("```", "").strip()
+            return json.loads(result_str)
+        except Exception as e:
+            logger.error(f"Erro na geração via Groq: {e}")
+
+    # Fallback/Mock
+    return {
+        "front": f"A alternativa correta era {{{{c1::{correct_text}}}}}.",
+        "back": f"Você marcou '{wrong_text}'."
+    }
 
 def expand_search_query(query: str) -> list[str]:
     """
-    Usa a IA para expandir a pesquisa em 3 a 7 sinônimos ou termos relacionados.
+    Usa Gemini (ou fallback Groq) para expandir a pesquisa em 3 a 7 sinônimos ou termos relacionados.
     Retorna uma lista de strings. Se a IA falhar ou não houver chave, retorna apenas a query original.
     """
-    api_key = os.environ.get("GROQ_API_KEY")
-    if not api_key:
-        return [query]
-        
-    client = Groq(api_key=api_key)
-    
     prompt = f"""Você é um especialista médico focado em buscas. O usuário quer pesquisar o seguinte termo: "{query}"
 
 Retorne um JSON contendo uma lista de strings (phrases). Esta lista deve conter o termo original e de 3 a 7 sinônimos, termos técnicos ou diagnósticos diferenciais intimamente ligados à pesquisa.
@@ -101,28 +108,56 @@ Exemplo para "infarto": ["infarto", "iam", "isquemia miocardica", "sindrome coro
 
 Responda APENAS com o JSON. Exemplo: {{ "terms": ["...", "..."] }}
 """
-    try:
-        completion = client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": "Você responde apenas em JSON válido."},
-                {"role": "user", "content": prompt}
-            ],
-            model="llama-3.3-70b-versatile",
-            temperature=0.1,
-            max_tokens=100,
-            response_format={"type": "json_object"}
-        )
-        
-        result_str = completion.choices[0].message.content
-        data = json.loads(result_str)
-        terms = data.get("terms", [])
-        if not terms or not isinstance(terms, list):
-            return [query]
-            
-        return terms
-    except json.JSONDecodeError as e:
-        logger.error(f"Erro no parse JSON da expansão de busca: {e}")
-        return [query]
-    except Exception as e:
-        logger.error(f"Erro na expansão de busca: {e}")
-        return [query]
+
+    gemini_key = os.environ.get("GEMINI_API_KEY")
+    if gemini_key:
+        try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={gemini_key}"
+            payload = {
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {
+                    "responseMimeType": "application/json"
+                },
+                "systemInstruction": {
+                    "parts": [{"text": "Você responde apenas em JSON válido."}]
+                }
+            }
+            body = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req) as response:
+                res_data = response.read().decode("utf-8")
+                res_json = json.loads(res_data)
+                result_str = res_json["candidates"][0]["content"]["parts"][0]["text"].strip()
+                result_str = result_str.replace("```json", "").replace("```", "").strip()
+                data = json.loads(result_str)
+                terms = data.get("terms", [])
+                if terms and isinstance(terms, list):
+                    return terms
+        except Exception as e:
+            logger.error(f"Erro na expansão via Gemini: {e}")
+
+    groq_key = os.environ.get("GROQ_API_KEY")
+    if groq_key:
+        try:
+            from groq import Groq
+            client = Groq(api_key=groq_key)
+            completion = client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": "Você responde apenas em JSON válido."},
+                    {"role": "user", "content": prompt}
+                ],
+                model="llama-3.3-70b-versatile",
+                temperature=0.1,
+                max_tokens=100,
+                response_format={"type": "json_object"}
+            )
+            result_str = completion.choices[0].message.content
+            data = json.loads(result_str)
+            terms = data.get("terms", [])
+            if terms and isinstance(terms, list):
+                return terms
+        except Exception as e:
+            logger.error(f"Erro na expansão via Groq: {e}")
+
+    return [query]
+
