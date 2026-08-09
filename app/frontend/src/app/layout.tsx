@@ -4,6 +4,7 @@ import { ClerkProvider, SignIn } from '@clerk/nextjs'
 import { auth } from '@clerk/nextjs/server'
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
+import { TopNavBar } from "@/components/TopNavBar";
 import { CommandPalette } from "@/components/CommandPalette";
 
 const inter = Inter({
@@ -55,7 +56,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         className={`${inter.variable} h-full antialiased`}
         suppressHydrationWarning
       >
-        <body className="min-h-full flex bg-background text-foreground overflow-hidden">
+        <head>
+          <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+        </head>
+        <body className="font-body-md text-body-md h-screen flex overflow-hidden bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
           {!userId ? (
             <div className="flex w-full h-full items-center justify-center p-8">
               <SignIn routing="hash" />
@@ -63,11 +67,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           ) : (
             <>
               <Sidebar />
-              <main className="flex-1 flex flex-col h-screen overflow-y-auto relative">
-                <div className="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8">
+              <div className="flex-1 flex flex-col w-full min-w-0 bg-background overflow-y-auto">
+                <TopNavBar />
+                <main className="flex-1 max-w-[1440px] mx-auto w-full p-gutter md:p-margin gap-stack-lg flex flex-col pb-24 md:pb-margin relative">
                   {children}
-                </div>
-              </main>
+                </main>
+              </div>
               <CommandPalette />
             </>
           )}

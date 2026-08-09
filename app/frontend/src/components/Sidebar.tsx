@@ -2,85 +2,69 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Target, Activity, CalendarDays, BrainCircuit, ChevronLeft, ChevronRight, Search, FileSignature } from "lucide-react";
 import { useState } from "react";
-import { ThemeToggle } from "./ThemeToggle";
 import clsx from "clsx";
 import { UserButton } from "@clerk/nextjs";
 
 const NAV_ITEMS = [
-  { href: "/", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/cobertura", label: "Cobertura", icon: Target },
-  { href: "/analise", label: "Análise", icon: Activity },
-  { href: "/planner", label: "Planner", icon: CalendarDays },
-  { href: "/estudar", label: "Estudar", icon: BrainCircuit },
-  { href: "/revisao-ativa", label: "Revisão Ativa", icon: BrainCircuit },
-  { href: "/simulado", label: "Simulado USP", icon: FileSignature },
+  { href: "/", label: "Dashboard", icon: "dashboard" },
+  { href: "/cobertura", label: "Cobertura", icon: "my_location" },
+  { href: "/analise", label: "Análise", icon: "analytics" },
+  { href: "/planner", label: "Planner", icon: "calendar_today" },
+  { href: "/estudar", label: "Estudar", icon: "clinical_notes" },
+  { href: "/revisao-ativa", label: "Revisão Ativa", icon: "task_alt" },
+  { href: "/simulado", label: "Simulado USP", icon: "description" },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
-  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <aside 
-      className={clsx(
-        "flex flex-col h-screen border-r border-border bg-card transition-all duration-300",
-        collapsed ? "w-16" : "w-64"
-      )}
-    >
-      <div className="flex items-center justify-between p-4 border-b border-border">
-        {!collapsed && <span className="font-bold text-lg text-primary tracking-tight">MedQuest</span>}
-        <button 
-          onClick={() => setCollapsed(!collapsed)}
-          className={clsx("p-1.5 rounded-md hover:bg-muted text-muted-foreground transition-colors", collapsed && "mx-auto")}
-          aria-label="Toggle sidebar"
-        >
-          {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
-        </button>
+    <aside className="hidden md:flex flex-col bg-surface-container-low h-screen left-0 w-64 border-r border-outline-variant p-4 gap-stack-md z-10">
+      <div className="mb-6 flex flex-col items-center justify-center p-4">
+        <div className="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-2">
+          <span className="material-symbols-outlined" data-icon="local_hospital">local_hospital</span>
+        </div>
+        <h1 className="font-headline-md text-headline-md font-bold text-primary">MedQuest</h1>
+        <p className="font-label-md text-label-md text-on-surface-variant">Preparação USP</p>
       </div>
 
-      <div className="flex-1 py-4 overflow-y-auto overflow-x-hidden flex flex-col gap-2 px-3">
+      <nav className="flex-1 flex flex-col gap-1 overflow-y-auto">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.href;
-          const Icon = item.icon;
           return (
             <Link
               key={item.href}
               href={item.href}
               className={clsx(
-                "flex items-center gap-3 px-3 py-2.5 rounded-md transition-colors whitespace-nowrap",
+                "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200",
                 isActive 
-                  ? "bg-primary text-primary-foreground font-medium shadow-1" 
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  ? "bg-secondary-container text-on-secondary-container font-bold opacity-80 shadow-[0_1px_2px_rgba(0,0,0,0.05)]" 
+                  : "text-on-surface-variant hover:bg-surface-container-high"
               )}
             >
-              <Icon size={20} className="shrink-0" />
-              {!collapsed && <span>{item.label}</span>}
+              <span className="material-symbols-outlined" data-icon={item.icon}>{item.icon}</span>
+              <span className="font-label-md text-label-md">{item.label}</span>
             </Link>
           );
         })}
-      </div>
+      </nav>
 
-      <div className="p-4 border-t border-border flex flex-col gap-4">
+      <div className="mt-auto flex flex-col gap-2 pt-2 border-t border-outline-variant">
         <button 
-          className={clsx(
-            "flex items-center gap-2 px-3 py-2 rounded-md bg-muted text-muted-foreground hover:text-foreground text-sm transition-colors",
-            collapsed && "justify-center"
-          )}
+          className="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 text-left w-full"
           onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))}
         >
-          <Search size={16} className="shrink-0" />
-          {!collapsed && (
-            <div className="flex flex-1 items-center justify-between">
-              <span>Buscar...</span>
-              <kbd className="text-[10px] bg-background px-1.5 py-0.5 rounded border border-border opacity-70">Cmd+K</kbd>
-            </div>
-          )}
+          <span className="material-symbols-outlined" data-icon="search">search</span>
+          <span className="font-label-md text-label-md flex-1">Buscar...</span>
+          <kbd className="text-[10px] bg-surface px-1.5 py-0.5 rounded border border-outline-variant opacity-70">Cmd+K</kbd>
         </button>
-        <div className={clsx("flex items-center", collapsed ? "justify-center flex-col gap-4" : "justify-between px-1")}>
+        <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 justify-between">
+          <div className="flex items-center gap-3">
+            <span className="material-symbols-outlined" data-icon="person">person</span>
+            <span className="font-label-md text-label-md">Conta</span>
+          </div>
           <UserButton appearance={{ elements: { userButtonAvatarBox: "w-8 h-8" } }} />
-          <ThemeToggle />
         </div>
       </div>
     </aside>

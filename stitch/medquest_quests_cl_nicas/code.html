@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MedQuest - Clinical Quests</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#424750",
+                        "primary-fixed": "#d5e3ff",
+                        "secondary": "#006a61",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "background": "#f7f9fb",
+                        "primary-fixed-dim": "#a6c8ff",
+                        "secondary-container": "#86f2e4",
+                        "tertiary-fixed": "#d3e4fe",
+                        "on-secondary-container": "#006f66",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1a4b84",
+                        "on-secondary-fixed": "#00201d",
+                        "outline-variant": "#c3c6d1",
+                        "inverse-primary": "#a6c8ff",
+                        "surface-dim": "#d8dadc",
+                        "on-primary-fixed": "#001c3b",
+                        "on-background": "#191c1e",
+                        "primary": "#003466",
+                        "inverse-surface": "#2d3133",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-bright": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#89f5e7",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "on-secondary": "#ffffff",
+                        "outline": "#737781",
+                        "on-primary-fixed-variant": "#144780",
+                        "surface": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "on-secondary-fixed-variant": "#005049",
+                        "surface-container-low": "#f2f4f6",
+                        "on-tertiary-container": "#acbcd6",
+                        "surface-tint": "#335f99",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "on-primary-container": "#93bcfc",
+                        "tertiary": "#25354a",
+                        "tertiary-container": "#3c4c61"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin": "32px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f7f9fb; }
+        .gradient-primary { background: linear-gradient(180deg, #245A9D 0%, #1A4B84 100%); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- Side Navigation -->
+<aside class="bg-surface-container-low text-primary docked h-screen left-0 w-64 border-r border-outline-variant flat no shadows flex flex-col h-full p-4 gap-stack-md hidden md:flex">
+<div class="mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                MedQuest
+            </h1>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1 ml-8">Clinical Education</p>
+</div>
+<button class="gradient-primary text-on-primary font-body-sm text-body-sm rounded px-4 py-2 mb-6 w-full text-left font-semibold shadow-sm hover:opacity-90 transition-opacity flex items-center justify-between">
+            New Quest
+            <span class="material-symbols-outlined text-sm">add</span>
+</button>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-sm text-body-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container rounded-xl font-bold hover:bg-surface-container-high transition-all duration-200 Active: scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="clinical_notes" style="font-variation-settings: 'FILL' 1;">clinical_notes</span>
+<span class="font-body-sm text-body-sm">Clinical Quests</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-body-sm text-body-sm">Medical Library</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-body-sm text-body-sm">Progress Stats</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="font-body-sm text-body-sm">Resources</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-sm text-body-sm">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-sm text-body-sm">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden">
+<!-- Top App Bar -->
+<header class="bg-surface text-primary font-body-md text-body-md docked full-width top-0 border-b border-outline-variant flat no shadows flex justify-between items-center w-full px-6 py-3 h-16">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative w-64 md:w-96 hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full pl-9 pr-4 py-1.5 bg-white border border-outline-variant rounded-full font-body-sm text-body-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface" placeholder="Search clinical quests..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-md font-bold ml-2">
+                    DR
+                </div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 overflow-y-auto p-gutter bg-surface-bright">
+<div class="max-w-[1440px] mx-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-stack-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary hidden md:block">Clinical Quests</h2>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary md:hidden">Clinical Quests</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Select a case study to enhance your diagnostic skills.</p>
+</div>
+<div class="flex gap-2">
+<select class="bg-white border border-outline-variant rounded px-3 py-1.5 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary">
+<option>All Specialties</option>
+<option>Cardiology</option>
+<option>Neurology</option>
+<option>Pediatrics</option>
+</select>
+<select class="bg-white border border-outline-variant rounded px-3 py-1.5 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary">
+<option>Difficulty: All</option>
+<option>Beginner</option>
+<option>Intermediate</option>
+<option>Advanced</option>
+</select>
+</div>
+</div>
+<!-- Bento Grid Layout for Quests -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Quest Card 1 - High Priority/Featured -->
+<div class="col-span-1 md:col-span-2 lg:col-span-2 bg-white rounded-lg border border-outline-variant overflow-hidden flex flex-col md:flex-row shadow-[0px_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0px_4px_12px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="w-full md:w-2/5 h-48 md:h-auto bg-surface-container-low flex items-center justify-center border-r border-outline-variant" data-alt="A detailed digital medical illustration of a human heart, focused on the left ventricle. Professional, clinical aesthetic with subtle blue and sterile white tones. High precision, clean lines, suitable for high-end medical software interface." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNnH4ZxaT97l1EjdFgDtIHVsGwEpymhVz8D_2oJY_PGvDk2tIyHlkc5KdG-XK0hXr3_Ema735bL5bIKsslSwLWhYIYkpeTxVE5UMDOXuhy9kbCcFam8PEmaCTFQtRvNG1hMmALE83i-jDwhj3yQvvMiYnCZKN30SWUllAwUTZJOceYNNvbl6FgbrTQCPNlePE8rkyhU723bmYOjWW5P1Hr8crs75WNLQ6VYnnenmbtqOgkYOtHlVqt1Q')">
+</div>
+<div class="p-6 flex flex-col justify-between flex-1">
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="inline-block bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded font-label-md text-label-md uppercase tracking-wider">Cardiology</span>
+<span class="flex items-center gap-1 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+                                        500 XP
+                                    </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">The Silent Ischemia Case</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">A 65-year-old patient presents with atypical symptoms. Analyze the ECG and patient history to determine the optimal intervention path.</p>
+</div>
+<div class="flex justify-between items-center mt-6 pt-4 border-t border-outline-variant">
+<div class="flex gap-4">
+<span class="flex items-center gap-1 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+                                        Advanced
+                                    </span>
+<span class="flex items-center gap-1 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                                        45 Min
+                                    </span>
+</div>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-sm text-body-sm px-4 py-1.5 rounded transition-colors font-semibold">Start Quest</button>
+</div>
+</div>
+</div>
+<!-- Quest Card 2 -->
+<div class="bg-white rounded-lg border border-outline-variant overflow-hidden flex flex-col shadow-[0px_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0px_4px_12px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="h-32 bg-surface-container-low border-b border-outline-variant p-4 flex justify-end flex-col relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDBMOCA4Wk04IDBMMCA4WiIgc3Ryb2tlPSIjMDAzNDY2IiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KPC9zdmc+')]"></div>
+<span class="material-symbols-outlined text-4xl text-secondary mb-2 relative z-10">psychology</span>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded font-label-md text-label-md uppercase tracking-wider">Neurology</span>
+<span class="flex items-center gap-1 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+                                    350 XP
+                                </span>
+</div>
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-2">Acute Stroke Protocol</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex-1">Evaluate tPA eligibility for a patient arriving 2.5 hours post-symptom onset.</p>
+<div class="flex justify-between items-center mt-4 pt-3 border-t border-outline-variant">
+<div class="flex gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">signal_cellular_alt</span> Intermediate</span>
+</div>
+<button class="text-primary font-body-sm text-body-sm font-semibold hover:underline">Start</button>
+</div>
+</div>
+</div>
+<!-- Quest Card 3 -->
+<div class="bg-white rounded-lg border border-outline-variant overflow-hidden flex flex-col shadow-[0px_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0px_4px_12px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="h-32 bg-surface-container-low border-b border-outline-variant p-4 flex justify-end flex-col relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDBMOCA4Wk04IDBMMCA4WiIgc3Ryb2tlPSIjMDAzNDY2IiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KPC9zdmc+')]"></div>
+<span class="material-symbols-outlined text-4xl text-tertiary mb-2 relative z-10">child_care</span>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded font-label-md text-label-md uppercase tracking-wider">Pediatrics</span>
+<span class="flex items-center gap-1 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+                                    200 XP
+                                </span>
+</div>
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-2">Neonatal Jaundice Assessment</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex-1">Determine the threshold for phototherapy based on bilirubin levels and gestational age.</p>
+<div class="flex justify-between items-center mt-4 pt-3 border-t border-outline-variant">
+<div class="flex gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">signal_cellular_alt_1_bar</span> Beginner</span>
+</div>
+<button class="text-primary font-body-sm text-body-sm font-semibold hover:underline">Start</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

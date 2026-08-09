@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dr. Aris - User Profile | MedQuest</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#144780",
+                        "surface-bright": "#f7f9fb",
+                        "surface-variant": "#e0e3e5",
+                        "outline-variant": "#c3c6d1",
+                        "primary-fixed": "#d5e3ff",
+                        "secondary": "#006a61",
+                        "background": "#f7f9fb",
+                        "primary": "#003466",
+                        "surface-container-high": "#e6e8ea",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#a6c8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f2f4f6",
+                        "on-surface-variant": "#424750",
+                        "inverse-primary": "#a6c8ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005049",
+                        "primary-container": "#1a4b84",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface": "#f7f9fb",
+                        "tertiary": "#25354a",
+                        "on-secondary-container": "#006f66",
+                        "secondary-fixed": "#89f5e7",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "inverse-surface": "#2d3133",
+                        "surface-dim": "#d8dadc",
+                        "on-primary-fixed": "#001c3b",
+                        "on-tertiary-container": "#acbcd6",
+                        "surface-container": "#eceef0",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "outline": "#737781",
+                        "on-background": "#191c1e",
+                        "tertiary-container": "#3c4c61",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary-container": "#93bcfc",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "tertiary-fixed": "#d3e4fe",
+                        "on-secondary-fixed": "#00201d",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#335f99",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#86f2e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "unit": "4px",
+                        "margin": "32px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--tw-colors-outline-variant);
+        }
+        .micro-shadow {
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.05), 0px 10px 20px rgba(0,0,0,0.02);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col h-screen left-0 w-64 bg-surface-container-low border-r border-outline-variant p-4 gap-stack-md fixed z-20">
+<div class="mb-stack-lg flex flex-col items-start gap-stack-sm p-2">
+<span class="font-headline-md text-headline-md font-bold text-primary">MedQuest</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Clinical Education</span>
+</div>
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded-lg font-body-sm flex items-center justify-center gap-2 hover:bg-primary-container transition-colors mb-stack-md" style="background-image: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+            New Quest
+        </button>
+<div class="flex flex-col gap-unit flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="clinical_notes">clinical_notes</span>
+<span class="font-label-md text-label-md">Clinical Quests</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-md text-label-md">Medical Library</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Progress Stats</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-unit border-t border-outline-variant pt-stack-md">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-secondary-container text-on-secondary-container font-bold hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-6 py-3 h-16 bg-surface border-b border-outline-variant sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<div class="relative hidden md:flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 border border-outline-variant rounded-full text-body-sm bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors w-64" placeholder="Search records..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="Medical Practitioner Avatar" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A highly detailed close-up portrait of a professional medical practitioner avatar. The avatar is rendered in a modern, clinical, flat vector style with clean lines. The practitioner is wearing a pristine white lab coat and a stethoscope. The background is a soft, sterile gradient of light blue and white. The lighting is even and bright, conveying a sense of trust, precision, and modern healthcare." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHF6vgAi1APeGht598hM5cHdNIqqf4pTn1lo9GSdPT-RhYerHYior3-dBR2uuTa-RIOdFQpBP9S2gyZiSl2qTCsv6DmLYlfCyzfZqWYueq7ZGr6KoHuxDoUzOAej0UqbpEl02O0zr-k2Y1HfESECsYZTbE1bT4pcnwk4BrzBop_CyKVWzCAhhIz0tX0W-tGPVVFb_OVC-o7WIBXsNOG7twuMjjWEJu4sBU25aDYiHI55q-SE8nAgQUCw"/>
+</div>
+</header>
+<div class="flex-1 p-gutter max-w-[1440px] mx-auto w-full">
+<!-- User Header Bento -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-stack-lg">
+<div class="col-span-1 md:col-span-12 glass-panel micro-shadow rounded-xl p-stack-lg flex flex-col md:flex-row items-center md:items-start gap-gutter relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 100% 0%, var(--tw-colors-primary-container) 0%, transparent 40%);"></div>
+<div class="w-32 h-32 rounded-full border-4 border-surface-container-lowest micro-shadow overflow-hidden flex-shrink-0 relative z-10">
+<img class="w-full h-full object-cover" data-alt="A professional headshot portrait of Dr. Aris, a modern medical doctor. The doctor is wearing a dark navy scrub top and a crisp white lab coat. The setting is a bright, clinical, modern hospital environment with soft, out-of-focus high-key lighting in the background. The mood is confident, empathetic, and authoritative. The overall aesthetic is highly polished and professional, suitable for a premium medical software profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsKnoQYMcXR_YlPoMZopwfpw1voMk7j-TmfBcbcGMY_ReKRIkccK6Mk-oubySXNW9VyDcI_6EjulLCVJc42GiW1Qhlcec5jYvcL4GAPZzLsSeCAp1BYY5x_4qhQo5pqn_U8P687jIoZpYsMHdBNuMCnwIgeX3eBAuDHpopokfGWmuEzzXW4LC27gV85GzgQIvkuN4LDjag0Y4lzs-rAhhxB-3zBsfSMGdXFabDMT2PAR5fLc88qpthMA"/>
+</div>
+<div class="flex flex-col items-center md:items-start text-center md:text-left flex-1 relative z-10">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-unit">Dr. Aris Vance</h1>
+<p class="font-body-lg text-body-lg text-primary-container mb-stack-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">neurology</span>
+                            Neurology Specialist
+                        </p>
+<div class="flex flex-wrap gap-2 justify-center md:justify-start mt-stack-sm">
+<span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md border border-secondary-fixed-dim">Attending Physician</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md border border-outline-variant">ID: MQ-78921</span>
+</div>
+</div>
+<div class="flex gap-3 relative z-10 self-center md:self-start mt-4 md:mt-0">
+<button class="bg-surface-container-lowest border border-outline-variant text-on-surface py-2 px-4 rounded-lg font-body-sm hover:bg-surface-container-low transition-colors">Edit Profile</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Left Column (Personal Info & Stats) -->
+<div class="lg:col-span-1 flex flex-col gap-gutter">
+<!-- Personal Information Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-stack-md">
+<div class="border-b border-surface-variant pb-stack-sm mb-stack-sm">
+<h2 class="font-headline-md text-headline-md text-on-background">Personal Information</h2>
+</div>
+<ul class="flex flex-col gap-stack-sm">
+<li class="flex flex-col gap-unit">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Email</span>
+<span class="font-body-md text-body-md text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm">mail</span>
+                                    aris.vance@medquest.edu
+                                </span>
+</li>
+<li class="flex flex-col gap-unit mt-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Hospital Affiliation</span>
+<span class="font-body-md text-body-md text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm">local_hospital</span>
+                                    St. Jude Research Medical Center
+                                </span>
+</li>
+<li class="flex flex-col gap-unit mt-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Timezone</span>
+<span class="font-body-md text-body-md text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm">schedule</span>
+                                    EST (New York)
+                                </span>
+</li>
+</ul>
+</div>
+<!-- Clinical Accuracy Stats -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-stack-md bg-gradient-to-br from-surface-container-lowest to-surface-container-low">
+<div class="border-b border-surface-variant pb-stack-sm mb-stack-sm flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-background">Clinical Accuracy</h2>
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div class="flex items-center justify-center py-stack-md">
+<div class="relative w-32 h-32">
+<!-- SVG Donut Chart Mock -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="40" stroke="var(--tw-colors-surface-variant)" stroke-width="8"></circle>
+<circle class="transition-all duration-1000 ease-out" cx="50" cy="50" fill="none" r="40" stroke="var(--tw-colors-primary)" stroke-dasharray="251.2" stroke-dashoffset="15" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">94%</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-2">
+<div class="bg-surface p-3 rounded-lg border border-outline-variant text-center">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-1">Diagnoses</span>
+<span class="font-body-md text-body-md font-bold text-on-background">412</span>
+</div>
+<div class="bg-surface p-3 rounded-lg border border-outline-variant text-center">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-1">Treatment Plans</span>
+<span class="font-body-md text-body-md font-bold text-on-background">389</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Academic & History) -->
+<div class="lg:col-span-2 flex flex-col gap-gutter">
+<!-- Academic Progress (Badges & Certs) -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-stack-md">
+<div class="border-b border-surface-variant pb-stack-sm mb-stack-md flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-background">Academic Progress</h2>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-stack-sm">Recent Badges Earned</h3>
+<div class="flex flex-wrap gap-4 mb-stack-md">
+<div class="flex flex-col items-center gap-2 p-3 bg-surface rounded-lg border border-outline-variant w-24 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<span class="font-label-md text-label-md text-center">Neuro Master</span>
+</div>
+<div class="flex flex-col items-center gap-2 p-3 bg-surface rounded-lg border border-outline-variant w-24 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">speed</span>
+</div>
+<span class="font-label-md text-label-md text-center">Swift Triage</span>
+</div>
+<div class="flex flex-col items-center gap-2 p-3 bg-surface rounded-lg border border-outline-variant w-24 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<span class="font-label-md text-label-md text-center">Peer Reviewer</span>
+</div>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-stack-sm">Certificates</h3>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between p-3 border border-outline-variant rounded-lg hover:border-primary transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-primary-fixed-dim bg-opacity-20 p-2 rounded">description</span>
+<div>
+<p class="font-body-sm font-semibold text-on-background group-hover:text-primary transition-colors">Advanced Neurological Diagnostics</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Issued: Oct 2023</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">download</span>
+</div>
+<div class="flex items-center justify-between p-3 border border-outline-variant rounded-lg hover:border-primary transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-primary-fixed-dim bg-opacity-20 p-2 rounded">description</span>
+<div>
+<p class="font-body-sm font-semibold text-on-background group-hover:text-primary transition-colors">Emergency Stroke Protocol Validation</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Issued: Aug 2023</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">download</span>
+</div>
+</div>
+</div>
+<!-- Quest History (Data Table) -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden">
+<div class="p-stack-md border-b border-surface-variant flex justify-between items-center bg-surface-container-lowest">
+<h2 class="font-headline-md text-headline-md text-on-background">Quest History</h2>
+<div class="flex gap-2">
+<button class="p-1 text-on-surface-variant hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-sm">filter_list</span></button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface border-b border-outline-variant font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">
+<th class="p-3 font-semibold">Case ID</th>
+<th class="p-3 font-semibold">Diagnosis Topic</th>
+<th class="p-3 font-semibold">Date</th>
+<th class="p-3 font-semibold">Score</th>
+<th class="p-3 font-semibold text-right">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-on-background">
+<tr class="border-b border-surface-variant hover:bg-surface-bright transition-colors cursor-pointer">
+<td class="p-3 font-mono text-primary">#NQ-892</td>
+<td class="p-3">Atypical Presentation of Multiple Sclerosis</td>
+<td class="p-3 text-on-surface-variant">Today, 09:41 AM</td>
+<td class="p-3"><span class="font-semibold text-secondary">98/100</span></td>
+<td class="p-3 text-right">
+<span class="inline-block px-2 py-1 rounded bg-secondary-container text-on-secondary-container font-label-md text-label-md">Completed</span>
+</td>
+</tr>
+<tr class="bg-surface border-b border-surface-variant hover:bg-surface-bright transition-colors cursor-pointer">
+<td class="p-3 font-mono text-primary">#NQ-887</td>
+<td class="p-3">Acute Ischemic Stroke Triage</td>
+<td class="p-3 text-on-surface-variant">Yesterday</td>
+<td class="p-3"><span class="font-semibold text-secondary">100/100</span></td>
+<td class="p-3 text-right">
+<span class="inline-block px-2 py-1 rounded bg-secondary-container text-on-secondary-container font-label-md text-label-md">Completed</span>
+</td>
+</tr>
+<tr class="border-b border-surface-variant hover:bg-surface-bright transition-colors cursor-pointer">
+<td class="p-3 font-mono text-primary">#NQ-850</td>
+<td class="p-3">Peripheral Neuropathy Analysis</td>
+<td class="p-3 text-on-surface-variant">Oct 12, 2023</td>
+<td class="p-3"><span class="font-semibold text-on-background">85/100</span></td>
+<td class="p-3 text-right">
+<span class="inline-block px-2 py-1 rounded bg-secondary-container text-on-secondary-container font-label-md text-label-md">Completed</span>
+</td>
+</tr>
+<tr class="bg-surface hover:bg-surface-bright transition-colors cursor-pointer">
+<td class="p-3 font-mono text-primary">#NQ-842</td>
+<td class="p-3">Complex Seizure Disorder Management</td>
+<td class="p-3 text-on-surface-variant">Oct 05, 2023</td>
+<td class="p-3"><span class="text-on-surface-variant">-</span></td>
+<td class="p-3 text-right">
+<span class="inline-block px-2 py-1 rounded bg-surface-variant text-on-surface-variant font-label-md text-label-md">Under Review</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
