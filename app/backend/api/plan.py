@@ -111,5 +111,14 @@ def generate_plan():
     except ValidationError as e:
         return jsonify({"error": "invalid input", "details": e.errors()}), 400
     start_date = data.start_date or datetime.now(timezone.utc).isoformat()
-    plan = generate_annual_plan(DB_PATH, start_date, data.exam_date, data.hours_per_week, intensive=data.intensive)
+    
+    db = get_db()
+    rows = db.execute("""
+        SELECT area, subtema, COUNT(id) as q_count 
+        FROM questions 
+        WHERE area IS NOT NULL AND subtema IS NOT NULL
+        GROUP BY area, subtema
+    """).fetchall()
+    
+    plan = generate_annual_plan(rows, start_date, data.exam_date, data.hours_per_week, intensive=data.intensive)
     return jsonify(plan) # generate_annual_plan now returns a dict that might contain warning

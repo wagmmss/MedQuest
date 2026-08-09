@@ -22,7 +22,7 @@ def get_normalized_area(raw_area):
     if "Pediatria" in raw_area: return "Pediatria"
     return "Outros"
 
-def generate_annual_plan(db_path, start_date_str, exam_date_str, hours_per_week, intensive=False):
+def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, intensive=False):
     """
     Gera um plano de estudos fatiado por semanas com base no tempo disponível
     e no peso histórico das áreas na prova de Residência da USP.
@@ -69,16 +69,7 @@ def generate_annual_plan(db_path, start_date_str, exam_date_str, hours_per_week,
                 "theory_hours": theory_hours
             }
 
-    # Fetch available subtopics per area
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    rows = conn.execute("""
-        SELECT area, subtema, COUNT(id) as q_count 
-        FROM questions 
-        WHERE area IS NOT NULL AND subtema IS NOT NULL
-        GROUP BY area, subtema
-    """).fetchall()
-    conn.close()
+    # Rows now provided via argument
 
     # Prepara a lista de todos os tópicos disponíveis, calculando as horas de cada um
     all_topics = []
