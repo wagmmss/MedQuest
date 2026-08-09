@@ -56,8 +56,8 @@ export function QuizClient({
         alert("Nenhuma questão encontrada com esses filtros.");
         setState("FILTERS");
       }
-    } catch (e) {
-      alert("Erro ao buscar questões.");
+    } catch (e: any) {
+      alert(`Erro ao buscar questões: ${e.message}`);
       setState("FILTERS");
     }
   }, []);
@@ -304,7 +304,7 @@ export function QuizClient({
                 <option value="">Todas</option>
                 <option value="unanswered">Não respondidas</option>
                 <option value="srs_due">Para Revisão (Repetição Espaçada)</option>
-                <option value="incorrect">Errei anteriormente</option>
+                <option value="wrong">Errei anteriormente</option>
               </select>
             </div>
             
