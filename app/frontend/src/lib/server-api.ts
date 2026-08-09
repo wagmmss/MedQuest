@@ -25,7 +25,20 @@ async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<
     throw new Error(`Server API error on ${BACKEND_URL}${endpoint}: ${response.status} ${response.statusText}`);
   }
 
-  return response.json();
+  let data;
+  try {
+    const text = await response.text();
+    try {
+      data = JSON.parse(text);
+    } catch (e: any) {
+      console.error(`JSON Parse Error for ${BACKEND_URL}${endpoint}. Raw text: ${text.substring(0, 500)}`);
+      throw new Error(`JSON parse error on ${BACKEND_URL}${endpoint}: ${e.message}`);
+    }
+  } catch (e: any) {
+    throw new Error(`Failed to read response from ${BACKEND_URL}${endpoint}: ${e.message}`);
+  }
+
+  return data;
 }
 
 export const serverApi = {

@@ -98,7 +98,14 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
 
   useEffect(() => {
     const saved = localStorage.getItem("medquest_planner_topics");
-    if (saved) setCheckedTopics(JSON.parse(saved));
+    if (saved) {
+      try {
+        setCheckedTopics(JSON.parse(saved));
+      } catch (e) {
+        console.error("Failed to parse saved planner topics:", e);
+        localStorage.removeItem("medquest_planner_topics");
+      }
+    }
   }, []);
 
   useEffect(() => {
