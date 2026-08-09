@@ -12,6 +12,8 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
 
   const headers = new Headers(req.headers);
   headers.delete("host");
+  // CRITICAL: Prevent backend from sending compressed data, let Vercel handle it
+  headers.delete("accept-encoding");
   
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
@@ -29,8 +31,10 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
 
     console.log(`[PROXY] Received response from backend: ${response.status} ${response.statusText}`);
 
-  const responseHeaders = new Headers(response.headers);
-  responseHeaders.delete("content-encoding");
+    const responseHeaders = new Headers(response.headers);
+    // CRITICAL: If the backend still sends compressed data, strip the headers so Vercel computes the correct size
+    responseHeaders.delete("content-encoding");
+    responseHeaders.delete("content-length");
 
     return new NextResponse(response.body, {
       status: response.status,
