@@ -147,19 +147,17 @@ export function QuizClient({
     }
   };
 
-  const handleAttempt = async (letter: string) => {
-    if (attemptResult || submitting || !currentDetail) return;
+  const handleAttempt = async () => {
+    if (attemptResult || submitting || !currentDetail || !selectedLetter) return;
     
-    setSelectedLetter(letter);
     setSubmitting(true);
     if (timerRef.current) clearInterval(timerRef.current);
 
     try {
-      const res = await api.questions.submitAttempt(currentDetail.id, letter, timeSpent * 1000, confidence);
+      const res = await api.questions.submitAttempt(currentDetail.id, selectedLetter, timeSpent * 1000, confidence);
       setAttemptResult(res);
     } catch (e) {
       toast.error("Erro ao enviar resposta.");
-      setSelectedLetter(null);
       // O timer será reiniciado automaticamente pelo useEffect pois attemptResult continua null e state="PLAYING"
     } finally {
       setSubmitting(false);
@@ -231,7 +229,12 @@ export function QuizClient({
         if (key in altIndexMap) {
           const idx = altIndexMap[key];
           if (idx < currentDetail.alternatives.length) {
-            handleAttempt(currentDetail.alternatives[idx].letter);
+            setSelectedLetter(currentDetail.alternatives[idx].letter);
+          }
+        } else if (key === "ENTER" || key === " ") {
+          if (selectedLetter && !submitting) {
+            e.preventDefault();
+            handleAttempt();
           }
         }
       } else {
@@ -254,7 +257,7 @@ export function QuizClient({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue]);
+  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue, selectedLetter, submitting]);
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -603,7 +606,7 @@ export function QuizClient({
               return (
                 <button
                   key={alt.letter}
-                  onClick={() => handleAttempt(alt.letter)}
+                  onClick={() => !attemptResult && !submitting && setSelectedLetter(alt.letter)}
                   disabled={!!attemptResult || submitting}
                   className={clsx(
                     "text-left p-4 rounded-xl border transition-all flex items-start gap-4 w-full",
@@ -630,6 +633,20 @@ export function QuizClient({
               );
             })}
           </div>
+
+          {!attemptResult && selectedLetter && (
+            <button
+              onClick={handleAttempt}
+              disabled={submitting}
+              className="mt-2 w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 rounded-xl transition-all flex items-center justify-center shadow-md animate-in slide-in-from-bottom-2 fade-in duration-200"
+            >
+              {submitting ? (
+                <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+              ) : (
+                "Confirmar Resposta"
+              )}
+            </button>
+          )}
 
           {/* Explanation Block */}
           {attemptResult && (
