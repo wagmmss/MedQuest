@@ -10,14 +10,14 @@ __all__ = ["AttemptIn", "BatchAttemptItem", "BatchAttemptIn", "PlannerConfigIn",
 class AttemptIn(BaseModel):
     selected_letter: str = Field(pattern=r"^[A-Ea-e]$")
     time_spent_ms: Optional[int] = Field(default=None, ge=0)
-    confidence: Optional[Literal["chutei", "duvida", "certeza"]] = None
+    confidence: Optional[Literal["chutei", "duvida", "certeza", "defer"]] = None
 
 
 class BatchAttemptItem(BaseModel):
     question_id: int
     selected_letter: str = Field(pattern=r"^[A-Ea-e]$")
     time_spent_ms: Optional[int] = Field(default=None, ge=0)
-    confidence: Optional[Literal["chutei", "duvida", "certeza"]] = None
+    confidence: Optional[Literal["chutei", "duvida", "certeza", "defer"]] = None
 
 
 class BatchAttemptIn(BaseModel):

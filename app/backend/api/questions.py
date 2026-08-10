@@ -211,14 +211,16 @@ def submit_attempt(qid):
     )
 
     # Repetição espaçada (FSRS)
-    sr = db.execute("SELECT fsrs_card FROM spaced_repetition WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
-    card_json, next_review = srs.review(sr["fsrs_card"] if sr else None, is_correct, payload.confidence)
-    db.execute("""
-        INSERT INTO spaced_repetition (question_id, next_review_date, fsrs_card, user_id)
-        VALUES (?, ?, ?, ?)
-        ON CONFLICT(question_id, user_id) DO UPDATE SET
-            next_review_date = excluded.next_review_date, fsrs_card = excluded.fsrs_card
-    """, (qid, next_review, card_json, g.user_id))
+    next_review = None
+    if payload.confidence != "defer":
+        sr = db.execute("SELECT fsrs_card FROM spaced_repetition WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
+        card_json, next_review = srs.review(sr["fsrs_card"] if sr else None, is_correct, payload.confidence)
+        db.execute("""
+            INSERT INTO spaced_repetition (question_id, next_review_date, fsrs_card, user_id)
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT(question_id, user_id) DO UPDATE SET
+                next_review_date = excluded.next_review_date, fsrs_card = excluded.fsrs_card
+        """, (qid, next_review, card_json, g.user_id))
     db.commit()
 
     exp = db.execute("SELECT explanation_text FROM explanations WHERE question_id = ?", (qid,)).fetchone()
@@ -229,6 +231,36 @@ def submit_attempt(qid):
         "next_review_date": next_review,
     })
 
+
+@bp.route("/questions/<int:qid>/review", methods=["POST"])
+def review_fsrs(qid):
+    db = get_db()
+    data = request.get_json(force=True) or {}
+    confidence = data.get("confidence")
+    
+    last_attempt = db.execute(
+        "SELECT id, is_correct FROM attempts WHERE question_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1", 
+        (qid, g.user_id)
+    ).fetchone()
+    
+    if not last_attempt:
+        return jsonify({"error": "No attempt found"}), 400
+        
+    db.execute(
+        "UPDATE attempts SET confidence = ? WHERE id = ?",
+        (confidence, last_attempt["id"])
+    )
+        
+    sr = db.execute("SELECT fsrs_card FROM spaced_repetition WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
+    card_json, next_review = srs.review(sr["fsrs_card"] if sr else None, last_attempt["is_correct"], confidence)
+    db.execute("""
+        INSERT INTO spaced_repetition (question_id, next_review_date, fsrs_card, user_id)
+        VALUES (?, ?, ?, ?)
+        ON CONFLICT(question_id, user_id) DO UPDATE SET
+            next_review_date = excluded.next_review_date, fsrs_card = excluded.fsrs_card
+    """, (qid, next_review, card_json, g.user_id))
+    db.commit()
+    return jsonify({"success": True, "next_review_date": next_review})
 
 @bp.route("/attempt/batch", methods=["POST"])
 def submit_attempt_batch():

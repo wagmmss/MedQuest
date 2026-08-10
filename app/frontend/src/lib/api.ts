@@ -109,10 +109,15 @@ export const api = {
       return apiFetch<QuestionListItem[]>(`/api/questions?${params.toString()}`, { cache: 'no-store' });
     },
     getDetail: (id: number) => apiFetch<QuestionDetail>(`/api/questions/${id}`, { cache: 'no-store' }),
-    submitAttempt: (id: number, selected_letter: string, time_spent_ms: number, confidence: string = "certeza") => 
+    submitAttempt: (id: number, selected_letter: string, time_spent_ms: number, confidence: string = "defer") => 
       apiFetch<AttemptResult>(`/api/questions/${id}/attempt`, {
         method: "POST",
         body: JSON.stringify({ selected_letter, time_spent_ms, confidence }),
+      }),
+    reviewFSRS: (id: number, confidence: string) => 
+      apiFetch<{success: boolean, next_review_date: string}>(`/api/questions/${id}/review`, {
+        method: "POST",
+        body: JSON.stringify({ confidence })
       }),
     toggleFavorite: (id: number) => apiFetch<{is_favorite: boolean}>(`/api/questions/${id}/favorite`, {
       method: "POST"

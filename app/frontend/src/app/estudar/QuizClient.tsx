@@ -20,6 +20,16 @@ export function QuizClient({
   const router = useRouter();
   const [state, setState] = useState<QuizState>(Object.keys(initialFilters).length > 0 ? "LOADING_QUEUE" : "FILTERS");
   const [filters, setFilters] = useState<Record<string, string | string[]>>({ limit: "50", ...initialFilters });
+  const [localLimit, setLocalLimit] = useState<string>(
+    typeof filters.limit === "string" ? filters.limit : "50"
+  );
+
+  useEffect(() => {
+    if (typeof filters.limit === "string") {
+      setLocalLimit(filters.limit);
+    }
+  }, [filters.limit]);
+
   const [studyMode, setStudyMode] = useState<"TUTOR" | "SIMULADO">("TUTOR");
   const [dynamicMeta, setDynamicMeta] = useState<QuestionMeta>(meta);
   const [isUpdatingMeta, setIsUpdatingMeta] = useState(false);
@@ -41,7 +51,7 @@ export function QuizClient({
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   
   // Confidence
-  const [confidence, setConfidence] = useState<string>("certeza"); // "chutei", "duvida", "certeza"
+
   const [togglingFavorite, setTogglingFavorite] = useState(false);
 
   const loadQuestionDetail = useCallback(async (id: number) => {
@@ -50,7 +60,6 @@ export function QuizClient({
     setSelectedLetter(null);
     setFlashcardResult(null);
     setTimeSpent(0);
-    setConfidence("certeza");
     try {
       const detail = await api.questions.getDetail(id);
       setCurrentDetail(detail);
@@ -132,9 +141,22 @@ export function QuizClient({
 
   const handleFilterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Sanitize limit before submitting
+    let finalLimit = "50";
+    if (typeof filters.limit === "string" && filters.limit.trim() !== "") {
+      const parsed = parseInt(filters.limit, 10);
+      if (!isNaN(parsed)) {
+        if (parsed < 1) finalLimit = "1";
+        else if (parsed > 200) finalLimit = "200";
+        else finalLimit = parsed.toString();
+      }
+    }
+    const finalFilters = { ...filters, limit: finalLimit };
+
     if (studyMode === "SIMULADO") {
       const params = new URLSearchParams();
-      for (const [key, value] of Object.entries(filters)) {
+      for (const [key, value] of Object.entries(finalFilters)) {
         if (Array.isArray(value)) {
           value.forEach(v => params.append(key, v));
         } else if (value !== undefined && value !== "") {
@@ -143,7 +165,7 @@ export function QuizClient({
       }
       router.push(`/simulado?${params.toString()}`);
     } else {
-      loadQueue(filters);
+      loadQueue(finalFilters);
     }
   };
 
@@ -154,7 +176,7 @@ export function QuizClient({
     if (timerRef.current) clearInterval(timerRef.current);
 
     try {
-      const res = await api.questions.submitAttempt(currentDetail.id, selectedLetter, timeSpent * 1000, confidence);
+      const res = await api.questions.submitAttempt(currentDetail.id, selectedLetter, timeSpent * 1000, "defer");
       setAttemptResult(res);
     } catch (e) {
       toast.error("Erro ao enviar resposta.");
@@ -183,6 +205,17 @@ export function QuizClient({
       loadQuestionDetail(queue[currentIndex + 1].id);
     } else {
       setState("FINISHED");
+    }
+  };
+
+  const handleReviewFSRS = async (conf: string) => {
+    if (!currentDetail) return;
+    try {
+      await api.questions.reviewFSRS(currentDetail.id, conf);
+    } catch (e) {
+      toast.error("Erro ao salvar revisão (FSRS).");
+    } finally {
+      nextQuestion();
     }
   };
 
@@ -238,10 +271,15 @@ export function QuizClient({
           }
         }
       } else {
-        // Next Question with Enter
-        if (key === "ENTER" || key === " ") {
-          e.preventDefault();
-          nextQuestion();
+        if (!attemptResult.next_review_date) {
+          if (key === "1") handleReviewFSRS("chutei");
+          else if (key === "2" || key === "ENTER" || key === " ") { e.preventDefault(); handleReviewFSRS("duvida"); }
+          else if (key === "3") handleReviewFSRS("certeza");
+        } else {
+          if (key === "ENTER" || key === " " || key === "3" || key === "2" || key === "1") {
+            e.preventDefault();
+            nextQuestion();
+          }
         }
       }
 
@@ -328,8 +366,27 @@ export function QuizClient({
                 min="1"
                 max="200"
                 className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                value={filters.limit || "50"}
-                onChange={(e) => setFilters({ ...filters, limit: e.target.value })}
+                value={localLimit}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setLocalLimit(val);
+                  setFilters((prev) => ({ ...prev, limit: val }));
+                }}
+                onBlur={() => {
+                  if (!localLimit || localLimit.trim() === "") {
+                    setLocalLimit("50");
+                    setFilters((prev) => ({ ...prev, limit: "50" }));
+                  } else {
+                    const parsed = parseInt(localLimit, 10);
+                    if (isNaN(parsed) || parsed < 1) {
+                      setLocalLimit("1");
+                      setFilters((prev) => ({ ...prev, limit: "1" }));
+                    } else if (parsed > 200) {
+                      setLocalLimit("200");
+                      setFilters((prev) => ({ ...prev, limit: "200" }));
+                    }
+                  }
+                }}
               />
               <p className="text-xs text-muted-foreground">Máximo de 200 questões por sessão.</p>
             </div>
@@ -576,18 +633,6 @@ export function QuizClient({
             )}
           </div>
 
-          {/* Confidence (if not answered) */}
-          {!attemptResult && (
-            <div className="bg-card border border-border shadow-1 rounded-xl p-4 flex items-center justify-between">
-              <span className="text-sm font-medium text-foreground">Grau de Certeza (FSRS):</span>
-              <div className="flex gap-2">
-                <button onClick={() => setConfidence("chutei")} className={clsx("px-3 py-1 text-xs rounded transition-colors font-medium", confidence === "chutei" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground")}>Chute / Dúvida</button>
-                <button onClick={() => setConfidence("duvida")} className={clsx("px-3 py-1 text-xs rounded transition-colors font-medium", confidence === "duvida" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground")}>Pensei um pouco</button>
-                <button onClick={() => setConfidence("certeza")} className={clsx("px-3 py-1 text-xs rounded transition-colors font-medium", confidence === "certeza" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground")}>Certeza</button>
-              </div>
-            </div>
-          )}
-
           {/* Alternatives */}
           <div className="flex flex-col gap-3">
             {q.alternatives.map((alt) => {
@@ -666,12 +711,14 @@ export function QuizClient({
                       <><XCircle className="text-destructive" /> <span className="text-destructive">Resposta Incorreta</span></>
                     )}
                   </div>
-                  <button
-                    onClick={nextQuestion}
-                    className="flex items-center gap-2 bg-background border border-border hover:bg-muted font-bold px-4 py-2 rounded-md transition-colors text-sm"
-                  >
-                    Próxima <ArrowRight size={16} />
-                  </button>
+                  {!attemptResult.is_correct && attemptResult.next_review_date && (
+                    <button
+                      onClick={nextQuestion}
+                      className="flex items-center gap-2 bg-background border border-border hover:bg-muted font-bold px-4 py-2 rounded-md transition-colors text-sm"
+                    >
+                      Próxima <ArrowRight size={16} />
+                    </button>
+                  )}
                 </div>
                 
                 <div className="p-6 md:p-8">
@@ -719,10 +766,45 @@ export function QuizClient({
                     </div>
                   )}
 
-                  {attemptResult.next_review_date && (
+                  {attemptResult.next_review_date ? (
                     <div className="mt-8 pt-4 border-t border-border flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <Clock size={16} />
                       Próxima revisão agendada para: {new Date(attemptResult.next_review_date).toLocaleDateString('pt-BR')}
+                    </div>
+                  ) : (
+                    <div className="mt-8 pt-4 border-t border-border flex flex-col gap-4">
+                      <span className="text-sm font-bold text-foreground">
+                        {attemptResult.is_correct 
+                          ? "Como foi lembrar dessa resposta? (FSRS)" 
+                          : "Qual era o seu grau de certeza antes de ver o resultado? (FSRS)"}
+                      </span>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        {attemptResult.is_correct ? (
+                          <>
+                            <button onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm">
+                              🔴 Acertei no Chute (Difícil) <br/><span className="text-xs font-normal opacity-70">Atalho: 1</span>
+                            </button>
+                            <button onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm">
+                              🟡 Pensei um Pouco (Bom) <br/><span className="text-xs font-normal opacity-70">Atalho: 2 ou Enter</span>
+                            </button>
+                            <button onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm">
+                              🟢 Tinha Certeza (Fácil) <br/><span className="text-xs font-normal opacity-70">Atalho: 3</span>
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm">
+                              🔴 Errei no Chute <br/><span className="text-xs font-normal opacity-70">Atalho: 1</span>
+                            </button>
+                            <button onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm">
+                              🟡 Errei com Dúvida <br/><span className="text-xs font-normal opacity-70">Atalho: 2 ou Enter</span>
+                            </button>
+                            <button onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm">
+                              🟢 Tinha Certeza, mas Errei <br/><span className="text-xs font-normal opacity-70">Atalho: 3</span>
+                            </button>
+                          </>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
