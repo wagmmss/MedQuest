@@ -20,7 +20,7 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
   const [error, setError] = useState<string | null>(null);
 
   const handleResetProgress = async () => {
-    if (confirmText !== "RESETAR") return;
+    if (confirmText.toUpperCase() !== "RESETAR") return;
     
     setIsLoading(true);
     setError(null);
@@ -33,7 +33,7 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
         setError("Não foi possível resetar o progresso. Tente novamente.");
         setIsLoading(false);
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
       setError("Ocorreu um erro ao resetar o progresso.");
       setIsLoading(false);
@@ -205,7 +205,7 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                       </button>
                       <button
                         onClick={handleResetProgress}
-                        disabled={confirmText !== "RESETAR" || isLoading}
+                        disabled={confirmText.toUpperCase() !== "RESETAR" || isLoading}
                         className="flex-1 py-3 px-4 rounded-xl bg-error text-on-error hover:bg-error/90 disabled:bg-surface-container-highest disabled:text-on-surface/30 disabled:cursor-not-allowed transition-all text-center font-bold text-label-md cursor-pointer flex items-center justify-center gap-2 shadow-md shadow-error/10"
                       >
                         {isLoading ? (

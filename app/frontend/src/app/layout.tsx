@@ -5,6 +5,8 @@ import { auth } from '@clerk/nextjs/server';
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import TopNav from "@/components/TopNav";
+import { Toaster } from "react-hot-toast";
+import { CommandPalette } from "@/components/CommandPalette";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -57,6 +59,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       >
         <head>
           <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                try {
+                  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark')
+                  } else {
+                    document.documentElement.classList.remove('dark')
+                  }
+                } catch (_) {}
+              `
+            }}
+          />
         </head>
         <body className="font-body-md text-body-md h-screen flex overflow-hidden bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
           {!userId ? (
@@ -72,8 +87,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   {children}
                 </main>
               </div>
+              <CommandPalette />
             </>
           )}
+          <Toaster position="top-right" />
         </body>
       </html>
     </ClerkProvider>

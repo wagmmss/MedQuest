@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { useUser } from "@clerk/nextjs";
 import { AccountModal } from "./AccountModal";
+import { ThemeToggle } from "./ThemeToggle";
 
 const NAV_ITEMS = [
   { href: "/", label: "Dashboard", icon: "dashboard" },
@@ -21,6 +22,17 @@ export function Sidebar() {
   const pathname = usePathname();
   const { user, isLoaded } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [shortcut, setShortcut] = useState("Cmd+K");
+
+  useEffect(() => {
+    if (typeof navigator !== "undefined") {
+      const isMac = navigator.userAgent.indexOf("Mac") !== -1;
+      const timer = setTimeout(() => {
+        setShortcut(isMac ? "⌘K" : "Ctrl+K");
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   return (
     <>
@@ -55,14 +67,17 @@ export function Sidebar() {
         </nav>
 
         <div className="mt-auto flex flex-col gap-2 pt-2 border-t border-outline-variant">
-          <button 
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 text-left w-full cursor-pointer"
-            onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))}
-          >
-            <span className="material-symbols-outlined" data-icon="search">search</span>
-            <span className="font-label-md text-label-md flex-1">Buscar...</span>
-            <kbd className="text-[10px] bg-surface px-1.5 py-0.5 rounded border border-outline-variant opacity-70">Cmd+K</kbd>
-          </button>
+          <div className="flex items-center justify-between gap-2">
+            <button 
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 text-left flex-1 cursor-pointer"
+              onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
+            >
+              <span className="material-symbols-outlined" data-icon="search">search</span>
+              <span className="font-label-md text-label-md flex-1">Buscar...</span>
+              <kbd className="text-[10px] bg-surface px-1.5 py-0.5 rounded border border-outline-variant opacity-70">{shortcut}</kbd>
+            </button>
+            <ThemeToggle />
+          </div>
           
           <button
             onClick={() => setIsModalOpen(true)}

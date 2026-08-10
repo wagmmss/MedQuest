@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, ChevronRight, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft } from "lucide-react";
+import { Play, Filter, Clock, CheckCircle2, XCircle, ChevronRight, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff } from "lucide-react";
 import clsx from "clsx";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 type QuizState = "FILTERS" | "LOADING_QUEUE" | "PLAYING" | "FINISHED";
@@ -43,6 +44,24 @@ export function QuizClient({
   const [confidence, setConfidence] = useState<string>("certeza"); // "chutei", "duvida", "certeza"
   const [togglingFavorite, setTogglingFavorite] = useState(false);
 
+  const loadQuestionDetail = useCallback(async (id: number) => {
+    setLoadingDetail(true);
+    setAttemptResult(null);
+    setSelectedLetter(null);
+    setFlashcardResult(null);
+    setTimeSpent(0);
+    setConfidence("certeza");
+    try {
+      const detail = await api.questions.getDetail(id);
+      setCurrentDetail(detail);
+      // Removida a lógica de bloqueio por already_answered. Na revisão, o aluno tenta de novo!
+    } catch (e) {
+      toast.error("Erro ao carregar questão.");
+    } finally {
+      setLoadingDetail(false);
+    }
+  }, []);
+
   const loadQueue = useCallback(async (activeFilters: Record<string, string | string[]>) => {
     setState("LOADING_QUEUE");
     try {
@@ -53,18 +72,22 @@ export function QuizClient({
         setState("PLAYING");
         loadQuestionDetail(qList[0].id);
       } else {
-        alert("Nenhuma questão encontrada com esses filtros.");
+        toast.error("Nenhuma questão encontrada com esses filtros.");
         setState("FILTERS");
       }
-    } catch (e: any) {
-      alert(`Erro ao buscar questões: ${e.message}`);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "Erro desconhecido";
+      toast.error(`Erro ao buscar questões: ${message}`);
       setState("FILTERS");
     }
-  }, []);
+  }, [loadQuestionDetail]);
 
   useEffect(() => {
     if (Object.keys(initialFilters).length > 0 && queue.length === 0 && state === "LOADING_QUEUE") {
-      loadQueue({ limit: "50", ...initialFilters });
+      const timer = setTimeout(() => {
+        loadQueue({ limit: "50", ...initialFilters });
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [initialFilters, loadQueue, queue.length, state]);
 
@@ -107,24 +130,6 @@ export function QuizClient({
     };
   }, [state, currentDetail, attemptResult]);
 
-  const loadQuestionDetail = async (id: number) => {
-    setLoadingDetail(true);
-    setAttemptResult(null);
-    setSelectedLetter(null);
-    setFlashcardResult(null);
-    setTimeSpent(0);
-    setConfidence("certeza");
-    try {
-      const detail = await api.questions.getDetail(id);
-      setCurrentDetail(detail);
-      // Removida a lógica de bloqueio por already_answered. Na revisão, o aluno tenta de novo!
-    } catch (e) {
-      alert("Erro ao carregar questão.");
-    } finally {
-      setLoadingDetail(false);
-    }
-  };
-
   const handleFilterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (studyMode === "SIMULADO") {
@@ -153,11 +158,9 @@ export function QuizClient({
       const res = await api.questions.submitAttempt(currentDetail.id, letter, timeSpent * 1000, confidence);
       setAttemptResult(res);
     } catch (e) {
-      alert("Erro ao enviar resposta.");
+      toast.error("Erro ao enviar resposta.");
       setSelectedLetter(null);
-      timerRef.current = setInterval(() => {
-        setTimeSpent(prev => prev + 1);
-      }, 1000);
+      // O timer será reiniciado automaticamente pelo useEffect pois attemptResult continua null e state="PLAYING"
     } finally {
       setSubmitting(false);
     }
@@ -170,7 +173,7 @@ export function QuizClient({
       const res = await api.flashcards.generate(currentDetail.id, selectedLetter);
       setFlashcardResult(res);
     } catch (e) {
-      alert("Erro ao gerar flashcard com IA.");
+      toast.error("Erro ao gerar flashcard com IA.");
     } finally {
       setGeneratingFlashcard(false);
     }
@@ -232,11 +235,11 @@ export function QuizClient({
         }
       }
 
-      // Free navigation with arrows
-      if (e.key === "ArrowLeft") {
+      // Free navigation with arrows (Requires Ctrl or Alt to prevent accidental jumps while scrolling)
+      if (e.key === "ArrowLeft" && (e.ctrlKey || e.altKey)) {
         e.preventDefault();
         prevQuestion();
-      } else if (e.key === "ArrowRight") {
+      } else if (e.key === "ArrowRight" && (e.ctrlKey || e.altKey)) {
         e.preventDefault();
         nextQuestion();
       }
@@ -313,11 +316,12 @@ export function QuizClient({
               <input 
                 type="number"
                 min="1"
-                max="2000"
+                max="200"
                 className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                 value={filters.limit || "50"}
                 onChange={(e) => setFilters({ ...filters, limit: e.target.value })}
               />
+              <p className="text-xs text-muted-foreground">Máximo de 200 questões por sessão.</p>
             </div>
           </div>
 
@@ -424,11 +428,15 @@ export function QuizClient({
         <div className="w-20 h-20 bg-success/20 text-success rounded-full flex items-center justify-center mx-auto mb-6">
           <CheckCircle2 size={40} />
         </div>
-        <h2 className="text-2xl font-bold text-foreground mb-3">Simulado Concluído!</h2>
-        <p className="text-muted-foreground mb-8">Você terminou todas as questões da fila.</p>
+        <h2 className="text-2xl font-bold text-foreground mb-3">
+          {studyMode === "TUTOR" ? "Sessão Concluída!" : "Simulado Concluído!"}
+        </h2>
+        <p className="text-muted-foreground mb-8">
+          {studyMode === "TUTOR" ? "Você terminou de responder todas as questões desta sessão." : "Você terminou todas as questões da fila."}
+        </p>
         <button 
           onClick={() => setState("FILTERS")}
-          className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-2.5 px-6 rounded-md transition-colors"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-2.5 px-6 rounded-md transition-colors cursor-pointer"
         >
           Voltar para Filtros
         </button>
@@ -453,6 +461,13 @@ export function QuizClient({
           <div className="h-6 w-px bg-border hidden sm:block" />
           <div className="text-sm font-semibold text-foreground">
             Questão {currentIndex + 1} de {queue.length}
+          </div>
+          <div className="hidden lg:flex items-center gap-2 ml-4 px-3 py-1 bg-muted/50 rounded-full text-xs text-muted-foreground font-medium">
+            <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">A-E</kbd> ou <kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">1-5</kbd> Alternativas</span>
+            <span className="w-1 h-1 rounded-full bg-border" />
+            <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">Enter</kbd> Confirmar</span>
+            <span className="w-1 h-1 rounded-full bg-border" />
+            <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">➔</kbd> Próxima</span>
           </div>
         </div>
         
@@ -526,7 +541,23 @@ export function QuizClient({
             {q.images && q.images.length > 0 && (
               <div className="flex flex-col gap-4 mt-4">
                 {q.images.map((img, i) => (
-                  <img key={i} src={`/images/${img}`} alt={`Imagem ${i+1}`} className="max-w-full rounded-md border border-border" />
+                  <div key={i} className="relative group rounded-md overflow-hidden border border-border bg-muted/20">
+                    <img 
+                      src={`/api/images/${img}`} 
+                      alt={`Imagem ${i+1}`} 
+                      className="max-w-full" 
+                      onError={(e) => { 
+                        e.currentTarget.style.display = 'none'; 
+                        if (e.currentTarget.nextElementSibling) {
+                          (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
+                        }
+                      }} 
+                    />
+                    <div className="hidden flex-col items-center justify-center p-8 text-muted-foreground gap-2">
+                      <ImageOff size={32} />
+                      <span className="text-sm font-medium">Imagem indisponível</span>
+                    </div>
+                  </div>
                 ))}
               </div>
             )}

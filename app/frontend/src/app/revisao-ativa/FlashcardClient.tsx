@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Flashcard } from "@/types/api";
 import { api } from "@/lib/api";
 import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle, ArrowRight } from "lucide-react";
+import toast from "react-hot-toast";
 
 export function FlashcardClient() {
   const [queue, setQueue] = useState<Flashcard[]>([]);
@@ -24,7 +25,10 @@ export function FlashcardClient() {
   }, []);
 
   useEffect(() => {
-    fetchDue();
+    const timer = setTimeout(() => {
+      fetchDue();
+    }, 0);
+    return () => clearTimeout(timer);
   }, [fetchDue]);
 
   const handleReview = async (confidence: string) => {
@@ -37,8 +41,8 @@ export function FlashcardClient() {
       // Remove da fila e vira
       setQueue(prev => prev.slice(1));
       setFlipped(false);
-    } catch (e) {
-      alert("Erro ao enviar avaliação.");
+    } catch {
+      toast.error("Erro ao enviar avaliação.");
     } finally {
       setSubmitting(false);
     }
@@ -82,8 +86,12 @@ export function FlashcardClient() {
 
       {/* Cartão */}
       <div 
-        className="w-full min-h-[300px] bg-card border border-border shadow-1 rounded-2xl p-8 flex flex-col items-center justify-center relative cursor-pointer hover:border-purple-500/50 transition-colors"
+        className="w-full min-h-[300px] bg-card border border-border shadow-1 rounded-2xl p-8 flex flex-col items-center justify-center relative cursor-pointer hover:border-purple-500/50 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
         onClick={() => !flipped && setFlipped(true)}
+        onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && !flipped) { e.preventDefault(); setFlipped(true); } }}
+        role="button"
+        tabIndex={0}
+        aria-label={flipped ? "Flashcard revelado" : "Clique para revelar o flashcard"}
       >
         {current.stem && (
           <div className="w-full mb-8 pb-6 border-b border-border/50 text-muted-foreground text-sm md:text-base leading-relaxed text-left opacity-80">

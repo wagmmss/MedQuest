@@ -9,6 +9,7 @@ export interface OverviewStats {
   accuracy_last7: number | null;
   accuracy_prev7: number | null;
   streak_days: number;
+  flashcards_due_count?: number;
 }
 
 export interface CoverageSubtema {

@@ -28,6 +28,9 @@ def overview():
     srs_due_count = db.execute(
         "SELECT COUNT(*) n FROM spaced_repetition WHERE next_review_date <= ? AND user_id = ?", (now_utc.isoformat(), g.user_id)
     ).fetchone()["n"]
+    flashcards_due_count = db.execute(
+        "SELECT COUNT(*) n FROM flashcards WHERE next_review_date <= ? AND user_id = ?", (now_utc.isoformat(), g.user_id)
+    ).fetchone()["n"]
 
     last7 = db.execute(
         "SELECT SUM(is_correct) c, COUNT(*) n FROM attempts WHERE answered_at >= ? AND user_id = ?",
@@ -47,7 +50,10 @@ def overview():
     days_studied = {r["day"] for r in day_rows}
     streak_days = 0
     if days_studied:
-        tz_offset = int(request.args.get('tz_offset', 0))
+        try:
+            tz_offset = int(request.args.get('tz_offset', 0))
+        except (ValueError, TypeError):
+            tz_offset = 0
         local_now = datetime.now(timezone.utc) + timedelta(minutes=tz_offset)
         cursor_day = local_now.date()
         if str(cursor_day) not in days_studied:
@@ -62,6 +68,7 @@ def overview():
         "accuracy_latest_attempt": accuracy_latest, "coverage_pct": coverage_pct,
         "srs_due_count": srs_due_count, "accuracy_last7": accuracy_last7,
         "accuracy_prev7": accuracy_prev7, "streak_days": streak_days,
+        "flashcards_due_count": flashcards_due_count,
     })
 
 
@@ -85,7 +92,7 @@ def _breakdown(db, group_col, label_col=None):
 @bp.route("/stats/breakdown")
 def breakdown():
     db = get_db()
-    by = request.args.get("by", "institution_code")
+    by = request.args.get("by", "institution")
     col_map = {
         "institution": ("institution_code", "institution_label"),
         "source": ("source_file", "source_file"),
@@ -235,13 +242,18 @@ def recommendations():
 @bp.route("/stats/reset", methods=["DELETE"])
 def reset_stats():
     db = get_db()
-    db.execute("DELETE FROM attempts WHERE user_id = ?", (g.user_id,))
-    db.execute("DELETE FROM spaced_repetition WHERE user_id = ?", (g.user_id,))
-    db.execute("DELETE FROM flashcards WHERE user_id = ?", (g.user_id,))
-    db.execute("DELETE FROM planner_progress WHERE user_id = ?", (g.user_id,))
-    db.execute("DELETE FROM favorites WHERE user_id = ?", (g.user_id,))
-    db.execute("DELETE FROM planner_config WHERE user_id = ?", (g.user_id,))
-    db.commit()
+    try:
+        db.execute("BEGIN TRANSACTION")
+        db.execute("DELETE FROM attempts WHERE user_id = ?", (g.user_id,))
+        db.execute("DELETE FROM spaced_repetition WHERE user_id = ?", (g.user_id,))
+        db.execute("DELETE FROM flashcards WHERE user_id = ?", (g.user_id,))
+        db.execute("DELETE FROM planner_progress WHERE user_id = ?", (g.user_id,))
+        db.execute("DELETE FROM favorites WHERE user_id = ?", (g.user_id,))
+        db.execute("DELETE FROM planner_config WHERE user_id = ?", (g.user_id,))
+        db.execute("COMMIT")
+    except Exception:
+        db.execute("ROLLBACK")
+        raise
     return jsonify({"success": True})
 
 

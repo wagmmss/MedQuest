@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { CoverageArea } from "@/types/api";
 import { ChevronDown, ChevronRight, CheckCircle2, CircleDashed, PlayCircle } from "lucide-react";
 import clsx from "clsx";
@@ -85,7 +86,8 @@ export function CoverageClient({ areas }: { areas: CoverageArea[] }) {
                         <th className="px-4 py-3 font-semibold text-right">Questões</th>
                         <th className="px-4 py-3 font-semibold text-right">Feitas</th>
                         <th className="px-4 py-3 font-semibold text-right">Acurácia</th>
-                        <th className="px-4 py-3 font-semibold text-center rounded-tr-md">Status</th>
+                        <th className="px-4 py-3 font-semibold text-center">Status</th>
+                        <th className="px-4 py-3 font-semibold text-center rounded-tr-md"></th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
@@ -101,6 +103,15 @@ export function CoverageClient({ areas }: { areas: CoverageArea[] }) {
                             <div className="flex items-center justify-center p-1" title={sub.status}>
                               {getStatusIcon(sub.status)}
                             </div>
+                          </td>
+                          <td className="px-4 py-3 text-center">
+                            <Link
+                              href={`/estudar?subtema=${encodeURIComponent(sub.subtema)}&limit=50`}
+                              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-primary bg-primary/10 hover:bg-primary/20 rounded-lg transition-colors"
+                            >
+                              <PlayCircle size={14} />
+                              Estudar
+                            </Link>
                           </td>
                         </tr>
                       ))}

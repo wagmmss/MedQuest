@@ -4,19 +4,19 @@ import { AnalysisClient } from "./AnalysisClient";
 
 export default async function AnalisePage() {
   // Fazemos fetch paralelo de todos os dados do dashboard analítico
-  const [
-    timeline,
-    weakTopics,
-    recommendations,
-    breakdown,
-    distractors
-  ] = await Promise.all([
+  const results = await Promise.allSettled([
     serverApi.stats.getTimeline(),
     serverApi.stats.getWeakTopics(),
     serverApi.stats.getRecommendations(),
     serverApi.stats.getBreakdown("institution"),
     serverApi.stats.getDistractors(),
   ]);
+
+  const timeline = results[0].status === 'fulfilled' ? results[0].value : [];
+  const weakTopics = results[1].status === 'fulfilled' ? results[1].value : [];
+  const recommendations = results[2].status === 'fulfilled' ? results[2].value : [];
+  const breakdown = results[3].status === 'fulfilled' ? results[3].value : [];
+  const distractors = results[4].status === 'fulfilled' ? results[4].value : [];
 
   return (
     <div className="flex flex-col gap-8 animate-in fade-in duration-500">

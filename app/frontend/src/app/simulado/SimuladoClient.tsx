@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { QuestionListItem, QuestionDetail, BatchAttemptItem, BatchAttemptResultItem } from "@/types/api";
 import { api } from "@/lib/api";
-import { Play, Clock, CheckCircle2, XCircle, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle } from "lucide-react";
+import { Play, Clock, CheckCircle2, XCircle, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw } from "lucide-react";
 import clsx from "clsx";
+import toast from "react-hot-toast";
 
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS";
 
@@ -20,6 +21,8 @@ export function SimuladoClient({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [detailsCache, setDetailsCache] = useState<Record<number, QuestionDetail>>({});
   const [loadingDetail, setLoadingDetail] = useState(false);
+  const [detailError, setDetailError] = useState(false);
+  const [showFinishConfirm, setShowFinishConfirm] = useState(false);
   
   // Answers: question_id -> letter
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -30,8 +33,60 @@ export function SimuladoClient({
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  const [hasSavedState, setHasSavedState] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("medquest_simulado_state");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed.state === "PLAYING" || parsed.state === "RESULTS") {
+          const timer = setTimeout(() => {
+            setHasSavedState(true);
+          }, 0);
+          return () => clearTimeout(timer);
+        }
+      } catch {
+        localStorage.removeItem("medquest_simulado_state");
+      }
+    }
+  }, []);
+
+  const resumeSimulado = () => {
+    const saved = localStorage.getItem("medquest_simulado_state");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setState(parsed.state);
+        setQueue(parsed.queue);
+        setCurrentIndex(parsed.currentIndex);
+        setAnswers(parsed.answers);
+        setResultsMap(parsed.resultsMap);
+        setTimeLeft(parsed.timeLeft);
+        if (parsed.queue.length > 0) {
+          loadDetail(parsed.queue[parsed.currentIndex].id);
+        }
+      } catch {
+        toast.error("Erro ao restaurar simulado.");
+        localStorage.removeItem("medquest_simulado_state");
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (state === "PLAYING" || state === "RESULTS") {
+      localStorage.setItem("medquest_simulado_state", JSON.stringify({
+        state, queue, answers, timeLeft, currentIndex, resultsMap
+      }));
+    }
+  }, [state, queue, answers, timeLeft, currentIndex, resultsMap]);
+
   // Load Simulado
   const startSimulado = async () => {
+    if (hasSavedState) {
+      localStorage.removeItem("medquest_simulado_state");
+      setHasSavedState(false);
+    }
     setState("LOADING");
     try {
       const hasCustomFilters = Object.keys(initialFilters).filter(k => k !== 'limit').length > 0;
@@ -45,7 +100,7 @@ export function SimuladoClient({
       }
 
       if (qList.length === 0) {
-        alert("Erro: Não há questões suficientes para montar o simulado com esses filtros.");
+        toast.error("Erro: Não há questões suficientes para montar o simulado com esses filtros.");
         setState("START");
         return;
       }
@@ -57,8 +112,8 @@ export function SimuladoClient({
       setResultsMap({});
       setState("PLAYING");
       loadDetail(qList[0].id);
-    } catch (e) {
-      alert("Erro ao gerar simulado.");
+    } catch {
+      toast.error("Erro ao gerar simulado.");
       setState("START");
     }
   };
@@ -66,59 +121,19 @@ export function SimuladoClient({
   const loadDetail = async (id: number) => {
     if (detailsCache[id]) return; // Already cached
     setLoadingDetail(true);
+    setDetailError(false);
     try {
       const detail = await api.questions.getDetail(id);
       setDetailsCache(prev => ({ ...prev, [id]: detail }));
-    } catch (e) {
+    } catch {
       console.error("Erro ao carregar questão", id);
+      setDetailError(true);
     } finally {
       setLoadingDetail(false);
     }
   };
 
-  // Timer Effect
-  useEffect(() => {
-    if (state === "PLAYING") {
-      timerRef.current = setInterval(() => {
-        setTimeLeft(prev => {
-          if (prev <= 1) {
-            clearInterval(timerRef.current!);
-            finishSimulado();
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    } else {
-      if (timerRef.current) clearInterval(timerRef.current);
-    }
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [state]);
-
-  const handleSelect = (letter: string) => {
-    if (state !== "PLAYING") return;
-    const currentQ = queue[currentIndex];
-    setAnswers(prev => ({ ...prev, [currentQ.id]: letter }));
-  };
-
-  const navigateTo = (index: number) => {
-    if (index >= 0 && index < queue.length) {
-      setCurrentIndex(index);
-      loadDetail(queue[index].id);
-    }
-  };
-
-  const finishSimulado = async () => {
-    if (state !== "PLAYING") return;
-    
-    const unanswered = queue.length - Object.keys(answers).length;
-    if (unanswered > 0) {
-      const conf = confirm(`Você ainda tem ${unanswered} questões em branco. Deseja finalizar mesmo assim?`);
-      if (!conf) return;
-    }
-
+  const submitSimulado = useCallback(async () => {
     setState("SUBMITTING");
     if (timerRef.current) clearInterval(timerRef.current);
 
@@ -140,10 +155,55 @@ export function SimuladoClient({
       setResultsMap(rMap);
       setState("RESULTS");
       setCurrentIndex(0); // Go back to first question to review
-    } catch (e) {
-      alert("Erro ao enviar simulado. Tente novamente.");
+    } catch {
+      toast.error("Erro ao enviar simulado. Tente novamente.");
       setState("PLAYING");
     }
+  }, [answers]);
+
+  // Timer Effect
+  useEffect(() => {
+    if (state === "PLAYING") {
+      timerRef.current = setInterval(() => {
+        setTimeLeft(prev => {
+          if (prev <= 1) {
+            clearInterval(timerRef.current!);
+            submitSimulado();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      if (timerRef.current) clearInterval(timerRef.current);
+    }
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [state, submitSimulado]);
+
+  const handleSelect = (letter: string) => {
+    if (state !== "PLAYING") return;
+    const currentQ = queue[currentIndex];
+    setAnswers(prev => ({ ...prev, [currentQ.id]: letter }));
+  };
+
+  const navigateTo = (index: number) => {
+    if (index >= 0 && index < queue.length) {
+      setCurrentIndex(index);
+      loadDetail(queue[index].id);
+    }
+  };
+
+  const finishSimulado = () => {
+    if (state !== "PLAYING") return;
+    
+    const unanswered = queue.length - Object.keys(answers).length;
+    if (unanswered > 0) {
+      setShowFinishConfirm(true);
+      return;
+    }
+    submitSimulado();
   };
 
   const formatTime = (seconds: number) => {
@@ -199,13 +259,24 @@ export function SimuladoClient({
           </p>
         </div>
 
-        <button 
-          onClick={startSimulado}
-          className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full max-w-md shadow-lg hover:-translate-y-0.5"
-        >
-          <Play size={20} fill="currentColor" />
-          Iniciar Simulado Agora
-        </button>
+        <div className="flex flex-col gap-3 w-full max-w-md">
+          {hasSavedState && (
+            <button 
+              onClick={resumeSimulado}
+              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full shadow-lg hover:-translate-y-0.5"
+            >
+              <RotateCcw size={20} />
+              Continuar Simulado em Andamento
+            </button>
+          )}
+          <button 
+            onClick={startSimulado}
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full shadow-lg hover:-translate-y-0.5"
+          >
+            <Play size={20} fill="currentColor" />
+            {hasSavedState ? "Iniciar Novo Simulado" : "Iniciar Simulado Agora"}
+          </button>
+        </div>
       </div>
     );
   }
@@ -224,28 +295,29 @@ export function SimuladoClient({
   const currentQListItem = queue[currentIndex];
   const qDetail = detailsCache[currentQListItem?.id];
   const isReview = state === "RESULTS";
+  const unansweredCount = queue.length - Object.keys(answers).length;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-[1400px] mx-auto pb-12 h-[calc(100vh-8rem)]">
+    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-[1400px] mx-auto pb-12 lg:h-[calc(100vh-8rem)]">
       
       {/* Sidebar: Grid de Questões */}
-      <div className="w-full lg:w-72 shrink-0 flex flex-col gap-4 order-2 lg:order-1 h-full">
+      <div className="w-full lg:w-72 shrink-0 flex flex-col gap-4 order-1 lg:order-1 h-auto lg:h-full lg:sticky lg:top-4 z-10 bg-background/95 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none p-2 lg:p-0 rounded-xl shadow-sm lg:shadow-none mb-4 lg:mb-0 border lg:border-0 border-border">
         {/* Timer Box */}
-        <div className="bg-card border border-border shadow-1 rounded-xl p-5 flex flex-col items-center justify-center gap-2">
+        <div className="bg-card border border-border shadow-1 rounded-xl p-4 lg:p-5 flex flex-row lg:flex-col items-center justify-between lg:justify-center gap-2">
           {isReview ? (
             <>
               <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Nota Final</span>
-              <div className="text-4xl font-black text-foreground">
-                {Object.values(resultsMap).filter(r => r.is_correct).length} <span className="text-lg text-muted-foreground">/ 120</span>
+              <div className="text-2xl lg:text-4xl font-black text-foreground">
+                {Object.values(resultsMap).filter(r => r.is_correct).length} <span className="text-sm lg:text-lg text-muted-foreground">/ 120</span>
               </div>
             </>
           ) : (
             <>
               <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                <Clock size={16} /> Tempo Restante
+                <Clock size={16} /> Tempo
               </span>
               <div className={clsx(
-                "text-3xl font-black font-mono",
+                "text-2xl lg:text-3xl font-black font-mono",
                 timeLeft < 1800 ? "text-destructive animate-pulse" : "text-foreground"
               )}>
                 {formatTime(timeLeft)}
@@ -255,8 +327,8 @@ export function SimuladoClient({
         </div>
 
         {/* Grid Box */}
-        <div className="bg-card border border-border shadow-1 rounded-xl flex flex-col h-[400px] lg:h-auto lg:flex-1 overflow-hidden">
-          <div className="p-4 border-b border-border bg-muted/30">
+        <div className="bg-card border border-border shadow-1 rounded-xl flex flex-col h-[200px] lg:h-auto lg:flex-1 overflow-hidden">
+          <div className="p-3 lg:p-4 border-b border-border bg-muted/30">
             <h3 className="font-bold text-foreground text-sm">Cartão Resposta</h3>
             {!isReview && (
               <p className="text-xs text-muted-foreground mt-1">
@@ -264,8 +336,8 @@ export function SimuladoClient({
               </p>
             )}
           </div>
-          <div className="p-4 overflow-y-auto flex-1">
-            <div className="grid grid-cols-5 gap-2">
+          <div className="p-3 lg:p-4 overflow-y-auto flex-1">
+            <div className="grid grid-cols-6 sm:grid-cols-8 lg:grid-cols-5 gap-2">
               {queue.map((q, idx) => {
                 const isCurrent = idx === currentIndex;
                 const answeredLetter = answers[q.id];
@@ -303,10 +375,10 @@ export function SimuladoClient({
           </div>
           
           {!isReview && (
-            <div className="p-4 border-t border-border bg-muted/30">
+            <div className="p-3 lg:p-4 border-t border-border bg-muted/30">
               <button 
                 onClick={finishSimulado}
-                className="w-full bg-foreground hover:bg-foreground/90 text-background font-bold py-3 rounded-lg transition-colors"
+                className="w-full bg-foreground hover:bg-foreground/90 text-background font-bold py-2.5 lg:py-3 rounded-lg transition-colors text-sm lg:text-base"
               >
                 Finalizar Simulado
               </button>
@@ -316,8 +388,20 @@ export function SimuladoClient({
       </div>
 
       {/* Main Area: Question View */}
-      <div className="flex-1 flex flex-col order-1 lg:order-2 h-full">
-        {loadingDetail || !qDetail ? (
+      <div className="flex-1 flex flex-col order-2 lg:order-2 h-full">
+        {detailError ? (
+          <div className="bg-card border border-border shadow-1 rounded-xl p-8 flex-1 flex flex-col gap-4 items-center justify-center">
+            <AlertCircle className="text-destructive w-10 h-10" />
+            <p className="text-foreground font-semibold">Erro ao carregar a questão</p>
+            <p className="text-muted-foreground text-sm text-center">Não foi possível carregar os detalhes desta questão. Verifique sua conexão.</p>
+            <button 
+              onClick={() => loadDetail(queue[currentIndex].id)}
+              className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm mt-2"
+            >
+              <RotateCcw size={16} /> Tentar Novamente
+            </button>
+          </div>
+        ) : loadingDetail || !qDetail ? (
           <div className="bg-card border border-border shadow-1 rounded-xl p-8 flex-1 flex flex-col gap-6 animate-pulse">
              <div className="h-6 w-32 bg-muted rounded" />
              <div className="h-40 bg-muted rounded-xl" />
@@ -446,6 +530,33 @@ export function SimuladoClient({
         )}
       </div>
 
+      {showFinishConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
+          <div className="bg-card border border-border shadow-lg rounded-xl p-6 max-w-sm w-full flex flex-col gap-4 animate-in zoom-in-95 duration-200">
+            <h3 className="font-bold text-lg text-foreground">Atenção!</h3>
+            <p className="text-muted-foreground text-sm">
+              Você ainda tem {unansweredCount} questões em branco. Deseja finalizar mesmo assim?
+            </p>
+            <div className="flex justify-end gap-3 mt-2">
+              <button
+                onClick={() => setShowFinishConfirm(false)}
+                className="px-4 py-2 bg-muted text-muted-foreground rounded-lg font-medium hover:bg-muted/80 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={() => {
+                  setShowFinishConfirm(false);
+                  submitSimulado();
+                }}
+                className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
+              >
+                Finalizar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

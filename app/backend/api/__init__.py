@@ -29,7 +29,7 @@ def create_app():
     def authenticate_request():
         # The require_auth decorator will verify the token and set g.user_id
         # We don't apply it to the root index path if we check the request.path
-        if request.path == "/" or request.method == "OPTIONS":
+        if request.path == "/" or request.method == "OPTIONS" or "/images/" in request.path:
             return
         pass
 

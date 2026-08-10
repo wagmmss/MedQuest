@@ -41,9 +41,10 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
       statusText: response.statusText,
       headers: responseHeaders,
     });
-  } catch (error: any) {
-    console.error(`[PROXY] Fetch error to ${targetUrl}:`, error.message);
-    return new NextResponse(JSON.stringify({ error: "Proxy fetch failed", details: error.message }), {
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error(`[PROXY] Fetch error to ${targetUrl}:`, message);
+    return new NextResponse(JSON.stringify({ error: "Proxy fetch failed", details: message }), {
       status: 502,
       headers: { "Content-Type": "application/json" }
     });

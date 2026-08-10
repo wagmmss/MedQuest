@@ -182,7 +182,7 @@ export function AnalysisClient({
                       const fillId = acc >= 70 ? 'url(#colorSuccess)' : acc >= 50 ? 'url(#colorWarning)' : 'url(#colorDestructive)';
                       return <Cell key={`cell-${index}`} fill={fillId} />;
                     })}
-                    <LabelList dataKey="accPct" position="right" formatter={(val: any) => `${val}%`} style={{ fill: 'var(--foreground)', fontSize: 13, fontWeight: 700 }} />
+                    <LabelList dataKey="accPct" position="right" formatter={(val: string | number) => `${val}%`} style={{ fill: 'var(--foreground)', fontSize: 13, fontWeight: 700 }} />
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
@@ -308,17 +308,18 @@ export function AnalysisClient({
             <div className="divide-y divide-border/50">
               {weakTopics.length > 0 ? (
                 weakTopics.slice(0, 8).map((wt) => (
-                  <div key={wt.topic} className="p-4 hover:bg-muted/30 transition-colors flex items-center justify-between gap-4">
+                  <Link key={wt.topic} href={`/estudar?subtema=${encodeURIComponent(wt.topic)}&limit=50`} className="p-4 hover:bg-muted/30 transition-colors flex items-center justify-between gap-4 group">
                     <div className="min-w-0 flex-1">
-                      <p className="font-medium text-foreground truncate" title={wt.topic}>{wt.topic}</p>
+                      <p className="font-medium text-foreground truncate group-hover:text-primary transition-colors" title={wt.topic}>{wt.topic}</p>
                       <p className="text-xs text-muted-foreground mt-0.5">{wt.correct} acertos de {wt.attempts} totais</p>
                     </div>
-                    <div className="flex flex-col items-end shrink-0">
+                    <div className="flex items-center gap-3 shrink-0">
                       <span className={clsx("font-bold text-lg", wt.accuracy < 0.5 ? "text-destructive" : "text-warning")}>
                         {(wt.accuracy * 100).toFixed(0)}%
                       </span>
+                      <ChevronRight size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
-                  </div>
+                  </Link>
                 ))
               ) : (
                 <div className="p-8 text-center text-muted-foreground flex flex-col items-center gap-3">
@@ -350,7 +351,7 @@ export function AnalysisClient({
                   const worstChoice = d.wrong_choices[0];
                   if (!worstChoice) return null;
                   return (
-                    <div key={i} className="p-4 flex items-center justify-between gap-4 hover:bg-muted/30 transition-colors group">
+                    <Link key={i} href={`/estudar?subtema=${encodeURIComponent(d.subtema)}&limit=50`} className="p-4 flex items-center justify-between gap-4 hover:bg-muted/30 transition-colors group">
                       <div className="min-w-0 flex-1">
                         <div className="font-medium text-foreground truncate group-hover:text-primary transition-colors" title={d.subtema}>{d.subtema}</div>
                         <div className="text-sm text-muted-foreground mt-1 flex items-center gap-2">
@@ -360,12 +361,13 @@ export function AnalysisClient({
                           </span>
                         </div>
                       </div>
-                      <div className="flex flex-col items-center justify-center shrink-0">
+                      <div className="flex items-center gap-3 shrink-0">
                         <div className="bg-destructive/10 text-destructive font-bold rounded-full min-w-[2.5rem] h-10 px-2 flex items-center justify-center border border-destructive/20 shadow-sm">
                           {worstChoice.count}x
                         </div>
+                        <ChevronRight size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
-                    </div>
+                    </Link>
                   );
                 })
               ) : (

@@ -10,8 +10,11 @@ export function ThemeToggle() {
     // Check initial preference
     if (document.documentElement.classList.contains("dark") || 
         (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-      setIsDark(true);
+      const timer = setTimeout(() => {
+        setIsDark(true);
+      }, 0);
       document.documentElement.classList.add("dark");
+      return () => clearTimeout(timer);
     }
   }, []);
 

@@ -12,12 +12,13 @@ export function CommandPalette() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+      if ((e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((open) => !open);
       }
@@ -25,33 +26,48 @@ export function CommandPalette() {
         setOpen(false);
       }
     };
+    const handleOpen = () => setOpen(true);
+
     document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    window.addEventListener("open-command-palette", handleOpen);
+    return () => {
+      document.removeEventListener("keydown", down);
+      window.removeEventListener("open-command-palette", handleOpen);
+    };
   }, []);
 
   useEffect(() => {
     if (open) {
       inputRef.current?.focus();
     } else {
-      setQuery("");
-      setResults([]);
+      const timer = setTimeout(() => {
+        setQuery("");
+        setResults([]);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [open]);
 
   useEffect(() => {
     if (!query.trim()) {
-      setResults([]);
-      return;
+      const timer = setTimeout(() => {
+        setResults([]);
+      }, 0);
+      return () => clearTimeout(timer);
     }
 
     let isMounted = true;
     const timer = setTimeout(async () => {
-      setLoading(true);
+      if (isMounted) {
+        setLoading(true);
+        setError(false);
+      }
       try {
         const res = await api.questions.search(query, false);
         if (isMounted) setResults(res.slice(0, 5));
       } catch (e) {
         console.error(e);
+        if (isMounted) setError(true);
       } finally {
         if (isMounted) setLoading(false);
       }
@@ -87,11 +103,15 @@ export function CommandPalette() {
         <div className="max-h-[60vh] overflow-y-auto p-2">
           {query.length === 0 ? (
             <div className="px-3 py-8 text-center text-muted-foreground text-sm">
-              Tente buscar por "Cardiologia", "Simulado USP" ou "Revisão".
+              Tente buscar por &quot;Cardiologia&quot;, &quot;Simulado USP&quot; ou &quot;Revisão&quot;.
             </div>
           ) : loading && results.length === 0 ? (
             <div className="px-3 py-8 text-center text-muted-foreground text-sm flex items-center justify-center gap-2">
               <Loader2 size={16} className="animate-spin" /> Buscando...
+            </div>
+          ) : error ? (
+            <div className="px-3 py-8 text-center text-destructive text-sm">
+              Erro ao buscar. Tente novamente.
             </div>
           ) : (
             <div className="flex flex-col gap-1">
@@ -99,7 +119,7 @@ export function CommandPalette() {
                 className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors mb-2 border-b border-border pb-3"
                 onClick={() => {
                   setOpen(false);
-                  window.location.href = `/buscar?q=${encodeURIComponent(query)}`;
+                  router.push(`/buscar?q=${encodeURIComponent(query)}`);
                 }}
               >
                 <Search size={16} className="text-muted-foreground shrink-0" />
@@ -116,7 +136,7 @@ export function CommandPalette() {
                       className="flex flex-col gap-1.5 px-3 py-2.5 rounded-md hover:bg-muted text-left transition-colors"
                       onClick={() => {
                         setOpen(false);
-                        window.location.href = `/estudar?id=${res.id}`;
+                        router.push(`/estudar?id=${res.id}`);
                       }}
                     >
                       <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">

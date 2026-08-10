@@ -36,6 +36,8 @@ def simulado_usp():
 def search_questions():
     db = get_db()
     q = request.args.get("q", "").strip()
+    if not q:
+        return jsonify([])
     semantic = request.args.get("semantic", "false").lower() == "true"
     
     if semantic:
@@ -315,3 +317,13 @@ def toggle_favorite(qid):
         is_fav = True
     db.commit()
     return jsonify({"success": True, "is_favorite": is_fav})
+
+
+@bp.route("/images/<path:filename>")
+def serve_image(filename):
+    import os
+    from flask import send_from_directory
+    backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    static_dir = os.path.join(backend_dir, "static")
+    return send_from_directory(static_dir, filename)
+

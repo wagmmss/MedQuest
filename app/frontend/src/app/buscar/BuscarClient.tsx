@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Loader2, BookOpen } from "lucide-react";
+import Link from "next/link";
+import { Search, Loader2, BookOpen, X } from "lucide-react";
 import { api } from "@/lib/api";
 import { SearchResult } from "@/types/api";
 
@@ -15,13 +16,15 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
 
   useEffect(() => {
     if (!query.trim()) {
-      setResults([]);
-      return;
+      const timer = setTimeout(() => {
+        setResults([]);
+      }, 0);
+      return () => clearTimeout(timer);
     }
 
     let isMounted = true;
     const timer = setTimeout(async () => {
-      setLoading(true);
+      if (isMounted) setLoading(true);
       try {
         const res = await api.questions.search(query, semantic);
         if (isMounted) setResults(res);
@@ -54,6 +57,9 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
           <button 
             type="button"
             onClick={() => setSemantic(!semantic)}
+            role="switch"
+            aria-checked={semantic}
+            aria-label="Alternar busca semântica"
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${semantic ? 'bg-primary' : 'bg-muted-foreground/30'}`}
           >
             <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${semantic ? 'translate-x-6' : 'translate-x-1'}`} />
@@ -69,17 +75,27 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
           </div>
           <input
             type="text"
-            className="w-full bg-input border border-border rounded-full py-4 pl-12 pr-4 text-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary shadow-sm"
+            className="w-full bg-input border border-border rounded-full py-4 pl-12 pr-12 text-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary shadow-sm"
             placeholder="Digite para buscar..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
           />
-          {loading && (
-            <div className="absolute inset-y-0 right-4 flex items-center">
+          <div className="absolute inset-y-0 right-4 flex items-center gap-2">
+            {loading && (
               <Loader2 size={20} className="text-primary animate-spin" />
-            </div>
-          )}
+            )}
+            {query.length > 0 && !loading && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="p-1 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+                aria-label="Limpar busca"
+              >
+                <X size={18} />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -92,10 +108,10 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
           
           <div className="flex flex-col gap-4">
             {results.map((res) => (
-              <div 
+              <Link 
                 key={res.id}
+                href={`/estudar?id=${res.id}`}
                 className="bg-card border border-border shadow-sm rounded-xl p-5 hover:border-primary/50 hover:shadow-md cursor-pointer transition-all flex flex-col gap-3 group"
-                onClick={() => { window.location.href = `/estudar?id=${res.id}`; }}
               >
                 <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   <span className="bg-primary/10 text-primary px-2 py-1 rounded">{res.institution_code} {res.year}</span>
@@ -117,7 +133,7 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
                     />
                   </div>
                 )}
-              </div>
+              </Link>
             ))}
             
             {!loading && results.length === 0 && (

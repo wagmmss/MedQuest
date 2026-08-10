@@ -43,8 +43,9 @@ export function PlannerWizard() {
       });
 
       router.refresh();
-    } catch (err: any) {
-      setError(err.message || "Erro ao salvar a configuração.");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Erro ao salvar a configuração.";
+      setError(message);
       setLoading(false);
     }
   };

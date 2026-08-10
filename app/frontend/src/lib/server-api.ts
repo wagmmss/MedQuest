@@ -20,8 +20,9 @@ async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<
         ...options?.headers,
       },
     });
-  } catch (error: any) {
-    throw new Error(`Fetch failed for ${BACKEND_URL}${endpoint}: ${error.message}`);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    throw new Error(`Fetch failed for ${BACKEND_URL}${endpoint}: ${message}`);
   }
 
   if (!response.ok) {
@@ -33,12 +34,14 @@ async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<
     const text = await response.text();
     try {
       data = JSON.parse(text);
-    } catch (e: any) {
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "Unknown parse error";
       console.error(`JSON Parse Error for ${BACKEND_URL}${endpoint}. Raw text: ${text.substring(0, 500)}`);
-      throw new Error(`JSON parse error on ${BACKEND_URL}${endpoint}: ${e.message}`);
+      throw new Error(`JSON parse error on ${BACKEND_URL}${endpoint}: ${message}`);
     }
-  } catch (e: any) {
-    throw new Error(`Failed to read response from ${BACKEND_URL}${endpoint}: ${e.message}`);
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Unknown read error";
+    throw new Error(`Failed to read response from ${BACKEND_URL}${endpoint}: ${message}`);
   }
 
   return data;
@@ -60,11 +63,11 @@ export const serverApi = {
   },
   planner: {
     getConfig: () => serverFetch<PlannerConfig>("/api/planner/config", { cache: 'no-store' }),
-    generatePlan: (params: any) => serverFetch<any>("/api/generate_plan", {
+    generatePlan: (params: Record<string, unknown>) => serverFetch<unknown>("/api/generate_plan", {
       method: 'POST',
       body: JSON.stringify(params),
       cache: 'no-store'
     }),
-    getProgress: () => serverFetch<any>("/api/planner", { cache: 'no-store' }),
+    getProgress: () => serverFetch<unknown>("/api/planner", { cache: 'no-store' }),
   }
 };

@@ -29,13 +29,28 @@ export default async function Dashboard() {
             Aqui está o seu progresso semanal na preparação para a USP.
           </p>
         </div>
-        <div className="flex gap-3">
-          <Link href="/estudar?status=srs_due&limit=100">
-            <button className="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl shadow-[0_4px_14px_0_rgba(26,75,132,0.39)] hover:shadow-[0_6px_20px_rgba(26,75,132,0.23)] hover:-translate-y-1 transform transition-all duration-200 font-body-sm text-body-sm font-semibold">
+        <div className="flex flex-wrap gap-3">
+          {stats.srs_due_count === 0 ? (
+            <button disabled className="flex items-center gap-2 px-6 py-3 bg-surface-variant text-on-surface-variant rounded-xl opacity-70 cursor-not-allowed font-body-sm text-body-sm font-semibold">
               <span className="material-symbols-outlined" data-icon="psychology">psychology</span>
-              Iniciar Revisão ({stats.srs_due_count})
+              Nenhuma revisão pendente
             </button>
-          </Link>
+          ) : (
+            <Link href="/estudar?status=srs_due&limit=100">
+              <button className="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl shadow-[0_4px_14px_0_rgba(26,75,132,0.39)] hover:shadow-[0_6px_20px_rgba(26,75,132,0.23)] hover:-translate-y-1 transform transition-all duration-200 font-body-sm text-body-sm font-semibold cursor-pointer">
+                <span className="material-symbols-outlined" data-icon="psychology">psychology</span>
+                Iniciar Revisão ({stats.srs_due_count})
+              </button>
+            </Link>
+          )}
+          {stats.flashcards_due_count != null && stats.flashcards_due_count > 0 && (
+            <Link href="/revisao-ativa">
+              <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white rounded-xl shadow-[0_4px_14px_rgba(139,92,246,0.3)] hover:-translate-y-1 transform transition-all duration-200 font-body-sm text-body-sm font-semibold cursor-pointer">
+                <span className="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+                Revisar Flashcards ({stats.flashcards_due_count})
+              </button>
+            </Link>
+          )}
         </div>
       </section>
 
@@ -97,8 +112,8 @@ export default async function Dashboard() {
             <h3 className="font-headline-md text-headline-md text-on-surface">Acesso Rápido</h3>
           </div>
           <ul className="flex flex-col gap-4">
-            <Link href="/estudar">
-              <li className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+            <li>
+              <Link href="/estudar" className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
                 <div className="p-2 bg-primary-fixed rounded-lg text-on-primary-fixed group-hover:bg-primary group-hover:text-on-primary transition-colors">
                   <span className="material-symbols-outlined" data-icon="menu_book">menu_book</span>
                 </div>
@@ -106,10 +121,10 @@ export default async function Dashboard() {
                   <h4 className="font-body-md text-body-md font-semibold text-on-surface">Estudar Banco de Questões</h4>
                   <p className="font-body-sm text-body-sm text-on-surface-variant">Filtre por especialidade ou tema.</p>
                 </div>
-              </li>
-            </Link>
-            <Link href="/simulado">
-              <li className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+              </Link>
+            </li>
+            <li>
+              <Link href="/simulado" className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
                 <div className="p-2 bg-secondary-fixed rounded-lg text-on-secondary-fixed group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
                   <span className="material-symbols-outlined" data-icon="description">description</span>
                 </div>
@@ -117,10 +132,10 @@ export default async function Dashboard() {
                   <h4 className="font-body-md text-body-md font-semibold text-on-surface">Simulado USP</h4>
                   <p className="font-body-sm text-body-sm text-on-surface-variant">Realize provas na íntegra.</p>
                 </div>
-              </li>
-            </Link>
-            <Link href="/planner">
-              <li className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+              </Link>
+            </li>
+            <li>
+              <Link href="/planner" className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
                 <div className="p-2 bg-tertiary-fixed rounded-lg text-on-tertiary-fixed group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
                   <span className="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
                 </div>
@@ -128,8 +143,19 @@ export default async function Dashboard() {
                   <h4 className="font-body-md text-body-md font-semibold text-on-surface">Planner Anual</h4>
                   <p className="font-body-sm text-body-sm text-on-surface-variant">Acompanhe seu cronograma de estudos.</p>
                 </div>
-              </li>
-            </Link>
+              </Link>
+            </li>
+            <li>
+              <Link href="/revisao-ativa" className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+                <div className="p-2 bg-purple-500/10 rounded-lg text-purple-500 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                  <span className="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+                </div>
+                <div>
+                  <h4 className="font-body-md text-body-md font-semibold text-on-surface">Revisão Ativa</h4>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant">Estude com flashcards gerados por IA.</p>
+                </div>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

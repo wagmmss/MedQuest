@@ -2,11 +2,13 @@
 
 import { useState, useEffect, memo } from "react";
 import { useRouter } from "next/navigation";
-import { PlannerWeek, PlannerProgressMap } from "@/types/api";
+import { PlannerWeek, PlannerProgressMap, PlannerTopic } from "@/types/api";
 import { api } from "@/lib/api";
 import { getSubtemaDetails } from "@/lib/plannerData";
-import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap } from "lucide-react";
+import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X } from "lucide-react";
 import clsx from "clsx";
+import toast from "react-hot-toast";
+import { useAuth } from "@clerk/nextjs";
 
 const getAreaColorClass = (areaName: string) => {
   const name = areaName.toLowerCase();
@@ -17,15 +19,15 @@ const getAreaColorClass = (areaName: string) => {
   return "bg-area-clinica text-area-clinica";
 };
 
-const TopicRow = memo(({ 
+const TopicRow = memo(function TopicRow({ 
   t, 
   checkedTopics, 
   toggleTopicCheck 
 }: { 
-  t: any; 
+  t: PlannerTopic; 
   checkedTopics: Record<string, boolean>; 
   toggleTopicCheck: (key: string) => void;
-}) => {
+}) {
   const info = getSubtemaDetails(t.subtema);
   return (
     <div className="flex items-start gap-3">
@@ -82,6 +84,7 @@ const TopicRow = memo(({
     </div>
   );
 });
+TopicRow.displayName = "TopicRow";
 
 interface PlannerClientProps {
   plan: PlannerWeek[];
@@ -92,39 +95,56 @@ interface PlannerClientProps {
 
 export function PlannerClient({ plan, initialProgress, warning, isIntensive }: PlannerClientProps) {
   const router = useRouter();
+  const { userId } = useAuth();
+  const storageKey = `medquest_planner_topics_${userId || 'guest'}`;
+
   const [progress, setProgress] = useState<PlannerProgressMap>(initialProgress);
   const [loadingAction, setLoadingAction] = useState<string | null>(null);
   const [checkedTopics, setCheckedTopics] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    const saved = localStorage.getItem("medquest_planner_topics");
+    const saved = localStorage.getItem(storageKey);
     if (saved) {
       try {
-        setCheckedTopics(JSON.parse(saved));
-      } catch (e) {
-        console.error("Failed to parse saved planner topics:", e);
-        localStorage.removeItem("medquest_planner_topics");
+        const parsed = JSON.parse(saved);
+        const timer = setTimeout(() => {
+          setCheckedTopics(parsed);
+        }, 0);
+        return () => clearTimeout(timer);
+      } catch {
+        console.error("Failed to parse saved planner topics");
+        localStorage.removeItem(storageKey);
       }
     }
-  }, []);
+  }, [storageKey]);
 
   useEffect(() => {
-    setProgress(initialProgress);
+    const timer = setTimeout(() => {
+      setProgress(initialProgress);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [initialProgress]);
 
   const toggleTopicCheck = (key: string) => {
     setCheckedTopics(prev => {
       const next = { ...prev, [key]: !prev[key] };
-      localStorage.setItem("medquest_planner_topics", JSON.stringify(next));
+      localStorage.setItem(storageKey, JSON.stringify(next));
       return next;
     });
   };
 
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+
   const handleResetConfig = async () => {
-    if (confirm("Isso apagará TODO o seu progresso no planner. Deseja continuar?")) {
-      setLoadingAction("reset");
+    setShowResetConfirm(false);
+    setLoadingAction("reset");
+    try {
       await api.planner.resetConfig();
+      toast.success("Progresso reiniciado com sucesso.");
       router.refresh();
+    } catch {
+      toast.error("Erro ao reiniciar progresso.");
+      setLoadingAction(null);
     }
   };
 
@@ -152,7 +172,8 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
 
     try {
       await api.planner.markStudy(week, newStatus);
-    } catch (e) {
+    } catch {
+      toast.error("Erro ao salvar progresso.");
       // Revert on error
       setProgress(prev => ({
         ...prev,
@@ -177,7 +198,8 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
 
     try {
       await api.planner.markRevision(week, type, newStatus);
-    } catch (e) {
+    } catch {
+      toast.error("Erro ao salvar revisão.");
       setProgress(prev => ({
         ...prev,
         [week.toString()]: { ...prev[week.toString()], [type]: currentStatus }
@@ -190,6 +212,7 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
   const today = new Date();
 
   return (
+    <>
     <div className="flex flex-col gap-6 pb-12">
       {warning && !isIntensive && (
         <div className="bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 p-4 rounded-xl flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
@@ -240,7 +263,7 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
             </div>
           </div>
           <button 
-            onClick={handleResetConfig}
+            onClick={() => setShowResetConfirm(true)}
             disabled={loadingAction === "reset"}
             className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80 px-3 py-1.5 rounded-md transition-colors"
           >
@@ -313,7 +336,7 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
                         className="peer sr-only"
                         checked={weekProgress.studied}
                         onChange={() => handleToggleStudy(week.week, weekProgress.studied)}
-                        disabled={loadingAction !== null}
+                        disabled={loadingAction === `study-${week.week}`}
                       />
                       <div className="w-5 h-5 border-2 border-muted-foreground rounded transition-colors peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center">
                         {loadingAction === `study-${week.week}` ? (
@@ -345,7 +368,7 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
                             className="peer sr-only"
                             checked={weekProgress[rev.key]}
                             onChange={() => handleToggleRevision(week.week, rev.key, weekProgress[rev.key])}
-                            disabled={loadingAction !== null || !weekProgress.studied}
+                            disabled={loadingAction === `${rev.key}-${week.week}` || !weekProgress.studied}
                           />
                           <div className="w-4 h-4 border border-muted-foreground rounded-sm transition-colors peer-checked:bg-secondary peer-checked:border-secondary flex items-center justify-center">
                             {loadingAction === `${rev.key}-${week.week}` ? (
@@ -370,5 +393,29 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
         })}
       </div>
     </div>
+
+      {/* Reset Confirmation Modal */}
+      {showResetConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowResetConfirm(false)} />
+          <div className="relative bg-card border border-border rounded-2xl shadow-2xl p-6 max-w-sm w-full mx-4 animate-in fade-in zoom-in-95 duration-200">
+            <button onClick={() => setShowResetConfirm(false)} className="absolute top-4 right-4 p-1 rounded-full hover:bg-muted transition-colors text-muted-foreground">
+              <X size={18} />
+            </button>
+            <div className="flex flex-col items-center text-center gap-4">
+              <div className="p-3 bg-destructive/10 rounded-full">
+                <AlertTriangle size={28} className="text-destructive" />
+              </div>
+              <h3 className="text-lg font-bold text-foreground">Resetar Progresso do Planner?</h3>
+              <p className="text-sm text-muted-foreground">Isso apagará TODO o seu progresso no planner. Esta ação não pode ser desfeita.</p>
+              <div className="flex gap-3 w-full mt-2">
+                <button onClick={() => setShowResetConfirm(false)} className="flex-1 py-2.5 px-4 rounded-xl border border-border text-foreground hover:bg-muted transition-colors font-medium text-sm">Cancelar</button>
+                <button onClick={handleResetConfig} className="flex-1 py-2.5 px-4 rounded-xl bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-colors font-bold text-sm">Sim, Apagar Tudo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
