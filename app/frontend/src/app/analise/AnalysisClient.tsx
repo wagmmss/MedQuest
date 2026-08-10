@@ -182,7 +182,7 @@ export function AnalysisClient({
                       const fillId = acc >= 70 ? 'url(#colorSuccess)' : acc >= 50 ? 'url(#colorWarning)' : 'url(#colorDestructive)';
                       return <Cell key={`cell-${index}`} fill={fillId} />;
                     })}
-                    <LabelList dataKey="accPct" position="right" formatter={(val: string | number) => `${val}%`} style={{ fill: 'var(--foreground)', fontSize: 13, fontWeight: 700 }} />
+                    <LabelList dataKey="accPct" position="right" formatter={(val: any) => `${val}%`} style={{ fill: 'var(--foreground)', fontSize: 13, fontWeight: 700 }} />
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>

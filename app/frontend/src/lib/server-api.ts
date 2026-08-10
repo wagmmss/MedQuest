@@ -1,7 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { 
   OverviewStats, CoverageResponse, QuestionMeta, PlannerConfig,
-  TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat
+  TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat,
+  PlannerPlanResponse, PlannerProgressMap
 } from "@/types/api";
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
@@ -63,11 +64,11 @@ export const serverApi = {
   },
   planner: {
     getConfig: () => serverFetch<PlannerConfig>("/api/planner/config", { cache: 'no-store' }),
-    generatePlan: (params: Record<string, unknown>) => serverFetch<unknown>("/api/generate_plan", {
+    generatePlan: (params: Record<string, unknown>) => serverFetch<PlannerPlanResponse>("/api/generate_plan", {
       method: 'POST',
       body: JSON.stringify(params),
       cache: 'no-store'
     }),
-    getProgress: () => serverFetch<unknown>("/api/planner", { cache: 'no-store' }),
+    getProgress: () => serverFetch<PlannerProgressMap>("/api/planner", { cache: 'no-store' }),
   }
 };
