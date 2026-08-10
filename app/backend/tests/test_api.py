@@ -46,9 +46,9 @@ def test_coverage(client):
 
 def test_planner_config_roundtrip(client):
     assert client.post("/api/planner/config",
-                       json={"exam_date": "2026-11-15", "days_per_week": 6, "questions_per_day": 40}).status_code == 200
+                       json={"exam_date": "2026-11-15", "days_per_week": 6, "hours_per_day": 5}).status_code == 200
     cfg = client.get("/api/planner/config").get_json()
-    assert cfg["questions_per_day"] == 40
+    assert cfg["hours_per_day"] == 5
 
 
 def test_planner_config_validacao(client):

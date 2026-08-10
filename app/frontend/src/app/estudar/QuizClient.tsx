@@ -372,21 +372,6 @@ export function QuizClient({
                   setLocalLimit(val);
                   setFilters((prev) => ({ ...prev, limit: val }));
                 }}
-                onBlur={() => {
-                  if (!localLimit || localLimit.trim() === "") {
-                    setLocalLimit("50");
-                    setFilters((prev) => ({ ...prev, limit: "50" }));
-                  } else {
-                    const parsed = parseInt(localLimit, 10);
-                    if (isNaN(parsed) || parsed < 1) {
-                      setLocalLimit("1");
-                      setFilters((prev) => ({ ...prev, limit: "1" }));
-                    } else if (parsed > 200) {
-                      setLocalLimit("200");
-                      setFilters((prev) => ({ ...prev, limit: "200" }));
-                    }
-                  }
-                }}
               />
               <p className="text-xs text-muted-foreground">Máximo de 200 questões por sessão.</p>
             </div>

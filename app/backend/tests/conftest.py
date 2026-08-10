@@ -35,8 +35,7 @@ def client(tmp_path):
     con.close()
     os.environ["MEDQUEST_DB"] = str(dbfile)
     try:
-        app = create_app()
-        app.config.update(TESTING=True)
+        app = create_app(testing=True)
         yield app.test_client()
     finally:
         os.environ.pop("MEDQUEST_DB", None)

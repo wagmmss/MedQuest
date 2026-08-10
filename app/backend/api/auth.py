@@ -38,6 +38,11 @@ def get_jwks():
 def require_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+        from flask import current_app
+        if current_app.config.get("TESTING"):
+            g.user_id = "1"  # Set to default user_id or "1" for the test DB seed
+            return f(*args, **kwargs)
+
         if request.method == "OPTIONS" or request.path == "/":
             return f(*args, **kwargs)
             

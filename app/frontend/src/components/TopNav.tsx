@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { AccountModal } from "./AccountModal";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -22,6 +22,13 @@ export default function TopNav() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    router.push(href);
+  };
 
   return (
     <>
@@ -78,7 +85,7 @@ export default function TopNav() {
               <Link 
                 key={item.href} 
                 href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                   isActive 
                     ? "bg-primary-container text-on-primary-container font-medium" 

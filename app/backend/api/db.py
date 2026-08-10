@@ -56,15 +56,20 @@ class TursoConnection:
         self.client.close()
 
 def get_db():
+    from flask import current_app
     if "db" not in g:
-        if TURSO_URL and TURSO_TOKEN:
+        is_testing = current_app.config.get("TESTING", False)
+        turso_url = os.environ.get("TURSO_DATABASE_URL")
+        turso_token = os.environ.get("TURSO_AUTH_TOKEN")
+        
+        if turso_url and turso_token and not is_testing:
             import libsql_client
-            # Se for ws:// muda pra https:// pro client sync HTTP
-            url = TURSO_URL.replace("libsql://", "https://")
-            client = libsql_client.create_client_sync(url=url, auth_token=TURSO_TOKEN)
+            url = turso_url.replace("libsql://", "https://")
+            client = libsql_client.create_client_sync(url=url, auth_token=turso_token)
             g.db = TursoConnection(client)
         else:
-            g.db = sqlite3.connect(DB_PATH, timeout=10)
+            db_path = os.environ.get("MEDQUEST_DB", os.path.join(BACKEND_DIR, "medquest.db"))
+            g.db = sqlite3.connect(db_path, timeout=10)
             g.db.row_factory = sqlite3.Row
             g.db.execute("PRAGMA foreign_keys = ON")
             g.db.execute("PRAGMA busy_timeout = 10000")
@@ -111,6 +116,8 @@ def init_db(app):
             next_review_date TEXT,
             fsrs_card TEXT,
             user_id TEXT DEFAULT '1')""")
+
+        db.commit()
 
         try:
             if isinstance(db, TursoConnection):
