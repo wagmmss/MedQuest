@@ -57,7 +57,7 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={resetStateAndClose}
+            onClick={() => !isLoading && resetStateAndClose()}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm"
           />
 
@@ -75,10 +75,12 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                 {step === "profile" ? "Minha Conta" : "Resetar Progresso"}
               </h2>
               <button
-                onClick={resetStateAndClose}
-                className="text-on-surface-variant hover:bg-surface-container-high rounded-full p-1.5 transition-colors flex items-center justify-center cursor-pointer"
+                onClick={() => !isLoading && resetStateAndClose()}
+                disabled={isLoading}
+                className="text-on-surface-variant hover:bg-surface-container-high rounded-full p-1.5 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Fechar"
               >
-                <span className="material-symbols-outlined" data-icon="close">close</span>
+                <span className="material-symbols-outlined" data-icon="close" aria-hidden="true">close</span>
               </button>
             </div>
 

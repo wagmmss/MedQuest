@@ -212,7 +212,14 @@ export function QuizClient({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName;
-      if (tag === 'BUTTON' || tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      
+      const isButton = tag === 'BUTTON';
+      const target = e.target as HTMLButtonElement;
+      
+      if (isButton && !target.disabled && (e.key === "Enter" || e.key === " ")) {
+        return;
+      }
 
       if (state !== "PLAYING" || !currentDetail || loadingDetail) return;
 
@@ -486,8 +493,9 @@ export function QuizClient({
                 q.is_favorite ? "bg-destructive/10 text-destructive" : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
               )}
               title="Favoritar"
+              aria-label={q.is_favorite ? "Remover dos favoritos" : "Adicionar aos favoritos"}
             >
-              <Heart size={18} fill={q.is_favorite ? "currentColor" : "none"} />
+              <Heart size={18} fill={q.is_favorite ? "currentColor" : "none"} aria-hidden="true" />
             </button>
           )}
         </div>
@@ -517,8 +525,9 @@ export function QuizClient({
                   disabled={currentIndex === 0 || loadingDetail}
                   className="p-1 hover:bg-background rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
                   title="Questão Anterior (Seta Esquerda)"
+                  aria-label="Questão Anterior"
                 >
-                  <ArrowLeft size={18} />
+                  <ArrowLeft size={18} aria-hidden="true" />
                 </button>
                 <span className="text-sm font-bold text-foreground min-w-[3rem] text-center">
                   {currentIndex + 1} / {queue.length}
@@ -528,8 +537,9 @@ export function QuizClient({
                   disabled={currentIndex === queue.length - 1 || loadingDetail}
                   className="p-1 hover:bg-background rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
                   title="Próxima Questão (Seta Direita)"
+                  aria-label="Próxima Questão"
                 >
-                  <ArrowRight size={18} />
+                  <ArrowRight size={18} aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -607,7 +617,11 @@ export function QuizClient({
                     isWrong ? "bg-destructive text-destructive-foreground" : 
                     "bg-muted text-muted-foreground"
                   )}>
-                    {alt.letter}
+                    {submitting && isSelected ? (
+                      <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                      alt.letter
+                    )}
                   </div>
                   <div className="pt-1.5 text-foreground leading-relaxed flex-1">
                     {alt.text}

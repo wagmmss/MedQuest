@@ -126,6 +126,14 @@ def init_db(app):
                             db.execute(f"ALTER TABLE attempts ADD COLUMN {col} {ddl}")
                         except Exception:
                             pass
+                            
+            if "flashcards" in tables:
+                fc = _table_cols(db, "flashcards")
+                if "user_id" not in fc:
+                    try:
+                        db.execute("ALTER TABLE flashcards ADD COLUMN user_id TEXT DEFAULT '1'")
+                    except Exception as e:
+                        logger.error(f"Failed to alter flashcards: {e}")
             if "fsrs_card" not in _table_cols(db, "spaced_repetition"):
                 try:
                     db.execute("ALTER TABLE spaced_repetition ADD COLUMN fsrs_card TEXT")

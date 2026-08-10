@@ -23,8 +23,10 @@ export function Sidebar() {
   const { user, isLoaded } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shortcut, setShortcut] = useState("Cmd+K");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     if (typeof navigator !== "undefined") {
       const isMac = navigator.userAgent.indexOf("Mac") !== -1;
       const timer = setTimeout(() => {
@@ -71,10 +73,11 @@ export function Sidebar() {
             <button 
               className="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 text-left flex-1 cursor-pointer"
               onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
+              aria-label="Abrir barra de busca"
             >
-              <span className="material-symbols-outlined" data-icon="search">search</span>
+              <span className="material-symbols-outlined" data-icon="search" aria-hidden="true">search</span>
               <span className="font-label-md text-label-md flex-1">Buscar...</span>
-              <kbd className="text-[10px] bg-surface px-1.5 py-0.5 rounded border border-outline-variant opacity-70">{shortcut}</kbd>
+              {mounted && <kbd className="text-[10px] bg-surface px-1.5 py-0.5 rounded border border-outline-variant opacity-70">{shortcut}</kbd>}
             </button>
             <ThemeToggle />
           </div>
@@ -82,6 +85,7 @@ export function Sidebar() {
           <button
             onClick={() => setIsModalOpen(true)}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface hover:bg-surface-container-high transition-all duration-200 justify-between w-full text-left cursor-pointer border border-transparent focus:outline-none focus:border-outline-variant"
+            aria-label="Minha Conta"
           >
             <div className="flex items-center gap-3 min-w-0">
               {isLoaded && user?.imageUrl ? (
