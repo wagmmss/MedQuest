@@ -57,6 +57,10 @@ export function QuizClient({
   // Image Modal
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
 
+  // AI Explanation Stream
+  const [aiExplanation, setAiExplanation] = useState<string>("");
+  const [isExplaining, setIsExplaining] = useState(false);
+
   // Confidence
 
   const [togglingFavorite, setTogglingFavorite] = useState(false);
@@ -66,6 +70,8 @@ export function QuizClient({
     setAttemptResult(null);
     setSelectedLetter(null);
     setFlashcardResult(null);
+    setAiExplanation("");
+    setIsExplaining(false);
     setTimeSpent(0);
     try {
       const detail = await api.questions.getDetail(id);
@@ -203,6 +209,47 @@ export function QuizClient({
       toast.error("Erro ao gerar flashcard com IA.");
     } finally {
       setGeneratingFlashcard(false);
+    }
+  };
+
+  const handleExplain = async () => {
+    if (!currentDetail) return;
+    setIsExplaining(true);
+    setAiExplanation("");
+    try {
+      // Usamos fetch nativo porque a lib apiFetch geralmente espera JSON e não stream
+      const response = await fetch(`/api/questions/${currentDetail.id}/explain`);
+      if (!response.body) throw new Error("No body returned");
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        
+        buffer += decoder.decode(value, { stream: true });
+        const parts = buffer.split('\n\n');
+        buffer = parts.pop() || "";
+        
+        for (const part of parts) {
+          if (part.startsWith('data: ')) {
+            const dataStr = part.slice(6);
+            if (dataStr === '[DONE]') break;
+            try {
+              const data = JSON.parse(dataStr);
+              if (data.text) {
+                setAiExplanation(prev => prev + data.text);
+              }
+            } catch (e) {}
+          }
+        }
+      }
+    } catch (e) {
+      toast.error("Erro ao carregar explicação com IA.");
+    } finally {
+      setIsExplaining(false);
     }
   };
 
@@ -812,8 +859,31 @@ export function QuizClient({
                     </div>
                   ) : null}
                   
-                  {!attemptResult.is_correct && !flashcardResult && (
-                    <div className="mt-6">
+                  {/* AI Explanation Stream Area */}
+                  {aiExplanation && (
+                    <div className="mt-6 p-5 bg-primary/5 border border-primary/20 rounded-xl">
+                      <h4 className="text-sm font-bold text-primary flex items-center gap-2 mb-3">
+                        <Sparkles size={16} /> Resposta do Tutor de IA
+                      </h4>
+                      <div className="text-foreground leading-relaxed whitespace-pre-wrap">
+                        {aiExplanation}
+                        {isExplaining && <span className="inline-block w-2 h-4 bg-primary ml-1 animate-pulse" />}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {!aiExplanation && !isExplaining && (
+                      <button 
+                        onClick={handleExplain}
+                        className="flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary/20 font-bold py-2 px-4 rounded-lg shadow-sm transition-all"
+                      >
+                        <Sparkles size={18} />
+                        Explicar com IA
+                      </button>
+                    )}
+                    
+                    {!attemptResult.is_correct && !flashcardResult && (
                       <button 
                         onClick={handleGenerateFlashcard}
                         disabled={generatingFlashcard}
@@ -824,10 +894,10 @@ export function QuizClient({
                         ) : (
                           <Sparkles size={18} />
                         )}
-                        {generatingFlashcard ? "Analisando seu erro e extraindo núcleo..." : "Gerar Flashcard com IA (Focado no Erro)"}
+                        {generatingFlashcard ? "Analisando seu erro..." : "Gerar Flashcard"}
                       </button>
-                    </div>
-                  )}
+                    )}
+                  </div>
 
                   {flashcardResult && (
                     <div className="mt-6 bg-purple-500/10 border border-purple-500/20 rounded-xl p-5">
