@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Dark mode por classe .dark no <html> (padrão shadcn/Tailwind v4) */
-@custom-variant dark (&:where(.dark, .dark *));
+@variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --color-on-surface-variant: #424750;
@@ -186,6 +186,7 @@ body.zen-mode > div:first-of-type {
 }
 
 .dark {
+  color-scheme: dark;
   --color-background: #0f1113;
   --color-on-background: #eff1f3;
   --color-surface: #15181a;
