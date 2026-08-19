@@ -156,8 +156,7 @@ export const api = {
         console.warn("[API] Offline mode: loading questions from localDb");
         try {
           const cached = await localDb.questions.where('id').anyOf(ids).toArray();
-          const map = cached.reduce((acc, q) => { acc[q.id] = q; return acc; }, {} as Record<number, QuestionDetail>);
-          return { questions: map } as BatchDetailResponse;
+          return { questions: cached } as unknown as BatchDetailResponse;
         } catch (e) {
           console.error("Dexie error", e);
         }
