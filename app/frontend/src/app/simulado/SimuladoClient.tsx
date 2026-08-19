@@ -29,8 +29,8 @@ export function SimuladoClient({
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [resultsMap, setResultsMap] = useState<Record<number, BatchAttemptResultItem>>({});
   
-  // Timer State (5 hours = 18000 seconds)
-  const TOTAL_TIME = 5 * 60 * 60;
+  // Formato oficial USP 2026: 120 questões em 6 horas.
+  const TOTAL_TIME = 6 * 60 * 60;
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -174,12 +174,19 @@ export function SimuladoClient({
     }
   }, [answers]);
 
+  const submitSimuladoRef = useRef(submitSimulado);
+  useEffect(() => {
+    submitSimuladoRef.current = submitSimulado;
+  }, [submitSimulado]);
+
   // Timer Effect
   useEffect(() => {
     if (state === "PLAYING") {
       timerRef.current = setInterval(() => {
         setTimeLeft(prev => {
           if (prev <= 1) {
+            if (timerRef.current) clearInterval(timerRef.current);
+            setTimeout(() => submitSimuladoRef.current(), 0);
             return 0;
           }
           return prev - 1;
@@ -192,13 +199,6 @@ export function SimuladoClient({
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [state]);
-
-  useEffect(() => {
-    if (state === "PLAYING" && timeLeft === 0) {
-      if (timerRef.current) clearInterval(timerRef.current);
-      submitSimulado();
-    }
-  }, [timeLeft, state, submitSimulado]);
 
   const handleSelect = (letter: string) => {
     if (state !== "PLAYING") return;
@@ -257,7 +257,7 @@ export function SimuladoClient({
           </div>
           <div className="bg-muted rounded-lg p-4">
             <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Duração</span>
-            <span className="text-lg font-bold text-foreground">5 Horas</span>
+            <span className="text-lg font-bold text-foreground">6 Horas</span>
           </div>
           {!isCustom && (
             <div className="bg-muted rounded-lg p-4 col-span-2">
@@ -292,7 +292,9 @@ export function SimuladoClient({
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full shadow-lg hover:-translate-y-0.5"
           >
             <Play size={20} fill="currentColor" />
-            {hasSavedState ? "Iniciar Novo Simulado USP (120 Qs)" : "Iniciar Simulado USP Agora"}
+            {hasSavedState
+              ? (isCustom ? "Iniciar Novo Simulado Personalizado" : "Iniciar Novo Simulado USP (120 Qs)")
+              : (isCustom ? "Iniciar Simulado Personalizado" : "Iniciar Simulado USP Agora")}
           </button>
 
           {!isCustom && (
@@ -358,7 +360,7 @@ export function SimuladoClient({
             <>
               <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Nota Final</span>
               <div className="text-2xl lg:text-4xl font-black text-foreground">
-                {Object.values(resultsMap).filter(r => r.is_correct).length} <span className="text-sm lg:text-lg text-muted-foreground">/ 120</span>
+                {Object.values(resultsMap).filter(r => r.is_correct).length} <span className="text-sm lg:text-lg text-muted-foreground">/ {queue.length}</span>
               </div>
             </>
           ) : (

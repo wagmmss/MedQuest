@@ -34,12 +34,6 @@ export function QuizClient({
     return () => document.body.classList.remove('zen-mode');
   }, [zenMode]);
 
-  useEffect(() => {
-    if (typeof filters.limit === "string") {
-      setLocalLimit(filters.limit);
-    }
-  }, [filters.limit]);
-
   const [studyMode, setStudyMode] = useState<"TUTOR" | "SIMULADO">("TUTOR");
   const [dynamicMeta, setDynamicMeta] = useState<QuestionMeta>(meta);
   const [isUpdatingMeta, setIsUpdatingMeta] = useState(false);
@@ -477,13 +471,13 @@ export function QuizClient({
             <Sparkles size={16} className="text-primary" /> Sugestões Rápidas
           </h3>
           <div className="flex flex-wrap gap-2">
-            <button type="button" onClick={() => setFilters({ ...filters, area: "Clínica Médica", limit: "20" })} className="bg-muted/50 hover:bg-muted px-4 py-2 rounded-full text-xs font-medium text-foreground border border-border transition-colors">
+            <button type="button" onClick={() => { setLocalLimit("20"); setFilters({ ...filters, area: "Clínica Médica", limit: "20" }); }} className="bg-muted/50 hover:bg-muted px-4 py-2 rounded-full text-xs font-medium text-foreground border border-border transition-colors">
               Revisar Clínica Médica (20 Qs)
             </button>
-            <button type="button" onClick={() => setFilters({ ...filters, status: "wrong", limit: "15" })} className="bg-destructive/5 hover:bg-destructive/10 px-4 py-2 rounded-full text-xs font-medium text-destructive border border-destructive/20 transition-colors">
+            <button type="button" onClick={() => { setLocalLimit("15"); setFilters({ ...filters, status: "wrong", limit: "15" }); }} className="bg-destructive/5 hover:bg-destructive/10 px-4 py-2 rounded-full text-xs font-medium text-destructive border border-destructive/20 transition-colors">
               Refazer Erros Recentes (15 Qs)
             </button>
-            <button type="button" onClick={() => setFilters({ ...filters, status: "srs_due", limit: "30" })} className="bg-warning/5 hover:bg-warning/10 px-4 py-2 rounded-full text-xs font-medium text-warning border border-warning/20 transition-colors">
+            <button type="button" onClick={() => { setLocalLimit("30"); setFilters({ ...filters, status: "srs_due", limit: "30" }); }} className="bg-warning/5 hover:bg-warning/10 px-4 py-2 rounded-full text-xs font-medium text-warning border border-warning/20 transition-colors">
               Revisão Espaçada Diária (30 Qs)
             </button>
           </div>

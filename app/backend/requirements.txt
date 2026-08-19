@@ -1,5 +1,6 @@
 flask
 flask-cors
+pydantic
 pdfplumber
 pymupdf
 groq
@@ -7,5 +8,6 @@ python-dotenv
 libsql-client
 PyJWT
 cryptography
+requests
 gunicorn
 fsrs

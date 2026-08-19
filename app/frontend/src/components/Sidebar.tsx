@@ -23,10 +23,8 @@ export function Sidebar() {
   const { user, isLoaded } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shortcut, setShortcut] = useState("Cmd+K");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     if (typeof navigator !== "undefined") {
       const isMac = navigator.userAgent.indexOf("Mac") !== -1;
       const timer = setTimeout(() => {
@@ -77,7 +75,7 @@ export function Sidebar() {
             >
               <span className="material-symbols-outlined" data-icon="search" aria-hidden="true">search</span>
               <span className="font-label-md text-label-md flex-1">Buscar...</span>
-              {mounted && <kbd className="text-[10px] bg-surface px-1.5 py-0.5 rounded border border-outline-variant opacity-70">{shortcut}</kbd>}
+              <kbd className="text-[10px] bg-surface px-1.5 py-0.5 rounded border border-outline-variant opacity-70">{shortcut}</kbd>
             </button>
             <ThemeToggle />
           </div>
