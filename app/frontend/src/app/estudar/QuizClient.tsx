@@ -596,11 +596,11 @@ export function QuizClient({
           {/* Question Stem */}
           <div className="bg-card border border-border shadow-1 rounded-xl p-6 md:p-8 flex flex-col gap-6">
             {q.technical_note && (
-              <div className="bg-warning/10 border border-warning/30 rounded-xl p-4 flex gap-3 text-warning-foreground mb-2">
-                <span className="material-symbols-outlined text-warning shrink-0" data-icon="warning">warning</span>
+              <div className="bg-amber-500/15 border-2 border-amber-500/50 rounded-xl p-5 flex gap-4 text-foreground mb-2 shadow-sm">
+                <AlertTriangle className="text-amber-500 shrink-0 mt-0.5" size={24} />
                 <div className="text-sm">
-                  <p className="font-bold mb-1">Atenção: Mudança de Diretriz</p>
-                  <p>{q.technical_note}</p>
+                  <p className="font-bold text-amber-600 dark:text-amber-500 mb-1 text-base uppercase tracking-wider">Atenção: Questão Histórica / Desatualizada</p>
+                  <p className="leading-relaxed font-medium">{q.technical_note}</p>
                 </div>
               </div>
             )}
@@ -768,6 +768,15 @@ export function QuizClient({
                     {attemptResult.explanation || "Nenhum comentário disponível para esta questão."}
                   </div>
 
+                  {currentDetail?.medical_references && (
+                    <div className="mt-6 pt-5 border-t border-border">
+                      <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-2">Referências e Diretrizes</h4>
+                      <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 p-4 rounded-lg">
+                        {currentDetail.medical_references}
+                      </div>
+                    </div>
+                  )}
+
                   {currentDetail?.times_wrong && currentDetail.times_wrong > 0 ? (
                     <div className="mt-4 flex items-center gap-2 text-sm text-destructive font-semibold bg-destructive/10 px-3 py-1.5 rounded-full w-fit">
                       Você já errou esta questão {currentDetail.times_wrong} {currentDetail.times_wrong === 1 ? 'vez' : 'vezes'} no passado.
@@ -819,31 +828,31 @@ export function QuizClient({
                       <div className="flex flex-col sm:flex-row gap-3">
                         {attemptResult.is_correct ? (
                           <>
-                            <button onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                            <button title="O algoritmo agendará a revisão desta questão para um intervalo curto (geralmente no dia seguinte) já que você não dominava o conceito original." onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
                               <span>🔴 Acertei no Chute</span>
                               <span className="text-[10px] font-normal opacity-80">Volta amanhã (Difícil) • Atalho: 1</span>
                             </button>
-                            <button onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm flex flex-col items-center justify-center gap-1">
+                            <button title="O algoritmo agendará a revisão com um multiplicador moderado de dias, reforçando a memória sem sobrecarregar sua fila." onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm flex flex-col items-center justify-center gap-1">
                               <span>🟡 Pensei um Pouco</span>
                               <span className="text-[10px] font-normal opacity-80">Bom tempo • Atalho: 2 / Enter</span>
                             </button>
-                            <button onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                            <button title="O algoritmo entenderá que você domina este assunto e agendará a revisão para o mais longe possível (maior estabilidade de memória)." onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
                               <span>🟢 Tinha Certeza</span>
                               <span className="text-[10px] font-normal opacity-80">Revisa mais tarde (Fácil) • Atalho: 3</span>
                             </button>
                           </>
                         ) : (
                           <>
-                            <button onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                            <button title="Você não sabia a resposta e foi pego de surpresa. A revisão ocorrerá o mais breve possível (amanhã)." onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
                               <span>🔴 Errei no Chute</span>
                               <span className="text-[10px] font-normal opacity-80">Volta amanhã • Atalho: 1</span>
                             </button>
-                            <button onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm flex flex-col items-center justify-center gap-1">
-                              <span>🟡 Errei com Dúvida</span>
-                              <span className="text-[10px] font-normal opacity-80">Quase acertei • Atalho: 2 / Enter</span>
+                            <button title="O algoritmo entenderá que você cometeu um erro que exige reforço imediato e agendará a revisão mais próxima para consertar a falha de memória." onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm flex flex-col items-center justify-center gap-1">
+                              <span>🟡 Fiquei em Dúvida</span>
+                              <span className="text-[10px] font-normal opacity-80">Bom tempo • Atalho: 2 / Enter</span>
                             </button>
-                            <button onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
-                              <span>🟢 Tinha Certeza, mas Errei</span>
+                            <button title="Você sentiu firmeza, mas se confundiu numa 'pegadinha'. O algoritmo agendará a revisão com certa urgência, mas espaçada o suficiente para testar se a confusão persiste." onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                              <span>🟢 Errei com Certeza</span>
                               <span className="text-[10px] font-normal opacity-80">Preciso fixar • Atalho: 3</span>
                             </button>
                           </>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import { TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat } from "@/types/api";
+import { TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat, PredictiveScore, AtRiskTopic } from "@/types/api";
 import { AlertTriangle, TrendingUp, Compass, AlarmClock, Lightbulb, Brain, ChevronRight, BarChart3, AlertCircle, Target, Activity } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
@@ -23,6 +23,8 @@ export function AnalysisClient({
   recommendations: Recommendation[];
   breakdown: BreakdownStat[];
   distractors: DistractorStat[];
+  predictiveScore: PredictiveScore;
+  atRiskTopics: AtRiskTopic[];
 }) {
   const getRecIcon = (type: string) => {
     switch (type) {
@@ -79,6 +81,89 @@ export function AnalysisClient({
       {/* Left Column (2/3 on xl screens) */}
       <div className="xl:col-span-2 flex flex-col gap-8 min-w-0">
         
+        {/* Predictive Dashboard */}
+        <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-both">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <Target size={24} className="text-primary" />
+            </div>
+            <h2 className="text-2xl font-bold text-foreground">
+              Dashboard Preditivo
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+            {/* Score Predictor */}
+            <div className="bg-card border border-border shadow-sm rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-bold text-lg text-foreground">Projeção de Nota</h3>
+                  <Activity className="text-muted-foreground" size={20} />
+                </div>
+                <p className="text-muted-foreground text-sm mb-6">
+                  Estimativa da sua nota oficial baseada na acurácia atual por área.
+                </p>
+              </div>
+              
+              <div className="flex items-end gap-4">
+                <div className="text-5xl font-black text-primary">
+                  {predictiveScore.projected_score}<span className="text-2xl text-muted-foreground font-medium">/100</span>
+                </div>
+                {predictiveScore.target_score !== null && (
+                  <div className="flex flex-col pb-1">
+                    <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Alvo</span>
+                    <span className="text-lg font-bold text-foreground">{predictiveScore.target_score}</span>
+                  </div>
+                )}
+              </div>
+              
+              {predictiveScore.target_score !== null && (
+                <div className="mt-6 w-full bg-secondary/20 h-3 rounded-full overflow-hidden relative">
+                  <div 
+                    className={clsx("h-full rounded-full transition-all duration-1000", predictiveScore.projected_score >= predictiveScore.target_score ? "bg-success" : "bg-primary")}
+                    style={{ width: `${Math.min(100, (predictiveScore.projected_score / predictiveScore.target_score) * 100)}%` }}
+                  />
+                  <div 
+                    className="absolute top-0 bottom-0 w-0.5 bg-foreground/50 z-10"
+                    style={{ left: `${predictiveScore.target_score}%` }}
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Radar de Esquecimento */}
+            <div className="bg-card border border-border shadow-sm rounded-2xl p-6 flex flex-col">
+              <div className="flex items-center gap-2 mb-4">
+                <AlertCircle className="text-warning" size={20} />
+                <h3 className="font-bold text-lg text-foreground">Radar de Esquecimento</h3>
+              </div>
+              <p className="text-muted-foreground text-sm mb-4">
+                Tópicos que o algoritmo do FSRS indica que você está prestes a esquecer.
+              </p>
+              
+              <div className="flex-1 overflow-y-auto space-y-3 pr-2 custom-scrollbar">
+                {atRiskTopics.length > 0 ? (
+                  atRiskTopics.map((topic, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-3 bg-background rounded-lg border border-border">
+                      <div className="flex flex-col">
+                        <span className="font-medium text-sm text-foreground leading-tight line-clamp-1" title={topic.subtema}>{topic.subtema}</span>
+                        <span className="text-xs text-muted-foreground mt-0.5">{topic.items_count} cartões em risco</span>
+                      </div>
+                      <div className="flex flex-col items-end shrink-0 pl-3">
+                        <span className="text-xs font-semibold text-warning">Baixa Retenção</span>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="h-full flex items-center justify-center text-sm text-muted-foreground text-center p-4 border border-dashed border-border rounded-lg">
+                    Sua memória está em dia! Continue fazendo suas revisões ativas.
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Recommendations */}
         <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100 fill-mode-both">
           <div className="flex items-center gap-3 mb-6">

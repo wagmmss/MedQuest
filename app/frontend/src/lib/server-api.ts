@@ -56,6 +56,8 @@ export const serverApi = {
     getWeakTopics: () => serverFetch<WeakTopic[]>("/api/stats/weak-topics", { cache: 'no-store' }),
     getRecommendations: () => serverFetch<Recommendation[]>("/api/stats/recommendations", { cache: 'no-store' }),
     getDistractors: () => serverFetch<DistractorStat[]>("/api/stats/distractors", { cache: 'no-store' }),
+    getPredictiveScore: () => serverFetch<PredictiveScore>("/api/stats/predictive-score", { cache: 'no-store' }),
+    getAtRiskTopics: () => serverFetch<AtRiskTopic[]>("/api/stats/at-risk", { cache: 'no-store' }),
     getBreakdown: (by: 'institution' | 'area' | 'year') => 
       serverFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { cache: 'no-store' }),
   },

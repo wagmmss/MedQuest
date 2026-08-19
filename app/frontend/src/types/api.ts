@@ -82,11 +82,28 @@ export interface DistractorStat {
   }[];
 }
 
+export interface PredictiveScore {
+  projected_score: number;
+  target_score: number | null;
+  areas: {
+    area: string;
+    accuracy: number;
+    attempts: number;
+  }[];
+}
+
+export interface AtRiskTopic {
+  subtema: string;
+  items_count: number;
+  stability: number;
+}
+
 export interface PlannerConfig {
   exam_date?: string;
   start_date?: string;
   days_per_week?: number;
   hours_per_day?: number;
+  target_score?: number;
 }
 
 export interface PlannerTopic {
@@ -166,6 +183,7 @@ export interface QuestionDetail extends QuestionListItem {
   is_verified?: boolean;
   last_updated_at?: string;
   technical_note?: string;
+  medical_references?: string;
   is_favorite?: boolean;
   times_wrong?: number;
 }
@@ -218,6 +236,7 @@ export interface Flashcard {
   next_review_date: string;
   stem?: string;
   source_context?: string;
+  is_ai_generated?: boolean;
 }
 
 export interface FlashcardGenerateResponse {

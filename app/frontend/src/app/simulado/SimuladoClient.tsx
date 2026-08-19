@@ -617,11 +617,11 @@ export function SimuladoClient({
 
             <div className="bg-card border border-border shadow-1 rounded-xl p-6 md:p-8 flex-1 overflow-y-auto">
               {qDetail.technical_note && (
-                <div className="bg-warning/10 border border-warning/30 rounded-xl p-4 flex gap-3 text-warning-foreground mb-4">
-                  <span className="material-symbols-outlined text-warning shrink-0" data-icon="warning">warning</span>
+                <div className="bg-amber-500/15 border-2 border-amber-500/50 rounded-xl p-5 flex gap-4 text-foreground mb-6 shadow-sm">
+                  <AlertTriangle className="text-amber-500 shrink-0 mt-0.5" size={24} />
                   <div className="text-sm">
-                    <p className="font-bold mb-1">Atenção: Mudança de Diretriz</p>
-                    <p>{qDetail.technical_note}</p>
+                    <p className="font-bold text-amber-600 dark:text-amber-500 mb-1 text-base uppercase tracking-wider">Atenção: Questão Histórica / Desatualizada</p>
+                    <p className="leading-relaxed font-medium">{qDetail.technical_note}</p>
                   </div>
                 </div>
               )}
@@ -710,6 +710,15 @@ export function SimuladoClient({
                       <div className="text-foreground text-body-l leading-relaxed whitespace-pre-wrap">
                         {resultsMap[qDetail.id].explanation || "Nenhum comentário disponível para esta questão."}
                       </div>
+                      
+                      {qDetail.medical_references && (
+                        <div className="mt-6 pt-5 border-t border-border">
+                          <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-2">Referências e Diretrizes</h4>
+                          <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 p-4 rounded-lg">
+                            {qDetail.medical_references}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

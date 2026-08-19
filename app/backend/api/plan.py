@@ -29,14 +29,14 @@ def planner_config():
         except ValidationError as e:
             return jsonify({"error": "invalid input", "details": e.errors()}), 400
         db.execute("""
-            INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(user_id) DO UPDATE SET
                 exam_date = excluded.exam_date, start_date = excluded.start_date,
                 days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
-                updated_at = excluded.updated_at
+                updated_at = excluded.updated_at, target_score = excluded.target_score
         """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
-              datetime.now(timezone.utc).isoformat()))
+              datetime.now(timezone.utc).isoformat(), cfg.target_score))
         db.commit()
         return jsonify({"success": True})
 
@@ -46,6 +46,7 @@ def planner_config():
     return jsonify({
         "exam_date": row["exam_date"], "start_date": row["start_date"],
         "days_per_week": row["days_per_week"], "hours_per_day": row["questions_per_day"],
+        "target_score": row["target_score"] if "target_score" in row.keys() else None,
     })
 
 

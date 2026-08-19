@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
-import { Calendar, Clock, BookOpen, ArrowRight, Loader2 } from "lucide-react";
+import { Calendar, Clock, BookOpen, ArrowRight, Loader2, Target } from "lucide-react";
 import clsx from "clsx";
 
 export function PlannerWizard() {
@@ -16,6 +16,7 @@ export function PlannerWizard() {
   const [startDate, setStartDate] = useState(new Date().toISOString().split("T")[0]);
   const [daysPerWeek, setDaysPerWeek] = useState(5);
   const [hoursPerDay, setHoursPerDay] = useState(4);
+  const [targetScore, setTargetScore] = useState<number | "">("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +43,8 @@ export function PlannerWizard() {
         exam_date: examIso,
         start_date: startIso,
         days_per_week: daysPerWeek,
-        hours_per_day: hoursPerDay
+        hours_per_day: hoursPerDay,
+        target_score: targetScore !== "" ? Number(targetScore) : undefined
       });
 
       router.refresh();
@@ -107,6 +109,25 @@ export function PlannerWizard() {
             {examError && (
               <p className="text-xs text-destructive mt-1 font-medium">Por favor, insira a data da sua prova principal.</p>
             )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-foreground">Nota de Corte Alvo (%)</label>
+            <div className="relative">
+              <Target className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
+              <input 
+                type="number"
+                min="0"
+                max="100"
+                placeholder="Ex: 75"
+                className="w-full bg-input border border-border rounded-md py-2 pl-10 pr-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                value={targetScore}
+                onChange={(e) => setTargetScore(e.target.value ? Number(e.target.value) : "")}
+              />
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">Opcional. Usado para gerar a sua projeção de aprovação.</p>
           </div>
         </div>
 

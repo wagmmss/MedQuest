@@ -156,8 +156,14 @@ export function FlashcardClient() {
         tabIndex={0}
         aria-label={flipped ? "Flashcard revelado" : "Clique para revelar o flashcard"}
       >
+        {current.is_ai_generated && (
+          <div className="absolute top-4 left-4 text-xs font-semibold text-purple-500 bg-purple-500/10 border border-purple-500/20 px-2 py-1 rounded-full flex items-center gap-1.5" title="Este flashcard foi gerado por Inteligência Artificial e ainda não passou por revisão médica estruturada.">
+            <Sparkles size={12} /> Gerado por IA
+          </div>
+        )}
+
         {current.stem && (
-          <div className="w-full mb-8 pb-6 border-b border-border/50 text-muted-foreground text-sm md:text-base leading-relaxed text-left opacity-80">
+          <div className="w-full mt-4 mb-8 pb-6 border-b border-border/50 text-muted-foreground text-sm md:text-base leading-relaxed text-left opacity-80">
             <span className="font-bold text-foreground/50 uppercase text-xs tracking-wider mb-3 block">Questão Original (Contexto)</span>
             <div dangerouslySetInnerHTML={{ __html: current.stem }} />
           </div>
@@ -212,6 +218,7 @@ export function FlashcardClient() {
       {flipped && (
         <div className="flex w-full gap-4 mt-4 animate-in slide-in-from-bottom-4 fade-in duration-300">
           <button 
+            title="O algoritmo agendará a revisão deste flashcard para amanhã, já que você não conseguiu se lembrar do conceito."
             onClick={() => handleReview("errei")}
             disabled={submitting}
             className="flex-1 bg-destructive/10 hover:bg-destructive/20 text-destructive border border-destructive/20 font-bold py-4 rounded-xl transition-colors flex flex-col items-center justify-center gap-1 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2"
@@ -220,6 +227,7 @@ export function FlashcardClient() {
             <span className="text-[10px] font-normal opacity-80 uppercase tracking-widest mt-1">Volta amanhã (1)</span>
           </button>
           <button 
+            title="O algoritmo aplicará um multiplicador de intervalo moderado, agendando uma revisão em breve para fixar este conceito difícil."
             onClick={() => handleReview("duvida")}
             disabled={submitting}
             className="flex-1 bg-warning/10 hover:bg-warning/20 text-warning border border-warning/20 font-bold py-4 rounded-xl transition-colors flex flex-col items-center justify-center gap-1 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warning focus-visible:ring-offset-2"
@@ -228,6 +236,7 @@ export function FlashcardClient() {
             <span className="text-[10px] font-normal opacity-80 uppercase tracking-widest mt-1">Bom tempo (2)</span>
           </button>
           <button 
+            title="O algoritmo entende que este flashcard está bem consolidado na sua memória e estenderá significativamente o intervalo para a próxima revisão."
             onClick={() => handleReview("certeza")}
             disabled={submitting}
             className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/20 font-bold py-4 rounded-xl transition-colors flex flex-col items-center justify-center gap-1 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success focus-visible:ring-offset-2"

@@ -33,6 +33,7 @@ class PlannerConfigIn(BaseModel):
     start_date: Optional[str] = None
     days_per_week: int = Field(default=6, ge=1, le=7)
     hours_per_day: int = Field(default=4, ge=1, le=24)
+    target_score: Optional[float] = Field(default=None, ge=0, le=100)
 
 
 class PlannerStudyIn(BaseModel):

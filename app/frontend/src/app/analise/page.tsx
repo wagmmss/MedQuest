@@ -10,6 +10,8 @@ export default async function AnalisePage() {
     serverApi.stats.getRecommendations(),
     serverApi.stats.getBreakdown("institution"),
     serverApi.stats.getDistractors(),
+    serverApi.stats.getPredictiveScore(),
+    serverApi.stats.getAtRiskTopics(),
   ]);
 
   const timeline = results[0].status === 'fulfilled' ? results[0].value : [];
@@ -17,6 +19,8 @@ export default async function AnalisePage() {
   const recommendations = results[2].status === 'fulfilled' ? results[2].value : [];
   const breakdown = results[3].status === 'fulfilled' ? results[3].value : [];
   const distractors = results[4].status === 'fulfilled' ? results[4].value : [];
+  const predictiveScore = results[5].status === 'fulfilled' ? results[5].value : { projected_score: 0, target_score: null, areas: [] };
+  const atRiskTopics = results[6].status === 'fulfilled' ? results[6].value : [];
 
   return (
     <div className="flex flex-col gap-8 animate-in fade-in duration-500">
@@ -47,6 +51,8 @@ export default async function AnalisePage() {
         recommendations={recommendations}
         breakdown={breakdown}
         distractors={distractors}
+        predictiveScore={predictiveScore}
+        atRiskTopics={atRiskTopics}
       />
 
     </div>

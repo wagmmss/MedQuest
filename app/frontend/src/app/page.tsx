@@ -58,55 +58,112 @@ export default async function Dashboard() {
             Aqui está o seu progresso semanal na preparação para a USP.
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
-          {stats.srs_due_count === 0 ? (
-            <button disabled className="flex items-center gap-2 px-6 py-3 bg-surface-variant text-on-surface-variant rounded-xl opacity-70 cursor-not-allowed font-body-sm text-body-sm font-semibold">
-              <span className="material-symbols-outlined" data-icon="psychology">psychology</span>
-              Nenhuma revisão pendente
-            </button>
-          ) : (
-            <Link href="/estudar?status=srs_due&limit=100">
-              <button className="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl shadow-[0_4px_14px_0_rgba(26,75,132,0.39)] hover:shadow-[0_6px_20px_rgba(26,75,132,0.23)] hover:-translate-y-1 transform transition-all duration-200 font-body-sm text-body-sm font-semibold cursor-pointer">
-                <span className="material-symbols-outlined" data-icon="psychology">psychology</span>
-                Iniciar Revisão ({stats.srs_due_count})
-              </button>
-            </Link>
-          )}
-          {stats.flashcards_due_count != null && stats.flashcards_due_count > 0 && (
-            <Link href="/revisao-ativa">
-              <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white rounded-xl shadow-[0_4px_14px_rgba(139,92,246,0.3)] hover:-translate-y-1 transform transition-all duration-200 font-body-sm text-body-sm font-semibold cursor-pointer">
-                <span className="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
-                Revisar Flashcards ({stats.flashcards_due_count})
-              </button>
-            </Link>
-          )}
         </div>
       </section>
 
-      {/* Daily/Weekly Planner Banner */}
-      <div className="mb-stack-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="bg-gradient-to-r from-primary to-indigo-600 rounded-2xl p-6 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 transition-transform hover:-translate-y-1 hover:shadow-xl duration-300">
-          <div className="flex items-center gap-4 w-full sm:w-auto">
-            <div className="p-3 bg-white/20 rounded-full flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-3xl" data-icon="calendar_today">calendar_today</span>
-            </div>
-            <div className="flex-1">
-              <h3 className="font-headline-md font-bold text-white mb-1">
-                {currentPlannerWeek ? `Plano da Semana (Semana ${currentPlannerWeek.week})` : "Configure seu Plano de Estudos"}
-              </h3>
-              <p className="text-white/90 text-sm">
-                {currentPlannerWeek 
-                  ? `Foco atual: ${currentPlannerWeek.topics.slice(0, 2).map(t => t.subtema).join(', ')}${currentPlannerWeek.topics.length > 2 ? '...' : ''}` 
-                  : "Defina sua data de prova para receber metas semanais personalizadas."}
+      {/* Plano Diário (3 Cards) */}
+      <div className="mb-stack-lg">
+        <h3 className="font-headline-sm font-bold text-on-surface mb-4 flex items-center gap-2">
+          <span className="material-symbols-outlined text-primary" data-icon="today">today</span>
+          Seu Plano Diário
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+          {/* Card 1: Revisões */}
+          <div className="bg-surface border border-outline-variant rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110" />
+            <div>
+              <div className="flex items-center gap-3 mb-2 text-purple-600">
+                <span className="material-symbols-outlined" data-icon="psychology">psychology</span>
+                <span className="font-label-md font-bold uppercase tracking-wider">Revisão Ativa</span>
+              </div>
+              <p className="font-display-sm text-on-surface mb-1">
+                {stats.srs_due_count! > 0 || stats.flashcards_due_count! > 0 
+                  ? (stats.srs_due_count! + stats.flashcards_due_count!) 
+                  : 0} pendentes
+              </p>
+              <p className="text-sm text-on-surface-variant">
+                Flashcards e questões no tempo ideal do FSRS.
               </p>
             </div>
+            
+            <div className="mt-6">
+              {(stats.srs_due_count! > 0 || stats.flashcards_due_count! > 0) ? (
+                <div className="flex gap-2 flex-col sm:flex-row">
+                  {stats.flashcards_due_count! > 0 && (
+                    <Link href="/revisao-ativa" className="flex-1">
+                      <button className="w-full py-2.5 bg-purple-100 hover:bg-purple-200 text-purple-700 dark:bg-purple-900/30 dark:hover:bg-purple-900/50 dark:text-purple-300 font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2">
+                        <span className="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span> Flashcards ({stats.flashcards_due_count})
+                      </button>
+                    </Link>
+                  )}
+                  {stats.srs_due_count! > 0 && (
+                    <Link href="/estudar?status=srs_due&limit=100" className="flex-1">
+                      <button className="w-full py-2.5 bg-primary/10 hover:bg-primary/20 text-primary font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2">
+                        <span className="material-symbols-outlined text-sm" data-icon="psychology">psychology</span> Questões ({stats.srs_due_count})
+                      </button>
+                    </Link>
+                  )}
+                </div>
+              ) : (
+                <button disabled className="w-full py-2.5 bg-surface-variant text-on-surface-variant font-semibold rounded-lg cursor-not-allowed text-sm flex items-center justify-center gap-2">
+                  <span className="material-symbols-outlined text-sm" data-icon="done_all">done_all</span> Tudo em dia
+                </button>
+              )}
+            </div>
           </div>
-          <Link href="/planner">
-            <button className="px-6 py-3 w-full sm:w-auto bg-white text-primary rounded-xl font-bold shadow-md hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 shrink-0">
-              <span className="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
-              {currentPlannerWeek ? "Ver Plano Completo" : "Configurar Agora"}
-            </button>
-          </Link>
+
+          {/* Card 2: Questões Novas */}
+          <div className="bg-surface border border-outline-variant rounded-2xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110" />
+            <div>
+              <div className="flex items-center gap-3 mb-2 text-blue-600">
+                <span className="material-symbols-outlined" data-icon="post_add">post_add</span>
+                <span className="font-label-md font-bold uppercase tracking-wider">Questões Novas</span>
+              </div>
+              <p className="font-display-sm text-on-surface mb-1">Meta: 20 inéditas</p>
+              <p className="text-sm text-on-surface-variant">
+                Avance na sua cobertura resolvendo questões que você nunca viu.
+              </p>
+            </div>
+            
+            <div className="mt-6">
+              <Link href={currentPlannerWeek && currentPlannerWeek.topics.length > 0 ? `/estudar?subtema=${encodeURIComponent(currentPlannerWeek.topics[0].subtema)}&status=new&limit=20` : "/estudar?status=new&limit=20"}>
+                <button className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2 shadow-sm">
+                  <span className="material-symbols-outlined text-sm" data-icon="play_arrow">play_arrow</span> Iniciar Bateria
+                </button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 3: Planner */}
+          <div className="bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl p-6 flex flex-col justify-between shadow-md hover:shadow-lg transition-shadow text-white relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-2 text-blue-100">
+                <span className="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+                <span className="font-label-md font-bold uppercase tracking-wider">Tópico da Semana</span>
+              </div>
+              <p className="font-display-sm mb-1 leading-tight">
+                {currentPlannerWeek && currentPlannerWeek.topics.length > 0 
+                  ? currentPlannerWeek.topics[0].subtema 
+                  : "Nenhum plano ativo"}
+              </p>
+              <p className="text-sm text-blue-100/80">
+                {currentPlannerWeek 
+                  ? `Semana ${currentPlannerWeek.week} • ${currentPlannerWeek.topics.length} metas` 
+                  : "Defina sua data de prova no planner."}
+              </p>
+            </div>
+            
+            <div className="mt-6 relative z-10">
+              <Link href="/planner">
+                <button className="w-full py-2.5 bg-white/20 hover:bg-white/30 text-white border border-white/30 font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2 backdrop-blur-sm">
+                  <span className="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span> Ver Planner
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 

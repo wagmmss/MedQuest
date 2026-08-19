@@ -369,6 +369,101 @@ def recommendations():
     return jsonify(recs[:5])
 
 
+@bp.route("/stats/predictive-score")
+def predictive_score():
+    db = get_db()
+    # Pega o target_score do planner_config
+    config_row = db.execute("SELECT * FROM planner_config WHERE user_id = ?", (g.user_id,)).fetchone()
+    target_score = config_row["target_score"] if config_row and "target_score" in config_row.keys() else None
+
+    # Calcula acurácia por área
+    areas_stats = db.execute("""
+        SELECT q.area AS area, COUNT(a.id) AS attempts, SUM(a.is_correct) AS correct
+        FROM attempts a JOIN questions q ON q.id = a.question_id
+        WHERE a.user_id = ? AND q.area IS NOT NULL AND q.area != ''
+        GROUP BY q.area
+    """, (g.user_id,)).fetchall()
+
+    if not areas_stats:
+        return jsonify({
+            "projected_score": 0,
+            "target_score": target_score,
+            "areas": []
+        })
+
+    areas_acc = []
+    total_acc = 0.0
+    valid_areas = 0
+
+    for r in areas_stats:
+        # Penaliza acurácia se tiver menos de 5 tentativas
+        acc = (r["correct"] / r["attempts"]) if r["attempts"] >= 5 else (r["correct"] / 5.0)
+        acc_pct = round(acc * 100, 1)
+        areas_acc.append({
+            "area": r["area"],
+            "accuracy": acc_pct,
+            "attempts": r["attempts"]
+        })
+        total_acc += acc_pct
+        valid_areas += 1
+
+    projected_score = round(total_acc / valid_areas, 1) if valid_areas > 0 else 0.0
+
+    return jsonify({
+        "projected_score": projected_score,
+        "target_score": target_score,
+        "areas": sorted(areas_acc, key=lambda x: x["accuracy"], reverse=True)
+    })
+
+@bp.route("/stats/at-risk")
+def at_risk():
+    import json
+    db = get_db()
+    
+    # Buscar cards de FSRS (questões) do usuário que têm fsrs_card e próxima revisão em breve
+    # Como não temos uma tabela explícita unificada, pegamos das questões
+    now_utc = datetime.now(timezone.utc).isoformat()
+    # Pega os 10 mais urgentes
+    rows = db.execute("""
+        SELECT q.subtema, sr.fsrs_card, sr.next_review_date
+        FROM spaced_repetition sr
+        JOIN questions q ON sr.question_id = q.id
+        WHERE sr.user_id = ? AND sr.fsrs_card IS NOT NULL
+        ORDER BY sr.next_review_date ASC
+        LIMIT 50
+    """, (g.user_id,)).fetchall()
+    
+    topics_risk = {}
+    for r in rows:
+        subtema = r["subtema"]
+        if not subtema: continue
+        try:
+            fsrs_data = json.loads(r["fsrs_card"])
+            stability = fsrs_data.get("stability", 10.0)
+        except Exception:
+            stability = 10.0
+            
+        if subtema not in topics_risk:
+            topics_risk[subtema] = {"count": 0, "min_stability": stability}
+        
+        topics_risk[subtema]["count"] += 1
+        if stability < topics_risk[subtema]["min_stability"]:
+            topics_risk[subtema]["min_stability"] = stability
+            
+    # Filtra subtemas onde a menor estabilidade de uma questão é < 5.0 (exemplo de limite para at-risk)
+    at_risk_list = []
+    for subtema, data in topics_risk.items():
+        if data["min_stability"] < 5.0:
+            at_risk_list.append({
+                "subtema": subtema,
+                "items_count": data["count"],
+                "stability": round(data["min_stability"], 2)
+            })
+            
+    at_risk_list.sort(key=lambda x: x["stability"])
+    return jsonify(at_risk_list[:10])
+
+
 @bp.route("/stats/reset", methods=["DELETE"])
 def reset_stats():
     db = get_db()
