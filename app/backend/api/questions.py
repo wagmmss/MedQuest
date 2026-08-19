@@ -1,15 +1,38 @@
 """Blueprint: metadados, listagem/fila de estudo, detalhe, tentativa e favoritos."""
 from datetime import datetime, timezone
+from html import escape
+import re
 
 from flask import Blueprint, jsonify, request, g
 
 from .db import get_db
 from .filters import question_filter_clauses
-from .schemas import AttemptIn, BatchAttemptIn, ValidationError
+from .schemas import AttemptIn, BatchAttemptIn, ReviewIn, ValidationError
 from . import srs
 import random
 
 bp = Blueprint("questions", __name__)
+
+
+def _bounded_int(value, default, minimum, maximum):
+    try:
+        parsed = int(value)
+    except (TypeError, ValueError):
+        return default
+    return max(minimum, min(parsed, maximum))
+
+
+def _fts_phrase(value):
+    """Converte texto livre em uma expressão FTS5 segura e limitada."""
+    words = re.findall(r"\w+", value or "", flags=re.UNICODE)[:12]
+    return " ".join(words)
+
+
+def _safe_snippet(value):
+    """Escapa o conteúdo original e preserva somente as tags de destaque."""
+    return (escape(value or "")
+            .replace("⟦MQH⟧", "<mark>")
+            .replace("⟦/MQH⟧", "</mark>"))
 
 
 @bp.route("/simulado/usp")
@@ -43,16 +66,20 @@ def search_questions():
     if semantic:
         from .ai import expand_search_query
         expanded_terms = expand_search_query(q)
-        fts_query = " OR ".join([f'"{term.replace(chr(34), "")}"' for term in expanded_terms])
+        phrases = [_fts_phrase(term) for term in expanded_terms]
+        fts_query = " OR ".join(f'"{phrase}"' for phrase in phrases if phrase)
     else:
         # Padrão: adiciona asterisco para pegar inícios de palavras (ex: press -> pressao)
-        terms = [f'"{t.replace(chr(34), "")}"*' for t in q.split()]
+        terms = [f'"{term}"*' for term in _fts_phrase(q).split()]
         fts_query = " AND ".join(terms)
+
+    if not fts_query:
+        return jsonify([])
     
     rows = db.execute("""
         SELECT q.id, q.institution_code, q.year, q.area, q.subtema,
-               snippet(questions_fts, 0, '<mark>', '</mark>', '...', 20) as stem_snippet,
-               snippet(questions_fts, 1, '<mark>', '</mark>', '...', 20) as exp_snippet
+               snippet(questions_fts, 0, '⟦MQH⟧', '⟦/MQH⟧', '...', 20) as stem_snippet,
+               snippet(questions_fts, 1, '⟦MQH⟧', '⟦/MQH⟧', '...', 20) as exp_snippet
         FROM questions_fts fts
         JOIN questions q ON q.id = fts.rowid
         WHERE questions_fts MATCH ?
@@ -60,7 +87,13 @@ def search_questions():
         LIMIT 50
     """, (fts_query,)).fetchall()
     
-    return jsonify([dict(r) for r in rows])
+    out = []
+    for row in rows:
+        item = dict(row)
+        item["stem_snippet"] = _safe_snippet(item.get("stem_snippet"))
+        item["exp_snippet"] = _safe_snippet(item.get("exp_snippet"))
+        out.append(item)
+    return jsonify(out)
 
 
 @bp.route("/meta")
@@ -71,6 +104,11 @@ def meta():
     # We must replace q. with empty or alias questions as q
     # Because question_filter_clauses assumes "q.institution_code" etc
     where = " AND ".join(clauses)
+
+    from werkzeug.datastructures import MultiDict
+    args_no_subtema = MultiDict((k, v) for k, v in request.args.items(multi=True) if k != 'subtema')
+    clauses_no_subtema, params_no_subtema = question_filter_clauses(args_no_subtema)
+    where_no_subtema = " AND ".join(clauses_no_subtema)
 
     institutions = db.execute(
         f"""SELECT q.institution_code, q.institution_label, COUNT(*) n
@@ -90,7 +128,7 @@ def meta():
     
     subtemas = db.execute(
         f"""SELECT q.subtema, COUNT(*) n FROM questions q
-           WHERE q.subtema IS NOT NULL AND q.subtema != '' AND {where} GROUP BY q.subtema ORDER BY n DESC LIMIT 300""", params
+           WHERE q.subtema IS NOT NULL AND q.subtema != '' AND {where_no_subtema} GROUP BY q.subtema ORDER BY n DESC LIMIT 300""", params_no_subtema
     ).fetchall()
     
     total = db.execute(f"SELECT COUNT(*) n FROM questions q WHERE {where}", params).fetchone()["n"]
@@ -135,7 +173,7 @@ def questions():
     db = get_db()
     clauses, params = question_filter_clauses(request.args)
     where = " AND ".join(clauses)
-    limit = min(int(request.args.get("limit", 500)), 2000)
+    limit = _bounded_int(request.args.get("limit"), default=500, minimum=1, maximum=2000)
     rows = db.execute(
         f"""SELECT q.id, q.source_file, q.source_number, q.year, q.institution_code,
                    q.institution_label, q.topic, q.area, q.subtema
@@ -235,8 +273,11 @@ def submit_attempt(qid):
 @bp.route("/questions/<int:qid>/review", methods=["POST"])
 def review_fsrs(qid):
     db = get_db()
-    data = request.get_json(force=True) or {}
-    confidence = data.get("confidence")
+    try:
+        data = ReviewIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": e.errors()}), 400
+    confidence = data.confidence
     
     last_attempt = db.execute(
         "SELECT id, is_correct FROM attempts WHERE question_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1", 
@@ -358,4 +399,3 @@ def serve_image(filename):
     backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     static_dir = os.path.join(backend_dir, "static")
     return send_from_directory(static_dir, filename)
-

@@ -54,56 +54,115 @@ export default async function Dashboard() {
         </div>
       </section>
 
+      {/* Daily Challenge Banner */}
+      <div className="mb-stack-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-6 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 transition-transform hover:-translate-y-1 hover:shadow-xl duration-300">
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-white/20 rounded-full flex items-center justify-center">
+              <span className="material-symbols-outlined text-3xl" data-icon="local_fire_department">local_fire_department</span>
+            </div>
+            <div>
+              <h3 className="font-headline-md font-bold text-white mb-1">Desafio do Dia</h3>
+              <p className="text-white/90 text-sm">Mantenha sua ofensiva de {stats.streak_days} dia(s) acesa! Resolva a questão selecionada para você hoje.</p>
+            </div>
+          </div>
+          <Link href="/estudar?status=unanswered&limit=1">
+            <button className="px-6 py-3 bg-white text-orange-600 rounded-xl font-bold shadow-md hover:bg-gray-50 transition-colors flex items-center gap-2">
+              <span className="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
+              Resolver Agora
+            </button>
+          </Link>
+        </div>
+      </div>
+
       {/* Bento Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
         {/* Weekly Progress Summary (4 Stats) */}
-        <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-gutter">
-          {/* Stat Card 1 */}
-          <div className="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col justify-between hover:bg-surface-container-lowest transition-colors shadow-[0px_1px_3px_rgba(0,0,0,0.05)]">
-            <div className="flex items-center gap-3 mb-4 text-primary">
-              <span className="material-symbols-outlined" data-icon="task_alt">task_alt</span>
-              <span className="font-label-md text-label-md uppercase">Questões Feitas</span>
+        <div className="md:col-span-8">
+          {stats.distinct_answered === 0 ? (
+            <div className="bg-surface border border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center text-center h-full shadow-[0px_1px_3px_rgba(0,0,0,0.05)]">
+              <div className="w-16 h-16 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center mb-4">
+                <span className="material-symbols-outlined text-3xl" data-icon="school">school</span>
+              </div>
+              <h3 className="font-headline-sm text-headline-sm text-on-surface mb-2">Bem-vindo(a) ao MedQuest!</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant max-w-md mb-6">
+                Você ainda não respondeu nenhuma questão. Que tal começar agora mesmo e testar seus conhecimentos?
+              </p>
+              <Link href="/estudar">
+                <button className="px-6 py-3 bg-primary text-on-primary rounded-xl font-body-sm font-semibold hover:opacity-90 transition-opacity">
+                  Explorar Banco de Questões
+                </button>
+              </Link>
             </div>
-            <div>
-              <span className="font-display-lg text-display-lg text-on-surface">{stats.distinct_answered}</span>
-              <span className="font-body-sm text-body-sm text-secondary ml-2 font-semibold">únicas</span>
-            </div>
-          </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-gutter h-full">
+              {/* Stat Card 1 */}
+              <div className="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/30 group">
+                <div className="flex items-center gap-3 mb-4 text-primary transition-transform group-hover:scale-105 origin-left">
+                  <span className="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+                  <span className="font-label-md text-label-md uppercase">Questões Feitas</span>
+                </div>
+                <div>
+                  <span className="font-display-lg text-display-lg text-on-surface">{stats.distinct_answered}</span>
+                  <span className="font-body-sm text-body-sm text-secondary ml-2 font-semibold">únicas</span>
+                </div>
+              </div>
 
-          {/* Stat Card 2 */}
-          <div className="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col justify-between hover:bg-surface-container-lowest transition-colors shadow-[0px_1px_3px_rgba(0,0,0,0.05)]">
-            <div className="flex items-center gap-3 mb-4 text-primary">
-              <span className="material-symbols-outlined" data-icon="my_location">my_location</span>
-              <span className="font-label-md text-label-md uppercase">Acurácia Geral</span>
-            </div>
-            <div>
-              <span className="font-display-lg text-display-lg text-on-surface">{accuracyFormatted}</span>
-            </div>
-          </div>
+              {/* Stat Card 2 */}
+              <div className="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/30 group">
+                <div className="flex items-center gap-3 mb-4 text-primary transition-transform group-hover:scale-105 origin-left">
+                  <span className="material-symbols-outlined" data-icon="my_location">my_location</span>
+                  <span className="font-label-md text-label-md uppercase">Acurácia Geral</span>
+                </div>
+                <div>
+                  <span className="font-display-lg text-display-lg text-on-surface">{accuracyFormatted}</span>
+                </div>
+              </div>
 
-          {/* Stat Card 3 */}
-          <div className="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col justify-between hover:bg-surface-container-lowest transition-colors shadow-[0px_1px_3px_rgba(0,0,0,0.05)]">
-            <div className="flex items-center gap-3 mb-4 text-primary">
-              <span className="material-symbols-outlined" data-icon="local_fire_department">local_fire_department</span>
-              <span className="font-label-md text-label-md uppercase">Ofensiva</span>
-            </div>
-            <div>
-              <span className="font-display-lg text-display-lg text-on-surface">{stats.streak_days}</span>
-              <span className="font-body-sm text-body-sm text-on-surface-variant ml-2">Dias</span>
-            </div>
-          </div>
+              {/* Stat Card 3 */}
+              <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/20 rounded-xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(234,88,12,0.15)] group relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <span className="material-symbols-outlined text-6xl text-orange-600">local_fire_department</span>
+                </div>
+                <div className="flex items-center gap-3 mb-4 text-orange-600 transition-transform group-hover:scale-105 origin-left relative z-10">
+                  <span className="material-symbols-outlined animate-pulse" data-icon="local_fire_department">local_fire_department</span>
+                  <span className="font-label-md text-label-md uppercase font-bold">Ofensiva Atual</span>
+                </div>
+                <div className="relative z-10">
+                  <span className="font-display-lg text-display-lg text-on-surface">{stats.streak_days}</span>
+                  <span className="font-body-sm text-body-sm text-on-surface-variant ml-2 font-semibold">Dias seguidos</span>
+                </div>
+              </div>
 
-          {/* Stat Card 4 */}
-          <div className="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col justify-between hover:bg-surface-container-lowest transition-colors shadow-[0px_1px_3px_rgba(0,0,0,0.05)]">
-            <div className="flex items-center gap-3 mb-4 text-primary">
-              <span className="material-symbols-outlined" data-icon="pie_chart">pie_chart</span>
-              <span className="font-label-md text-label-md uppercase">Cobertura</span>
+              {/* Stat Card 4 (Nível XP) */}
+              <div className="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-purple-500/30 group">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3 text-purple-600 transition-transform group-hover:scale-105 origin-left">
+                    <span className="material-symbols-outlined" data-icon="social_leaderboard">social_leaderboard</span>
+                    <span className="font-label-md text-label-md uppercase font-bold">Nível XP</span>
+                  </div>
+                  <span className="text-xs font-bold text-purple-600 bg-purple-100 dark:bg-purple-900/30 px-2 py-1 rounded-full">
+                    Lvl {Math.floor((stats.distinct_answered * 10) / 100) + 1}
+                  </span>
+                </div>
+                <div>
+                  <div className="flex justify-between text-xs mb-1.5 text-on-surface-variant font-medium">
+                    <span>{stats.distinct_answered * 10} XP</span>
+                    <span>{(Math.floor((stats.distinct_answered * 10) / 100) + 1) * 100} XP</span>
+                  </div>
+                  <div className="w-full bg-surface-variant rounded-full h-2.5 overflow-hidden">
+                    <div 
+                      className="bg-gradient-to-r from-purple-500 to-indigo-500 h-2.5 rounded-full transition-all duration-1000 ease-out" 
+                      style={{ width: `${((stats.distinct_answered * 10) % 100)}%` }}
+                    />
+                  </div>
+                  <span className="block mt-3 font-body-sm text-body-sm text-on-surface-variant text-xs">
+                    Resolva questões e revise para subir de nível!
+                  </span>
+                </div>
+              </div>
             </div>
-            <div>
-              <span className="font-display-lg text-display-lg text-on-surface">{coverageFormatted}</span>
-              <span className="font-body-sm text-body-sm text-on-surface-variant ml-2">de {stats.total_questions} Qs</span>
-            </div>
-          </div>
+          )}
         </div>
 
         {/* Quick Access List */}

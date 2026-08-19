@@ -39,7 +39,7 @@ export function AnalysisClient({
       ...b,
       accPct: parseFloat((b.accuracy * 100).toFixed(1)),
       // Truncate long labels for Y-axis display
-      shortLabel: b.label.length > 25 ? b.label.substring(0, 22) + "..." : b.label
+      shortLabel: b.label.length > 35 ? b.label.substring(0, 32) + "..." : b.label
     }));
   }, [breakdown]);
 
@@ -144,7 +144,7 @@ export function AnalysisClient({
                     type="category" 
                     axisLine={false} 
                     tickLine={false} 
-                    width={150}
+                    width={220}
                     tick={{ fill: 'var(--muted-foreground)', fontSize: 13, fontWeight: 500 }} 
                   />
                   <Tooltip 
@@ -354,17 +354,16 @@ export function AnalysisClient({
                     <Link key={i} href={`/estudar?subtema=${encodeURIComponent(d.subtema)}&limit=50`} className="p-4 flex items-center justify-between gap-4 hover:bg-muted/30 transition-colors group">
                       <div className="min-w-0 flex-1">
                         <div className="font-medium text-foreground truncate group-hover:text-primary transition-colors" title={d.subtema}>{d.subtema}</div>
-                        <div className="text-sm text-muted-foreground mt-1 flex items-center gap-2">
-                          <span>Mais errada:</span>
+                        <div className="text-sm text-muted-foreground mt-1 flex items-center gap-1.5 flex-wrap">
+                          <span>A alternativa</span>
                           <span className="inline-flex items-center justify-center bg-muted font-bold text-foreground w-6 h-6 rounded text-xs uppercase border border-border">
                             {worstChoice.letter}
                           </span>
+                          <span>foi escolhida incorretamente</span>
+                          <span className="font-bold text-destructive bg-destructive/10 px-1.5 py-0.5 rounded">{worstChoice.count} vez(es)</span>
                         </div>
                       </div>
                       <div className="flex items-center gap-3 shrink-0">
-                        <div className="bg-destructive/10 text-destructive font-bold rounded-full min-w-[2.5rem] h-10 px-2 flex items-center justify-center border border-destructive/20 shadow-sm">
-                          {worstChoice.count}x
-                        </div>
                         <ChevronRight size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
                     </Link>

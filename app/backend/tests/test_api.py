@@ -54,3 +54,26 @@ def test_planner_config_roundtrip(client):
 def test_planner_config_validacao(client):
     r = client.post("/api/planner/config", json={"days_per_week": 99})  # > 7
     assert r.status_code == 400
+
+
+def test_questions_limit_invalido_usa_padrao(client):
+    r = client.get("/api/questions?limit=nao-e-numero")
+    assert r.status_code == 200
+    assert len(r.get_json()) == 2
+
+
+def test_questions_limit_negativo_nao_fura_limite(client):
+    r = client.get("/api/questions?limit=-1")
+    assert r.status_code == 200
+    assert len(r.get_json()) == 1
+
+
+def test_review_rejeita_confianca_invalida(client):
+    client.post("/api/questions/1/attempt", json={"selected_letter": "B"})
+    r = client.post("/api/questions/1/review", json={"confidence": "qualquer-coisa"})
+    assert r.status_code == 400
+
+
+def test_weak_topics_aceita_min_attempts_invalido(client):
+    r = client.get("/api/stats/weak-topics?min_attempts=abc")
+    assert r.status_code == 200

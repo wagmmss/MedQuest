@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
-import { Calendar, Clock, BookOpen, ArrowRight } from "lucide-react";
+import { Calendar, Clock, BookOpen, ArrowRight, Loader2 } from "lucide-react";
+import clsx from "clsx";
 
 export function PlannerWizard() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [examError, setExamError] = useState(false);
 
   const [examDate, setExamDate] = useState("");
   const [startDate, setStartDate] = useState(new Date().toISOString().split("T")[0]);
@@ -18,9 +20,10 @@ export function PlannerWizard() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setExamError(false);
     
     if (!examDate) {
-      setError("Por favor, insira a data da sua prova principal.");
+      setExamError(true);
       return;
     }
     
@@ -62,7 +65,7 @@ export function PlannerWizard() {
         </div>
       </div>
 
-      {error && (
+      {error && !examError && (
         <div className="bg-destructive/10 text-destructive text-sm p-3 rounded-md mb-6 border border-destructive/20">
           {error}
         </div>
@@ -90,11 +93,20 @@ export function PlannerWizard() {
               <input 
                 type="date"
                 required
-                className="w-full bg-input border border-border rounded-md py-2 pl-10 pr-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className={clsx(
+                  "w-full bg-input border rounded-md py-2 pl-10 pr-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-colors",
+                  examError ? "border-destructive ring-1 ring-destructive" : "border-border"
+                )}
                 value={examDate}
-                onChange={(e) => setExamDate(e.target.value)}
+                onChange={(e) => {
+                  setExamDate(e.target.value);
+                  if (examError) setExamError(false);
+                }}
               />
             </div>
+            {examError && (
+              <p className="text-xs text-destructive mt-1 font-medium">Por favor, insira a data da sua prova principal.</p>
+            )}
           </div>
         </div>
 
@@ -136,8 +148,17 @@ export function PlannerWizard() {
           disabled={loading}
           className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-md transition-colors flex items-center justify-center gap-2 w-full mt-2 disabled:opacity-50"
         >
-          {loading ? "Gerando..." : "Gerar Cronograma"}
-          {!loading && <ArrowRight size={18} />}
+          {loading ? (
+            <>
+              <Loader2 size={18} className="animate-spin" />
+              Gerando cronograma detalhado (isso pode levar até 30s)...
+            </>
+          ) : (
+            <>
+              Gerar Cronograma
+              <ArrowRight size={18} />
+            </>
+          )}
         </button>
       </form>
     </div>

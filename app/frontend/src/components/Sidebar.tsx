@@ -38,7 +38,7 @@ export function Sidebar() {
 
   return (
     <>
-      <aside className="hidden md:flex flex-col bg-surface-container-low h-screen left-0 w-64 border-r border-outline-variant p-4 gap-stack-md z-10">
+      <aside className="app-sidebar hidden md:flex flex-col bg-surface-container-low h-screen left-0 w-64 border-r border-outline-variant p-4 gap-stack-md z-10">
         <div className="mb-6 flex flex-col items-center justify-center p-4">
           <div className="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-2">
             <span className="material-symbols-outlined" data-icon="local_hospital">local_hospital</span>
@@ -55,10 +55,10 @@ export function Sidebar() {
                 key={item.href}
                 href={item.href}
                 className={clsx(
-                  "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200",
+                  "flex items-center gap-3 py-3 rounded-xl transition-all duration-200",
                   isActive 
-                    ? "bg-secondary-container text-on-secondary-container font-bold opacity-80 shadow-[0_1px_2px_rgba(0,0,0,0.05)]" 
-                    : "text-on-surface-variant hover:bg-surface-container-high"
+                    ? "bg-primary/10 text-primary font-bold border-l-4 border-primary px-3 shadow-sm" 
+                    : "px-4 text-on-surface-variant hover:bg-surface-container-high"
                 )}
               >
                 <span className="material-symbols-outlined" data-icon={item.icon}>{item.icon}</span>

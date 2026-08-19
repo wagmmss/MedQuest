@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Loader2, ArrowRight } from "lucide-react";
+import { Search, Loader2, ArrowRight, X } from "lucide-react";
 import clsx from "clsx";
 import { api } from "@/lib/api";
 import { SearchResult } from "@/types/api";
@@ -98,7 +98,12 @@ export function CommandPalette() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <kbd className="hidden sm:inline-block text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded border border-border">ESC</kbd>
+          <div className="flex items-center gap-2">
+            <kbd className="hidden sm:inline-block text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded border border-border">ESC</kbd>
+            <button onClick={() => setOpen(false)} className="p-1 rounded-md hover:bg-muted text-muted-foreground transition-colors" aria-label="Fechar busca">
+              <X size={18} />
+            </button>
+          </div>
         </div>
         <div className="max-h-[60vh] overflow-y-auto p-2">
           {query.length === 0 ? (
@@ -127,9 +132,60 @@ export function CommandPalette() {
                 <ArrowRight size={14} className="ml-auto opacity-50" />
               </button>
               
+              {query.length > 0 && (
+                <>
+                  <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">Ações Rápidas</div>
+                  {("simulado usp prova exame".includes(query.toLowerCase())) && (
+                    <button
+                      className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors"
+                      onClick={() => { setOpen(false); router.push("/simulado"); }}
+                    >
+                      <span className="material-symbols-outlined text-primary text-sm" data-icon="description">description</span>
+                      <span>Iniciar Simulado USP</span>
+                    </button>
+                  )}
+                  {("clínica médica clinica cardiologia nefrologia".includes(query.toLowerCase())) && (
+                    <button
+                      className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors"
+                      onClick={() => { setOpen(false); router.push("/estudar?area=Clínica Médica"); }}
+                    >
+                      <span className="material-symbols-outlined text-primary text-sm" data-icon="menu_book">menu_book</span>
+                      <span>Estudar Clínica Médica</span>
+                    </button>
+                  )}
+                  {("cirurgia geral trauma".includes(query.toLowerCase())) && (
+                    <button
+                      className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors"
+                      onClick={() => { setOpen(false); router.push("/estudar?area=Cirurgia"); }}
+                    >
+                      <span className="material-symbols-outlined text-primary text-sm" data-icon="menu_book">menu_book</span>
+                      <span>Estudar Cirurgia Geral</span>
+                    </button>
+                  )}
+                  {("pediatria neo".includes(query.toLowerCase())) && (
+                    <button
+                      className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors"
+                      onClick={() => { setOpen(false); router.push("/estudar?area=Pediatria"); }}
+                    >
+                      <span className="material-symbols-outlined text-primary text-sm" data-icon="menu_book">menu_book</span>
+                      <span>Estudar Pediatria</span>
+                    </button>
+                  )}
+                  {("preventiva sus epidemiologia".includes(query.toLowerCase())) && (
+                    <button
+                      className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors"
+                      onClick={() => { setOpen(false); router.push("/estudar?area=Medicina Preventiva e Social"); }}
+                    >
+                      <span className="material-symbols-outlined text-primary text-sm" data-icon="menu_book">menu_book</span>
+                      <span>Estudar Preventiva</span>
+                    </button>
+                  )}
+                </>
+              )}
+              
               {results.length > 0 ? (
                 <>
-                  <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Top Resultados</div>
+                  <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-4">Questões Encontradas</div>
                   {results.map((res) => (
                     <button
                       key={res.id}
@@ -152,7 +208,7 @@ export function CommandPalette() {
                 </>
               ) : !loading && (
                 <div className="px-3 py-8 text-center text-muted-foreground text-sm">
-                  Nenhum resultado encontrado.
+                  Nenhuma questão encontrada para este termo.
                 </div>
               )}
             </div>

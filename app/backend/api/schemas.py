@@ -3,7 +3,7 @@ from typing import Optional, Literal
 
 from pydantic import BaseModel, Field, ValidationError
 
-__all__ = ["AttemptIn", "BatchAttemptItem", "BatchAttemptIn", "PlannerConfigIn", "PlannerStudyIn", "PlannerRevisionIn",
+__all__ = ["AttemptIn", "BatchAttemptItem", "BatchAttemptIn", "ReviewIn", "PlannerConfigIn", "PlannerStudyIn", "PlannerRevisionIn",
            "GeneratePlanIn", "ValidationError"]
 
 
@@ -21,7 +21,11 @@ class BatchAttemptItem(BaseModel):
 
 
 class BatchAttemptIn(BaseModel):
-    attempts: list[BatchAttemptItem]
+    attempts: list[BatchAttemptItem] = Field(max_length=500)
+
+
+class ReviewIn(BaseModel):
+    confidence: Literal["chutei", "duvida", "certeza"]
 
 
 class PlannerConfigIn(BaseModel):

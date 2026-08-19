@@ -6,6 +6,7 @@ import { api } from "@/lib/api";
 import { Play, Clock, CheckCircle2, XCircle, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
+import confetti from "canvas-confetti";
 
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS";
 
@@ -36,20 +37,23 @@ export function SimuladoClient({
   const [hasSavedState, setHasSavedState] = useState(false);
 
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     const saved = localStorage.getItem("medquest_simulado_state");
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
         if (parsed.state === "PLAYING" || parsed.state === "RESULTS") {
-          const timer = setTimeout(() => {
+          timer = setTimeout(() => {
             setHasSavedState(true);
           }, 0);
-          return () => clearTimeout(timer);
         }
       } catch {
         localStorage.removeItem("medquest_simulado_state");
       }
     }
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   const resumeSimulado = () => {
@@ -89,7 +93,7 @@ export function SimuladoClient({
     }
     setState("LOADING");
     try {
-      const hasCustomFilters = Object.keys(initialFilters).filter(k => k !== 'limit').length > 0;
+      const hasCustomFilters = Object.keys(initialFilters).length > 0;
       
       let qList: QuestionListItem[];
       if (hasCustomFilters) {
@@ -155,6 +159,15 @@ export function SimuladoClient({
       setResultsMap(rMap);
       setState("RESULTS");
       setCurrentIndex(0); // Go back to first question to review
+      
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#0EA5E9', '#38BDF8', '#7DD3FC', '#F472B6']
+      });
+      
+      localStorage.removeItem("medquest_simulado_state");
     } catch {
       toast.error("Erro ao enviar simulado. Tente novamente.");
       setState("PLAYING");
@@ -167,8 +180,6 @@ export function SimuladoClient({
       timerRef.current = setInterval(() => {
         setTimeLeft(prev => {
           if (prev <= 1) {
-            clearInterval(timerRef.current!);
-            submitSimulado();
             return 0;
           }
           return prev - 1;
@@ -180,7 +191,14 @@ export function SimuladoClient({
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [state, submitSimulado]);
+  }, [state]);
+
+  useEffect(() => {
+    if (state === "PLAYING" && timeLeft === 0) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      submitSimulado();
+    }
+  }, [timeLeft, state, submitSimulado]);
 
   const handleSelect = (letter: string) => {
     if (state !== "PLAYING") return;
@@ -214,7 +232,7 @@ export function SimuladoClient({
   };
 
   if (state === "START") {
-    const isCustom = Object.keys(initialFilters).filter(k => k !== 'limit').length > 0;
+    const isCustom = Object.keys(initialFilters).length > 0;
     
     return (
       <div className="bg-card border border-border shadow-1 rounded-xl p-8 max-w-2xl mx-auto w-full text-center flex flex-col items-center">
@@ -274,8 +292,40 @@ export function SimuladoClient({
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full shadow-lg hover:-translate-y-0.5"
           >
             <Play size={20} fill="currentColor" />
-            {hasSavedState ? "Iniciar Novo Simulado" : "Iniciar Simulado Agora"}
+            {hasSavedState ? "Iniciar Novo Simulado USP (120 Qs)" : "Iniciar Simulado USP Agora"}
           </button>
+
+          {!isCustom && (
+            <div className="mt-4 pt-4 border-t border-border w-full flex flex-col gap-3">
+              <span className="text-xs font-bold text-muted-foreground uppercase text-center mb-1">Simulados Temáticos (50 Qs)</span>
+              <div className="grid grid-cols-2 gap-3">
+                <button 
+                  onClick={() => { window.location.href = "/simulado?area=Clínica Médica&limit=50" }}
+                  className="bg-muted hover:bg-muted/80 text-foreground font-semibold py-3 px-4 rounded-lg transition-colors text-sm border border-border"
+                >
+                  Clínica Médica
+                </button>
+                <button 
+                  onClick={() => { window.location.href = "/simulado?area=Cirurgia&limit=50" }}
+                  className="bg-muted hover:bg-muted/80 text-foreground font-semibold py-3 px-4 rounded-lg transition-colors text-sm border border-border"
+                >
+                  Cirurgia Geral
+                </button>
+                <button 
+                  onClick={() => { window.location.href = "/simulado?area=Pediatria&limit=50" }}
+                  className="bg-muted hover:bg-muted/80 text-foreground font-semibold py-3 px-4 rounded-lg transition-colors text-sm border border-border"
+                >
+                  Pediatria
+                </button>
+                <button 
+                  onClick={() => { window.location.href = "/simulado?area=Medicina Preventiva e Social&limit=50" }}
+                  className="bg-muted hover:bg-muted/80 text-foreground font-semibold py-3 px-4 rounded-lg transition-colors text-sm border border-border"
+                >
+                  Preventiva
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -395,7 +445,13 @@ export function SimuladoClient({
             <p className="text-foreground font-semibold">Erro ao carregar a questão</p>
             <p className="text-muted-foreground text-sm text-center">Não foi possível carregar os detalhes desta questão. Verifique sua conexão.</p>
             <button 
-              onClick={() => loadDetail(queue[currentIndex].id)}
+              onClick={() => {
+                if (queue[currentIndex]) {
+                  loadDetail(queue[currentIndex].id);
+                } else {
+                  startSimulado();
+                }
+              }}
               className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm mt-2"
             >
               <RotateCcw size={16} /> Tentar Novamente

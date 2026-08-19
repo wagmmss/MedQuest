@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, ChevronRight, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff } from "lucide-react";
+import { Play, Filter, Clock, CheckCircle2, XCircle, ChevronRight, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -23,6 +23,16 @@ export function QuizClient({
   const [localLimit, setLocalLimit] = useState<string>(
     typeof filters.limit === "string" ? filters.limit : "50"
   );
+  const [zenMode, setZenMode] = useState(false);
+
+  useEffect(() => {
+    if (zenMode) {
+      document.body.classList.add('zen-mode');
+    } else {
+      document.body.classList.remove('zen-mode');
+    }
+    return () => document.body.classList.remove('zen-mode');
+  }, [zenMode]);
 
   useEffect(() => {
     if (typeof filters.limit === "string") {
@@ -461,6 +471,23 @@ export function QuizClient({
             {studyMode === "TUTOR" ? "Iniciar Sessão de Estudos" : "Iniciar Simulado Personalizado"}
           </button>
         </form>
+
+        <div className="mt-10 pt-8 border-t border-border">
+          <h3 className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
+            <Sparkles size={16} className="text-primary" /> Sugestões Rápidas
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={() => setFilters({ ...filters, area: "Clínica Médica", limit: "20" })} className="bg-muted/50 hover:bg-muted px-4 py-2 rounded-full text-xs font-medium text-foreground border border-border transition-colors">
+              Revisar Clínica Médica (20 Qs)
+            </button>
+            <button type="button" onClick={() => setFilters({ ...filters, status: "wrong", limit: "15" })} className="bg-destructive/5 hover:bg-destructive/10 px-4 py-2 rounded-full text-xs font-medium text-destructive border border-destructive/20 transition-colors">
+              Refazer Erros Recentes (15 Qs)
+            </button>
+            <button type="button" onClick={() => setFilters({ ...filters, status: "srs_due", limit: "30" })} className="bg-warning/5 hover:bg-warning/10 px-4 py-2 rounded-full text-xs font-medium text-warning border border-warning/20 transition-colors">
+              Revisão Espaçada Diária (30 Qs)
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -517,13 +544,28 @@ export function QuizClient({
           <div className="hidden lg:flex items-center gap-2 ml-4 px-3 py-1 bg-muted/50 rounded-full text-xs text-muted-foreground font-medium">
             <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">A-E</kbd> ou <kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">1-5</kbd> Alternativas</span>
             <span className="w-1 h-1 rounded-full bg-border" />
-            <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">Enter</kbd> Confirmar</span>
+              <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">Enter</kbd> Confirmar</span>
             <span className="w-1 h-1 rounded-full bg-border" />
             <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">➔</kbd> Próxima</span>
           </div>
         </div>
         
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setZenMode(!zenMode)}
+            className="flex items-center gap-2 px-3 py-1.5 bg-muted hover:bg-muted/80 text-muted-foreground rounded-lg transition-colors border border-border text-xs font-semibold"
+            title={zenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen (Foco Absoluto)"}
+          >
+            {zenMode ? (
+              <>
+                <Minimize size={14} /> Sair do Modo Zen
+              </>
+            ) : (
+              <>
+                <Maximize size={14} /> Modo Zen
+              </>
+            )}
+          </button>
           <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground w-16">
             <Clock size={16} />
             <span className={clsx(timeSpent > 120 && !attemptResult && "text-warning")}>

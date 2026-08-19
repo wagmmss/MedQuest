@@ -13,10 +13,22 @@ export function CoverageClient({ areas }: { areas: CoverageArea[] }) {
     setExpandedArea(expandedArea === area ? null : area);
   };
 
-  const getStatusIcon = (status: string) => {
-    if (status === "mastered") return <CheckCircle2 size={16} className="text-success" />;
-    if (status === "in_progress") return <PlayCircle size={16} className="text-warning" />;
-    return <CircleDashed size={16} className="text-muted-foreground" />;
+  const getStatusTag = (status: string) => {
+    if (status === "mastered") return (
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-success/10 text-success border border-success/20">
+        <CheckCircle2 size={14} /> Dominado
+      </span>
+    );
+    if (status === "in_progress") return (
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-warning/10 text-warning border border-warning/20 hover:bg-warning/20 transition-colors cursor-pointer" title="Clique para focar na revisão">
+        <PlayCircle size={14} /> Revisar
+      </span>
+    );
+    return (
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground border border-border">
+        <CircleDashed size={14} /> Não iniciado
+      </span>
+    );
   };
 
   const getAreaColorClass = (areaName: string) => {
@@ -100,8 +112,8 @@ export function CoverageClient({ areas }: { areas: CoverageArea[] }) {
                             {sub.accuracy != null ? (sub.accuracy * 100).toFixed(0) + "%" : "--"}
                           </td>
                           <td className="px-4 py-3 flex justify-center">
-                            <div className="flex items-center justify-center p-1" title={sub.status}>
-                              {getStatusIcon(sub.status)}
+                            <div className="flex items-center justify-center p-1">
+                              {getStatusTag(sub.status)}
                             </div>
                           </td>
                           <td className="px-4 py-3 text-center">

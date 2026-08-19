@@ -122,7 +122,11 @@ def timeline():
 @bp.route("/stats/weak-topics")
 def weak_topics():
     db = get_db()
-    min_attempts = int(request.args.get("min_attempts", 3))
+    try:
+        min_attempts = int(request.args.get("min_attempts", 3))
+    except (TypeError, ValueError):
+        min_attempts = 3
+    min_attempts = max(1, min(min_attempts, 1000))
     rows = db.execute("""
         SELECT COALESCE(NULLIF(q.subtema, ''), q.topic) AS topic,
                COUNT(a.id) AS attempts, SUM(a.is_correct) AS correct

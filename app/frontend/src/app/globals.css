@@ -103,6 +103,21 @@
   }
 }
 
+/* Modo Zen - Oculta menus laterais e cabeçalho, expandindo a área de estudo */
+body.zen-mode .app-sidebar,
+body.zen-mode .app-top-nav {
+  display: none !important;
+}
+body.zen-mode main {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 1.5rem !important;
+}
+body.zen-mode > div:first-of-type {
+  width: 100vw !important;
+}
+
 /* Utilitários tipográficos específicos do Clinical Precision que requerem propriedades extras além de font-size */
 @utility text-body-sm {
   font-size: 14px;

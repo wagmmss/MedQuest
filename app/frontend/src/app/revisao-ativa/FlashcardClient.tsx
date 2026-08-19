@@ -50,9 +50,25 @@ export function FlashcardClient() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center h-64 gap-4">
-        <div className="w-10 h-10 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
-        <p className="text-muted-foreground font-medium">Buscando seus flashcards...</p>
+      <div className="max-w-3xl mx-auto w-full flex flex-col items-center gap-6 pb-12 animate-in fade-in duration-500">
+        <div className="w-full flex items-center justify-between mb-2 opacity-50">
+          <div className="flex items-center gap-2 text-purple-500 font-bold">
+            <Sparkles size={20} /> Revisão Ativa (IA)
+          </div>
+          <div className="text-sm font-medium text-muted-foreground">
+            Buscando...
+          </div>
+        </div>
+        <div className="w-full min-h-[300px] bg-card border border-border shadow-1 rounded-2xl p-8 flex flex-col items-center justify-center gap-6">
+          <div className="relative">
+            <div className="w-16 h-16 border-4 border-purple-500/10 rounded-full" />
+            <div className="w-16 h-16 border-4 border-transparent border-t-purple-500 border-r-purple-500 rounded-full animate-spin absolute inset-0" />
+            <div className="absolute inset-0 flex items-center justify-center text-purple-500">
+              <BrainCircuit size={20} className="animate-pulse" />
+            </div>
+          </div>
+          <p className="text-muted-foreground font-medium animate-pulse">Sincronizando seus flashcards...</p>
+        </div>
       </div>
     );
   }
