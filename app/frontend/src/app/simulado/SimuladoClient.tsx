@@ -44,6 +44,13 @@ export function SimuladoClient({
   const [simuladoProfile, setSimuladoProfile] = useState<'usp_2026' | 'usp_history' | 'unicamp' | 'sus_sp' | 'custom'>(
     hasCustomFilters ? 'custom' : 'usp_2026'
   );
+  
+  const [customConfig, setCustomConfig] = useState({
+    institutions: [] as string[],
+    years: [] as string[],
+    questions_per_area: 20,
+    force_4_options: false
+  });
 
   const [hasSavedState, setHasSavedState] = useState(false);
 
@@ -138,6 +145,10 @@ export function SimuladoClient({
         } else if (simuladoProfile === 'sus_sp') {
           qList = await api.questions.getList({ institution_code: "SUS-SP", limit: "100" });
           durationHours = 5; // 100 questões, 5 horas
+        } else if (simuladoProfile === 'custom' && !hasCustomFilters) {
+          qList = await api.questions.getCustomSimulado(customConfig);
+          isForce4Options = customConfig.force_4_options;
+          durationHours = (qList.length / 120) * 6; // roughly 3 minutes per question
         } else {
           qList = await api.questions.getSimuladoUSP();
         }
@@ -344,7 +355,60 @@ export function SimuladoClient({
               <option value="usp_history">Histórico USP (120 Qs, 5 Alternativas)</option>
               <option value="unicamp">UNICAMP (80 Qs, 4 Alternativas)</option>
               <option value="sus_sp">SUS-SP (100 Qs, 5 Alternativas)</option>
+              <option value="custom">Configuração Personalizada</option>
             </select>
+          </div>
+        )}
+
+        {simuladoProfile === 'custom' && !hasCustomFilters && (
+          <div className="w-full max-w-md mb-6 bg-muted/30 p-4 rounded-xl border border-border text-left flex flex-col gap-4 animate-in slide-in-from-top-2">
+            <div>
+              <label className="block text-sm font-bold text-foreground mb-2">Bancas Incluídas (deixe vazio para todas)</label>
+              <div className="flex flex-wrap gap-2">
+                {['USP-SP', 'USP-RP', 'UNICAMP', 'SUS-SP', 'ENARE'].map(inst => (
+                  <label key={inst} className="flex items-center gap-1.5 bg-background border border-border px-2 py-1 rounded text-sm cursor-pointer hover:bg-muted">
+                    <input 
+                      type="checkbox" 
+                      checked={customConfig.institutions.includes(inst)}
+                      onChange={(e) => {
+                        setCustomConfig(prev => ({
+                          ...prev,
+                          institutions: e.target.checked 
+                            ? [...prev.institutions, inst] 
+                            : prev.institutions.filter(i => i !== inst)
+                        }))
+                      }}
+                      className="rounded text-primary focus:ring-primary"
+                    />
+                    {inst}
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <label className="block text-sm font-bold text-foreground mb-2">Questões por Área</label>
+                <input 
+                  type="number" 
+                  min="5" max="30" 
+                  value={customConfig.questions_per_area}
+                  onChange={(e) => setCustomConfig(prev => ({ ...prev, questions_per_area: parseInt(e.target.value) || 20 }))}
+                  className="w-full bg-background border border-border rounded-lg p-2 text-foreground focus:ring-2 focus:ring-primary"
+                />
+                <p className="text-xs text-muted-foreground mt-1">Multiplicado por 5 áreas</p>
+              </div>
+            </div>
+
+            <label className="flex items-center gap-2 cursor-pointer border-t border-border pt-4 mt-2">
+              <input 
+                type="checkbox" 
+                checked={customConfig.force_4_options}
+                onChange={(e) => setCustomConfig(prev => ({ ...prev, force_4_options: e.target.checked }))}
+                className="rounded text-primary focus:ring-primary w-4 h-4"
+              />
+              <span className="text-sm font-bold text-foreground">Forçar 4 Alternativas (Estilo USP 2026)</span>
+            </label>
           </div>
         )}
         
@@ -354,7 +418,8 @@ export function SimuladoClient({
             <span className="text-lg font-bold text-foreground">
               {hasCustomFilters ? (initialFilters.limit || "Até 50") : (
                 simuladoProfile === 'unicamp' ? '80' :
-                simuladoProfile === 'sus_sp' ? '100' : '120'
+                simuladoProfile === 'sus_sp' ? '100' :
+                simuladoProfile === 'custom' ? (customConfig.questions_per_area * 5) : '120'
               )} (Múltipla Escolha)
             </span>
           </div>
@@ -363,14 +428,20 @@ export function SimuladoClient({
             <span className="text-lg font-bold text-foreground">
               {hasCustomFilters 
                 ? `${Math.round((Number(initialFilters.limit || 50) / 120) * 6 * 60)} min` 
-                : (simuladoProfile === 'unicamp' ? '4 Horas' : simuladoProfile === 'sus_sp' ? '5 Horas' : '6 Horas')}
+                : (
+                    simuladoProfile === 'unicamp' ? '4 Horas' : 
+                    simuladoProfile === 'sus_sp' ? '5 Horas' : 
+                    simuladoProfile === 'custom' ? `${Math.round(((customConfig.questions_per_area * 5) / 120) * 6)} Horas` : '6 Horas'
+                  )}
             </span>
           </div>
-          {!hasCustomFilters && (simuladoProfile === 'usp_2026' || simuladoProfile === 'usp_history') && (
+          {!hasCustomFilters && (simuladoProfile === 'usp_2026' || simuladoProfile === 'usp_history' || simuladoProfile === 'custom') && (
             <div className="bg-muted rounded-lg p-4 col-span-2">
               <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Balanceamento</span>
               <span className="text-sm font-medium text-foreground">
-                24 Clínica • 24 Cirurgia • 24 Pediatria • 24 GO • 24 Preventiva
+                {simuladoProfile === 'custom' 
+                  ? `${customConfig.questions_per_area} Clínica • ${customConfig.questions_per_area} Cirurgia • ${customConfig.questions_per_area} Pediatria • ${customConfig.questions_per_area} GO • ${customConfig.questions_per_area} Preventiva`
+                  : '24 Clínica • 24 Cirurgia • 24 Pediatria • 24 GO • 24 Preventiva'}
               </span>
             </div>
           )}

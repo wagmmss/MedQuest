@@ -92,6 +92,54 @@ def simulado_usp():
     return jsonify(out)
 
 
+@bp.route("/simulado/custom", methods=["POST"])
+def simulado_custom():
+    db = get_db()
+    data = request.get_json(force=True) or {}
+    institutions = data.get("institutions", [])
+    years = data.get("years", [])
+    q_per_area = int(data.get("questions_per_area", 20))
+    
+    areas = ["Cirurgia", "Clínica Médica", "Pediatria", "Ginecologia e Obstetrícia", "Medicina Preventiva e Social"]
+    all_ids = []
+    
+    # Montar restrições
+    base_clauses = ["q.missing_alts = 0"]
+    base_params = []
+    
+    if institutions and isinstance(institutions, list) and len(institutions) > 0:
+        placeholders = ",".join("?" * len(institutions))
+        base_clauses.append(f"q.institution_code IN ({placeholders})")
+        base_params.extend(institutions)
+        
+    if years and isinstance(years, list) and len(years) > 0:
+        placeholders = ",".join("?" * len(years))
+        base_clauses.append(f"q.year IN ({placeholders})")
+        base_params.extend(years)
+        
+    for area in areas:
+        clauses = base_clauses + ["q.area = ?"]
+        params = base_params + [area]
+        where = " AND ".join(clauses)
+        ids = _sample_ids(db, where, tuple(params), q_per_area)
+        all_ids.extend(ids)
+        
+    if not all_ids:
+        return jsonify([])
+        
+    placeholders = ",".join("?" * len(all_ids))
+    rows = db.execute(
+        f"""SELECT q.id, q.source_file, q.source_number, q.year, q.institution_code,
+                   q.institution_label, q.topic, q.area, q.subtema
+            FROM questions q WHERE q.id IN ({placeholders})""",
+        all_ids,
+    ).fetchall()
+    
+    out = [dict(r) for r in rows]
+    random.shuffle(out)
+    return jsonify(out)
+
+
 @bp.route("/search")
 def search_questions():
     db = get_db()

@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { userId } = await auth();
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const isDemoMode = cookieStore.get("medquest_demo")?.value === "1";
 
   return (

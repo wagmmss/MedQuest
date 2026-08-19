@@ -2,7 +2,8 @@ import {
   OverviewStats, CoverageResponse, TimelineStat, WeakTopic, Recommendation, 
   BreakdownStat, DistractorStat, PlannerConfig, PlannerProgressMap, PlannerPlanResponse,
   QuestionMeta, SubtemaItem, QuestionListItem, QuestionDetail, AttemptResult, SearchResult,
-  BatchAttemptItem, BatchAttemptResult, BatchDetailResponse, Flashcard, FlashcardGenerateResponse
+  BatchAttemptItem, BatchAttemptResult, BatchDetailResponse, Flashcard, FlashcardGenerateResponse,
+  PredictiveScore, AtRiskTopic
 } from "@/types/api";
 
 const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 
@@ -142,6 +143,10 @@ export const api = {
     }),
     search: (q: string, semantic: boolean = false) => apiFetch<SearchResult[]>(`/api/search?q=${encodeURIComponent(q)}&semantic=${semantic}`, { cache: 'no-store' }),
     getSimuladoUSP: () => apiFetch<QuestionListItem[]>("/api/simulado/usp", { cache: 'no-store' }),
+    getCustomSimulado: (config: { institutions?: string[], years?: string[], questions_per_area?: number }) => apiFetch<QuestionListItem[]>("/api/simulado/custom", {
+      method: "POST",
+      body: JSON.stringify(config)
+    }),
     submitAttemptBatch: (attempts: BatchAttemptItem[]) => apiFetch<BatchAttemptResult>(`/api/questions/attempt/batch`, {
       method: "POST",
       body: JSON.stringify({ attempts })

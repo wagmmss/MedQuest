@@ -17,7 +17,9 @@ export function AnalysisClient({
   weakTopics,
   recommendations,
   breakdown,
-  distractors
+  distractors,
+  predictiveScore,
+  atRiskTopics
 }: {
   timeline: TimelineStat[];
   weakTopics: WeakTopic[];
@@ -309,7 +311,7 @@ export function AnalysisClient({
               </ResponsiveContainer>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Timeline (Recharts ComposedChart) */}
         <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-both">
@@ -427,7 +429,7 @@ export function AnalysisClient({
               </div>
             )}
           </div>
-        </motion.section>
+        </section>
       </div>
 
       {/* Right Column (1/3 on xl screens) */}

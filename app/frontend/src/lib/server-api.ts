@@ -2,7 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { 
   OverviewStats, CoverageResponse, QuestionMeta, PlannerConfig,
   TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat,
-  PlannerPlanResponse, PlannerProgressMap
+  PlannerPlanResponse, PlannerProgressMap, PredictiveScore, AtRiskTopic
 } from "@/types/api";
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";

@@ -59,7 +59,6 @@ export default async function Dashboard() {
             Aqui está o seu progresso semanal na preparação para a USP.
           </p>
         </div>
-        </div>
       </section>
 
       {/* Plano Diário (3 Cards) */}

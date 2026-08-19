@@ -18,7 +18,7 @@ export function SyncProvider() {
 
     window.addEventListener('sync-queue-updated', handleUpdate);
     // Setup initial count
-    setQueueCount(syncManager.getQueue().length);
+    syncManager.getQueue().then(q => setQueueCount(q.length));
 
     return () => window.removeEventListener('sync-queue-updated', handleUpdate);
   }, []);
