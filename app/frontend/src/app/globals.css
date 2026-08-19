@@ -4,26 +4,60 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-on-surface-variant: #424750;
-  --color-primary-fixed: #d5e3ff;
-  --color-secondary: #006a61;
-  --color-on-tertiary-fixed: #0b1c30;
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-primary-fixed: var(--primary-fixed);
+  --color-secondary: var(--secondary);
+  --color-on-tertiary-fixed: var(--on-tertiary-fixed);
   --color-background: var(--background);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+  --color-secondary-container: var(--secondary-container);
+  --color-tertiary-fixed: var(--tertiary-fixed);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-on-error: var(--on-error);
+  --color-secondary-fixed-dim: var(--secondary-fixed-dim);
+  --color-error-container: var(--error-container);
+  --color-error: var(--error);
+  --color-surface-variant: var(--surface-variant);
+  --color-surface-container: var(--surface-container);
+  --color-primary-container: var(--primary-container);
+  --color-on-secondary-fixed: var(--on-secondary-fixed);
+  --color-outline-variant: var(--outline-variant);
+  --color-inverse-primary: var(--inverse-primary);
+  --color-surface-dim: var(--surface-dim);
+  --color-on-primary-fixed: var(--on-primary-fixed);
   --color-on-background: var(--on-background);
   --color-primary: var(--primary);
+  --color-inverse-surface: var(--inverse-surface);
   --color-on-primary: var(--on-primary);
-  --color-primary-container: var(--primary-container);
-  --color-on-primary-container: var(--on-primary-container);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-bright: var(--surface-bright);
+  --color-inverse-on-surface: var(--inverse-on-surface);
+  --color-on-error-container: var(--on-error-container);
+  --color-secondary-fixed: var(--secondary-fixed);
+  --color-on-tertiary-fixed-variant: var(--on-tertiary-fixed-variant);
+  --color-on-secondary: var(--on-secondary);
+  --color-outline: var(--outline);
+  --color-on-primary-fixed-variant: var(--on-primary-fixed-variant);
   --color-surface: var(--surface);
   --color-on-surface: var(--on-surface);
-  
+  --color-on-secondary-fixed-variant: var(--on-secondary-fixed-variant);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-surface-tint: var(--surface-tint);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-tertiary-fixed-dim: var(--tertiary-fixed-dim);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-card-2: var(--card-2);
   --color-border: var(--border);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
   --color-destructive: var(--destructive);
@@ -53,9 +87,6 @@
   --font-label-md: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-body-lg: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-
-  /* We set base font styles from tailwind v3 text- classes */
-  /* This is a simplified version; we'll rely on global font styles */
 }
 
 @layer base {
@@ -147,14 +178,54 @@ body.zen-mode > div:first-of-type {
 @utility font-body-lg { font-family: var(--font-body-lg); }
 
 :root {
+  --on-surface-variant: #424750;
+  --primary-fixed: #d5e3ff;
+  --secondary: #006a61;
+  --on-tertiary-fixed: #0b1c30;
   --background: #f7f9fb;
+  --primary-fixed-dim: #a6c8ff;
+  --secondary-container: #86f2e4;
+  --tertiary-fixed: #d3e4fe;
+  --on-secondary-container: #006f66;
+  --on-error: #ffffff;
+  --secondary-fixed-dim: #6bd8cb;
+  --error-container: #ffdad6;
+  --error: #ba1a1a;
+  --surface-variant: #e0e3e5;
+  --surface-container: #eceef0;
+  --primary-container: #1a4b84;
+  --on-secondary-fixed: #00201d;
+  --outline-variant: #c3c6d1;
+  --inverse-primary: #a6c8ff;
+  --surface-dim: #d8dadc;
+  --on-primary-fixed: #001c3b;
   --on-background: #191c1e;
+  --primary: #003466;
+  --inverse-surface: #2d3133;
+  --on-primary: #ffffff;
+  --surface-container-highest: #e0e3e5;
+  --surface-bright: #f7f9fb;
+  --inverse-on-surface: #eff1f3;
+  --on-error-container: #93000a;
+  --secondary-fixed: #89f5e7;
+  --on-tertiary-fixed-variant: #38485d;
+  --on-secondary: #ffffff;
+  --outline: #737781;
+  --on-primary-fixed-variant: #144780;
   --surface: #f7f9fb;
   --on-surface: #191c1e;
-  --primary: #003466;
-  --on-primary: #ffffff;
-  --primary-container: #1a4b84;
+  --on-secondary-fixed-variant: #005049;
+  --surface-container-low: #f2f4f6;
+  --on-tertiary-container: #acbcd6;
+  --surface-tint: #335f99;
+  --surface-container-high: #e6e8ea;
+  --on-tertiary: #ffffff;
+  --surface-container-lowest: #ffffff;
+  --tertiary-fixed-dim: #b7c8e1;
   --on-primary-container: #93bcfc;
+  --tertiary: #25354a;
+  --tertiary-container: #3c4c61;
+
   --card: #ffffff;
   --card-foreground: #191c1e;
   --card-2: #f2f4f6;
@@ -193,4 +264,18 @@ body.zen-mode > div:first-of-type {
   --warning: #fbbf24;
   --warning-foreground: #78350f;
   --primary-foreground: #00305f;
+
+  --secondary-container: #005049;
+  --on-secondary-container: #86f2e4;
+  --surface-container-low: #1c1f21;
+  --surface-container: #202325;
+  --surface-container-high: #2b2e30;
+  --surface-container-highest: #36393b;
+  --outline-variant: #424750;
+  --outline: #8c9199;
+  --on-surface-variant: #c2c7cf;
+  --tertiary: #a6c8ff;
+  --on-tertiary: #0b1c30;
+  --tertiary-container: #25354a;
+  --on-tertiary-container: #d3e4fe;
 }
