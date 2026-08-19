@@ -13,6 +13,8 @@ from .plan import bp as plan_bp
 from .flashcards import bp as flashcards_bp
 
 
+from .logs import bp as logs_bp
+
 def create_app(testing=False):
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -29,9 +31,7 @@ def create_app(testing=False):
     @app.before_request
     @require_auth
     def authenticate_request():
-        # The require_auth decorator will verify the token and set g.user_id
-        # We don't apply it to the root index path if we check the request.path
-        if request.path == "/" or request.method == "OPTIONS" or "/images/" in request.path:
+        if request.path == "/" or request.method == "OPTIONS" or "/images/" in request.path or "/logs/error" in request.path:
             return
         pass
 
@@ -50,7 +50,7 @@ def create_app(testing=False):
         }), 500
 
     # Cada blueprint é montado em /api (compatibilidade) e em /api/v1.
-    for bp in (questions_bp, stats_bp, plan_bp, flashcards_bp):
+    for bp in (questions_bp, stats_bp, plan_bp, flashcards_bp, logs_bp):
         app.register_blueprint(bp, url_prefix="/api")
         app.register_blueprint(bp, url_prefix="/api/v1", name=f"{bp.name}_v1")
 

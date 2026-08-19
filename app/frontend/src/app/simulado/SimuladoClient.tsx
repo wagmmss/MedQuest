@@ -39,6 +39,10 @@ export function SimuladoClient({
   const [totalTime, setTotalTime] = useState(6 * 60 * 60);
   const [timeLeft, setTimeLeft] = useState(6 * 60 * 60);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const hasCustomFilters = Object.keys(initialFilters).length > 0;
+  const [simuladoProfile, setSimuladoProfile] = useState<'usp_2026' | 'usp_history' | 'unicamp' | 'sus_sp' | 'custom'>(
+    hasCustomFilters ? 'custom' : 'usp_2026'
+  );
 
   const [hasSavedState, setHasSavedState] = useState(false);
 
@@ -69,13 +73,24 @@ export function SimuladoClient({
         const parsed = JSON.parse(saved);
         setState(parsed.state);
         setQueue(parsed.queue);
-        setCurrentIndex(parsed.currentIndex);
         setAnswers(parsed.answers);
-        setResultsMap(parsed.resultsMap);
         setTimeLeft(parsed.timeLeft);
-        if (parsed.queue.length > 0) {
-          loadDetail(parsed.queue[parsed.currentIndex].id);
-        }
+        setCurrentIndex(parsed.currentIndex);
+        setResultsMap(parsed.resultsMap);
+        
+        // Re-fetch details batch
+        const ids = parsed.queue.map((q: any) => q.id);
+        const force4 = parsed.queue.length === 120 || parsed.queue.length === 80; // Heuristica simples para resume
+        api.questions.getBatch(ids, force4).then(batchRes => {
+          const cache: Record<number, QuestionDetail> = {};
+          for (const q of batchRes.questions) {
+            cache[q.id] = q;
+          }
+          setDetailsCache(cache);
+        }).catch(() => {
+          toast.error("Erro ao carregar detalhes no resumo.");
+        });
+        
       } catch {
         toast.error("Erro ao restaurar simulado.");
         localStorage.removeItem("medquest_simulado_state");
@@ -99,14 +114,32 @@ export function SimuladoClient({
     }
     setState("LOADING");
     try {
-      const hasCustomFilters = Object.keys(initialFilters).length > 0;
-      
       let qList: QuestionListItem[];
+      let isForce4Options = false;
+      let durationHours = 6;
+
       if (hasCustomFilters) {
         const limit = initialFilters.limit || "50";
         qList = await api.questions.getList({ ...initialFilters, limit });
+        durationHours = (qList.length / 120) * 6;
       } else {
-        qList = await api.questions.getSimuladoUSP();
+        if (simuladoProfile === 'usp_2026') {
+          qList = await api.questions.getSimuladoUSP();
+          isForce4Options = true;
+          durationHours = 6; // 120 questões, 6 horas
+        } else if (simuladoProfile === 'usp_history') {
+          qList = await api.questions.getSimuladoUSP();
+          durationHours = 6;
+        } else if (simuladoProfile === 'unicamp') {
+          qList = await api.questions.getList({ institution_code: "UNICAMP", limit: "80" });
+          isForce4Options = true;
+          durationHours = 4; // 80 questões, 4 horas
+        } else if (simuladoProfile === 'sus_sp') {
+          qList = await api.questions.getList({ institution_code: "SUS-SP", limit: "100" });
+          durationHours = 5; // 100 questões, 5 horas
+        } else {
+          qList = await api.questions.getSimuladoUSP();
+        }
       }
 
       if (qList.length === 0) {
@@ -115,8 +148,7 @@ export function SimuladoClient({
         return;
       }
       
-      // Duração proporcional: 3 min/questão (120q = 6h)
-      const calcTime = Math.round((qList.length / 120) * 6 * 60 * 60);
+      const calcTime = Math.round(durationHours * 60 * 60);
       setTotalTime(calcTime);
       setTimeLeft(calcTime);
       
@@ -131,7 +163,7 @@ export function SimuladoClient({
       // Batch prefetch all question details in one request
       const ids = qList.map(q => q.id);
       try {
-        const batchRes = await api.questions.getBatch(ids);
+        const batchRes = await api.questions.getBatch(ids, isForce4Options);
         const cache: Record<number, QuestionDetail> = {};
         for (const q of batchRes.questions) {
           cache[q.id] = q;
@@ -292,30 +324,48 @@ export function SimuladoClient({
           <FileSignature size={40} />
         </div>
         <h2 className="text-h2 font-bold text-foreground mb-4">
-          {isCustom ? "Simulado Personalizado" : "Simulado Fiel da USP"}
+          {hasCustomFilters ? "Simulado Personalizado" : "Novo Simulado"}
         </h2>
-        <p className="text-muted-foreground text-body-m mb-8 max-w-md">
-          {isCustom 
+        <p className="text-muted-foreground text-body-m mb-6 max-w-md">
+          {hasCustomFilters 
             ? "Esta prova irá simular as condições reais de exame usando os filtros que você escolheu."
-            : "Esta prova irá simular as condições reais de um exame de acesso direto da USP-SP / USP-RP."}
+            : "Selecione o perfil de prova desejado para simular as condições reais do exame."}
         </p>
+
+        {!hasCustomFilters && (
+          <div className="w-full max-w-md mb-6">
+            <select
+              value={simuladoProfile}
+              onChange={(e) => setSimuladoProfile(e.target.value as any)}
+              className="w-full bg-background border border-border rounded-lg p-3 text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-primary/50"
+            >
+              <option value="usp_2026">USP 2026 (120 Qs, 4 Alternativas)</option>
+              <option value="usp_history">Histórico USP (120 Qs, 5 Alternativas)</option>
+              <option value="unicamp">UNICAMP (80 Qs, 4 Alternativas)</option>
+              <option value="sus_sp">SUS-SP (100 Qs, 5 Alternativas)</option>
+            </select>
+          </div>
+        )}
         
         <div className="grid grid-cols-2 gap-4 w-full max-w-md mb-8 text-left">
           <div className="bg-muted rounded-lg p-4">
             <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Questões</span>
             <span className="text-lg font-bold text-foreground">
-              {isCustom ? (initialFilters.limit || "Até 50") : "120"} (Múltipla Escolha)
+              {hasCustomFilters ? (initialFilters.limit || "Até 50") : (
+                simuladoProfile === 'unicamp' ? '80' :
+                simuladoProfile === 'sus_sp' ? '100' : '120'
+              )} (Múltipla Escolha)
             </span>
           </div>
           <div className="bg-muted rounded-lg p-4">
             <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Duração</span>
             <span className="text-lg font-bold text-foreground">
-              {isCustom 
-                ? `${Math.round((Number(initialFilters.limit || 50) / 120) * 6 * 60)} min (proporcional)` 
-                : "6 Horas"}
+              {hasCustomFilters 
+                ? `${Math.round((Number(initialFilters.limit || 50) / 120) * 6 * 60)} min` 
+                : (simuladoProfile === 'unicamp' ? '4 Horas' : simuladoProfile === 'sus_sp' ? '5 Horas' : '6 Horas')}
             </span>
           </div>
-          {!isCustom && (
+          {!hasCustomFilters && (simuladoProfile === 'usp_2026' || simuladoProfile === 'usp_history') && (
             <div className="bg-muted rounded-lg p-4 col-span-2">
               <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Balanceamento</span>
               <span className="text-sm font-medium text-foreground">
@@ -329,7 +379,7 @@ export function SimuladoClient({
           <AlertTriangle size={20} className="shrink-0 mt-0.5" />
           <p>
             Você não receberá feedback imediato ao clicar nas alternativas. 
-            O resultado e os comentários dos professores só serão exibidos ao finalizar a prova.
+            O resultado e os comentários só serão exibidos ao finalizar a prova.
           </p>
         </div>
 
@@ -349,41 +399,9 @@ export function SimuladoClient({
           >
             <Play size={20} fill="currentColor" />
             {hasSavedState
-              ? (isCustom ? "Iniciar Novo Simulado Personalizado" : "Iniciar Novo Simulado USP (120 Qs)")
-              : (isCustom ? "Iniciar Simulado Personalizado" : "Iniciar Simulado USP Agora")}
+              ? (hasCustomFilters ? "Iniciar Novo Personalizado" : "Iniciar Novo Simulado")
+              : "Iniciar Simulado Agora"}
           </button>
-
-          {!isCustom && (
-            <div className="mt-4 pt-4 border-t border-border w-full flex flex-col gap-3">
-              <span className="text-xs font-bold text-muted-foreground uppercase text-center mb-1">Simulados Temáticos (50 Qs)</span>
-              <div className="grid grid-cols-2 gap-3">
-                <button 
-                  onClick={() => { window.location.href = "/simulado?area=Clínica Médica&limit=50" }}
-                  className="bg-muted hover:bg-muted/80 text-foreground font-semibold py-3 px-4 rounded-lg transition-colors text-sm border border-border"
-                >
-                  Clínica Médica
-                </button>
-                <button 
-                  onClick={() => { window.location.href = "/simulado?area=Cirurgia&limit=50" }}
-                  className="bg-muted hover:bg-muted/80 text-foreground font-semibold py-3 px-4 rounded-lg transition-colors text-sm border border-border"
-                >
-                  Cirurgia Geral
-                </button>
-                <button 
-                  onClick={() => { window.location.href = "/simulado?area=Pediatria&limit=50" }}
-                  className="bg-muted hover:bg-muted/80 text-foreground font-semibold py-3 px-4 rounded-lg transition-colors text-sm border border-border"
-                >
-                  Pediatria
-                </button>
-                <button 
-                  onClick={() => { window.location.href = "/simulado?area=Medicina Preventiva e Social&limit=50" }}
-                  className="bg-muted hover:bg-muted/80 text-foreground font-semibold py-3 px-4 rounded-lg transition-colors text-sm border border-border"
-                >
-                  Preventiva
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     );

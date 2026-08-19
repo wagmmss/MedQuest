@@ -2,11 +2,15 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider, SignIn } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
+import { cookies } from 'next/headers';
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import TopNav from "@/components/TopNav";
 import { Toaster } from "react-hot-toast";
 import { CommandPalette } from "@/components/CommandPalette";
+import { DemoButton } from "@/components/DemoButton";
+import { DemoBanner } from "@/components/DemoBanner";
+import { SyncProvider } from "@/components/SyncProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -49,6 +53,8 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { userId } = await auth();
+  const cookieStore = cookies();
+  const isDemoMode = cookieStore.get("medquest_demo")?.value === "1";
 
   return (
     <ClerkProvider>
@@ -74,22 +80,37 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
         </head>
         <body className="font-body-md text-body-md h-screen flex overflow-hidden bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
-          {!userId ? (
-            <div className="flex w-full h-full items-center justify-center p-8">
-              <SignIn routing="hash" />
+          {!userId && !isDemoMode ? (
+            <div className="flex w-full h-full items-center justify-center p-8 bg-background relative overflow-hidden">
+              <div className="absolute inset-0 bg-primary/5" style={{ backgroundImage: "radial-gradient(circle, var(--primary) 1px, transparent 1px)", backgroundSize: "32px 32px", opacity: 0.2 }} />
+              <div className="relative z-10 flex flex-col items-center max-w-md w-full bg-card p-8 md:p-12 rounded-2xl shadow-xl border border-border">
+                <div className="w-16 h-16 bg-primary/20 text-primary rounded-2xl flex items-center justify-center mb-6 shadow-sm">
+                  <span className="material-symbols-outlined text-4xl" data-icon="stethoscope">stethoscope</span>
+                </div>
+                <h1 className="text-2xl font-bold text-center mb-2">Bem-vindo ao MedQuest</h1>
+                <p className="text-muted-foreground text-center mb-8 text-sm">Faça login para salvar seu progresso diário ou experimente sem compromisso.</p>
+                <div className="w-full flex justify-center border-b border-border pb-8">
+                  <SignIn routing="hash" />
+                </div>
+                <DemoButton />
+              </div>
             </div>
           ) : (
-            <>
-              <Sidebar />
-              <div className="flex-1 flex flex-col w-full min-w-0 bg-background overflow-y-auto">
-                <TopNav />
-                <main className="flex-1 max-w-[1440px] mx-auto w-full p-gutter md:p-margin gap-stack-lg flex flex-col pb-24 md:pb-margin relative">
-                  {children}
-                </main>
+            <div className="flex flex-col w-full h-full">
+              <DemoBanner />
+              <div className="flex w-full h-full overflow-hidden">
+                <Sidebar />
+                <div className="flex-1 flex flex-col w-full min-w-0 bg-background overflow-y-auto">
+                  <TopNav />
+                  <main className="flex-1 max-w-[1440px] mx-auto w-full p-gutter md:p-margin gap-stack-lg flex flex-col pb-24 md:pb-margin relative">
+                    {children}
+                  </main>
+                </div>
+                <CommandPalette />
               </div>
-              <CommandPalette />
-            </>
+            </div>
           )}
+          <SyncProvider />
           <Toaster position="top-right" />
         </body>
       </html>

@@ -108,10 +108,25 @@ def breakdown():
 @bp.route("/stats/timeline")
 def timeline():
     db = get_db()
-    rows = db.execute("""
-        SELECT substr(answered_at, 1, 10) AS day, COUNT(*) AS attempts, SUM(is_correct) AS correct
-        FROM attempts WHERE user_id = ? GROUP BY day ORDER BY day
-    """, (g.user_id,)).fetchall()
+    days_param = request.args.get("days")
+    try:
+        days = int(days_param) if days_param else None
+    except ValueError:
+        days = None
+
+    if days is not None:
+        rows = db.execute("""
+            SELECT substr(answered_at, 1, 10) AS day, COUNT(*) AS attempts, SUM(is_correct) AS correct
+            FROM attempts 
+            WHERE user_id = ? AND answered_at >= date('now', ?)
+            GROUP BY day ORDER BY day
+        """, (g.user_id, f'-{days} days')).fetchall()
+    else:
+        rows = db.execute("""
+            SELECT substr(answered_at, 1, 10) AS day, COUNT(*) AS attempts, SUM(is_correct) AS correct
+            FROM attempts WHERE user_id = ? GROUP BY day ORDER BY day
+        """, (g.user_id,)).fetchall()
+        
     return jsonify([
         {"day": r["day"], "attempts": r["attempts"], "correct": r["correct"],
          "accuracy": (r["correct"] / r["attempts"]) if r["attempts"] else 0}

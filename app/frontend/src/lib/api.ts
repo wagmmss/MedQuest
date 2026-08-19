@@ -10,24 +10,39 @@ const API_BASE = process.env.NEXT_PUBLIC_APP_URL ||
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
   (typeof window !== "undefined" ? "" : "http://localhost:3000")));
 
+import { syncManager } from "./sync";
+
 /**
  * Base fetch function with default headers
  */
 async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE}${endpoint}`;
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...options?.headers,
-    },
-  });
+  try {
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        ...options?.headers,
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error(`API error: ${response.status} ${response.statusText}`);
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    if (typeof window !== "undefined" && options?.method && ["POST", "PUT"].includes(options.method.toUpperCase())) {
+      const isNetworkError = error instanceof TypeError && error.message.includes("Failed to fetch");
+      if (isNetworkError || !navigator.onLine) {
+        console.warn("[API] Network error detected, adding to offline queue:", endpoint);
+        syncManager.enqueue(url, options);
+        // Retornamos um objeto mock com sucesso true para não travar a UI (útil para tentativas de questões)
+        return { success: true, offline: true } as any;
+      }
+    }
+    throw error;
   }
-
-  return response.json();
 }
 
 /**
@@ -37,7 +52,7 @@ export const api = {
   stats: {
     getOverview: () => apiFetch<OverviewStats>("/api/stats/overview", { cache: 'no-store' }),
     getCoverage: () => apiFetch<CoverageResponse>("/api/coverage", { cache: 'no-store' }),
-    getTimeline: () => apiFetch<TimelineStat[]>("/api/stats/timeline", { cache: 'no-store' }),
+    getTimeline: (days: number = 14) => apiFetch<TimelineStat[]>(`/api/stats/timeline?days=${days}`, { cache: 'no-store' }),
     getWeakTopics: () => apiFetch<WeakTopic[]>("/api/stats/weak-topics", { cache: 'no-store' }),
     getRecommendations: () => apiFetch<Recommendation[]>("/api/stats/recommendations", { cache: 'no-store' }),
     getDistractors: () => apiFetch<DistractorStat[]>("/api/stats/distractors", { cache: 'no-store' }),
@@ -128,9 +143,9 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ attempts })
     }),
-    getBatch: (ids: number[]) => apiFetch<BatchDetailResponse>(`/api/questions/batch`, {
+    getBatch: (ids: number[], force_4_options: boolean = false) => apiFetch<BatchDetailResponse>(`/api/questions/batch`, {
       method: "POST",
-      body: JSON.stringify({ ids })
+      body: JSON.stringify({ ids, force_4_options })
     }),
   },
   flashcards: {

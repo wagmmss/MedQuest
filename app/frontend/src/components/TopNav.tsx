@@ -30,6 +30,11 @@ export default function TopNav() {
     router.push(href);
   };
 
+  const exitDemoMode = () => {
+    document.cookie = "medquest_demo=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    router.refresh();
+  };
+
   return (
     <>
       <header className="app-top-nav md:hidden flex justify-between items-center w-full px-6 py-3 h-16 bg-surface border-b border-outline-variant z-10 sticky top-0">

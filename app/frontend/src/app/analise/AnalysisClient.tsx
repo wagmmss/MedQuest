@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat } from "@/types/api";
 import { AlertTriangle, TrendingUp, Compass, AlarmClock, Lightbulb, Brain, ChevronRight, BarChart3, AlertCircle, Target, Activity } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
+import { api } from "@/lib/api";
 import {
   ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Cell, LabelList, Area
@@ -34,6 +35,28 @@ export function AnalysisClient({
     }
   };
 
+  const [days, setDays] = useState<number>(14);
+  const [localTimeline, setLocalTimeline] = useState<TimelineStat[]>(timeline);
+  const [loadingTimeline, setLoadingTimeline] = useState(false);
+
+  useEffect(() => {
+    // If it's the initial load for 14 days, we already have it in props
+    if (days === 14 && timeline.length > 0 && localTimeline === timeline) return;
+    
+    const fetchTimeline = async () => {
+      setLoadingTimeline(true);
+      try {
+        const data = await api.stats.getTimeline(days);
+        setLocalTimeline(data);
+      } catch (error) {
+        console.error("Failed to fetch timeline:", error);
+      } finally {
+        setLoadingTimeline(false);
+      }
+    };
+    fetchTimeline();
+  }, [days, timeline, localTimeline]);
+
   const chartBreakdown = useMemo(() => {
     return breakdown.slice(0, 8).map(b => ({
       ...b,
@@ -44,12 +67,12 @@ export function AnalysisClient({
   }, [breakdown]);
 
   const chartTimeline = useMemo(() => {
-    return timeline.slice(-14).map(t => ({
+    return localTimeline.map(t => ({
       ...t,
       dateShort: t.day.split("-").slice(1).reverse().join("/"),
       accPct: parseFloat((t.accuracy * 100).toFixed(1))
     }));
-  }, [timeline]);
+  }, [localTimeline]);
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 pb-10">
@@ -192,17 +215,38 @@ export function AnalysisClient({
 
         {/* Timeline (Recharts ComposedChart) */}
         <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-both">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-success/10 rounded-lg">
-              <TrendingUp size={24} className="text-success" />
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-success/10 rounded-lg">
+                <TrendingUp size={24} className="text-success" />
+              </div>
+              <h2 className="text-2xl font-bold text-foreground">
+                Evolução Recente
+              </h2>
             </div>
-            <h2 className="text-2xl font-bold text-foreground">
-              Evolução Recente
-            </h2>
+            
+            <div className="flex items-center gap-2 bg-muted/50 p-1 rounded-lg border border-border">
+              {[14, 30, 90].map(d => (
+                <button
+                  key={d}
+                  onClick={() => setDays(d)}
+                  disabled={loadingTimeline}
+                  className={clsx(
+                    "px-3 py-1 text-sm font-medium rounded-md transition-colors",
+                    days === d 
+                      ? "bg-background text-foreground shadow-sm" 
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/80",
+                    loadingTimeline && "opacity-50 cursor-not-allowed"
+                  )}
+                >
+                  {d}D
+                </button>
+              ))}
+            </div>
           </div>
           <div className="bg-card border border-border shadow-sm rounded-2xl p-6 h-[400px] relative overflow-hidden flex flex-col min-w-0">
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-success/5 to-transparent opacity-50 pointer-events-none" />
-            {timeline.length > 0 ? (
+            {localTimeline.length > 0 ? (
               <div className="flex-1 min-h-0 w-full mt-2">
                 <ResponsiveContainer width="100%" height="100%">
                   <ComposedChart

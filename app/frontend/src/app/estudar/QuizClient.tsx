@@ -545,10 +545,11 @@ export function QuizClient({
         </div>
         
         <div className="flex items-center gap-4">
-          <button
+          <button 
             onClick={() => setZenMode(!zenMode)}
-            className="flex items-center gap-2 px-3 py-1.5 bg-muted hover:bg-muted/80 text-muted-foreground rounded-lg transition-colors border border-border text-xs font-semibold"
+            className="flex items-center gap-2 px-3 py-1.5 bg-muted hover:bg-muted/80 text-muted-foreground rounded-lg transition-colors border border-border text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-background"
             title={zenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen (Foco Absoluto)"}
+            aria-label={zenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen"}
           >
             {zenMode ? (
               <>
@@ -570,11 +571,12 @@ export function QuizClient({
             <button 
               onClick={toggleFavorite}
               className={clsx(
-                "p-2 rounded-full transition-colors", 
+                "p-2 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-background", 
                 q.is_favorite ? "bg-destructive/10 text-destructive" : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
               )}
-              title="Favoritar"
-              aria-label={q.is_favorite ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+              title={q.is_favorite ? "Remover dos Favoritos" : "Favoritar"}
+              aria-label={q.is_favorite ? "Remover dos Favoritos" : "Adicionar aos Favoritos"}
+              aria-pressed={q.is_favorite}
             >
               <Heart size={18} fill={q.is_favorite ? "currentColor" : "none"} aria-hidden="true" />
             </button>
@@ -689,9 +691,10 @@ export function QuizClient({
                   onClick={() => !attemptResult && !submitting && setSelectedLetter(alt.letter)}
                   disabled={!!attemptResult || submitting}
                   className={clsx(
-                    "text-left p-4 rounded-xl border transition-all flex items-start gap-4 w-full",
+                    "text-left p-4 rounded-xl border transition-all flex items-start gap-4 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                     altClass
                   )}
+                  aria-pressed={isSelected}
                 >
                   <div className={clsx(
                     "w-8 h-8 shrink-0 flex items-center justify-center rounded-lg font-bold text-sm",
@@ -718,7 +721,7 @@ export function QuizClient({
             <button
               onClick={handleAttempt}
               disabled={submitting}
-              className="mt-2 w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 rounded-xl transition-all flex items-center justify-center shadow-md animate-in slide-in-from-bottom-2 fade-in duration-200"
+              className="mt-2 w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 rounded-xl transition-all flex items-center justify-center shadow-md animate-in slide-in-from-bottom-2 fade-in duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
               {submitting ? (
                 <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
@@ -816,26 +819,32 @@ export function QuizClient({
                       <div className="flex flex-col sm:flex-row gap-3">
                         {attemptResult.is_correct ? (
                           <>
-                            <button onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm">
-                              🔴 Acertei no Chute (Difícil) <br/><span className="text-xs font-normal opacity-70">Atalho: 1</span>
+                            <button onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                              <span>🔴 Acertei no Chute</span>
+                              <span className="text-[10px] font-normal opacity-80">Volta amanhã (Difícil) • Atalho: 1</span>
                             </button>
-                            <button onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm">
-                              🟡 Pensei um Pouco (Bom) <br/><span className="text-xs font-normal opacity-70">Atalho: 2 ou Enter</span>
+                            <button onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm flex flex-col items-center justify-center gap-1">
+                              <span>🟡 Pensei um Pouco</span>
+                              <span className="text-[10px] font-normal opacity-80">Bom tempo • Atalho: 2 / Enter</span>
                             </button>
-                            <button onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm">
-                              🟢 Tinha Certeza (Fácil) <br/><span className="text-xs font-normal opacity-70">Atalho: 3</span>
+                            <button onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                              <span>🟢 Tinha Certeza</span>
+                              <span className="text-[10px] font-normal opacity-80">Revisa mais tarde (Fácil) • Atalho: 3</span>
                             </button>
                           </>
                         ) : (
                           <>
-                            <button onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm">
-                              🔴 Errei no Chute <br/><span className="text-xs font-normal opacity-70">Atalho: 1</span>
+                            <button onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                              <span>🔴 Errei no Chute</span>
+                              <span className="text-[10px] font-normal opacity-80">Volta amanhã • Atalho: 1</span>
                             </button>
-                            <button onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm">
-                              🟡 Errei com Dúvida <br/><span className="text-xs font-normal opacity-70">Atalho: 2 ou Enter</span>
+                            <button onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm flex flex-col items-center justify-center gap-1">
+                              <span>🟡 Errei com Dúvida</span>
+                              <span className="text-[10px] font-normal opacity-80">Quase acertei • Atalho: 2 / Enter</span>
                             </button>
-                            <button onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm">
-                              🟢 Tinha Certeza, mas Errei <br/><span className="text-xs font-normal opacity-70">Atalho: 3</span>
+                            <button onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                              <span>🟢 Tinha Certeza, mas Errei</span>
+                              <span className="text-[10px] font-normal opacity-80">Preciso fixar • Atalho: 3</span>
                             </button>
                           </>
                         )}

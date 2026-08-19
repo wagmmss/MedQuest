@@ -447,6 +447,7 @@ def question_batch_detail():
     """
     data = request.get_json(force=True) or {}
     ids = data.get("ids", [])
+    force_4_options = data.get("force_4_options", False)
     if not ids or not isinstance(ids, list):
         return jsonify({"error": "ids is required and must be a list"}), 400
     ids = ids[:200]  # Cap at 200
@@ -495,6 +496,19 @@ def question_batch_detail():
         q = q_map.get(qid)
         if not q:
             continue
+            
+        alts = alt_map.get(qid, [])
+        if force_4_options and len(alts) > 4:
+            correct_letter = q.get("correct_letter")
+            incorrects = [a for a in alts if a["letter"] != correct_letter]
+            if incorrects:
+                # Escolhe um distrator para remover para que sobrem apenas 4 alternativas
+                # Se len for 5, remove 1. Se len for N, remove N-4
+                remove_count = len(alts) - 4
+                to_remove = random.sample(incorrects, remove_count)
+                to_remove_letters = {a["letter"] for a in to_remove}
+                alts = [a for a in alts if a["letter"] not in to_remove_letters]
+
         out.append({
             "id": q["id"],
             "source_file": q["source_file"],

@@ -31,6 +31,35 @@ export function FlashcardClient() {
     return () => clearTimeout(timer);
   }, [fetchDue]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (queue.length === 0 || loading || submitting) return;
+      const tag = document.activeElement?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+      if (!flipped) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setFlipped(true);
+        }
+      } else {
+        if (e.key === "1") {
+          e.preventDefault();
+          handleReview("errei");
+        } else if (e.key === "2") {
+          e.preventDefault();
+          handleReview("duvida");
+        } else if (e.key === "3" || e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleReview("certeza");
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [queue, loading, submitting, flipped]);
+
   const handleReview = async (confidence: string) => {
     if (queue.length === 0 || submitting) return;
     setSubmitting(true);
@@ -166,12 +195,13 @@ export function FlashcardClient() {
         
         {flipped && (
           <button 
-            className="absolute top-4 right-4 text-xs font-semibold text-muted-foreground hover:text-destructive flex items-center gap-1 transition-colors"
+            className="absolute top-4 right-4 text-xs font-semibold text-muted-foreground hover:text-destructive flex items-center gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2 rounded"
             onClick={(e) => {
               e.stopPropagation();
               handleReport();
             }}
             title="Reportar Erro no Flashcard"
+            aria-label="Reportar Erro no Flashcard"
           >
             <XCircle size={14} /> Reportar
           </button>
@@ -184,26 +214,26 @@ export function FlashcardClient() {
           <button 
             onClick={() => handleReview("errei")}
             disabled={submitting}
-            className="flex-1 bg-destructive/10 hover:bg-destructive/20 text-destructive border border-destructive/20 font-bold py-4 rounded-xl transition-colors flex flex-col items-center justify-center gap-1 disabled:opacity-50"
+            className="flex-1 bg-destructive/10 hover:bg-destructive/20 text-destructive border border-destructive/20 font-bold py-4 rounded-xl transition-colors flex flex-col items-center justify-center gap-1 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2"
           >
-            <XCircle size={24} />
-            Errei (Redefinir)
+            <div className="flex items-center gap-2"><XCircle size={20} /> Errei</div>
+            <span className="text-[10px] font-normal opacity-80 uppercase tracking-widest mt-1">Volta amanhã (1)</span>
           </button>
           <button 
             onClick={() => handleReview("duvida")}
             disabled={submitting}
-            className="flex-1 bg-warning/10 hover:bg-warning/20 text-warning border border-warning/20 font-bold py-4 rounded-xl transition-colors flex flex-col items-center justify-center gap-1 disabled:opacity-50"
+            className="flex-1 bg-warning/10 hover:bg-warning/20 text-warning border border-warning/20 font-bold py-4 rounded-xl transition-colors flex flex-col items-center justify-center gap-1 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warning focus-visible:ring-offset-2"
           >
-            <BrainCircuit size={24} />
-            Difícil
+            <div className="flex items-center gap-2"><BrainCircuit size={20} /> Difícil</div>
+            <span className="text-[10px] font-normal opacity-80 uppercase tracking-widest mt-1">Bom tempo (2)</span>
           </button>
           <button 
             onClick={() => handleReview("certeza")}
             disabled={submitting}
-            className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/20 font-bold py-4 rounded-xl transition-colors flex flex-col items-center justify-center gap-1 disabled:opacity-50"
+            className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/20 font-bold py-4 rounded-xl transition-colors flex flex-col items-center justify-center gap-1 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success focus-visible:ring-offset-2"
           >
-            <CheckCircle2 size={24} />
-            Fácil
+            <div className="flex items-center gap-2"><CheckCircle2 size={20} /> Fácil</div>
+            <span className="text-[10px] font-normal opacity-80 uppercase tracking-widest mt-1">Revisa depois (3)</span>
           </button>
         </div>
       )}

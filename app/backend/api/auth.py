@@ -47,8 +47,9 @@ def require_auth(f):
             return f(*args, **kwargs)
             
         auth_header = request.headers.get("Authorization")
-        if not auth_header or not auth_header.startswith("Bearer "):
-            return jsonify({"error": "Unauthorized", "message": "Token de autenticação não fornecido."}), 401
+        if not auth_header or not auth_header.startswith("Bearer ") or auth_header == "Bearer null":
+            g.user_id = "guest"
+            return f(*args, **kwargs)
             
         token = auth_header.split(" ")[1]
         try:

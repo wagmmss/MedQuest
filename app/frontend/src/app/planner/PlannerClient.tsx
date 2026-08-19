@@ -1,11 +1,12 @@
 "use client";
+import { useRouter } from "next/navigation";
 
 import { useState, useEffect, memo } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { PlannerWeek, PlannerProgressMap, PlannerTopic } from "@/types/api";
 import { api } from "@/lib/api";
 import { getSubtemaDetails } from "@/lib/plannerData";
-import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X } from "lucide-react";
+import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/nextjs";
@@ -78,6 +79,15 @@ const TopicRow = memo(function TopicRow({
             <span className="flex items-center gap-1"><Clock size={10} /> {t.estimated_hours}h estimadas</span>
             <span>•</span>
             <span>{t.questions_available} questões disponíveis</span>
+          </div>
+
+          <div className="mt-3 mb-1">
+            <Link 
+              href={`/estudar?area=${encodeURIComponent(t.area)}&subtema=${encodeURIComponent(t.subtema)}`}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold rounded-lg transition-colors border border-primary/20"
+            >
+              <Play size={12} className="fill-primary" /> Praticar Questões deste Tópico
+            </Link>
           </div>
         </details>
       </div>

@@ -52,7 +52,7 @@ export const serverApi = {
   stats: {
     getOverview: () => serverFetch<OverviewStats>("/api/stats/overview", { cache: 'no-store' }),
     getCoverage: () => serverFetch<CoverageResponse>("/api/coverage", { cache: 'no-store' }),
-    getTimeline: () => serverFetch<TimelineStat[]>("/api/stats/timeline", { cache: 'no-store' }),
+    getTimeline: (days: number = 14) => serverFetch<TimelineStat[]>(`/api/stats/timeline?days=${days}`, { cache: 'no-store' }),
     getWeakTopics: () => serverFetch<WeakTopic[]>("/api/stats/weak-topics", { cache: 'no-store' }),
     getRecommendations: () => serverFetch<Recommendation[]>("/api/stats/recommendations", { cache: 'no-store' }),
     getDistractors: () => serverFetch<DistractorStat[]>("/api/stats/distractors", { cache: 'no-store' }),
