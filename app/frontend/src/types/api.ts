@@ -19,7 +19,8 @@ export interface CoverageSubtema {
   attempts: number;
   correct: number;
   accuracy: number | null;
-  status: "mastered" | "in_progress" | "not_started";
+  coverage_pct: number;
+  status: "mastered" | "proficient" | "in_progress" | "not_started";
 }
 
 export interface CoverageArea {
@@ -30,6 +31,7 @@ export interface CoverageArea {
   attempts: number;
   correct: number;
   mastered: number;
+  proficient: number;
   in_progress: number;
   not_started: number;
   accuracy: number | null;
@@ -161,6 +163,9 @@ export interface QuestionDetail extends QuestionListItem {
     selected_letter: string;
     is_correct: number;
   };
+  is_verified?: boolean;
+  last_updated_at?: string;
+  technical_note?: string;
   is_favorite?: boolean;
   times_wrong?: number;
 }
@@ -191,6 +196,10 @@ export interface BatchAttemptResult {
   results: BatchAttemptResultItem[];
 }
 
+export interface BatchDetailResponse {
+  questions: QuestionDetail[];
+}
+
 export interface SearchResult {
   id: number;
   institution_code: string;
@@ -208,6 +217,7 @@ export interface Flashcard {
   back: string;
   next_review_date: string;
   stem?: string;
+  source_context?: string;
 }
 
 export interface FlashcardGenerateResponse {

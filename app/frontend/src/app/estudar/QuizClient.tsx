@@ -593,8 +593,22 @@ export function QuizClient({
         <>
           {/* Question Stem */}
           <div className="bg-card border border-border shadow-1 rounded-xl p-6 md:p-8 flex flex-col gap-6">
+            {q.technical_note && (
+              <div className="bg-warning/10 border border-warning/30 rounded-xl p-4 flex gap-3 text-warning-foreground mb-2">
+                <span className="material-symbols-outlined text-warning shrink-0" data-icon="warning">warning</span>
+                <div className="text-sm">
+                  <p className="font-bold mb-1">Atenção: Mudança de Diretriz</p>
+                  <p>{q.technical_note}</p>
+                </div>
+              </div>
+            )}
             <div className="flex items-start md:items-center justify-between flex-col md:flex-row gap-4">
               <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                {q.is_verified && (
+                  <span className="bg-success/15 text-success border border-success/30 px-2 py-1 rounded flex items-center gap-1" title={q.last_updated_at ? `Revisado em ${q.last_updated_at}` : "Revisado por um médico"}>
+                    <span className="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span> Revisado
+                  </span>
+                )}
                 <span className="bg-muted px-2 py-1 rounded">{q.institution_code} {q.year}</span>
                 <span className="bg-muted px-2 py-1 rounded">{q.area}</span>
                 <span className="bg-muted px-2 py-1 rounded">{q.subtema}</span>

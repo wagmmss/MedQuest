@@ -48,6 +48,24 @@ export function FlashcardClient() {
     }
   };
 
+  const handleReport = async () => {
+    if (queue.length === 0 || submitting) return;
+    const reason = window.prompt("Qual o problema com este flashcard? (Ex: Erro médico, desatualizado, mal formatado)");
+    if (!reason) return;
+
+    setSubmitting(true);
+    try {
+      await api.flashcards.report(queue[0].id, reason);
+      toast.success("Obrigado! O flashcard foi reportado e será auditado.");
+      setQueue(prev => prev.slice(1));
+      setFlipped(false);
+    } catch {
+      toast.error("Erro ao reportar flashcard.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="max-w-3xl mx-auto w-full flex flex-col items-center gap-6 pb-12 animate-in fade-in duration-500">
@@ -132,6 +150,11 @@ export function FlashcardClient() {
         {flipped && current.back && (
           <div className="mt-8 pt-8 border-t border-border w-full text-center animate-in slide-in-from-bottom-4 fade-in duration-300">
             <p className="text-muted-foreground text-body-m">{current.back}</p>
+            {current.source_context && (
+              <p className="mt-4 text-xs font-semibold text-purple-600/70 uppercase tracking-widest bg-purple-500/10 py-1.5 px-3 rounded-full inline-block">
+                Fonte: {current.source_context}
+              </p>
+            )}
           </div>
         )}
 
@@ -139,6 +162,19 @@ export function FlashcardClient() {
           <div className="absolute bottom-6 text-sm font-bold text-muted-foreground uppercase tracking-widest flex items-center gap-2">
             <RotateCcw size={16} /> Clique para Revelar
           </div>
+        )}
+        
+        {flipped && (
+          <button 
+            className="absolute top-4 right-4 text-xs font-semibold text-muted-foreground hover:text-destructive flex items-center gap-1 transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleReport();
+            }}
+            title="Reportar Erro no Flashcard"
+          >
+            <XCircle size={14} /> Reportar
+          </button>
         )}
       </div>
 

@@ -19,6 +19,11 @@ export function CoverageClient({ areas }: { areas: CoverageArea[] }) {
         <CheckCircle2 size={14} /> Dominado
       </span>
     );
+    if (status === "proficient") return (
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20" title="Boa acurácia, mas baixa cobertura">
+        <CheckCircle2 size={14} /> Proficiente
+      </span>
+    );
     if (status === "in_progress") return (
       <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-warning/10 text-warning border border-warning/20 hover:bg-warning/20 transition-colors cursor-pointer" title="Clique para focar na revisão">
         <PlayCircle size={14} /> Revisar
@@ -76,6 +81,7 @@ export function CoverageClient({ areas }: { areas: CoverageArea[] }) {
                   </div>
                   <div className="h-2 w-full bg-muted rounded-full overflow-hidden flex">
                     <div className="h-full bg-success" style={{ width: `${(area.mastered / area.n_subtemas) * 100}%` }} title="Dominado" />
+                    <div className="h-full bg-primary" style={{ width: `${(area.proficient / area.n_subtemas) * 100}%` }} title="Proficiente (Baixa Cobertura)" />
                     <div className="h-full bg-warning" style={{ width: `${(area.in_progress / area.n_subtemas) * 100}%` }} title="Em Progresso" />
                   </div>
                 </div>

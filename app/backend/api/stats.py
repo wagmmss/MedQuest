@@ -238,6 +238,117 @@ def recommendations():
         recs.append({
             "type": "start", "icon": "ph-rocket-launch", "title": "Comece a responder questões",
             "description": "Ainda não há tentativas suficientes para gerar recomendações personalizadas. Responda algumas questões para começar.",
+    rows = db.execute("""
+        SELECT COALESCE(NULLIF(q.subtema, ''), q.topic) AS topic,
+               COUNT(a.id) AS attempts, SUM(a.is_correct) AS correct
+        FROM attempts a JOIN questions q ON q.id = a.question_id
+        WHERE a.user_id = ? AND COALESCE(NULLIF(q.subtema, ''), q.topic) IS NOT NULL
+        GROUP BY topic HAVING attempts >= ?
+        ORDER BY (CAST(correct AS FLOAT) / attempts) ASC LIMIT 15
+    """, (g.user_id, min_attempts)).fetchall()
+    return jsonify([
+        {"topic": r["topic"], "attempts": r["attempts"], "correct": r["correct"],
+         "accuracy": (r["correct"] / r["attempts"]) if r["attempts"] else 0}
+        for r in rows
+    ])
+
+
+@bp.route("/stats/recommendations")
+def recommendations():
+    db = get_db()
+    recs = []
+    srs_due = db.execute(
+        "SELECT COUNT(*) n FROM spaced_repetition WHERE next_review_date <= ? AND user_id = ?",
+        (datetime.now(timezone.utc).isoformat(), g.user_id),
+    ).fetchone()["n"]
+    if srs_due > 0:
+        recs.append({
+            "type": "srs_due", "icon": "ph-alarm",
+            "title": f"{srs_due} questão(ões) para revisar hoje",
+            "description": "Sua repetição espaçada tem itens prontos para revisão. Reforce agora o que você já viu antes de esquecer.",
+            "cta": "Revisar agora", "filters": {"status": "srs_due"},
+        })
+
+    weak_subtemas = db.execute("""
+        SELECT q.subtema AS subtema, MIN(q.area) AS area,
+               COUNT(a.id) AS attempts, SUM(a.is_correct) AS correct
+        FROM attempts a JOIN questions q ON q.id = a.question_id
+        WHERE a.user_id = ? AND q.subtema IS NOT NULL AND q.subtema != ''
+        GROUP BY q.subtema HAVING attempts >= 3
+        ORDER BY (CAST(correct AS FLOAT) / attempts) ASC LIMIT 3
+    """, (g.user_id,)).fetchall()
+    covered_areas = set()
+    for r in weak_subtemas:
+        acc = r["correct"] / r["attempts"]
+        if acc < 0.65:
+            covered_areas.add(r["area"])
+            recs.append({
+                "type": "weak_topic", "icon": "ph-warning-circle",
+                "title": f"Reforce {r['subtema']}",
+                "description": f"Sua acurácia aqui é de {round(acc * 100)}% em {r['attempts']} tentativas. Vale revisar a teoria e praticar mais questões.",
+                "cta": "Praticar agora", "filters": {"subtema": r["subtema"]},
+            })
+
+    weak_areas = db.execute("""
+        SELECT q.area AS area, COUNT(a.id) AS attempts, SUM(a.is_correct) AS correct
+        FROM attempts a JOIN questions q ON q.id = a.question_id
+        WHERE a.user_id = ? AND q.area IS NOT NULL AND q.area != ''
+        GROUP BY q.area HAVING attempts >= 5
+        ORDER BY (CAST(correct AS FLOAT) / attempts) ASC LIMIT 1
+    """, (g.user_id,)).fetchall()
+    for r in weak_areas:
+        acc = r["correct"] / r["attempts"]
+        if acc < 0.65 and r["area"] not in covered_areas:
+            recs.append({
+                "type": "weak_area", "icon": "ph-chart-bar",
+                "title": f"Sua acurácia em {r['area']} está baixa",
+                "description": f"{round(acc * 100)}% de acerto em {r['attempts']} tentativas nessa área. Considere revisar os fundamentos antes de continuar.",
+                "cta": "Estudar área", "filters": {"area": r["area"]},
+            })
+
+    area_totals = db.execute(
+        "SELECT area, COUNT(*) n FROM questions WHERE area IS NOT NULL AND area != '' GROUP BY area"
+    ).fetchall()
+    area_answered = db.execute("""
+        SELECT q.area AS area, COUNT(DISTINCT a.question_id) n
+        FROM attempts a JOIN questions q ON q.id = a.question_id
+        WHERE a.user_id = ? AND q.area IS NOT NULL AND q.area != '' GROUP BY q.area
+    """, (g.user_id,)).fetchall()
+    answered_map = {r["area"]: r["n"] for r in area_answered}
+    least_explored = None
+    for r in area_totals:
+        if r["n"] < 20:
+            continue
+        coverage = answered_map.get(r["area"], 0) / r["n"]
+        if least_explored is None or coverage < least_explored["coverage"]:
+            least_explored = {"area": r["area"], "coverage": coverage, "total": r["n"]}
+    if least_explored is not None and least_explored["coverage"] < 0.1:
+        recs.append({
+            "type": "explore", "icon": "ph-compass",
+            "title": f"Explore mais {least_explored['area']}",
+            "description": f"Você ainda não praticou quase nada nessa área ({round(least_explored['coverage'] * 100)}% de {least_explored['total']} questões). Bom momento para começar.",
+            "cta": "Começar a explorar",
+            "filters": {"area": least_explored["area"], "status": "unanswered"},
+        })
+
+    total_attempts = db.execute("SELECT COUNT(*) n FROM attempts WHERE user_id = ?", (g.user_id,)).fetchone()["n"]
+    last_correct = db.execute("""
+        SELECT COUNT(*) n FROM attempts a1 WHERE a1.user_id = ? AND a1.is_correct = 1
+        AND a1.id = (SELECT MAX(a2.id) FROM attempts a2 WHERE a2.user_id = ? AND a2.question_id = a1.question_id)
+    """, (g.user_id, g.user_id)).fetchone()["n"]
+    distinct_answered = db.execute("SELECT COUNT(DISTINCT question_id) n FROM attempts WHERE user_id = ?", (g.user_id,)).fetchone()["n"]
+    accuracy_latest = (last_correct / distinct_answered) if distinct_answered else None
+
+    if not recs and distinct_answered >= 10 and accuracy_latest is not None and accuracy_latest >= 0.8:
+        recs.append({
+            "type": "praise", "icon": "ph-trophy", "title": "Ótimo desempenho geral!",
+            "description": f"Você está acertando {round(accuracy_latest * 100)}% das últimas tentativas. Que tal se desafiar em um simulado cronometrado?",
+            "cta": "Ir para os filtros", "filters": {},
+        })
+    elif not recs and total_attempts < 10:
+        recs.append({
+            "type": "start", "icon": "ph-rocket-launch", "title": "Comece a responder questões",
+            "description": "Ainda não há tentativas suficientes para gerar recomendações personalizadas. Responda algumas questões para começar.",
             "cta": "Ir para os filtros", "filters": {},
         })
     return jsonify(recs[:5])
@@ -277,17 +388,22 @@ def coverage():
     for r in rows:
         attempts = r["attempts"]
         accuracy = (r["correct"] / attempts) if attempts else None
+        coverage_pct = (r["answered"] / r["n_questions"]) if r["n_questions"] else 0
         if r["answered"] == 0:
             status = "not_started"
-        elif attempts >= 2 and accuracy is not None and accuracy >= 0.7:
+        elif attempts >= 2 and accuracy is not None and accuracy >= 0.7 and coverage_pct >= 0.5:
             status = "mastered"
+        elif attempts >= 2 and accuracy is not None and accuracy >= 0.7:
+            status = "proficient"
         else:
             status = "in_progress"
         sub = {"subtema": r["subtema"], "n_questions": r["n_questions"], "answered": r["answered"],
-               "attempts": attempts, "correct": r["correct"], "accuracy": accuracy, "status": status}
+               "attempts": attempts, "correct": r["correct"], "accuracy": accuracy,
+               "coverage_pct": coverage_pct, "status": status}
         a = areas.setdefault(r["area"], {
             "area": r["area"], "n_questions": 0, "n_subtemas": 0, "answered_questions": 0,
-            "attempts": 0, "correct": 0, "mastered": 0, "in_progress": 0, "not_started": 0, "subtemas": [],
+            "attempts": 0, "correct": 0, "mastered": 0, "proficient": 0,
+            "in_progress": 0, "not_started": 0, "subtemas": [],
         })
         a["n_questions"] += r["n_questions"]
         a["n_subtemas"] += 1

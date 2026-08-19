@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { QuestionListItem, QuestionDetail, BatchAttemptItem, BatchAttemptResultItem } from "@/types/api";
 import { api } from "@/lib/api";
-import { Play, Clock, CheckCircle2, XCircle, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw } from "lucide-react";
+import { Play, Clock, CheckCircle2, XCircle, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag, Filter } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import confetti from "canvas-confetti";
@@ -24,14 +24,20 @@ export function SimuladoClient({
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [detailError, setDetailError] = useState(false);
   const [showFinishConfirm, setShowFinishConfirm] = useState(false);
+  const [showAreaSummary, setShowAreaSummary] = useState(false);
   
   // Answers: question_id -> letter
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [resultsMap, setResultsMap] = useState<Record<number, BatchAttemptResultItem>>({});
   
-  // Formato oficial USP 2026: 120 questões em 6 horas.
-  const TOTAL_TIME = 6 * 60 * 60;
-  const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
+  // Marcar para revisar
+  const [flagged, setFlagged] = useState<Record<number, boolean>>({});
+  // Filtro da sidebar: 'all' | 'unanswered' | 'flagged'
+  const [sidebarFilter, setSidebarFilter] = useState<'all' | 'unanswered' | 'flagged'>('all');
+  
+  // Duração proporcional: 3 min/questão (120 Qs = 6h), arredondado
+  const [totalTime, setTotalTime] = useState(6 * 60 * 60);
+  const [timeLeft, setTimeLeft] = useState(6 * 60 * 60);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const [hasSavedState, setHasSavedState] = useState(false);
@@ -109,13 +115,32 @@ export function SimuladoClient({
         return;
       }
       
+      // Duração proporcional: 3 min/questão (120q = 6h)
+      const calcTime = Math.round((qList.length / 120) * 6 * 60 * 60);
+      setTotalTime(calcTime);
+      setTimeLeft(calcTime);
+      
       setQueue(qList);
       setCurrentIndex(0);
-      setTimeLeft(TOTAL_TIME);
       setAnswers({});
       setResultsMap({});
+      setFlagged({});
+      setSidebarFilter('all');
       setState("PLAYING");
-      loadDetail(qList[0].id);
+      
+      // Batch prefetch all question details in one request
+      const ids = qList.map(q => q.id);
+      try {
+        const batchRes = await api.questions.getBatch(ids);
+        const cache: Record<number, QuestionDetail> = {};
+        for (const q of batchRes.questions) {
+          cache[q.id] = q;
+        }
+        setDetailsCache(cache);
+      } catch {
+        // Fallback: load first question individually
+        loadDetail(qList[0].id);
+      }
     } catch {
       toast.error("Erro ao gerar simulado.");
       setState("START");
@@ -206,6 +231,33 @@ export function SimuladoClient({
     setAnswers(prev => ({ ...prev, [currentQ.id]: letter }));
   };
 
+  const toggleFlag = () => {
+    if (state !== "PLAYING") return;
+    const currentQ = queue[currentIndex];
+    setFlagged(prev => ({ ...prev, [currentQ.id]: !prev[currentQ.id] }));
+  };
+
+  // Filtro de questões visíveis na sidebar
+  const filteredIndices = useMemo(() => {
+    if (sidebarFilter === 'all') return queue.map((_, i) => i);
+    if (sidebarFilter === 'unanswered') return queue.map((_, i) => i).filter(i => !answers[queue[i].id]);
+    if (sidebarFilter === 'flagged') return queue.map((_, i) => i).filter(i => flagged[queue[i].id]);
+    return queue.map((_, i) => i);
+  }, [queue, answers, flagged, sidebarFilter]);
+
+  // Resumo por área para modal de confirmação
+  const areaSummary = useMemo(() => {
+    const summary: Record<string, { total: number; answered: number; blank: number }> = {};
+    for (const q of queue) {
+      const area = q.area || "Sem área";
+      if (!summary[area]) summary[area] = { total: 0, answered: 0, blank: 0 };
+      summary[area].total++;
+      if (answers[q.id]) summary[area].answered++;
+      else summary[area].blank++;
+    }
+    return Object.entries(summary).map(([area, data]) => ({ area, ...data }));
+  }, [queue, answers]);
+
   const navigateTo = (index: number) => {
     if (index >= 0 && index < queue.length) {
       setCurrentIndex(index);
@@ -218,10 +270,10 @@ export function SimuladoClient({
     
     const unanswered = queue.length - Object.keys(answers).length;
     if (unanswered > 0) {
-      setShowFinishConfirm(true);
+      setShowAreaSummary(true);
       return;
     }
-    submitSimulado();
+    setShowAreaSummary(true);
   };
 
   const formatTime = (seconds: number) => {
@@ -257,7 +309,11 @@ export function SimuladoClient({
           </div>
           <div className="bg-muted rounded-lg p-4">
             <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Duração</span>
-            <span className="text-lg font-bold text-foreground">6 Horas</span>
+            <span className="text-lg font-bold text-foreground">
+              {isCustom 
+                ? `${Math.round((Number(initialFilters.limit || 50) / 120) * 6 * 60)} min (proporcional)` 
+                : "6 Horas"}
+            </span>
           </div>
           {!isCustom && (
             <div className="bg-muted rounded-lg p-4 col-span-2">
@@ -385,22 +441,52 @@ export function SimuladoClient({
             {!isReview && (
               <p className="text-xs text-muted-foreground mt-1">
                 {Object.keys(answers).length} respondidas, {queue.length - Object.keys(answers).length} em branco.
+                {Object.values(flagged).filter(Boolean).length > 0 && (
+                  <span className="text-warning ml-1">
+                    · {Object.values(flagged).filter(Boolean).length} marcada(s)
+                  </span>
+                )}
               </p>
+            )}
+            {/* Filter buttons */}
+            {!isReview && (
+              <div className="flex gap-1.5 mt-2">
+                {([
+                  { key: 'all' as const, label: 'Todas' },
+                  { key: 'unanswered' as const, label: 'Em branco' },
+                  { key: 'flagged' as const, label: '🚩' },
+                ] as const).map(f => (
+                  <button
+                    key={f.key}
+                    onClick={() => setSidebarFilter(f.key)}
+                    className={clsx(
+                      "text-[10px] font-semibold px-2 py-1 rounded transition-colors",
+                      sidebarFilter === f.key
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    )}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
             )}
           </div>
           <div className="p-3 lg:p-4 overflow-y-auto flex-1">
             <div className="grid grid-cols-6 sm:grid-cols-8 lg:grid-cols-5 gap-2">
-              {queue.map((q, idx) => {
+              {filteredIndices.map((idx) => {
+                const q = queue[idx];
                 const isCurrent = idx === currentIndex;
                 const answeredLetter = answers[q.id];
                 const res = resultsMap[q.id];
+                const isFlagged = flagged[q.id];
 
                 let btnClass = "bg-muted text-muted-foreground hover:bg-muted/80";
                 
                 if (isReview) {
                   if (res?.is_correct) btnClass = "bg-success text-success-foreground font-bold";
                   else if (res && !res.is_correct) btnClass = "bg-destructive text-destructive-foreground font-bold";
-                  else btnClass = "bg-card border border-dashed border-muted-foreground text-muted-foreground"; // Não respondida/errada
+                  else btnClass = "bg-card border border-dashed border-muted-foreground text-muted-foreground";
                 } else {
                   if (answeredLetter) btnClass = "bg-primary/20 text-primary font-bold";
                 }
@@ -414,10 +500,15 @@ export function SimuladoClient({
                     key={q.id}
                     onClick={() => navigateTo(idx)}
                     className={clsx(
-                      "aspect-square rounded flex flex-col items-center justify-center text-xs transition-all",
+                      "aspect-square rounded flex flex-col items-center justify-center text-xs transition-all relative",
                       btnClass
                     )}
                   >
+                    {isFlagged && (
+                      <span className="absolute -top-0.5 -right-0.5 text-warning">
+                        <Flag size={8} fill="currentColor" />
+                      </span>
+                    )}
                     <span className={clsx(!isReview && answeredLetter ? "text-[10px]" : "text-xs")}>{idx + 1}</span>
                     {!isReview && answeredLetter && <span className="text-[14px] leading-none">{answeredLetter}</span>}
                   </button>
@@ -478,9 +569,25 @@ export function SimuladoClient({
               >
                 <ChevronLeft size={16} /> Anterior
               </button>
-              <span className="font-bold text-foreground">
-                Questão {currentIndex + 1}
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-foreground">
+                  Questão {currentIndex + 1}
+                </span>
+                {!isReview && (
+                  <button
+                    onClick={toggleFlag}
+                    className={clsx(
+                      "p-1.5 rounded transition-colors",
+                      flagged[queue[currentIndex]?.id]
+                        ? "text-warning bg-warning/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    )}
+                    title={flagged[queue[currentIndex]?.id] ? "Desmarcar revisão" : "Marcar para revisar"}
+                  >
+                    <Flag size={16} fill={flagged[queue[currentIndex]?.id] ? "currentColor" : "none"} />
+                  </button>
+                )}
+              </div>
               <button 
                 onClick={() => navigateTo(currentIndex + 1)}
                 disabled={currentIndex === queue.length - 1}
@@ -491,7 +598,21 @@ export function SimuladoClient({
             </div>
 
             <div className="bg-card border border-border shadow-1 rounded-xl p-6 md:p-8 flex-1 overflow-y-auto">
+              {qDetail.technical_note && (
+                <div className="bg-warning/10 border border-warning/30 rounded-xl p-4 flex gap-3 text-warning-foreground mb-4">
+                  <span className="material-symbols-outlined text-warning shrink-0" data-icon="warning">warning</span>
+                  <div className="text-sm">
+                    <p className="font-bold mb-1">Atenção: Mudança de Diretriz</p>
+                    <p>{qDetail.technical_note}</p>
+                  </div>
+                </div>
+              )}
               <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-6">
+                {qDetail.is_verified && (
+                  <span className="bg-success/15 text-success border border-success/30 px-2 py-1 rounded flex items-center gap-1" title={qDetail.last_updated_at ? `Revisado em ${qDetail.last_updated_at}` : "Revisado por um médico"}>
+                    <span className="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span> Revisado
+                  </span>
+                )}
                 <span className="bg-muted px-2 py-1 rounded">{qDetail.institution_code} {qDetail.year}</span>
                 <span className="bg-muted px-2 py-1 rounded">{qDetail.area}</span>
                 <span className="bg-muted px-2 py-1 rounded">{qDetail.subtema}</span>
@@ -588,28 +709,65 @@ export function SimuladoClient({
         )}
       </div>
 
-      {showFinishConfirm && (
+      {showAreaSummary && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
-          <div className="bg-card border border-border shadow-lg rounded-xl p-6 max-w-sm w-full flex flex-col gap-4 animate-in zoom-in-95 duration-200">
-            <h3 className="font-bold text-lg text-foreground">Atenção!</h3>
-            <p className="text-muted-foreground text-sm">
-              Você ainda tem {unansweredCount} questões em branco. Deseja finalizar mesmo assim?
-            </p>
+          <div className="bg-card border border-border shadow-lg rounded-xl p-6 max-w-md w-full flex flex-col gap-4 animate-in zoom-in-95 duration-200">
+            <h3 className="font-bold text-lg text-foreground">Resumo por Área</h3>
+            
+            <div className="border border-border rounded-lg overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="bg-muted/50">
+                  <tr>
+                    <th className="text-left px-3 py-2 font-semibold text-muted-foreground">Área</th>
+                    <th className="text-center px-3 py-2 font-semibold text-muted-foreground">Resp.</th>
+                    <th className="text-center px-3 py-2 font-semibold text-muted-foreground">Branco</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {areaSummary.map(row => (
+                    <tr key={row.area}>
+                      <td className="px-3 py-2 text-foreground font-medium">{row.area}</td>
+                      <td className="px-3 py-2 text-center text-success font-semibold">{row.answered}</td>
+                      <td className={clsx("px-3 py-2 text-center font-semibold", row.blank > 0 ? "text-destructive" : "text-muted-foreground")}>
+                        {row.blank}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot className="bg-muted/30 border-t border-border">
+                  <tr>
+                    <td className="px-3 py-2 font-bold text-foreground">Total</td>
+                    <td className="px-3 py-2 text-center font-bold text-success">{Object.keys(answers).length}</td>
+                    <td className={clsx("px-3 py-2 text-center font-bold", unansweredCount > 0 ? "text-destructive" : "text-muted-foreground")}>
+                      {unansweredCount}
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            {unansweredCount > 0 && (
+              <div className="bg-warning/10 text-warning border border-warning/20 rounded-lg p-3 flex items-start gap-2 text-sm">
+                <AlertTriangle size={16} className="shrink-0 mt-0.5" />
+                <span>Você ainda tem {unansweredCount} questão(ões) em branco.</span>
+              </div>
+            )}
+
             <div className="flex justify-end gap-3 mt-2">
               <button
-                onClick={() => setShowFinishConfirm(false)}
+                onClick={() => setShowAreaSummary(false)}
                 className="px-4 py-2 bg-muted text-muted-foreground rounded-lg font-medium hover:bg-muted/80 transition-colors"
               >
-                Cancelar
+                Voltar à Prova
               </button>
               <button
                 onClick={() => {
-                  setShowFinishConfirm(false);
+                  setShowAreaSummary(false);
                   submitSimulado();
                 }}
                 className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
               >
-                Finalizar
+                Entregar Prova
               </button>
             </div>
           </div>

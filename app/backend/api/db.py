@@ -136,11 +136,21 @@ def init_db(app):
                             
             if "flashcards" in tables:
                 fc = _table_cols(db, "flashcards")
-                if "user_id" not in fc:
-                    try:
-                        db.execute("ALTER TABLE flashcards ADD COLUMN user_id TEXT DEFAULT '1'")
-                    except Exception as e:
-                        logger.error(f"Failed to alter flashcards: {e}")
+                for col, ddl in [("user_id", "TEXT DEFAULT '1'"), ("source_context", "TEXT"), ("status", "TEXT DEFAULT 'active'"), ("reported_reason", "TEXT")]:
+                    if col not in fc:
+                        try:
+                            db.execute(f"ALTER TABLE flashcards ADD COLUMN {col} {ddl}")
+                        except Exception as e:
+                            logger.error(f"Failed to alter flashcards for {col}: {e}")
+                            
+            if "questions" in tables:
+                qc = _table_cols(db, "questions")
+                for col, ddl in [("is_verified", "INTEGER DEFAULT 0"), ("last_updated_at", "TEXT"), ("technical_note", "TEXT")]:
+                    if col not in qc:
+                        try:
+                            db.execute(f"ALTER TABLE questions ADD COLUMN {col} {ddl}")
+                        except Exception as e:
+                            logger.error(f"Failed to alter questions for {col}: {e}")
             if "fsrs_card" not in _table_cols(db, "spaced_repetition"):
                 try:
                     db.execute("ALTER TABLE spaced_repetition ADD COLUMN fsrs_card TEXT")

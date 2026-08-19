@@ -2,7 +2,7 @@ import {
   OverviewStats, CoverageResponse, TimelineStat, WeakTopic, Recommendation, 
   BreakdownStat, DistractorStat, PlannerConfig, PlannerProgressMap, PlannerPlanResponse,
   QuestionMeta, SubtemaItem, QuestionListItem, QuestionDetail, AttemptResult, SearchResult,
-  BatchAttemptItem, BatchAttemptResult, Flashcard, FlashcardGenerateResponse
+  BatchAttemptItem, BatchAttemptResult, BatchDetailResponse, Flashcard, FlashcardGenerateResponse
 } from "@/types/api";
 
 const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 
@@ -128,6 +128,10 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ attempts })
     }),
+    getBatch: (ids: number[]) => apiFetch<BatchDetailResponse>(`/api/questions/batch`, {
+      method: "POST",
+      body: JSON.stringify({ ids })
+    }),
   },
   flashcards: {
     generate: (question_id: number, wrong_letter: string) => apiFetch<FlashcardGenerateResponse>(`/api/flashcards/generate`, {
@@ -138,6 +142,10 @@ export const api = {
     review: (id: number, confidence: string) => apiFetch<{id: number, next_review_date: string}>(`/api/flashcards/${id}/review`, {
       method: "POST",
       body: JSON.stringify({ confidence })
+    }),
+    report: (id: number, reason: string) => apiFetch<{success: boolean}>(`/api/flashcards/${id}/report`, {
+      method: "POST",
+      body: JSON.stringify({ reason })
     })
   }
 };

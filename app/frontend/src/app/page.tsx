@@ -1,11 +1,40 @@
 import { serverApi } from "@/lib/server-api";
-import { OverviewStats } from "@/types/api";
+import { OverviewStats, PlannerWeek } from "@/types/api";
 import Link from "next/link";
 import { currentUser } from '@clerk/nextjs/server';
 
 export default async function Dashboard() {
   const stats: OverviewStats = await serverApi.stats.getOverview();
   const user = await currentUser();
+
+  let currentPlannerWeek: PlannerWeek | null = null;
+  try {
+    const config = await serverApi.planner.getConfig();
+    if (config && config.exam_date && config.start_date) {
+      const planResponse = await serverApi.planner.generatePlan({
+        start_date: config.start_date,
+        exam_date: config.exam_date,
+        hours_per_week: (config.days_per_week || 5) * (config.hours_per_day || 4),
+        intensive: false
+      });
+      if (planResponse.plan && planResponse.plan.length > 0) {
+        const now = new Date();
+        const start = new Date(config.start_date);
+        const diffTime = now.getTime() - start.getTime();
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const weekIndex = Math.floor(diffDays / 7);
+        if (weekIndex >= 0 && weekIndex < planResponse.plan.length) {
+          currentPlannerWeek = planResponse.plan[weekIndex];
+        } else if (weekIndex >= planResponse.plan.length) {
+           currentPlannerWeek = planResponse.plan[planResponse.plan.length - 1];
+        } else if (weekIndex < 0) {
+           currentPlannerWeek = planResponse.plan[0];
+        }
+      }
+    }
+  } catch (e) {
+    console.error("Failed to fetch planner info for dashboard", e);
+  }
 
   const accuracyFormatted = stats.accuracy_all_attempts != null 
     ? (stats.accuracy_all_attempts * 100).toFixed(1) + "%" 
@@ -54,22 +83,28 @@ export default async function Dashboard() {
         </div>
       </section>
 
-      {/* Daily Challenge Banner */}
+      {/* Daily/Weekly Planner Banner */}
       <div className="mb-stack-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-6 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 transition-transform hover:-translate-y-1 hover:shadow-xl duration-300">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-white/20 rounded-full flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl" data-icon="local_fire_department">local_fire_department</span>
+        <div className="bg-gradient-to-r from-primary to-indigo-600 rounded-2xl p-6 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 transition-transform hover:-translate-y-1 hover:shadow-xl duration-300">
+          <div className="flex items-center gap-4 w-full sm:w-auto">
+            <div className="p-3 bg-white/20 rounded-full flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-3xl" data-icon="calendar_today">calendar_today</span>
             </div>
-            <div>
-              <h3 className="font-headline-md font-bold text-white mb-1">Desafio do Dia</h3>
-              <p className="text-white/90 text-sm">Mantenha sua ofensiva de {stats.streak_days} dia(s) acesa! Resolva a questão selecionada para você hoje.</p>
+            <div className="flex-1">
+              <h3 className="font-headline-md font-bold text-white mb-1">
+                {currentPlannerWeek ? `Plano da Semana (Semana ${currentPlannerWeek.week})` : "Configure seu Plano de Estudos"}
+              </h3>
+              <p className="text-white/90 text-sm">
+                {currentPlannerWeek 
+                  ? `Foco atual: ${currentPlannerWeek.topics.slice(0, 2).map(t => t.subtema).join(', ')}${currentPlannerWeek.topics.length > 2 ? '...' : ''}` 
+                  : "Defina sua data de prova para receber metas semanais personalizadas."}
+              </p>
             </div>
           </div>
-          <Link href="/estudar?status=unanswered&limit=1">
-            <button className="px-6 py-3 bg-white text-orange-600 rounded-xl font-bold shadow-md hover:bg-gray-50 transition-colors flex items-center gap-2">
-              <span className="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
-              Resolver Agora
+          <Link href="/planner">
+            <button className="px-6 py-3 w-full sm:w-auto bg-white text-primary rounded-xl font-bold shadow-md hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 shrink-0">
+              <span className="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+              {currentPlannerWeek ? "Ver Plano Completo" : "Configurar Agora"}
             </button>
           </Link>
         </div>

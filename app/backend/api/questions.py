@@ -14,6 +14,39 @@ import random
 bp = Blueprint("questions", __name__)
 
 
+def _sample_ids(db, where_clause, params, limit):
+    """Amostragem rápida por faixa de IDs, evitando ORDER BY RANDOM().
+
+    Obtém min/max ID, gera candidatos aleatórios em Python e filtra.
+    Fallback para ORDER BY RANDOM() se a faixa for muito esparsa.
+    """
+    bounds = db.execute(
+        f"SELECT MIN(q.id) AS lo, MAX(q.id) AS hi, COUNT(*) AS n FROM questions q WHERE {where_clause}",
+        params,
+    ).fetchone()
+    lo, hi, n = bounds["lo"], bounds["hi"], bounds["n"]
+    if not lo or n == 0:
+        return []
+    effective_limit = min(limit, n)
+    # Se a tabela é densa o suficiente, amostragem por faixa é eficiente
+    if n > 0 and (hi - lo + 1) / n < 5:
+        candidates = random.sample(range(lo, hi + 1), min(effective_limit * 3, hi - lo + 1))
+        placeholders = ",".join("?" * len(candidates))
+        rows = db.execute(
+            f"SELECT q.id FROM questions q WHERE q.id IN ({placeholders}) AND {where_clause} LIMIT ?",
+            (*candidates, *params, effective_limit),
+        ).fetchall()
+        ids = [r["id"] for r in rows]
+        if len(ids) >= effective_limit:
+            return ids[:effective_limit]
+    # Fallback para RANDOM() quando a faixa é muito esparsa
+    rows = db.execute(
+        f"SELECT q.id FROM questions q WHERE {where_clause} ORDER BY RANDOM() LIMIT ?",
+        (*params, effective_limit),
+    ).fetchall()
+    return [r["id"] for r in rows]
+
+
 def _bounded_int(value, default, minimum, maximum):
     try:
         parsed = int(value)
@@ -39,17 +72,21 @@ def _safe_snippet(value):
 def simulado_usp():
     db = get_db()
     areas = ["Cirurgia", "Clínica Médica", "Pediatria", "Ginecologia e Obstetrícia", "Medicina Preventiva e Social"]
-    rows = []
+    all_ids = []
     for area in areas:
-        q = db.execute("""
-            SELECT q.id, q.source_file, q.source_number, q.year, q.institution_code,
+        where = "q.institution_code IN ('USP-SP', 'USP-RP') AND q.area = ? AND q.missing_alts = 0"
+        ids = _sample_ids(db, where, (area,), 24)
+        all_ids.extend(ids)
+
+    if not all_ids:
+        return jsonify([])
+    placeholders = ",".join("?" * len(all_ids))
+    rows = db.execute(
+        f"""SELECT q.id, q.source_file, q.source_number, q.year, q.institution_code,
                    q.institution_label, q.topic, q.area, q.subtema
-            FROM questions q 
-            WHERE q.institution_code IN ('USP-SP', 'USP-RP') AND q.area = ? AND q.missing_alts = 0
-            ORDER BY RANDOM() LIMIT 24
-        """, (area,)).fetchall()
-        rows.extend(q)
-    
+            FROM questions q WHERE q.id IN ({placeholders})""",
+        all_ids,
+    ).fetchall()
     out = [dict(r) for r in rows]
     random.shuffle(out)
     return jsonify(out)
@@ -174,13 +211,19 @@ def questions():
     clauses, params = question_filter_clauses(request.args)
     where = " AND ".join(clauses)
     limit = _bounded_int(request.args.get("limit"), default=500, minimum=1, maximum=2000)
+    ids = _sample_ids(db, where, params, limit)
+    if not ids:
+        return jsonify([])
+    placeholders = ",".join("?" * len(ids))
     rows = db.execute(
         f"""SELECT q.id, q.source_file, q.source_number, q.year, q.institution_code,
                    q.institution_label, q.topic, q.area, q.subtema
-            FROM questions q WHERE {where} ORDER BY RANDOM() LIMIT ?""",
-        (*params, limit),
+            FROM questions q WHERE q.id IN ({placeholders})""",
+        ids,
     ).fetchall()
-    return jsonify([dict(r) for r in rows])
+    out = [dict(r) for r in rows]
+    random.shuffle(out)
+    return jsonify(out)
 
 
 @bp.route("/questions/count")
@@ -218,6 +261,9 @@ def question_detail(qid):
         "year": q["year"], "institution_code": q["institution_code"],
         "institution_label": q["institution_label"], "topic": q["topic"],
         "area": q["area"], "subtema": q["subtema"], "stem": q["stem"],
+        "is_verified": bool(q.get("is_verified", 0)),
+        "last_updated_at": q.get("last_updated_at"),
+        "technical_note": q.get("technical_note"),
         "alternatives": [dict(a) for a in alts],
         "images": [i["file_path"] for i in imgs],
         "already_answered": dict(last_attempt) if last_attempt else None,
@@ -392,6 +438,87 @@ def toggle_favorite(qid):
     return jsonify({"success": True, "is_favorite": is_fav})
 
 
+@bp.route("/questions/batch", methods=["POST"])
+def question_batch_detail():
+    """Retorna detalhes completos de múltiplas questões em uma única requisição.
+    
+    Aceita {"ids": [1, 2, ...]} com no máximo 200 IDs.
+    Substitui até 120 chamadas individuais GET /questions/:id no simulado.
+    """
+    data = request.get_json(force=True) or {}
+    ids = data.get("ids", [])
+    if not ids or not isinstance(ids, list):
+        return jsonify({"error": "ids is required and must be a list"}), 400
+    ids = ids[:200]  # Cap at 200
+
+    db = get_db()
+    CHUNK = 500
+    q_map = {}
+    alt_map = {}
+    img_map = {}
+    attempt_map = {}
+    wrong_map = {}
+    fav_set = set()
+
+    for i in range(0, len(ids), CHUNK):
+        chunk = ids[i:i + CHUNK]
+        ph = ",".join("?" * len(chunk))
+
+        for r in db.execute(f"SELECT * FROM questions WHERE id IN ({ph})", chunk).fetchall():
+            q_map[r["id"]] = dict(r)
+
+        for r in db.execute(f"SELECT question_id, letter, text FROM alternatives WHERE question_id IN ({ph}) ORDER BY letter", chunk).fetchall():
+            alt_map.setdefault(r["question_id"], []).append({"letter": r["letter"], "text": r["text"]})
+
+        for r in db.execute(f"SELECT question_id, file_path FROM question_images WHERE question_id IN ({ph}) ORDER BY order_index", chunk).fetchall():
+            img_map.setdefault(r["question_id"], []).append(r["file_path"])
+
+        chunk_user = list(chunk) + [g.user_id]
+        for r in db.execute(
+            f"SELECT question_id, selected_letter, is_correct FROM attempts WHERE question_id IN ({ph}) AND user_id = ? ORDER BY id DESC",
+            chunk_user,
+        ).fetchall():
+            if r["question_id"] not in attempt_map:
+                attempt_map[r["question_id"]] = {"selected_letter": r["selected_letter"], "is_correct": bool(r["is_correct"])}
+
+        for r in db.execute(
+            f"SELECT question_id, COUNT(*) as n FROM attempts WHERE question_id IN ({ph}) AND is_correct = 0 AND user_id = ? GROUP BY question_id",
+            chunk_user,
+        ).fetchall():
+            wrong_map[r["question_id"]] = r["n"]
+
+        for r in db.execute(f"SELECT question_id FROM favorites WHERE question_id IN ({ph}) AND user_id = ?", chunk_user).fetchall():
+            fav_set.add(r["question_id"])
+
+    out = []
+    for qid in ids:
+        q = q_map.get(qid)
+        if not q:
+            continue
+        out.append({
+            "id": q["id"],
+            "source_file": q["source_file"],
+            "source_number": q["source_number"],
+            "year": q["year"],
+            "institution_code": q["institution_code"],
+            "institution_label": q["institution_label"],
+            "topic": q["topic"],
+            "area": q["area"],
+            "subtema": q["subtema"],
+            "stem": q["stem"],
+            "is_verified": bool(q.get("is_verified", 0)),
+            "last_updated_at": q.get("last_updated_at"),
+            "technical_note": q.get("technical_note"),
+            "alternatives": alt_map.get(qid, []),
+            "images": img_map.get(qid, []),
+            "already_answered": attempt_map.get(qid),
+            "is_favorite": qid in fav_set,
+            "times_wrong": wrong_map.get(qid, 0),
+        })
+
+    return jsonify({"questions": out})
+
+
 @bp.route("/images/<path:filename>")
 def serve_image(filename):
     import os
@@ -399,3 +526,4 @@ def serve_image(filename):
     backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     static_dir = os.path.join(backend_dir, "static")
     return send_from_directory(static_dir, filename)
+

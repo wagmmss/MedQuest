@@ -3,8 +3,13 @@ import json
 import logging
 import urllib.request
 import urllib.error
+import time
 
 logger = logging.getLogger(__name__)
+
+# In-memory TTL cache for semantic search expansions (avoids redundant AI calls)
+_search_cache = {}  # key: normalized query -> (timestamp, result)
+_SEARCH_CACHE_TTL = 300  # 5 minutes
 
 def generate_cloze_flashcard(stem: str, correct_text: str, wrong_text: str, explanation: str) -> dict:
     """
@@ -34,11 +39,13 @@ REGRAS CRÍTICAS PARA O FLASHCARD:
 4. Jamais cite letras de alternativas (ex: "A alternativa B está correta").
 5. Foque em contrastar o erro do aluno com o acerto. Exemplo de estrutura boa: "Na suspeita de X, a conduta não é Y (como você pensou), mas sim {{{{c1::Z}}}}."
 6. No campo "back", forneça uma nota de rodapé super rápida (1 a 2 frases) explicando objetivamente POR QUE o erro do aluno estava errado com base na fisiologia/diretriz.
+7. No campo "context", informe de forma extremamente curta a fonte dessa conduta ou um resumo simples (ex: "Diretriz SBC 2024" ou "Consenso Brasileiro").
 
 Responda EXCLUSIVAMENTE com um JSON válido no formato:
 {{
   "front": "texto do flashcard com a omissão cloze",
-  "back": "explicação curta do erro vs acerto"
+  "back": "explicação curta do erro vs acerto",
+  "context": "fonte super curta da diretriz/conduta"
 }}
 Não inclua markdown ```json ou nenhum texto fora das chaves do JSON.
 """
@@ -98,7 +105,28 @@ def expand_search_query(query: str) -> list[str]:
     """
     Usa Gemini (ou fallback Groq) para expandir a pesquisa em 3 a 7 sinônimos ou termos relacionados.
     Retorna uma lista de strings. Se a IA falhar ou não houver chave, retorna apenas a query original.
+    Resultados são cacheados por 5 minutos para evitar chamadas redundantes à IA.
     """
+    # Cache lookup (normalized key)
+    cache_key = query.strip().lower()
+    now = time.time()
+    if cache_key in _search_cache:
+        ts, cached_result = _search_cache[cache_key]
+        if now - ts < _SEARCH_CACHE_TTL:
+            return cached_result
+        else:
+            del _search_cache[cache_key]
+
+    # Evict stale entries periodically (keep cache bounded)
+    if len(_search_cache) > 500:
+        stale_keys = [k for k, (ts, _) in _search_cache.items() if now - ts >= _SEARCH_CACHE_TTL]
+        for k in stale_keys:
+            del _search_cache[k]
+
+    def _cache_and_return(terms):
+        _search_cache[cache_key] = (now, terms)
+        return terms
+
     prompt = f"""Você é um especialista médico focado em buscas. O usuário quer pesquisar o seguinte termo: "{query}"
 
 Retorne um JSON contendo uma lista de strings (phrases). Esta lista deve conter o termo original e de 3 a 7 sinônimos, termos técnicos ou diagnósticos diferenciais intimamente ligados à pesquisa.
@@ -132,7 +160,7 @@ Responda APENAS com o JSON. Exemplo: {{ "terms": ["...", "..."] }}
                 data = json.loads(result_str)
                 terms = data.get("terms", [])
                 if terms and isinstance(terms, list):
-                    return terms
+                    return _cache_and_return(terms)
         except Exception as e:
             logger.error(f"Erro na expansão via Gemini: {e}")
 
@@ -155,9 +183,9 @@ Responda APENAS com o JSON. Exemplo: {{ "terms": ["...", "..."] }}
             data = json.loads(result_str)
             terms = data.get("terms", [])
             if terms and isinstance(terms, list):
-                return terms
+                return _cache_and_return(terms)
         except Exception as e:
             logger.error(f"Erro na expansão via Groq: {e}")
 
-    return [query]
+    return _cache_and_return([query])
 
