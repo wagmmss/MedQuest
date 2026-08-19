@@ -54,6 +54,9 @@ export function QuizClient({
   const [timeSpent, setTimeSpent] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   
+  // Image Modal
+  const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
+
   // Confidence
 
   const [togglingFavorite, setTogglingFavorite] = useState(false);
@@ -521,7 +524,26 @@ export function QuizClient({
   const q = currentDetail;
 
   return (
-    <div className="max-w-4xl mx-auto w-full flex flex-col gap-6 pb-12">
+    <div className="max-w-4xl mx-auto w-full flex flex-col gap-6 pb-12 relative">
+      {/* Fullscreen Image Modal */}
+      {enlargedImage && (
+        <div 
+          className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8 cursor-zoom-out"
+          onClick={() => setEnlargedImage(null)}
+        >
+          <img 
+            src={`/api/images/${enlargedImage}`} 
+            alt="Imagem Ampliada" 
+            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+          />
+          <button 
+            className="absolute top-4 right-4 bg-surface/50 hover:bg-surface text-foreground p-2 rounded-full transition-colors"
+            onClick={(e) => { e.stopPropagation(); setEnlargedImage(null); }}
+          >
+            <XCircle size={24} />
+          </button>
+        </div>
+      )}
       {/* Top Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-card border border-border shadow-1 rounded-xl p-4">
         <div className="flex items-center gap-4">
@@ -641,18 +663,22 @@ export function QuizClient({
               </div>
             </div>
             
-            <div className="text-foreground text-body-l leading-relaxed whitespace-pre-wrap">
+            <div className="text-foreground text-lg md:text-xl font-medium leading-relaxed whitespace-pre-wrap">
               {q.stem}
             </div>
 
             {q.images && q.images.length > 0 && (
-              <div className="flex flex-col gap-4 mt-4">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-6">
                 {q.images.map((img, i) => (
-                  <div key={i} className="relative group rounded-md overflow-hidden border border-border bg-muted/20">
+                  <div 
+                    key={i} 
+                    className="relative group rounded-xl overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-sm"
+                    onClick={() => setEnlargedImage(img)}
+                  >
                     <img 
                       src={`/api/images/${img}`} 
                       alt={`Imagem ${i+1}`} 
-                      className="max-w-full" 
+                      className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300" 
                       onError={(e) => { 
                         e.currentTarget.style.display = 'none'; 
                         if (e.currentTarget.nextElementSibling) {
@@ -660,6 +686,9 @@ export function QuizClient({
                         }
                       }} 
                     />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center pointer-events-none">
+                      <Maximize size={24} className="text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md" />
+                    </div>
                     <div className="hidden flex-col items-center justify-center p-8 text-muted-foreground gap-2">
                       <ImageOff size={32} />
                       <span className="text-sm font-medium">Imagem indisponível</span>
@@ -677,12 +706,12 @@ export function QuizClient({
               const isCorrect = attemptResult?.correct_letter === alt.letter || (attemptResult && isSelected && attemptResult.is_correct);
               const isWrong = attemptResult && isSelected && !attemptResult.is_correct;
               
-              let altClass = "bg-card border-border hover:bg-muted/50 cursor-pointer";
-              if (isSelected && !attemptResult) altClass = "bg-primary/10 border-primary cursor-pointer";
+              let altClass = "bg-card border-border hover:bg-muted/50 hover:border-primary/30 cursor-pointer shadow-sm hover:shadow";
+              if (isSelected && !attemptResult) altClass = "bg-primary/5 border-primary/50 cursor-pointer shadow ring-1 ring-primary/20";
               if (attemptResult) {
-                if (isCorrect) altClass = "bg-success/20 border-success/50 cursor-default";
-                else if (isWrong) altClass = "bg-destructive/20 border-destructive/50 cursor-default";
-                else altClass = "bg-card border-border opacity-50 cursor-default";
+                if (isCorrect) altClass = "bg-success/10 border-success/50 shadow-sm cursor-default ring-1 ring-success/20";
+                else if (isWrong) altClass = "bg-destructive/10 border-destructive/50 shadow-sm cursor-default ring-1 ring-destructive/20";
+                else altClass = "bg-card border-border opacity-40 cursor-default";
               }
 
               return (
@@ -764,7 +793,7 @@ export function QuizClient({
                     <BookOpen size={20} className="text-primary" />
                     Comentário do Professor
                   </h3>
-                  <div className="text-foreground text-body-l leading-relaxed whitespace-pre-wrap">
+                  <div className="text-foreground text-base md:text-lg leading-relaxed whitespace-pre-wrap">
                     {attemptResult.explanation || "Nenhum comentário disponível para esta questão."}
                   </div>
 

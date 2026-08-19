@@ -189,3 +189,72 @@ Responda APENAS com o JSON. Exemplo: {{ "terms": ["...", "..."] }}
 
     return _cache_and_return([query])
 
+def stream_explanation(stem: str, correct_text: str, wrong_text: str = None) -> list[str]:
+    """
+    Generator that yields explanation text chunk by chunk.
+    """
+    if wrong_text:
+        context = f"O aluno marcou a alternativa: '{wrong_text}' que está INCORRETA.\nA alternativa CORRETA é: '{correct_text}'."
+    else:
+        context = f"A alternativa CORRETA é: '{correct_text}'."
+        
+    prompt = f"""Você é um professor padrão ouro de Medicina (residência USP). 
+Explique de forma didática e muito rápida (máximo 2 parágrafos curtos) POR QUE a resposta correta está certa, focando no 'pulo do gato' clínico.
+Se o aluno errou, aponte a principal pegadinha que o levou ao erro.
+
+QUESTÃO: {stem}
+{context}
+
+Seja direto. Não inclua saudações. Use markdown leve (negrito)."""
+
+    gemini_key = os.environ.get("GEMINI_API_KEY")
+    if gemini_key:
+        try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent?key={gemini_key}"
+            payload = {
+                "contents": [{"parts": [{"text": prompt}]}]
+            }
+            body = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req) as response:
+                for line in response:
+                    line_str = line.decode('utf-8').strip()
+                    if line_str.startswith('"text":'):
+                        # rudimentary parsing for gemini stream
+                        # This is a bit brittle, but handles basic cases. A proper library is better.
+                        try:
+                            # extract text from JSON fragment
+                            part = line_str[7:].strip().rstrip(',')
+                            text = json.loads("{" + f'"text": {part}' + "}")["text"]
+                            yield text
+                        except:
+                            pass
+                return
+        except Exception as e:
+            logger.error(f"Erro no streaming Gemini: {e}")
+
+    groq_key = os.environ.get("GROQ_API_KEY")
+    if groq_key:
+        try:
+            from groq import Groq
+            client = Groq(api_key=groq_key)
+            completion = client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": "Seja direto, didático e use formatação markdown."},
+                    {"role": "user", "content": prompt}
+                ],
+                model="llama-3.3-70b-versatile",
+                temperature=0.3,
+                max_tokens=300,
+                stream=True
+            )
+            for chunk in completion:
+                if chunk.choices[0].delta.content:
+                    yield chunk.choices[0].delta.content
+            return
+        except Exception as e:
+            logger.error(f"Erro no streaming Groq: {e}")
+            
+    yield "Nenhuma API de IA configurada para exibir explicação."
+
+

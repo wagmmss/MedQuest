@@ -22,7 +22,7 @@ def get_normalized_area(raw_area):
     if "Pediatria" in raw_area: return "Pediatria"
     return "Outros"
 
-def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, intensive=False):
+def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, intensive=False, user_progress=None):
     """
     Gera um plano de estudos fatiado por semanas com base no tempo disponível
     e no peso histórico das áreas na prova de Residência da USP.
@@ -75,20 +75,40 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
     all_topics = []
     total_required_hours = 0.0
 
+    if user_progress is None:
+        user_progress = {}
+
     for r in rows:
         raw_area = r['area']
         norm_area = get_normalized_area(raw_area)
         subtema = r['subtema']
         q_count = r['q_count']
         
+        prog = user_progress.get(subtema, {"ans_count": 0, "correct_count": 0, "attempts": 0})
+        ans_count = prog["ans_count"]
+        attempts = prog["attempts"]
+        acc = (prog["correct_count"] / attempts) if attempts > 0 else 0
+        
+        remaining_q = max(0, q_count - ans_count)
+        
         meta = meta_dict.get(subtema, {"highYield": False, "theory_hours": 1.0})
         
         if intensive and not meta["highYield"]:
             continue
             
+        theory_hours = meta["theory_hours"]
+        # Reduce theory time significantly if user is already highly proficient
+        if ans_count >= 5 and acc >= 0.7:
+            theory_hours = theory_hours * 0.3
+            
         # 3 mins (0.05h) per question
-        practice_hours = q_count * 0.05
-        total_topic_hours = meta["theory_hours"] + practice_hours
+        practice_hours = remaining_q * 0.05
+        total_topic_hours = theory_hours + practice_hours
+        
+        # Skip if topic requires almost no time and user is already very proficient
+        if total_topic_hours < 0.2 and acc >= 0.7:
+            continue
+            
         total_required_hours += total_topic_hours
         
         # Priority score: High Yield = 100, plus area weight
@@ -96,10 +116,14 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         priority = 100 if meta["highYield"] else 0
         priority += weight * 10
         
+        # Boost priority if accuracy is low (user needs to study this!)
+        if attempts >= 3 and acc < 0.6:
+            priority += 50
+        
         all_topics.append({
             "area": norm_area,
             "subtema": subtema,
-            "questions_available": q_count,
+            "questions_available": remaining_q,
             "estimated_hours": total_topic_hours,
             "priority": priority
         })

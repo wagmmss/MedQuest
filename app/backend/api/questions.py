@@ -2,13 +2,15 @@
 from datetime import datetime, timezone
 from html import escape
 import re
+import json
 
-from flask import Blueprint, jsonify, request, g
+from flask import Blueprint, jsonify, request, g, Response, stream_with_context
 
 from .db import get_db
 from .filters import question_filter_clauses
 from .schemas import AttemptIn, BatchAttemptIn, ReviewIn, ValidationError
 from . import srs
+from . import ai
 import random
 
 bp = Blueprint("questions", __name__)
@@ -375,7 +377,7 @@ def review_fsrs(qid):
     confidence = data.confidence
     
     last_attempt = db.execute(
-        "SELECT id, is_correct FROM attempts WHERE question_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1", 
+        "SELECT id, is_correct, confidence FROM attempts WHERE question_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1", 
         (qid, g.user_id)
     ).fetchone()
     
@@ -386,6 +388,11 @@ def review_fsrs(qid):
         "UPDATE attempts SET confidence = ? WHERE id = ?",
         (confidence, last_attempt["id"])
     )
+        
+    # Evita avanço duplo no FSRS se o cartão já havia sido classificado antes nesta tentativa
+    if last_attempt["confidence"] != "defer" and last_attempt["confidence"] is not None:
+        db.commit()
+        return jsonify({"success": True, "warning": "Confiança atualizada, mas FSRS retido na primeira impressão para evitar avanço duplo."})
         
     sr = db.execute("SELECT fsrs_card FROM spaced_repetition WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
     card_json, next_review = srs.review(sr["fsrs_card"] if sr else None, last_attempt["is_correct"], confidence)
@@ -591,3 +598,34 @@ def serve_image(filename):
     static_dir = os.path.join(backend_dir, "static")
     return send_from_directory(static_dir, filename)
 
+@bp.route("/<int:qid>/explain", methods=["GET"])
+def explain_question(qid):
+    db = get_db()
+    # Check if there's a recent attempt to get the wrong text
+    last_attempt = db.execute(
+        "SELECT selected_letter, is_correct FROM attempts WHERE question_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1",
+        (qid, g.user_id)
+    ).fetchone()
+
+    q_row = db.execute("SELECT stem, answer, text_a, text_b, text_c, text_d FROM questions WHERE id = ?", (qid,)).fetchone()
+    if not q_row:
+        return jsonify({"error": "Question not found"}), 404
+
+    correct_letter = q_row["answer"].lower()
+    correct_text = q_row[f"text_{correct_letter}"]
+    wrong_text = None
+    
+    if last_attempt and last_attempt["is_correct"] == 0:
+        wrong_letter = last_attempt["selected_letter"].lower()
+        if wrong_letter in ['a', 'b', 'c', 'd']:
+            wrong_text = q_row[f"text_{wrong_letter}"]
+
+    def generate():
+        # SSE standard format
+        for chunk in ai.stream_explanation(q_row["stem"], correct_text, wrong_text):
+            # Envia o chunk empacotado em JSON para que o cliente processe facilmente
+            data = json.dumps({"text": chunk})
+            yield f"data: {data}\n\n"
+        yield "data: [DONE]\n\n"
+
+    return Response(stream_with_context(generate()), mimetype='text/event-stream')

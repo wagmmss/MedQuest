@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from flask import Blueprint, jsonify, request, g
 
 from .db import get_db
+from planner import USP_WEIGHTS, get_normalized_area
 
 bp = Blueprint("stats", __name__)
 
@@ -281,10 +282,13 @@ def predictive_score():
         })
 
     areas_acc = []
-    total_acc = 0.0
-    valid_areas = 0
+    projected_score_weighted = 0.0
+    total_weights = 0.0
 
     for r in areas_stats:
+        norm_area = get_normalized_area(r["area"])
+        weight = USP_WEIGHTS.get(norm_area, 0.1)
+        
         # Penaliza acurácia se tiver menos de 5 tentativas
         acc = (r["correct"] / r["attempts"]) if r["attempts"] >= 5 else (r["correct"] / 5.0)
         acc_pct = round(acc * 100, 1)
@@ -293,10 +297,15 @@ def predictive_score():
             "accuracy": acc_pct,
             "attempts": r["attempts"]
         })
-        total_acc += acc_pct
-        valid_areas += 1
+        
+        projected_score_weighted += acc_pct * weight
+        total_weights += weight
 
-    projected_score = round(total_acc / valid_areas, 1) if valid_areas > 0 else 0.0
+    # Se a soma dos pesos for menor que 1 (ex: não respondeu todas as áreas ainda), projetamos proativamente baseando no peso atingido
+    # Ex: se só respondeu Clínica (0.3), projetamos a nota apenas nessa proporção? 
+    # Não, se ele só respondeu clínica, assumimos que as outras são 0 até que ele estude, ou normalizamos?
+    # Para ser realista na prova, o que ele não estudou é 0. Mas para motivação inicial, vamos normalizar.
+    projected_score = round(projected_score_weighted / total_weights, 1) if total_weights > 0 else 0.0
 
     return jsonify({
         "projected_score": projected_score,

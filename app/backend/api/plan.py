@@ -121,5 +121,18 @@ def generate_plan():
         GROUP BY area, subtema
     """).fetchall()
     
-    plan = generate_annual_plan(rows, start_date, data.exam_date, data.hours_per_week, intensive=data.intensive)
-    return jsonify(plan) # generate_annual_plan now returns a dict that might contain warning
+    answered = db.execute("""
+        SELECT q.subtema, COUNT(DISTINCT a.question_id) as ans_count, SUM(a.is_correct) as correct_count, COUNT(a.id) as attempts
+        FROM attempts a
+        JOIN questions q ON q.id = a.question_id
+        WHERE a.user_id = ? AND q.subtema IS NOT NULL
+        GROUP BY q.subtema
+    """, (g.user_id,)).fetchall()
+    
+    answered_map = {r["subtema"]: r for r in answered}
+    
+    plan = generate_annual_plan(
+        rows, start_date, data.exam_date, data.hours_per_week, 
+        intensive=data.intensive, user_progress=answered_map
+    )
+    return jsonify(plan)
