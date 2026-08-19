@@ -7,6 +7,7 @@ import { Play, Clock, CheckCircle2, XCircle, ChevronLeft, ChevronRight, FileSign
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import confetti from "canvas-confetti";
+import { motion, AnimatePresence } from "framer-motion";
 
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS";
 
@@ -615,8 +616,17 @@ export function SimuladoClient({
               </button>
             </div>
 
-            <div className="bg-card border border-border shadow-1 rounded-xl p-6 md:p-8 flex-1 overflow-y-auto">
-              {qDetail.technical_note && (
+            <div className="bg-card border border-border shadow-1 rounded-xl p-6 md:p-8 flex-1 overflow-x-hidden overflow-y-auto custom-scrollbar relative">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.2 }}
+                  className="w-full"
+                >
+                  {qDetail.technical_note && (
                 <div className="bg-amber-500/15 border-2 border-amber-500/50 rounded-xl p-5 flex gap-4 text-foreground mb-6 shadow-sm">
                   <AlertTriangle className="text-amber-500 shrink-0 mt-0.5" size={24} />
                   <div className="text-sm">
@@ -731,6 +741,8 @@ export function SimuladoClient({
                   Você não respondeu esta questão no simulado.
                 </div>
               )}
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         )}

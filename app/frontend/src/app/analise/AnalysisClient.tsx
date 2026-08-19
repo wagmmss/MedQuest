@@ -10,6 +10,7 @@ import {
   ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Cell, LabelList, Area
 } from 'recharts';
+import { motion } from 'framer-motion';
 
 export function AnalysisClient({
   timeline,
@@ -82,7 +83,11 @@ export function AnalysisClient({
       <div className="xl:col-span-2 flex flex-col gap-8 min-w-0">
         
         {/* Predictive Dashboard */}
-        <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-both">
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-primary/10 rounded-lg">
               <Target size={24} className="text-primary" />
@@ -162,10 +167,14 @@ export function AnalysisClient({
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Recommendations */}
-        <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100 fill-mode-both">
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-primary/10 rounded-lg">
               <Brain size={24} className="text-primary" />
@@ -210,10 +219,14 @@ export function AnalysisClient({
               </div>
             )}
           </div>
-        </section>
+        </motion.section>
 
         {/* Breakdown by Institution */}
-        <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 fill-mode-both">
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-secondary/10 rounded-lg">
               <BarChart3 size={24} className="text-secondary" />
@@ -414,14 +427,18 @@ export function AnalysisClient({
               </div>
             )}
           </div>
-        </section>
+        </motion.section>
       </div>
 
       {/* Right Column (1/3 on xl screens) */}
       <div className="flex flex-col gap-8 min-w-0">
         
         {/* Weak Topics */}
-        <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 fill-mode-both">
+        <motion.section 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-warning/10 rounded-lg">
               <AlertTriangle size={24} className="text-warning" />
@@ -430,7 +447,7 @@ export function AnalysisClient({
               Tópicos Fracos
             </h2>
           </div>
-          <div className="bg-card border border-border shadow-sm rounded-2xl overflow-hidden flex flex-col">
+          <div className="bg-card/50 backdrop-blur-xl border border-white/10 shadow-sm rounded-2xl overflow-hidden flex flex-col">
             <div className="p-4 border-b border-border/50 bg-muted/20">
               <p className="text-sm text-muted-foreground leading-relaxed">Tópicos com menor índice de acertos. Priorize estudá-los.</p>
             </div>
@@ -458,10 +475,14 @@ export function AnalysisClient({
               )}
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Distractors (New Feature) */}
-        <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-both">
+        <motion.section 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-destructive/10 rounded-lg">
               <AlertCircle size={24} className="text-destructive" />
@@ -470,7 +491,7 @@ export function AnalysisClient({
               Análise de Distratores
             </h2>
           </div>
-          <div className="bg-card border border-border shadow-sm rounded-2xl overflow-hidden">
+          <div className="bg-card/50 backdrop-blur-xl border border-white/10 shadow-sm rounded-2xl overflow-hidden">
             <div className="p-4 border-b border-border/50 bg-muted/20">
               <p className="text-sm text-muted-foreground leading-relaxed">Alternativas incorretas que você mais assinala. Fique atento a essas armadilhas.</p>
             </div>
@@ -506,7 +527,7 @@ export function AnalysisClient({
               )}
             </div>
           </div>
-        </section>
+        </motion.section>
 
       </div>
     </div>

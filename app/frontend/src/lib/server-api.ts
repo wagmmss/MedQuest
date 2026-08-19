@@ -50,16 +50,16 @@ async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<
 
 export const serverApi = {
   stats: {
-    getOverview: () => serverFetch<OverviewStats>("/api/stats/overview", { cache: 'no-store' }),
-    getCoverage: () => serverFetch<CoverageResponse>("/api/coverage", { cache: 'no-store' }),
-    getTimeline: (days: number = 14) => serverFetch<TimelineStat[]>(`/api/stats/timeline?days=${days}`, { cache: 'no-store' }),
-    getWeakTopics: () => serverFetch<WeakTopic[]>("/api/stats/weak-topics", { cache: 'no-store' }),
-    getRecommendations: () => serverFetch<Recommendation[]>("/api/stats/recommendations", { cache: 'no-store' }),
-    getDistractors: () => serverFetch<DistractorStat[]>("/api/stats/distractors", { cache: 'no-store' }),
-    getPredictiveScore: () => serverFetch<PredictiveScore>("/api/stats/predictive-score", { cache: 'no-store' }),
-    getAtRiskTopics: () => serverFetch<AtRiskTopic[]>("/api/stats/at-risk", { cache: 'no-store' }),
+    getOverview: () => serverFetch<OverviewStats>("/api/stats/overview", { next: { tags: ['stats'] } }),
+    getCoverage: () => serverFetch<CoverageResponse>("/api/coverage", { next: { tags: ['stats'] } }),
+    getTimeline: (days: number = 14) => serverFetch<TimelineStat[]>(`/api/stats/timeline?days=${days}`, { next: { tags: ['stats'] } }),
+    getWeakTopics: () => serverFetch<WeakTopic[]>("/api/stats/weak-topics", { next: { tags: ['stats'] } }),
+    getRecommendations: () => serverFetch<Recommendation[]>("/api/stats/recommendations", { next: { tags: ['stats'] } }),
+    getDistractors: () => serverFetch<DistractorStat[]>("/api/stats/distractors", { next: { tags: ['stats'] } }),
+    getPredictiveScore: () => serverFetch<PredictiveScore>("/api/stats/predictive-score", { next: { tags: ['stats'] } }),
+    getAtRiskTopics: () => serverFetch<AtRiskTopic[]>("/api/stats/at-risk", { next: { tags: ['stats'] } }),
     getBreakdown: (by: 'institution' | 'area' | 'year') => 
-      serverFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { cache: 'no-store' }),
+      serverFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { next: { tags: ['stats'] } }),
   },
   questions: {
     getMeta: () => serverFetch<QuestionMeta>("/api/meta", { next: { revalidate: 3600 } }),

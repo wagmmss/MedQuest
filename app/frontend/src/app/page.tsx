@@ -2,6 +2,7 @@ import { serverApi } from "@/lib/server-api";
 import { OverviewStats, PlannerWeek } from "@/types/api";
 import Link from "next/link";
 import { currentUser } from '@clerk/nextjs/server';
+import { OfflinePanel } from "@/components/OfflinePanel";
 
 export default async function Dashboard() {
   const stats: OverviewStats = await serverApi.stats.getOverview();
@@ -308,6 +309,11 @@ export default async function Dashboard() {
               </Link>
             </li>
           </ul>
+        </div>
+        
+        {/* Offline Panel */}
+        <div className="md:col-span-8 flex flex-col">
+          <OfflinePanel />
         </div>
       </div>
     </>

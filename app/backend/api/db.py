@@ -145,7 +145,7 @@ def init_db(app):
                             
             if "questions" in tables:
                 qc = _table_cols(db, "questions")
-                for col, ddl in [("is_verified", "INTEGER DEFAULT 0"), ("last_updated_at", "TEXT"), ("technical_note", "TEXT")]:
+                for col, ddl in [("is_verified", "INTEGER DEFAULT 0"), ("last_updated_at", "TEXT"), ("technical_note", "TEXT"), ("image_url", "TEXT"), ("explanation_image_url", "TEXT")]:
                     if col not in qc:
                         try:
                             db.execute(f"ALTER TABLE questions ADD COLUMN {col} {ddl}")

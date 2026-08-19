@@ -11,6 +11,7 @@ const API_BASE = process.env.NEXT_PUBLIC_APP_URL ||
   (typeof window !== "undefined" ? "" : "http://localhost:3000")));
 
 import { syncManager } from "./sync";
+import { localDb } from "./db";
 
 /**
  * Base fetch function with default headers
@@ -145,17 +146,40 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ attempts })
     }),
-    getBatch: (ids: number[], force_4_options: boolean = false) => apiFetch<BatchDetailResponse>(`/api/questions/batch`, {
-      method: "POST",
-      body: JSON.stringify({ ids, force_4_options })
-    }),
+    getBatch: async (ids: number[], force_4_options: boolean = false) => {
+      if (typeof window !== "undefined" && !navigator.onLine && localDb) {
+        console.warn("[API] Offline mode: loading questions from localDb");
+        try {
+          const cached = await localDb.questions.where('id').anyOf(ids).toArray();
+          const map = cached.reduce((acc, q) => { acc[q.id] = q; return acc; }, {} as Record<number, QuestionDetail>);
+          return { questions: map } as BatchDetailResponse;
+        } catch (e) {
+          console.error("Dexie error", e);
+        }
+      }
+      return apiFetch<BatchDetailResponse>(`/api/questions/batch`, {
+        method: "POST",
+        body: JSON.stringify({ ids, force_4_options })
+      });
+    },
   },
   flashcards: {
     generate: (question_id: number, wrong_letter: string) => apiFetch<FlashcardGenerateResponse>(`/api/flashcards/generate`, {
       method: "POST",
       body: JSON.stringify({ question_id, wrong_letter })
     }),
-    getDue: () => apiFetch<Flashcard[]>("/api/flashcards/review", { cache: 'no-store' }),
+    getDue: async () => {
+      if (typeof window !== "undefined" && !navigator.onLine && localDb) {
+        console.warn("[API] Offline mode: loading flashcards from localDb");
+        try {
+          return await localDb.flashcards.toArray();
+        } catch (e) {
+          console.error("Dexie error", e);
+          return [];
+        }
+      }
+      return apiFetch<Flashcard[]>("/api/flashcards/review", { cache: 'no-store' });
+    },
     review: (id: number, confidence: string) => apiFetch<{id: number, next_review_date: string}>(`/api/flashcards/${id}/review`, {
       method: "POST",
       body: JSON.stringify({ confidence })
