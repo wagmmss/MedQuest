@@ -12,32 +12,46 @@ const API_BASE = process.env.NEXT_PUBLIC_APP_URL ||
   (typeof window !== "undefined" ? "" : "http://localhost:3000")));
 
 import { syncManager } from "./sync";
-import { localDb, getUserId } from "./db";
+import { localDb, getLocalOwnerId } from "./db";
+
+export class OfflineQueuedError extends Error {
+  public localId: string;
+  constructor(localId: string) {
+    super("Operação salva neste dispositivo e aguardando sincronização.");
+    this.name = "OfflineQueuedError";
+    this.localId = localId;
+  }
+}
 
 /**
  * Base fetch function with default headers
  */
 async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE}${endpoint}`;
-  
-  // Isolar usuários convidados
-  let guestId = "";
-  if (typeof window !== "undefined") {
-    guestId = localStorage.getItem("mq_guest_id") || "";
-    if (!guestId) {
-      guestId = Math.random().toString(36).substring(2, 15);
-      localStorage.setItem("mq_guest_id", guestId);
-    }
+
+  const isMutation = options?.method && ["POST", "PUT", "PATCH", "DELETE"].includes(options.method.toUpperCase());
+  const isIdempotentEndpoint = isMutation && (
+    endpoint.includes("/attempt") || 
+    endpoint.includes("/review") || 
+    endpoint.includes("/favorite") || 
+    endpoint.includes("/planner/")
+  );
+
+  let idempotencyKey: string | undefined;
+  const headers = {
+    "Content-Type": "application/json",
+    ...options?.headers,
+  };
+
+  if (isIdempotentEndpoint) {
+    idempotencyKey = crypto.randomUUID();
+    (headers as any)["X-Idempotency-Key"] = idempotencyKey;
   }
 
   try {
     const response = await fetch(url, {
       ...options,
-      headers: {
-        "Content-Type": "application/json",
-        ...(guestId ? { "X-Guest-ID": guestId } : {}),
-        ...options?.headers,
-      },
+      headers,
     });
 
     if (!response.ok) {
@@ -46,12 +60,12 @@ async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> 
 
     return await response.json();
   } catch (error) {
-    if (typeof window !== "undefined" && options?.method && ["POST", "PUT"].includes(options.method.toUpperCase())) {
+    if (typeof window !== "undefined" && isIdempotentEndpoint) {
       const isNetworkError = error instanceof TypeError && error.message.includes("Failed to fetch");
       if (isNetworkError || !navigator.onLine) {
         console.warn("[API] Network error detected, adding to offline queue:", endpoint);
-        syncManager.enqueue(url, options);
-        throw error;
+        const localId = await syncManager.enqueue(url, { ...options, headers }, idempotencyKey!);
+        throw new OfflineQueuedError(localId);
       }
     }
     throw error;
@@ -166,8 +180,8 @@ export const api = {
       if (typeof window !== "undefined" && !navigator.onLine && localDb) {
         console.warn("[API] Offline mode: loading questions from localDb");
         try {
-          const uid = getUserId();
-          const cached = await localDb.questions.where('id').anyOf(ids).filter(q => q._user_id === uid).toArray();
+          const uid = getLocalOwnerId();
+          const cached = await localDb.questions.where('id').anyOf(ids).filter(q => q._owner_id === uid).toArray();
           return { questions: cached } as unknown as BatchDetailResponse;
         } catch (e) {
           console.error("Dexie error", e);
@@ -188,8 +202,8 @@ export const api = {
       if (typeof window !== "undefined" && !navigator.onLine && localDb) {
         console.warn("[API] Offline mode: loading flashcards from localDb");
         try {
-          const uid = getUserId();
-          return await localDb.flashcards.filter(f => f._user_id === uid).toArray();
+          const uid = getLocalOwnerId();
+          return await localDb.flashcards.filter(f => f._owner_id === uid).toArray();
         } catch (e) {
           console.error("Dexie error", e);
           return [];

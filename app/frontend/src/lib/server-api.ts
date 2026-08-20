@@ -1,27 +1,44 @@
 import { auth } from "@clerk/nextjs/server";
+import { getGuestSession } from "./session";
 import { 
   OverviewStats, CoverageResponse, QuestionMeta, PlannerConfig,
   TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat,
   PlannerPlanResponse, PlannerProgressMap, PredictiveScore, AtRiskTopic
 } from "@/types/api";
 
+export type { QuestionMeta };
+
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
 
 async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  const proxySecret = process.env.FLASK_API_PROXY_SECRET;
+  if (!proxySecret) {
+    throw new Error("FLASK_API_PROXY_SECRET is not configured on server.");
+  }
   const { getToken } = await auth();
   const token = await getToken();
+  const guestId = await getGuestSession();
   
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...(options?.headers as Record<string, string> || {}),
+  };
+  
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+  else if (guestId) headers["X-Guest-ID"] = guestId;
+  
+  headers["X-Internal-Proxy-Token"] = proxySecret;
+
   let response;
   try {
     response = await fetch(`${BACKEND_URL}${endpoint}`, {
       ...options,
-      headers: {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        ...options?.headers,
-      },
+      headers,
     });
   } catch (error) {
+    if (error instanceof Error && (error.message.includes('DYNAMIC_SERVER_USAGE') || (error as any).digest?.includes('DYNAMIC_SERVER_USAGE'))) {
+      throw error; // Re-throw to allow Next.js to handle it
+    }
     const message = error instanceof Error ? error.message : "Unknown error";
     throw new Error(`Fetch failed for ${BACKEND_URL}${endpoint}: ${message}`);
   }

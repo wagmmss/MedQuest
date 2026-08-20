@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, BatchAttemptItem, BatchAttemptResultItem } from "@/types/api";
-import { api } from "@/lib/api";
-import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag } from "lucide-react";
+import { api, OfflineQueuedError } from "@/lib/api";
+import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag, CloudOff } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 
@@ -28,7 +28,7 @@ interface ProfileData {
 
 const profilesData = profilesDataRaw as ProfileData[];
 
-type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS";
+type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS" | "OFFLINE_SUBMITTED";
 type SimuladoProfile = "usp_2026" | "usp_history" | "unicamp" | "custom";
 
 interface SavedSimuladoState {
@@ -38,6 +38,7 @@ interface SavedSimuladoState {
   timeLeft: number;
   currentIndex: number;
   resultsMap: Record<number, BatchAttemptResultItem>;
+  queueId?: string;
 }
 
 export function SimuladoClient({
@@ -62,6 +63,7 @@ export function SimuladoClient({
   // Answers: question_id -> letter
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [resultsMap, setResultsMap] = useState<Record<number, BatchAttemptResultItem>>({});
+  const [queueId, setQueueId] = useState<string | undefined>(undefined);
   
   // Marcar para revisar
   const [flagged, setFlagged] = useState<Record<number, boolean>>({});
@@ -91,7 +93,7 @@ export function SimuladoClient({
     if (saved) {
       try {
         const parsed = JSON.parse(saved) as SavedSimuladoState;
-        if (parsed.state === "PLAYING" || parsed.state === "RESULTS") {
+        if (parsed.state === "PLAYING" || parsed.state === "RESULTS" || parsed.state === "OFFLINE_SUBMITTED") {
           timer = setTimeout(() => {
             setHasSavedState(true);
           }, 0);
@@ -116,6 +118,7 @@ export function SimuladoClient({
         setTimeLeft(parsed.timeLeft);
         setCurrentIndex(parsed.currentIndex);
         setResultsMap(parsed.resultsMap);
+        setQueueId(parsed.queueId);
         
         // Re-fetch details batch
         const ids = parsed.queue.map((question) => question.id);
@@ -138,12 +141,12 @@ export function SimuladoClient({
   };
 
   useEffect(() => {
-    if (state === "PLAYING" || state === "RESULTS") {
+    if (state === "PLAYING" || state === "RESULTS" || state === "OFFLINE_SUBMITTED") {
       localStorage.setItem("medquest_simulado_state", JSON.stringify({
-        state, queue, answers, timeLeft, currentIndex, resultsMap
+        state, queue, answers, timeLeft, currentIndex, resultsMap, queueId
       }));
     }
-  }, [state, queue, answers, timeLeft, currentIndex, resultsMap]);
+  }, [state, queue, answers, timeLeft, currentIndex, resultsMap, queueId]);
 
   // Load Simulado
   const startSimulado = async () => {
@@ -253,11 +256,16 @@ export function SimuladoClient({
       setState("RESULTS");
       setCurrentIndex(0); // Go back to first question to review
 
-      
       localStorage.removeItem("medquest_simulado_state");
-    } catch {
-      toast.error("Erro ao enviar simulado. Tente novamente.");
-      setState("PLAYING");
+    } catch (err) {
+      if (err instanceof OfflineQueuedError) {
+        toast("Respostas do simulado salvas no dispositivo; serão sincronizadas quando a conexão voltar.", { icon: "💾" });
+        setQueueId(err.localId);
+        setState("OFFLINE_SUBMITTED");
+      } else {
+        toast.error("Erro ao enviar simulado. Tente novamente.");
+        setState("PLAYING");
+      }
     }
   }, [answers]);
 
@@ -286,6 +294,37 @@ export function SimuladoClient({
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [state]);
+
+  // Polling offline queue status
+  useEffect(() => {
+    if (state === "OFFLINE_SUBMITTED" && queueId) {
+      const interval = setInterval(async () => {
+        try {
+          const { syncManager } = await import('@/lib/sync');
+          const failed = await syncManager.getFailedItems();
+          if (failed.find(i => i.id === queueId)) {
+            toast.error("A sincronização falhou permanentemente. Você pode tentar reenviar as respostas salvas.");
+            setState("PLAYING"); // Retorna para que o usuário tente novamente
+            setQueueId(undefined);
+            clearInterval(interval);
+            return;
+          }
+          const pending = await syncManager.getQueue();
+          if (!pending.find(i => i.id === queueId)) {
+            // Não está pendente nem falhou -> completou!
+            toast.success("Simulado sincronizado com sucesso!");
+            // Remove o estado local pois já sincronizou, o backend processou
+            localStorage.removeItem("medquest_simulado_state");
+            setState("START");
+            clearInterval(interval);
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [state, queueId]);
 
   const handleSelect = useCallback((letter: string) => {
     if (state !== "PLAYING") return;
@@ -554,6 +593,31 @@ export function SimuladoClient({
         <p className="text-muted-foreground font-medium text-lg">
           {state === "LOADING" ? "Gerando cadernos e balanceando questões..." : "Corrigindo gabarito e calculando SRS..."}
         </p>
+      </div>
+    );
+  }
+
+  if (state === "OFFLINE_SUBMITTED") {
+    return (
+      <div className="max-w-2xl mx-auto py-16 px-6 text-center flex flex-col items-center gap-6 bg-card border border-border rounded-2xl shadow-1 mt-8 animate-in zoom-in-95 duration-200">
+        <div className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+          <CloudOff size={32} />
+        </div>
+        <div className="space-y-3">
+          <h2 className="text-2xl font-bold text-foreground">Simulado Salvo Offline</h2>
+          <p className="text-muted-foreground text-base">
+            Todas as suas {Object.keys(answers).length} respostas foram salvas com segurança neste dispositivo.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            A correção oficial, gabarito e atualização do seu algoritmo de repetição espaçada (FSRS) serão processados automaticamente assim que sua conexão com a internet for restabelecida.
+          </p>
+        </div>
+        <button
+          onClick={() => setState("START")}
+          className="bg-primary text-primary-foreground font-bold px-8 py-3.5 rounded-xl hover:bg-primary/90 transition-colors shadow-md text-sm mt-2"
+        >
+          Voltar ao Início
+        </button>
       </div>
     );
   }

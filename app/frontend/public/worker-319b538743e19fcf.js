@@ -1,0 +1,1 @@
+(()=>{"use strict";let e=["apis","start-url","pages","pages-rsc","pages-rsc-prefetch","static-data-assets","cross-origin"];self.addEventListener("activate",s=>{"u">typeof caches&&s.waitUntil(caches.keys().then(s=>Promise.all(s.filter(s=>e.some(e=>s.includes(e))).map(e=>(console.log(`[ServiceWorker] Removing legacy cache: ${e}`),caches.delete(e))))))})})();

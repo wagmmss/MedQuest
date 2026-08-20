@@ -8,6 +8,7 @@ export function SyncProvider() {
   const [queueCount, setQueueCount] = useState(0);
 
   useEffect(() => {
+    (window as unknown as { syncManager: typeof syncManager }).syncManager = syncManager;
     syncManager.init();
     
     // Sync UI with queue length
@@ -18,9 +19,12 @@ export function SyncProvider() {
 
     window.addEventListener('sync-queue-updated', handleUpdate);
     // Setup initial count
-    syncManager.getQueue().then(q => setQueueCount(q.length));
+    syncManager.getPendingCount().then(count => setQueueCount(count));
 
-    return () => window.removeEventListener('sync-queue-updated', handleUpdate);
+    return () => {
+      window.removeEventListener('sync-queue-updated', handleUpdate);
+      syncManager.cleanup();
+    };
   }, []);
 
   if (queueCount === 0) return null;

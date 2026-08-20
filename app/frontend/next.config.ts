@@ -4,22 +4,20 @@ import withPWAInit from "@ducanh2912/next-pwa";
 const withPWA = withPWAInit({
   dest: "public",
   disable: process.env.NODE_ENV === "development",
+  cacheStartUrl: false,
+  dynamicStartUrl: false,
+  cacheOnFrontEndNav: false,
+  aggressiveFrontEndNavCaching: false,
+  extendDefaultRuntimeCaching: false,
+  customWorkerSrc: "worker",
   workboxOptions: {
+    cleanupOutdatedCaches: true,
+    skipWaiting: true,
+    clientsClaim: true,
     runtimeCaching: [
       {
-        urlPattern: /^https?:\/\/.*\/api\/questions\/.*/i,
-        handler: "NetworkFirst",
-        options: {
-          cacheName: "medquest-api-cache",
-          expiration: {
-            maxEntries: 50,
-            maxAgeSeconds: 60 * 60 * 24 * 7, // 1 semana
-          },
-          networkTimeoutSeconds: 10,
-        },
-      },
-      {
-        urlPattern: /^https?:\/\/.*\/api\/images\/.*/i,
+        urlPattern: ({ sameOrigin, url: { pathname } }: { sameOrigin: boolean; url: { pathname: string } }) =>
+          sameOrigin && pathname.startsWith("/api/images/"),
         handler: "CacheFirst",
         options: {
           cacheName: "medquest-image-cache",
@@ -28,6 +26,11 @@ const withPWA = withPWAInit({
             maxAgeSeconds: 60 * 60 * 24 * 30, // 30 dias
           },
         },
+      },
+      {
+        urlPattern: ({ sameOrigin, url: { pathname } }: { sameOrigin: boolean; url: { pathname: string } }) =>
+          sameOrigin && pathname.startsWith("/api/"),
+        handler: "NetworkOnly",
       },
     ],
   },

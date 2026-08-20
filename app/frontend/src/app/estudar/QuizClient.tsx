@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
-import { api } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X } from "lucide-react";
+import { api, OfflineQueuedError } from "@/lib/api";
+import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -15,12 +15,23 @@ import Image from "next/image";
 
 type QuizState = "FILTERS" | "LOADING_QUEUE" | "PLAYING" | "FINISHED";
 
+const DEFAULT_META: QuestionMeta = {
+  total_questions: 0,
+  answered_questions: 0,
+  institutions: [],
+  years: [],
+  areas: [],
+  subtemas: [],
+  sources: [],
+  specialties: []
+};
+
 export function QuizClient({
-  meta,
-  initialFilters
+  meta = DEFAULT_META,
+  initialFilters = {}
 }: {
-  meta: QuestionMeta;
-  initialFilters: Record<string, string>;
+  meta?: QuestionMeta;
+  initialFilters?: Record<string, string>;
 }) {
   const router = useRouter();
   const [state, setState] = useState<QuizState>(Object.keys(initialFilters).length > 0 ? "LOADING_QUEUE" : "FILTERS");
@@ -32,7 +43,7 @@ export function QuizClient({
   const [subtemaSearch, setSubtemaSearch] = useState("");
 
   const [studyMode, setStudyMode] = useState<"TUTOR" | "SIMULADO">("TUTOR");
-  const [dynamicMeta, setDynamicMeta] = useState<QuestionMeta>(meta);
+  const [dynamicMeta, setDynamicMeta] = useState<QuestionMeta>(meta || DEFAULT_META);
   const [isUpdatingMeta, setIsUpdatingMeta] = useState(false);
   
   const [queue, setQueue] = useState<QuestionListItem[]>([]);
@@ -40,11 +51,12 @@ export function QuizClient({
   const [currentDetail, setCurrentDetail] = useState<QuestionDetail | null>(null);
   const [loadingDetail, setLoadingDetail] = useState(false);
   
-  const [sessionAnswers, setSessionAnswers] = useState<Record<number, { letter: string, result: AttemptResult }>>({});
+  const [sessionAnswers, setSessionAnswers] = useState<Record<number, { letter: string, result?: AttemptResult | null, isOffline?: boolean }>>({});
   
   // Quiz State
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
   const [attemptResult, setAttemptResult] = useState<AttemptResult | null>(null);
+  const [isOfflineSaved, setIsOfflineSaved] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [generatingFlashcard, setGeneratingFlashcard] = useState(false);
   const [flashcardResult, setFlashcardResult] = useState<FlashcardGenerateResponse | null>(null);
@@ -68,6 +80,7 @@ export function QuizClient({
     setLoadingDetail(true);
     setAttemptResult(null);
     setSelectedLetter(null);
+    setIsOfflineSaved(false);
     setFlashcardResult(null);
     setAiExplanation("");
     setIsExplaining(false);
@@ -75,7 +88,6 @@ export function QuizClient({
     try {
       const detail = await api.questions.getDetail(id);
       setCurrentDetail(detail);
-      // Removida a lógica de bloqueio por already_answered. Na revisão, o aluno tenta de novo!
     } catch {
       toast.error("Erro ao carregar questão.");
     } finally {
@@ -108,7 +120,8 @@ export function QuizClient({
       const ans = sessionAnswers[currentDetail.id];
       const timer = setTimeout(() => {
         setSelectedLetter(ans.letter);
-        setAttemptResult(ans.result);
+        setAttemptResult(ans.result || null);
+        setIsOfflineSaved(!!ans.isOffline);
       }, 0);
       return () => clearTimeout(timer);
     }
@@ -124,8 +137,8 @@ export function QuizClient({
       try {
         const parsed = JSON.parse(saved);
         if (parsed.state === "PLAYING" || parsed.state === "FINISHED") {
-          hasRestored.current = true;
           const timer = setTimeout(() => {
+            hasRestored.current = true;
             setQueue(parsed.queue);
             setCurrentIndex(parsed.currentIndex);
             setFilters(parsed.filters);
@@ -141,8 +154,8 @@ export function QuizClient({
     }
 
     if (Object.keys(initialFilters).length > 0 && queue.length === 0 && state === "LOADING_QUEUE") {
-      hasRestored.current = true;
       const timer = setTimeout(() => {
+        hasRestored.current = true;
         loadQueue({ limit: "50", ...initialFilters });
       }, 0);
       return () => clearTimeout(timer);
@@ -229,7 +242,7 @@ export function QuizClient({
   };
 
   const handleAttempt = useCallback(async () => {
-    if (attemptResult || submitting || !currentDetail || !selectedLetter) return;
+    if (attemptResult || isOfflineSaved || submitting || !currentDetail || !selectedLetter) return;
     
     setSubmitting(true);
     if (timerRef.current) clearInterval(timerRef.current);
@@ -237,18 +250,27 @@ export function QuizClient({
     try {
       const res = await api.questions.submitAttempt(currentDetail.id, selectedLetter, timeSpent * 1000, "defer");
       setAttemptResult(res);
+      setIsOfflineSaved(false);
       setSessionAnswers(prev => ({
         ...prev,
         [currentDetail.id]: { letter: selectedLetter, result: res }
       }));
 
-    } catch {
-      toast.error("Erro ao enviar resposta.");
-      // O timer será reiniciado automaticamente pelo useEffect pois attemptResult continua null e state="PLAYING"
+    } catch (err) {
+      if (err instanceof OfflineQueuedError) {
+        toast("Resposta salva neste dispositivo; será sincronizada quando a conexão voltar.", { icon: "💾" });
+        setIsOfflineSaved(true);
+        setSessionAnswers(prev => ({
+          ...prev,
+          [currentDetail.id]: { letter: selectedLetter, isOffline: true }
+        }));
+      } else {
+        toast.error("Erro ao enviar resposta.");
+      }
     } finally {
       setSubmitting(false);
     }
-  }, [attemptResult, submitting, currentDetail, selectedLetter, timeSpent]);
+  }, [attemptResult, isOfflineSaved, submitting, currentDetail, selectedLetter, timeSpent]);
 
   const handleGenerateFlashcard = async () => {
     if (!currentDetail || !selectedLetter) return;
@@ -925,7 +947,7 @@ export function QuizClient({
             })}
           </div>
 
-          {!attemptResult && selectedLetter && (
+          {!attemptResult && !isOfflineSaved && selectedLetter && (
             <button
               onClick={handleAttempt}
               disabled={submitting}
@@ -937,6 +959,28 @@ export function QuizClient({
                 "Confirmar Resposta"
               )}
             </button>
+          )}
+
+          {/* Offline Saved Banner */}
+          {isOfflineSaved && (
+            <div className="bg-primary/10 border border-primary/30 rounded-xl p-6 flex flex-col gap-4 text-foreground animate-in slide-in-from-bottom-2 duration-200 shadow-sm mt-2">
+              <div className="flex items-center gap-3">
+                <CloudOff className="text-primary shrink-0" size={24} />
+                <div>
+                  <p className="font-bold text-base">Resposta Salva Offline</p>
+                  <p className="text-sm text-muted-foreground">Sua resposta foi salva neste dispositivo e será sincronizada automaticamente assim que a conexão for restabelecida.</p>
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  onClick={nextQuestion}
+                  disabled={currentIndex === queue.length - 1}
+                  className="flex items-center gap-2 bg-primary text-primary-foreground font-bold px-4 py-2 rounded-lg transition-colors text-sm hover:bg-primary/90 disabled:opacity-50"
+                >
+                  Próxima Questão <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
           )}
 
           {/* Explanation Block */}

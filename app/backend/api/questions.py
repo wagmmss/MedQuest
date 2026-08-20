@@ -8,6 +8,7 @@ from flask import Blueprint, jsonify, request, g, Response, stream_with_context
 from .db import get_db
 from .filters import question_filter_clauses
 from .schemas import AttemptIn, BatchAttemptIn, ReviewIn, ValidationError
+from .idempotency import reserve_idempotency, complete_idempotency, fail_idempotency
 from . import srs
 from . import ai
 import random
@@ -390,45 +391,67 @@ def question_detail(qid):
 @bp.route("/questions/<int:qid>/attempt", methods=["POST"])
 def submit_attempt(qid):
     db = get_db()
+    raw_payload = request.get_data()
+
+    cached_resp, err_resp, lease_token = reserve_idempotency(db, g.user_id, request.path, request.method, raw_payload)
+    if cached_resp is not None:
+        return cached_resp
+    if err_resp is not None:
+        return err_resp
+
     try:
-        payload = AttemptIn.model_validate(request.get_json(force=True) or {})
-    except ValidationError as e:
-        return jsonify({"error": "invalid input", "details": e.errors()}), 400
+        try:
+            payload = AttemptIn.model_validate(request.get_json(force=True) or {})
+        except ValidationError as e:
+            if lease_token:
+                fail_idempotency(db, g.user_id, lease_token)
+            return jsonify({"error": "invalid input", "details": e.errors()}), 400
 
-    q = db.execute("SELECT correct_letter FROM questions WHERE id = ?", (qid,)).fetchone()
-    if not q:
-        return jsonify({"error": "not found"}), 404
+        q = db.execute("SELECT correct_letter FROM questions WHERE id = ?", (qid,)).fetchone()
+        if not q:
+            if lease_token:
+                fail_idempotency(db, g.user_id, lease_token)
+            return jsonify({"error": "not found"}), 404
 
-    selected = payload.selected_letter.upper()
-    is_correct = 1 if selected == q["correct_letter"] else 0
+        selected = payload.selected_letter.upper()
+        is_correct = 1 if selected == q["correct_letter"] else 0
 
-    db.execute(
-        """INSERT INTO attempts (question_id, selected_letter, is_correct, answered_at, time_spent_ms, confidence, user_id)
-           VALUES (?,?,?,?,?,?,?)""",
-        (qid, selected, is_correct, datetime.now(timezone.utc).isoformat(),
-         payload.time_spent_ms, payload.confidence, g.user_id),
-    )
+        db.execute(
+            """INSERT INTO attempts (question_id, selected_letter, is_correct, answered_at, time_spent_ms, confidence, user_id)
+               VALUES (?,?,?,?,?,?,?)""",
+            (qid, selected, is_correct, datetime.now(timezone.utc).isoformat(),
+             payload.time_spent_ms, payload.confidence, g.user_id),
+        )
 
-    # Repetição espaçada (FSRS)
-    next_review = None
-    if payload.confidence != "defer":
-        sr = db.execute("SELECT fsrs_card FROM spaced_repetition WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
-        card_json, next_review = srs.review(sr["fsrs_card"] if sr else None, is_correct, payload.confidence)
-        db.execute("""
-            INSERT INTO spaced_repetition (question_id, next_review_date, fsrs_card, user_id)
-            VALUES (?, ?, ?, ?)
-            ON CONFLICT(question_id, user_id) DO UPDATE SET
-                next_review_date = excluded.next_review_date, fsrs_card = excluded.fsrs_card
-        """, (qid, next_review, card_json, g.user_id))
-    db.commit()
+        # Repetição espaçada (FSRS)
+        next_review = None
+        if payload.confidence != "defer":
+            sr = db.execute("SELECT fsrs_card FROM spaced_repetition WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
+            card_json, next_review = srs.review(sr["fsrs_card"] if sr else None, is_correct, payload.confidence)
+            db.execute("""
+                INSERT INTO spaced_repetition (question_id, next_review_date, fsrs_card, user_id)
+                VALUES (?, ?, ?, ?)
+                ON CONFLICT(question_id, user_id) DO UPDATE SET
+                    next_review_date = excluded.next_review_date, fsrs_card = excluded.fsrs_card
+            """, (qid, next_review, card_json, g.user_id))
 
-    exp = db.execute("SELECT explanation_text FROM explanations WHERE question_id = ?", (qid,)).fetchone()
-    return jsonify({
-        "is_correct": bool(is_correct),
-        "correct_letter": q["correct_letter"],
-        "explanation": exp["explanation_text"] if exp else None,
-        "next_review_date": next_review,
-    })
+        exp = db.execute("SELECT explanation_text FROM explanations WHERE question_id = ?", (qid,)).fetchone()
+        resp_data = {
+            "is_correct": bool(is_correct),
+            "correct_letter": q["correct_letter"],
+            "explanation": exp["explanation_text"] if exp else None,
+            "next_review_date": next_review,
+        }
+
+        if lease_token:
+            complete_idempotency(db, g.user_id, 200, resp_data)
+        db.commit()
+
+        return jsonify(resp_data)
+    except Exception:
+        if lease_token:
+            fail_idempotency(db, g.user_id, lease_token)
+        raise
 
 
 @bp.route("/questions/<int:qid>/review", methods=["POST"])
@@ -472,90 +495,139 @@ def review_fsrs(qid):
 @bp.route("/attempt/batch", methods=["POST"])
 def submit_attempt_batch():
     db = get_db()
+    raw_payload = request.get_data()
+
+    cached_resp, err_resp, lease_token = reserve_idempotency(db, g.user_id, request.path, request.method, raw_payload)
+    if cached_resp is not None:
+        return cached_resp
+    if err_resp is not None:
+        return err_resp
+
     try:
-        payload = BatchAttemptIn.model_validate(request.get_json(force=True) or {})
-    except ValidationError as e:
-        return jsonify({"error": "invalid input", "details": e.errors()}), 400
+        try:
+            payload = BatchAttemptIn.model_validate(request.get_json(force=True) or {})
+        except ValidationError as e:
+            if lease_token:
+                fail_idempotency(db, g.user_id, lease_token)
+            return jsonify({"error": "invalid input", "details": e.errors()}), 400
 
-    results = []
-    answered_at = datetime.now(timezone.utc).isoformat()
+        results = []
+        answered_at = datetime.now(timezone.utc).isoformat()
 
-    # To avoid many SELECTs, get all correct_letters and explanations at once
-    q_ids = [item.question_id for item in payload.attempts]
-    if not q_ids:
-        return jsonify({"results": []})
+        # To avoid many SELECTs, get all correct_letters and explanations at once
+        q_ids = [item.question_id for item in payload.attempts]
+        if not q_ids:
+            resp_data = {"results": []}
+            if lease_token:
+                complete_idempotency(db, g.user_id, 200, resp_data)
+            db.commit()
+            return jsonify(resp_data)
 
-    CHUNK_SIZE = 500
-    q_map = {}
-    exp_map = {}
-    srs_map = {}
+        CHUNK_SIZE = 500
+        q_map = {}
+        exp_map = {}
+        srs_map = {}
 
-    for i in range(0, len(q_ids), CHUNK_SIZE):
-        chunk = q_ids[i:i + CHUNK_SIZE]
-        placeholders = ",".join("?" * len(chunk))
-        
-        qs = db.execute(f"SELECT id, correct_letter FROM questions WHERE id IN ({placeholders})", chunk).fetchall()
-        for q in qs:
-            q_map[q["id"]] = q["correct_letter"]
+        for i in range(0, len(q_ids), CHUNK_SIZE):
+            chunk = q_ids[i:i + CHUNK_SIZE]
+            placeholders = ",".join("?" * len(chunk))
             
-        exps = db.execute(f"SELECT question_id, explanation_text FROM explanations WHERE question_id IN ({placeholders})", chunk).fetchall()
-        for e in exps:
-            exp_map[e["question_id"]] = e["explanation_text"]
+            qs = db.execute(f"SELECT id, correct_letter FROM questions WHERE id IN ({placeholders})", chunk).fetchall()
+            for q in qs:
+                q_map[q["id"]] = q["correct_letter"]
+                
+            exps = db.execute(f"SELECT question_id, explanation_text FROM explanations WHERE question_id IN ({placeholders})", chunk).fetchall()
+            for e in exps:
+                exp_map[e["question_id"]] = e["explanation_text"]
+                
+            chunk_args = list(chunk)
+            chunk_args.append(g.user_id)
+            srs_data = db.execute(f"SELECT question_id, fsrs_card FROM spaced_repetition WHERE question_id IN ({placeholders}) AND user_id = ?", chunk_args).fetchall()
+            for s in srs_data:
+                srs_map[s["question_id"]] = s["fsrs_card"]
+
+        for item in payload.attempts:
+            correct_letter = q_map.get(item.question_id)
+            if not correct_letter:
+                continue
             
-        chunk_args = list(chunk)
-        chunk_args.append(g.user_id)
-        srs_data = db.execute(f"SELECT question_id, fsrs_card FROM spaced_repetition WHERE question_id IN ({placeholders}) AND user_id = ?", chunk_args).fetchall()
-        for s in srs_data:
-            srs_map[s["question_id"]] = s["fsrs_card"]
+            selected = item.selected_letter.upper()
+            is_correct = 1 if selected == correct_letter else 0
+            conf = item.confidence or "certeza"
 
-    for item in payload.attempts:
-        correct_letter = q_map.get(item.question_id)
-        if not correct_letter:
-            continue
-        
-        selected = item.selected_letter.upper()
-        is_correct = 1 if selected == correct_letter else 0
-        conf = item.confidence or "certeza"
+            db.execute(
+                """INSERT INTO attempts (question_id, selected_letter, is_correct, answered_at, time_spent_ms, confidence, user_id)
+                   VALUES (?,?,?,?,?,?,?)""",
+                (item.question_id, selected, is_correct, answered_at, item.time_spent_ms, conf, g.user_id),
+            )
 
-        db.execute(
-            """INSERT INTO attempts (question_id, selected_letter, is_correct, answered_at, time_spent_ms, confidence, user_id)
-               VALUES (?,?,?,?,?,?,?)""",
-            (item.question_id, selected, is_correct, answered_at, item.time_spent_ms, conf, g.user_id),
-        )
+            old_card = srs_map.get(item.question_id)
+            card_json, next_review = srs.review(old_card, is_correct, conf)
+            db.execute("""
+                INSERT INTO spaced_repetition (question_id, next_review_date, fsrs_card, user_id)
+                VALUES (?, ?, ?, ?)
+                ON CONFLICT(question_id, user_id) DO UPDATE SET
+                    next_review_date = excluded.next_review_date, fsrs_card = excluded.fsrs_card
+            """, (item.question_id, next_review, card_json, g.user_id))
 
-        old_card = srs_map.get(item.question_id)
-        card_json, next_review = srs.review(old_card, is_correct, conf)
-        db.execute("""
-            INSERT INTO spaced_repetition (question_id, next_review_date, fsrs_card, user_id)
-            VALUES (?, ?, ?, ?)
-            ON CONFLICT(question_id, user_id) DO UPDATE SET
-                next_review_date = excluded.next_review_date, fsrs_card = excluded.fsrs_card
-        """, (item.question_id, next_review, card_json, g.user_id))
+            results.append({
+                "question_id": item.question_id,
+                "is_correct": bool(is_correct),
+                "correct_letter": correct_letter,
+                "explanation": exp_map.get(item.question_id),
+                "next_review_date": next_review
+            })
 
-        results.append({
-            "question_id": item.question_id,
-            "is_correct": bool(is_correct),
-            "correct_letter": correct_letter,
-            "explanation": exp_map.get(item.question_id),
-            "next_review_date": next_review
-        })
-
-    db.commit()
-    return jsonify({"results": results})
+        resp_data = {"results": results}
+        if lease_token:
+            complete_idempotency(db, g.user_id, 200, resp_data)
+        db.commit()
+        return jsonify(resp_data)
+    except Exception:
+        if lease_token:
+            fail_idempotency(db, g.user_id, lease_token)
+        raise
 
 
 @bp.route("/questions/<int:qid>/favorite", methods=["POST"])
 def toggle_favorite(qid):
     db = get_db()
-    fav = db.execute("SELECT 1 FROM favorites WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
-    if fav:
-        db.execute("DELETE FROM favorites WHERE question_id = ? AND user_id = ?", (qid, g.user_id))
-        is_fav = False
-    else:
-        db.execute("INSERT INTO favorites (question_id, user_id) VALUES (?, ?)", (qid, g.user_id))
-        is_fav = True
-    db.commit()
-    return jsonify({"success": True, "is_favorite": is_fav})
+    raw_payload = request.get_data()
+
+    cached_resp, err_resp, lease_token = reserve_idempotency(db, g.user_id, request.path, request.method, raw_payload)
+    if cached_resp is not None:
+        return cached_resp
+    if err_resp is not None:
+        return err_resp
+
+    try:
+        data = request.get_json(silent=True) or {}
+        target_fav = data.get("is_favorite")
+        if target_fav is not None:
+            if target_fav:
+                db.execute("INSERT OR IGNORE INTO favorites (question_id, user_id) VALUES (?, ?)", (qid, g.user_id))
+                is_fav = True
+            else:
+                db.execute("DELETE FROM favorites WHERE question_id = ? AND user_id = ?", (qid, g.user_id))
+                is_fav = False
+        else:
+            fav = db.execute("SELECT 1 FROM favorites WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
+            if fav:
+                db.execute("DELETE FROM favorites WHERE question_id = ? AND user_id = ?", (qid, g.user_id))
+                is_fav = False
+            else:
+                db.execute("INSERT OR IGNORE INTO favorites (question_id, user_id) VALUES (?, ?)", (qid, g.user_id))
+                is_fav = True
+
+        resp_data = {"success": True, "is_favorite": is_fav}
+        if lease_token:
+            complete_idempotency(db, g.user_id, 200, resp_data)
+        db.commit()
+        return jsonify(resp_data)
+    except Exception:
+        if lease_token:
+            fail_idempotency(db, g.user_id, lease_token)
+        raise
 
 
 @bp.route("/questions/batch", methods=["POST"])

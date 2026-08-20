@@ -35,38 +35,49 @@ class TursoCursor:
 class TursoConnection:
     def __init__(self, client):
         self.client = client
+        self.tx = None
         
+    def _get_tx(self):
+        if self.tx is None:
+            self.tx = self.client.transaction()
+        return self.tx
+
     def execute(self, sql, parameters=()):
-        # Replace ? with ? in SQL? libsql_client supports ? syntax but prefers list of args
-        # Ensure parameters is a list/tuple
         args = list(parameters)
         clean_args = [x if not isinstance(x, bytes) else x.decode('utf-8', 'ignore') for x in args]
         try:
-            result = self.client.execute(sql, clean_args)
+            tx = self._get_tx()
+            result = tx.execute(sql, clean_args)
             return TursoCursor(result)
         except Exception as e:
             logger.error(f"Turso Error on query: {sql} with args {clean_args}. Error: {e}")
+            self.rollback()
             raise
 
     def batch(self, queries):
-        from libsql_client import Statement
-        stmts = []
+        res = []
         for sql, parameters in queries:
-            args = list(parameters)
-            clean_args = [x if not isinstance(x, bytes) else x.decode('utf-8', 'ignore') for x in args]
-            stmts.append(Statement(sql, clean_args))
-        try:
-            results = self.client.batch(stmts)
-            return [TursoCursor(r) for r in results]
-        except Exception as e:
-            logger.error(f"Turso Error on batch queries. Error: {e}")
-            raise
+            res.append(self.execute(sql, parameters))
+        return res
             
     def commit(self):
-        # HTTP client is auto-commit or we can ignore
-        pass
+        if self.tx is not None:
+            try:
+                self.tx.commit()
+            finally:
+                self.tx = None
+                
+    def rollback(self):
+        if self.tx is not None:
+            try:
+                self.tx.rollback()
+            except Exception:
+                pass
+            finally:
+                self.tx = None
         
     def close(self):
+        self.rollback()
         self.client.close()
 
 def get_db():
@@ -96,6 +107,11 @@ def get_db():
 def close_db(exception=None):
     db = g.pop("db", None)
     if db is not None:
+        if exception:
+            if hasattr(db, "rollback"):
+                db.rollback()
+            else:
+                db.execute("ROLLBACK") if hasattr(db, "in_transaction") and getattr(db, "in_transaction", False) else None
         db.close()
 
 def _table_cols(db, table):
@@ -137,7 +153,28 @@ def init_db(app):
                 stem TEXT NOT NULL,
                 images TEXT,
                 medical_references TEXT)""")
-            
+
+            db.execute("""CREATE TABLE IF NOT EXISTS idempotency_keys (
+                user_id TEXT NOT NULL,
+                key TEXT NOT NULL,
+                method TEXT NOT NULL,
+                path TEXT NOT NULL,
+                payload_hash TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'completed',
+                status_code INTEGER,
+                response_body TEXT,
+                lease_expires_at REAL DEFAULT 0,
+                created_at TEXT NOT NULL,
+                PRIMARY KEY (user_id, key))""")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_idempotency_created ON idempotency_keys(created_at)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_idempotency_lease ON idempotency_keys(user_id, lease_expires_at)")
+
+            existing_cols = _table_cols(db, "idempotency_keys")
+            if "status" not in existing_cols:
+                db.execute("ALTER TABLE idempotency_keys ADD COLUMN status TEXT NOT NULL DEFAULT 'completed'")
+            if "lease_expires_at" not in existing_cols:
+                db.execute("ALTER TABLE idempotency_keys ADD COLUMN lease_expires_at REAL DEFAULT 0")
+
             # FTS5 table
             try:
                 db.execute("""CREATE VIRTUAL TABLE IF NOT EXISTS questions_fts USING fts5(

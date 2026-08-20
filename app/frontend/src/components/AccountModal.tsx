@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useUser, useClerk } from "@clerk/nextjs";
 import { motion, AnimatePresence } from "framer-motion";
 import { api } from "@/lib/api";
-import { localDb } from "@/lib/db";
+import { localDb, getLocalOwnerId } from "@/lib/db";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -37,7 +37,12 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
           if (key.startsWith("medquest_planner_topics_")) localStorage.removeItem(key);
         }
         if (localDb) {
-          await Promise.all([localDb.flashcards.clear(), localDb.syncQueue.clear()]);
+          const uid = getLocalOwnerId();
+          await Promise.all([
+            localDb.questions.where({ _owner_id: uid }).delete(),
+            localDb.flashcards.where({ _owner_id: uid }).delete(),
+            localDb.syncQueue.where({ owner_id: uid }).delete()
+          ]);
         }
         router.replace("/");
         router.refresh();
