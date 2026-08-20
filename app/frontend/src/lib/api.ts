@@ -108,13 +108,13 @@ export const api = {
       // Remove limit from meta request so it returns accurate totals
       params.delete("limit");
       const qs = params.toString();
-      return apiFetch<QuestionMeta>(`/api/meta${qs ? `?${qs}` : ''}`, { next: { revalidate: 3600 } });
+      return apiFetch<QuestionMeta>(`/api/meta${qs ? `?${qs}` : ''}`, { next: { revalidate: 60 } });
     },
     getSubtemas: (area?: string, q?: string) => {
       const params = new URLSearchParams();
       if (area) params.append("area", area);
       if (q) params.append("q", q);
-      return apiFetch<SubtemaItem[]>(`/api/subtemas?${params.toString()}`, { next: { revalidate: 3600 } });
+      return apiFetch<SubtemaItem[]>(`/api/subtemas?${params.toString()}`, { next: { revalidate: 60 } });
     },
     getList: (filters: Record<string, string | string[]>) => {
       const params = new URLSearchParams();
