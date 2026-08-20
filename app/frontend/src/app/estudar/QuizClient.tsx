@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, ChevronRight, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle } from "lucide-react";
+import { Play, Filter, Clock, CheckCircle2, XCircle, ChevronRight, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -27,6 +27,7 @@ export function QuizClient({
     typeof filters.limit === "string" ? filters.limit : "50"
   );
   const [zenMode, setZenMode] = useState(false);
+  const [subtemaSearch, setSubtemaSearch] = useState("");
 
   useEffect(() => {
     if (zenMode) {
@@ -483,11 +484,25 @@ export function QuizClient({
                 <span>Subtemas (Múltipla Escolha)</span>
                 {isUpdatingMeta && <span className="text-xs text-muted-foreground animate-pulse">Atualizando...</span>}
               </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Buscar subtema..."
+                  value={subtemaSearch}
+                  onChange={(e) => setSubtemaSearch(e.target.value)}
+                  className="w-full bg-input border border-border rounded-md py-2 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary pl-9"
+                />
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                  <Search size={16} />
+                </div>
+              </div>
               <div className="w-full bg-input border border-border rounded-md p-3 h-48 overflow-y-auto flex flex-col gap-1">
                 {dynamicMeta.subtemas?.length === 0 && (
                   <p className="text-xs text-muted-foreground italic">Nenhum subtema encontrado para esta área.</p>
                 )}
-                {dynamicMeta.subtemas?.map(s => {
+                {dynamicMeta.subtemas
+                  ?.filter(s => s.subtema.toLowerCase().includes(subtemaSearch.toLowerCase()))
+                  .map(s => {
                   const isSelected = Array.isArray(filters.subtema) 
                     ? filters.subtema.includes(s.subtema) 
                     : filters.subtema === s.subtema;
