@@ -21,7 +21,7 @@ export default async function PlannerPage({ searchParams }: { searchParams: Prom
     serverApi.planner.generatePlan({
       start_date: config.start_date,
       exam_date: config.exam_date,
-      hours_per_week: (config.days_per_week || 5) * (config.hours_per_day || 4),
+      hours_per_week: Math.min(168, (config.days_per_week || 5) * (config.hours_per_day || 4)),
       intensive: isIntensive
     }),
     serverApi.planner.getProgress()

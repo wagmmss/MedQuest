@@ -27,8 +27,11 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
     Gera um plano de estudos fatiado por semanas com base no tempo disponível
     e no peso histórico das áreas na prova de Residência da USP.
     """
-    start_date = datetime.fromisoformat(start_date_str)
-    exam_date = datetime.fromisoformat(exam_date_str)
+    try:
+        start_date = datetime.fromisoformat(start_date_str.replace("Z", "+00:00"))
+        exam_date = datetime.fromisoformat(exam_date_str.replace("Z", "+00:00"))
+    except ValueError:
+        return {"error": "Formato de data inválido."}
 
     # Normaliza para naive: exam_date costuma vir só com a data (sem timezone),
     # enquanto start_date pode vir com timezone (ex.: default gerado no backend).
@@ -85,9 +88,10 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         q_count = r['q_count']
         
         prog = user_progress.get(subtema, {"ans_count": 0, "correct_count": 0, "attempts": 0})
-        ans_count = prog["ans_count"]
-        attempts = prog["attempts"]
-        acc = (prog["correct_count"] / attempts) if attempts > 0 else 0
+        ans_count = prog.get("ans_count") or 0
+        attempts = prog.get("attempts") or 0
+        correct_count = prog.get("correct_count") or 0
+        acc = (correct_count / attempts) if attempts > 0 else 0
         
         remaining_q = max(0, q_count - ans_count)
         
