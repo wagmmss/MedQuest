@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { AccountModal } from "./AccountModal";
 import { ThemeToggle } from "./ThemeToggle";
+import { useZenMode } from "@/hooks/useZenMode";
 
 const NAV_ITEMS = [
   { href: "/", label: "Dashboard", icon: "dashboard" },
@@ -23,6 +24,7 @@ export default function TopNav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const { isZenMode, toggleZenMode } = useZenMode();
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
@@ -40,6 +42,13 @@ export default function TopNav() {
       <header className="app-top-nav md:hidden flex justify-between items-center w-full px-6 py-3 h-16 bg-surface border-b border-outline-variant z-10 sticky top-0">
         <h1 className="font-headline-md text-headline-md font-bold text-primary">MedQuest</h1>
         <div className="flex items-center gap-4">
+          <button
+            onClick={toggleZenMode}
+            className="text-on-surface-variant hover:bg-surface-container-low rounded-full p-2 transition-colors flex items-center justify-center cursor-pointer"
+            title={isZenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen (Z)"}
+          >
+            <span className="material-symbols-outlined">{isZenMode ? "fullscreen_exit" : "fullscreen"}</span>
+          </button>
           <ThemeToggle />
           <button 
             onClick={() => setIsMobileMenuOpen(true)}

@@ -306,6 +306,15 @@ def question_detail(qid):
         (qid, g.user_id)
     ).fetchone()["n"]
     is_favorite = db.execute("SELECT 1 FROM favorites WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
+    cc = None
+    if q.get("clinical_case_id"):
+        cc_row = db.execute("SELECT stem, images FROM clinical_cases WHERE id = ?", (q["clinical_case_id"],)).fetchone()
+        if cc_row:
+            cc = {
+                "stem": cc_row["stem"],
+                "images": json.loads(cc_row["images"]) if cc_row["images"] else []
+            }
+
     return jsonify({
         "id": q["id"], "source_file": q["source_file"], "source_number": q["source_number"],
         "year": q["year"], "institution_code": q["institution_code"],
@@ -315,6 +324,9 @@ def question_detail(qid):
         "last_updated_at": q.get("last_updated_at"),
         "technical_note": q.get("technical_note"),
         "medical_references": q.get("medical_references"),
+        "clinical_case": cc,
+        "usp_macro": q.get("usp_macro"),
+        "usp_micro": q.get("usp_micro"),
         "alternatives": [dict(a) for a in alts],
         "images": [i["file_path"] for i in imgs],
         "already_answered": dict(last_attempt) if last_attempt else None,
@@ -547,6 +559,16 @@ def question_batch_detail():
         for r in db.execute(f"SELECT question_id FROM favorites WHERE question_id IN ({ph}) AND user_id = ?", chunk_user).fetchall():
             fav_set.add(r["question_id"])
 
+    cc_map = {}
+    cc_ids = list({q["clinical_case_id"] for q in q_map.values() if q.get("clinical_case_id")})
+    if cc_ids:
+        ph_cc = ",".join("?" * len(cc_ids))
+        for r in db.execute(f"SELECT id, stem, images FROM clinical_cases WHERE id IN ({ph_cc})", cc_ids).fetchall():
+            cc_map[r["id"]] = {
+                "stem": r["stem"],
+                "images": json.loads(r["images"]) if r["images"] else []
+            }
+
     out = []
     for qid in ids:
         q = q_map.get(qid)
@@ -580,6 +602,9 @@ def question_batch_detail():
             "last_updated_at": q.get("last_updated_at"),
             "technical_note": q.get("technical_note"),
             "medical_references": q.get("medical_references"),
+            "clinical_case": cc_map.get(q.get("clinical_case_id")),
+            "usp_macro": q.get("usp_macro"),
+            "usp_micro": q.get("usp_micro"),
             "alternatives": alts,
             "images": img_map.get(qid, []),
             "already_answered": attempt_map.get(qid),
@@ -607,18 +632,19 @@ def explain_question(qid):
         (qid, g.user_id)
     ).fetchone()
 
-    q_row = db.execute("SELECT stem, answer, text_a, text_b, text_c, text_d FROM questions WHERE id = ?", (qid,)).fetchone()
+    q_row = db.execute("SELECT stem, correct_letter FROM questions WHERE id = ?", (qid,)).fetchone()
     if not q_row:
         return jsonify({"error": "Question not found"}), 404
 
-    correct_letter = q_row["answer"].lower()
-    correct_text = q_row[f"text_{correct_letter}"]
+    correct_letter = q_row["correct_letter"]
+    correct_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (qid, correct_letter)).fetchone()
+    correct_text = correct_alt["text"] if correct_alt else ""
     wrong_text = None
     
     if last_attempt and last_attempt["is_correct"] == 0:
-        wrong_letter = last_attempt["selected_letter"].lower()
-        if wrong_letter in ['a', 'b', 'c', 'd']:
-            wrong_text = q_row[f"text_{wrong_letter}"]
+        wrong_letter = last_attempt["selected_letter"]
+        wrong_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (qid, wrong_letter)).fetchone()
+        wrong_text = wrong_alt["text"] if wrong_alt else None
 
     def generate():
         # SSE standard format

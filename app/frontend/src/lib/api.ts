@@ -147,7 +147,7 @@ export const api = {
       method: "POST",
       body: JSON.stringify(config)
     }),
-    submitAttemptBatch: (attempts: BatchAttemptItem[]) => apiFetch<BatchAttemptResult>(`/api/questions/attempt/batch`, {
+    submitAttemptBatch: (attempts: BatchAttemptItem[]) => apiFetch<BatchAttemptResult>(`/api/attempt/batch`, {
       method: "POST",
       body: JSON.stringify({ attempts })
     }),

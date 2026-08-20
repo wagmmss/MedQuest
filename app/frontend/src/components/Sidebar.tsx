@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { useUser } from "@clerk/nextjs";
 import { AccountModal } from "./AccountModal";
 import { ThemeToggle } from "./ThemeToggle";
+import { useZenMode } from "@/hooks/useZenMode";
 
 const NAV_ITEMS = [
   { href: "/", label: "Dashboard", icon: "dashboard" },
@@ -23,6 +24,7 @@ export function Sidebar() {
   const { user, isLoaded } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shortcut, setShortcut] = useState("Cmd+K");
+  const { isZenMode, toggleZenMode } = useZenMode();
 
   useEffect(() => {
     if (typeof navigator !== "undefined") {
@@ -76,6 +78,13 @@ export function Sidebar() {
               <span className="material-symbols-outlined" data-icon="search" aria-hidden="true">search</span>
               <span className="font-label-md text-label-md flex-1">Buscar...</span>
               <kbd className="text-[10px] bg-surface px-1.5 py-0.5 rounded border border-outline-variant opacity-70">{shortcut}</kbd>
+            </button>
+            <button
+              onClick={toggleZenMode}
+              className="flex items-center justify-center p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors text-left cursor-pointer"
+              title={isZenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen (Z)"}
+            >
+              <span className="material-symbols-outlined">{isZenMode ? "fullscreen_exit" : "fullscreen"}</span>
             </button>
             <ThemeToggle />
           </div>

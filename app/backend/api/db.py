@@ -105,7 +105,7 @@ def init_db(app):
             user_id TEXT DEFAULT '1', PRIMARY KEY (week, user_id))""")
         db.execute("""CREATE TABLE IF NOT EXISTS planner_config (
             user_id TEXT PRIMARY KEY, exam_date TEXT, start_date TEXT,
-            days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30,
+            days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30, target_score REAL,
             updated_at TEXT)""")
         db.execute("""CREATE TABLE IF NOT EXISTS flashcards (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -116,11 +116,20 @@ def init_db(app):
             next_review_date TEXT,
             fsrs_card TEXT,
             user_id TEXT DEFAULT '1')""")
+        
+        db.execute("""CREATE TABLE IF NOT EXISTS clinical_cases (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            stem TEXT NOT NULL,
+            images TEXT,
+            medical_references TEXT)""")
 
         db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_question ON attempts (user_id, question_id)")
         db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_correct ON attempts (user_id, is_correct)")
         db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area_subtema ON questions (area, subtema)")
         db.execute("CREATE INDEX IF NOT EXISTS idx_spaced_repetition_review ON spaced_repetition (user_id, next_review_date)")
+        db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area ON questions (area)")
+        db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_created_at ON attempts (created_at)")
+        db.execute("CREATE INDEX IF NOT EXISTS idx_srs_reviews_next_review ON srs_reviews (next_review)")
         
         db.commit()
 
@@ -141,7 +150,7 @@ def init_db(app):
                             
             if "flashcards" in tables:
                 fc = _table_cols(db, "flashcards")
-                for col, ddl in [("user_id", "TEXT DEFAULT '1'"), ("source_context", "TEXT"), ("status", "TEXT DEFAULT 'active'"), ("reported_reason", "TEXT")]:
+                for col, ddl in [("user_id", "TEXT DEFAULT '1'"), ("source_context", "TEXT"), ("status", "TEXT DEFAULT 'active'"), ("report_status", "TEXT"), ("is_ai_generated", "INTEGER DEFAULT 0")]:
                     if col not in fc:
                         try:
                             db.execute(f"ALTER TABLE flashcards ADD COLUMN {col} {ddl}")
@@ -150,7 +159,16 @@ def init_db(app):
                             
             if "questions" in tables:
                 qc = _table_cols(db, "questions")
-                for col, ddl in [("is_verified", "INTEGER DEFAULT 0"), ("last_updated_at", "TEXT"), ("technical_note", "TEXT"), ("image_url", "TEXT"), ("explanation_image_url", "TEXT")]:
+                for col, ddl in [
+                    ("is_verified", "INTEGER DEFAULT 0"), 
+                    ("last_updated_at", "TEXT"), 
+                    ("technical_note", "TEXT"), 
+                    ("image_url", "TEXT"), 
+                    ("explanation_image_url", "TEXT"),
+                    ("clinical_case_id", "INTEGER"),
+                    ("usp_macro", "TEXT"),
+                    ("usp_micro", "TEXT")
+                ]:
                     if col not in qc:
                         try:
                             db.execute(f"ALTER TABLE questions ADD COLUMN {col} {ddl}")

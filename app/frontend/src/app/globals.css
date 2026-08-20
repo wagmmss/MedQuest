@@ -102,14 +102,21 @@
   }
 }
 
+/* Transição suave para menus */
+.app-sidebar, .app-top-nav {
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
 /* Modo Zen - Oculta menus laterais e cabeçalho, expandindo a área de estudo */
 body.zen-mode .app-sidebar,
 body.zen-mode .app-top-nav {
-  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 body.zen-mode main {
   max-width: 100% !important;
-  width: 100% !important;
+  width: 100vw !important;
   margin: 0 !important;
   padding: 1.5rem !important;
 }

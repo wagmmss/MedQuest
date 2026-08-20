@@ -7,6 +7,9 @@ import { Play, Filter, Clock, CheckCircle2, XCircle, ChevronRight, BookOpen, Hea
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
+import { ImageViewer } from "@/components/ImageViewer";
 
 type QuizState = "FILTERS" | "LOADING_QUEUE" | "PLAYING" | "FINISHED";
 
@@ -191,6 +194,14 @@ export function QuizClient({
     try {
       const res = await api.questions.submitAttempt(currentDetail.id, selectedLetter, timeSpent * 1000, "defer");
       setAttemptResult(res);
+      if (res.is_correct) {
+        confetti({
+          particleCount: 80,
+          spread: 60,
+          origin: { y: 0.6 },
+          colors: ['#10b981', '#34d399', '#059669']
+        });
+      }
     } catch (e) {
       toast.error("Erro ao enviar resposta.");
       // O timer será reiniciado automaticamente pelo useEffect pois attemptResult continua null e state="PLAYING"
@@ -574,22 +585,11 @@ export function QuizClient({
     <div className="max-w-4xl mx-auto w-full flex flex-col gap-6 pb-12 relative">
       {/* Fullscreen Image Modal */}
       {enlargedImage && (
-        <div 
-          className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8 cursor-zoom-out"
-          onClick={() => setEnlargedImage(null)}
-        >
-          <img 
-            src={`/api/images/${enlargedImage}`} 
-            alt="Imagem Ampliada" 
-            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-          />
-          <button 
-            className="absolute top-4 right-4 bg-surface/50 hover:bg-surface text-foreground p-2 rounded-full transition-colors"
-            onClick={(e) => { e.stopPropagation(); setEnlargedImage(null); }}
-          >
-            <XCircle size={24} />
-          </button>
-        </div>
+        <ImageViewer 
+          src={`/api/images/${enlargedImage}`} 
+          isOpen={!!enlargedImage} 
+          onClose={() => setEnlargedImage(null)} 
+        />
       )}
       {/* Top Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-card border border-border shadow-1 rounded-xl p-4">
@@ -710,6 +710,33 @@ export function QuizClient({
               </div>
             </div>
             
+            {/* Clinical Case */}
+            {q.clinical_case && (
+              <div className="bg-muted/30 border-l-4 border-primary rounded-r-xl p-5 mb-2">
+                <h4 className="text-sm font-bold text-primary mb-3 uppercase tracking-wider">Caso Clínico</h4>
+                <div className="text-foreground text-lg leading-relaxed whitespace-pre-wrap">
+                  {q.clinical_case.stem}
+                </div>
+                {q.clinical_case.images && q.clinical_case.images.length > 0 && (
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-4">
+                    {q.clinical_case.images.map((img, i) => (
+                      <div 
+                        key={i} 
+                        className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-xs"
+                        onClick={() => setEnlargedImage(img)}
+                      >
+                        <img 
+                          src={`/api/images/${img}`} 
+                          alt={`Imagem do Caso ${i+1}`} 
+                          className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300" 
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            
             <div className="text-foreground text-lg md:text-xl font-medium leading-relaxed whitespace-pre-wrap">
               {q.stem}
             </div>
@@ -762,7 +789,13 @@ export function QuizClient({
               }
 
               return (
-                <button
+                <motion.button
+                  whileTap={!attemptResult ? { scale: 0.98 } : {}}
+                  animate={
+                    attemptResult && isWrong ? { x: [-5, 5, -5, 5, 0], transition: { duration: 0.4 } } : 
+                    attemptResult && isCorrect ? { scale: [1, 1.02, 1], transition: { duration: 0.4 } } : 
+                    {}
+                  }
                   key={alt.letter}
                   onClick={() => !attemptResult && !submitting && setSelectedLetter(alt.letter)}
                   disabled={!!attemptResult || submitting}
@@ -788,7 +821,7 @@ export function QuizClient({
                   <div className="pt-1.5 text-foreground leading-relaxed flex-1">
                     {alt.text}
                   </div>
-                </button>
+                </motion.button>
               );
             })}
           </div>

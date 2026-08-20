@@ -137,10 +137,15 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
             ))}
             
             {!loading && results.length === 0 && (
-              <div className="bg-card border border-border rounded-xl p-12 text-center flex flex-col items-center justify-center gap-4">
-                <Search size={40} className="text-muted-foreground/30" />
-                <h3 className="text-lg font-medium text-foreground">Nenhuma questão encontrada</h3>
-                <p className="text-muted-foreground text-sm">Tente usar palavras-chave mais simples ou termos diferentes.</p>
+              <div className="bg-card border border-border border-dashed shadow-sm rounded-xl p-16 text-center flex flex-col items-center justify-center gap-4 animate-in fade-in zoom-in-95 duration-500">
+                <div className="w-20 h-20 bg-muted/50 rounded-full flex items-center justify-center mb-2">
+                  <Search size={32} className="text-muted-foreground/50" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">Nenhuma questão encontrada</h3>
+                <p className="text-muted-foreground text-base max-w-md">
+                  Não encontramos resultados para "<strong className="text-foreground">{debouncedQuery}</strong>". 
+                  Tente usar palavras-chave mais curtas, remover filtros ou buscar por sinônimos.
+                </p>
               </div>
             )}
           </div>

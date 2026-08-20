@@ -55,6 +55,20 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
     show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 300, damping: 24 } }
   };
 
+  const hour = new Date().getHours();
+  let greeting = "Boa noite";
+  if (hour >= 5 && hour < 12) greeting = "Bom dia";
+  else if (hour >= 12 && hour < 18) greeting = "Boa tarde";
+
+  const motivationalMessages = [
+    stats.streak_days >= 5 ? `Sua sequência está em 🔥! ${stats.streak_days} dias seguidos.` : null,
+    currentPlannerWeek && currentPlannerWeek.week > 20 ? `Reta final! Você está na Semana ${currentPlannerWeek.week}.` : null,
+    pendentes === 0 && stats.distinct_answered > 0 ? "Você já bateu sua meta diária de revisões! 🎉" : null,
+    "Aqui está o seu progresso na preparação para a USP."
+  ].filter(Boolean);
+
+  const motivationalMessage = motivationalMessages[0];
+
   if (!mounted) return <div className="min-h-screen" />; // Previne hydration mismatch
 
   return (
@@ -68,10 +82,10 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
       <motion.section variants={itemVariants} className="flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
         <div>
           <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">
-            Bom dia, {firstName}
+            {greeting}, {firstName}
           </h2>
           <p className="font-body-md text-body-md text-on-surface-variant">
-            Aqui está o seu progresso semanal na preparação para a USP.
+            {motivationalMessage}
           </p>
         </div>
       </motion.section>

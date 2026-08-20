@@ -122,15 +122,30 @@ export function FlashcardClient() {
 
   if (queue.length === 0) {
     return (
-      <div className="bg-card border border-border shadow-1 rounded-xl p-10 max-w-2xl mx-auto w-full text-center">
-        <div className="w-20 h-20 bg-success/20 text-success rounded-full flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 size={40} />
-        </div>
-        <h2 className="text-2xl font-bold text-foreground mb-3">Tudo Revisado!</h2>
-        <p className="text-muted-foreground mb-8">
-          Você não tem nenhum flashcard vencido no momento. Volte a estudar para gerar novos cartões com seus erros!
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-card border border-border shadow-1 rounded-xl p-12 max-w-2xl mx-auto w-full text-center flex flex-col items-center"
+      >
+        <motion.div 
+          animate={{ scale: [1, 1.1, 1] }} 
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-24 h-24 bg-success/20 text-success rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <CheckCircle2 size={48} />
+        </motion.div>
+        <h2 className="text-2xl font-black text-foreground mb-3 tracking-tight">Tudo Revisado!</h2>
+        <p className="text-muted-foreground mb-8 text-lg max-w-md">
+          Você não tem nenhum flashcard vencido no momento. Volte a estudar para gerar novos cartões com seus erros e fortalecer a memória.
         </p>
-      </div>
+        <button 
+          onClick={() => window.location.href = '/estudar'}
+          className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:-translate-y-0.5 flex items-center gap-2"
+        >
+          <span className="material-symbols-outlined text-lg" data-icon="menu_book">menu_book</span>
+          Ir para Banco de Questões
+        </button>
+      </motion.div>
     );
   }
 
