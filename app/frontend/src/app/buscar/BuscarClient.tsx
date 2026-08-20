@@ -143,7 +143,7 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
                 </div>
                 <h3 className="text-xl font-bold text-foreground">Nenhuma questão encontrada</h3>
                 <p className="text-muted-foreground text-base max-w-md">
-                  Não encontramos resultados para "<strong className="text-foreground">{debouncedQuery}</strong>". 
+                  Não encontramos resultados para "<strong className="text-foreground">{query}</strong>". 
                   Tente usar palavras-chave mais curtas, remover filtros ou buscar por sinônimos.
                 </p>
               </div>

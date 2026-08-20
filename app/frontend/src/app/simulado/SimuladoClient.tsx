@@ -9,8 +9,8 @@ import toast from "react-hot-toast";
 import confetti from "canvas-confetti";
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
-import { FixedSizeGrid } from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
+import { Grid as FixedSizeGrid } from "react-window";
+import { AutoSizer } from "react-virtualized-auto-sizer";
 
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS";
 
@@ -632,87 +632,86 @@ export function SimuladoClient({
             )}
           </div>
           <div className="flex-1 overflow-hidden">
+            {/* @ts-ignore */}
             <AutoSizer>
-              {({ height, width }) => {
-                // Responsive column count based on width
-                // padding 16px (lg:p-4) -> total width available
+              {({ height, width }: { height: number; width: number }) => {
                 const availableWidth = width;
                 let columnCount = 5;
                 if (availableWidth > 300) columnCount = 6;
                 if (availableWidth > 400) columnCount = 8;
-                if (availableWidth > 600) columnCount = 5; // lg breakpoint resets sidebar width
+                if (availableWidth > 600) columnCount = 5;
                 
                 const gap = 8;
                 const columnWidth = (availableWidth - gap * (columnCount - 1)) / columnCount;
-                const rowHeight = columnWidth; // aspect-square
+                const rowHeight = columnWidth;
                 const rowCount = Math.ceil(filteredIndices.length / columnCount);
 
+                const Cell = ({ columnIndex, rowIndex, style }: any) => {
+                  const index = rowIndex * columnCount + columnIndex;
+                  if (index >= filteredIndices.length) return null;
+                  
+                  const idx = filteredIndices[index];
+                  const q = queue[idx];
+                  const isCurrent = idx === currentIndex;
+                  const answeredLetter = answers[q.id];
+                  const res = resultsMap[q.id];
+                  const isFlagged = flagged[q.id];
+
+                  let btnClass = "bg-muted text-muted-foreground hover:bg-muted/80";
+                  
+                  if (isReview) {
+                    if (res?.is_correct) btnClass = "bg-success text-success-foreground font-bold";
+                    else if (res && !res.is_correct) btnClass = "bg-destructive text-destructive-foreground font-bold";
+                    else btnClass = "bg-card border border-dashed border-muted-foreground text-muted-foreground";
+                  } else {
+                    if (answeredLetter) btnClass = "bg-primary/20 text-primary font-bold";
+                  }
+
+                  if (isCurrent) {
+                    btnClass += " ring-2 ring-foreground ring-offset-2 ring-offset-background";
+                  }
+
+                  const cellStyle = {
+                    ...style,
+                    left: Number(style.left) + gap / 2,
+                    top: Number(style.top) + gap / 2,
+                    width: Number(style.width) - gap,
+                    height: Number(style.height) - gap
+                  };
+
+                  return (
+                    <div style={cellStyle}>
+                      <button
+                        key={q.id}
+                        onClick={() => navigateTo(idx)}
+                        className={clsx(
+                          "w-full h-full rounded flex flex-col items-center justify-center text-xs transition-all relative",
+                          btnClass
+                        )}
+                      >
+                        {isFlagged && (
+                          <span className="absolute -top-0.5 -right-0.5 text-warning">
+                            <Flag size={8} fill="currentColor" />
+                          </span>
+                        )}
+                        <span className={clsx(!isReview && answeredLetter ? "text-[10px]" : "text-xs")}>{idx + 1}</span>
+                        {!isReview && answeredLetter && <span className="text-[14px] leading-none">{answeredLetter}</span>}
+                      </button>
+                    </div>
+                  );
+                };
+
                 return (
+                  // @ts-ignore
                   <FixedSizeGrid
                     columnCount={columnCount}
                     columnWidth={columnWidth + gap}
-                    height={height}
                     rowCount={rowCount}
                     rowHeight={rowHeight + gap}
-                    width={width}
-                    style={{ overflowX: "hidden" }}
-                  >
-                    {({ columnIndex, rowIndex, style }) => {
-                      const index = rowIndex * columnCount + columnIndex;
-                      if (index >= filteredIndices.length) return null;
-                      
-                      const idx = filteredIndices[index];
-                      const q = queue[idx];
-                      const isCurrent = idx === currentIndex;
-                      const answeredLetter = answers[q.id];
-                      const res = resultsMap[q.id];
-                      const isFlagged = flagged[q.id];
-
-                      let btnClass = "bg-muted text-muted-foreground hover:bg-muted/80";
-                      
-                      if (isReview) {
-                        if (res?.is_correct) btnClass = "bg-success text-success-foreground font-bold";
-                        else if (res && !res.is_correct) btnClass = "bg-destructive text-destructive-foreground font-bold";
-                        else btnClass = "bg-card border border-dashed border-muted-foreground text-muted-foreground";
-                      } else {
-                        if (answeredLetter) btnClass = "bg-primary/20 text-primary font-bold";
-                      }
-
-                      if (isCurrent) {
-                        btnClass += " ring-2 ring-foreground ring-offset-2 ring-offset-background";
-                      }
-
-                      // Apply gap by reducing size within style box
-                      const cellStyle = {
-                        ...style,
-                        left: Number(style.left) + gap / 2,
-                        top: Number(style.top) + gap / 2,
-                        width: Number(style.width) - gap,
-                        height: Number(style.height) - gap
-                      };
-
-                      return (
-                        <div style={cellStyle}>
-                          <button
-                            key={q.id}
-                            onClick={() => navigateTo(idx)}
-                            className={clsx(
-                              "w-full h-full rounded flex flex-col items-center justify-center text-xs transition-all relative",
-                              btnClass
-                            )}
-                          >
-                            {isFlagged && (
-                              <span className="absolute -top-0.5 -right-0.5 text-warning">
-                                <Flag size={8} fill="currentColor" />
-                              </span>
-                            )}
-                            <span className={clsx(!isReview && answeredLetter ? "text-[10px]" : "text-xs")}>{idx + 1}</span>
-                            {!isReview && answeredLetter && <span className="text-[14px] leading-none">{answeredLetter}</span>}
-                          </button>
-                        </div>
-                      );
-                    }}
-                  </FixedSizeGrid>
+                    cellComponent={Cell}
+                    cellProps={{}}
+                    style={{ overflowX: "hidden", height, width }}
+                  />
                 );
               }}
             </AutoSizer>

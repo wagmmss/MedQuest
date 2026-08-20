@@ -5,6 +5,7 @@ import { Flashcard } from "@/types/api";
 import { api } from "@/lib/api";
 import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function FlashcardClient() {
   const [queue, setQueue] = useState<Flashcard[]>([]);
