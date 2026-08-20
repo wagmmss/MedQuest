@@ -411,11 +411,11 @@ export function SimuladoClient({
               onChange={(e) => setSimuladoProfile(e.target.value as any)}
               className="w-full bg-background border border-border rounded-lg p-3 text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-primary/50"
             >
-              <option value="usp_2026">USP 2026 (120 Qs, 4 Alternativas)</option>
-              <option value="usp_history">Histórico USP (120 Qs, 5 Alternativas)</option>
-              <option value="unicamp">UNICAMP (80 Qs, 4 Alternativas)</option>
-              <option value="sus_sp">SUS-SP (100 Qs, 5 Alternativas)</option>
-              <option value="custom">Configuração Personalizada</option>
+              <option className="bg-background text-foreground" value="usp_2026">USP 2026 (120 Qs, 4 Alternativas)</option>
+              <option className="bg-background text-foreground" value="usp_history">Histórico USP (120 Qs, 5 Alternativas)</option>
+              <option className="bg-background text-foreground" value="unicamp">UNICAMP (80 Qs, 4 Alternativas)</option>
+              <option className="bg-background text-foreground" value="sus_sp">SUS-SP (100 Qs, 5 Alternativas)</option>
+              <option className="bg-background text-foreground" value="custom">Configuração Personalizada</option>
             </select>
           </div>
         )}

@@ -418,10 +418,10 @@ export function QuizClient({
                 value={filters.status || ""}
                 onChange={(e) => setFilters({ ...filters, status: e.target.value })}
               >
-                <option value="">Todas</option>
-                <option value="unanswered">Não respondidas</option>
-                <option value="srs_due">Para Revisão (Repetição Espaçada)</option>
-                <option value="wrong">Errei anteriormente</option>
+                <option className="bg-background text-foreground" value="">Todas</option>
+                <option className="bg-background text-foreground" value="unanswered">Não respondidas</option>
+                <option className="bg-background text-foreground" value="srs_due">Para Revisão (Repetição Espaçada)</option>
+                <option className="bg-background text-foreground" value="wrong">Errei anteriormente</option>
               </select>
             </div>
             
@@ -454,9 +454,9 @@ export function QuizClient({
                 value={filters.area || ""}
                 onChange={(e) => setFilters({ ...filters, area: e.target.value })}
               >
-                <option value="">Todas as Áreas</option>
+                <option className="bg-background text-foreground" value="">Todas as Áreas</option>
                 {dynamicMeta.areas.map(a => (
-                  <option key={a.area} value={a.area}>{a.area} ({a.n})</option>
+                  <option className="bg-background text-foreground" key={a.area} value={a.area}>{a.area} ({a.n})</option>
                 ))}
               </select>
             </div>
@@ -472,9 +472,9 @@ export function QuizClient({
                 value={filters.institution || ""}
                 onChange={(e) => setFilters({ ...filters, institution: e.target.value })}
               >
-                <option value="">Todas as Instituições</option>
+                <option className="bg-background text-foreground" value="">Todas as Instituições</option>
                 {dynamicMeta.institutions.map(i => (
-                  <option key={i.institution_code} value={i.institution_code}>{i.institution_code} ({i.n})</option>
+                  <option className="bg-background text-foreground" key={i.institution_code} value={i.institution_code}>{i.institution_code} ({i.n})</option>
                 ))}
               </select>
             </div>
