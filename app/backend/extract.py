@@ -16,16 +16,16 @@ from datetime import datetime
 import fitz  # PyMuPDF
 import pdfplumber
 
-SRC_DIR = os.environ.get("MEDQUEST_PDF_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import glob
+
+SRC_DIR = os.environ.get("MEDQUEST_PDF_DIR", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 APP_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG_DIR = os.path.join(APP_DIR, "frontend", "public", "images")
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "medquest.db")
 
-SOURCE_FILES = [
-    ("Cirurgia.pdf", "Cirurgia"),
-    ("Clínica.pdf", "Clínica Médica"),
-    ("Miscelânea.pdf", "Miscelânea"),
-]
+# Encontra dinamicamente todos os PDFs no SRC_DIR
+pdf_paths = glob.glob(os.path.join(SRC_DIR, "*.pdf"))
+SOURCE_FILES = [(os.path.basename(p), os.path.splitext(os.path.basename(p))[0]) for p in pdf_paths]
 
 # --- correção de ligaduras quebradas (fontes embutidas no export) ---
 CID_MAP = {
