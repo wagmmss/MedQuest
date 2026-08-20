@@ -245,6 +245,7 @@ def meta():
         (f"SELECT DISTINCT q.year FROM questions q WHERE q.year IS NOT NULL AND {where} ORDER BY q.year", params),
         (f"SELECT q.source_file, COUNT(*) n FROM questions q WHERE {where} GROUP BY q.source_file ORDER BY q.source_file", params),
         (f"SELECT q.area, COUNT(*) n FROM questions q WHERE q.area IS NOT NULL AND q.area != '' AND {where} GROUP BY q.area ORDER BY n DESC", params),
+        (f"SELECT q.specialty, COUNT(*) n FROM questions q WHERE q.specialty IS NOT NULL AND q.specialty != '' AND {where} GROUP BY q.specialty ORDER BY n DESC", params),
         (f"SELECT q.subtema, COUNT(*) n FROM questions q WHERE q.subtema IS NOT NULL AND q.subtema != '' AND {where_no_subtema} GROUP BY q.subtema ORDER BY n DESC LIMIT 300", params_no_subtema),
         (f"SELECT COUNT(*) n FROM questions q WHERE {where}", params),
         (f"SELECT COUNT(DISTINCT q.id) n FROM questions q WHERE {where} AND q.id IN (SELECT question_id FROM attempts WHERE user_id = ?)", answered_params)

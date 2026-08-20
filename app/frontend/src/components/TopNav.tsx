@@ -39,7 +39,7 @@ export default function TopNav() {
 
   return (
     <>
-      <header className="app-top-nav md:hidden flex justify-between items-center w-full px-6 py-3 h-16 bg-surface border-b border-outline-variant z-10 sticky top-0">
+      <header className="app-top-nav md:hidden flex justify-between items-center w-full px-6 py-3 h-16 bg-surface/90 backdrop-blur-xl border-b border-outline-variant z-10 sticky top-0 transition-all duration-300">
         <h1 className="font-headline-md text-headline-md font-bold text-primary">MedQuest</h1>
         <div className="flex items-center gap-4">
           <button

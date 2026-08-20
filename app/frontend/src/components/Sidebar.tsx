@@ -38,7 +38,7 @@ export function Sidebar() {
 
   return (
     <>
-      <aside className="app-sidebar hidden md:flex flex-col bg-surface-container-low h-screen left-0 w-64 border-r border-outline-variant p-4 gap-stack-md z-10">
+      <aside className="app-sidebar hidden md:flex flex-col bg-surface-container-low/90 backdrop-blur-xl h-screen left-0 w-64 border-r border-outline-variant p-4 gap-stack-md z-10 transition-all duration-300">
         <div className="mb-6 flex flex-col items-center justify-center p-4">
           <div className="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-2">
             <span className="material-symbols-outlined" data-icon="local_hospital">local_hospital</span>

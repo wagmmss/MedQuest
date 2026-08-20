@@ -137,6 +137,15 @@ def init_db(app):
                 stem TEXT NOT NULL,
                 images TEXT,
                 medical_references TEXT)""")
+            
+            # FTS5 table
+            try:
+                db.execute("""CREATE VIRTUAL TABLE IF NOT EXISTS questions_fts USING fts5(
+                    stem,
+                    explanation
+                )""")
+            except Exception as e:
+                logger.warning(f"FTS table creation might not be fully supported or already exists: {e}")
 
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_question ON attempts (user_id, question_id)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_correct ON attempts (user_id, is_correct)")
@@ -187,7 +196,8 @@ def init_db(app):
                     ("explanation_image_url", "TEXT"),
                     ("clinical_case_id", "INTEGER"),
                     ("usp_macro", "TEXT"),
-                    ("usp_micro", "TEXT")
+                    ("usp_micro", "TEXT"),
+                    ("specialty", "TEXT")
                 ]:
                     if col not in qc:
                         try:

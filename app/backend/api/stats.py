@@ -1,4 +1,5 @@
 """Blueprint: desempenho, recomendações e mapa de cobertura."""
+import time
 from datetime import datetime, timedelta, timezone
 
 from flask import Blueprint, jsonify, request, g
@@ -8,9 +9,35 @@ from planner import USP_WEIGHTS, get_normalized_area
 
 bp = Blueprint("stats", __name__)
 
+class SimpleTTLCache:
+    def __init__(self, ttl_seconds):
+        self.ttl = ttl_seconds
+        self.cache = {}
+        self.expiry = {}
+        
+    def get(self, key):
+        if key in self.cache and time.time() < self.expiry[key]:
+            return self.cache[key]
+        return None
+        
+    def set(self, key, value):
+        self.cache[key] = value
+        self.expiry[key] = time.time() + self.ttl
+        
+overview_cache = SimpleTTLCache(60)
 
 @bp.route("/stats/overview")
 def overview():
+    try:
+        tz_offset = int(request.args.get('tz_offset', 0))
+    except (ValueError, TypeError):
+        tz_offset = 0
+
+    cache_key = f"{g.user_id}_{tz_offset}"
+    cached = overview_cache.get(cache_key)
+    if cached:
+        return jsonify(cached)
+
     db = get_db()
     total_q = db.execute("SELECT COUNT(*) n FROM questions WHERE missing_alts = 0").fetchone()["n"]
     total_attempts = db.execute("SELECT COUNT(*) n FROM attempts WHERE user_id = ?", (g.user_id,)).fetchone()["n"]
@@ -63,14 +90,16 @@ def overview():
             streak_days += 1
             cursor_day -= timedelta(days=1)
 
-    return jsonify({
+    result = {
         "total_questions": total_q, "distinct_answered": distinct_answered,
         "total_attempts": total_attempts, "accuracy_all_attempts": accuracy,
         "accuracy_latest_attempt": accuracy_latest, "coverage_pct": coverage_pct,
         "srs_due_count": srs_due_count, "accuracy_last7": accuracy_last7,
         "accuracy_prev7": accuracy_prev7, "streak_days": streak_days,
         "flashcards_due_count": flashcards_due_count,
-    })
+    }
+    overview_cache.set(cache_key, result)
+    return jsonify(result)
 
 
 def _breakdown(db, group_col, label_col=None):
@@ -99,6 +128,7 @@ def breakdown():
         "source": ("source_file", "source_file"),
         "year": ("year", "year"), "topic": ("topic", "topic"),
         "area": ("area", "area"), "subtema": ("subtema", "subtema"),
+        "specialty": ("specialty", "specialty"),
     }
     if by not in col_map:
         return jsonify({"error": "invalid 'by'"}), 400

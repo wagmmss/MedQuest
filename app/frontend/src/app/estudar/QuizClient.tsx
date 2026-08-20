@@ -724,9 +724,38 @@ export function QuizClient({
           </div>
         </div>
       ) : (
-        <>
-          {/* Question Stem */}
-          <div className="bg-card border border-border shadow-1 rounded-xl p-6 md:p-8 flex flex-col gap-6">
+        <div className={clsx("grid gap-6 items-start", q.clinical_case ? "lg:grid-cols-2" : "grid-cols-1")}>
+          {q.clinical_case && (
+            <div className="lg:sticky lg:top-24 h-fit bg-muted/30 border-l-4 border-primary shadow-sm rounded-r-xl rounded-l-md p-6 flex flex-col gap-6">
+              <h4 className="text-sm font-bold text-primary uppercase tracking-wider flex items-center gap-2">
+                <BookOpen size={18} /> Caso Clínico
+              </h4>
+              <div className="text-foreground text-lg leading-relaxed whitespace-pre-wrap">
+                {q.clinical_case.stem}
+              </div>
+              {q.clinical_case.images && q.clinical_case.images.length > 0 && (
+                <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-2">
+                  {q.clinical_case.images.map((img, i) => (
+                    <div 
+                      key={i} 
+                      className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-xs"
+                      onClick={() => setEnlargedImage(img)}
+                    >
+                      <img 
+                        src={`/api/images/${img}`} 
+                        alt={`Imagem do Caso ${i+1}`} 
+                        className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300" 
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="flex flex-col gap-6">
+            {/* Question Stem */}
+            <div className="bg-card border border-border shadow-1 rounded-xl p-6 md:p-8 flex flex-col gap-6">
             {q.technical_note && (
               <div className="bg-amber-500/15 border-2 border-amber-500/50 rounded-xl p-5 flex gap-4 text-foreground mb-2 shadow-sm">
                 <AlertTriangle className="text-amber-500 shrink-0 mt-0.5" size={24} />
@@ -773,33 +802,7 @@ export function QuizClient({
               </div>
             </div>
             
-            {/* Clinical Case */}
-            {q.clinical_case && (
-              <div className="bg-muted/30 border-l-4 border-primary rounded-r-xl p-5 mb-2">
-                <h4 className="text-sm font-bold text-primary mb-3 uppercase tracking-wider">Caso Clínico</h4>
-                <div className="text-foreground text-lg leading-relaxed whitespace-pre-wrap">
-                  {q.clinical_case.stem}
-                </div>
-                {q.clinical_case.images && q.clinical_case.images.length > 0 && (
-                  <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-4">
-                    {q.clinical_case.images.map((img, i) => (
-                      <div 
-                        key={i} 
-                        className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-xs"
-                        onClick={() => setEnlargedImage(img)}
-                      >
-                        <img 
-                          src={`/api/images/${img}`} 
-                          alt={`Imagem do Caso ${i+1}`} 
-                          className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300" 
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-            
+
             <div className="text-foreground text-lg md:text-xl font-medium leading-relaxed whitespace-pre-wrap">
               {q.stem}
             </div>
@@ -1059,7 +1062,8 @@ export function QuizClient({
               </div>
             </div>
           )}
-        </>
+          </div>
+        </div>
       )}
     </div>
   );
