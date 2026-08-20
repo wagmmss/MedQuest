@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 import os
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "")
-MODEL_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key={API_KEY}"
+MODEL_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={API_KEY}"
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "medquest.db")
 
@@ -133,8 +133,8 @@ def main():
                     
         conn.commit()
         
-        # Respeitar limites da API (Gemini Free: 15 RPM max, pause 5s)
-        time.sleep(5)
+        # Respeitar limites da API (Gemini 3.7 Free: 5 RPM max, pause 13s)
+        time.sleep(13)
         
     print(f"\nFinalizado! {success_count} comentários gerados com sucesso.")
 
