@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { CloudOff, Download, RefreshCw, Database } from "lucide-react";
-import { localDb } from "@/lib/db";
+import { localDb, getUserId } from "@/lib/db";
 import { api } from "@/lib/api";
 
 export function OfflinePanel() {
@@ -56,7 +56,8 @@ export function OfflinePanel() {
       setDownloadProgress(10);
       const flashcards = await api.flashcards.getDue();
       if (flashcards && flashcards.length > 0 && localDb) {
-        await localDb.flashcards.bulkPut(flashcards);
+        const uid = getUserId();
+        await localDb.flashcards.bulkPut(flashcards.map(f => ({ ...f, _user_id: uid })));
       }
       setDownloadProgress(30);
       
@@ -70,7 +71,8 @@ export function OfflinePanel() {
           const chunk = ids.slice(i, i + chunkSize);
           const detailResponse = await api.questions.getBatch(chunk, true);
           if (detailResponse.questions && localDb) {
-            await localDb.questions.bulkPut(Object.values(detailResponse.questions));
+            const uid = getUserId();
+            await localDb.questions.bulkPut(Object.values(detailResponse.questions).map(q => ({ ...q, _user_id: uid })));
           }
           loaded += chunk.length;
           setDownloadProgress(40 + (loaded / ids.length) * 60);

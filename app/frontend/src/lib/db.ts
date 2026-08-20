@@ -1,9 +1,19 @@
 import Dexie, { Table } from 'dexie';
 import { QuestionDetail, Flashcard } from '@/types/api';
 
+declare global {
+  interface Window {
+    Clerk?: {
+      user?: {
+        id: string;
+      };
+    };
+  }
+}
+
 export function getUserId(): string {
   if (typeof window === "undefined") return "server";
-  const clerkUser = (window as any).Clerk?.user?.id;
+  const clerkUser = window.Clerk?.user?.id;
   if (clerkUser) return clerkUser;
   
   let guestId = localStorage.getItem("mq_guest_id");

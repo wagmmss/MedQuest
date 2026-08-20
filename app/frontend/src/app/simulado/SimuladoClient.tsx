@@ -6,13 +6,27 @@ import { api } from "@/lib/api";
 import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
-import { triggerConfetti } from "@/lib/confetti";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
 import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
 import { AutoSizer } from "react-virtualized-auto-sizer";
 import Image from "next/image";
-import profilesData from "@/lib/profiles.json";
+import profilesDataRaw from "@/lib/profiles.json";
+
+interface ProfileData {
+  id: string;
+  name: string;
+  questions: number;
+  alternatives: number;
+  duration_hours: number;
+  is_force_4_options: boolean;
+  fetch_method: "getSimuladoUSP" | "getList";
+  fetch_args?: Record<string, string | string[]>;
+  balance_label?: string;
+}
+
+const profilesData = profilesDataRaw as ProfileData[];
 
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS";
 type SimuladoProfile = "usp_2026" | "usp_history" | "unicamp" | "custom";
@@ -159,7 +173,7 @@ export function SimuladoClient({
         if (profile.fetch_method === "getSimuladoUSP") {
           qList = await api.questions.getSimuladoUSP();
         } else if (profile.fetch_method === "getList" && profile.fetch_args) {
-          qList = await api.questions.getList(profile.fetch_args as any);
+          qList = await api.questions.getList(profile.fetch_args);
         } else {
           qList = await api.questions.getSimuladoUSP();
         }
@@ -238,9 +252,7 @@ export function SimuladoClient({
       setResultsMap(rMap);
       setState("RESULTS");
       setCurrentIndex(0); // Go back to first question to review
-      if (stats.completed_today === stats.daily_goal) {
-        triggerConfetti();
-      }
+
       
       localStorage.removeItem("medquest_simulado_state");
     } catch {

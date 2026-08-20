@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search } from "lucide-react";
+import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { triggerConfetti } from "@/lib/confetti";
+
 import { ImageViewer } from "@/components/ImageViewer";
 import { useZenMode } from "@/hooks/useZenMode";
 import Image from "next/image";
@@ -241,9 +241,7 @@ export function QuizClient({
         ...prev,
         [currentDetail.id]: { letter: selectedLetter, result: res }
       }));
-      if (newStats.completed_today === newStats.daily_goal) {
-        triggerConfetti();
-      }
+
     } catch {
       toast.error("Erro ao enviar resposta.");
       // O timer será reiniciado automaticamente pelo useEffect pois attemptResult continua null e state="PLAYING"
@@ -536,7 +534,10 @@ export function QuizClient({
                         type="button" 
                         onClick={() => {
                           const current = (filters.subtema as string[]).filter(x => x !== sub);
-                          setFilters({ ...filters, subtema: current.length > 0 ? current : undefined });
+                          const newFilters = { ...filters };
+                          if (current.length > 0) newFilters.subtema = current;
+                          else delete newFilters.subtema;
+                          setFilters(newFilters);
                         }} 
                         className="hover:text-destructive hover:bg-destructive/10 rounded-full p-0.5 transition-colors"
                         aria-label="Remover"
@@ -547,7 +548,11 @@ export function QuizClient({
                   ))}
                   <button 
                     type="button" 
-                    onClick={() => setFilters({ ...filters, subtema: undefined })}
+                    onClick={() => {
+                      const newFilters = { ...filters };
+                      delete newFilters.subtema;
+                      setFilters(newFilters);
+                    }}
                     className="text-xs text-muted-foreground hover:text-foreground underline px-2 py-1.5"
                   >
                     Limpar todos
@@ -587,7 +592,7 @@ export function QuizClient({
                         key={s.subtema} 
                         type="button"
                         onClick={() => {
-                          let current = Array.isArray(filters.subtema) ? [...filters.subtema] : (filters.subtema ? [filters.subtema as string] : []);
+                          const current = Array.isArray(filters.subtema) ? [...filters.subtema] : (filters.subtema ? [filters.subtema as string] : []);
                           current.push(s.subtema);
                           setFilters({ ...filters, subtema: current });
                           setSubtemaSearch("");
