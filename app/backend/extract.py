@@ -20,7 +20,7 @@ import glob
 
 SRC_DIR = os.environ.get("MEDQUEST_PDF_DIR", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 APP_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-IMG_DIR = os.path.join(APP_DIR, "frontend", "public", "images")
+IMG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "images")
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "medquest.db")
 
 # Encontra dinamicamente todos os PDFs no SRC_DIR
