@@ -97,9 +97,9 @@ test.describe('Offline Sync e Resiliência', () => {
 
     // 8. Disparar sincronização
     await page.evaluate(async () => {
-      const win = window as unknown as { syncManager?: { sync: () => Promise<void> } };
+      const win = window as unknown as { syncManager?: { sync: (force?: boolean) => Promise<void> } };
       if (win.syncManager) {
-        await win.syncManager.sync();
+        await win.syncManager.sync(true);
       }
     });
 
@@ -154,9 +154,9 @@ test.describe('Offline Sync e Resiliência', () => {
 
     // Disparar sincronização
     await page.evaluate(async () => {
-      const win = window as unknown as { syncManager?: { sync: () => Promise<void> } };
+      const win = window as unknown as { syncManager?: { sync: (force?: boolean) => Promise<void> } };
       if (win.syncManager) {
-        await win.syncManager.sync();
+        await win.syncManager.sync(true);
       }
     });
 

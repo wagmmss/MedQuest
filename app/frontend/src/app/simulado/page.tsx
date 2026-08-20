@@ -1,4 +1,4 @@
-import { serverApi, QuestionMeta } from "@/lib/server-api";
+import { isDynamicServerUsageError, serverApi, QuestionMeta } from "@/lib/server-api";
 import { SimuladoClient } from "./SimuladoClient";
 
 export const dynamic = "force-dynamic";
@@ -11,8 +11,8 @@ export default async function SimuladoPage({
   let meta: QuestionMeta | undefined;
   try {
     meta = await serverApi.questions.getMeta();
-  } catch (err: any) {
-    if (err.message?.includes('DYNAMIC_SERVER_USAGE') || err.digest?.includes('DYNAMIC_SERVER_USAGE')) {
+  } catch (err: unknown) {
+    if (isDynamicServerUsageError(err)) {
       throw err;
     }
     console.warn("SSR getMeta fallback to client fetch:", err);

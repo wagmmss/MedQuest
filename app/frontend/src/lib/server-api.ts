@@ -10,6 +10,12 @@ export type { QuestionMeta };
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
 
+export function isDynamicServerUsageError(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+  const digest = "digest" in error && typeof error.digest === "string" ? error.digest : "";
+  return error.message.includes("DYNAMIC_SERVER_USAGE") || digest.includes("DYNAMIC_SERVER_USAGE");
+}
+
 async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const proxySecret = process.env.FLASK_API_PROXY_SECRET;
   if (!proxySecret) {
@@ -36,7 +42,7 @@ async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<
       headers,
     });
   } catch (error) {
-    if (error instanceof Error && (error.message.includes('DYNAMIC_SERVER_USAGE') || (error as any).digest?.includes('DYNAMIC_SERVER_USAGE'))) {
+    if (isDynamicServerUsageError(error)) {
       throw error; // Re-throw to allow Next.js to handle it
     }
     const message = error instanceof Error ? error.message : "Unknown error";

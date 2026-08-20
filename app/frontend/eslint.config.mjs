@@ -15,6 +15,7 @@ const eslintConfig = defineConfig([
     // Generated service worker / Workbox files:
     "public/sw.js",
     "public/workbox-*.js",
+    "public/worker-*.js",
   ]),
 ]);
 

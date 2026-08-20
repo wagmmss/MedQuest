@@ -1,12 +1,13 @@
 import os
 import uuid
+import hashlib
 import sqlite3
 import threading
 import time
 import pytest
 import json
 from api import create_app
-from api.idempotency import cleanup_idempotency_keys
+from api.idempotency import cleanup_idempotency_keys, complete_idempotency, LostLeaseError
 from tests.conftest import SCHEMA_AND_SEED
 
 PROXY_SECRET = "super-secret-proxy-token-12345"
@@ -275,7 +276,7 @@ def test_lease_expiration_and_recovery(idemp_app):
         db.execute(
             """INSERT INTO idempotency_keys (user_id, key, method, path, payload_hash, status, lease_expires_at, created_at)
                VALUES (?, ?, 'POST', '/api/questions/1/attempt', ?, 'processing', ?, '2026-01-01T00:00:00')""",
-            (guest_id, key.lower(), payload_hash, expired_ts)
+            (f"guest:{guest_id}", key.lower(), payload_hash, expired_ts)
         )
         db.commit()
 
@@ -289,7 +290,7 @@ def test_lease_expiration_and_recovery(idemp_app):
     with idemp_app.app_context():
         from api.db import get_db
         db = get_db()
-        row = db.execute("SELECT status, status_code FROM idempotency_keys WHERE user_id = ? AND key = ?", (guest_id, key.lower())).fetchone()
+        row = db.execute("SELECT status, status_code FROM idempotency_keys WHERE user_id = ? AND key = ?", (f"guest:{guest_id}", key.lower())).fetchone()
         assert row["status"] == "completed"
         assert row["status_code"] == 200
 
@@ -327,3 +328,148 @@ def test_cleanup_idempotency_keys(idemp_app):
         assert db.execute("SELECT 1 FROM idempotency_keys WHERE key = ?", (old_completed,)).fetchone() is None
         assert db.execute("SELECT 1 FROM idempotency_keys WHERE key = ?", (old_failed,)).fetchone() is None
         assert db.execute("SELECT 1 FROM idempotency_keys WHERE key = ?", (recent_completed,)).fetchone() is not None
+
+
+def test_failed_reservation_can_be_recovered(idemp_app):
+    guest_id = str(uuid.uuid4())
+    key = str(uuid.uuid4())
+    payload = {"selected_letter": "B", "time_spent_ms": 1500, "confidence": "certeza"}
+    raw_body = json.dumps(payload).encode("utf-8")
+
+    with idemp_app.app_context():
+        from api.db import get_db
+        db = get_db()
+        db.execute(
+            """INSERT INTO idempotency_keys
+               (user_id, key, method, path, payload_hash, status, lease_expires_at, created_at)
+               VALUES (?, ?, 'POST', '/api/questions/1/attempt', ?, 'failed', 0, ?)""",
+            (
+                f"guest:{guest_id}",
+                key,
+                hashlib.sha256(raw_body).hexdigest(),
+                "2026-01-01T00:00:00+00:00",
+            ),
+        )
+        db.commit()
+
+    response = idemp_app.test_client().post(
+        "/api/questions/1/attempt",
+        headers={
+            "X-Internal-Proxy-Token": PROXY_SECRET,
+            "X-Guest-ID": guest_id,
+            "X-Idempotency-Key": key,
+        },
+        data=raw_body,
+        content_type="application/json",
+    )
+    assert response.status_code == 200
+
+    with idemp_app.app_context():
+        from api.db import get_db
+        db = get_db()
+        assert db.execute(
+            "SELECT COUNT(*) AS total FROM attempts WHERE user_id = ?",
+            (f"guest:{guest_id}",),
+        ).fetchone()["total"] == 1
+
+
+def test_lost_lease_rolls_back_protected_effect(idemp_app):
+    guest_id = str(uuid.uuid4())
+    user_id = f"guest:{guest_id}"
+    key = str(uuid.uuid4())
+    old_token = str(uuid.uuid4())
+    new_token = str(uuid.uuid4())
+
+    with idemp_app.test_request_context(headers={"X-Idempotency-Key": key}):
+        from api.db import get_db, db_transaction
+        db = get_db()
+        db.execute(
+            """INSERT INTO idempotency_keys
+               (user_id, key, method, path, payload_hash, status, lease_expires_at, lease_owner_token, created_at)
+               VALUES (?, ?, 'POST', '/api/questions/1/attempt', 'hash', 'processing', ?, ?, ?)""",
+            (user_id, key, time.time() + 30, new_token, "2026-01-01T00:00:00+00:00"),
+        )
+        db.commit()
+
+        with pytest.raises(LostLeaseError):
+            with db_transaction(db, immediate=True):
+                db.execute(
+                    """INSERT INTO attempts
+                       (question_id, selected_letter, is_correct, answered_at, confidence, user_id)
+                       VALUES (1, 'B', 1, 'now', 'certeza', ?)""",
+                    (user_id,),
+                )
+                db.execute(
+                    """INSERT INTO spaced_repetition
+                       (question_id, next_review_date, fsrs_card, user_id)
+                       VALUES (1, 'tomorrow', '{}', ?)""",
+                    (user_id,),
+                )
+                complete_idempotency(db, user_id, 200, {"ok": True}, old_token)
+
+        assert db.execute(
+            "SELECT COUNT(*) AS total FROM attempts WHERE user_id = ?", (user_id,)
+        ).fetchone()["total"] == 0
+        assert db.execute(
+            "SELECT 1 FROM spaced_repetition WHERE user_id = ?", (user_id,)
+        ).fetchone() is None
+        row = db.execute(
+            "SELECT status, lease_owner_token FROM idempotency_keys WHERE user_id = ? AND key = ?",
+            (user_id, key),
+        ).fetchone()
+        assert row["status"] == "processing"
+        assert row["lease_owner_token"] == new_token
+
+
+def test_empty_batch_response_is_cached(idemp_client):
+    guest_id = str(uuid.uuid4())
+    key = str(uuid.uuid4())
+    headers = {
+        "X-Internal-Proxy-Token": PROXY_SECRET,
+        "X-Guest-ID": guest_id,
+        "X-Idempotency-Key": key,
+    }
+    first = idemp_client.post("/api/attempt/batch", headers=headers, json={"attempts": []})
+    second = idemp_client.post("/api/attempt/batch", headers=headers, json={"attempts": []})
+    assert first.status_code == second.status_code == 200
+    assert first.get_json() == second.get_json() == {"results": []}
+
+
+def test_favorite_toggle_replay_does_not_toggle_back(idemp_client):
+    guest_id = str(uuid.uuid4())
+    key = str(uuid.uuid4())
+    headers = {
+        "X-Internal-Proxy-Token": PROXY_SECRET,
+        "X-Guest-ID": guest_id,
+        "X-Idempotency-Key": key,
+    }
+    first = idemp_client.post("/api/questions/1/favorite", headers=headers, json={})
+    second = idemp_client.post("/api/questions/1/favorite", headers=headers, json={})
+    assert first.status_code == second.status_code == 200
+    assert first.get_json() == second.get_json()
+    assert second.get_json()["is_favorite"] is True
+
+
+def test_review_replay_advances_fsrs_only_once(idemp_client):
+    guest_id = str(uuid.uuid4())
+    base_headers = {
+        "X-Internal-Proxy-Token": PROXY_SECRET,
+        "X-Guest-ID": guest_id,
+    }
+    attempt_headers = {**base_headers, "X-Idempotency-Key": str(uuid.uuid4())}
+    attempt = idemp_client.post(
+        "/api/questions/1/attempt",
+        headers=attempt_headers,
+        json={"selected_letter": "B", "time_spent_ms": 1000, "confidence": "defer"},
+    )
+    assert attempt.status_code == 200
+
+    review_headers = {**base_headers, "X-Idempotency-Key": str(uuid.uuid4())}
+    first = idemp_client.post(
+        "/api/questions/1/review", headers=review_headers, json={"confidence": "certeza"}
+    )
+    second = idemp_client.post(
+        "/api/questions/1/review", headers=review_headers, json={"confidence": "certeza"}
+    )
+    assert first.status_code == second.status_code == 200
+    assert first.get_json() == second.get_json()

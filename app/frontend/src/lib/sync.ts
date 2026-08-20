@@ -98,7 +98,9 @@ export const syncManager = {
       content_type: contentType,
       created_at: Date.now(),
       retry_count: 0,
-      next_retry_at: Date.now(),
+      // The request has just failed once. Avoid an immediate duplicate retry;
+      // explicit/manual sync and the browser online event may still force it.
+      next_retry_at: Date.now() + 2000 + Math.random() * 1000,
       status: "pending",
       idempotency_key: providedIdempotencyKey || crypto.randomUUID(),
     });
@@ -163,14 +165,14 @@ export const syncManager = {
     }
   },
 
-  async sync(): Promise<void> {
+  async sync(force = false): Promise<void> {
     if (typeof window === "undefined" || !navigator.onLine || !localDb) return;
 
     if (syncPromise) {
       return syncPromise;
     }
 
-    syncPromise = this._doSync().finally(() => {
+    syncPromise = this._doSync(force).finally(() => {
       syncPromise = null;
       this.scheduleNextSync();
     });
@@ -178,7 +180,7 @@ export const syncManager = {
     return syncPromise;
   },
 
-  async _doSync(): Promise<void> {
+  async _doSync(force = false): Promise<void> {
     const uid = getLocalOwnerId();
     const now = Date.now();
 
@@ -186,7 +188,7 @@ export const syncManager = {
     try {
       items = await localDb.syncQueue
         .where({ owner_id: uid })
-        .filter((item) => item.status === "pending" && item.next_retry_at <= now)
+        .filter((item) => item.status === "pending" && (force || item.next_retry_at <= now))
         .toArray();
     } catch (err) {
       console.error("[Sync] Erro ao carregar itens da fila:", err);
@@ -318,7 +320,7 @@ export const syncManager = {
     isInitialized = true;
 
     onlineHandler = () => {
-      this.sync();
+      this.sync(true);
     };
     visibilityHandler = () => {
       if (document.visibilityState === "visible") {

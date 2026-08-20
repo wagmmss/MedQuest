@@ -109,26 +109,32 @@ export class MedQuestDB extends Dexie {
               s.idempotency_key = s.idempotency_key || crypto.randomUUID();
               
               // v2 bug: loss of method and content-type from options
-              if (s.options) {
-                const opts = s.options as any;
-                s.method = opts.method ? opts.method.toUpperCase() : (s.method || "POST");
+              if (typeof s.options === "object" && s.options !== null) {
+                const opts = s.options as Record<string, unknown>;
+                s.method = typeof opts.method === "string"
+                  ? opts.method.toUpperCase()
+                  : (s.method || "POST");
                 
                 let cType = "application/json";
-                if (opts.headers) {
-                  if (typeof opts.headers.get === "function") {
-                    cType = opts.headers.get("content-type") || cType;
-                  } else if (Array.isArray(opts.headers)) {
-                    const f = opts.headers.find(([k]: [string]) => k.toLowerCase() === "content-type");
-                    if (f) cType = f[1];
-                  } else if (typeof opts.headers === "object") {
-                    for (const [k, v] of Object.entries(opts.headers)) {
-                      if (k.toLowerCase() === "content-type" && typeof v === "string") cType = v;
+                const oldHeaders = opts.headers;
+                if (oldHeaders instanceof Headers) {
+                  cType = oldHeaders.get("content-type") || cType;
+                } else if (Array.isArray(oldHeaders)) {
+                  for (const entry of oldHeaders) {
+                    if (Array.isArray(entry) && typeof entry[0] === "string" &&
+                        entry[0].toLowerCase() === "content-type" && typeof entry[1] === "string") {
+                      cType = entry[1];
+                      break;
                     }
                   }
+                } else if (typeof oldHeaders === "object" && oldHeaders !== null) {
+                    for (const [k, v] of Object.entries(oldHeaders)) {
+                      if (k.toLowerCase() === "content-type" && typeof v === "string") cType = v;
+                    }
                 }
                 s.content_type = cType;
 
-                let rawBody = opts.body;
+                const rawBody = opts.body;
                 if (typeof rawBody === "string") {
                   s.body = rawBody;
                 } else if (rawBody !== undefined && rawBody !== null) {

@@ -4,6 +4,7 @@ import sqlite3
 from flask import g
 import logging
 from dotenv import load_dotenv
+from contextlib import contextmanager
 
 load_dotenv()
 
@@ -15,43 +16,48 @@ TURSO_URL = os.environ.get("TURSO_DATABASE_URL")
 TURSO_TOKEN = os.environ.get("TURSO_AUTH_TOKEN")
 
 class TursoCursor:
-    def __init__(self, result):
-        self.result = result
+    """Expose DB-API cursor rows as mappings, matching sqlite3.Row usage."""
+
+    def __init__(self, cursor):
+        self.cursor = cursor
+        self.columns = [column[0] for column in (cursor.description or [])]
         
     def fetchone(self):
-        if not self.result.rows:
+        row = self.cursor.fetchone()
+        if row is None:
             return None
-        return dict(zip(self.result.columns, self.result.rows[0]))
+        return dict(zip(self.columns, row))
         
     def fetchall(self):
-        if not self.result.rows:
-            return []
-        return [dict(zip(self.result.columns, r)) for r in self.result.rows]
+        return [dict(zip(self.columns, row)) for row in self.cursor.fetchall()]
         
     @property
     def lastrowid(self):
-        return getattr(self.result, "last_insert_rowid", None)
+        return getattr(self.cursor, "lastrowid", None)
+
+    @property
+    def rowcount(self):
+        return getattr(self.cursor, "rowcount", 0)
 
 class TursoConnection:
     def __init__(self, client):
         self.client = client
-        self.tx = None
+        self.tx = False
         
-    def _get_tx(self):
-        if self.tx is None:
-            self.tx = self.client.transaction()
-        return self.tx
+    def begin(self, immediate=False):
+        if self.tx:
+            raise RuntimeError("A Turso transaction is already active")
+        self.client.execute("BEGIN IMMEDIATE" if immediate else "BEGIN")
+        self.tx = True
 
     def execute(self, sql, parameters=()):
         args = list(parameters)
         clean_args = [x if not isinstance(x, bytes) else x.decode('utf-8', 'ignore') for x in args]
         try:
-            tx = self._get_tx()
-            result = tx.execute(sql, clean_args)
-            return TursoCursor(result)
+            cursor = self.client.execute(sql, clean_args)
+            return TursoCursor(cursor)
         except Exception as e:
-            logger.error(f"Turso Error on query: {sql} with args {clean_args}. Error: {e}")
-            self.rollback()
+            logger.error("Turso query failed: %s", e)
             raise
 
     def batch(self, queries):
@@ -61,24 +67,36 @@ class TursoConnection:
         return res
             
     def commit(self):
-        if self.tx is not None:
-            try:
-                self.tx.commit()
-            finally:
-                self.tx = None
+        try:
+            self.client.commit()
+        finally:
+            self.tx = False
                 
     def rollback(self):
-        if self.tx is not None:
-            try:
-                self.tx.rollback()
-            except Exception:
-                pass
-            finally:
-                self.tx = None
+        try:
+            self.client.rollback()
+        except Exception:
+            pass
+        finally:
+            self.tx = False
         
     def close(self):
         self.rollback()
         self.client.close()
+
+@contextmanager
+def db_transaction(db, immediate=False):
+    """Context manager para gerenciar transações e garantir rollback explícito."""
+    try:
+        if isinstance(db, TursoConnection):
+            db.begin(immediate=immediate)
+        else:
+            db.execute("BEGIN IMMEDIATE" if immediate else "BEGIN")
+        yield db
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
 
 def get_db():
     from flask import current_app
@@ -87,10 +105,14 @@ def get_db():
         turso_url = os.environ.get("TURSO_DATABASE_URL")
         turso_token = os.environ.get("TURSO_AUTH_TOKEN")
         
+        if not is_testing and bool(turso_url) != bool(turso_token):
+            raise ValueError("TURSO_DATABASE_URL and TURSO_AUTH_TOKEN must be configured together")
+
         if turso_url and turso_token and not is_testing:
-            import libsql_client
-            url = turso_url.replace("libsql://", "https://")
-            client = libsql_client.create_client_sync(url=url, auth_token=turso_token)
+            if not turso_url.lower().startswith(("libsql://", "wss://")):
+                raise ValueError("TURSO_DATABASE_URL must use libsql:// or wss:// for transaction support")
+            import libsql
+            client = libsql.connect(turso_url, auth_token=turso_token)
             g.db = TursoConnection(client)
         else:
             db_path = os.environ.get("MEDQUEST_DB", os.path.join(BACKEND_DIR, "medquest.db"))
@@ -124,7 +146,7 @@ def init_db(app):
     """Cria tabelas de usuário se não existirem e garante colunas novas."""
     with app.app_context():
         db = get_db()
-        try:
+        with db_transaction(db, immediate=True):
             db.execute("CREATE TABLE IF NOT EXISTS favorites (question_id INTEGER, user_id TEXT DEFAULT '1', PRIMARY KEY (question_id, user_id))")
             db.execute("""CREATE TABLE IF NOT EXISTS spaced_repetition (
                 question_id INTEGER, efactor REAL, interval INTEGER,
@@ -164,25 +186,21 @@ def init_db(app):
                 status_code INTEGER,
                 response_body TEXT,
                 lease_expires_at REAL DEFAULT 0,
+                lease_owner_token TEXT,
                 created_at TEXT NOT NULL,
                 PRIMARY KEY (user_id, key))""")
-            db.execute("CREATE INDEX IF NOT EXISTS idx_idempotency_created ON idempotency_keys(created_at)")
-            db.execute("CREATE INDEX IF NOT EXISTS idx_idempotency_lease ON idempotency_keys(user_id, lease_expires_at)")
-
             existing_cols = _table_cols(db, "idempotency_keys")
             if "status" not in existing_cols:
                 db.execute("ALTER TABLE idempotency_keys ADD COLUMN status TEXT NOT NULL DEFAULT 'completed'")
             if "lease_expires_at" not in existing_cols:
                 db.execute("ALTER TABLE idempotency_keys ADD COLUMN lease_expires_at REAL DEFAULT 0")
+            if "lease_owner_token" not in existing_cols:
+                db.execute("ALTER TABLE idempotency_keys ADD COLUMN lease_owner_token TEXT")
 
-            # FTS5 table
-            try:
-                db.execute("""CREATE VIRTUAL TABLE IF NOT EXISTS questions_fts USING fts5(
-                    stem,
-                    explanation
-                )""")
-            except Exception as e:
-                logger.warning(f"FTS table creation might not be fully supported or already exists: {e}")
+            # Indexes that reference migrated columns must be created only
+            # after every supported legacy schema has those columns.
+            db.execute("CREATE INDEX IF NOT EXISTS idx_idempotency_created ON idempotency_keys(created_at)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_idempotency_lease ON idempotency_keys(user_id, lease_expires_at)")
 
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_question ON attempts (user_id, question_id)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_correct ON attempts (user_id, is_correct)")
@@ -193,11 +211,13 @@ def init_db(app):
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_year ON questions (year)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_source ON questions (source_file)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_answered_at ON attempts (answered_at)")
-            
-            db.commit()
-        except Exception as e:
-            logger.error(f"Error executing DDL during init_db: {e}")
+
+        # FTS is an optional capability and must not invalidate the required schema.
         try:
-            db.commit()
+            with db_transaction(db, immediate=True):
+                db.execute("""CREATE VIRTUAL TABLE IF NOT EXISTS questions_fts USING fts5(
+                    stem,
+                    explanation
+                )""")
         except Exception as e:
-            logger.error(f"Error during init_db: {e}")
+            logger.warning("FTS table creation is unavailable: %s", e)

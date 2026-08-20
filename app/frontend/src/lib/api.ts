@@ -38,14 +38,12 @@ async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> 
   );
 
   let idempotencyKey: string | undefined;
-  const headers = {
-    "Content-Type": "application/json",
-    ...options?.headers,
-  };
+  const headers = new Headers(options?.headers);
+  if (!headers.has("Content-Type")) headers.set("Content-Type", "application/json");
 
   if (isIdempotentEndpoint) {
     idempotencyKey = crypto.randomUUID();
-    (headers as any)["X-Idempotency-Key"] = idempotencyKey;
+    headers.set("X-Idempotency-Key", idempotencyKey);
   }
 
   try {
