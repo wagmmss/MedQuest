@@ -262,39 +262,38 @@ def parse_pdf(path, source_label):
 
 
 def collect_image_candidates(path):
-    """Coleta candidatas a imagem de conteúdo (posição via pdfplumber, bytes via
-    PyMuPDF, pareados por ordem por página) SEM gravar em disco ainda -- a
-    deduplicação por hash (feita depois, olhando o documento inteiro) é o que
-    de fato separa conteúdo clínico de elementos decorativos repetidos."""
+    """Coleta candidatas a imagem usando get_image_info do PyMuPDF."""
     doc = fitz.open(path)
     candidates = []
-    with pdfplumber.open(path) as pdf:
-        for pno, page in enumerate(pdf.pages):
-            pl_imgs = page.images
-            fz_imgs = doc[pno].get_images(full=True)
-            if len(pl_imgs) != len(fz_imgs):
+    for pno, page in enumerate(doc):
+        imgs = page.get_image_info(xrefs=True)
+        if not imgs:
+            continue
+        page_rect = page.rect
+        page_w, page_h = page_rect.width, page_rect.height
+        for img in imgs:
+            xref = img.get("xref")
+            if not xref:
                 continue
-            page_w, page_h = page.width, page.height
-            for idx, (pl_im, fz_im) in enumerate(zip(pl_imgs, fz_imgs)):
-                w = pl_im["x1"] - pl_im["x0"]
-                h = pl_im["bottom"] - pl_im["top"]
-                # descarta de cara a arte de fundo que cobre quase a página inteira
-                if w >= 0.85 * page_w and h >= 0.85 * page_h:
-                    continue
-                xref = fz_im[0]
-                try:
-                    base = doc.extract_image(xref)
-                except Exception:
-                    continue
-                data = base["image"]
-                if len(data) < 2500:
-                    continue
-                candidates.append({
-                    "page": pno,
-                    "top": pl_im["top"],
-                    "ext": base["ext"],
-                    "data": data,
-                })
+            bbox = img["bbox"]
+            w = bbox[2] - bbox[0]
+            h = bbox[3] - bbox[1]
+            # descarta de cara a arte de fundo que cobre quase a página inteira
+            if w >= 0.85 * page_w and h >= 0.85 * page_h:
+                continue
+            try:
+                base = doc.extract_image(xref)
+            except Exception:
+                continue
+            data = base["image"]
+            if len(data) < 2500:
+                continue
+            candidates.append({
+                "page": pno,
+                "top": bbox[1],
+                "ext": base["ext"],
+                "data": data,
+            })
     doc.close()
     candidates.sort(key=lambda r: (r["page"], r["top"]))
     return candidates
@@ -404,25 +403,29 @@ def build_db(all_records_by_source):
             cur.execute("SELECT id FROM questions WHERE source_file = ? AND source_number = ?", 
                         (source_label, r["source_number"]))
             existing_q = cur.fetchone()
+            
             if existing_q:
-                continue
-
-            cur.execute(
-                """INSERT INTO questions
-                (source_file, source_number, year, institution_code, institution_label,
-                 topic, stem, correct_letter, missing_alts, comment_code, page_start, page_end)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
-                (source_label, r["source_number"], r["year"], r["institution_code"],
-                 r["institution_label"], r["topic"], r["stem"], r["correct_letter"],
-                 1 if r["missing_alts"] else 0, r["comment_code"], r["page_start"], r["page_end"]),
-            )
-            qid = cur.lastrowid
-            for letter, text in r["alternatives"].items():
+                qid = existing_q[0]
+            else:
                 cur.execute(
-                    "INSERT INTO alternatives (question_id, letter, text, is_correct) VALUES (?,?,?,?)",
-                    (qid, letter, text, 1 if letter == r["correct_letter"] else 0),
+                    """INSERT INTO questions
+                    (source_file, source_number, year, institution_code, institution_label,
+                     topic, stem, correct_letter, missing_alts, comment_code, page_start, page_end)
+                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
+                    (source_label, r["source_number"], r["year"], r["institution_code"],
+                     r["institution_label"], r["topic"], r["stem"], r["correct_letter"],
+                     1 if r["missing_alts"] else 0, r["comment_code"], r["page_start"], r["page_end"]),
                 )
+                qid = cur.lastrowid
+                for letter, text in r["alternatives"].items():
+                    cur.execute(
+                        "INSERT INTO alternatives (question_id, letter, text, is_correct) VALUES (?,?,?,?)",
+                        (qid, letter, text, 1 if letter == r["correct_letter"] else 0),
+                    )
+            
             for order, fp in enumerate(image_map.get(r["source_number"], [])):
+                # Delete existing image if it exists to avoid duplicates
+                cur.execute("DELETE FROM question_images WHERE question_id = ? AND file_path = ?", (qid, fp))
                 cur.execute(
                     "INSERT INTO question_images (question_id, file_path, order_index) VALUES (?,?,?)",
                     (qid, fp, order),
