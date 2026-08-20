@@ -108,14 +108,47 @@ export function QuizClient({
     }
   }, [loadQuestionDetail]);
 
+  const hasRestored = useRef(false);
+
   useEffect(() => {
+    if (hasRestored.current) return;
+    
+    const saved = sessionStorage.getItem("medquest_quiz_state");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed.state === "PLAYING" || parsed.state === "FINISHED") {
+          hasRestored.current = true;
+          setQueue(parsed.queue);
+          setCurrentIndex(parsed.currentIndex);
+          setFilters(parsed.filters);
+          if (parsed.currentDetail) setCurrentDetail(parsed.currentDetail);
+          setState(parsed.state);
+          return;
+        }
+      } catch {
+        sessionStorage.removeItem("medquest_quiz_state");
+      }
+    }
+
     if (Object.keys(initialFilters).length > 0 && queue.length === 0 && state === "LOADING_QUEUE") {
+      hasRestored.current = true;
       const timer = setTimeout(() => {
         loadQueue({ limit: "50", ...initialFilters });
       }, 0);
       return () => clearTimeout(timer);
     }
   }, [initialFilters, loadQueue, queue.length, state]);
+
+  useEffect(() => {
+    if (state === "PLAYING" || state === "FINISHED") {
+      sessionStorage.setItem("medquest_quiz_state", JSON.stringify({
+        state, queue, currentIndex, filters, currentDetail
+      }));
+    } else if (state === "FILTERS") {
+      sessionStorage.removeItem("medquest_quiz_state");
+    }
+  }, [state, queue, currentIndex, filters, currentDetail]);
 
   // Effect to fetch dynamic meta when filters change
   useEffect(() => {
