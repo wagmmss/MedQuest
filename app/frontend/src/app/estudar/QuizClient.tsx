@@ -47,6 +47,8 @@ export function QuizClient({
   const [currentDetail, setCurrentDetail] = useState<QuestionDetail | null>(null);
   const [loadingDetail, setLoadingDetail] = useState(false);
   
+  const [sessionAnswers, setSessionAnswers] = useState<Record<number, { letter: string, result: AttemptResult }>>({});
+  
   // Quiz State
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
   const [attemptResult, setAttemptResult] = useState<AttemptResult | null>(null);
@@ -108,6 +110,14 @@ export function QuizClient({
     }
   }, [loadQuestionDetail]);
 
+  useEffect(() => {
+    if (currentDetail && sessionAnswers[currentDetail.id]) {
+      const ans = sessionAnswers[currentDetail.id];
+      setSelectedLetter(ans.letter);
+      setAttemptResult(ans.result);
+    }
+  }, [currentDetail, sessionAnswers]);
+
   const hasRestored = useRef(false);
 
   useEffect(() => {
@@ -123,6 +133,7 @@ export function QuizClient({
           setCurrentIndex(parsed.currentIndex);
           setFilters(parsed.filters);
           if (parsed.currentDetail) setCurrentDetail(parsed.currentDetail);
+          if (parsed.sessionAnswers) setSessionAnswers(parsed.sessionAnswers);
           setState(parsed.state);
           return;
         }
@@ -143,12 +154,12 @@ export function QuizClient({
   useEffect(() => {
     if (state === "PLAYING" || state === "FINISHED") {
       sessionStorage.setItem("medquest_quiz_state", JSON.stringify({
-        state, queue, currentIndex, filters, currentDetail
+        state, queue, currentIndex, filters, currentDetail, sessionAnswers
       }));
     } else if (state === "FILTERS") {
       sessionStorage.removeItem("medquest_quiz_state");
     }
-  }, [state, queue, currentIndex, filters, currentDetail]);
+  }, [state, queue, currentIndex, filters, currentDetail, sessionAnswers]);
 
   // Effect to fetch dynamic meta when filters change
   useEffect(() => {
@@ -228,6 +239,10 @@ export function QuizClient({
     try {
       const res = await api.questions.submitAttempt(currentDetail.id, selectedLetter, timeSpent * 1000, "defer");
       setAttemptResult(res);
+      setSessionAnswers(prev => ({
+        ...prev,
+        [currentDetail.id]: { letter: selectedLetter, result: res }
+      }));
       if (res.is_correct) {
         confetti({
           particleCount: 80,
