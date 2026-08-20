@@ -1,13 +1,8 @@
-import urllib.request
-import json
-
-data = json.dumps({"selected_letter": "A", "time_spent_ms": 1000, "confidence": "certeza"}).encode('utf-8')
-req = urllib.request.Request('http://localhost:5050/api/questions/1/attempt', data=data, headers={'Content-Type': 'application/json'})
-
-try:
-    response = urllib.request.urlopen(req)
-    print("Success:", response.read().decode('utf-8'))
-except urllib.error.HTTPError as e:
-    print("Error:", e.code, e.read().decode('utf-8'))
-except Exception as e:
-    print("Exception:", str(e))
+import sys, os
+sys.path.append('c:\\dev\\MedQuest\\app\\backend')
+from app import create_app
+app = create_app()
+client = app.test_client()
+response = client.get('/api/search?q=trauma')
+print('Status:', response.status_code)
+print('Data:', response.data.decode('utf-8')[:200])

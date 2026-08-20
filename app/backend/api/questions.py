@@ -150,35 +150,46 @@ def search_questions():
         return jsonify([])
     semantic = request.args.get("semantic", "false").lower() == "true"
     
+    def make_like_clauses(term_list, joiner="AND"):
+        clauses = []
+        params = []
+        for term in term_list:
+            if not term: continue
+            term_clean = term.replace("%", "").replace("_", "")
+            if len(term_clean) < 2: continue
+            clauses.append("(q.stem LIKE ? OR e.explanation_text LIKE ? OR q.area LIKE ? OR q.subtema LIKE ?)")
+            like_val = f"%{term_clean}%"
+            params.extend([like_val, like_val, like_val, like_val])
+        if not clauses:
+            return "", []
+        return f"({f' {joiner} '.join(clauses)})", params
+
     if semantic:
         from .ai import expand_search_query
         expanded_terms = expand_search_query(q)
-        phrases = [_fts_phrase(term) for term in expanded_terms]
-        fts_query = " OR ".join(f'"{phrase}"' for phrase in phrases if phrase)
+        where_sql, params = make_like_clauses(expanded_terms, "OR")
     else:
-        # Padrão: adiciona asterisco para pegar inícios de palavras (ex: press -> pressao)
-        terms = [f'"{term}"*' for term in _fts_phrase(q).split()]
-        fts_query = " AND ".join(terms)
+        terms = re.findall(r"\w+", q, flags=re.UNICODE)[:12]
+        where_sql, params = make_like_clauses(terms, "AND")
 
-    if not fts_query:
+    if not where_sql:
         return jsonify([])
     
-    rows = db.execute("""
+    rows = db.execute(f"""
         SELECT q.id, q.institution_code, q.year, q.area, q.subtema,
-               snippet(questions_fts, 0, '⟦MQH⟧', '⟦/MQH⟧', '...', 20) as stem_snippet,
-               snippet(questions_fts, 1, '⟦MQH⟧', '⟦/MQH⟧', '...', 20) as exp_snippet
-        FROM questions_fts fts
-        JOIN questions q ON q.id = fts.rowid
-        WHERE questions_fts MATCH ?
-        ORDER BY rank
+               SUBSTR(q.stem, 1, 150) as stem_snippet,
+               SUBSTR(e.explanation_text, 1, 150) as exp_snippet
+        FROM questions q
+        LEFT JOIN explanations e ON q.id = e.question_id
+        WHERE {where_sql}
         LIMIT 50
-    """, (fts_query,)).fetchall()
+    """, params).fetchall()
     
     out = []
     for row in rows:
         item = dict(row)
-        item["stem_snippet"] = _safe_snippet(item.get("stem_snippet"))
-        item["exp_snippet"] = _safe_snippet(item.get("exp_snippet"))
+        item["stem_snippet"] = escape(item.get("stem_snippet") or "") + "..."
+        item["exp_snippet"] = escape(item.get("exp_snippet") or "") + "..."
         out.append(item)
     return jsonify(out)
 

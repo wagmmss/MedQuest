@@ -94,44 +94,47 @@ def init_db(app):
     """Cria tabelas de usuário se não existirem e garante colunas novas."""
     with app.app_context():
         db = get_db()
-        db.execute("CREATE TABLE IF NOT EXISTS favorites (question_id INTEGER, user_id TEXT DEFAULT '1', PRIMARY KEY (question_id, user_id))")
-        db.execute("""CREATE TABLE IF NOT EXISTS spaced_repetition (
-            question_id INTEGER, efactor REAL, interval INTEGER,
-            next_review_date TEXT, user_id TEXT DEFAULT '1', fsrs_card TEXT,
-            PRIMARY KEY (question_id, user_id))""")
-        db.execute("""CREATE TABLE IF NOT EXISTS planner_progress (
-            week INTEGER, studied INTEGER DEFAULT 0, studied_at TEXT,
-            rev24h INTEGER DEFAULT 0, rev7d INTEGER DEFAULT 0, rev30d INTEGER DEFAULT 0,
-            user_id TEXT DEFAULT '1', PRIMARY KEY (week, user_id))""")
-        db.execute("""CREATE TABLE IF NOT EXISTS planner_config (
-            user_id TEXT PRIMARY KEY, exam_date TEXT, start_date TEXT,
-            days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30, target_score REAL,
-            updated_at TEXT)""")
-        db.execute("""CREATE TABLE IF NOT EXISTS flashcards (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            question_id INTEGER NOT NULL,
-            front TEXT NOT NULL,
-            back TEXT,
-            created_at TEXT NOT NULL,
-            next_review_date TEXT,
-            fsrs_card TEXT,
-            user_id TEXT DEFAULT '1')""")
-        
-        db.execute("""CREATE TABLE IF NOT EXISTS clinical_cases (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            stem TEXT NOT NULL,
-            images TEXT,
-            medical_references TEXT)""")
+        try:
+            db.execute("CREATE TABLE IF NOT EXISTS favorites (question_id INTEGER, user_id TEXT DEFAULT '1', PRIMARY KEY (question_id, user_id))")
+            db.execute("""CREATE TABLE IF NOT EXISTS spaced_repetition (
+                question_id INTEGER, efactor REAL, interval INTEGER,
+                next_review_date TEXT, user_id TEXT DEFAULT '1', fsrs_card TEXT,
+                PRIMARY KEY (question_id, user_id))""")
+            db.execute("""CREATE TABLE IF NOT EXISTS planner_progress (
+                week INTEGER, studied INTEGER DEFAULT 0, studied_at TEXT,
+                rev24h INTEGER DEFAULT 0, rev7d INTEGER DEFAULT 0, rev30d INTEGER DEFAULT 0,
+                user_id TEXT DEFAULT '1', PRIMARY KEY (week, user_id))""")
+            db.execute("""CREATE TABLE IF NOT EXISTS planner_config (
+                user_id TEXT PRIMARY KEY, exam_date TEXT, start_date TEXT,
+                days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30, target_score REAL,
+                updated_at TEXT)""")
+            db.execute("""CREATE TABLE IF NOT EXISTS flashcards (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                question_id INTEGER NOT NULL,
+                front TEXT NOT NULL,
+                back TEXT,
+                created_at TEXT NOT NULL,
+                next_review_date TEXT,
+                fsrs_card TEXT,
+                user_id TEXT DEFAULT '1')""")
+            
+            db.execute("""CREATE TABLE IF NOT EXISTS clinical_cases (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                stem TEXT NOT NULL,
+                images TEXT,
+                medical_references TEXT)""")
 
-        db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_question ON attempts (user_id, question_id)")
-        db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_correct ON attempts (user_id, is_correct)")
-        db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area_subtema ON questions (area, subtema)")
-        db.execute("CREATE INDEX IF NOT EXISTS idx_spaced_repetition_review ON spaced_repetition (user_id, next_review_date)")
-        db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area ON questions (area)")
-        db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_created_at ON attempts (created_at)")
-        db.execute("CREATE INDEX IF NOT EXISTS idx_srs_reviews_next_review ON srs_reviews (next_review)")
-        
-        db.commit()
+            db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_question ON attempts (user_id, question_id)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_correct ON attempts (user_id, is_correct)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area_subtema ON questions (area, subtema)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_spaced_repetition_review ON spaced_repetition (user_id, next_review_date)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area ON questions (area)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_created_at ON attempts (created_at)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_srs_reviews_next_review ON srs_reviews (next_review)")
+            
+            db.commit()
+        except Exception as e:
+            logger.error(f"Error executing DDL during init_db: {e}")
 
         try:
             if isinstance(db, TursoConnection):
