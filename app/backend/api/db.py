@@ -47,6 +47,20 @@ class TursoConnection:
         except Exception as e:
             logger.error(f"Turso Error on query: {sql} with args {clean_args}. Error: {e}")
             raise
+
+    def batch(self, queries):
+        from libsql_client import Statement
+        stmts = []
+        for sql, parameters in queries:
+            args = list(parameters)
+            clean_args = [x if not isinstance(x, bytes) else x.decode('utf-8', 'ignore') for x in args]
+            stmts.append(Statement(sql, clean_args))
+        try:
+            results = self.client.batch(stmts)
+            return [TursoCursor(r) for r in results]
+        except Exception as e:
+            logger.error(f"Turso Error on batch queries. Error: {e}")
+            raise
             
     def commit(self):
         # HTTP client is auto-commit or we can ignore
@@ -129,6 +143,9 @@ def init_db(app):
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area_subtema ON questions (area, subtema)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_spaced_repetition_review ON spaced_repetition (user_id, next_review_date)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area ON questions (area)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_questions_institution ON questions (institution_code)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_questions_year ON questions (year)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_questions_source ON questions (source_file)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_created_at ON attempts (created_at)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_srs_reviews_next_review ON srs_reviews (next_review)")
             
