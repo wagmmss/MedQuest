@@ -1,58 +1,28 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
+
+const ZEN_MODE_EVENT = 'zen-mode-changed';
+
+function subscribe(onStoreChange: () => void) {
+  window.addEventListener(ZEN_MODE_EVENT, onStoreChange);
+  return () => window.removeEventListener(ZEN_MODE_EVENT, onStoreChange);
+}
+
+function getSnapshot() {
+  return document.body.classList.contains('zen-mode');
+}
+
+function getServerSnapshot() {
+  return false;
+}
 
 export function useZenMode() {
-  const [isZenMode, setIsZenMode] = useState(false);
-
-  // Sincroniza o estado inicial lendo a classe do body
-  useEffect(() => {
-    setIsZenMode(document.body.classList.contains('zen-mode'));
-  }, []);
+  const isZenMode = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const toggleZenMode = useCallback(() => {
-    setIsZenMode((prev) => {
-      const next = !prev;
-      if (next) {
-        document.body.classList.add('zen-mode');
-      } else {
-        document.body.classList.remove('zen-mode');
-      }
-      // Dispara um evento customizado para avisar outros componentes (como QuizClient)
-      window.dispatchEvent(new CustomEvent('zen-mode-changed', { detail: next }));
-      return next;
-    });
+    const next = !getSnapshot();
+    document.body.classList.toggle('zen-mode', next);
+    window.dispatchEvent(new Event(ZEN_MODE_EVENT));
   }, []);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignora se estiver digitando em inputs
-      const tag = (e.target as HTMLElement).tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-
-      // Atalho 'z' para Zen Mode
-      if (e.key.toLowerCase() === 'z' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-        e.preventDefault();
-        toggleZenMode();
-      }
-    };
-
-    const handleCustomEvent = (e: Event) => {
-      const customEvent = e as CustomEvent;
-      setIsZenMode(customEvent.detail);
-      if (customEvent.detail) {
-        document.body.classList.add('zen-mode');
-      } else {
-        document.body.classList.remove('zen-mode');
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('zen-mode-changed', handleCustomEvent);
-    
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('zen-mode-changed', handleCustomEvent);
-    };
-  }, [toggleZenMode]);
 
   return { isZenMode, toggleZenMode };
 }

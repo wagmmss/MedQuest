@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Loader2, ArrowRight, X } from "lucide-react";
-import clsx from "clsx";
 import { api } from "@/lib/api";
 import { SearchResult } from "@/types/api";
 
@@ -199,10 +198,9 @@ export function CommandPalette() {
                         <span className="bg-primary/10 text-primary px-1.5 py-0.5 rounded">{res.institution_code} {res.year}</span>
                         <span>{res.subtema || res.area}</span>
                       </div>
-                      <div 
-                        className="text-sm text-foreground line-clamp-2 [&>mark]:bg-warning/30 [&>mark]:text-foreground [&>mark]:rounded-sm [&>mark]:px-0.5"
-                        dangerouslySetInnerHTML={{ __html: res.stem_snippet }}
-                      />
+                      <div className="text-sm text-foreground line-clamp-2">
+                        {res.stem_snippet}
+                      </div>
                     </button>
                   ))}
                 </>

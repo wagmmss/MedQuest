@@ -48,7 +48,7 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
     if total_weeks > 260:
         total_weeks = 260
 
-    # Carrega dados enriquecidos (highYield e details_times)
+    # Carrega o mesmo catálogo pedagógico exibido no frontend.
     planner_data_path = os.path.join(os.path.dirname(__file__), "plannerData.json")
     try:
         with open(planner_data_path, "r", encoding="utf-8") as f:
@@ -56,21 +56,20 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
     except Exception:
         planner_meta = []
 
-    # Cria dicionário de subtemas para fácil acesso
+    # Cria dicionário de subtemas para fácil acesso.
     meta_dict = {}
-    for w in planner_meta:
-        is_high_yield = w.get("highYield", False)
-        # Calcula tempo teórico (soma de details_times em horas)
-        # Se não tiver details, assume 1 hora.
-        theory_hours = sum(w.get("details_times", [])) / 60.0
-        if theory_hours == 0:
-            theory_hours = 1.0
-            
-        for db_subtema in w.get("dbSubtemas", []):
-            meta_dict[db_subtema] = {
-                "highYield": is_high_yield,
-                "theory_hours": theory_hours
-            }
+    for area_group in planner_meta:
+        for macro in area_group.get("macroThemes", []):
+            is_high_yield = macro.get("highYield", False)
+            # Cada objetivo representa cerca de 15 min de teoria, com piso de
+            # 1 h por tema para que tópicos curtos não desapareçam do plano.
+            theory_hours = max(1.0, len(macro.get("details", [])) * 0.25)
+
+            for db_subtema in macro.get("dbSubtemas", []):
+                meta_dict[db_subtema] = {
+                    "highYield": is_high_yield,
+                    "theory_hours": theory_hours
+                }
 
     # Rows now provided via argument
 

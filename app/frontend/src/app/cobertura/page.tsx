@@ -23,7 +23,7 @@ export default async function CoberturaPage() {
             Cobertura do Banco
           </h1>
           <p className="text-muted-foreground text-body-l max-w-2xl">
-            Acompanhe o seu domínio em cada subtema. O status é calculado com base no número de tentativas e acurácia. Subtemas com mais de 70% de acerto em pelo menos 2 questões atestam domínio.
+            Acompanhe o seu domínio em cada subtema. “Dominado” exige pelo menos 70% de acerto, 2 tentativas e cobertura de 50% das questões únicas do tema.
           </p>
         </div>
 

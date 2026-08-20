@@ -6,6 +6,23 @@ import pytest
 
 from api import create_app
 
+# Estes arquivos são diagnósticos manuais que acessam banco/serviços reais no
+# momento da importação. Eles permanecem úteis para manutenção, mas não fazem
+# parte da suíte hermética executada pelo pytest.
+collect_ignore = [
+    "test.py",
+    "test_ai.py",
+    "test_api_root.py",
+    "test_db.py",
+    "test_expand.py",
+    "test_flashcards.py",
+    "test_meta.py",
+    "test_raw_turso.py",
+    "test_turso.py",
+    "test_turso2.py",
+    "test_turso3.py",
+]
+
 SCHEMA_AND_SEED = """
 CREATE TABLE questions(
     id INTEGER PRIMARY KEY, source_file TEXT, source_number INTEGER, year INTEGER,

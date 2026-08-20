@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { CloudOff, Download, RefreshCw, CheckCircle, Database } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { CloudOff, Download, RefreshCw, Database } from "lucide-react";
 import { localDb } from "@/lib/db";
 import { api } from "@/lib/api";
 
@@ -10,40 +10,42 @@ export function OfflinePanel() {
   const [stats, setStats] = useState({ questions: 0, flashcards: 0, queue: 0 });
   const [isDownloading, setIsDownloading] = useState(false);
 
-  useEffect(() => {
-    // Determine online status
-    const handleOnline = () => setIsOffline(false);
-    const handleOffline = () => setIsOffline(true);
-    
-    setIsOffline(!navigator.onLine);
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-
-    // Initial stats
-    updateStats();
-
-    // Listen to queue updates
-    const handleQueueUpdate = () => updateStats();
-    window.addEventListener("sync-queue-updated", handleQueueUpdate);
-
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-      window.removeEventListener("sync-queue-updated", handleQueueUpdate);
-    };
-  }, []);
-
-  const updateStats = async () => {
+  const updateStats = useCallback(async () => {
     if (!localDb) return;
     try {
       const questions = await localDb.questions.count();
       const flashcards = await localDb.flashcards.count();
       const queue = await localDb.syncQueue.count();
       setStats({ questions, flashcards, queue });
-    } catch (e) {
-      console.error("Failed to read local stats", e);
+    } catch (error) {
+      console.error("Failed to read local stats", error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    // Determine online status
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+    
+    const initialStatusTimer = setTimeout(() => setIsOffline(!navigator.onLine), 0);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    // Initial stats (deferido para não encadear renderizações na montagem).
+    const initialStatsTimer = setTimeout(() => void updateStats(), 0);
+
+    // Listen to queue updates
+    const handleQueueUpdate = () => void updateStats();
+    window.addEventListener("sync-queue-updated", handleQueueUpdate);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+      window.removeEventListener("sync-queue-updated", handleQueueUpdate);
+      clearTimeout(initialStatusTimer);
+      clearTimeout(initialStatsTimer);
+    };
+  }, [updateStats]);
 
   const downloadForShift = async () => {
     if (isDownloading) return;

@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { AccountModal } from "./AccountModal";
 import { ThemeToggle } from "./ThemeToggle";
 import { useZenMode } from "@/hooks/useZenMode";
+import Image from "next/image";
 
 const NAV_ITEMS = [
   { href: "/", label: "Dashboard", icon: "dashboard" },
@@ -32,10 +33,18 @@ export default function TopNav() {
     router.push(href);
   };
 
-  const exitDemoMode = () => {
-    document.cookie = "medquest_demo=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    router.refresh();
-  };
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const tag = (event.target as HTMLElement).tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (event.key.toLowerCase() === "z" && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        event.preventDefault();
+        toggleZenMode();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [toggleZenMode]);
 
   return (
     <>
@@ -58,10 +67,10 @@ export default function TopNav() {
           </button>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30 flex items-center justify-center cursor-pointer hover:opacity-85 transition-opacity focus:outline-none focus:border-outline"
+            className="relative w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30 flex items-center justify-center cursor-pointer hover:opacity-85 transition-opacity focus:outline-none focus:border-outline"
           >
             {isLoaded && user?.imageUrl ? (
-              <img src={user.imageUrl} alt="Avatar" className="w-full h-full object-cover" />
+              <Image src={user.imageUrl} alt="Avatar" fill sizes="32px" className="object-cover" />
             ) : (
               <span className="material-symbols-outlined text-lg" data-icon="person">person</span>
             )}

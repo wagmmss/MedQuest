@@ -3,16 +3,27 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, BatchAttemptItem, BatchAttemptResultItem } from "@/types/api";
 import { api } from "@/lib/api";
-import { Play, Clock, CheckCircle2, XCircle, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag, Filter } from "lucide-react";
+import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import confetti from "canvas-confetti";
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
-import { Grid as FixedSizeGrid } from "react-window";
+import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
 import { AutoSizer } from "react-virtualized-auto-sizer";
+import Image from "next/image";
 
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS";
+type SimuladoProfile = "usp_2026" | "usp_history" | "unicamp" | "sus_sp" | "custom";
+
+interface SavedSimuladoState {
+  state: SimuladoState;
+  queue: QuestionListItem[];
+  answers: Record<number, string>;
+  timeLeft: number;
+  currentIndex: number;
+  resultsMap: Record<number, BatchAttemptResultItem>;
+}
 
 export function SimuladoClient({
   initialFilters = {},
@@ -29,7 +40,6 @@ export function SimuladoClient({
   const [detailsCache, setDetailsCache] = useState<Record<number, QuestionDetail>>({});
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [detailError, setDetailError] = useState(false);
-  const [showFinishConfirm, setShowFinishConfirm] = useState(false);
   const [showAreaSummary, setShowAreaSummary] = useState(false);
   const [showResultsSummary, setShowResultsSummary] = useState(false);
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
@@ -44,11 +54,10 @@ export function SimuladoClient({
   const [sidebarFilter, setSidebarFilter] = useState<'all' | 'unanswered' | 'flagged'>('all');
   
   // Duração proporcional: 3 min/questão (120 Qs = 6h), arredondado
-  const [totalTime, setTotalTime] = useState(6 * 60 * 60);
   const [timeLeft, setTimeLeft] = useState(6 * 60 * 60);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const hasCustomFilters = Object.keys(initialFilters).length > 0;
-  const [simuladoProfile, setSimuladoProfile] = useState<'usp_2026' | 'usp_history' | 'unicamp' | 'sus_sp' | 'custom'>(
+  const [simuladoProfile, setSimuladoProfile] = useState<SimuladoProfile>(
     hasCustomFilters ? 'custom' : 'usp_2026'
   );
   
@@ -66,7 +75,7 @@ export function SimuladoClient({
     const saved = localStorage.getItem("medquest_simulado_state");
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
+        const parsed = JSON.parse(saved) as SavedSimuladoState;
         if (parsed.state === "PLAYING" || parsed.state === "RESULTS") {
           timer = setTimeout(() => {
             setHasSavedState(true);
@@ -85,7 +94,7 @@ export function SimuladoClient({
     const saved = localStorage.getItem("medquest_simulado_state");
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
+        const parsed = JSON.parse(saved) as SavedSimuladoState;
         setState(parsed.state);
         setQueue(parsed.queue);
         setAnswers(parsed.answers);
@@ -94,7 +103,7 @@ export function SimuladoClient({
         setResultsMap(parsed.resultsMap);
         
         // Re-fetch details batch
-        const ids = parsed.queue.map((q: any) => q.id);
+        const ids = parsed.queue.map((question) => question.id);
         const force4 = parsed.queue.length === 120 || parsed.queue.length === 80; // Heuristica simples para resume
         api.questions.getBatch(ids, force4).then(batchRes => {
           const cache: Record<number, QuestionDetail> = {};
@@ -146,11 +155,11 @@ export function SimuladoClient({
           qList = await api.questions.getSimuladoUSP();
           durationHours = 6;
         } else if (simuladoProfile === 'unicamp') {
-          qList = await api.questions.getList({ institution_code: "UNICAMP", limit: "80" });
+          qList = await api.questions.getList({ institution: "UNICAMP", limit: "80" });
           isForce4Options = true;
           durationHours = 4; // 80 questões, 4 horas
         } else if (simuladoProfile === 'sus_sp') {
-          qList = await api.questions.getList({ institution_code: "SUS-SP", limit: "100" });
+          qList = await api.questions.getList({ institution: "SUS-SP", limit: "100" });
           durationHours = 5; // 100 questões, 5 horas
         } else if (simuladoProfile === 'custom' && !hasCustomFilters) {
           qList = await api.questions.getCustomSimulado(customConfig);
@@ -168,7 +177,6 @@ export function SimuladoClient({
       }
       
       const calcTime = Math.round(durationHours * 60 * 60);
-      setTotalTime(calcTime);
       setTimeLeft(calcTime);
       
       setQueue(qList);
@@ -233,7 +241,6 @@ export function SimuladoClient({
         rMap[r.question_id] = r;
       });
       setResultsMap(rMap);
-      setResultsMap(rMap);
       setState("RESULTS");
       setCurrentIndex(0); // Go back to first question to review
       setShowResultsSummary(true);
@@ -278,17 +285,17 @@ export function SimuladoClient({
     };
   }, [state]);
 
-  const handleSelect = (letter: string) => {
+  const handleSelect = useCallback((letter: string) => {
     if (state !== "PLAYING") return;
     const currentQ = queue[currentIndex];
     setAnswers(prev => ({ ...prev, [currentQ.id]: letter }));
-  };
+  }, [state, queue, currentIndex]);
 
-  const toggleFlag = () => {
+  const toggleFlag = useCallback(() => {
     if (state !== "PLAYING") return;
     const currentQ = queue[currentIndex];
     setFlagged(prev => ({ ...prev, [currentQ.id]: !prev[currentQ.id] }));
-  };
+  }, [state, queue, currentIndex]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -331,14 +338,14 @@ export function SimuladoClient({
         // Finish/submit
         if (key === 'enter') {
           e.preventDefault();
-          setShowFinishConfirm(true);
+          setShowAreaSummary(true);
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [state, currentIndex, queue, detailsCache]);
+  }, [state, currentIndex, queue, detailsCache, handleSelect, toggleFlag]);
 
 
   // Filtro de questões visíveis na sidebar
@@ -388,8 +395,6 @@ export function SimuladoClient({
   };
 
   if (state === "START") {
-    const isCustom = Object.keys(initialFilters).length > 0;
-    
     return (
       <div className="bg-card border border-border shadow-1 rounded-xl p-8 max-w-2xl mx-auto w-full text-center flex flex-col items-center">
         <div className="w-20 h-20 bg-primary/20 text-primary rounded-2xl flex items-center justify-center mb-6">
@@ -408,7 +413,7 @@ export function SimuladoClient({
           <div className="w-full max-w-md mb-6">
             <select
               value={simuladoProfile}
-              onChange={(e) => setSimuladoProfile(e.target.value as any)}
+              onChange={(e) => setSimuladoProfile(e.target.value as SimuladoProfile)}
               className="w-full bg-background border border-border rounded-lg p-3 text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-primary/50"
             >
               <option className="bg-background text-foreground" value="usp_2026">USP 2026 (120 Qs, 4 Alternativas)</option>
@@ -634,9 +639,8 @@ export function SimuladoClient({
             )}
           </div>
           <div className="flex-1 overflow-hidden">
-            {/* @ts-ignore */}
-            <AutoSizer>
-              {({ height, width }: { height: number; width: number }) => {
+            <AutoSizer renderProp={({ height, width }) => {
+                if (height === undefined || width === undefined) return null;
                 const availableWidth = width;
                 let columnCount = 5;
                 if (availableWidth > 300) columnCount = 6;
@@ -648,7 +652,7 @@ export function SimuladoClient({
                 const rowHeight = columnWidth;
                 const rowCount = Math.ceil(filteredIndices.length / columnCount);
 
-                const Cell = ({ columnIndex, rowIndex, style }: any) => {
+                const Cell = ({ columnIndex, rowIndex, style, ariaAttributes }: CellComponentProps) => {
                   const index = rowIndex * columnCount + columnIndex;
                   if (index >= filteredIndices.length) return null;
                   
@@ -682,7 +686,7 @@ export function SimuladoClient({
                   };
 
                   return (
-                    <div style={cellStyle}>
+                    <div {...ariaAttributes} style={cellStyle}>
                       <button
                         key={q.id}
                         onClick={() => navigateTo(idx)}
@@ -704,7 +708,6 @@ export function SimuladoClient({
                 };
 
                 return (
-                  // @ts-ignore
                   <FixedSizeGrid
                     columnCount={columnCount}
                     columnWidth={columnWidth + gap}
@@ -715,8 +718,7 @@ export function SimuladoClient({
                     style={{ overflowX: "hidden", height, width }}
                   />
                 );
-              }}
-            </AutoSizer>
+              }} />
           </div>
           
           {!isReview && (
@@ -914,9 +916,12 @@ export function SimuladoClient({
                           className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-xs"
                           onClick={() => setEnlargedImage(img)}
                         >
-                          <img 
+                          <Image
                             src={`/api/images/${img}`} 
                             alt={`Imagem do Caso ${i+1}`} 
+                            width={800}
+                            height={600}
+                            unoptimized
                             className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300" 
                           />
                         </div>
@@ -938,9 +943,12 @@ export function SimuladoClient({
                       className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-sm"
                       onClick={() => setEnlargedImage(img)}
                     >
-                      <img 
+                      <Image
                         src={`/api/images/${img}`} 
                         alt={`Imagem ${i+1}`} 
+                        width={800}
+                        height={600}
+                        unoptimized
                         className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300" 
                       />
                     </div>

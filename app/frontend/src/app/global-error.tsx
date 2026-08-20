@@ -57,13 +57,13 @@ export default function GlobalError({
               Tentar Novamente
             </button>
             
-            <button
-              onClick={() => window.location.href = "/"}
+            <Link
+              href="/"
               className="w-full flex items-center justify-center gap-2 bg-muted text-foreground font-semibold py-3 px-4 rounded-xl hover:bg-muted/80 transition-colors"
             >
               <Home size={18} />
               Voltar ao Início
-            </button>
+            </Link>
           </div>
         </div>
       </body>

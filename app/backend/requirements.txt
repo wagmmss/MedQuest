@@ -11,3 +11,4 @@ cryptography
 requests
 gunicorn
 fsrs
+pytest

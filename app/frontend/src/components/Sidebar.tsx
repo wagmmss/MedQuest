@@ -8,6 +8,7 @@ import { useUser } from "@clerk/nextjs";
 import { AccountModal } from "./AccountModal";
 import { ThemeToggle } from "./ThemeToggle";
 import { useZenMode } from "@/hooks/useZenMode";
+import Image from "next/image";
 
 const NAV_ITEMS = [
   { href: "/", label: "Dashboard", icon: "dashboard" },
@@ -38,7 +39,7 @@ export function Sidebar() {
 
   return (
     <>
-      <aside className="app-sidebar hidden md:flex flex-col bg-surface-container-low/90 backdrop-blur-xl h-screen left-0 w-64 border-r border-outline-variant p-4 gap-stack-md z-10 transition-all duration-300">
+      <aside className="app-sidebar hidden md:flex flex-col bg-surface-container-low/90 backdrop-blur-xl h-full left-0 w-64 border-r border-outline-variant p-4 gap-stack-md z-10 transition-all duration-300">
         <div className="mb-6 flex flex-col items-center justify-center p-4">
           <div className="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-2">
             <span className="material-symbols-outlined" data-icon="local_hospital">local_hospital</span>
@@ -96,8 +97,8 @@ export function Sidebar() {
           >
             <div className="flex items-center gap-3 min-w-0">
               {isLoaded && user?.imageUrl ? (
-                <div className="w-5 h-5 rounded-full overflow-hidden flex-shrink-0">
-                  <img src={user.imageUrl} alt="Avatar" className="w-full h-full object-cover" />
+                <div className="relative w-5 h-5 rounded-full overflow-hidden flex-shrink-0">
+                  <Image src={user.imageUrl} alt="Avatar" fill sizes="20px" className="object-cover" />
                 </div>
               ) : (
                 <span className="material-symbols-outlined flex-shrink-0" data-icon="person">person</span>
@@ -107,8 +108,8 @@ export function Sidebar() {
               </span>
             </div>
             {isLoaded && user?.imageUrl && (
-              <div className="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30 flex-shrink-0">
-                <img src={user.imageUrl} alt="Avatar Mini" className="w-full h-full object-cover" />
+              <div className="relative w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30 flex-shrink-0">
+                <Image src={user.imageUrl} alt="Avatar Mini" fill sizes="32px" className="object-cover" />
               </div>
             )}
           </button>

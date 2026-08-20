@@ -145,6 +145,7 @@ export interface QuestionMeta {
   years: number[];
   sources: { source_file: string; n: number }[];
   areas: { area: string; n: number }[];
+  specialties: { specialty: string; n: number }[];
   subtemas: { subtema: string; n: number }[];
   total_questions: number;
   answered_questions: number;

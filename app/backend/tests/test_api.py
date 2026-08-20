@@ -7,6 +7,13 @@ def test_meta(client):
     assert r.get_json()["total_questions"] == 2
 
 
+def test_meta_cache_preserva_filtros_repetidos(client):
+    usp = client.get("/api/meta?institution=USP-SP")
+    ambas = client.get("/api/meta?institution=USP-SP&institution=USP-RP")
+    assert usp.get_json()["total_questions"] == 1
+    assert ambas.get_json()["total_questions"] == 2
+
+
 def test_v1_alias(client):
     assert client.get("/api/v1/meta").status_code == 200
 
@@ -76,4 +83,9 @@ def test_review_rejeita_confianca_invalida(client):
 
 def test_weak_topics_aceita_min_attempts_invalido(client):
     r = client.get("/api/stats/weak-topics?min_attempts=abc")
+    assert r.status_code == 200
+
+
+def test_simulado_custom_limita_quantidade_invalida(client):
+    r = client.post("/api/simulado/custom", json={"questions_per_area": "abc"})
     assert r.status_code == 200

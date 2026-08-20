@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 from flask import Blueprint, jsonify, request, g
 
 from .db import get_db
-from planner import USP_WEIGHTS, get_normalized_area
+from scripts.planner import USP_WEIGHTS, get_normalized_area
 
 bp = Blueprint("stats", __name__)
 

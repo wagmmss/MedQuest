@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useUser, useClerk } from "@clerk/nextjs";
 import { motion, AnimatePresence } from "framer-motion";
 import { api } from "@/lib/api";
+import { localDb } from "@/lib/db";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface AccountModalProps {
   isOpen: boolean;
@@ -13,6 +16,7 @@ interface AccountModalProps {
 export function AccountModal({ isOpen, onClose }: AccountModalProps) {
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
+  const router = useRouter();
   
   const [step, setStep] = useState<"profile" | "confirm_reset">("profile");
   const [confirmText, setConfirmText] = useState("");
@@ -27,8 +31,16 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
     try {
       const res = await api.stats.resetProgress();
       if (res.success) {
-        // Redirect to dashboard and force a full reload to clear all cached states
-        window.location.href = "/";
+        sessionStorage.removeItem("medquest_quiz_state");
+        localStorage.removeItem("medquest_simulado_state");
+        for (const key of Object.keys(localStorage)) {
+          if (key.startsWith("medquest_planner_topics_")) localStorage.removeItem(key);
+        }
+        if (localDb) {
+          await Promise.all([localDb.flashcards.clear(), localDb.syncQueue.clear()]);
+        }
+        router.replace("/");
+        router.refresh();
       } else {
         setError("Não foi possível resetar o progresso. Tente novamente.");
         setIsLoading(false);
@@ -98,9 +110,9 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                   >
                     {/* User Info Card */}
                     <div className="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant">
-                      <div className="w-16 h-16 rounded-2xl bg-surface-container-high overflow-hidden flex-shrink-0 border-2 border-primary/10 shadow-[0px_2px_8px_rgba(0,0,0,0.05)]">
+                      <div className="relative w-16 h-16 rounded-2xl bg-surface-container-high overflow-hidden flex-shrink-0 border-2 border-primary/10 shadow-[0px_2px_8px_rgba(0,0,0,0.05)]">
                         {isLoaded && user?.imageUrl ? (
-                          <img src={user.imageUrl} alt="Avatar" className="w-full h-full object-cover" />
+                          <Image src={user.imageUrl} alt="Avatar" fill sizes="64px" className="object-cover" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center bg-primary-container text-on-primary-container">
                             <span className="material-symbols-outlined text-3xl" data-icon="person">person</span>

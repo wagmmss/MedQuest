@@ -21,7 +21,6 @@ export const viewport: Viewport = {
   themeColor: "#0ea5e9",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export const metadata: Metadata = {
@@ -64,6 +63,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         suppressHydrationWarning
       >
         <head>
+          {/* eslint-disable-next-line @next/next/no-page-custom-font */}
           <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
           <script
             dangerouslySetInnerHTML={{
@@ -81,7 +81,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </head>
         <body className="font-body-md text-body-md h-screen flex overflow-hidden bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
           {!userId && !isDemoMode ? (
-            <div className="flex w-full h-full items-center justify-center p-8 bg-background relative overflow-hidden">
+            <div className="flex w-full h-full items-start justify-center p-8 bg-background relative overflow-y-auto">
               <div className="absolute inset-0 bg-primary/5" style={{ backgroundImage: "radial-gradient(circle, var(--primary) 1px, transparent 1px)", backgroundSize: "32px 32px", opacity: 0.2 }} />
               <div className="relative z-10 flex flex-col items-center max-w-md w-full bg-card p-8 md:p-12 rounded-2xl shadow-xl border border-border">
                 <div className="w-16 h-16 bg-primary/20 text-primary rounded-2xl flex items-center justify-center mb-6 shadow-sm">
@@ -98,7 +98,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           ) : (
             <div className="flex flex-col w-full h-full">
               <DemoBanner />
-              <div className="flex w-full h-full overflow-hidden">
+              <div className="flex flex-1 min-h-0 w-full overflow-hidden">
                 <Sidebar />
                 <div className="flex-1 flex flex-col w-full min-w-0 bg-background overflow-y-auto">
                   <TopNav />

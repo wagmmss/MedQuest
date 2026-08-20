@@ -155,8 +155,7 @@ def init_db(app):
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_institution ON questions (institution_code)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_year ON questions (year)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_source ON questions (source_file)")
-            db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_created_at ON attempts (created_at)")
-            db.execute("CREATE INDEX IF NOT EXISTS idx_srs_reviews_next_review ON srs_reviews (next_review)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_answered_at ON attempts (answered_at)")
             
             db.commit()
         except Exception as e:

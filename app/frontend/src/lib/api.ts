@@ -40,7 +40,7 @@ async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> 
         console.warn("[API] Network error detected, adding to offline queue:", endpoint);
         syncManager.enqueue(url, options);
         // Retornamos um objeto mock com sucesso true para não travar a UI (útil para tentativas de questões)
-        return { success: true, offline: true } as any;
+        return { success: true, offline: true } as T;
       }
     }
     throw error;

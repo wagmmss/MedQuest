@@ -1,6 +1,5 @@
 """Blueprint: metadados, listagem/fila de estudo, detalhe, tentativa e favoritos."""
 from datetime import datetime, timezone
-from html import escape
 import re
 import json
 
@@ -87,13 +86,6 @@ def _fts_phrase(value):
     return " ".join(words)
 
 
-def _safe_snippet(value):
-    """Escapa o conteúdo original e preserva somente as tags de destaque."""
-    return (escape(value or "")
-            .replace("⟦MQH⟧", "<mark>")
-            .replace("⟦/MQH⟧", "</mark>"))
-
-
 @bp.route("/simulado/usp")
 def simulado_usp():
     db = get_db()
@@ -124,7 +116,7 @@ def simulado_custom():
     data = request.get_json(force=True) or {}
     institutions = data.get("institutions", [])
     years = data.get("years", [])
-    q_per_area = int(data.get("questions_per_area", 20))
+    q_per_area = _bounded_int(data.get("questions_per_area"), 20, 1, 100)
     
     areas = ["Cirurgia", "Clínica Médica", "Pediatria", "Ginecologia e Obstetrícia", "Medicina Preventiva e Social"]
     all_ids = []
@@ -212,15 +204,21 @@ def search_questions():
     out = []
     for row in rows:
         item = dict(row)
-        item["stem_snippet"] = escape(item.get("stem_snippet") or "") + "..."
-        item["exp_snippet"] = escape(item.get("exp_snippet") or "") + "..."
+        item["stem_snippet"] = (item.get("stem_snippet") or "") + "..."
+        item["exp_snippet"] = (item.get("exp_snippet") or "") + "..."
         out.append(item)
     return jsonify(out)
 
 
 @bp.route("/meta")
 def meta():
-    cache_key = f"{str(dict(request.args))}_{g.user_id}"
+    # Preserva valores repetidos (ex.: institution=A&institution=B) e faz
+    # consultas equivalentes compartilharem a mesma entrada de cache.
+    normalized_args = tuple(sorted(
+        (key, tuple(sorted(values)))
+        for key, values in request.args.lists()
+    ))
+    cache_key = (g.user_id, normalized_args)
     cached = meta_cache.get(cache_key)
     if cached:
         return jsonify(cached)
@@ -257,23 +255,26 @@ def meta():
         years = results[1].fetchall()
         sources = results[2].fetchall()
         areas = results[3].fetchall()
-        subtemas = results[4].fetchall()
-        total = results[5].fetchone()["n"]
-        answered = results[6].fetchone()["n"]
+        specialties = results[4].fetchall()
+        subtemas = results[5].fetchall()
+        total = results[6].fetchone()["n"]
+        answered = results[7].fetchone()["n"]
     else:
         institutions = db.execute(queries[0][0], queries[0][1]).fetchall()
         years = db.execute(queries[1][0], queries[1][1]).fetchall()
         sources = db.execute(queries[2][0], queries[2][1]).fetchall()
         areas = db.execute(queries[3][0], queries[3][1]).fetchall()
-        subtemas = db.execute(queries[4][0], queries[4][1]).fetchall()
-        total = db.execute(queries[5][0], queries[5][1]).fetchone()["n"]
-        answered = db.execute(queries[6][0], queries[6][1]).fetchone()["n"]
+        specialties = db.execute(queries[4][0], queries[4][1]).fetchall()
+        subtemas = db.execute(queries[5][0], queries[5][1]).fetchall()
+        total = db.execute(queries[6][0], queries[6][1]).fetchone()["n"]
+        answered = db.execute(queries[7][0], queries[7][1]).fetchone()["n"]
     
     result = {
         "institutions": [dict(r) for r in institutions],
         "years": [r["year"] for r in years],
         "sources": [dict(r) for r in sources],
         "areas": [dict(r) for r in areas],
+        "specialties": [dict(r) for r in specialties],
         "subtemas": [dict(r) for r in subtemas],
         "total_questions": total,
         "answered_questions": answered,

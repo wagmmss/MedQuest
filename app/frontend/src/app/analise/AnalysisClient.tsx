@@ -387,7 +387,7 @@ export function AnalysisClient({
                     />
                     <Tooltip 
                       cursor={{ fill: 'var(--muted)', opacity: 0.15 }}
-                      content={({ active, payload, label }) => {
+                      content={({ active, payload }) => {
                         if (active && payload && payload.length) {
                           const data = payload[0].payload;
                           return (

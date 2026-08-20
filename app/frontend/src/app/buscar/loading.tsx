@@ -1,5 +1,3 @@
-import { Search } from "lucide-react";
-
 export default function LoadingBuscar() {
   return (
     <div className="max-w-4xl mx-auto w-full flex flex-col gap-6 pb-12 animate-pulse">

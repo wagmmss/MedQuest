@@ -3,13 +3,15 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, ChevronRight, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search } from "lucide-react";
+import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { ImageViewer } from "@/components/ImageViewer";
+import { useZenMode } from "@/hooks/useZenMode";
+import Image from "next/image";
 
 type QuizState = "FILTERS" | "LOADING_QUEUE" | "PLAYING" | "FINISHED";
 
@@ -26,17 +28,8 @@ export function QuizClient({
   const [localLimit, setLocalLimit] = useState<string>(
     typeof filters.limit === "string" ? filters.limit : "50"
   );
-  const [zenMode, setZenMode] = useState(false);
+  const { isZenMode: zenMode, toggleZenMode } = useZenMode();
   const [subtemaSearch, setSubtemaSearch] = useState("");
-
-  useEffect(() => {
-    if (zenMode) {
-      document.body.classList.add('zen-mode');
-    } else {
-      document.body.classList.remove('zen-mode');
-    }
-    return () => document.body.classList.remove('zen-mode');
-  }, [zenMode]);
 
   const [studyMode, setStudyMode] = useState<"TUTOR" | "SIMULADO">("TUTOR");
   const [dynamicMeta, setDynamicMeta] = useState<QuestionMeta>(meta);
@@ -83,7 +76,7 @@ export function QuizClient({
       const detail = await api.questions.getDetail(id);
       setCurrentDetail(detail);
       // Removida a lógica de bloqueio por already_answered. Na revisão, o aluno tenta de novo!
-    } catch (e) {
+    } catch {
       toast.error("Erro ao carregar questão.");
     } finally {
       setLoadingDetail(false);
@@ -113,8 +106,11 @@ export function QuizClient({
   useEffect(() => {
     if (currentDetail && sessionAnswers[currentDetail.id]) {
       const ans = sessionAnswers[currentDetail.id];
-      setSelectedLetter(ans.letter);
-      setAttemptResult(ans.result);
+      const timer = setTimeout(() => {
+        setSelectedLetter(ans.letter);
+        setAttemptResult(ans.result);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [currentDetail, sessionAnswers]);
 
@@ -129,13 +125,15 @@ export function QuizClient({
         const parsed = JSON.parse(saved);
         if (parsed.state === "PLAYING" || parsed.state === "FINISHED") {
           hasRestored.current = true;
-          setQueue(parsed.queue);
-          setCurrentIndex(parsed.currentIndex);
-          setFilters(parsed.filters);
-          if (parsed.currentDetail) setCurrentDetail(parsed.currentDetail);
-          if (parsed.sessionAnswers) setSessionAnswers(parsed.sessionAnswers);
-          setState(parsed.state);
-          return;
+          const timer = setTimeout(() => {
+            setQueue(parsed.queue);
+            setCurrentIndex(parsed.currentIndex);
+            setFilters(parsed.filters);
+            if (parsed.currentDetail) setCurrentDetail(parsed.currentDetail);
+            if (parsed.sessionAnswers) setSessionAnswers(parsed.sessionAnswers);
+            setState(parsed.state);
+          }, 0);
+          return () => clearTimeout(timer);
         }
       } catch {
         sessionStorage.removeItem("medquest_quiz_state");
@@ -171,7 +169,7 @@ export function QuizClient({
       try {
         const newMeta = await api.questions.getMeta(filters);
         if (isMounted) setDynamicMeta(newMeta);
-      } catch (e) {
+      } catch {
         console.error("Failed to load dynamic meta");
       } finally {
         if (isMounted) setIsUpdatingMeta(false);
@@ -230,7 +228,7 @@ export function QuizClient({
     }
   };
 
-  const handleAttempt = async () => {
+  const handleAttempt = useCallback(async () => {
     if (attemptResult || submitting || !currentDetail || !selectedLetter) return;
     
     setSubmitting(true);
@@ -251,13 +249,13 @@ export function QuizClient({
           colors: ['#10b981', '#34d399', '#059669']
         });
       }
-    } catch (e) {
+    } catch {
       toast.error("Erro ao enviar resposta.");
       // O timer será reiniciado automaticamente pelo useEffect pois attemptResult continua null e state="PLAYING"
     } finally {
       setSubmitting(false);
     }
-  };
+  }, [attemptResult, submitting, currentDetail, selectedLetter, timeSpent]);
 
   const handleGenerateFlashcard = async () => {
     if (!currentDetail || !selectedLetter) return;
@@ -265,7 +263,7 @@ export function QuizClient({
     try {
       const res = await api.flashcards.generate(currentDetail.id, selectedLetter);
       setFlashcardResult(res);
-    } catch (e) {
+    } catch {
       toast.error("Erro ao gerar flashcard com IA.");
     } finally {
       setGeneratingFlashcard(false);
@@ -302,43 +300,43 @@ export function QuizClient({
               if (data.text) {
                 setAiExplanation(prev => prev + data.text);
               }
-            } catch (e) {}
+            } catch {}
           }
         }
       }
-    } catch (e) {
+    } catch {
       toast.error("Erro ao carregar explicação com IA.");
     } finally {
       setIsExplaining(false);
     }
   };
 
-  const nextQuestion = () => {
+  const nextQuestion = useCallback(() => {
     if (currentIndex + 1 < queue.length) {
       setCurrentIndex(prev => prev + 1);
       loadQuestionDetail(queue[currentIndex + 1].id);
     } else {
       setState("FINISHED");
     }
-  };
+  }, [currentIndex, queue, loadQuestionDetail]);
 
-  const handleReviewFSRS = async (conf: string) => {
+  const handleReviewFSRS = useCallback(async (conf: string) => {
     if (!currentDetail) return;
     try {
       await api.questions.reviewFSRS(currentDetail.id, conf);
-    } catch (e) {
+    } catch {
       toast.error("Erro ao salvar revisão (FSRS).");
     } finally {
       nextQuestion();
     }
-  };
+  }, [currentDetail, nextQuestion]);
 
-  const prevQuestion = () => {
+  const prevQuestion = useCallback(() => {
     if (currentIndex > 0) {
       setCurrentIndex(prev => prev - 1);
       loadQuestionDetail(queue[currentIndex - 1].id);
     }
-  };
+  }, [currentIndex, queue, loadQuestionDetail]);
 
   const toggleFavorite = async () => {
     if (!currentDetail || togglingFavorite) return;
@@ -346,7 +344,7 @@ export function QuizClient({
     setCurrentDetail({ ...currentDetail, is_favorite: !currentDetail.is_favorite });
     try {
       await api.questions.toggleFavorite(currentDetail.id);
-    } catch (e) {
+    } catch {
       setCurrentDetail({ ...currentDetail, is_favorite: currentDetail.is_favorite });
     } finally {
       setTogglingFavorite(false);
@@ -409,7 +407,7 @@ export function QuizClient({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue, selectedLetter, submitting]);
+  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue, selectedLetter, submitting, handleAttempt, handleReviewFSRS, nextQuestion, prevQuestion]);
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -678,7 +676,7 @@ export function QuizClient({
         
         <div className="flex items-center gap-4">
           <button 
-            onClick={() => setZenMode(!zenMode)}
+            onClick={toggleZenMode}
             className="flex items-center gap-2 px-3 py-1.5 bg-muted hover:bg-muted/80 text-muted-foreground rounded-lg transition-colors border border-border text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-background"
             title={zenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen (Foco Absoluto)"}
             aria-label={zenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen"}
@@ -741,9 +739,12 @@ export function QuizClient({
                       className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-xs"
                       onClick={() => setEnlargedImage(img)}
                     >
-                      <img 
+                      <Image
                         src={`/api/images/${img}`} 
                         alt={`Imagem do Caso ${i+1}`} 
+                        width={800}
+                        height={600}
+                        unoptimized
                         className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300" 
                       />
                     </div>
@@ -815,9 +816,12 @@ export function QuizClient({
                     className="relative group rounded-xl overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-sm"
                     onClick={() => setEnlargedImage(img)}
                   >
-                    <img 
+                    <Image
                       src={`/api/images/${img}`} 
                       alt={`Imagem ${i+1}`} 
+                      width={800}
+                      height={600}
+                      unoptimized
                       className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300" 
                       onError={(e) => { 
                         e.currentTarget.style.display = 'none'; 

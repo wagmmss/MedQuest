@@ -1,4 +1,4 @@
-import { Sparkles, BrainCircuit } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export default function LoadingFlashcards() {
   return (

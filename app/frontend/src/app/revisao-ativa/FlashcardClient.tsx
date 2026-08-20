@@ -3,9 +3,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { Flashcard } from "@/types/api";
 import { api } from "@/lib/api";
-import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle, ArrowRight } from "lucide-react";
+import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle } from "lucide-react";
 import toast from "react-hot-toast";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export function FlashcardClient() {
   const [queue, setQueue] = useState<Flashcard[]>([]);
@@ -24,6 +25,21 @@ export function FlashcardClient() {
       setLoading(false);
     }
   }, []);
+
+  const handleReview = useCallback(async (confidence: string) => {
+    if (queue.length === 0 || submitting) return;
+    setSubmitting(true);
+
+    try {
+      await api.flashcards.review(queue[0].id, confidence);
+      setQueue(prev => prev.slice(1));
+      setFlipped(false);
+    } catch {
+      toast.error("Erro ao enviar avaliação.");
+    } finally {
+      setSubmitting(false);
+    }
+  }, [queue, submitting]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -59,24 +75,7 @@ export function FlashcardClient() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [queue, loading, submitting, flipped]);
-
-  const handleReview = async (confidence: string) => {
-    if (queue.length === 0 || submitting) return;
-    setSubmitting(true);
-    
-    try {
-      await api.flashcards.review(queue[0].id, confidence);
-      
-      // Remove da fila e vira
-      setQueue(prev => prev.slice(1));
-      setFlipped(false);
-    } catch {
-      toast.error("Erro ao enviar avaliação.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  }, [queue, loading, submitting, flipped, handleReview]);
 
   const handleReport = async () => {
     if (queue.length === 0 || submitting) return;
@@ -139,13 +138,13 @@ export function FlashcardClient() {
         <p className="text-muted-foreground mb-8 text-lg max-w-md">
           Você não tem nenhum flashcard vencido no momento. Volte a estudar para gerar novos cartões com seus erros e fortalecer a memória.
         </p>
-        <button 
-          onClick={() => window.location.href = '/estudar'}
+        <Link
+          href="/estudar"
           className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:-translate-y-0.5 flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-lg" data-icon="menu_book">menu_book</span>
           Ir para Banco de Questões
-        </button>
+        </Link>
       </motion.div>
     );
   }
@@ -181,7 +180,7 @@ export function FlashcardClient() {
         {current.stem && (
           <div className="w-full mt-4 mb-8 pb-6 border-b border-border/50 text-muted-foreground text-sm md:text-base leading-relaxed text-left opacity-80">
             <span className="font-bold text-foreground/50 uppercase text-xs tracking-wider mb-3 block">Questão Original (Contexto)</span>
-            <div dangerouslySetInnerHTML={{ __html: current.stem }} />
+            <div className="whitespace-pre-wrap">{current.stem}</div>
           </div>
         )}
 

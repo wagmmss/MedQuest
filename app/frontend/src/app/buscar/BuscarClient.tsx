@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Search, Loader2, BookOpen, X } from "lucide-react";
 import { api } from "@/lib/api";
@@ -12,7 +11,6 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
   const [semantic, setSemantic] = useState(true);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     if (!query.trim()) {
@@ -103,7 +101,7 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
       {query.trim().length > 0 && (
         <div className="flex flex-col gap-4">
           <div className="text-sm font-medium text-muted-foreground px-2">
-            {loading ? "Buscando..." : `${results.length} resultados encontrados para "${query}"`}
+            {loading ? "Buscando..." : `${results.length} resultados encontrados para “${query}”`}
           </div>
           
           <div className="flex flex-col gap-4">
@@ -119,18 +117,14 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
                   <span className="bg-muted px-2 py-1 rounded">{res.subtema}</span>
                 </div>
                 
-                <div 
-                  className="text-foreground text-body-m leading-relaxed [&>mark]:bg-warning/30 [&>mark]:text-foreground [&>mark]:rounded-sm [&>mark]:px-0.5 group-hover:text-primary transition-colors"
-                  dangerouslySetInnerHTML={{ __html: res.stem_snippet }}
-                />
+                <div className="text-foreground text-body-m leading-relaxed group-hover:text-primary transition-colors">
+                  {res.stem_snippet}
+                </div>
                 
                 {res.exp_snippet && (
                   <div className="mt-2 bg-muted/50 rounded-lg p-3 text-sm text-muted-foreground flex items-start gap-2 border border-border/50">
                     <BookOpen size={16} className="shrink-0 mt-0.5 opacity-70" />
-                    <div 
-                      className="line-clamp-2 [&>mark]:bg-warning/30 [&>mark]:text-foreground [&>mark]:rounded-sm [&>mark]:px-0.5"
-                      dangerouslySetInnerHTML={{ __html: res.exp_snippet }}
-                    />
+                    <div className="line-clamp-2">{res.exp_snippet}</div>
                   </div>
                 )}
               </Link>
@@ -143,7 +137,7 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
                 </div>
                 <h3 className="text-xl font-bold text-foreground">Nenhuma questão encontrada</h3>
                 <p className="text-muted-foreground text-base max-w-md">
-                  Não encontramos resultados para "<strong className="text-foreground">{query}</strong>". 
+                  Não encontramos resultados para “<strong className="text-foreground">{query}</strong>”.
                   Tente usar palavras-chave mais curtas, remover filtros ou buscar por sinônimos.
                 </p>
               </div>

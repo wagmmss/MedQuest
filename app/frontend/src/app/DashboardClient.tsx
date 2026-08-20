@@ -4,7 +4,7 @@ import Link from "next/link";
 import { OverviewStats, PlannerWeek } from "@/types/api";
 import { OfflinePanel } from "@/components/OfflinePanel";
 import { motion, Variants } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import confetti from "canvas-confetti";
 
 interface DashboardClientProps {
@@ -14,10 +14,7 @@ interface DashboardClientProps {
 }
 
 export function DashboardClient({ stats, currentPlannerWeek, firstName }: DashboardClientProps) {
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
     // Dispara confete se as revisões diárias estiverem zeradas e houver pelo menos 1 questão feita
     if (stats.srs_due_count === 0 && stats.flashcards_due_count === 0 && stats.distinct_answered > 0) {
       const timer = setTimeout(() => {
@@ -55,11 +52,6 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
     show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 300, damping: 24 } }
   };
 
-  const hour = new Date().getHours();
-  let greeting = "Boa noite";
-  if (hour >= 5 && hour < 12) greeting = "Bom dia";
-  else if (hour >= 12 && hour < 18) greeting = "Boa tarde";
-
   const motivationalMessages = [
     stats.streak_days >= 5 ? `Sua sequência está em 🔥! ${stats.streak_days} dias seguidos.` : null,
     currentPlannerWeek && currentPlannerWeek.week > 20 ? `Reta final! Você está na Semana ${currentPlannerWeek.week}.` : null,
@@ -68,8 +60,6 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
   ].filter(Boolean);
 
   const motivationalMessage = motivationalMessages[0];
-
-  if (!mounted) return <div className="min-h-screen" />; // Previne hydration mismatch
 
   return (
     <motion.div 
@@ -82,7 +72,7 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
       <motion.section variants={itemVariants} className="flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
         <div>
           <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">
-            {greeting}, {firstName}
+            Olá, {firstName}
           </h2>
           <p className="font-body-md text-body-md text-on-surface-variant">
             {motivationalMessage}
@@ -121,17 +111,13 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
               {pendentes > 0 ? (
                 <div className="flex gap-2 flex-col sm:flex-row">
                   {stats.flashcards_due_count! > 0 && (
-                    <Link href="/revisao-ativa" className="flex-1">
-                      <button className="w-full py-2.5 bg-purple-100 hover:bg-purple-200 text-purple-700 dark:bg-purple-900/30 dark:hover:bg-purple-900/50 dark:text-purple-300 font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2">
-                        <span className="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span> Flashcards ({stats.flashcards_due_count})
-                      </button>
+                    <Link href="/revisao-ativa" className="flex-1 w-full py-2.5 bg-purple-100 hover:bg-purple-200 text-purple-700 dark:bg-purple-900/30 dark:hover:bg-purple-900/50 dark:text-purple-300 font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2">
+                      <span className="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span> Flashcards ({stats.flashcards_due_count})
                     </Link>
                   )}
                   {stats.srs_due_count! > 0 && (
-                    <Link href="/estudar?status=srs_due&limit=100" className="flex-1">
-                      <button className="w-full py-2.5 bg-primary/10 hover:bg-primary/20 text-primary font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2">
-                        <span className="material-symbols-outlined text-sm" data-icon="psychology">psychology</span> Questões ({stats.srs_due_count})
-                      </button>
+                    <Link href="/estudar?status=srs_due&limit=100" className="flex-1 w-full py-2.5 bg-primary/10 hover:bg-primary/20 text-primary font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2">
+                      <span className="material-symbols-outlined text-sm" data-icon="psychology">psychology</span> Questões ({stats.srs_due_count})
                     </Link>
                   )}
                 </div>
@@ -161,10 +147,8 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
             </div>
             
             <div className="mt-6 relative z-10">
-              <Link href={currentPlannerWeek && currentPlannerWeek.topics.length > 0 ? `/estudar?subtema=${encodeURIComponent(currentPlannerWeek.topics[0].subtema)}&status=new&limit=20` : "/estudar?status=new&limit=20"}>
-                <button className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-blue-500/25">
-                  <span className="material-symbols-outlined text-sm" data-icon="play_arrow">play_arrow</span> Iniciar Bateria
-                </button>
+              <Link href={currentPlannerWeek && currentPlannerWeek.topics.length > 0 ? `/estudar?subtema=${encodeURIComponent(currentPlannerWeek.topics[0].subtema)}&status=new&limit=20` : "/estudar?status=new&limit=20"} className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-blue-500/25">
+                <span className="material-symbols-outlined text-sm" data-icon="play_arrow">play_arrow</span> Iniciar Bateria
               </Link>
             </div>
           </motion.div>
@@ -193,10 +177,8 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
             </div>
             
             <div className="mt-6 relative z-10">
-              <Link href="/planner">
-                <button className="w-full py-2.5 bg-white/20 hover:bg-white/30 text-white border border-white/30 font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2 backdrop-blur-sm">
-                  <span className="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span> Ver Planner
-                </button>
+              <Link href="/planner" className="w-full py-2.5 bg-white/20 hover:bg-white/30 text-white border border-white/30 font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2 backdrop-blur-sm">
+                <span className="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span> Ver Planner
               </Link>
             </div>
           </motion.div>
@@ -220,10 +202,8 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
               <p className="font-body-md text-body-md text-on-surface-variant max-w-md mb-6">
                 Você ainda não respondeu nenhuma questão. Que tal começar agora mesmo e testar seus conhecimentos?
               </p>
-              <Link href="/estudar">
-                <button className="px-6 py-3 bg-primary text-on-primary rounded-xl font-body-sm font-semibold hover:opacity-90 transition-opacity">
-                  Explorar Banco de Questões
-                </button>
+              <Link href="/estudar" className="px-6 py-3 bg-primary text-on-primary rounded-xl font-body-sm font-semibold hover:opacity-90 transition-opacity">
+                Explorar Banco de Questões
               </Link>
             </div>
           ) : (
@@ -310,7 +290,7 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
               { href: "/simulado", icon: "description", title: "Simulado USP", desc: "Realize provas na íntegra.", colorClass: "text-secondary", bgClass: "bg-secondary/10", groupHoverBg: "group-hover:bg-secondary", groupHoverText: "group-hover:text-white" },
               { href: "/planner", icon: "calendar_month", title: "Planner Anual", desc: "Acompanhe seu cronograma de estudos.", colorClass: "text-blue-500", bgClass: "bg-blue-500/10", groupHoverBg: "group-hover:bg-blue-500", groupHoverText: "group-hover:text-white" },
               { href: "/revisao-ativa", icon: "auto_awesome", title: "Revisão Ativa", desc: "Estude com flashcards gerados por IA.", colorClass: "text-purple-500", bgClass: "bg-purple-500/10", groupHoverBg: "group-hover:bg-purple-500", groupHoverText: "group-hover:text-white" }
-            ].map((item, idx) => (
+            ].map((item) => (
               <motion.li key={item.href} whileHover={{ x: 5 }}>
                 <Link href={item.href} className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-high transition-colors cursor-pointer group">
                   <div className={`p-2 rounded-lg transition-colors ${item.colorClass} ${item.bgClass} ${item.groupHoverBg} ${item.groupHoverText}`}>
