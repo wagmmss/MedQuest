@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider, SignIn } from '@clerk/nextjs';
+import { ptBR } from '@clerk/localizations';
 import { auth } from '@clerk/nextjs/server';
 import { cookies } from 'next/headers';
 import "./globals.css";
+import "material-symbols/outlined.css";
 import { Sidebar } from "@/components/Sidebar";
 import TopNav from "@/components/TopNav";
 import { Toaster } from "react-hot-toast";
@@ -56,15 +58,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const isDemoMode = cookieStore.get("medquest_demo")?.value === "1";
 
   return (
-    <ClerkProvider>
+    <ClerkProvider localization={ptBR}>
       <html
         lang="pt-BR"
         className={`${inter.variable} h-full antialiased`}
         suppressHydrationWarning
       >
         <head>
-          {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-          <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+          {/* Local Material Symbols injected via globals.css or layout import */}
           <script
             dangerouslySetInnerHTML={{
               __html: `

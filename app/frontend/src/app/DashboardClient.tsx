@@ -4,8 +4,8 @@ import Link from "next/link";
 import { OverviewStats, PlannerWeek } from "@/types/api";
 import { OfflinePanel } from "@/components/OfflinePanel";
 import { motion, Variants } from "framer-motion";
-import { useEffect } from "react";
-import confetti from "canvas-confetti";
+import { useEffect, useRef } from "react";
+import { triggerConfetti } from "@/lib/confetti";
 
 interface DashboardClientProps {
   stats: OverviewStats;
@@ -14,18 +14,13 @@ interface DashboardClientProps {
 }
 
 export function DashboardClient({ stats, currentPlannerWeek, firstName }: DashboardClientProps) {
+  const hasAnimated = useRef(false);
+
   useEffect(() => {
     // Dispara confete se as revisões diárias estiverem zeradas e houver pelo menos 1 questão feita
-    if (stats.srs_due_count === 0 && stats.flashcards_due_count === 0 && stats.distinct_answered > 0) {
-      const timer = setTimeout(() => {
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#003466', '#10b981', '#8b5cf6']
-        });
-      }, 500);
-      return () => clearTimeout(timer);
+    if (stats.srs_due_count === 0 && stats.flashcards_due_count === 0 && stats.distinct_answered > 0 && !hasAnimated.current) {
+      hasAnimated.current = true;
+      triggerConfetti();
     }
   }, [stats]);
 

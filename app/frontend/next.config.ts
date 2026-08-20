@@ -44,6 +44,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    optimizePackageImports: ["lucide-react", "date-fns", "framer-motion", "recharts"],
+  },
 };
 
 export default withPWA(nextConfig);

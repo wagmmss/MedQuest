@@ -1,4 +1,4 @@
-export const plannerData = [
+[
   {
     "area": "Medicina Preventiva",
     "macroThemes": [
@@ -1346,4 +1346,4 @@ export const plannerData = [
       }
     ]
   }
-];
+]

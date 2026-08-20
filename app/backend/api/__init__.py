@@ -20,7 +20,9 @@ def create_app(testing=False):
     app.config.from_object(Config)
     if testing:
         app.config["TESTING"] = True
-    CORS(app)
+    import os
+    frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+    CORS(app, origins=[frontend_url, "http://localhost:3000", "http://127.0.0.1:3000"])
 
     @app.route("/")
     def index():

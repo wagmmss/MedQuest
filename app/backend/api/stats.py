@@ -9,21 +9,46 @@ from scripts.planner import USP_WEIGHTS, get_normalized_area
 
 bp = Blueprint("stats", __name__)
 
+from threading import Lock
+
 class SimpleTTLCache:
-    def __init__(self, ttl_seconds):
+    def __init__(self, ttl_seconds, max_size=500):
         self.ttl = ttl_seconds
+        self.max_size = max_size
         self.cache = {}
         self.expiry = {}
+        self.lock = Lock()
         
     def get(self, key):
-        if key in self.cache and time.time() < self.expiry[key]:
-            return self.cache[key]
-        return None
-        
+        with self.lock:
+            if key in self.cache and time.time() < self.expiry[key]:
+                return self.cache[key]
+            if key in self.cache:
+                del self.cache[key]
+                del self.expiry[key]
+            return None
+            
     def set(self, key, value):
-        self.cache[key] = value
-        self.expiry[key] = time.time() + self.ttl
-        
+        with self.lock:
+            now = time.time()
+            stale = [k for k, exp in self.expiry.items() if now >= exp]
+            for k in stale:
+                del self.cache[k]
+                del self.expiry[k]
+            if len(self.cache) >= self.max_size:
+                oldest = min(self.expiry, key=self.expiry.get)
+                del self.cache[oldest]
+                del self.expiry[oldest]
+            self.cache[key] = value
+            self.expiry[key] = now + self.ttl
+
+    def clear_user(self, user_id):
+        with self.lock:
+            keys_to_delete = [k for k in self.cache.keys() if str(k).startswith(str(user_id))]
+            for k in keys_to_delete:
+                del self.cache[k]
+                del self.expiry[k]
+                
 overview_cache = SimpleTTLCache(60)
 
 @bp.route("/stats/overview")
@@ -408,6 +433,8 @@ def reset_stats():
         db.commit()
     except Exception:
         raise
+        
+    overview_cache.clear_user(g.user_id)
     return jsonify({"success": True})
 
 

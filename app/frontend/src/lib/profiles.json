@@ -1,0 +1,33 @@
+[
+  {
+    "id": "usp_2026",
+    "name": "USP 2026",
+    "questions": 120,
+    "alternatives": 4,
+    "duration_hours": 6,
+    "is_force_4_options": true,
+    "fetch_method": "getSimuladoUSP",
+    "balance_label": "24 Clínica • 24 Cirurgia • 24 Pediatria • 24 GO • 24 Preventiva"
+  },
+  {
+    "id": "usp_history",
+    "name": "Histórico USP",
+    "questions": 120,
+    "alternatives": 5,
+    "duration_hours": 6,
+    "is_force_4_options": false,
+    "fetch_method": "getSimuladoUSP",
+    "balance_label": "24 Clínica • 24 Cirurgia • 24 Pediatria • 24 GO • 24 Preventiva"
+  },
+  {
+    "id": "unicamp",
+    "name": "UNICAMP",
+    "questions": 80,
+    "alternatives": 4,
+    "duration_hours": 4,
+    "is_force_4_options": true,
+    "fetch_method": "getList",
+    "fetch_args": { "institution": "UNICAMP", "limit": "80" },
+    "balance_label": "Questões aleatórias da instituição"
+  }
+]

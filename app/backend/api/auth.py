@@ -48,7 +48,9 @@ def require_auth(f):
             
         auth_header = request.headers.get("Authorization")
         if not auth_header or not auth_header.startswith("Bearer ") or auth_header == "Bearer null":
-            g.user_id = "guest"
+            # Isolar usuários visitantes
+            guest_id = request.headers.get("X-Guest-ID", "guest")
+            g.user_id = f"guest_{guest_id}" if guest_id != "guest" else "guest"
             return f(*args, **kwargs)
             
         token = auth_header.split(" ")[1]

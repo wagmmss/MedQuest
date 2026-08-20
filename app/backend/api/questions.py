@@ -15,8 +15,9 @@ import time
 from threading import Lock
 
 class SimpleTTLCache:
-    def __init__(self, ttl_seconds):
+    def __init__(self, ttl_seconds, max_size=500):
         self.ttl = ttl_seconds
+        self.max_size = max_size
         self.cache = {}
         self.lock = Lock()
         
@@ -32,7 +33,14 @@ class SimpleTTLCache:
             
     def set(self, key, value):
         with self.lock:
-            self.cache[key] = (value, time.time() + self.ttl)
+            now = time.time()
+            stale = [k for k, (v, exp) in self.cache.items() if now >= exp]
+            for k in stale:
+                del self.cache[k]
+            if len(self.cache) >= self.max_size:
+                oldest = min(self.cache.keys(), key=lambda k: self.cache[k][1])
+                del self.cache[oldest]
+            self.cache[key] = (value, now + self.ttl)
 
 meta_cache = SimpleTTLCache(60)
 
@@ -241,9 +249,7 @@ def meta():
     queries = [
         (f"SELECT q.institution_code, q.institution_label, COUNT(*) n FROM questions q WHERE {where} GROUP BY q.institution_code ORDER BY n DESC", params),
         (f"SELECT DISTINCT q.year FROM questions q WHERE q.year IS NOT NULL AND {where} ORDER BY q.year", params),
-        (f"SELECT q.source_file, COUNT(*) n FROM questions q WHERE {where} GROUP BY q.source_file ORDER BY q.source_file", params),
         (f"SELECT q.area, COUNT(*) n FROM questions q WHERE q.area IS NOT NULL AND q.area != '' AND {where} GROUP BY q.area ORDER BY n DESC", params),
-        (f"SELECT q.specialty, COUNT(*) n FROM questions q WHERE q.specialty IS NOT NULL AND q.specialty != '' AND {where} GROUP BY q.specialty ORDER BY n DESC", params),
         (f"SELECT q.subtema, COUNT(*) n FROM questions q WHERE q.subtema IS NOT NULL AND q.subtema != '' AND {where_no_subtema} GROUP BY q.subtema ORDER BY n DESC LIMIT 300", params_no_subtema),
         (f"SELECT COUNT(*) n FROM questions q WHERE {where}", params),
         (f"SELECT COUNT(DISTINCT q.id) n FROM questions q WHERE {where} AND q.id IN (SELECT question_id FROM attempts WHERE user_id = ?)", answered_params)
@@ -253,28 +259,24 @@ def meta():
         results = db.batch(queries)
         institutions = results[0].fetchall()
         years = results[1].fetchall()
-        sources = results[2].fetchall()
-        areas = results[3].fetchall()
-        specialties = results[4].fetchall()
-        subtemas = results[5].fetchall()
-        total = results[6].fetchone()["n"]
-        answered = results[7].fetchone()["n"]
+        areas = results[2].fetchall()
+        subtemas = results[3].fetchall()
+        total = results[4].fetchone()["n"]
+        answered = results[5].fetchone()["n"]
     else:
         institutions = db.execute(queries[0][0], queries[0][1]).fetchall()
         years = db.execute(queries[1][0], queries[1][1]).fetchall()
-        sources = db.execute(queries[2][0], queries[2][1]).fetchall()
-        areas = db.execute(queries[3][0], queries[3][1]).fetchall()
-        specialties = db.execute(queries[4][0], queries[4][1]).fetchall()
-        subtemas = db.execute(queries[5][0], queries[5][1]).fetchall()
-        total = db.execute(queries[6][0], queries[6][1]).fetchone()["n"]
-        answered = db.execute(queries[7][0], queries[7][1]).fetchone()["n"]
+        areas = db.execute(queries[2][0], queries[2][1]).fetchall()
+        subtemas = db.execute(queries[3][0], queries[3][1]).fetchall()
+        total = db.execute(queries[4][0], queries[4][1]).fetchone()["n"]
+        answered = db.execute(queries[5][0], queries[5][1]).fetchone()["n"]
     
     result = {
         "institutions": [dict(r) for r in institutions],
         "years": [r["year"] for r in years],
-        "sources": [dict(r) for r in sources],
+        "sources": [],
         "areas": [dict(r) for r in areas],
-        "specialties": [dict(r) for r in specialties],
+        "specialties": [],
         "subtemas": [dict(r) for r in subtemas],
         "total_questions": total,
         "answered_questions": answered,

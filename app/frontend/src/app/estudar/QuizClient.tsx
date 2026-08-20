@@ -8,7 +8,7 @@ import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import confetti from "canvas-confetti";
+import { triggerConfetti } from "@/lib/confetti";
 import { ImageViewer } from "@/components/ImageViewer";
 import { useZenMode } from "@/hooks/useZenMode";
 import Image from "next/image";
@@ -241,13 +241,8 @@ export function QuizClient({
         ...prev,
         [currentDetail.id]: { letter: selectedLetter, result: res }
       }));
-      if (res.is_correct) {
-        confetti({
-          particleCount: 80,
-          spread: 60,
-          origin: { y: 0.6 },
-          colors: ['#10b981', '#34d399', '#059669']
-        });
+      if (newStats.completed_today === newStats.daily_goal) {
+        triggerConfetti();
       }
     } catch {
       toast.error("Erro ao enviar resposta.");
@@ -525,57 +520,86 @@ export function QuizClient({
               </select>
             </div>
             
-            <div className="space-y-2 md:col-span-2">
+            <div className="space-y-2 md:col-span-2 relative">
               <label className="text-sm font-medium text-foreground flex items-center justify-between">
                 <span>Subtemas (Múltipla Escolha)</span>
                 {isUpdatingMeta && <span className="text-xs text-muted-foreground animate-pulse">Atualizando...</span>}
               </label>
+              
+              {/* Chips of selected subtemas */}
+              {Array.isArray(filters.subtema) && filters.subtema.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {filters.subtema.map(sub => (
+                    <span key={sub} className="bg-primary/10 text-primary border border-primary/20 px-3 py-1.5 rounded-full text-sm flex items-center gap-1.5 animate-in zoom-in-95 duration-200">
+                      <span className="max-w-[200px] truncate">{sub}</span>
+                      <button 
+                        type="button" 
+                        onClick={() => {
+                          const current = (filters.subtema as string[]).filter(x => x !== sub);
+                          setFilters({ ...filters, subtema: current.length > 0 ? current : undefined });
+                        }} 
+                        className="hover:text-destructive hover:bg-destructive/10 rounded-full p-0.5 transition-colors"
+                        aria-label="Remover"
+                      >
+                        <X size={14} />
+                      </button>
+                    </span>
+                  ))}
+                  <button 
+                    type="button" 
+                    onClick={() => setFilters({ ...filters, subtema: undefined })}
+                    className="text-xs text-muted-foreground hover:text-foreground underline px-2 py-1.5"
+                  >
+                    Limpar todos
+                  </button>
+                </div>
+              )}
+              
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Buscar subtema..."
+                  placeholder="Buscar subtema para adicionar..."
                   value={subtemaSearch}
                   onChange={(e) => setSubtemaSearch(e.target.value)}
-                  className="w-full bg-input border border-border rounded-md py-2 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary pl-9"
+                  className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary pl-9"
                 />
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
                   <Search size={16} />
                 </div>
               </div>
-              <div className="w-full bg-input border border-border rounded-md p-3 h-48 overflow-y-auto flex flex-col gap-1">
-                {dynamicMeta.subtemas?.length === 0 && (
-                  <p className="text-xs text-muted-foreground italic">Nenhum subtema encontrado para esta área.</p>
-                )}
-                {dynamicMeta.subtemas
-                  ?.filter(s => s.subtema.toLowerCase().includes(subtemaSearch.toLowerCase()))
-                  .map(s => {
-                  const isSelected = Array.isArray(filters.subtema) 
-                    ? filters.subtema.includes(s.subtema) 
-                    : filters.subtema === s.subtema;
-                  
-                  return (
-                    <label key={s.subtema} className="flex items-center gap-3 text-sm text-foreground cursor-pointer hover:bg-muted/50 p-2 rounded border border-transparent hover:border-border transition-colors">
-                      <input 
-                        type="checkbox" 
-                        checked={isSelected}
-                        onChange={(e) => {
-                          const checked = e.target.checked;
+              
+              {subtemaSearch.trim().length > 0 && (
+                <div className="absolute z-50 w-full mt-1 bg-card border border-border rounded-md shadow-lg max-h-60 overflow-y-auto">
+                  {dynamicMeta.subtemas
+                    ?.filter(s => s.subtema.toLowerCase().includes(subtemaSearch.toLowerCase()))
+                    .filter(s => !(Array.isArray(filters.subtema) && filters.subtema.includes(s.subtema)))
+                    .length === 0 && (
+                      <div className="px-4 py-3 text-sm text-muted-foreground italic">
+                        Nenhum subtema disponível encontrado.
+                      </div>
+                  )}
+                  {dynamicMeta.subtemas
+                    ?.filter(s => s.subtema.toLowerCase().includes(subtemaSearch.toLowerCase()))
+                    .filter(s => !(Array.isArray(filters.subtema) && filters.subtema.includes(s.subtema)))
+                    .slice(0, 50)
+                    .map(s => (
+                      <button 
+                        key={s.subtema} 
+                        type="button"
+                        onClick={() => {
                           let current = Array.isArray(filters.subtema) ? [...filters.subtema] : (filters.subtema ? [filters.subtema as string] : []);
-                          if (checked) {
-                            current.push(s.subtema);
-                          } else {
-                            current = current.filter(x => x !== s.subtema);
-                          }
+                          current.push(s.subtema);
                           setFilters({ ...filters, subtema: current });
+                          setSubtemaSearch("");
                         }}
-                        className="rounded border-border text-primary focus:ring-primary w-4 h-4"
-                      />
-                      <span className="flex-1 truncate">{s.subtema}</span>
-                      <span className="text-xs font-medium text-muted-foreground bg-muted px-2 py-0.5 rounded-full">{s.n}</span>
-                    </label>
-                  );
-                })}
-              </div>
+                        className="w-full text-left flex items-center justify-between px-4 py-2.5 hover:bg-muted text-sm border-b border-border/50 last:border-0"
+                      >
+                        <span className="truncate pr-4">{s.subtema}</span>
+                        <span className="text-xs font-medium text-muted-foreground bg-muted px-2 py-0.5 rounded-full shrink-0">{s.n}</span>
+                      </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 

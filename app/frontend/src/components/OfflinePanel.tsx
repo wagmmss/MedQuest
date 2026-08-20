@@ -9,6 +9,7 @@ export function OfflinePanel() {
   const [isOffline, setIsOffline] = useState(false);
   const [stats, setStats] = useState({ questions: 0, flashcards: 0, queue: 0 });
   const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState(0);
 
   const updateStats = useCallback(async () => {
     if (!localDb) return;
@@ -50,30 +51,42 @@ export function OfflinePanel() {
   const downloadForShift = async () => {
     if (isDownloading) return;
     setIsDownloading(true);
+    setDownloadProgress(0);
     try {
-      // Baixar flashcards do dia
+      setDownloadProgress(10);
       const flashcards = await api.flashcards.getDue();
       if (flashcards && flashcards.length > 0 && localDb) {
         await localDb.flashcards.bulkPut(flashcards);
       }
+      setDownloadProgress(30);
       
-      // Baixar 50 questões pseudo-aleatórias para plantão
-      // Idealmente, a API deveria ter um endpoint `/api/questions/shift`
-      // Como não temos, vamos simular buscando um simulado ou lista rápida
       const questions = await api.questions.getSimuladoUSP();
       if (questions && questions.length > 0) {
+        setDownloadProgress(40);
         const ids = questions.slice(0, 50).map(q => q.id);
-        const detailResponse = await api.questions.getBatch(ids, true);
-        if (detailResponse.questions && localDb) {
-          await localDb.questions.bulkPut(Object.values(detailResponse.questions));
+        const chunkSize = 10;
+        let loaded = 0;
+        for (let i = 0; i < ids.length; i += chunkSize) {
+          const chunk = ids.slice(i, i + chunkSize);
+          const detailResponse = await api.questions.getBatch(chunk, true);
+          if (detailResponse.questions && localDb) {
+            await localDb.questions.bulkPut(Object.values(detailResponse.questions));
+          }
+          loaded += chunk.length;
+          setDownloadProgress(40 + (loaded / ids.length) * 60);
         }
+      } else {
+        setDownloadProgress(100);
       }
 
       await updateStats();
     } catch (e) {
       console.error("Erro ao baixar dados para o plantão:", e);
     } finally {
-      setIsDownloading(false);
+      setTimeout(() => {
+        setIsDownloading(false);
+        setDownloadProgress(0);
+      }, 800);
     }
   };
 
@@ -123,6 +136,21 @@ export function OfflinePanel() {
           <><Download size={20} /> Baixar Pacote de Plantão</>
         )}
       </button>
+
+      {isDownloading && (
+        <div className="mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="flex justify-between text-xs text-on-surface-variant mb-1.5 font-medium">
+            <span>Progresso</span>
+            <span>{Math.round(downloadProgress)}%</span>
+          </div>
+          <div className="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+            <div 
+              className="bg-primary h-full transition-all duration-300 ease-out" 
+              style={{ width: `${downloadProgress}%` }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

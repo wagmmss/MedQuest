@@ -3,13 +3,14 @@
  * Gerencia a fila de requisições POST/PUT falhas para sincronização em background usando Dexie (IndexedDB)
  */
 
-import { localDb, SyncItem } from "./db";
+import { localDb, SyncItem, getUserId } from "./db";
 
 export const syncManager = {
   async getQueue(): Promise<SyncItem[]> {
     if (typeof window === "undefined" || !localDb) return [];
     try {
-      return await localDb.syncQueue.toArray();
+      const uid = getUserId();
+      return await localDb.syncQueue.where({ user_id: uid }).toArray();
     } catch {
       return [];
     }
@@ -19,8 +20,10 @@ export const syncManager = {
     if (typeof window === "undefined" || !localDb) return;
     
     try {
+      const uid = getUserId();
       await localDb.syncQueue.add({
         id: crypto.randomUUID(),
+        user_id: uid,
         endpoint,
         options,
         timestamp: Date.now()

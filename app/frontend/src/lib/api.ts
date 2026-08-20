@@ -12,18 +12,30 @@ const API_BASE = process.env.NEXT_PUBLIC_APP_URL ||
   (typeof window !== "undefined" ? "" : "http://localhost:3000")));
 
 import { syncManager } from "./sync";
-import { localDb } from "./db";
+import { localDb, getUserId } from "./db";
 
 /**
  * Base fetch function with default headers
  */
 async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE}${endpoint}`;
+  
+  // Isolar usuários convidados
+  let guestId = "";
+  if (typeof window !== "undefined") {
+    guestId = localStorage.getItem("mq_guest_id") || "";
+    if (!guestId) {
+      guestId = Math.random().toString(36).substring(2, 15);
+      localStorage.setItem("mq_guest_id", guestId);
+    }
+  }
+
   try {
     const response = await fetch(url, {
       ...options,
       headers: {
         "Content-Type": "application/json",
+        ...(guestId ? { "X-Guest-ID": guestId } : {}),
         ...options?.headers,
       },
     });
@@ -39,8 +51,7 @@ async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> 
       if (isNetworkError || !navigator.onLine) {
         console.warn("[API] Network error detected, adding to offline queue:", endpoint);
         syncManager.enqueue(url, options);
-        // Retornamos um objeto mock com sucesso true para não travar a UI (útil para tentativas de questões)
-        return { success: true, offline: true } as T;
+        throw error;
       }
     }
     throw error;
@@ -155,7 +166,8 @@ export const api = {
       if (typeof window !== "undefined" && !navigator.onLine && localDb) {
         console.warn("[API] Offline mode: loading questions from localDb");
         try {
-          const cached = await localDb.questions.where('id').anyOf(ids).toArray();
+          const uid = getUserId();
+          const cached = await localDb.questions.where('id').anyOf(ids).filter(q => q._user_id === uid).toArray();
           return { questions: cached } as unknown as BatchDetailResponse;
         } catch (e) {
           console.error("Dexie error", e);
@@ -176,7 +188,8 @@ export const api = {
       if (typeof window !== "undefined" && !navigator.onLine && localDb) {
         console.warn("[API] Offline mode: loading flashcards from localDb");
         try {
-          return await localDb.flashcards.toArray();
+          const uid = getUserId();
+          return await localDb.flashcards.filter(f => f._user_id === uid).toArray();
         } catch (e) {
           console.error("Dexie error", e);
           return [];

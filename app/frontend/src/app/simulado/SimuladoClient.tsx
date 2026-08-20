@@ -6,15 +6,16 @@ import { api } from "@/lib/api";
 import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
-import confetti from "canvas-confetti";
+import { triggerConfetti } from "@/lib/confetti";
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
 import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
 import { AutoSizer } from "react-virtualized-auto-sizer";
 import Image from "next/image";
+import profilesData from "@/lib/profiles.json";
 
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS";
-type SimuladoProfile = "usp_2026" | "usp_history" | "unicamp" | "sus_sp" | "custom";
+type SimuladoProfile = "usp_2026" | "usp_history" | "unicamp" | "custom";
 
 interface SavedSimuladoState {
   state: SimuladoState;
@@ -146,25 +147,19 @@ export function SimuladoClient({
         const limit = initialFilters.limit || "50";
         qList = await api.questions.getList({ ...initialFilters, limit });
         durationHours = (qList.length / 120) * 6;
+      } else if (simuladoProfile === 'custom' && !hasCustomFilters) {
+        qList = await api.questions.getCustomSimulado(customConfig);
+        isForce4Options = customConfig.force_4_options;
+        durationHours = (qList.length / 120) * 6;
       } else {
-        if (simuladoProfile === 'usp_2026') {
+        const profile = profilesData.find(p => p.id === simuladoProfile) || profilesData[0];
+        durationHours = profile.duration_hours;
+        isForce4Options = profile.is_force_4_options;
+        
+        if (profile.fetch_method === "getSimuladoUSP") {
           qList = await api.questions.getSimuladoUSP();
-          isForce4Options = true;
-          durationHours = 6; // 120 questões, 6 horas
-        } else if (simuladoProfile === 'usp_history') {
-          qList = await api.questions.getSimuladoUSP();
-          durationHours = 6;
-        } else if (simuladoProfile === 'unicamp') {
-          qList = await api.questions.getList({ institution: "UNICAMP", limit: "80" });
-          isForce4Options = true;
-          durationHours = 4; // 80 questões, 4 horas
-        } else if (simuladoProfile === 'sus_sp') {
-          qList = await api.questions.getList({ institution: "SUS-SP", limit: "100" });
-          durationHours = 5; // 100 questões, 5 horas
-        } else if (simuladoProfile === 'custom' && !hasCustomFilters) {
-          qList = await api.questions.getCustomSimulado(customConfig);
-          isForce4Options = customConfig.force_4_options;
-          durationHours = (qList.length / 120) * 6; // roughly 3 minutes per question
+        } else if (profile.fetch_method === "getList" && profile.fetch_args) {
+          qList = await api.questions.getList(profile.fetch_args as any);
         } else {
           qList = await api.questions.getSimuladoUSP();
         }
@@ -243,14 +238,9 @@ export function SimuladoClient({
       setResultsMap(rMap);
       setState("RESULTS");
       setCurrentIndex(0); // Go back to first question to review
-      setShowResultsSummary(true);
-      
-      confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#0EA5E9', '#38BDF8', '#7DD3FC', '#F472B6']
-      });
+      if (stats.completed_today === stats.daily_goal) {
+        triggerConfetti();
+      }
       
       localStorage.removeItem("medquest_simulado_state");
     } catch {
@@ -416,10 +406,11 @@ export function SimuladoClient({
               onChange={(e) => setSimuladoProfile(e.target.value as SimuladoProfile)}
               className="w-full bg-background border border-border rounded-lg p-3 text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-primary/50"
             >
-              <option className="bg-background text-foreground" value="usp_2026">USP 2026 (120 Qs, 4 Alternativas)</option>
-              <option className="bg-background text-foreground" value="usp_history">Histórico USP (120 Qs, 5 Alternativas)</option>
-              <option className="bg-background text-foreground" value="unicamp">UNICAMP (80 Qs, 4 Alternativas)</option>
-              <option className="bg-background text-foreground" value="sus_sp">SUS-SP (100 Qs, 5 Alternativas)</option>
+              {profilesData.map(p => (
+                <option key={p.id} className="bg-background text-foreground" value={p.id}>
+                  {p.name} ({p.questions} Qs, {p.alternatives} Alternativas)
+                </option>
+              ))}
               <option className="bg-background text-foreground" value="custom">Configuração Personalizada</option>
             </select>
           </div>
@@ -430,7 +421,7 @@ export function SimuladoClient({
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">Bancas Incluídas (deixe vazio para todas)</label>
               <div className="flex flex-wrap gap-2">
-                {(meta?.institutions.map(i => i.institution_code) || ['USP-SP', 'USP-RP', 'UNICAMP', 'SUS-SP', 'ENARE']).map(inst => (
+                {(meta?.institutions.map(i => i.institution_code) || ['USP-SP', 'USP-RP', 'UNICAMP']).filter(i => !['SUS-SP', 'ENARE'].includes(i)).map(inst => (
                   <label key={inst} className="flex items-center gap-1.5 bg-background border border-border px-2 py-1 rounded text-sm cursor-pointer hover:bg-muted">
                     <input 
                       type="checkbox" 
@@ -482,9 +473,9 @@ export function SimuladoClient({
             <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Questões</span>
             <span className="text-lg font-bold text-foreground">
               {hasCustomFilters ? (initialFilters.limit || "Até 50") : (
-                simuladoProfile === 'unicamp' ? '80' :
-                simuladoProfile === 'sus_sp' ? '100' :
-                simuladoProfile === 'custom' ? (customConfig.questions_per_area * 5) : '120'
+                simuladoProfile === 'custom' 
+                  ? (customConfig.questions_per_area * 5) 
+                  : (profilesData.find(p => p.id === simuladoProfile)?.questions || 120)
               )} (Múltipla Escolha)
             </span>
           </div>
@@ -494,19 +485,19 @@ export function SimuladoClient({
               {hasCustomFilters 
                 ? `${Math.round((Number(initialFilters.limit || 50) / 120) * 6 * 60)} min` 
                 : (
-                    simuladoProfile === 'unicamp' ? '4 Horas' : 
-                    simuladoProfile === 'sus_sp' ? '5 Horas' : 
-                    simuladoProfile === 'custom' ? `${Math.round(((customConfig.questions_per_area * 5) / 120) * 6)} Horas` : '6 Horas'
+                    simuladoProfile === 'custom' 
+                      ? `${Math.round(((customConfig.questions_per_area * 5) / 120) * 6)} Horas` 
+                      : `${profilesData.find(p => p.id === simuladoProfile)?.duration_hours || 6} Horas`
                   )}
             </span>
           </div>
-          {!hasCustomFilters && (simuladoProfile === 'usp_2026' || simuladoProfile === 'usp_history' || simuladoProfile === 'custom') && (
+          {!hasCustomFilters && (
             <div className="bg-muted rounded-lg p-4 col-span-2">
               <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Balanceamento</span>
               <span className="text-sm font-medium text-foreground">
                 {simuladoProfile === 'custom' 
                   ? `${customConfig.questions_per_area} Clínica • ${customConfig.questions_per_area} Cirurgia • ${customConfig.questions_per_area} Pediatria • ${customConfig.questions_per_area} GO • ${customConfig.questions_per_area} Preventiva`
-                  : '24 Clínica • 24 Cirurgia • 24 Pediatria • 24 GO • 24 Preventiva'}
+                  : profilesData.find(p => p.id === simuladoProfile)?.balance_label || 'Balanceamento Automático'}
               </span>
             </div>
           )}

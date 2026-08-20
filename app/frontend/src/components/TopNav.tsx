@@ -35,6 +35,11 @@ export default function TopNav() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (isMobileMenuOpen && event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+        return;
+      }
+
       const tag = (event.target as HTMLElement).tagName;
       if (tag === "INPUT" || tag === "TEXTAREA") return;
       if (event.key.toLowerCase() === "z" && !event.ctrlKey && !event.metaKey && !event.altKey) {
@@ -44,7 +49,21 @@ export default function TopNav() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [toggleZenMode]);
+  }, [toggleZenMode, isMobileMenuOpen]);
+
+  // Focus trap and prevent background scrolling
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      const timer = setTimeout(() => {
+        const closeBtn = document.getElementById("mobile-menu-close");
+        if (closeBtn) closeBtn.focus();
+      }, 50);
+      return () => { clearTimeout(timer); };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -95,8 +114,10 @@ export default function TopNav() {
         <div className="flex items-center justify-between p-4 border-b border-outline-variant">
           <h2 className="font-headline-sm font-bold text-primary">Menu</h2>
           <button 
+            id="mobile-menu-close"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface"
+            className="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"
+            aria-label="Fechar menu"
           >
             <span className="material-symbols-outlined">close</span>
           </button>

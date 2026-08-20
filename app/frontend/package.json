@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@clerk/localizations": "^4.15.4",
     "@clerk/nextjs": "^7.7.1",
     "@ducanh2912/next-pwa": "^10.2.9",
     "@types/react-virtualized-auto-sizer": "^1.0.4",
@@ -19,6 +20,7 @@
     "dexie-react-hooks": "^4.4.0",
     "framer-motion": "^13.0.0",
     "lucide-react": "^1.30.0",
+    "material-symbols": "^0.46.0",
     "next": "16.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
@@ -29,6 +31,7 @@
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",

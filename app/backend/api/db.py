@@ -160,54 +160,7 @@ def init_db(app):
             db.commit()
         except Exception as e:
             logger.error(f"Error executing DDL during init_db: {e}")
-
         try:
-            if isinstance(db, TursoConnection):
-                tables = [r["name"] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
-            else:
-                tables = [r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
-                
-            if "attempts" in tables:
-                ac = _table_cols(db, "attempts")
-                for col, ddl in [("user_id", "TEXT DEFAULT '1'"), ("time_spent_ms", "INTEGER"), ("confidence", "TEXT")]:
-                    if col not in ac:
-                        try:
-                            db.execute(f"ALTER TABLE attempts ADD COLUMN {col} {ddl}")
-                        except Exception:
-                            pass
-                            
-            if "flashcards" in tables:
-                fc = _table_cols(db, "flashcards")
-                for col, ddl in [("user_id", "TEXT DEFAULT '1'"), ("source_context", "TEXT"), ("status", "TEXT DEFAULT 'active'"), ("report_status", "TEXT"), ("is_ai_generated", "INTEGER DEFAULT 0")]:
-                    if col not in fc:
-                        try:
-                            db.execute(f"ALTER TABLE flashcards ADD COLUMN {col} {ddl}")
-                        except Exception as e:
-                            logger.error(f"Failed to alter flashcards for {col}: {e}")
-                            
-            if "questions" in tables:
-                qc = _table_cols(db, "questions")
-                for col, ddl in [
-                    ("is_verified", "INTEGER DEFAULT 0"), 
-                    ("last_updated_at", "TEXT"), 
-                    ("technical_note", "TEXT"), 
-                    ("image_url", "TEXT"), 
-                    ("explanation_image_url", "TEXT"),
-                    ("clinical_case_id", "INTEGER"),
-                    ("usp_macro", "TEXT"),
-                    ("usp_micro", "TEXT"),
-                    ("specialty", "TEXT")
-                ]:
-                    if col not in qc:
-                        try:
-                            db.execute(f"ALTER TABLE questions ADD COLUMN {col} {ddl}")
-                        except Exception as e:
-                            logger.error(f"Failed to alter questions for {col}: {e}")
-            if "fsrs_card" not in _table_cols(db, "spaced_repetition"):
-                try:
-                    db.execute("ALTER TABLE spaced_repetition ADD COLUMN fsrs_card TEXT")
-                except Exception:
-                    pass
             db.commit()
         except Exception as e:
             logger.error(f"Error during init_db: {e}")
