@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 import os
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "")
-MODEL_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={API_KEY}"
+MODEL_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent?key={API_KEY}"
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "medquest.db")
 
@@ -76,20 +76,26 @@ def generate_batch(conn, questions_batch):
     
     headers = {"Content-Type": "application/json"}
     
-    try:
-        response = requests.post(MODEL_URL, headers=headers, json=payload, timeout=60)
-        response.raise_for_status()
-        result = response.json()
-        
-        # Parse gemini response
-        raw_text = result["candidates"][0]["content"]["parts"][0]["text"]
-        data = json.loads(raw_text)
-        return data.get("explanations", [])
-    except Exception as e:
-        print(f"Erro ao comunicar com a API ou parsear JSON: {e}")
-        if 'response' in locals() and hasattr(response, 'text'):
-            print("Resposta da API:", response.text)
-        return []
+    import time
+    for attempt in range(4):
+        try:
+            response = requests.post(MODEL_URL, headers=headers, json=payload, timeout=60)
+            response.raise_for_status()
+            result = response.json()
+            
+            # Parse gemini response
+            raw_text = result["candidates"][0]["content"]["parts"][0]["text"]
+            data = json.loads(raw_text)
+            return data.get("explanations", [])
+        except Exception as e:
+            print(f"Tentativa {attempt+1} falhou: {e}")
+            if 'response' in locals() and hasattr(response, 'text'):
+                print("Resposta da API:", response.text)
+            if attempt < 3:
+                print("Aguardando 61s antes de tentar novamente (para limpar a cota RPM)...")
+                time.sleep(61)
+            else:
+                return []
 
 def main():
     parser = argparse.ArgumentParser()
@@ -133,8 +139,8 @@ def main():
                     
         conn.commit()
         
-        # Respeitar limites da API (Gemini 3.7 Free: 5 RPM max, pause 13s)
-        time.sleep(13)
+        # Respeitar limites da API (Gemini Free: 15 RPM max, pause 5s)
+        time.sleep(5)
         
     print(f"\nFinalizado! {success_count} comentários gerados com sucesso.")
 
