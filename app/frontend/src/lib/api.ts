@@ -108,7 +108,7 @@ export const api = {
       // Remove limit from meta request so it returns accurate totals
       params.delete("limit");
       const qs = params.toString();
-      return apiFetch<QuestionMeta>(`/api/meta${qs ? `?${qs}` : ''}`, { next: { revalidate: 60 } });
+      return apiFetch<QuestionMeta>(`/api/meta${qs ? `?${qs}` : ''}`, { cache: 'no-store' });
     },
     getSubtemas: (area?: string, q?: string) => {
       const params = new URLSearchParams();

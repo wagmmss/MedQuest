@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { QuestionListItem, QuestionDetail, BatchAttemptItem, BatchAttemptResultItem } from "@/types/api";
+import { QuestionMeta, QuestionListItem, QuestionDetail, BatchAttemptItem, BatchAttemptResultItem } from "@/types/api";
 import { api } from "@/lib/api";
 import { Play, Clock, CheckCircle2, XCircle, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag, Filter } from "lucide-react";
 import clsx from "clsx";
@@ -15,9 +15,11 @@ import { AutoSizer } from "react-virtualized-auto-sizer";
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS";
 
 export function SimuladoClient({
-  initialFilters = {}
+  initialFilters = {},
+  meta
 }: {
   initialFilters?: Record<string, string | string[]>;
+  meta?: QuestionMeta;
 }) {
   const [state, setState] = useState<SimuladoState>("START");
   const [queue, setQueue] = useState<QuestionListItem[]>([]);
@@ -423,7 +425,7 @@ export function SimuladoClient({
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">Bancas Incluídas (deixe vazio para todas)</label>
               <div className="flex flex-wrap gap-2">
-                {['USP-SP', 'USP-RP', 'UNICAMP', 'SUS-SP', 'ENARE'].map(inst => (
+                {(meta?.institutions.map(i => i.institution_code) || ['USP-SP', 'USP-RP', 'UNICAMP', 'SUS-SP', 'ENARE']).map(inst => (
                   <label key={inst} className="flex items-center gap-1.5 bg-background border border-border px-2 py-1 rounded text-sm cursor-pointer hover:bg-muted">
                     <input 
                       type="checkbox" 

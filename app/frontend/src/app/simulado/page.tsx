@@ -1,3 +1,4 @@
+import { serverApi } from "@/lib/server-api";
 import { SimuladoClient } from "./SimuladoClient";
 
 export default async function SimuladoPage({
@@ -5,6 +6,7 @@ export default async function SimuladoPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
+  const meta = await serverApi.questions.getMeta();
   const rawParams = await searchParams;
   const initialFilters: Record<string, string | string[]> = {};
   
@@ -17,7 +19,7 @@ export default async function SimuladoPage({
 
   return (
     <div className="animate-in fade-in duration-500 w-full h-full">
-      <SimuladoClient initialFilters={initialFilters} />
+      <SimuladoClient initialFilters={initialFilters} meta={meta} />
     </div>
   );
 }

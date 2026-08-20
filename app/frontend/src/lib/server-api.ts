@@ -62,7 +62,7 @@ export const serverApi = {
       serverFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { next: { tags: ['stats'] } }),
   },
   questions: {
-    getMeta: () => serverFetch<QuestionMeta>("/api/meta", { next: { revalidate: 3600 } }),
+    getMeta: () => serverFetch<QuestionMeta>("/api/meta", { cache: 'no-store' }),
   },
   planner: {
     getConfig: () => serverFetch<PlannerConfig>("/api/planner/config", { cache: 'no-store' }),
