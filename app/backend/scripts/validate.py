@@ -2,10 +2,12 @@
 from __future__ import annotations
 
 import argparse
+import sys
 import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from datetime import datetime, timezone
 
 try:  # Script execution: python scripts/validate.py
     from audit.connection import get_readonly_connection
@@ -27,6 +29,19 @@ except ModuleNotFoundError:  # Package import: from scripts.validate import ...
 DEFAULT_DB = Path(__file__).resolve().parents[1] / "medquest.db"
 SCRIPTS_DIR = Path(__file__).resolve().parent
 
+    cf = data["critical_failures"]
+    md.extend([
+        f"- **Empty Statements:** {len(cf['empty_statement'])}",
+        f"- **Empty Alternatives:** {len(cf['empty_alternative'])}",
+        f"- **Invalid Correct Letters:** {len(cf['invalid_correct_letter'])}",
+        f"- **Answers w/o Alternative:** {len(cf['answer_without_alternative'])}",
+        f"- **Questions with Duplicated Alt Letters:** {len(cf['duplicated_letters'])}",
+        f"- **Orphan Alternatives:** {len(cf['orphan_records']['alternatives'])}",
+        f"- **Orphan Images:** {len(cf['orphan_records']['images'])}",
+        f"- **missing_alts=0 but Incomplete:** {len(cf['missing_alts_0_incomplete'])}",
+        f"- **Duplicated Source File+Number:** {len(cf['duplicate_source_file_number'])}",
+        ""
+    ])
 
 def _nonempty_leaf_count(value: object) -> int:
     if isinstance(value, list):
@@ -35,6 +50,13 @@ def _nonempty_leaf_count(value: object) -> int:
         return sum(_nonempty_leaf_count(item) for item in value.values())
     return 0
 
+    md.extend([
+        "## 4. Human Review Queue (Explanations)",
+        f"- **High Priority (Empty/Placeholder):** {len(data['human_review_queue']['high_priority'])}",
+        f"- **Medium Priority (Too short):** {len(data['human_review_queue']['medium_priority'])}",
+        f"- **Low Priority (Heuristic):** {len(data['human_review_queue']['low_priority'])}",
+        ""
+    ])
 
 def audit_database(
     db_path: Path,
@@ -202,6 +224,70 @@ def main() -> int:
         return 1
     return 0
 
+    scripts_dir = Path(__file__).resolve().parent
+
+    db, size = get_readonly_connection(args.db)
+
+    # 1. Summary
+    tq = db.execute("SELECT count(*) FROM questions").fetchone()[0]
+    uq = db.execute("SELECT count(*) FROM questions WHERE missing_alts = 0").fetchone()[0]
+    na = db.execute("SELECT count(*) FROM questions WHERE missing_alts = 0 AND (area IS NULL OR trim(area) = '')").fetchone()[0]
+    ns = db.execute("SELECT count(*) FROM questions WHERE missing_alts = 0 AND (subtema IS NULL OR trim(subtema) = '')").fetchone()[0]
+
+    # Modules
+    integrity_data = check_integrity(db)
+    duplication_data = check_duplication(db)
+    explanations_data = check_explanations(db, args.short_explanation_limit)
+    taxonomy_data = check_taxonomy(db, scripts_dir)
+    coverage_data = check_coverage(db, scripts_dir, args.low_coverage_limit, args.max_details)
+    encoding_data = check_encoding(db)
+
+    db.close()
+
+    full_data = {
+        "schema_version": "1.1",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "database": {
+            "path": str(Path(args.db).resolve()),
+            "size_bytes": size
+        },
+        "config": {
+            "short_explanation_limit": args.short_explanation_limit,
+            "low_coverage_limit": args.low_coverage_limit,
+            "max_details": args.max_details,
+            "strict_mode": args.strict
+        },
+        "summary": {
+            "total_questions": tq,
+            "usable_questions": uq,
+            "no_area": na,
+            "no_subtema": ns
+        },
+        "integrity": integrity_data, # For backward compat or raw data if needed, but we hoist critical_failures
+        "critical_failures": integrity_data["critical_failures"],
+        "warnings": integrity_data["warnings"],
+        "human_review_queue": explanations_data["human_review_queue"],
+        "duplication": duplication_data,
+        "explanations": explanations_data,
+        "taxonomy": taxonomy_data,
+        "coverage": coverage_data,
+        "encoding": encoding_data
+    }
+
+    if args.output:
+        with open(args.output, "w", encoding="utf-8") as f:
+            json.dump(full_data, f, indent=2, ensure_ascii=False)
+
+    if args.md:
+        with open(args.md, "w", encoding="utf-8") as f:
+            f.write(build_markdown(full_data))
+
+    if args.strict:
+        cf = full_data["critical_failures"]
+        has_critical = any(len(v) > 0 if isinstance(v, list) else (len(v['alternatives']) > 0 or len(v['images']) > 0) for k, v in cf.items())
+        if has_critical:
+            print("ERROR: Critical failures found in strict mode.")
+            sys.exit(1)
 
 if __name__ == "__main__":
     raise SystemExit(main())
