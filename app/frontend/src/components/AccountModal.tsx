@@ -7,6 +7,7 @@ import { api } from "@/lib/api";
 import { localDb, getLocalOwnerId } from "@/lib/db";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { clearLearningSessions } from "@/lib/sessionState";
 
 interface AccountModalProps {
   isOpen: boolean;
@@ -31,8 +32,7 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
     try {
       const res = await api.stats.resetProgress();
       if (res.success) {
-        sessionStorage.removeItem("medquest_quiz_state");
-        localStorage.removeItem("medquest_simulado_state");
+        clearLearningSessions();
         for (const key of Object.keys(localStorage)) {
           if (key.startsWith("medquest_planner_topics_")) localStorage.removeItem(key);
         }

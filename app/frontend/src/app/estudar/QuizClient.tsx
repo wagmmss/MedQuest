@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff } from "lucide-react";
+import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff, RotateCcw } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -12,8 +12,40 @@ import { motion } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
 import { useZenMode } from "@/hooks/useZenMode";
 import Image from "next/image";
+import {
+  LEARNING_SESSION_VERSION,
+  readLearningSession,
+  removeLearningSession,
+  writeLearningSession,
+} from "@/lib/sessionState";
 
 type QuizState = "FILTERS" | "LOADING_QUEUE" | "PLAYING" | "FINISHED";
+type SessionAnswer = { letter: string; result?: AttemptResult | null; isOffline?: boolean };
+
+interface SavedQuizState {
+  version: number;
+  state: "PLAYING" | "FINISHED";
+  queue: QuestionListItem[];
+  currentIndex: number;
+  filters: Record<string, string | string[]>;
+  currentDetail: QuestionDetail | null;
+  sessionAnswers: Record<number, SessionAnswer>;
+  selectedLetter: string | null;
+  timeSpent: number;
+  savedAt: number;
+}
+
+function isSavedQuizState(value: unknown): value is SavedQuizState {
+  if (typeof value !== "object" || value === null) return false;
+  const saved = value as Partial<SavedQuizState>;
+  return saved.version === LEARNING_SESSION_VERSION &&
+    (saved.state === "PLAYING" || saved.state === "FINISHED") &&
+    Array.isArray(saved.queue) && saved.queue.length > 0 &&
+    typeof saved.currentIndex === "number" && saved.currentIndex >= 0 &&
+    saved.currentIndex < saved.queue.length &&
+    typeof saved.filters === "object" && saved.filters !== null &&
+    typeof saved.sessionAnswers === "object" && saved.sessionAnswers !== null;
+}
 
 const DEFAULT_META: QuestionMeta = {
   total_questions: 0,
@@ -50,8 +82,9 @@ export function QuizClient({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentDetail, setCurrentDetail] = useState<QuestionDetail | null>(null);
   const [loadingDetail, setLoadingDetail] = useState(false);
+  const [detailError, setDetailError] = useState<string | null>(null);
   
-  const [sessionAnswers, setSessionAnswers] = useState<Record<number, { letter: string, result?: AttemptResult | null, isOffline?: boolean }>>({});
+  const [sessionAnswers, setSessionAnswers] = useState<Record<number, SessionAnswer>>({});
   
   // Quiz State
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
@@ -64,6 +97,11 @@ export function QuizClient({
   // Timer State
   const [timeSpent, setTimeSpent] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timeSpentSnapshotRef = useRef(0);
+
+  useEffect(() => {
+    timeSpentSnapshotRef.current = timeSpent;
+  }, [timeSpent]);
   
   // Image Modal
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
@@ -75,9 +113,16 @@ export function QuizClient({
   // Confidence
 
   const [togglingFavorite, setTogglingFavorite] = useState(false);
+  const detailRequestRef = useRef(0);
+  const attemptLockRef = useRef(false);
+  const reviewLockRef = useRef(false);
+  const favoriteLockRef = useRef(false);
 
   const loadQuestionDetail = useCallback(async (id: number) => {
+    const requestId = ++detailRequestRef.current;
     setLoadingDetail(true);
+    setDetailError(null);
+    setCurrentDetail(null);
     setAttemptResult(null);
     setSelectedLetter(null);
     setIsOfflineSaved(false);
@@ -87,11 +132,13 @@ export function QuizClient({
     setTimeSpent(0);
     try {
       const detail = await api.questions.getDetail(id);
-      setCurrentDetail(detail);
+      if (detailRequestRef.current === requestId) setCurrentDetail(detail);
     } catch {
-      toast.error("Erro ao carregar questão.");
+      if (detailRequestRef.current === requestId) {
+        setDetailError("Não foi possível carregar esta questão. Verifique sua conexão e tente novamente.");
+      }
     } finally {
-      setLoadingDetail(false);
+      if (detailRequestRef.current === requestId) setLoadingDetail(false);
     }
   }, []);
 
@@ -128,49 +175,53 @@ export function QuizClient({
   }, [currentDetail, sessionAnswers]);
 
   const hasRestored = useRef(false);
+  const [storageReady, setStorageReady] = useState(false);
 
   useEffect(() => {
     if (hasRestored.current) return;
-    
-    const saved = sessionStorage.getItem("medquest_quiz_state");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (parsed.state === "PLAYING" || parsed.state === "FINISHED") {
-          const timer = setTimeout(() => {
-            hasRestored.current = true;
-            setQueue(parsed.queue);
-            setCurrentIndex(parsed.currentIndex);
-            setFilters(parsed.filters);
-            if (parsed.currentDetail) setCurrentDetail(parsed.currentDetail);
-            if (parsed.sessionAnswers) setSessionAnswers(parsed.sessionAnswers);
-            setState(parsed.state);
-          }, 0);
-          return () => clearTimeout(timer);
-        }
-      } catch {
-        sessionStorage.removeItem("medquest_quiz_state");
-      }
-    }
+    const timer = setTimeout(() => {
+      const saved = readLearningSession("quiz", isSavedQuizState);
+      hasRestored.current = true;
 
-    if (Object.keys(initialFilters).length > 0 && queue.length === 0 && state === "LOADING_QUEUE") {
-      const timer = setTimeout(() => {
-        hasRestored.current = true;
+      if (saved) {
+        setQueue(saved.queue);
+        setCurrentIndex(saved.currentIndex);
+        setFilters(saved.filters);
+        setCurrentDetail(saved.currentDetail);
+        setSessionAnswers(saved.sessionAnswers);
+        setSelectedLetter(saved.selectedLetter);
+        setTimeSpent(saved.timeSpent || 0);
+        setState(saved.state);
+        if (!saved.currentDetail) loadQuestionDetail(saved.queue[saved.currentIndex].id);
+        toast.success("Sessão de estudo retomada.");
+      } else if (Object.keys(initialFilters).length > 0 && queue.length === 0 && state === "LOADING_QUEUE") {
         loadQueue({ limit: "50", ...initialFilters });
-      }, 0);
-      return () => clearTimeout(timer);
-    }
-  }, [initialFilters, loadQueue, queue.length, state]);
+      }
+      setStorageReady(true);
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [initialFilters, loadQueue, loadQuestionDetail, queue.length, state]);
 
   useEffect(() => {
+    if (!storageReady) return;
     if (state === "PLAYING" || state === "FINISHED") {
-      sessionStorage.setItem("medquest_quiz_state", JSON.stringify({
-        state, queue, currentIndex, filters, currentDetail, sessionAnswers
-      }));
+      writeLearningSession("quiz", {
+        version: LEARNING_SESSION_VERSION,
+        state,
+        queue,
+        currentIndex,
+        filters,
+        currentDetail,
+        sessionAnswers,
+        selectedLetter,
+        timeSpent: timeSpentSnapshotRef.current,
+        savedAt: Date.now(),
+      } satisfies SavedQuizState);
     } else if (state === "FILTERS") {
-      sessionStorage.removeItem("medquest_quiz_state");
+      removeLearningSession("quiz");
     }
-  }, [state, queue, currentIndex, filters, currentDetail, sessionAnswers]);
+  }, [storageReady, state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter]);
 
   // Effect to fetch dynamic meta when filters change
   useEffect(() => {
@@ -242,7 +293,8 @@ export function QuizClient({
   };
 
   const handleAttempt = useCallback(async () => {
-    if (attemptResult || isOfflineSaved || submitting || !currentDetail || !selectedLetter) return;
+    if (attemptLockRef.current || attemptResult || isOfflineSaved || submitting || !currentDetail || !selectedLetter) return;
+    attemptLockRef.current = true;
     
     setSubmitting(true);
     if (timerRef.current) clearInterval(timerRef.current);
@@ -268,6 +320,7 @@ export function QuizClient({
         toast.error("Erro ao enviar resposta.");
       }
     } finally {
+      attemptLockRef.current = false;
       setSubmitting(false);
     }
   }, [attemptResult, isOfflineSaved, submitting, currentDetail, selectedLetter, timeSpent]);
@@ -336,12 +389,14 @@ export function QuizClient({
   }, [currentIndex, queue, loadQuestionDetail]);
 
   const handleReviewFSRS = useCallback(async (conf: string) => {
-    if (!currentDetail) return;
+    if (!currentDetail || reviewLockRef.current) return;
+    reviewLockRef.current = true;
     try {
       await api.questions.reviewFSRS(currentDetail.id, conf);
     } catch {
       toast.error("Erro ao salvar revisão (FSRS).");
     } finally {
+      reviewLockRef.current = false;
       nextQuestion();
     }
   }, [currentDetail, nextQuestion]);
@@ -354,7 +409,8 @@ export function QuizClient({
   }, [currentIndex, queue, loadQuestionDetail]);
 
   const toggleFavorite = async () => {
-    if (!currentDetail || togglingFavorite) return;
+    if (!currentDetail || togglingFavorite || favoriteLockRef.current) return;
+    favoriteLockRef.current = true;
     setTogglingFavorite(true);
     setCurrentDetail({ ...currentDetail, is_favorite: !currentDetail.is_favorite });
     try {
@@ -362,6 +418,7 @@ export function QuizClient({
     } catch {
       setCurrentDetail({ ...currentDetail, is_favorite: currentDetail.is_favorite });
     } finally {
+      favoriteLockRef.current = false;
       setTogglingFavorite(false);
     }
   };
@@ -765,7 +822,19 @@ export function QuizClient({
         </div>
       </div>
 
-      {loadingDetail || !q ? (
+      {detailError ? (
+        <div className="bg-card border border-border shadow-1 rounded-xl p-8 min-h-64 flex flex-col gap-4 items-center justify-center text-center" role="alert">
+          <AlertTriangle className="text-destructive" size={36} />
+          <p className="font-bold text-foreground">Erro ao carregar a questão</p>
+          <p className="text-sm text-muted-foreground max-w-md">{detailError}</p>
+          <button
+            onClick={() => queue[currentIndex] && loadQuestionDetail(queue[currentIndex].id)}
+            className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+          >
+            <RotateCcw size={16} /> Tentar novamente
+          </button>
+        </div>
+      ) : loadingDetail || !q ? (
         <div className="flex flex-col gap-6 animate-pulse">
           <div className="bg-card border border-border rounded-xl p-8 h-40" />
           <div className="flex flex-col gap-4">

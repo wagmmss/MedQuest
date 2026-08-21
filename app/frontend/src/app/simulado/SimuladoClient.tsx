@@ -13,6 +13,12 @@ import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
 import { AutoSizer } from "react-virtualized-auto-sizer";
 import Image from "next/image";
 import profilesDataRaw from "@/lib/profiles.json";
+import {
+  LEARNING_SESSION_VERSION,
+  readLearningSession,
+  removeLearningSession,
+  writeLearningSession,
+} from "@/lib/sessionState";
 
 interface ProfileData {
   id: string;
@@ -28,17 +34,39 @@ interface ProfileData {
 
 const profilesData = profilesDataRaw as ProfileData[];
 
+function deadlineFromNow(seconds: number): number {
+  return Date.now() + seconds * 1000;
+}
+
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS" | "OFFLINE_SUBMITTED";
 type SimuladoProfile = "usp_2026" | "usp_history" | "unicamp" | "custom";
 
 interface SavedSimuladoState {
+  version: number;
   state: SimuladoState;
   queue: QuestionListItem[];
   answers: Record<number, string>;
-  timeLeft: number;
+  deadlineAt: number;
   currentIndex: number;
   resultsMap: Record<number, BatchAttemptResultItem>;
+  flagged: Record<number, boolean>;
+  force4Options: boolean;
   queueId?: string;
+  savedAt: number;
+}
+
+function isSavedSimuladoState(value: unknown): value is SavedSimuladoState {
+  if (typeof value !== "object" || value === null) return false;
+  const saved = value as Partial<SavedSimuladoState>;
+  return saved.version === LEARNING_SESSION_VERSION &&
+    (saved.state === "PLAYING" || saved.state === "RESULTS" || saved.state === "OFFLINE_SUBMITTED") &&
+    Array.isArray(saved.queue) && saved.queue.length > 0 &&
+    typeof saved.currentIndex === "number" && saved.currentIndex >= 0 &&
+    saved.currentIndex < saved.queue.length &&
+    typeof saved.answers === "object" && saved.answers !== null &&
+    typeof saved.resultsMap === "object" && saved.resultsMap !== null &&
+    typeof saved.flagged === "object" && saved.flagged !== null &&
+    typeof saved.deadlineAt === "number" && Number.isFinite(saved.deadlineAt);
 }
 
 export function SimuladoClient({
@@ -73,6 +101,7 @@ export function SimuladoClient({
   // Duração proporcional: 3 min/questão (120 Qs = 6h), arredondado
   const [timeLeft, setTimeLeft] = useState(6 * 60 * 60);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const deadlineRef = useRef(0);
   const hasCustomFilters = Object.keys(initialFilters).length > 0;
   const [simuladoProfile, setSimuladoProfile] = useState<SimuladoProfile>(
     hasCustomFilters ? 'custom' : 'usp_2026'
@@ -86,72 +115,79 @@ export function SimuladoClient({
   });
 
   const [hasSavedState, setHasSavedState] = useState(false);
+  const [clientReady, setClientReady] = useState(false);
+  const [storageReady, setStorageReady] = useState(false);
+  const [force4Options, setForce4Options] = useState(false);
+  const submitLockRef = useRef(false);
+  const startLockRef = useRef(false);
+  const detailRequestRef = useRef(0);
+  const dialogInitialFocusRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    const saved = localStorage.getItem("medquest_simulado_state");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved) as SavedSimuladoState;
-        if (parsed.state === "PLAYING" || parsed.state === "RESULTS" || parsed.state === "OFFLINE_SUBMITTED") {
-          timer = setTimeout(() => {
-            setHasSavedState(true);
-          }, 0);
-        }
-      } catch {
-        localStorage.removeItem("medquest_simulado_state");
-      }
-    }
-    return () => {
-      if (timer) clearTimeout(timer);
-    };
+    if (showAreaSummary) dialogInitialFocusRef.current?.focus();
+  }, [showAreaSummary]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHasSavedState(readLearningSession("simulado", isSavedSimuladoState) !== null);
+      setStorageReady(true);
+      setClientReady(true);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const resumeSimulado = () => {
-    const saved = localStorage.getItem("medquest_simulado_state");
+    const saved = readLearningSession("simulado", isSavedSimuladoState);
     if (saved) {
-      try {
-        const parsed = JSON.parse(saved) as SavedSimuladoState;
-        setState(parsed.state);
-        setQueue(parsed.queue);
-        setAnswers(parsed.answers);
-        setTimeLeft(parsed.timeLeft);
-        setCurrentIndex(parsed.currentIndex);
-        setResultsMap(parsed.resultsMap);
-        setQueueId(parsed.queueId);
+      setState(saved.state);
+      setQueue(saved.queue);
+      setAnswers(saved.answers);
+      deadlineRef.current = saved.deadlineAt;
+      setTimeLeft(Math.max(0, Math.ceil((saved.deadlineAt - Date.now()) / 1000)));
+      setCurrentIndex(saved.currentIndex);
+      setResultsMap(saved.resultsMap);
+      setFlagged(saved.flagged);
+      setForce4Options(saved.force4Options);
+      setQueueId(saved.queueId);
         
-        // Re-fetch details batch
-        const ids = parsed.queue.map((question) => question.id);
-        const force4 = parsed.queue.length === 120 || parsed.queue.length === 80; // Heuristica simples para resume
-        api.questions.getBatch(ids, force4).then(batchRes => {
-          const cache: Record<number, QuestionDetail> = {};
-          for (const q of batchRes.questions) {
-            cache[q.id] = q;
-          }
-          setDetailsCache(cache);
-        }).catch(() => {
-          toast.error("Erro ao carregar detalhes no resumo.");
-        });
-        
-      } catch {
-        toast.error("Erro ao restaurar simulado.");
-        localStorage.removeItem("medquest_simulado_state");
-      }
+      const ids = saved.queue.map((question) => question.id);
+      api.questions.getBatch(ids, saved.force4Options).then(batchRes => {
+        const cache: Record<number, QuestionDetail> = {};
+        for (const q of batchRes.questions) cache[q.id] = q;
+        setDetailsCache(cache);
+      }).catch(() => {
+        toast.error("Erro ao carregar detalhes do simulado retomado.");
+      });
+      setHasSavedState(false);
+      toast.success("Simulado retomado do ponto em que você parou.");
     }
   };
 
   useEffect(() => {
+    if (!storageReady) return;
     if (state === "PLAYING" || state === "RESULTS" || state === "OFFLINE_SUBMITTED") {
-      localStorage.setItem("medquest_simulado_state", JSON.stringify({
-        state, queue, answers, timeLeft, currentIndex, resultsMap, queueId
-      }));
+      writeLearningSession("simulado", {
+        version: LEARNING_SESSION_VERSION,
+        state,
+        queue,
+        answers,
+        deadlineAt: deadlineRef.current,
+        currentIndex,
+        resultsMap,
+        flagged,
+        force4Options,
+        queueId,
+        savedAt: Date.now(),
+      } satisfies SavedSimuladoState);
     }
-  }, [state, queue, answers, timeLeft, currentIndex, resultsMap, queueId]);
+  }, [storageReady, state, queue, answers, currentIndex, resultsMap, flagged, force4Options, queueId]);
 
   // Load Simulado
   const startSimulado = async () => {
+    if (startLockRef.current) return;
+    startLockRef.current = true;
     if (hasSavedState) {
-      localStorage.removeItem("medquest_simulado_state");
+      removeLearningSession("simulado");
       setHasSavedState(false);
     }
     setState("LOADING");
@@ -190,6 +226,8 @@ export function SimuladoClient({
       
       const calcTime = Math.round(durationHours * 60 * 60);
       setTimeLeft(calcTime);
+      deadlineRef.current = deadlineFromNow(calcTime);
+      setForce4Options(isForce4Options);
       
       setQueue(qList);
       setCurrentIndex(0);
@@ -215,11 +253,14 @@ export function SimuladoClient({
     } catch {
       toast.error("Erro ao gerar simulado.");
       setState("START");
+    } finally {
+      startLockRef.current = false;
     }
   };
 
   const loadDetail = async (id: number) => {
     if (detailsCache[id]) return; // Already cached
+    const requestId = ++detailRequestRef.current;
     setLoadingDetail(true);
     setDetailError(false);
     try {
@@ -227,13 +268,15 @@ export function SimuladoClient({
       setDetailsCache(prev => ({ ...prev, [id]: detail }));
     } catch {
       console.error("Erro ao carregar questão", id);
-      setDetailError(true);
+      if (detailRequestRef.current === requestId) setDetailError(true);
     } finally {
-      setLoadingDetail(false);
+      if (detailRequestRef.current === requestId) setLoadingDetail(false);
     }
   };
 
   const submitSimulado = useCallback(async () => {
+    if (submitLockRef.current) return;
+    submitLockRef.current = true;
     setState("SUBMITTING");
     if (timerRef.current) clearInterval(timerRef.current);
 
@@ -256,7 +299,7 @@ export function SimuladoClient({
       setState("RESULTS");
       setCurrentIndex(0); // Go back to first question to review
 
-      localStorage.removeItem("medquest_simulado_state");
+      removeLearningSession("simulado");
     } catch (err) {
       if (err instanceof OfflineQueuedError) {
         toast("Respostas do simulado salvas no dispositivo; serão sincronizadas quando a conexão voltar.", { icon: "💾" });
@@ -266,6 +309,8 @@ export function SimuladoClient({
         toast.error("Erro ao enviar simulado. Tente novamente.");
         setState("PLAYING");
       }
+    } finally {
+      submitLockRef.current = false;
     }
   }, [answers]);
 
@@ -278,14 +323,12 @@ export function SimuladoClient({
   useEffect(() => {
     if (state === "PLAYING") {
       timerRef.current = setInterval(() => {
-        setTimeLeft(prev => {
-          if (prev <= 1) {
-            if (timerRef.current) clearInterval(timerRef.current);
-            setTimeout(() => submitSimuladoRef.current(), 0);
-            return 0;
-          }
-          return prev - 1;
-        });
+        const remaining = Math.max(0, Math.ceil((deadlineRef.current - Date.now()) / 1000));
+        setTimeLeft(remaining);
+        if (remaining === 0) {
+          if (timerRef.current) clearInterval(timerRef.current);
+          setTimeout(() => submitSimuladoRef.current(), 0);
+        }
       }, 1000);
     } else {
       if (timerRef.current) clearInterval(timerRef.current);
@@ -314,7 +357,7 @@ export function SimuladoClient({
             // Não está pendente nem falhou -> completou!
             toast.success("Simulado sincronizado com sucesso!");
             // Remove o estado local pois já sincronizou, o backend processou
-            localStorage.removeItem("medquest_simulado_state");
+            removeLearningSession("simulado");
             setState("START");
             clearInterval(interval);
           }
@@ -342,6 +385,11 @@ export function SimuladoClient({
     const handleKeyDown = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+      if (showAreaSummary) {
+        if (e.key === "Escape") setShowAreaSummary(false);
+        return;
+      }
 
       if (state !== "PLAYING" && state !== "RESULTS") return;
 
@@ -386,7 +434,7 @@ export function SimuladoClient({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [state, currentIndex, queue, detailsCache, handleSelect, toggleFlag]);
+  }, [state, currentIndex, queue, detailsCache, handleSelect, toggleFlag, showAreaSummary]);
 
 
   // Filtro de questões visíveis na sidebar
@@ -566,7 +614,8 @@ export function SimuladoClient({
           {hasSavedState && (
             <button 
               onClick={resumeSimulado}
-              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full shadow-lg hover:-translate-y-0.5"
+              disabled={!clientReady}
+              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0"
             >
               <RotateCcw size={20} />
               Continuar Simulado em Andamento
@@ -574,7 +623,8 @@ export function SimuladoClient({
           )}
           <button 
             onClick={startSimulado}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full shadow-lg hover:-translate-y-0.5"
+            disabled={!clientReady}
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0"
           >
             <Play size={20} fill="currentColor" />
             {hasSavedState
@@ -613,7 +663,10 @@ export function SimuladoClient({
           </p>
         </div>
         <button
-          onClick={() => setState("START")}
+          onClick={() => {
+            setHasSavedState(true);
+            setState("START");
+          }}
           className="bg-primary text-primary-foreground font-bold px-8 py-3.5 rounded-xl hover:bg-primary/90 transition-colors shadow-md text-sm mt-2"
         >
           Voltar ao Início
@@ -757,6 +810,8 @@ export function SimuladoClient({
                       <button
                         key={q.id}
                         onClick={() => navigateTo(idx)}
+                        aria-label={`Ir para questão ${idx + 1}${answeredLetter ? `, resposta ${answeredLetter}` : ", em branco"}${isFlagged ? ", marcada para revisão" : ""}`}
+                        aria-current={isCurrent ? "step" : undefined}
                         className={clsx(
                           "w-full h-full rounded flex flex-col items-center justify-center text-xs transition-all relative",
                           btnClass
@@ -1051,6 +1106,8 @@ export function SimuladoClient({
                     <button
                       key={alt.letter}
                       onClick={() => !isReview && handleSelect(alt.letter)}
+                      disabled={isReview}
+                      aria-pressed={isSelected}
                       className={clsx(
                         "text-left p-4 rounded-xl border transition-all flex items-start gap-4 w-full",
                         altClass
@@ -1115,8 +1172,13 @@ export function SimuladoClient({
 
       {showAreaSummary && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
-          <div className="bg-card border border-border shadow-lg rounded-xl p-6 max-w-md w-full flex flex-col gap-4 animate-in zoom-in-95 duration-200">
-            <h3 className="font-bold text-lg text-foreground">Resumo por Área</h3>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="simulado-submit-title"
+            className="bg-card border border-border shadow-lg rounded-xl p-6 max-w-md w-full flex flex-col gap-4 animate-in zoom-in-95 duration-200"
+          >
+            <h3 id="simulado-submit-title" className="font-bold text-lg text-foreground">Resumo por Área</h3>
             
             <div className="border border-border rounded-lg overflow-hidden">
               <table className="w-full text-sm">
@@ -1159,6 +1221,7 @@ export function SimuladoClient({
 
             <div className="flex justify-end gap-3 mt-2">
               <button
+                ref={dialogInitialFocusRef}
                 onClick={() => setShowAreaSummary(false)}
                 className="px-4 py-2 bg-muted text-muted-foreground rounded-lg font-medium hover:bg-muted/80 transition-colors"
               >

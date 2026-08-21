@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 
 const MOCK_SIMULADO_QUESTIONS = [
   { id: 101, institution_code: "USP-SP", year: 2026, area: "Clínica Médica", subtema: "Cardiologia", topic: "Cardiologia" },
@@ -41,6 +41,50 @@ const MOCK_BATCH_DETAILS = {
     },
   ],
 };
+
+async function mockSimuladoApi(page: Page, onBatchSubmit?: () => void | Promise<void>) {
+  await page.route('**/api/**', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname.endsWith('/api/meta')) {
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          institutions: [{ institution_code: 'USP-SP', n: 10 }],
+          years: [{ year: 2026, n: 10 }],
+          areas: [{ area: 'Clínica Médica', n: 5 }, { area: 'Cirurgia', n: 5 }],
+          subtemas: [],
+        }),
+      });
+    }
+    if (url.pathname.includes('/simulado/usp') || url.pathname.endsWith('/api/questions')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_SIMULADO_QUESTIONS) });
+    }
+    if (url.pathname.endsWith('/api/questions/batch')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_BATCH_DETAILS) });
+    }
+    if (url.pathname.endsWith('/api/questions/101')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_BATCH_DETAILS.questions[0]) });
+    }
+    if (url.pathname.endsWith('/api/questions/102')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_BATCH_DETAILS.questions[1]) });
+    }
+    if (url.pathname.endsWith('/api/attempt/batch')) {
+      await onBatchSubmit?.();
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          results: [
+            { question_id: 101, is_correct: true, correct_letter: "A", explanation: "ECG precoce é mandatória na suspeita de SCA.", next_review_date: "2026-08-25T00:00:00Z" },
+            { question_id: 102, is_correct: true, correct_letter: "B", explanation: "Hemotórax maciço/volumoso requer drenagem torácica imediata.", next_review_date: "2026-08-25T00:00:00Z" },
+          ],
+        }),
+      });
+    }
+    return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({}) });
+  });
+}
 
 test.describe('Fluxo Completo de Simulado', () => {
   test.beforeEach(async ({ context }) => {
@@ -105,7 +149,7 @@ test.describe('Fluxo Completo de Simulado', () => {
     });
 
     // 2. Navegar para a tela de Simulado
-    await page.goto('/simulado');
+    await page.goto('/simulado', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('button:has-text("Iniciar Simulado")')).toBeVisible({ timeout: 10000 });
 
     // 3. Iniciar o simulado
@@ -130,5 +174,61 @@ test.describe('Fluxo Completo de Simulado', () => {
     // 8. Validar tela final de resultados
     await expect(page.locator('text=Nota Final')).toBeVisible({ timeout: 10000 });
     await expect(page.locator('text=100% de Acerto')).toBeVisible();
+  });
+
+  test('retoma respostas e posição após recarregar a página', async ({ page }) => {
+    await mockSimuladoApi(page);
+    await page.goto('/simulado', { waitUntil: 'domcontentloaded' });
+    await page.getByRole('button', { name: /Iniciar Simulado/ }).click();
+
+    await expect(page.getByText('Paciente com dor torácica')).toBeVisible();
+    await page.getByRole('button', { name: /ECG em até 10 minutos/ }).click();
+    await page.getByRole('button', { name: /Próxima/ }).last().click();
+    await page.getByRole('button', { name: /Drenagem torácica em selo/ }).click();
+    await expect(page.getByRole('button', { name: /Drenagem torácica em selo/ })).toHaveAttribute('aria-pressed', 'true');
+
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.getByRole('button', { name: 'Continuar Simulado em Andamento' }).click();
+
+    await expect(page.getByText('Vítima de trauma')).toBeVisible();
+    await expect(page.getByRole('button', { name: /Drenagem torácica em selo/ })).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  test('bloqueia entrega duplicada e oferece diálogo acessível', async ({ page }) => {
+    let submissions = 0;
+    await mockSimuladoApi(page, async () => {
+      submissions++;
+      await new Promise(resolve => setTimeout(resolve, 300));
+    });
+
+    await page.goto('/simulado', { waitUntil: 'domcontentloaded' });
+    await page.getByRole('button', { name: /Iniciar Simulado/ }).click();
+    await expect(page.getByText('Paciente com dor torácica')).toBeVisible();
+    await page.getByRole('button', { name: /ECG em até 10 minutos/ }).click();
+    await page.getByRole('button', { name: 'Finalizar Simulado' }).click();
+
+    const dialog = page.getByRole('dialog', { name: 'Resumo por Área' });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByRole('button', { name: 'Voltar à Prova' })).toBeFocused();
+    await dialog.getByRole('button', { name: 'Entregar Prova' }).dblclick();
+
+    await expect(page.getByText('Nota Final')).toBeVisible();
+    expect(submissions).toBe(1);
+  });
+
+  test('mantém a prova utilizável em viewport mobile sem rolagem horizontal', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await mockSimuladoApi(page);
+    await page.goto('/simulado', { waitUntil: 'domcontentloaded' });
+    await page.getByRole('button', { name: /Iniciar Simulado/ }).click();
+
+    await expect(page.getByText('Paciente com dor torácica')).toBeVisible();
+    const answer = page.getByRole('button', { name: /ECG em até 10 minutos/ });
+    await answer.click();
+    await expect(answer).toHaveAttribute('aria-pressed', 'true');
+
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    expect(overflow).toBeLessThanOrEqual(1);
+    await expect(page.getByRole('button', { name: 'Finalizar Simulado' })).toBeVisible();
   });
 });
