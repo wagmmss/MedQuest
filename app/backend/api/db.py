@@ -2,7 +2,7 @@
 import os
 import sqlite3
 import tempfile
-from threading import Lock
+from threading import local
 from flask import g
 import logging
 from dotenv import load_dotenv
@@ -17,34 +17,23 @@ DB_PATH = os.environ.get("MEDQUEST_DB", os.path.join(BACKEND_DIR, "medquest.db")
 TURSO_URL = os.environ.get("TURSO_DATABASE_URL")
 TURSO_TOKEN = os.environ.get("TURSO_AUTH_TOKEN")
 
-# A direct remote libSQL connection turns every SQL statement into a network
-# round-trip. Several dashboard endpoints issue multiple statements, which is
-# fast enough locally but can exhaust the request timeout on Render. Keep an
-# ephemeral embedded replica per instance so reads are local while libSQL still
-# forwards writes to the Turso primary.
-_replica_init_lock = Lock()
-_shared_turso_client = None
+# The native libSQL client owns a Rust runtime and must not be shared across
+# request threads. Keep one persistent connection per worker thread instead of
+# constructing/closing a runtime for every Flask request.
+_turso_clients = local()
 
 
 def _connect_turso(turso_url, turso_token):
-    global _shared_turso_client
-
     import libsql
 
-    # Usa uma conexão remota direta em vez de réplica embutida (embedded replica).
-    # Réplicas embutidas forçam um download completo do banco no startup (sync),
-    # o que demora mais de 15 segundos no Render e causa Gateway Timeout na Vercel (504/429).
-    with _replica_init_lock:
-        if _shared_turso_client is None:
-            client = libsql.connect(
-                turso_url,
-                auth_token=turso_token,
-                _check_same_thread=False,
-            )
-            logger.info("Connected to remote Turso database directly (no replica sync)")
-            _shared_turso_client = client
-
-    return _shared_turso_client
+    client = getattr(_turso_clients, "client", None)
+    if client is None:
+        # A direct remote connection avoids the full embedded-replica sync at
+        # cold start. Its lifetime is the worker thread, not a request.
+        client = libsql.connect(turso_url, auth_token=turso_token)
+        _turso_clients.client = client
+        logger.info("Connected to remote Turso database directly for worker thread")
+    return client
 
 class TursoCursor:
     """Expose DB-API cursor rows as mappings, matching sqlite3.Row usage."""

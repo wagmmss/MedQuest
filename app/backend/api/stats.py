@@ -99,38 +99,53 @@ def overview():
         return jsonify(cached)
 
     db = get_db()
-    total_q = db.execute("SELECT COUNT(*) n FROM questions WHERE missing_alts = 0").fetchone()["n"]
-    total_attempts = db.execute("SELECT COUNT(*) n FROM attempts WHERE user_id = ?", (g.user_id,)).fetchone()["n"]
-    distinct_answered = db.execute("SELECT COUNT(DISTINCT question_id) n FROM attempts WHERE user_id = ?", (g.user_id,)).fetchone()["n"]
-    correct = db.execute("SELECT COUNT(*) n FROM attempts WHERE user_id = ? AND is_correct = 1", (g.user_id,)).fetchone()["n"]
-    accuracy = (correct / total_attempts) if total_attempts else None
+    now_utc = datetime.now(timezone.utc)
+    last7_start = (now_utc - timedelta(days=7)).isoformat()
+    prev7_start = (now_utc - timedelta(days=14)).isoformat()
+    now_value = now_utc.isoformat()
 
-    last_correct = db.execute("""
-        SELECT COUNT(*) n FROM attempts a1 WHERE a1.user_id = ? AND a1.is_correct = 1
-        AND a1.id = (SELECT MAX(a2.id) FROM attempts a2 WHERE a2.user_id = ? AND a2.question_id = a1.question_id)
-    """, (g.user_id, g.user_id)).fetchone()["n"]
+    # Turso is remote in production. Keep the dashboard summary to one round
+    # trip rather than issuing a separate remote query for each metric.
+    overview = db.execute("""
+        SELECT
+            (SELECT COUNT(*) FROM questions WHERE missing_alts = 0) AS total_q,
+            (SELECT COUNT(*) FROM attempts WHERE user_id = ?) AS total_attempts,
+            (SELECT COUNT(DISTINCT question_id) FROM attempts WHERE user_id = ?) AS distinct_answered,
+            (SELECT COUNT(*) FROM attempts WHERE user_id = ? AND is_correct = 1) AS correct,
+            (SELECT COUNT(*) FROM attempts a1
+             WHERE a1.user_id = ? AND a1.is_correct = 1
+               AND a1.id = (SELECT MAX(a2.id) FROM attempts a2
+                            WHERE a2.user_id = ? AND a2.question_id = a1.question_id)) AS last_correct,
+            (SELECT COUNT(*) FROM spaced_repetition
+             WHERE next_review_date <= ? AND user_id = ?) AS srs_due_count,
+            (SELECT COUNT(*) FROM flashcards
+             WHERE next_review_date <= ? AND user_id = ?) AS flashcards_due_count,
+            (SELECT SUM(is_correct) FROM attempts WHERE answered_at >= ? AND user_id = ?) AS last7_correct,
+            (SELECT COUNT(*) FROM attempts WHERE answered_at >= ? AND user_id = ?) AS last7_total,
+            (SELECT SUM(is_correct) FROM attempts
+             WHERE answered_at >= ? AND answered_at < ? AND user_id = ?) AS prev7_correct,
+            (SELECT COUNT(*) FROM attempts
+             WHERE answered_at >= ? AND answered_at < ? AND user_id = ?) AS prev7_total
+    """, (
+        g.user_id, g.user_id, g.user_id, g.user_id, g.user_id,
+        now_value, g.user_id, now_value, g.user_id,
+        last7_start, g.user_id, last7_start, g.user_id,
+        prev7_start, last7_start, g.user_id,
+        prev7_start, last7_start, g.user_id,
+    )).fetchone()
+    total_q = overview["total_q"]
+    total_attempts = overview["total_attempts"]
+    distinct_answered = overview["distinct_answered"]
+    correct = overview["correct"]
+    accuracy = (correct / total_attempts) if total_attempts else None
+    last_correct = overview["last_correct"]
     accuracy_latest = (last_correct / distinct_answered) if distinct_answered else None
     coverage_pct = (distinct_answered / total_q) if total_q else None
 
-    now_utc = datetime.now(timezone.utc)
-    srs_due_count = db.execute(
-        "SELECT COUNT(*) n FROM spaced_repetition WHERE next_review_date <= ? AND user_id = ?", (now_utc.isoformat(), g.user_id)
-    ).fetchone()["n"]
-    flashcards_due_count = db.execute(
-        "SELECT COUNT(*) n FROM flashcards WHERE next_review_date <= ? AND user_id = ?", (now_utc.isoformat(), g.user_id)
-    ).fetchone()["n"]
-
-    last7 = db.execute(
-        "SELECT SUM(is_correct) c, COUNT(*) n FROM attempts WHERE answered_at >= ? AND user_id = ?",
-        ((now_utc - timedelta(days=7)).isoformat(), g.user_id),
-    ).fetchone()
-    accuracy_last7 = (last7["c"] / last7["n"]) if last7["n"] else None
-
-    prev7 = db.execute(
-        "SELECT SUM(is_correct) c, COUNT(*) n FROM attempts WHERE answered_at >= ? AND answered_at < ? AND user_id = ?",
-        ((now_utc - timedelta(days=14)).isoformat(), (now_utc - timedelta(days=7)).isoformat(), g.user_id),
-    ).fetchone()
-    accuracy_prev7 = (prev7["c"] / prev7["n"]) if prev7["n"] else None
+    srs_due_count = overview["srs_due_count"]
+    flashcards_due_count = overview["flashcards_due_count"]
+    accuracy_last7 = (overview["last7_correct"] / overview["last7_total"]) if overview["last7_total"] else None
+    accuracy_prev7 = (overview["prev7_correct"] / overview["prev7_total"]) if overview["prev7_total"] else None
 
     day_rows = db.execute(
         "SELECT DISTINCT substr(answered_at, 1, 10) AS day FROM attempts WHERE user_id = ? ORDER BY day DESC", (g.user_id,)

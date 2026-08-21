@@ -9,8 +9,8 @@ import sys
 import json
 import requests
 
-TURSO_URL = "https://medquest-wagmss.aws-us-east-1.turso.io"
-TURSO_TOKEN = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3ODYyMjYzMjUsImlkIjoiMDE5ZmUzNjItNmUwMS03YTE5LTkyZjctMGRhOTJlZTk5OWQ0Iiwia2lkIjoiTlhsOWVXamdJaXcwVW5vNmhSTGdhSVFsRl9OaVBxSm13eHB6U21hY1hNUSIsInJpZCI6IjJhMjVkMzQ0LWI3ZTctNDA5YS1hMmIzLTVlNWNkMTgxMWE4NCJ9.jOZcgW1n4dCGN1W8SPG-vMFpj734oh0Wn1NDl7lteH6NsD5nqeOXmr1tZm4TEQVhTO-_2aN29LBz1u7o29D1Dw"
+TURSO_URL = os.environ["TURSO_DATABASE_URL"].replace("libsql://", "https://").replace("wss://", "https://")
+TURSO_TOKEN = os.environ["TURSO_AUTH_TOKEN"]
 LOCAL_DB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "medquest.db")
 
 SKIP_TABLES = {"questions_fts", "questions_fts_data", "questions_fts_idx",
