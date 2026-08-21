@@ -1,20 +1,35 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Desenvolvimento local
 
-First, run the development server:
+O frontend encaminha as chamadas `/api/*` para o Flask em `http://127.0.0.1:5050`.
+Por isso os dois processos precisam estar ativos durante o desenvolvimento.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. Confirme que `app/frontend/.env.local` e `app/backend/.env` têm o mesmo
+   `FLASK_API_PROXY_SECRET` e que `FLASK_API_URL=http://127.0.0.1:5050` no
+   frontend. Não use uma variável `NEXT_PUBLIC_*` para esse segredo.
+2. Em um terminal, inicie o backend:
+
+```powershell
+cd app/backend
+.\.venv\Scripts\python.exe app.py
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Em outro terminal, inicie o frontend:
+
+```bash
+cd app/frontend
+npm run dev
+```
+
+Abra [http://localhost:3000](http://localhost:3000). Se o dashboard não
+carregar, valide a conexão pelo navegador em
+`http://localhost:3000/api/stats/overview`; a resposta deve ser JSON com HTTP
+200, não uma página de erro do Next.
+
+O servidor Flask pode ser encerrado com `Ctrl+C`. As variáveis de ambiente do
+frontend devem ficar em `.env.local`; o Next só as lê na raiz de
+`app/frontend`.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

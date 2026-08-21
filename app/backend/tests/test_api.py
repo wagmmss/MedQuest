@@ -89,3 +89,38 @@ def test_weak_topics_aceita_min_attempts_invalido(client):
 def test_simulado_custom_limita_quantidade_invalida(client):
     r = client.post("/api/simulado/custom", json={"questions_per_area": "abc"})
     assert r.status_code == 200
+
+
+def test_explain_route_compatibilidade(client):
+    # Testa ambas as rotas /api/questions/1/explain e /api/1/explain
+    r1 = client.get("/api/questions/1/explain")
+    assert r1.status_code == 200
+    assert r1.headers["Content-Type"].startswith("text/event-stream")
+    data1 = r1.get_data(as_text=True)
+    assert "data:" in data1
+
+    r2 = client.get("/api/1/explain")
+    assert r2.status_code == 200
+    assert r2.headers["Content-Type"].startswith("text/event-stream")
+    data2 = r2.get_data(as_text=True)
+    assert "data:" in data2
+
+
+def test_filters_status_new_e_unanswered(client):
+    # Inicialmente ambas as 2 questões não foram respondidas
+    r_unanswered = client.get("/api/questions?status=unanswered")
+    r_new = client.get("/api/questions?status=new")
+    assert len(r_unanswered.get_json()) == 2
+    assert len(r_new.get_json()) == 2
+
+    # Responde à questão 1
+    client.post("/api/questions/1/attempt", json={"selected_letter": "B"})
+
+    # Ambas as queries agora devem retornar apenas a questão 2 restante
+    r_unanswered_after = client.get("/api/questions?status=unanswered")
+    r_new_after = client.get("/api/questions?status=new")
+    assert len(r_unanswered_after.get_json()) == 1
+    assert r_unanswered_after.get_json()[0]["id"] == 2
+    assert len(r_new_after.get_json()) == 1
+    assert r_new_after.get_json()[0]["id"] == 2
+

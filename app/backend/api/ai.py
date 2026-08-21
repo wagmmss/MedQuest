@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 # In-memory TTL cache for semantic search expansions (avoids redundant AI calls)
 _search_cache = {}  # key: normalized query -> (timestamp, result)
 _SEARCH_CACHE_TTL = 300  # 5 minutes
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
 
 def generate_cloze_flashcard(stem: str, correct_text: str, wrong_text: str, explanation: str) -> dict:
     """
@@ -53,7 +54,7 @@ Não inclua markdown ```json ou nenhum texto fora das chaves do JSON.
     gemini_key = os.environ.get("GEMINI_API_KEY")
     if gemini_key:
         try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={gemini_key}"
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={gemini_key}"
             payload = {
                 "contents": [{"parts": [{"text": prompt}]}],
                 "generationConfig": {
@@ -140,7 +141,7 @@ Responda APENAS com o JSON. Exemplo: {{ "terms": ["...", "..."] }}
     gemini_key = os.environ.get("GEMINI_API_KEY")
     if gemini_key:
         try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={gemini_key}"
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={gemini_key}"
             payload = {
                 "contents": [{"parts": [{"text": prompt}]}],
                 "generationConfig": {
@@ -210,7 +211,7 @@ Seja direto. Não inclua saudações. Use markdown leve (negrito)."""
     gemini_key = os.environ.get("GEMINI_API_KEY")
     if gemini_key:
         try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent?key={gemini_key}"
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:streamGenerateContent?key={gemini_key}"
             payload = {
                 "contents": [{"parts": [{"text": prompt}]}]
             }

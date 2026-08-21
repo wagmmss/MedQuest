@@ -112,6 +112,10 @@ export function QuizClient({
 
   // Confidence
 
+  const [detailsCache, setDetailsCache] = useState<Record<number, QuestionDetail>>({});
+  const detailsCacheRef = useRef<Record<number, QuestionDetail>>({});
+  const prefetchingRef = useRef<Set<number>>(new Set());
+
   const [togglingFavorite, setTogglingFavorite] = useState(false);
   const detailRequestRef = useRef(0);
   const attemptLockRef = useRef(false);
@@ -120,9 +124,7 @@ export function QuizClient({
 
   const loadQuestionDetail = useCallback(async (id: number) => {
     const requestId = ++detailRequestRef.current;
-    setLoadingDetail(true);
     setDetailError(null);
-    setCurrentDetail(null);
     setAttemptResult(null);
     setSelectedLetter(null);
     setIsOfflineSaved(false);
@@ -130,9 +132,24 @@ export function QuizClient({
     setAiExplanation("");
     setIsExplaining(false);
     setTimeSpent(0);
+
+    // Se já estiver no cache, carrega instantaneamente sem tela de loading
+    const cached = detailsCacheRef.current[id];
+    if (cached) {
+      setCurrentDetail(cached);
+      setLoadingDetail(false);
+      return;
+    }
+
+    setLoadingDetail(true);
+    setCurrentDetail(null);
     try {
       const detail = await api.questions.getDetail(id);
-      if (detailRequestRef.current === requestId) setCurrentDetail(detail);
+      detailsCacheRef.current[id] = detail;
+      setDetailsCache(prev => ({ ...prev, [id]: detail }));
+      if (detailRequestRef.current === requestId) {
+        setCurrentDetail(detail);
+      }
     } catch {
       if (detailRequestRef.current === requestId) {
         setDetailError("Não foi possível carregar esta questão. Verifique sua conexão e tente novamente.");
@@ -141,6 +158,33 @@ export function QuizClient({
       if (detailRequestRef.current === requestId) setLoadingDetail(false);
     }
   }, []);
+
+  // Pré-carregamento em segundo plano das próximas questões
+  useEffect(() => {
+    if (state !== "PLAYING" || queue.length === 0) return;
+
+    const nextIds = [
+      queue[currentIndex + 1]?.id,
+      queue[currentIndex + 2]?.id,
+    ].filter((id): id is number => typeof id === "number" && !detailsCacheRef.current[id] && !prefetchingRef.current.has(id));
+
+    if (nextIds.length === 0) return;
+
+    for (const nextId of nextIds) {
+      prefetchingRef.current.add(nextId);
+      api.questions.getDetail(nextId)
+        .then((detail) => {
+          detailsCacheRef.current[nextId] = detail;
+          setDetailsCache(prev => ({ ...prev, [nextId]: detail }));
+        })
+        .catch(() => {
+          // Ignora falhas de prefetch em segundo plano
+        })
+        .finally(() => {
+          prefetchingRef.current.delete(nextId);
+        });
+    }
+  }, [state, queue, currentIndex, detailsCache]);
 
   const loadQueue = useCallback(async (activeFilters: Record<string, string | string[]>) => {
     setState("LOADING_QUEUE");
@@ -192,7 +236,12 @@ export function QuizClient({
         setSelectedLetter(saved.selectedLetter);
         setTimeSpent(saved.timeSpent || 0);
         setState(saved.state);
-        if (!saved.currentDetail) loadQuestionDetail(saved.queue[saved.currentIndex].id);
+        if (saved.currentDetail) {
+          detailsCacheRef.current[saved.currentDetail.id] = saved.currentDetail;
+          setDetailsCache(prev => ({ ...prev, [saved.currentDetail!.id]: saved.currentDetail! }));
+        } else {
+          loadQuestionDetail(saved.queue[saved.currentIndex].id);
+        }
         toast.success("Sessão de estudo retomada.");
       } else if (Object.keys(initialFilters).length > 0 && queue.length === 0 && state === "LOADING_QUEUE") {
         loadQueue({ limit: "50", ...initialFilters });
@@ -424,11 +473,16 @@ export function QuizClient({
     if (!currentDetail || togglingFavorite || favoriteLockRef.current) return;
     favoriteLockRef.current = true;
     setTogglingFavorite(true);
-    setCurrentDetail({ ...currentDetail, is_favorite: !currentDetail.is_favorite });
+    const updated = { ...currentDetail, is_favorite: !currentDetail.is_favorite };
+    setCurrentDetail(updated);
+    detailsCacheRef.current[updated.id] = updated;
+    setDetailsCache(prev => ({ ...prev, [updated.id]: updated }));
     try {
       await api.questions.toggleFavorite(currentDetail.id);
     } catch {
-      setCurrentDetail({ ...currentDetail, is_favorite: currentDetail.is_favorite });
+      setCurrentDetail(currentDetail);
+      detailsCacheRef.current[currentDetail.id] = currentDetail;
+      setDetailsCache(prev => ({ ...prev, [currentDetail.id]: currentDetail }));
     } finally {
       favoriteLockRef.current = false;
       setTogglingFavorite(false);
