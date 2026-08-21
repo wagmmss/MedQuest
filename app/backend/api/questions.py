@@ -7,6 +7,7 @@ from flask import Blueprint, jsonify, request, g, Response, stream_with_context
 
 from .db import get_db, db_transaction
 from .filters import question_filter_clauses
+from .adaptive import rank_adaptive_candidates
 from .schemas import AttemptIn, BatchAttemptIn, ReviewIn, ValidationError
 from .idempotency import reserve_idempotency, complete_idempotency, fail_idempotency
 from . import srs
@@ -314,6 +315,8 @@ def questions():
     clauses, params = question_filter_clauses(request.args)
     where = " AND ".join(clauses)
     limit = _bounded_int(request.args.get("limit"), default=500, minimum=1, maximum=2000)
+    if request.args.get("mode") == "adaptive":
+        return jsonify(rank_adaptive_candidates(db, g.user_id, where, params, limit))
     ids = _sample_ids(db, where, params, limit)
     if not ids:
         return jsonify([])

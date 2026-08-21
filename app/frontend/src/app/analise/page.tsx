@@ -12,6 +12,7 @@ export default async function AnalisePage() {
     serverApi.stats.getDistractors(),
     serverApi.stats.getPredictiveScore(),
     serverApi.stats.getAtRiskTopics(),
+    serverApi.stats.getLearningProfile(),
   ]);
 
   const timeline = results[0].status === 'fulfilled' ? results[0].value : [];
@@ -21,6 +22,12 @@ export default async function AnalisePage() {
   const distractors = results[4].status === 'fulfilled' ? results[4].value : [];
   const predictiveScore = results[5].status === 'fulfilled' ? results[5].value : { projected_score: 0, target_score: null, areas: [] };
   const atRiskTopics = results[6].status === 'fulfilled' ? results[6].value : [];
+  const learningProfile = results[7].status === 'fulfilled' ? results[7].value : {
+    generated_at: '',
+    goal: { questions_today: 30, configured_daily_questions: 30, reviews_due: 0, target_score: null, exam_date: null },
+    topics: [],
+    method: { deterministic: true, signals: [] },
+  };
 
   return (
     <div className="flex flex-col gap-8 animate-in fade-in duration-500">
@@ -53,6 +60,7 @@ export default async function AnalisePage() {
         distractors={distractors}
         predictiveScore={predictiveScore}
         atRiskTopics={atRiskTopics}
+        learningProfile={learningProfile}
       />
 
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import { TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat, PredictiveScore, AtRiskTopic } from "@/types/api";
+import { TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat, PredictiveScore, AtRiskTopic, LearningProfile } from "@/types/api";
 import { AlertTriangle, TrendingUp, Compass, AlarmClock, Lightbulb, Brain, ChevronRight, BarChart3, AlertCircle, Target, Activity } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
@@ -19,7 +19,8 @@ export function AnalysisClient({
   breakdown,
   distractors,
   predictiveScore,
-  atRiskTopics
+  atRiskTopics,
+  learningProfile
 }: {
   timeline: TimelineStat[];
   weakTopics: WeakTopic[];
@@ -28,6 +29,7 @@ export function AnalysisClient({
   distractors: DistractorStat[];
   predictiveScore: PredictiveScore;
   atRiskTopics: AtRiskTopic[];
+  learningProfile: LearningProfile;
 }) {
   const getRecIcon = (type: string) => {
     switch (type) {
@@ -83,6 +85,35 @@ export function AnalysisClient({
     <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 pb-10">
       {/* Left Column (2/3 on xl screens) */}
       <div className="xl:col-span-2 flex flex-col gap-8 min-w-0">
+
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-card border border-primary/30 shadow-sm rounded-2xl p-6"
+        >
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Brain size={22} className="text-primary" />
+                <h2 className="text-xl font-bold text-foreground">Meta adaptativa de hoje</h2>
+              </div>
+              <p className="text-muted-foreground">
+                {learningProfile.goal.questions_today} questões, incluindo {learningProfile.goal.reviews_due} revisões vencidas.
+              </p>
+              {learningProfile.topics[0] && (
+                <p className="text-sm text-muted-foreground mt-2">
+                  Prioridade atual: <span className="font-semibold text-foreground">{learningProfile.topics[0].topic}</span>
+                </p>
+              )}
+            </div>
+            <Link
+              href={`/estudar?mode=adaptive&limit=${learningProfile.goal.questions_today}`}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Iniciar sessão personalizada <ChevronRight size={18} />
+            </Link>
+          </div>
+        </motion.section>
         
         {/* Predictive Dashboard */}
         <motion.section 
@@ -157,7 +188,9 @@ export function AnalysisClient({
                         <span className="text-xs text-muted-foreground mt-0.5">{topic.items_count} cartões em risco</span>
                       </div>
                       <div className="flex flex-col items-end shrink-0 pl-3">
-                        <span className="text-xs font-semibold text-warning">Baixa Retenção</span>
+                        <span className="text-xs font-semibold text-warning">
+                          {topic.retrievability !== undefined ? `${Math.round(topic.retrievability * 100)}% retenção` : "Baixa retenção"}
+                        </span>
                       </div>
                     </div>
                   ))

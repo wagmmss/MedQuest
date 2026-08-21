@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -26,6 +26,8 @@ export default function TopNav() {
   const pathname = usePathname();
   const router = useRouter();
   const { isZenMode, toggleZenMode } = useZenMode();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
@@ -51,18 +53,35 @@ export default function TopNav() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [toggleZenMode, isMobileMenuOpen]);
 
-  // Focus trap and prevent background scrolling
+  // Focus trap, focus restoration and background scroll lock.
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-      const timer = setTimeout(() => {
-        const closeBtn = document.getElementById("mobile-menu-close");
-        if (closeBtn) closeBtn.focus();
-      }, 50);
-      return () => { clearTimeout(timer); };
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!isMobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const opener = menuButtonRef.current;
+    document.body.style.overflow = "hidden";
+    const drawer = drawerRef.current;
+    const controls = () => Array.from(drawer?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') || []);
+    controls()[0]?.focus();
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+      const items = controls();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", trapFocus);
+    return () => {
+      document.removeEventListener("keydown", trapFocus);
+      document.body.style.overflow = previousOverflow;
+      opener?.focus();
+    };
   }, [isMobileMenuOpen]);
 
   return (
@@ -74,19 +93,26 @@ export default function TopNav() {
             onClick={toggleZenMode}
             className="text-on-surface-variant hover:bg-surface-container-low rounded-full p-2 transition-colors flex items-center justify-center cursor-pointer"
             title={isZenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen (Z)"}
+            aria-label={isZenMode ? "Sair do modo Zen" : "Entrar no modo Zen"}
+            aria-pressed={isZenMode}
           >
             <span className="material-symbols-outlined">{isZenMode ? "fullscreen_exit" : "fullscreen"}</span>
           </button>
           <ThemeToggle />
           <button 
+            ref={menuButtonRef}
             onClick={() => setIsMobileMenuOpen(true)}
             className="text-on-surface-variant hover:bg-surface-container-low rounded-full p-2 transition-colors flex items-center justify-center cursor-pointer"
+            aria-label="Abrir menu principal"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation-drawer"
           >
             <span className="material-symbols-outlined" data-icon="menu">menu</span>
           </button>
           <button 
             onClick={() => setIsModalOpen(true)}
             className="relative w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30 flex items-center justify-center cursor-pointer hover:opacity-85 transition-opacity focus:outline-none focus:border-outline"
+            aria-label="Abrir minha conta"
           >
             {isLoaded && user?.imageUrl ? (
               <Image src={user.imageUrl} alt="Avatar" fill sizes="32px" className="object-cover" />
@@ -106,13 +132,16 @@ export default function TopNav() {
       )}
       
       {/* Mobile Drawer */}
-      <div 
-        className={`fixed top-0 left-0 h-full w-64 bg-surface z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
-          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+      {isMobileMenuOpen && <div
+        ref={drawerRef}
+        id="mobile-navigation-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-menu-title"
+        className="fixed top-0 left-0 h-full w-[min(20rem,85vw)] bg-surface z-50 shadow-2xl md:hidden"
       >
         <div className="flex items-center justify-between p-4 border-b border-outline-variant">
-          <h2 className="font-headline-sm font-bold text-primary">Menu</h2>
+          <h2 id="mobile-menu-title" className="font-headline-sm font-bold text-primary">Menu</h2>
           <button 
             id="mobile-menu-close"
             onClick={() => setIsMobileMenuOpen(false)}
@@ -122,7 +151,7 @@ export default function TopNav() {
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-2" aria-label="Navegação principal">
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -130,6 +159,7 @@ export default function TopNav() {
                 key={item.href} 
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
+                aria-current={isActive ? "page" : undefined}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                   isActive 
                     ? "bg-primary-container text-on-primary-container font-medium" 
@@ -142,7 +172,7 @@ export default function TopNav() {
             );
           })}
         </nav>
-      </div>
+      </div>}
 
       <AccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>

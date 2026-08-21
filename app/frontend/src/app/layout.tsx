@@ -13,6 +13,7 @@ import { CommandPalette } from "@/components/CommandPalette";
 import { DemoButton } from "@/components/DemoButton";
 import { DemoBanner } from "@/components/DemoBanner";
 import { SyncProvider } from "@/components/SyncProvider";
+import { OnboardingTour } from "@/components/OnboardingTour";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -81,6 +82,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
         </head>
         <body className="font-body-md text-body-md h-screen flex overflow-hidden bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+          <a href="#conteudo-principal" className="skip-link">Pular para o conteúdo principal</a>
           {!userId && !isDemoMode ? (
             <div className="flex w-full h-full items-start justify-center p-8 bg-background relative overflow-y-auto">
               <div className="absolute inset-0 bg-primary/5" style={{ backgroundImage: "radial-gradient(circle, var(--primary) 1px, transparent 1px)", backgroundSize: "32px 32px", opacity: 0.2 }} />
@@ -103,12 +105,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <Sidebar />
                 <div className="flex-1 flex flex-col w-full min-w-0 bg-background overflow-y-auto">
                   <TopNav />
-                  <main className="flex-1 max-w-[1440px] mx-auto w-full p-gutter md:p-margin gap-stack-lg flex flex-col pb-24 md:pb-margin relative">
+                  <main id="conteudo-principal" tabIndex={-1} className="flex-1 max-w-[1440px] mx-auto w-full p-4 sm:p-gutter md:p-margin gap-stack-lg flex flex-col pb-24 md:pb-margin relative focus:outline-none">
                     {children}
                   </main>
                 </div>
                 <CommandPalette />
               </div>
+              <OnboardingTour />
             </div>
           )}
           <SyncProvider />

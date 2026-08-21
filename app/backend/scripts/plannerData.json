@@ -391,6 +391,35 @@
           "Puberdade precoce e atraso puberal",
           "Confidencialidade, sexualidade e saúde do adolescente"
         ]
+      },
+      {
+        "theme": "Outros Tópicos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Aleitamento Materno e Alimentação Complementar",
+          "Anemias e Doença Falciforme na Infância",
+          "Cetoacidose Diabética e Diabetes na Infância",
+          "Crescimento e Desenvolvimento Neuropsicomotor",
+          "Desnutrição, Obesidade e Avaliação Nutricional Infantil",
+          "Diarreia Aguda, Reidratação e Parasitoses",
+          "Doenças Exantemáticas e Infectocontagiosas",
+          "Doenças Gastrointestinais Crônicas (Doença Celíaca, APLV, DII)",
+          "Febre Reumática",
+          "Fibrose Cística e Doenças Respiratórias Crônicas",
+          "Hematologia Pediátrica (Coagulopatias e PTI)",
+          "Imunização (PNI) e Calendário Vacinal",
+          "Imunodeficiências Primárias",
+          "Infecção do Trato Urinário e Refluxo Vesicoureteral",
+          "Maus-tratos e Violência contra a Criança",
+          "Neoplasias na Infância e Neutropenia Febril",
+          "Período Neonatal: Doenças Hematológicas e Icterícia",
+          "Período Neonatal: Doenças Infecciosas e Sífilis/STORCH",
+          "Período Neonatal: Doenças Neurológicas e Sensoriais",
+          "Período Neonatal: Doenças Respiratórias",
+          "Período Neonatal: Doenças do Metabolismo",
+          "Sala de Parto e Reanimação Neonatal"
+        ],
+        "details": []
       }
     ]
   },
@@ -624,6 +653,19 @@
           "Puerpério fisiológico e patológico; hemorragia pós-parto (4 T) e atonia uterina",
           "Infecção puerperal e mastite puerperal"
         ]
+      },
+      {
+        "theme": "Outros Tópicos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Diabetes Gestacional e Diabetes na Gestação",
+          "Endometriose e Dor Pélvica Crônica",
+          "Gestação de Alto Risco e Intercorrências Clínicas",
+          "Infertilidade Conjugal",
+          "Sangramento da Primeira Metade da Gestação (Aborto, Ectópica, Mola)",
+          "Sangramento da Segunda Metade da Gestação (DPP, Placenta Prévia)"
+        ],
+        "details": []
       }
     ]
   },
@@ -1182,6 +1224,125 @@
           "Foco nas suas áreas e subtemas mais fracos (ver Análise de Desempenho)",
           "Simulados completos e ajuste fino da estratégia de prova"
         ]
+      },
+      {
+        "theme": "Outros Tópicos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Asma",
+          "DPOC",
+          "Dependência Química e Tabagismo",
+          "Dermatologia (Lesões Cutâneas, Eczemas, Psoríase)",
+          "Diabetes Mellitus e Complicações",
+          "Doenças Pulmonares Intersticiais e Outras Pneumopatias",
+          "Doenças das Vias Biliares e Pâncreas",
+          "Doenças do Esôfago e Estômago (DRGE, Úlcera, Dispepsia)",
+          "Glomerulopatias e Síndrome Nefrótica/Nefrítica",
+          "Infecções de Pele e ISTs (Sífilis, Hanseníase, Micoses)",
+          "Leucemias, Linfomas e Mieloma",
+          "Litíase Urinária e Infecção Urinária",
+          "Lúpus e Doenças Autoimunes Sistêmicas (Esclerose, Vasculites)",
+          "Oftalmologia Clínica",
+          "Oncologia (Rastreio e Neoplasias Sólidas)",
+          "Osteoporose e Doença Óssea Metabólica",
+          "Parada Cardiorrespiratória e Suporte Avançado de Vida",
+          "Pericardiopatias",
+          "Síndromes Coronarianas Agudas (IAM e Angina)",
+          "Transtornos Psiquiátricos (Depressão, Ansiedade, Psicoses)",
+          "Ventilação Mecânica e Medicina Intensiva"
+        ],
+        "details": []
+      }
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "macroThemes": [
+      {
+        "theme": "Outros Tópicos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Abdome Agudo Obstrutivo",
+          "Abdome Agudo Perfurativo",
+          "Anestesiologia e Técnica Operatória",
+          "Aneurismas e Dissecção de Aorta",
+          "Apendicite Aguda",
+          "Atendimento Inicial ao Trauma (ATLS)",
+          "Avaliação Pré-operatória e Risco Cirúrgico",
+          "Choque e Transfusão no Trauma",
+          "Cirurgia Bariátrica e Complicações",
+          "Cirurgia Pediátrica",
+          "Cirurgia Torácica e Mediastino",
+          "Cirurgia Vascular Periférica (Isquemia Arterial, Varizes, TVP)",
+          "Colecistite e Colelitíase",
+          "Coledocolitíase e Colangite",
+          "Câncer Colorretal",
+          "Diverticulite Aguda",
+          "Doenças Orificiais (Hemorroida, Fissura, Fístula)",
+          "Doenças do Esôfago (DRGE, Acalasia, Câncer)",
+          "Estômago (Úlcera, HDA, Câncer Gástrico)",
+          "Hérnias da Parede Abdominal",
+          "Infecção de Sítio Cirúrgico e Cicatrização",
+          "Isquemia Mesentérica",
+          "Neurocirurgia (Hemorragia, Hidrocefalia, Tumor)",
+          "Oftalmologia Cirúrgica",
+          "Ortopedia e Fraturas",
+          "Otorrinolaringologia Cirúrgica",
+          "Pancreatite Aguda",
+          "Queimaduras",
+          "Resposta Metabólica ao Trauma e Pós-operatório",
+          "Tireoide e Paratireoide",
+          "Trauma Abdominal",
+          "Trauma Cervical e Vascular",
+          "Trauma Cranioencefálico e Raquimedular",
+          "Trauma Pélvico e Urológico",
+          "Trauma Torácico",
+          "Tumores de Pele e Partes Moles",
+          "Tumores de Pele e Partes Moles (Melanoma, CBC, CEC)",
+          "Urologia (Litíase, HPB, Neoplasia Renal, Escroto Agudo)"
+        ],
+        "details": []
+      }
+    ]
+  },
+  {
+    "area": "Medicina Preventiva e Social",
+    "macroThemes": [
+      {
+        "theme": "Outros Tópicos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Atenção Primária à Saúde",
+          "Bioestatística e Testes de Hipótese",
+          "Comunicação Médico-Paciente e Humanização",
+          "Controle Social e Participação Popular",
+          "Determinantes Sociais da Saúde e Vulnerabilidade",
+          "Epidemiologia das Doenças Transmissíveis",
+          "Estatística de Testes Diagnósticos",
+          "Estratégia Saúde da Família e Equipe Multiprofissional",
+          "Estudos Epidemiológicos (Análise Estatística e Aplicação)",
+          "Estudos Epidemiológicos (Classificação e Desenho)",
+          "Estudos Observacionais (Coorte, Caso-Controle, Transversal, Ecológico)",
+          "Ferramentas da APS (SOAP, PTS, Genograma, Método Centrado na Pessoa)",
+          "Imunização e Programas de Saúde",
+          "Indicadores de Saúde e Mortalidade",
+          "Legislação e Financiamento do SUS",
+          "Medicina Baseada em Evidências e Revisão Sistemática",
+          "Modelos de Atenção e Reforma Sanitária",
+          "Níveis de Prevenção e Prevenção Quaternária",
+          "Princípios e Diretrizes do SUS",
+          "Rastreamento Populacional",
+          "Redes de Atenção à Saúde",
+          "Saúde Indígena e Populações Específicas",
+          "Saúde Mental na Atenção Primária",
+          "Saúde Ocupacional e do Trabalhador",
+          "Sistemas de Informação em Saúde",
+          "Transição Demográfica e Epidemiológica",
+          "Vigilância Sanitária e Ambiental",
+          "Vigilância em Saúde e Notificação Compulsória",
+          "Ética Médica e Bioética"
+        ],
+        "details": []
       }
     ]
   }

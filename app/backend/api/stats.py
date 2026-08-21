@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 from flask import Blueprint, jsonify, request, g
 
 from .db import get_db
+from .adaptive import build_learning_profile, fsrs_metrics
 from scripts.planner import USP_WEIGHTS, get_normalized_area
 
 bp = Blueprint("stats", __name__)
@@ -229,6 +230,17 @@ def recommendations():
             "cta": "Revisar agora", "filters": {"status": "srs_due"},
         })
 
+    attempt_count = db.execute(
+        "SELECT COUNT(*) n FROM attempts WHERE user_id = ?", (g.user_id,)
+    ).fetchone()["n"]
+    if attempt_count >= 3:
+        recs.append({
+            "type": "adaptive", "icon": "ph-brain",
+            "title": "Sessão adaptativa personalizada",
+            "description": "Uma fila equilibrada por revisões vencidas, risco de esquecimento, erros recentes e lacunas de cobertura.",
+            "cta": "Iniciar sessão", "filters": {"mode": "adaptive", "limit": "30"},
+        })
+
     weak_subtemas = db.execute("""
         SELECT q.subtema AS subtema, MIN(q.area) AS area,
                COUNT(a.id) AS attempts, SUM(a.is_correct) AS correct
@@ -314,6 +326,11 @@ def recommendations():
     return jsonify(recs[:5])
 
 
+@bp.route("/stats/learning-profile")
+def learning_profile():
+    return jsonify(build_learning_profile(get_db(), g.user_id))
+
+
 @bp.route("/stats/predictive-score")
 def predictive_score():
     db = get_db()
@@ -370,7 +387,6 @@ def predictive_score():
 
 @bp.route("/stats/at-risk")
 def at_risk():
-    import json
     db = get_db()
     
     # Buscar cards de FSRS (questões) do usuário que têm fsrs_card e próxima revisão em breve
@@ -390,33 +406,30 @@ def at_risk():
     for r in rows:
         subtema = r["subtema"]
         if not subtema: continue
-        try:
-            fsrs_data = json.loads(r["fsrs_card"])
-            if isinstance(fsrs_data, dict):
-                stability = float(fsrs_data.get("stability", 10.0))
-            else:
-                stability = 10.0
-        except Exception:
-            stability = 10.0
+        metrics = fsrs_metrics(r["fsrs_card"])
+        retrievability = metrics["retrievability"]
+        if retrievability is None:
+            continue
             
         if subtema not in topics_risk:
-            topics_risk[subtema] = {"count": 0, "min_stability": stability}
+            topics_risk[subtema] = {"count": 0, "min_retrievability": retrievability}
         
         topics_risk[subtema]["count"] += 1
-        if stability < topics_risk[subtema]["min_stability"]:
-            topics_risk[subtema]["min_stability"] = stability
+        if retrievability < topics_risk[subtema]["min_retrievability"]:
+            topics_risk[subtema]["min_retrievability"] = retrievability
             
-    # Filtra subtemas onde a menor estabilidade de uma questão é < 5.0 (exemplo de limite para at-risk)
+    # A retenção desejada padrão do FSRS é 90%; abaixo disso há risco de esquecimento.
     at_risk_list = []
     for subtema, data in topics_risk.items():
-        if data["min_stability"] < 5.0:
+        if data["min_retrievability"] < 0.9:
             at_risk_list.append({
                 "subtema": subtema,
                 "items_count": data["count"],
-                "stability": round(data["min_stability"], 2)
+                "retrievability": round(data["min_retrievability"], 4),
+                "stability": None,
             })
             
-    at_risk_list.sort(key=lambda x: x["stability"])
+    at_risk_list.sort(key=lambda x: (x["retrievability"], x["subtema"]))
     return jsonify(at_risk_list[:10])
 
 

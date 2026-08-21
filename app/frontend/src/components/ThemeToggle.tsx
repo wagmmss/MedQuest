@@ -34,9 +34,11 @@ export function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className="p-2 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-      aria-label="Alternar tema"
+      aria-label={isDark ? "Usar tema claro" : "Usar tema escuro"}
+      aria-pressed={isDark}
+      title={isDark ? "Usar tema claro" : "Usar tema escuro"}
     >
-      {isDark ? <Moon size={20} /> : <Sun size={20} />}
+      {isDark ? <Moon size={20} aria-hidden="true" /> : <Sun size={20} aria-hidden="true" />}
     </button>
   );
 }

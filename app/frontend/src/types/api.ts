@@ -56,6 +56,34 @@ export interface WeakTopic {
   accuracy: number;
 }
 
+export interface LearningProfileTopic {
+  topic: string;
+  area: string;
+  available: number;
+  attempts: number;
+  correct: number;
+  accuracy: number | null;
+  coverage: number;
+  confidence: number;
+  retrievability: number | null;
+  due_count: number;
+  priority_score: number;
+  reasons: string[];
+}
+
+export interface LearningProfile {
+  generated_at: string;
+  goal: {
+    questions_today: number;
+    configured_daily_questions: number;
+    reviews_due: number;
+    target_score: number | null;
+    exam_date: string | null;
+  };
+  topics: LearningProfileTopic[];
+  method: { deterministic: boolean; signals: string[] };
+}
+
 export interface Recommendation {
   type: string;
   icon: string;
@@ -95,7 +123,8 @@ export interface PredictiveScore {
 export interface AtRiskTopic {
   subtema: string;
   items_count: number;
-  stability: number;
+  stability: number | null;
+  retrievability?: number;
 }
 
 export interface PlannerConfig {
@@ -166,6 +195,9 @@ export interface QuestionListItem {
   topic: string;
   area: string;
   subtema: string;
+  adaptive_score?: number;
+  adaptive_reasons?: string[];
+  retrievability?: number | null;
 }
 
 export interface QuestionAlternative {

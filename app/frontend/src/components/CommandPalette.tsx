@@ -13,6 +13,8 @@ export function CommandPalette() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -37,8 +39,26 @@ export function CommandPalette() {
 
   useEffect(() => {
     if (open) {
+      previousFocusRef.current = document.activeElement as HTMLElement;
       inputRef.current?.focus();
+      const trapFocus = (event: KeyboardEvent) => {
+        if (event.key !== "Tab") return;
+        const controls = Array.from(panelRef.current?.querySelectorAll<HTMLElement>('input, button:not([disabled]), a[href]') || []);
+        if (!controls.length) return;
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      };
+      document.addEventListener("keydown", trapFocus);
+      return () => document.removeEventListener("keydown", trapFocus);
     } else {
+      previousFocusRef.current?.focus();
       const timer = setTimeout(() => {
         setQuery("");
         setResults([]);
@@ -85,8 +105,10 @@ export function CommandPalette() {
       <div 
         className="fixed inset-0 bg-foreground/20 backdrop-blur-sm" 
         onClick={() => setOpen(false)}
+        aria-hidden="true"
       />
-      <div className="relative w-full max-w-xl bg-card rounded-lg shadow-2 border border-border overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div ref={panelRef} role="dialog" aria-modal="true" aria-labelledby="command-palette-title" className="relative w-full max-w-xl bg-card rounded-lg shadow-2 border border-border overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <h2 id="command-palette-title" className="sr-only">Busca rápida</h2>
         <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
           <Search size={20} className="text-muted-foreground shrink-0" />
           <input
@@ -94,6 +116,8 @@ export function CommandPalette() {
             type="text"
             className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground text-lg"
             placeholder="Buscar questão, tópico ou comando..."
+            aria-label="Buscar questão, tópico ou comando"
+            aria-controls="command-palette-results"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -104,7 +128,7 @@ export function CommandPalette() {
             </button>
           </div>
         </div>
-        <div className="max-h-[60vh] overflow-y-auto p-2">
+        <div id="command-palette-results" className="max-h-[60vh] overflow-y-auto p-2" aria-live="polite" aria-busy={loading}>
           {query.length === 0 ? (
             <div className="px-3 py-8 text-center text-muted-foreground text-sm">
               Tente buscar por &quot;Cardiologia&quot;, &quot;Simulado USP&quot; ou &quot;Revisão&quot;.

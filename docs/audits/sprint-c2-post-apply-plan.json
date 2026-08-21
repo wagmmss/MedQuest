@@ -1,0 +1,43 @@
+{
+  "database": "C:\\dev\\MedQuest\\app\\backend\\medquest.db",
+  "mode": "dry_run",
+  "operations": {
+    "assign_subtema_ids": [],
+    "disable_critical_questions": [],
+    "mark_explanations_for_human_review": [],
+    "quarantine_critical_questions": [],
+    "synchronize_is_correct": []
+  },
+  "policy": {
+    "automated_fields": [
+      "questions.missing_alts",
+      "questions.status",
+      "questions.subtema_id",
+      "questions.editorial_status",
+      "alternatives.is_correct"
+    ],
+    "medical_review": "human_required",
+    "never_automated": [
+      "questions.stem",
+      "alternatives.text",
+      "explanations.explanation_text",
+      "questions.medical_references",
+      "questions.area",
+      "questions.subtema"
+    ]
+  },
+  "schema_version": "2.0.0",
+  "summary": {
+    "assign_subtema_ids": 0,
+    "critical_questions": 61,
+    "disable_critical_questions": 0,
+    "mark_explanations_for_human_review": 0,
+    "quarantine_critical_questions": 0,
+    "synchronize_is_correct": 0,
+    "unmapped_database_subtemas": 0
+  },
+  "warnings": [
+    "Empty or medically questionable content is quarantined/queued, never generated or rewritten automatically.",
+    "Applying this plan changes operational metadata only and requires a verified backup."
+  ]
+}

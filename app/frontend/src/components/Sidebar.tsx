@@ -48,13 +48,14 @@ export function Sidebar() {
           <p className="font-label-md text-label-md text-on-surface-variant">Preparação USP</p>
         </div>
 
-        <nav className="flex-1 flex flex-col gap-1 overflow-y-auto">
+        <nav className="flex-1 flex flex-col gap-1 overflow-y-auto" aria-label="Navegação principal">
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={isActive ? "page" : undefined}
                 className={clsx(
                   "flex items-center gap-3 py-3 rounded-xl transition-all duration-200",
                   isActive 
@@ -84,6 +85,8 @@ export function Sidebar() {
               onClick={toggleZenMode}
               className="flex items-center justify-center p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors text-left cursor-pointer"
               title={isZenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen (Z)"}
+              aria-label={isZenMode ? "Sair do modo Zen" : "Entrar no modo Zen"}
+              aria-pressed={isZenMode}
             >
               <span className="material-symbols-outlined">{isZenMode ? "fullscreen_exit" : "fullscreen"}</span>
             </button>

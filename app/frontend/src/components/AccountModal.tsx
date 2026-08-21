@@ -85,10 +85,13 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
             exit={{ scale: 0.95, opacity: 0, y: 15 }}
             transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
             className="bg-surface border border-outline-variant rounded-3xl shadow-2xl w-full max-w-md overflow-hidden z-10 flex flex-col relative"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="account-modal-title"
           >
             {/* Header */}
             <div className="flex justify-between items-center px-6 py-4 border-b border-outline-variant bg-surface-container-low">
-              <h2 className="font-headline-sm text-headline-sm font-bold text-on-surface">
+              <h2 id="account-modal-title" className="font-headline-sm text-headline-sm font-bold text-on-surface">
                 {step === "profile" ? "Minha Conta" : "Resetar Progresso"}
               </h2>
               <button
@@ -203,7 +206,7 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                     </div>
 
                     {error && (
-                      <p className="text-error text-body-sm font-semibold flex items-center gap-1.5 justify-center">
+                      <p role="alert" className="text-error text-body-sm font-semibold flex items-center gap-1.5 justify-center">
                         <span className="material-symbols-outlined text-sm" data-icon="error">error</span>
                         {error}
                       </p>
