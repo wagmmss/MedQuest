@@ -1,6 +1,8 @@
 """Acesso ao banco (SQLite / Turso) e criação/evolução de tabelas."""
 import os
 import sqlite3
+import tempfile
+from threading import Lock
 from flask import g
 import logging
 from dotenv import load_dotenv
@@ -14,6 +16,41 @@ BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB_PATH = os.environ.get("MEDQUEST_DB", os.path.join(BACKEND_DIR, "medquest.db"))
 TURSO_URL = os.environ.get("TURSO_DATABASE_URL")
 TURSO_TOKEN = os.environ.get("TURSO_AUTH_TOKEN")
+
+# A direct remote libSQL connection turns every SQL statement into a network
+# round-trip. Several dashboard endpoints issue multiple statements, which is
+# fast enough locally but can exhaust the request timeout on Render. Keep an
+# ephemeral embedded replica per instance so reads are local while libSQL still
+# forwards writes to the Turso primary.
+_replica_init_lock = Lock()
+_initialized_replicas = set()
+
+
+def _connect_turso(turso_url, turso_token):
+    import libsql
+
+    replica_path = os.environ.get(
+        "TURSO_REPLICA_PATH",
+        os.path.join(tempfile.gettempdir(), "medquest-turso-replica.db"),
+    )
+    replica_dir = os.path.dirname(os.path.abspath(replica_path))
+    os.makedirs(replica_dir, exist_ok=True)
+
+    client = libsql.connect(
+        replica_path,
+        sync_url=turso_url,
+        auth_token=turso_token,
+    )
+
+    # Each process bootstraps once. Subsequent request connections reuse the
+    # same replica file and avoid repeatedly downloading it.
+    with _replica_init_lock:
+        if replica_path not in _initialized_replicas:
+            logger.info("Synchronizing Turso embedded replica at %s", replica_path)
+            client.sync()
+            _initialized_replicas.add(replica_path)
+
+    return client
 
 class TursoCursor:
     """Expose DB-API cursor rows as mappings, matching sqlite3.Row usage."""
@@ -87,7 +124,8 @@ class TursoConnection:
             self.tx = False
         
     def close(self):
-        self.rollback()
+        if self.tx:
+            self.rollback()
         self.client.close()
 
 @contextmanager
@@ -117,8 +155,7 @@ def get_db():
         if turso_url and turso_token and not is_testing:
             if not turso_url.lower().startswith(("libsql://", "wss://")):
                 raise ValueError("TURSO_DATABASE_URL must use libsql:// or wss:// for transaction support")
-            import libsql
-            client = libsql.connect(turso_url, auth_token=turso_token)
+            client = _connect_turso(turso_url, turso_token)
             g.db = TursoConnection(client)
         else:
             db_path = os.environ.get("MEDQUEST_DB", os.path.join(BACKEND_DIR, "medquest.db"))
