@@ -4,7 +4,9 @@ pydantic>=2.0
 fsrs>=5.0
 groq
 python-dotenv
-libsql-client
+# api/db.py uses the synchronous `libsql` driver for Turso connections.
+# `libsql-client` exposes a different module name and does not provide it.
+libsql==0.1.11
 PyJWT
 cryptography
 requests

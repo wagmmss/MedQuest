@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { getGuestSession } from "@/lib/session";
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
+const UPSTREAM_TIMEOUT_MS = 15_000;
 
 async function handler(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   const requestId = crypto.randomUUID();
@@ -52,6 +53,7 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
       headers,
       body: req.method !== "GET" && req.method !== "HEAD" ? await req.blob() : undefined,
       redirect: "manual",
+      signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
     });
 
     const responseHeaders = new Headers(response.headers);
@@ -67,8 +69,12 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
     console.error(`[PROXY] request_id=${requestId} upstream failure:`, message);
-    return new NextResponse(JSON.stringify({ error: "Proxy fetch failed", request_id: requestId }), {
-      status: 502,
+    const timedOut = error instanceof DOMException && error.name === "TimeoutError";
+    return new NextResponse(JSON.stringify({
+      error: timedOut ? "Backend request timed out" : "Proxy fetch failed",
+      request_id: requestId,
+    }), {
+      status: timedOut ? 504 : 502,
       headers: { "Content-Type": "application/json", "X-Request-ID": requestId },
     });
   }

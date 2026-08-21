@@ -9,6 +9,7 @@ import {
 export type { QuestionMeta };
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
+const API_REQUEST_TIMEOUT_MS = 15_000;
 
 export function isDynamicServerUsageError(error: unknown): boolean {
   if (!(error instanceof Error)) return false;
@@ -40,12 +41,18 @@ async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<
     response = await fetch(`${BACKEND_URL}${endpoint}`, {
       ...options,
       headers,
+      // A stalled upstream must not leave the App Router streaming its loading
+      // UI forever. Callers can still provide a stricter signal when needed.
+      signal: options?.signal ?? AbortSignal.timeout(API_REQUEST_TIMEOUT_MS),
     });
   } catch (error) {
     if (isDynamicServerUsageError(error)) {
       throw error; // Re-throw to allow Next.js to handle it
     }
     const message = error instanceof Error ? error.message : "Unknown error";
+    if (error instanceof DOMException && error.name === "TimeoutError") {
+      throw new Error(`Backend timeout after ${API_REQUEST_TIMEOUT_MS / 1000}s for ${endpoint}`);
+    }
     throw new Error(`Fetch failed for ${BACKEND_URL}${endpoint}: ${message}`);
   }
 
