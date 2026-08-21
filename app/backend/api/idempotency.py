@@ -18,11 +18,13 @@ class LostLeaseError(RuntimeError):
 
 
 def _owns_lease(db, user_id: str, key: str, lease_token: str, status: str) -> bool:
-    row = db.execute(
+    cursor = db.execute(
         """SELECT 1 AS owned FROM idempotency_keys
            WHERE user_id = ? AND key = ? AND lease_owner_token = ? AND status = ?""",
         (user_id, key, lease_token, status),
-    ).fetchone()
+    )
+    row = cursor.fetchone()
+    cursor.close()
     return row is not None
 
 
@@ -70,10 +72,12 @@ def reserve_idempotency(db, user_id: str, path: str, method: str, raw_payload: b
         return None, _database_unavailable(), None
 
     # 2. Investigar o registro existente
-    existing = db.execute(
+    cursor = db.execute(
         "SELECT status, method, path, payload_hash, status_code, response_body, lease_expires_at FROM idempotency_keys WHERE user_id = ? AND key = ?",
         (user_id, normalized_key)
-    ).fetchone()
+    )
+    existing = cursor.fetchone()
+    cursor.close()
 
     if not existing:
         return None, (jsonify({"error": "Idempotency state changed concurrently; retry the request"}), 409), None
@@ -112,10 +116,12 @@ def reserve_idempotency(db, user_id: str, path: str, method: str, raw_payload: b
         # Aguardar brevemente (polling de até 1.5s) caso a requisição concorrente esteja finalizando
         for _ in range(15):
             time.sleep(0.1)
-            row = db.execute(
+            cursor = db.execute(
                 "SELECT status, status_code, response_body FROM idempotency_keys WHERE user_id = ? AND key = ?",
                 (user_id, normalized_key)
-            ).fetchone()
+            )
+            row = cursor.fetchone()
+            cursor.close()
             if row and row["status"] == "completed" and row["response_body"] is not None:
                 return Response(row["response_body"], status=row["status_code"] or 200, mimetype="application/json"), None, None
 
