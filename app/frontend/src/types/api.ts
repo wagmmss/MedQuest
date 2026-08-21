@@ -311,3 +311,9 @@ export interface FlashcardGenerateResponse {
   front: string;
   back: string;
 }
+
+export interface BatchFlashcardGenerateResponse {
+  success: boolean;
+  count: number;
+  flashcards: FlashcardGenerateResponse[];
+}

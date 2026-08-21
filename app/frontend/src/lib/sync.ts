@@ -355,3 +355,7 @@ export const syncManager = {
     isInitialized = false;
   },
 };
+
+if (typeof window !== "undefined") {
+  (window as unknown as { syncManager?: typeof syncManager }).syncManager = syncManager;
+}

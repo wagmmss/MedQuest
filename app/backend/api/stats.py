@@ -8,7 +8,7 @@ from flask import Blueprint, g, jsonify, request
 from scripts.planner import USP_WEIGHTS, get_normalized_area
 
 from .adaptive import build_learning_profile, fsrs_metrics
-from .db import get_db
+from .db import get_db, db_transaction
 
 bp = Blueprint("stats", __name__)
 
@@ -54,6 +54,17 @@ class SimpleTTLCache:
                 del self.expiry[k]
                 
 overview_cache = SimpleTTLCache(60)
+_area_totals_cache = SimpleTTLCache(300)
+
+def _get_cached_area_totals(db):
+    cached = _area_totals_cache.get("area_totals")
+    if cached is not None:
+        return cached
+    totals = db.execute(
+        "SELECT area, COUNT(*) n FROM questions WHERE area IS NOT NULL AND area != '' GROUP BY area"
+    ).fetchall()
+    _area_totals_cache.set("area_totals", totals)
+    return totals
 
 
 def responsible_streak(days_studied, today, days_per_week=6):
@@ -322,9 +333,7 @@ def recommendations():
                 "cta": "Estudar área", "filters": {"area": r["area"]},
             })
 
-    area_totals = db.execute(
-        "SELECT area, COUNT(*) n FROM questions WHERE area IS NOT NULL AND area != '' GROUP BY area"
-    ).fetchall()
+    area_totals = _get_cached_area_totals(db)
     area_answered = db.execute("""
         SELECT q.area AS area, COUNT(DISTINCT a.question_id) n
         FROM attempts a JOIN questions q ON q.id = a.question_id
@@ -529,13 +538,13 @@ def at_risk():
 def reset_stats():
     db = get_db()
     try:
-        db.execute("DELETE FROM attempts WHERE user_id = ?", (g.user_id,))
-        db.execute("DELETE FROM spaced_repetition WHERE user_id = ?", (g.user_id,))
-        db.execute("DELETE FROM flashcards WHERE user_id = ?", (g.user_id,))
-        db.execute("DELETE FROM planner_progress WHERE user_id = ?", (g.user_id,))
-        db.execute("DELETE FROM favorites WHERE user_id = ?", (g.user_id,))
-        db.execute("DELETE FROM planner_config WHERE user_id = ?", (g.user_id,))
-        db.commit()
+        with db_transaction(db, immediate=True):
+            db.execute("DELETE FROM attempts WHERE user_id = ?", (g.user_id,))
+            db.execute("DELETE FROM spaced_repetition WHERE user_id = ?", (g.user_id,))
+            db.execute("DELETE FROM flashcards WHERE user_id = ?", (g.user_id,))
+            db.execute("DELETE FROM planner_progress WHERE user_id = ?", (g.user_id,))
+            db.execute("DELETE FROM favorites WHERE user_id = ?", (g.user_id,))
+            db.execute("DELETE FROM planner_config WHERE user_id = ?", (g.user_id,))
     except Exception:
         raise
         
@@ -547,14 +556,29 @@ def reset_stats():
 def coverage():
     db = get_db()
     rows = db.execute("""
-        SELECT q.area AS area, q.subtema AS subtema,
-               COUNT(DISTINCT q.id) AS n_questions,
-               COUNT(DISTINCT a.question_id) AS answered,
-               COUNT(a.id) AS attempts, COALESCE(SUM(a.is_correct), 0) AS correct
-        FROM questions q LEFT JOIN attempts a ON a.question_id = q.id AND a.user_id = ?
-        WHERE q.missing_alts = 0 AND q.area IS NOT NULL AND q.area != ''
-              AND q.subtema IS NOT NULL AND q.subtema != ''
-        GROUP BY q.area, q.subtema ORDER BY q.area, n_questions DESC
+        WITH user_agg AS (
+            SELECT q.area, q.subtema,
+                   COUNT(DISTINCT a.question_id) AS answered,
+                   COUNT(a.id) AS attempts,
+                   COALESCE(SUM(a.is_correct), 0) AS correct
+            FROM attempts a
+            JOIN questions q ON q.id = a.question_id
+            WHERE a.user_id = ? AND q.missing_alts = 0 AND q.area IS NOT NULL AND q.area != '' AND q.subtema IS NOT NULL AND q.subtema != ''
+            GROUP BY q.area, q.subtema
+        ),
+        q_totals AS (
+            SELECT area, subtema, COUNT(*) AS n_questions
+            FROM questions
+            WHERE missing_alts = 0 AND area IS NOT NULL AND area != '' AND subtema IS NOT NULL AND subtema != ''
+            GROUP BY area, subtema
+        )
+        SELECT q.area, q.subtema, q.n_questions,
+               COALESCE(u.answered, 0) AS answered,
+               COALESCE(u.attempts, 0) AS attempts,
+               COALESCE(u.correct, 0) AS correct
+        FROM q_totals q
+        LEFT JOIN user_agg u ON q.area = u.area AND q.subtema = u.subtema
+        ORDER BY q.area, q.n_questions DESC
     """, (g.user_id,)).fetchall()
 
     areas = {}

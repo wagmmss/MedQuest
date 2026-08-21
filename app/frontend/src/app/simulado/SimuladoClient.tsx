@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { QuestionMeta, QuestionListItem, QuestionDetail, BatchAttemptItem, BatchAttemptResultItem } from "@/types/api";
+import { QuestionMeta, QuestionListItem, QuestionDetail, BatchAttemptItem, BatchAttemptResultItem, FlashcardGenerateResponse } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
-import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag, CloudOff } from "lucide-react";
+import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag, CloudOff, Sparkles, CheckCircle2 } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
+import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
 import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
@@ -92,6 +94,12 @@ export function SimuladoClient({
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [resultsMap, setResultsMap] = useState<Record<number, BatchAttemptResultItem>>({});
   const [queueId, setQueueId] = useState<string | undefined>(undefined);
+  
+  // Flashcards
+  const [generatingBatchFlashcards, setGeneratingBatchFlashcards] = useState(false);
+  const [batchFlashcardsResult, setBatchFlashcardsResult] = useState<{ count: number } | null>(null);
+  const [questionFlashcardsMap, setQuestionFlashcardsMap] = useState<Record<number, FlashcardGenerateResponse>>({});
+  const [generatingSingleFlashcard, setGeneratingSingleFlashcard] = useState<number | null>(null);
   
   // Marcar para revisar
   const [flagged, setFlagged] = useState<Record<number, boolean>>({});
@@ -345,6 +353,40 @@ export function SimuladoClient({
       submitLockRef.current = false;
     }
   }, [answers]);
+
+  const handleGenerateSingleFlashcard = async (qid: number, wrongLetter: string) => {
+    if (generatingSingleFlashcard) return;
+    setGeneratingSingleFlashcard(qid);
+    try {
+      const res = await api.flashcards.generate(qid, wrongLetter);
+      const qDetail = detailsCache[qid];
+      const normalized = normalizeFlashcard({ ...res, stem: qDetail?.stem || "" });
+      setQuestionFlashcardsMap(prev => ({ ...prev, [qid]: normalized }));
+      toast.success("Flashcard criado e inserido na sua Revisão Ativa!");
+    } catch {
+      toast.error("Erro ao gerar flashcard.");
+    } finally {
+      setGeneratingSingleFlashcard(null);
+    }
+  };
+
+  const handleGenerateAllSimuladoWrongFlashcards = async () => {
+    const wrongItems = queue
+      .filter(q => resultsMap[q.id] && !resultsMap[q.id].is_correct && answers[q.id])
+      .map(q => ({ question_id: q.id, wrong_letter: answers[q.id] }));
+
+    if (wrongItems.length === 0) return;
+    setGeneratingBatchFlashcards(true);
+    try {
+      const res = await api.flashcards.generateBatch(wrongItems);
+      setBatchFlashcardsResult({ count: res.count });
+      toast.success(`${res.count} flashcard(s) criado(s) e adicionado(s) à Revisão Ativa!`);
+    } catch {
+      toast.error("Erro ao gerar flashcards em lote.");
+    } finally {
+      setGeneratingBatchFlashcards(false);
+    }
+  };
 
   const submitSimuladoRef = useRef(submitSimulado);
   useEffect(() => {
@@ -966,6 +1008,50 @@ export function SimuladoClient({
               </div>
             </div>
 
+            {queue.filter(q => resultsMap[q.id] && !resultsMap[q.id].is_correct && answers[q.id]).length > 0 && (
+              <div className="w-full max-w-2xl bg-purple-500/10 border border-purple-500/25 rounded-xl p-6 mb-8 text-left animate-in slide-in-from-bottom-2">
+                <div className="flex items-center gap-2 text-purple-600 font-bold text-base mb-2">
+                  <Sparkles size={20} />
+                  Revisão Ativa & Flashcards das Erradas
+                </div>
+                <p className="text-sm text-foreground/80 leading-relaxed mb-4">
+                  Você errou <strong className="text-foreground">{queue.filter(q => resultsMap[q.id] && !resultsMap[q.id].is_correct && answers[q.id]).length}</strong> questões neste simulado. Converta seus erros em flashcards com 1 clique para praticar repetição espaçada (FSRS).
+                </p>
+
+                {batchFlashcardsResult ? (
+                  <div className="flex flex-col sm:flex-row items-center gap-3">
+                    <div className="flex-1 bg-success/15 border border-success/30 text-success font-semibold px-4 py-2.5 rounded-xl text-sm flex items-center gap-2">
+                      <CheckCircle2 size={18} /> {batchFlashcardsResult.count} flashcard(s) adicionado(s) à Revisão Ativa!
+                    </div>
+                    <Link
+                      href="/revisao-ativa"
+                      className="bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm flex items-center gap-2 shrink-0"
+                    >
+                      <Sparkles size={16} /> Praticar Flashcards
+                    </Link>
+                  </div>
+                ) : (
+                  <button
+                    onClick={handleGenerateAllSimuladoWrongFlashcards}
+                    disabled={generatingBatchFlashcards}
+                    className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer text-sm"
+                  >
+                    {generatingBatchFlashcards ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Gerando Flashcards dos seus Erros...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles size={18} />
+                        Gerar Flashcards de Todas as Erradas ({queue.filter(q => resultsMap[q.id] && !resultsMap[q.id].is_correct && answers[q.id]).length})
+                      </>
+                    )}
+                  </button>
+                )}
+              </div>
+            )}
+
             <button 
               onClick={() => setShowResultsSummary(false)}
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-lg transition-all shadow-lg hover:-translate-y-0.5 flex items-center gap-2"
@@ -1211,6 +1297,51 @@ export function SimuladoClient({
                           <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-2">Referências e Diretrizes</h4>
                           <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 p-4 rounded-lg">
                             {qDetail.medical_references}
+                          </div>
+                        </div>
+                      )}
+
+                      {!resultsMap[qDetail.id].is_correct && answers[qDetail.id] && !questionFlashcardsMap[qDetail.id] && (
+                        <div className="mt-6 pt-5 border-t border-border">
+                          <button
+                            onClick={() => handleGenerateSingleFlashcard(qDetail.id, answers[qDetail.id])}
+                            disabled={generatingSingleFlashcard === qDetail.id}
+                            className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-sm transition-all disabled:opacity-50 cursor-pointer text-sm"
+                          >
+                            {generatingSingleFlashcard === qDetail.id ? (
+                              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            ) : (
+                              <Sparkles size={16} />
+                            )}
+                            {generatingSingleFlashcard === qDetail.id ? "Gerando Flashcard..." : "Gerar Flashcard desta Questão"}
+                          </button>
+                        </div>
+                      )}
+
+                      {questionFlashcardsMap[qDetail.id] && (
+                        <div className="mt-6 bg-purple-500/10 border border-purple-500/25 rounded-2xl p-5 animate-in slide-in-from-bottom-2 text-left">
+                          <div className="flex items-center justify-between gap-2 mb-3">
+                            <div className="flex items-center gap-2 text-purple-600 font-bold text-sm">
+                              <Sparkles size={16} /> Flashcard Salvo na Revisão Ativa!
+                            </div>
+                            <Link 
+                              href="/revisao-ativa"
+                              className="text-xs font-bold text-purple-600 hover:underline flex items-center gap-1"
+                            >
+                              Ir para Revisão Ativa →
+                            </Link>
+                          </div>
+                          <div className="text-foreground text-sm space-y-2">
+                            <div className="font-medium bg-background p-3.5 rounded-lg border border-border leading-relaxed whitespace-pre-line text-sm">
+                              <span className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Frente:</span>
+                              {questionFlashcardsMap[qDetail.id].front}
+                            </div>
+                            {questionFlashcardsMap[qDetail.id].back && (
+                              <div className="text-muted-foreground bg-background p-3.5 rounded-lg border border-border leading-relaxed whitespace-pre-line text-sm">
+                                <span className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Verso:</span>
+                                {questionFlashcardsMap[qDetail.id].back}
+                              </div>
+                            )}
                           </div>
                         </div>
                       )}

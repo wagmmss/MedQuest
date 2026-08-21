@@ -176,3 +176,7 @@ export class MedQuestDB extends Dexie {
 }
 
 export const localDb = typeof window !== "undefined" ? new MedQuestDB() : (null as unknown as MedQuestDB);
+
+if (typeof window !== "undefined" && localDb) {
+  (window as unknown as { localDb?: MedQuestDB }).localDb = localDb;
+}

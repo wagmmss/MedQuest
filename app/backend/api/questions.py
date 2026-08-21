@@ -78,7 +78,8 @@ def _sample_ids(db, where_clause, params, limit):
     effective_limit = min(limit, n)
     # Se a tabela é densa o suficiente, amostragem por faixa é eficiente
     if n > 0 and (hi - lo + 1) / n < 5:
-        candidates = random.sample(range(lo, hi + 1), min(effective_limit * 3, hi - lo + 1))
+        sample_size = min(effective_limit * 3, hi - lo + 1, 900)
+        candidates = random.sample(range(lo, hi + 1), sample_size)
         placeholders = ",".join("?" * len(candidates))
         rows = db.execute(
             f"SELECT q.id FROM questions q WHERE q.id IN ({placeholders}) AND {where_clause} LIMIT ?",
@@ -813,37 +814,3 @@ def serve_image(filename):
     backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     static_dir = os.path.join(backend_dir, "static")
     return send_from_directory(static_dir, filename)
-
-@bp.route("/questions/<int:qid>/explain", methods=["GET"])
-@bp.route("/<int:qid>/explain", methods=["GET"])
-def explain_question(qid):
-    db = get_db()
-    # Check if there's a recent attempt to get the wrong text
-    last_attempt = db.execute(
-        "SELECT selected_letter, is_correct FROM attempts WHERE question_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1",
-        (qid, g.user_id)
-    ).fetchone()
-
-    q_row = db.execute("SELECT stem, correct_letter FROM questions WHERE id = ?", (qid,)).fetchone()
-    if not q_row:
-        return jsonify({"error": "Question not found"}), 404
-
-    correct_letter = q_row["correct_letter"]
-    correct_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (qid, correct_letter)).fetchone()
-    correct_text = correct_alt["text"] if correct_alt else ""
-    wrong_text = None
-    
-    if last_attempt and last_attempt["is_correct"] == 0:
-        wrong_letter = last_attempt["selected_letter"]
-        wrong_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (qid, wrong_letter)).fetchone()
-        wrong_text = wrong_alt["text"] if wrong_alt else None
-
-    def generate():
-        # SSE standard format
-        for chunk in ai.stream_explanation(q_row["stem"], correct_text, wrong_text):
-            # Envia o chunk empacotado em JSON para que o cliente processe facilmente
-            data = json.dumps({"text": chunk})
-            yield f"data: {data}\n\n"
-        yield "data: [DONE]\n\n"
-
-    return Response(stream_with_context(generate()), mimetype='text/event-stream')

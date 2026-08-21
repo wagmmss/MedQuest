@@ -1,10 +1,12 @@
+import re
 from datetime import datetime, timezone
 
 from flask import Blueprint, g, jsonify, request
 
 from . import srs
 from .ai import generate_cloze_flashcard
-from .db import get_db
+from .db import db_transaction, get_db
+from .questions import invalidate_user_caches
 
 bp = Blueprint("flashcards", __name__)
 
@@ -20,7 +22,7 @@ def generate():
     db = get_db()
     
     # Busca a questao, a alternativa correta e a explicacao
-    q = db.execute("SELECT stem, correct_letter FROM questions WHERE id = ?", (question_id,)).fetchone()
+    q = db.execute("SELECT stem, correct_letter, area, subtema, topic FROM questions WHERE id = ?", (question_id,)).fetchone()
     if not q:
         return jsonify({"error": "Questao nao encontrada."}), 404
         
@@ -31,45 +33,203 @@ def generate():
     if not correct_alt or not wrong_alt:
         return jsonify({"error": "Alternativas nao encontradas."}), 404
 
-    # Chama a IA
+    # Extrai/Gera o Cloze Flashcard com contexto médico estruturado
     card_data = generate_cloze_flashcard(
         stem=q["stem"], 
-        correct_text=f"{q['correct_letter']}) {correct_alt['text']}", 
-        wrong_text=f"{wrong_letter}) {wrong_alt['text']}", 
-        explanation=exp["explanation_text"] if exp else ""
+        correct_text=correct_alt["text"], 
+        wrong_text=wrong_alt["text"], 
+        explanation=exp["explanation_text"] if exp else "",
+        area=q["area"] or "",
+        subtema=q["subtema"] or "",
+        topic=q["topic"] or "",
+        correct_letter=q["correct_letter"],
+        wrong_letter=wrong_letter
     )
 
     now = datetime.now(timezone.utc).isoformat()
-    # Initial FSRS parameters for a new card: just set next_review_date to now
-    cursor = db.execute("""
-        INSERT INTO flashcards (question_id, front, back, created_at, next_review_date, fsrs_card, user_id, source_context, is_ai_generated)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)
-    """, (question_id, card_data.get("front", ""), card_data.get("back", ""), now, now, None, g.user_id, card_data.get("context", "")))
-    
-    db.commit()
-
+    with db_transaction(db, immediate=True):
+        existing = db.execute("SELECT id FROM flashcards WHERE question_id = ? AND user_id = ?", (question_id, g.user_id)).fetchone()
+        if existing:
+            db.execute("""
+                UPDATE flashcards
+                SET front = ?, back = ?, source_context = ?, next_review_date = ?
+                WHERE id = ? AND user_id = ?
+            """, (card_data.get("front", ""), card_data.get("back", ""), card_data.get("context", ""), now, existing["id"], g.user_id))
+            card_id = existing["id"]
+        else:
+            cursor = db.execute("""
+                INSERT INTO flashcards (question_id, front, back, created_at, next_review_date, fsrs_card, user_id, source_context, is_ai_generated)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)
+            """, (question_id, card_data.get("front", ""), card_data.get("back", ""), now, now, None, g.user_id, card_data.get("context", "")))
+            card_id = cursor.lastrowid
+        
+    invalidate_user_caches(g.user_id)
     return jsonify({
-        "id": cursor.lastrowid,
+        "id": card_id,
         "question_id": question_id,
         "front": card_data.get("front", ""),
-        "back": card_data.get("back", "")
+        "back": card_data.get("back", ""),
+        "context": card_data.get("context", "")
     })
+
+
+@bp.route("/flashcards/generate-batch", methods=["POST"])
+def generate_batch():
+    data = request.get_json() or {}
+    items = data.get("items", [])
+    if not isinstance(items, list) or len(items) == 0:
+        return jsonify({"error": "Lista de itens obrigatoria."}), 400
+
+    items = items[:50]
+    db = get_db()
+    now = datetime.now(timezone.utc).isoformat()
+    created_or_updated = []
+
+    with db_transaction(db, immediate=True):
+        for item in items:
+            qid = item.get("question_id")
+            wrong_letter = str(item.get("wrong_letter", "")).upper()
+            if not qid or not wrong_letter:
+                continue
+
+            q = db.execute("SELECT stem, correct_letter, area, subtema, topic FROM questions WHERE id = ?", (qid,)).fetchone()
+            if not q:
+                continue
+
+            correct_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (qid, q["correct_letter"])).fetchone()
+            wrong_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (qid, wrong_letter)).fetchone()
+            exp = db.execute("SELECT explanation_text FROM explanations WHERE question_id = ?", (qid,)).fetchone()
+            if not correct_alt or not wrong_alt:
+                continue
+
+            card_data = generate_cloze_flashcard(
+                stem=q["stem"],
+                correct_text=correct_alt["text"],
+                wrong_text=wrong_alt["text"],
+                explanation=exp["explanation_text"] if exp else "",
+                area=q["area"] or "",
+                subtema=q["subtema"] or "",
+                topic=q["topic"] or "",
+                correct_letter=q["correct_letter"],
+                wrong_letter=wrong_letter
+            )
+
+            existing = db.execute("SELECT id FROM flashcards WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
+            if existing:
+                db.execute("""
+                    UPDATE flashcards
+                    SET front = ?, back = ?, source_context = ?, next_review_date = ?
+                    WHERE id = ? AND user_id = ?
+                """, (card_data.get("front", ""), card_data.get("back", ""), card_data.get("context", ""), now, existing["id"], g.user_id))
+                created_or_updated.append({
+                    "id": existing["id"],
+                    "question_id": qid,
+                    "front": card_data.get("front", ""),
+                    "back": card_data.get("back", "")
+                })
+            else:
+                cursor = db.execute("""
+                    INSERT INTO flashcards (question_id, front, back, created_at, next_review_date, fsrs_card, user_id, source_context, is_ai_generated)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)
+                """, (qid, card_data.get("front", ""), card_data.get("back", ""), now, now, None, g.user_id, card_data.get("context", "")))
+                created_or_updated.append({
+                    "id": cursor.lastrowid,
+                    "question_id": qid,
+                    "front": card_data.get("front", ""),
+                    "back": card_data.get("back", "")
+                })
+
+    invalidate_user_caches(g.user_id)
+    return jsonify({
+        "success": True,
+        "count": len(created_or_updated),
+        "flashcards": created_or_updated
+    })
+
+
+def _bounded_int(value, default, minimum, maximum):
+    try:
+        parsed = int(value)
+    except (TypeError, ValueError):
+        return default
+    return max(minimum, min(parsed, maximum))
 
 
 @bp.route("/flashcards/review", methods=["GET"])
 def get_due_flashcards():
     db = get_db()
     now = datetime.now(timezone.utc).isoformat()
-    # Pega ate 50 cards vencidos
-    rows = db.execute("""
-        SELECT f.id, f.question_id, f.front, f.back, f.next_review_date, q.stem, f.is_ai_generated
-        FROM flashcards f
-        JOIN questions q ON f.question_id = q.id
-        WHERE f.next_review_date <= ? AND f.user_id = ?
-        ORDER BY f.next_review_date ASC LIMIT 50
-    """, (now, g.user_id)).fetchall()
-    
-    return jsonify([dict(r) for r in rows])
+    include_all = request.args.get("all", "false").lower() == "true"
+    limit = _bounded_int(request.args.get("limit"), 50, 1, 100)
+
+    if include_all:
+        rows = db.execute("""
+            SELECT f.id, f.question_id, f.front, f.back, f.next_review_date, q.stem, f.is_ai_generated
+            FROM flashcards f
+            JOIN questions q ON f.question_id = q.id
+            WHERE f.user_id = ?
+            ORDER BY f.next_review_date ASC LIMIT ?
+        """, (g.user_id, limit)).fetchall()
+    else:
+        rows = db.execute("""
+            SELECT f.id, f.question_id, f.front, f.back, f.next_review_date, q.stem, f.is_ai_generated
+            FROM flashcards f
+            JOIN questions q ON f.question_id = q.id
+            WHERE f.next_review_date <= ? AND f.user_id = ?
+            ORDER BY f.next_review_date ASC LIMIT ?
+        """, (now, g.user_id, limit)).fetchall()
+
+    items = []
+    for r in rows:
+        item = dict(r)
+        front = item.get("front", "")
+        back = item.get("back", "")
+        stem = item.get("stem", "")
+
+        if (
+            "A alternativa correta era" in front
+            or front.startswith("Neste caso clínico, em vez de")
+            or front.startswith("Para este quadro clínico,")
+        ):
+            cloze_match = re.search(r'{{c1::(.*?)}}', front)
+            term = cloze_match.group(1) if cloze_match else ""
+            term = re.sub(r'^[A-Ea-e][\)\.\:\-]\s*', '', term).strip()
+
+            wrong_match = re.search(r"Você marcou\s*['\"](.*?)['\"]", back, re.IGNORECASE) or re.search(r"em vez de\s*[\"'](.*?)[\"']", back, re.IGNORECASE)
+            wrong_term = re.sub(r'^[A-Ea-e][\)\.\:\-]\s*', '', wrong_match.group(1)).strip() if wrong_match else ""
+
+            scenario = ""
+            if stem:
+                scenario = re.sub(r'\s+', ' ', stem.strip())
+                end_match = re.search(
+                    r'(?:Diante disso|Diante do exposto|Diante desse quadro|Nesse momento|Nesse caso|Considerando o caso|Em relação ao caso|Sobre o caso descrito|Qual a conduta|Qual o diagnóstico|Qual é o diagnóstico|A melhor conduta|A conduta mais adequada|O diagnóstico mais provável).*$',
+                    scenario,
+                    re.IGNORECASE
+                )
+                if end_match and end_match.start() > 30:
+                    scenario = scenario[:end_match.start()].strip()
+                scenario = re.sub(r'[\s,;:]+$', '', scenario).strip()
+                if scenario and not scenario.endswith('.'):
+                    scenario += '.'
+
+            tag = "[Caso Clínico / Conduta]"
+            item["front"] = (
+                f"{tag} {scenario}\n\n👉 Diagnóstico / Conduta indicada: {{{{c1::{term}}}}}"
+                if scenario and len(scenario) > 20
+                else f"{tag}\n\n👉 Diagnóstico / Conduta indicada: {{{{c1::{term}}}}}"
+            )
+            if back.startswith("Você marcou") or back.startswith("Alternativa correta:"):
+                item["back"] = (
+                    f"💡 Gabarito Oficial:\n{term}\n\n⚠️ Atenção ao distrator:\nA opção '{wrong_term}' é incorreta para este quadro clínico."
+                    if wrong_term
+                    else f"💡 Gabarito Oficial:\n{term}"
+                )
+        else:
+            item["front"] = re.sub(r'{{c1::[A-Ea-e][\)\.\:\-]\s*(.*?)}}', r'{{c1::\1}}', front)
+
+        items.append(item)
+
+    return jsonify(items)
 
 
 @bp.route("/flashcards/<int:fid>/review", methods=["POST"])
@@ -89,12 +249,14 @@ def review_flashcard(fid):
 
     card_json, next_review = srs.review(card["fsrs_card"], is_correct, confidence if is_correct else "chutei")
     
-    db.execute("""
-        UPDATE flashcards 
-        SET next_review_date = ?, fsrs_card = ? 
-        WHERE id = ? AND user_id = ?
-    """, (next_review, card_json, fid, g.user_id))
-    db.commit()
+    with db_transaction(db, immediate=True):
+        db.execute("""
+            UPDATE flashcards 
+            SET next_review_date = ?, fsrs_card = ? 
+            WHERE id = ? AND user_id = ?
+        """, (next_review, card_json, fid, g.user_id))
+
+    invalidate_user_caches(g.user_id)
 
     return jsonify({
         "id": fid,
@@ -117,12 +279,12 @@ def report_flashcard(fid):
         return jsonify({"error": "Flashcard nao encontrado."}), 404
 
     try:
-        db.execute("""
-            UPDATE flashcards 
-            SET report_status = ? 
-            WHERE id = ? AND user_id = ?
-        """, (reason, fid, g.user_id))
-        db.commit()
+        with db_transaction(db, immediate=True):
+            db.execute("""
+                UPDATE flashcards 
+                SET report_status = ? 
+                WHERE id = ? AND user_id = ?
+            """, (reason, fid, g.user_id))
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

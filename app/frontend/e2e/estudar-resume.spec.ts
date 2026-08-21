@@ -105,3 +105,60 @@ test('mostra erro recuperável quando uma questão falha ao carregar', async ({ 
 
   await expect(page.getByText('Qual o tratamento inicial')).toBeVisible();
 });
+
+test('remove botão de IA e permite gerar flashcard após erro', async ({ page, context }) => {
+  await context.addCookies([{ name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' }]);
+  
+  let flashcardGenerated = false;
+  await page.route('**/api/**', async route => {
+    const path = new URL(route.request().url()).pathname;
+    if (path.endsWith('/api/meta')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(META) });
+    }
+    if (path.endsWith('/api/questions/1/attempt')) {
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ is_correct: false, correct_letter: 'B', explanation: 'Tratamento individualizado.', next_review_date: null }),
+      });
+    }
+    if (path.endsWith('/api/flashcards/generate')) {
+      flashcardGenerated = true;
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          id: 42,
+          question_id: 1,
+          front: 'Neste caso clínico, a conduta indicada é {{c1::Mudança de estilo de vida}}.',
+          back: 'Tratamento individualizado.'
+        })
+      });
+    }
+    if (path.endsWith('/api/questions/1')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(QUESTION) });
+    }
+    if (path.endsWith('/api/questions')) {
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify([{ id: 1, institution_code: 'USP', year: 2025, area: 'Clínica Médica', subtema: 'HAS', topic: 'HAS' }]) });
+    }
+    return route.fulfill({ status: 200, contentType: 'application/json', body: '{}' });
+  });
+
+  await page.goto('/estudar?area=Cl%C3%ADnica+M%C3%A9dica', { waitUntil: 'domcontentloaded' });
+  // Clica na alternativa errada (A)
+  await page.getByRole('button', { name: /Internação imediata/ }).click();
+  await page.getByRole('button', { name: 'Confirmar Resposta' }).click();
+
+  // Verifica que o botão de explicar com IA NÃO existe
+  await expect(page.getByRole('button', { name: /Explicar com IA/i })).not.toBeVisible();
+
+  // Verifica e clica no botão de gerar flashcard
+  const flashcardBtn = page.getByRole('button', { name: /Gerar Flashcard/i });
+  await expect(flashcardBtn).toBeVisible();
+  await flashcardBtn.click();
+
+  // Verifica que o flashcard foi gerado e exibido
+  await expect(page.getByText('Flashcard Salvo na Revisão Ativa!')).toBeVisible();
+  await expect(page.getByText(/conduta indicada é/i)).toBeVisible();
+  expect(flashcardGenerated).toBe(true);
+});

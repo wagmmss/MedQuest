@@ -7,7 +7,9 @@ import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 
 import { ImageViewer } from "@/components/ImageViewer";
 import { useZenMode } from "@/hooks/useZenMode";
@@ -93,6 +95,8 @@ export function QuizClient({
   const [submitting, setSubmitting] = useState(false);
   const [generatingFlashcard, setGeneratingFlashcard] = useState(false);
   const [flashcardResult, setFlashcardResult] = useState<FlashcardGenerateResponse | null>(null);
+  const [generatingBatchFlashcards, setGeneratingBatchFlashcards] = useState(false);
+  const [batchFlashcardsResult, setBatchFlashcardsResult] = useState<{ count: number } | null>(null);
   
   // Timer State
   const [timeSpent, setTimeSpent] = useState(0);
@@ -106,13 +110,7 @@ export function QuizClient({
   // Image Modal
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
 
-  // AI Explanation Stream
-  const [aiExplanation, setAiExplanation] = useState<string>("");
-  const [isExplaining, setIsExplaining] = useState(false);
-
-  // Confidence
-
-  const [detailsCache, setDetailsCache] = useState<Record<number, QuestionDetail>>({});
+  const [, setDetailsCache] = useState<Record<number, QuestionDetail>>({});
   const detailsCacheRef = useRef<Record<number, QuestionDetail>>({});
   const prefetchingRef = useRef<Set<number>>(new Set());
 
@@ -129,8 +127,6 @@ export function QuizClient({
     setSelectedLetter(null);
     setIsOfflineSaved(false);
     setFlashcardResult(null);
-    setAiExplanation("");
-    setIsExplaining(false);
     setTimeSpent(0);
 
     // Se já estiver no cache, carrega instantaneamente sem tela de loading
@@ -184,7 +180,7 @@ export function QuizClient({
           prefetchingRef.current.delete(nextId);
         });
     }
-  }, [state, queue, currentIndex, detailsCache]);
+  }, [state, queue, currentIndex]);
 
   const loadQueue = useCallback(async (activeFilters: Record<string, string | string[]>) => {
     setState("LOADING_QUEUE");
@@ -391,52 +387,31 @@ export function QuizClient({
     setGeneratingFlashcard(true);
     try {
       const res = await api.flashcards.generate(currentDetail.id, selectedLetter);
-      setFlashcardResult(res);
+      const normalized = normalizeFlashcard({ ...res, stem: currentDetail.stem });
+      setFlashcardResult(normalized);
+      toast.success("Flashcard criado e inserido na sua Revisão Ativa!");
     } catch {
-      toast.error("Erro ao gerar flashcard com IA.");
+      toast.error("Erro ao gerar flashcard.");
     } finally {
       setGeneratingFlashcard(false);
     }
   };
 
-  const handleExplain = async () => {
-    if (!currentDetail) return;
-    setIsExplaining(true);
-    setAiExplanation("");
+  const handleGenerateAllWrongFlashcards = async () => {
+    const wrongItems = Object.entries(sessionAnswers)
+      .filter(([_, ans]) => ans.result && !ans.result.is_correct)
+      .map(([qid, ans]) => ({ question_id: Number(qid), wrong_letter: ans.letter }));
+
+    if (wrongItems.length === 0) return;
+    setGeneratingBatchFlashcards(true);
     try {
-      // Usamos fetch nativo porque a lib apiFetch geralmente espera JSON e não stream
-      const response = await fetch(`/api/questions/${currentDetail.id}/explain`);
-      if (!response.body) throw new Error("No body returned");
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder("utf-8");
-      let buffer = "";
-
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        
-        buffer += decoder.decode(value, { stream: true });
-        const parts = buffer.split('\n\n');
-        buffer = parts.pop() || "";
-        
-        for (const part of parts) {
-          if (part.startsWith('data: ')) {
-            const dataStr = part.slice(6);
-            if (dataStr === '[DONE]') break;
-            try {
-              const data = JSON.parse(dataStr);
-              if (data.text) {
-                setAiExplanation(prev => prev + data.text);
-              }
-            } catch {}
-          }
-        }
-      }
+      const res = await api.flashcards.generateBatch(wrongItems);
+      setBatchFlashcardsResult({ count: res.count });
+      toast.success(`${res.count} flashcard(s) criado(s) e adicionado(s) à Revisão Ativa!`);
     } catch {
-      toast.error("Erro ao carregar explicação com IA.");
+      toast.error("Erro ao gerar flashcards em lote.");
     } finally {
-      setIsExplaining(false);
+      setGeneratingBatchFlashcards(false);
     }
   };
 
@@ -792,23 +767,80 @@ export function QuizClient({
   }
 
   if (state === "FINISHED") {
+    const totalAnswered = Object.keys(sessionAnswers).length;
+    const correctCount = Object.values(sessionAnswers).filter(a => a.result?.is_correct).length;
+    const wrongItems = Object.entries(sessionAnswers)
+      .filter(([_, ans]) => ans.result && !ans.result.is_correct)
+      .map(([qid, ans]) => ({ question_id: Number(qid), wrong_letter: ans.letter }));
+    const accuracy = totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
+
     return (
-      <div className="bg-card border border-border shadow-1 rounded-xl p-10 max-w-2xl mx-auto w-full text-center">
+      <div className="bg-card border border-border shadow-1 rounded-2xl p-8 md:p-10 max-w-2xl mx-auto w-full text-center flex flex-col items-center animate-in zoom-in-95 duration-300">
         <div className="w-20 h-20 bg-success/20 text-success rounded-full flex items-center justify-center mx-auto mb-6">
           <CheckCircle2 size={40} />
         </div>
-        <h2 className="text-2xl font-bold text-foreground mb-3">
+        <h2 className="text-2xl md:text-3xl font-black text-foreground mb-3 tracking-tight">
           {studyMode === "TUTOR" ? "Sessão Concluída!" : "Simulado Concluído!"}
         </h2>
-        <p className="text-muted-foreground mb-8">
-          {studyMode === "TUTOR" ? "Você terminou de responder todas as questões desta sessão." : "Você terminou todas as questões da fila."}
+        <p className="text-muted-foreground text-base md:text-lg mb-6">
+          Você respondeu <strong className="text-foreground">{totalAnswered}</strong> {totalAnswered === 1 ? 'questão' : 'questões'} com <strong className="text-primary">{accuracy}%</strong> de acerto ({correctCount} acertos).
         </p>
-        <button 
-          onClick={() => setState("FILTERS")}
-          className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-2.5 px-6 rounded-md transition-colors cursor-pointer"
-        >
-          Voltar para Filtros
-        </button>
+
+        {wrongItems.length > 0 && (
+          <div className="w-full bg-purple-500/10 border border-purple-500/25 rounded-2xl p-6 mb-8 text-left animate-in slide-in-from-bottom-2">
+            <div className="flex items-center gap-2.5 text-purple-600 font-bold text-base mb-2">
+              <Sparkles size={20} />
+              Revisão Ativa & Repetição Espaçada (FSRS)
+            </div>
+            <p className="text-sm text-foreground/80 leading-relaxed mb-5">
+              Você errou <strong className="text-foreground">{wrongItems.length}</strong> {wrongItems.length === 1 ? 'questão' : 'questões'} nesta sessão. Transforme seus erros em flashcards com 1 clique para consolidar a memória e não esquecer mais.
+            </p>
+            
+            {batchFlashcardsResult ? (
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <div className="flex-1 bg-success/15 border border-success/30 text-success font-semibold px-4 py-2.5 rounded-xl text-sm flex items-center gap-2">
+                  <CheckCircle2 size={18} /> {batchFlashcardsResult.count} flashcard(s) adicionado(s) à Revisão Ativa!
+                </div>
+                <Link
+                  href="/revisao-ativa"
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm flex items-center gap-2 shrink-0"
+                >
+                  <Sparkles size={16} /> Praticar Flashcards
+                </Link>
+              </div>
+            ) : (
+              <button
+                onClick={handleGenerateAllWrongFlashcards}
+                disabled={generatingBatchFlashcards}
+                className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+              >
+                {generatingBatchFlashcards ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Gerando Flashcards dos seus Erros...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles size={18} />
+                    Gerar Flashcards de Todas as Erradas ({wrongItems.length})
+                  </>
+                )}
+              </button>
+            )}
+          </div>
+        )}
+
+        <div className="flex flex-wrap items-center justify-center gap-3 w-full">
+          <button 
+            onClick={() => {
+              setBatchFlashcardsResult(null);
+              setState("FILTERS");
+            }}
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-xl transition-colors cursor-pointer text-sm shadow-md"
+          >
+            Nova Sessão de Estudos
+          </button>
+        </div>
       </div>
     );
   }
@@ -1170,56 +1202,48 @@ export function QuizClient({
                     </div>
                   ) : null}
                   
-                  {/* AI Explanation Stream Area */}
-                  {aiExplanation && (
-                    <div className="mt-6 p-5 bg-primary/5 border border-primary/20 rounded-xl">
-                      <h4 className="text-sm font-bold text-primary flex items-center gap-2 mb-3">
-                        <Sparkles size={16} /> Resposta do Tutor de IA
-                      </h4>
-                      <div className="text-foreground leading-relaxed whitespace-pre-wrap">
-                        {aiExplanation}
-                        {isExplaining && <span className="inline-block w-2 h-4 bg-primary ml-1 animate-pulse" />}
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    {!aiExplanation && !isExplaining && (
-                      <button 
-                        onClick={handleExplain}
-                        className="flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary/20 font-bold py-2 px-4 rounded-lg shadow-sm transition-all"
-                      >
-                        <Sparkles size={18} />
-                        Explicar com IA
-                      </button>
-                    )}
-                    
-                    {!attemptResult.is_correct && !flashcardResult && (
+                  {!attemptResult.is_correct && !flashcardResult && (
+                    <div className="mt-6">
                       <button 
                         onClick={handleGenerateFlashcard}
                         disabled={generatingFlashcard}
-                        className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow-sm transition-all disabled:opacity-50"
+                        className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-sm transition-all disabled:opacity-50 cursor-pointer text-sm"
                       >
                         {generatingFlashcard ? (
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                         ) : (
-                          <Sparkles size={18} />
+                          <Sparkles size={16} />
                         )}
-                        {generatingFlashcard ? "Analisando seu erro..." : "Gerar Flashcard"}
+                        {generatingFlashcard ? "Gerando Flashcard do Erro..." : "Gerar Flashcard desta Questão"}
                       </button>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   {flashcardResult && (
-                    <div className="mt-6 bg-purple-500/10 border border-purple-500/20 rounded-xl p-5">
-                      <div className="flex items-center gap-2 text-purple-500 font-bold mb-3">
-                        <Sparkles size={18} /> Flashcard Salvo com Sucesso!
+                    <div className="mt-6 bg-purple-500/10 border border-purple-500/25 rounded-2xl p-5 animate-in slide-in-from-bottom-2">
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <div className="flex items-center gap-2 text-purple-600 font-bold text-sm">
+                          <Sparkles size={16} /> Flashcard Salvo na Revisão Ativa!
+                        </div>
+                        <Link 
+                          href="/revisao-ativa"
+                          className="text-xs font-bold text-purple-600 hover:underline flex items-center gap-1"
+                        >
+                          Ir para Revisão Ativa →
+                        </Link>
                       </div>
                       <div className="text-foreground text-sm space-y-2">
-                        <p className="font-medium bg-background p-3 rounded border border-border">Frente: {flashcardResult.front}</p>
-                        {flashcardResult.back && <p className="text-muted-foreground bg-background p-3 rounded border border-border">Verso: {flashcardResult.back}</p>}
+                        <div className="font-medium bg-background p-3.5 rounded-lg border border-border leading-relaxed whitespace-pre-line text-sm">
+                          <span className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Frente:</span>
+                          {flashcardResult.front}
+                        </div>
+                        {flashcardResult.back && (
+                          <div className="text-muted-foreground bg-background p-3.5 rounded-lg border border-border leading-relaxed whitespace-pre-line text-sm">
+                            <span className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Verso:</span>
+                            {flashcardResult.back}
+                          </div>
+                        )}
                       </div>
-                      <p className="text-xs text-muted-foreground mt-3">Ele foi automaticamente inserido na sua pilha de Revisão Ativa.</p>
                     </div>
                   )}
 

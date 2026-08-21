@@ -60,14 +60,13 @@ def reserve_idempotency(db, user_id: str, path: str, method: str, raw_payload: b
 
     # INSERT OR IGNORE has the same conflict semantics on SQLite and libSQL.
     try:
-        cursor = db.execute(
-            """INSERT OR IGNORE INTO idempotency_keys (user_id, key, method, path, payload_hash, status, status_code, response_body, lease_expires_at, lease_owner_token, created_at)
-               VALUES (?, ?, ?, ?, ?, 'processing', 0, '', ?, ?, ?)""",
-            (user_id, normalized_key, method, path, payload_hash, lease_expires_at, lease_owner_token, created_at)
-        )
-        cursor.close()
-        reserved = _owns_lease(db, user_id, normalized_key, lease_owner_token, "processing")
-        db.commit()
+        with db_transaction(db, immediate=True):
+            db.execute(
+                """INSERT OR IGNORE INTO idempotency_keys (user_id, key, method, path, payload_hash, status, status_code, response_body, lease_expires_at, lease_owner_token, created_at)
+                   VALUES (?, ?, ?, ?, ?, 'processing', 0, '', ?, ?, ?)""",
+                (user_id, normalized_key, method, path, payload_hash, lease_expires_at, lease_owner_token, created_at)
+            )
+            reserved = _owns_lease(db, user_id, normalized_key, lease_owner_token, "processing")
         if reserved:
             return None, None, lease_owner_token
     except Exception:
@@ -102,16 +101,15 @@ def reserve_idempotency(db, user_id: str, path: str, method: str, raw_payload: b
         if existing["status"] == "failed" or now_ts > current_lease:
             # Lease expirado ou status failed -> tentativa de recuperação atômica
             try:
-                cursor = db.execute(
-                    """UPDATE idempotency_keys 
-                       SET status = 'processing', lease_expires_at = ?, payload_hash = ?, method = ?, path = ?, lease_owner_token = ?
-                       WHERE user_id = ? AND key = ?
-                         AND (status = 'failed' OR (status = 'processing' AND lease_expires_at <= ?))""",
-                    (lease_expires_at, payload_hash, method, path, lease_owner_token, user_id, normalized_key, now_ts)
-                )
-                cursor.close()
-                took_over = _owns_lease(db, user_id, normalized_key, lease_owner_token, "processing")
-                db.commit()
+                with db_transaction(db, immediate=True):
+                    db.execute(
+                        """UPDATE idempotency_keys 
+                           SET status = 'processing', lease_expires_at = ?, payload_hash = ?, method = ?, path = ?, lease_owner_token = ?
+                           WHERE user_id = ? AND key = ?
+                             AND (status = 'failed' OR (status = 'processing' AND lease_expires_at <= ?))""",
+                        (lease_expires_at, payload_hash, method, path, lease_owner_token, user_id, normalized_key, now_ts)
+                    )
+                    took_over = _owns_lease(db, user_id, normalized_key, lease_owner_token, "processing")
                 if took_over:
                     return None, None, lease_owner_token
             except Exception:

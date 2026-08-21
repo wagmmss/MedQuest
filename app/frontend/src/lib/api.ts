@@ -3,7 +3,7 @@ import {
   BreakdownStat, DistractorStat, PlannerConfig, PlannerProgressMap, PlannerPlanResponse,
   QuestionMeta, SubtemaItem, QuestionListItem, QuestionDetail, AttemptResult, SearchResult,
   BatchAttemptItem, BatchAttemptResult, BatchDetailResponse, Flashcard, FlashcardGenerateResponse,
-  PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness
+  BatchFlashcardGenerateResponse, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness
 } from "@/types/api";
 
 const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 
@@ -130,7 +130,6 @@ export const api = {
           }
         }
       }
-      // Remove limit from meta request so it returns accurate totals
       params.delete("limit");
       const qs = params.toString();
       return apiFetch<QuestionMeta>(`/api/meta${qs ? `?${qs}` : ''}`, { cache: 'no-store' });
@@ -141,7 +140,46 @@ export const api = {
       if (q) params.append("q", q);
       return apiFetch<SubtemaItem[]>(`/api/subtemas?${params.toString()}`, { next: { revalidate: 60 } });
     },
-    getList: (filters: Record<string, string | string[]>) => {
+    getList: async (filters: Record<string, string | string[]>) => {
+      const getLocalFallback = async () => {
+        if (typeof window !== "undefined" && localDb) {
+          const uid = getLocalOwnerId();
+          let cached = await localDb.questions.where({ _owner_id: uid }).toArray();
+          if (filters.area) {
+            const area = Array.isArray(filters.area) ? filters.area[0] : filters.area;
+            cached = cached.filter(q => q.area === area);
+          }
+          if (filters.subtema) {
+            const subtema = Array.isArray(filters.subtema) ? filters.subtema[0] : filters.subtema;
+            cached = cached.filter(q => q.subtema === subtema);
+          }
+          if (filters.institution) {
+            const inst = Array.isArray(filters.institution) ? filters.institution[0] : filters.institution;
+            cached = cached.filter(q => q.institution_code === inst);
+          }
+          if (cached.length > 0) {
+            const limit = typeof filters.limit === "string" ? parseInt(filters.limit, 10) : 50;
+            return cached.slice(0, isNaN(limit) ? 50 : limit).map(q => ({
+              id: q.id,
+              source_file: q.source_file,
+              source_number: q.source_number,
+              year: q.year,
+              institution_code: q.institution_code,
+              institution_label: q.institution_label,
+              topic: q.topic,
+              area: q.area,
+              subtema: q.subtema,
+            }));
+          }
+        }
+        return null;
+      };
+
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const local = await getLocalFallback();
+        if (local) return local;
+      }
+
       const params = new URLSearchParams();
       for (const [key, value] of Object.entries(filters)) {
         if (Array.isArray(value)) {
@@ -150,9 +188,37 @@ export const api = {
           params.append(key, value);
         }
       }
-      return apiFetch<QuestionListItem[]>(`/api/questions?${params.toString()}`, { cache: 'no-store' });
+      try {
+        return await apiFetch<QuestionListItem[]>(`/api/questions?${params.toString()}`, { cache: 'no-store' });
+      } catch (err) {
+        const local = await getLocalFallback();
+        if (local) return local;
+        throw err;
+      }
     },
-    getDetail: (id: number) => apiFetch<QuestionDetail>(`/api/questions/${id}`, { cache: 'no-store' }),
+    getDetail: async (id: number) => {
+      const getLocalFallback = async () => {
+        if (typeof window !== "undefined" && localDb) {
+          const uid = getLocalOwnerId();
+          const cached = await localDb.questions.where({ _owner_id: uid }).filter(q => q.id === id).first();
+          if (cached) return cached;
+        }
+        return null;
+      };
+
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const local = await getLocalFallback();
+        if (local) return local;
+      }
+
+      try {
+        return await apiFetch<QuestionDetail>(`/api/questions/${id}`, { cache: 'no-store' });
+      } catch (err) {
+        const local = await getLocalFallback();
+        if (local) return local;
+        throw err;
+      }
+    },
     submitAttempt: (id: number, selected_letter: string, time_spent_ms: number, confidence: string = "defer") => 
       apiFetch<AttemptResult>(`/api/questions/${id}/attempt`, {
         method: "POST",
@@ -167,49 +233,329 @@ export const api = {
       method: "POST"
     }),
     search: (q: string, semantic: boolean = false) => apiFetch<SearchResult[]>(`/api/search?q=${encodeURIComponent(q)}&semantic=${semantic}`, { cache: 'no-store' }),
-    getSimuladoUSP: () => apiFetch<QuestionListItem[]>("/api/simulado/usp", { cache: 'no-store' }),
-    getCustomSimulado: (config: { institutions?: string[], years?: string[], questions_per_area?: number, duration_minutes?: number, force_4_options?: boolean }) => apiFetch<QuestionListItem[]>("/api/simulado/custom", {
-      method: "POST",
-      body: JSON.stringify(config)
-    }),
+    getSimuladoUSP: async () => {
+      const getLocalFallback = async () => {
+        if (typeof window !== "undefined" && localDb) {
+          const uid = getLocalOwnerId();
+          const cached = await localDb.questions.where({ _owner_id: uid }).toArray();
+          if (cached.length > 0) {
+            return cached.map(q => ({
+              id: q.id,
+              source_file: q.source_file,
+              source_number: q.source_number,
+              year: q.year,
+              institution_code: q.institution_code,
+              institution_label: q.institution_label,
+              topic: q.topic,
+              area: q.area,
+              subtema: q.subtema,
+            }));
+          }
+        }
+        return null;
+      };
+
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const local = await getLocalFallback();
+        if (local) return local;
+      }
+
+      try {
+        return await apiFetch<QuestionListItem[]>("/api/simulado/usp", { cache: 'no-store' });
+      } catch (err) {
+        const local = await getLocalFallback();
+        if (local) return local;
+        throw err;
+      }
+    },
+    getCustomSimulado: async (config: { institutions?: string[], years?: string[], questions_per_area?: number, duration_minutes?: number, force_4_options?: boolean }) => {
+      const getLocalFallback = async () => {
+        if (typeof window !== "undefined" && localDb) {
+          const uid = getLocalOwnerId();
+          const cached = await localDb.questions.where({ _owner_id: uid }).toArray();
+          if (cached.length > 0) {
+            return cached.map(q => ({
+              id: q.id,
+              source_file: q.source_file,
+              source_number: q.source_number,
+              year: q.year,
+              institution_code: q.institution_code,
+              institution_label: q.institution_label,
+              topic: q.topic,
+              area: q.area,
+              subtema: q.subtema,
+            }));
+          }
+        }
+        return null;
+      };
+
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const local = await getLocalFallback();
+        if (local) return local;
+      }
+
+      try {
+        return await apiFetch<QuestionListItem[]>("/api/simulado/custom", {
+          method: "POST",
+          body: JSON.stringify(config)
+        });
+      } catch (err) {
+        const local = await getLocalFallback();
+        if (local) return local;
+        throw err;
+      }
+    },
     submitAttemptBatch: (attempts: BatchAttemptItem[]) => apiFetch<BatchAttemptResult>(`/api/attempt/batch`, {
       method: "POST",
       body: JSON.stringify({ attempts })
     }),
     getBatch: async (ids: number[], force_4_options: boolean = false) => {
-      if (typeof window !== "undefined" && !navigator.onLine && localDb) {
-        console.warn("[API] Offline mode: loading questions from localDb");
-        try {
-          const uid = getLocalOwnerId();
-          const cached = await localDb.questions.where('id').anyOf(ids).filter(q => q._owner_id === uid).toArray();
-          return { questions: cached } as unknown as BatchDetailResponse;
-        } catch (e) {
-          console.error("Dexie error", e);
+      const getLocalFallback = async () => {
+        if (typeof window !== "undefined" && localDb) {
+          try {
+            const uid = getLocalOwnerId();
+            const cached = await localDb.questions.where('_owner_id').equals(uid).filter(q => ids.includes(q.id)).toArray();
+            if (cached.length > 0) {
+              return { questions: cached } as unknown as BatchDetailResponse;
+            }
+          } catch (e) {
+            console.error("Dexie error loading batch", e);
+          }
         }
+        return null;
+      };
+
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const local = await getLocalFallback();
+        if (local) return local;
       }
-      return apiFetch<BatchDetailResponse>(`/api/questions/batch`, {
-        method: "POST",
-        body: JSON.stringify({ ids, force_4_options })
-      });
+
+      try {
+        return await apiFetch<BatchDetailResponse>(`/api/questions/batch`, {
+          method: "POST",
+          body: JSON.stringify({ ids, force_4_options })
+        });
+      } catch (err) {
+        const local = await getLocalFallback();
+        if (local) return local;
+        throw err;
+      }
     },
   },
   flashcards: {
-    generate: (question_id: number, wrong_letter: string) => apiFetch<FlashcardGenerateResponse>(`/api/flashcards/generate`, {
-      method: "POST",
-      body: JSON.stringify({ question_id, wrong_letter })
-    }),
-    getDue: async () => {
-      if (typeof window !== "undefined" && !navigator.onLine && localDb) {
-        console.warn("[API] Offline mode: loading flashcards from localDb");
-        try {
-          const uid = getLocalOwnerId();
-          return await localDb.flashcards.filter(f => f._owner_id === uid).toArray();
-        } catch (e) {
-          console.error("Dexie error", e);
-          return [];
+    generate: async (question_id: number, wrong_letter: string) => {
+      const formatLocalCard = (q: any, wrongLetter: string) => {
+        const correctAlt = q.alternatives?.find((a: any) => a.letter === q.correct_letter);
+        const wrongAlt = q.alternatives?.find((a: any) => a.letter === wrongLetter);
+        const correctClean = (correctAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
+        const wrongClean = (wrongAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
+        const tag = `[${q.subtema || q.topic || q.area || "Caso Clínico"}]`;
+        
+        let scenario = (q.stem || "").trim();
+        const endMatch = scenario.match(/(?:Diante disso|Diante do exposto|Diante desse quadro|Nesse momento|Nesse caso|Considerando o caso|Em relação ao caso|Sobre o caso descrito|Qual a conduta|Qual o diagnóstico|A melhor conduta|A conduta mais adequada).*$/i);
+        if (endMatch && endMatch.index && endMatch.index > 30) {
+          scenario = scenario.substring(0, endMatch.index).trim();
         }
+        if (scenario && !scenario.endsWith(".")) scenario += ".";
+
+        const front = scenario && scenario.length > 20
+          ? `${tag} ${scenario}\n\n👉 Decisão / Conduta indicada: {{c1::${correctClean}}}`
+          : `${tag}\n\n👉 Decisão / Conduta indicada: {{c1::${correctClean}}}`;
+
+        const back = wrongClean && wrongClean.toLowerCase() !== correctClean.toLowerCase()
+          ? `💡 Gabarito Oficial:\n${correctClean}\n\n⚠️ Atenção ao distrator:\nA opção '${wrongClean}' é incorreta para este quadro clínico.`
+          : `💡 Gabarito Oficial:\n${correctClean}`;
+
+        return { front, back, context: `${q.area || ""} > ${q.subtema || ""}`.trim() };
+      };
+
+      const getLocalFallback = async (): Promise<FlashcardGenerateResponse | null> => {
+        if (typeof window !== "undefined" && localDb) {
+          try {
+            const uid = getLocalOwnerId();
+            const q = await localDb.questions.where('_owner_id').equals(uid).filter(item => item.id === question_id).first();
+            if (q) {
+              const { front, back, context } = formatLocalCard(q, wrong_letter);
+              const mockCard = {
+                id: Date.now(),
+                question_id,
+                front,
+                back,
+                next_review_date: new Date().toISOString(),
+                stem: q.stem,
+                is_ai_generated: true,
+                source_context: context,
+                _owner_id: uid,
+              };
+              await localDb.flashcards.put(mockCard as any);
+              return {
+                id: mockCard.id,
+                question_id,
+                front: mockCard.front,
+                back: mockCard.back,
+                context: mockCard.source_context
+              };
+            }
+          } catch (e) {
+            console.error("Dexie error creating local flashcard", e);
+          }
+        }
+        return null;
+      };
+
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const local = await getLocalFallback();
+        if (local) return local;
       }
-      return apiFetch<Flashcard[]>("/api/flashcards/review", { cache: 'no-store' });
+
+      try {
+        const res = await apiFetch<FlashcardGenerateResponse>(`/api/flashcards/generate`, {
+          method: "POST",
+          body: JSON.stringify({ question_id, wrong_letter })
+        });
+        if (typeof window !== "undefined" && localDb && res) {
+          const uid = getLocalOwnerId();
+          await localDb.flashcards.put({
+            id: res.id,
+            question_id: res.question_id,
+            front: res.front,
+            back: res.back,
+            next_review_date: new Date().toISOString(),
+            is_ai_generated: true,
+            source_context: res.context,
+            _owner_id: uid,
+          } as any);
+        }
+        return res;
+      } catch (err) {
+        const local = await getLocalFallback();
+        if (local) return local;
+        throw err;
+      }
+    },
+    generateBatch: async (items: Array<{ question_id: number; wrong_letter: string }>) => {
+      const formatLocalCard = (q: any, wrongLetter: string) => {
+        const correctAlt = q.alternatives?.find((a: any) => a.letter === q.correct_letter);
+        const wrongAlt = q.alternatives?.find((a: any) => a.letter === wrongLetter);
+        const correctClean = (correctAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
+        const wrongClean = (wrongAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
+        const tag = `[${q.subtema || q.topic || q.area || "Caso Clínico"}]`;
+        
+        let scenario = (q.stem || "").trim();
+        const endMatch = scenario.match(/(?:Diante disso|Diante do exposto|Diante desse quadro|Nesse momento|Nesse caso|Considerando o caso|Em relação ao caso|Sobre o caso descrito|Qual a conduta|Qual o diagnóstico|A melhor conduta|A conduta mais adequada).*$/i);
+        if (endMatch && endMatch.index && endMatch.index > 30) {
+          scenario = scenario.substring(0, endMatch.index).trim();
+        }
+        if (scenario && !scenario.endsWith(".")) scenario += ".";
+
+        const front = scenario && scenario.length > 20
+          ? `${tag} ${scenario}\n\n👉 Decisão / Conduta indicada: {{c1::${correctClean}}}`
+          : `${tag}\n\n👉 Decisão / Conduta indicada: {{c1::${correctClean}}}`;
+
+        const back = wrongClean && wrongClean.toLowerCase() !== correctClean.toLowerCase()
+          ? `💡 Gabarito Oficial:\n${correctClean}\n\n⚠️ Atenção ao distrator:\nA opção '${wrongClean}' é incorreta para este quadro clínico.`
+          : `💡 Gabarito Oficial:\n${correctClean}`;
+
+        return { front, back, context: `${q.area || ""} > ${q.subtema || ""}`.trim() };
+      };
+
+      const getLocalFallback = async (): Promise<BatchFlashcardGenerateResponse | null> => {
+        if (typeof window !== "undefined" && localDb) {
+          try {
+            const uid = getLocalOwnerId();
+            const created: FlashcardGenerateResponse[] = [];
+            for (const item of items) {
+              const q = await localDb.questions.where('_owner_id').equals(uid).filter(qItem => qItem.id === item.question_id).first();
+              if (q) {
+                const { front, back, context } = formatLocalCard(q, item.wrong_letter);
+                const cardId = Date.now() + Math.floor(Math.random() * 1000);
+                const mockCard = {
+                  id: cardId,
+                  question_id: item.question_id,
+                  front,
+                  back,
+                  next_review_date: new Date().toISOString(),
+                  stem: q.stem,
+                  is_ai_generated: true,
+                  source_context: context,
+                  _owner_id: uid,
+                };
+                await localDb.flashcards.put(mockCard as any);
+                created.push({
+                  id: mockCard.id,
+                  question_id: mockCard.question_id,
+                  front: mockCard.front,
+                  back: mockCard.back,
+                  context: mockCard.source_context
+                });
+              }
+            }
+            if (created.length > 0) {
+              return { success: true, count: created.length, flashcards: created };
+            }
+          } catch (e) {
+            console.error("Dexie error creating batch local flashcards", e);
+          }
+        }
+        return null;
+      };
+
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const local = await getLocalFallback();
+        if (local) return local;
+      }
+
+      try {
+        const res = await apiFetch<BatchFlashcardGenerateResponse>(`/api/flashcards/generate-batch`, {
+          method: "POST",
+          body: JSON.stringify({ items })
+        });
+        if (typeof window !== "undefined" && localDb && res.flashcards) {
+          const uid = getLocalOwnerId();
+          await localDb.flashcards.bulkPut(res.flashcards.map(f => ({
+            id: f.id,
+            question_id: f.question_id,
+            front: f.front,
+            back: f.back,
+            next_review_date: new Date().toISOString(),
+            is_ai_generated: true,
+            _owner_id: uid,
+          } as any)));
+        }
+        return res;
+      } catch (err) {
+        const local = await getLocalFallback();
+        if (local) return local;
+        throw err;
+      }
+    },
+    getDue: async (includeAll: boolean = false) => {
+      const getLocalFallback = async () => {
+        if (typeof window !== "undefined" && localDb) {
+          try {
+            const uid = getLocalOwnerId();
+            return await localDb.flashcards.where({ _owner_id: uid }).toArray();
+          } catch (e) {
+            console.error("Dexie error loading flashcards", e);
+            return [];
+          }
+        }
+        return null;
+      };
+
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const local = await getLocalFallback();
+        if (local) return local;
+      }
+
+      try {
+        return await apiFetch<Flashcard[]>(`/api/flashcards/review${includeAll ? "?all=true" : ""}`, { cache: 'no-store' });
+      } catch (err) {
+        const local = await getLocalFallback();
+        if (local) return local;
+        throw err;
+      }
     },
     review: (id: number, confidence: string) => apiFetch<{id: number, next_review_date: string}>(`/api/flashcards/${id}/review`, {
       method: "POST",

@@ -173,4 +173,81 @@ test.describe('Offline Sync e Resiliência', () => {
       });
     }, { timeout: 10000 }).toBe(1);
   });
+
+  test('inicia e responde simulado 100% offline a partir de questões em cache local', async ({ page }) => {
+    const TEST_OWNER = 'test_owner_offline';
+    await page.addInitScript((owner) => {
+      localStorage.setItem('medquest_local_owner', owner);
+    }, TEST_OWNER);
+
+    // Mock de rotas abortadas para simular desconexão total durante o simulado
+    await page.route('**/api/meta**', async (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_META) }));
+    await page.route('**/api/simulado/**', async (route) => route.abort('failed'));
+    await page.route('**/api/questions/**', async (route) => route.abort('failed'));
+    await page.route('**/api/attempt/**', async (route) => route.abort('failed'));
+
+    // 1. Acessa /simulado, aguarda o localDb carregar, popula e recarrega
+    await page.goto('/simulado');
+    await page.waitForFunction(() => typeof (window as any).localDb !== 'undefined');
+    await page.evaluate(async ({ mockQuestion, ownerId }) => {
+      const win = window as any;
+      await win.localDb.questions.put({
+        ...mockQuestion,
+        _owner_id: ownerId,
+      });
+    }, { mockQuestion: MOCK_QUESTION_DETAIL, ownerId: TEST_OWNER });
+    await page.reload();
+
+    // 2. Inicia o simulado offline
+    await expect(page.locator('button:has-text("Iniciar Simulado")')).toBeVisible({ timeout: 10000 });
+    await page.click('button:has-text("Iniciar Simulado")');
+
+    // 3. Verifica que a questão carregou a partir do cache local
+    await expect(page.locator('text=Qual o tratamento de primeira linha')).toBeVisible({ timeout: 10000 });
+
+    // 4. Responde e finaliza
+    await page.click('text=Mudança de estilo de vida');
+    await page.click('button:has-text("Finalizar Simulado")');
+    await page.click('button:has-text("Entregar Prova")');
+
+    // 5. Confirma exibição de sucesso offline
+    await expect(page.locator('text=Simulado Salvo Offline')).toBeVisible({ timeout: 10000 });
+  });
+
+  test('permite revisar flashcards 100% offline sem travamento', async ({ page }) => {
+    const TEST_OWNER = 'test_owner_flashcard';
+    await page.addInitScript((owner) => {
+      localStorage.setItem('medquest_local_owner', owner);
+    }, TEST_OWNER);
+
+    await page.route('**/api/meta**', async (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_META) }));
+    await page.route('**/api/flashcards/**', async (route) => route.abort('failed'));
+
+    // 1. Acessa /revisao-ativa, aguarda localDb, popula e recarrega
+    await page.goto('/revisao-ativa');
+    await page.waitForFunction(() => typeof (window as any).localDb !== 'undefined');
+    await page.evaluate(async (ownerId) => {
+      const win = window as any;
+      await win.localDb.flashcards.put({
+        id: 101,
+        question_id: 1,
+        front: "O tratamento de primeira linha de HAS é {{c1::estilo de vida}}.",
+        back: "Mudança de estilo de vida e monitoramento.",
+        next_review_date: "2026-08-20T00:00:00Z",
+        _owner_id: ownerId,
+      });
+    }, TEST_OWNER);
+    await page.reload();
+
+    // 2. Verifica a tela de flashcards offline carregada
+    await expect(page.locator('text=Clique para Revelar')).toBeVisible({ timeout: 10000 });
+
+    // 3. Revela e responde
+    await page.click('text=Clique para Revelar');
+    await expect(page.locator('button:has-text("Fácil")')).toBeVisible({ timeout: 5000 });
+    await page.click('button:has-text("Fácil")');
+
+    // 4. Confirma que avançou para "Tudo Revisado"
+    await expect(page.locator('text=Tudo Revisado!')).toBeVisible({ timeout: 10000 });
+  });
 });

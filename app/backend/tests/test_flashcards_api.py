@@ -66,3 +66,39 @@ def test_flashcards_validation_errors(client):
     # Report sem motivo
     r = client.post("/api/flashcards/1/report", json={})
     assert r.status_code == 400
+
+
+def test_flashcards_duplicate_prevention(client):
+    # Gera primeira vez
+    r1 = client.post("/api/flashcards/generate", json={
+        "question_id": 1,
+        "wrong_letter": "A"
+    })
+    assert r1.status_code == 200
+    fid1 = r1.get_json()["id"]
+
+    # Gera novamente para a mesma questão
+    r2 = client.post("/api/flashcards/generate", json={
+        "question_id": 1,
+        "wrong_letter": "A"
+    })
+    assert r2.status_code == 200
+    fid2 = r2.get_json()["id"]
+
+    # Deve reutilizar o mesmo ID sem duplicar o cartão
+    assert fid1 == fid2
+
+
+def test_flashcards_generate_batch(client):
+    r = client.post("/api/flashcards/generate-batch", json={
+        "items": [
+            {"question_id": 1, "wrong_letter": "A"},
+            {"question_id": 2, "wrong_letter": "B"},
+            {"question_id": 9999, "wrong_letter": "A"}  # Questão inválida ignorada graciosamente
+        ]
+    })
+    assert r.status_code == 200
+    data = r.get_json()
+    assert data["success"] is True
+    assert data["count"] >= 1
+    assert len(data["flashcards"]) >= 1

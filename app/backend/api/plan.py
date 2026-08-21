@@ -6,7 +6,8 @@ from flask import Blueprint, g, jsonify, request
 # planner.py (raiz do backend) — geração do plano anual por pesos históricos USP
 from scripts.planner import generate_annual_plan
 
-from .db import get_db
+from .db import get_db, db_transaction
+from .questions import invalidate_user_caches
 from .schemas import (
     GeneratePlanIn,
     PlannerConfigIn,
@@ -21,9 +22,10 @@ bp = Blueprint("plan", __name__)
 @bp.route("/planner/config/reset", methods=["POST"])
 def planner_config_reset():
     db = get_db()
-    db.execute("DELETE FROM planner_config WHERE user_id = ?", (g.user_id,))
-    db.execute("DELETE FROM planner_progress WHERE user_id = ?", (g.user_id,))
-    db.commit()
+    with db_transaction(db, immediate=True):
+        db.execute("DELETE FROM planner_config WHERE user_id = ?", (g.user_id,))
+        db.execute("DELETE FROM planner_progress WHERE user_id = ?", (g.user_id,))
+    invalidate_user_caches(g.user_id)
     return jsonify({"success": True})
 
 @bp.route("/planner/config", methods=["GET", "POST"])
@@ -34,16 +36,17 @@ def planner_config():
             cfg = PlannerConfigIn.model_validate(request.get_json(force=True) or {})
         except ValidationError as e:
             return jsonify({"error": "invalid input", "details": e.errors()}), 400
-        db.execute("""
-            INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(user_id) DO UPDATE SET
-                exam_date = excluded.exam_date, start_date = excluded.start_date,
-                days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
-                updated_at = excluded.updated_at, target_score = excluded.target_score
-        """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
-              datetime.now(timezone.utc).isoformat(), cfg.target_score))
-        db.commit()
+        with db_transaction(db, immediate=True):
+            db.execute("""
+                INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(user_id) DO UPDATE SET
+                    exam_date = excluded.exam_date, start_date = excluded.start_date,
+                    days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
+                    updated_at = excluded.updated_at, target_score = excluded.target_score
+            """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
+                  datetime.now(timezone.utc).isoformat(), cfg.target_score))
+        invalidate_user_caches(g.user_id)
         return jsonify({"success": True})
 
     row = db.execute("SELECT * FROM planner_config WHERE user_id = ?", (g.user_id,)).fetchone()
@@ -74,19 +77,23 @@ def planner_study(week):
     except ValidationError as e:
         return jsonify({"error": "invalid input", "details": e.errors()}), 400
     studied = 1 if data.studied else 0
-    studied_at = datetime.now(timezone.utc).isoformat() if studied else None
     if studied:
-        db.execute("""
-            INSERT INTO planner_progress (week, studied, studied_at, user_id) VALUES (?, 1, ?, ?)
-            ON CONFLICT(week, user_id) DO UPDATE SET studied = 1, studied_at = excluded.studied_at
-        """, (week, studied_at, g.user_id))
+        studied_at = datetime.now(timezone.utc).isoformat()
+        with db_transaction(db, immediate=True):
+            db.execute("""
+                INSERT INTO planner_progress (week, studied, studied_at, rev24h, rev7d, rev30d, user_id)
+                VALUES (?, 1, ?, 0, 0, 0, ?)
+                ON CONFLICT(week, user_id) DO UPDATE SET studied = 1, studied_at = excluded.studied_at
+            """, (week, studied_at, g.user_id))
     else:
-        db.execute("""
-            INSERT INTO planner_progress (week, studied, studied_at, rev24h, rev7d, rev30d, user_id)
-            VALUES (?, 0, NULL, 0, 0, 0, ?)
-            ON CONFLICT(week, user_id) DO UPDATE SET studied = 0, studied_at = NULL, rev24h = 0, rev7d = 0, rev30d = 0
-        """, (week, g.user_id))
-    db.commit()
+        studied_at = None
+        with db_transaction(db, immediate=True):
+            db.execute("""
+                INSERT INTO planner_progress (week, studied, studied_at, rev24h, rev7d, rev30d, user_id)
+                VALUES (?, 0, NULL, 0, 0, 0, ?)
+                ON CONFLICT(week, user_id) DO UPDATE SET studied = 0, studied_at = NULL, rev24h = 0, rev7d = 0, rev30d = 0
+            """, (week, g.user_id))
+    invalidate_user_caches(g.user_id)
     return jsonify({"success": True, "studied": bool(studied), "studied_at": studied_at})
 
 
@@ -103,11 +110,12 @@ def planner_revision(week):
         return jsonify({'error': 'invalid type'}), 400
         
     checked = 1 if data.checked else 0
-    db.execute(f"""
-        INSERT INTO planner_progress (week, {data.type}, user_id) VALUES (?, ?, ?)
-        ON CONFLICT(week, user_id) DO UPDATE SET {data.type} = excluded.{data.type}
-    """, (week, checked, g.user_id))
-    db.commit()
+    with db_transaction(db, immediate=True):
+        db.execute(f"""
+            INSERT INTO planner_progress (week, {data.type}, user_id) VALUES (?, ?, ?)
+            ON CONFLICT(week, user_id) DO UPDATE SET {data.type} = excluded.{data.type}
+        """, (week, checked, g.user_id))
+    invalidate_user_caches(g.user_id)
     return jsonify({"success": True, "type": data.type, "checked": bool(checked)})
 
 

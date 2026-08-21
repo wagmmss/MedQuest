@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness } from "@/types/api";
 import { AlertTriangle, TrendingUp, Compass, AlarmClock, Lightbulb, Brain, ChevronRight, BarChart3, AlertCircle, Target, Activity } from "lucide-react";
 import Link from "next/link";
@@ -47,24 +47,31 @@ export function AnalysisClient({
   const [days, setDays] = useState<number>(14);
   const [localTimeline, setLocalTimeline] = useState<TimelineStat[]>(timeline);
   const [loadingTimeline, setLoadingTimeline] = useState(false);
+  const isFirstMount = useRef(true);
 
   useEffect(() => {
-    // If it's the initial load for 14 days, we already have it in props
-    if (days === 14 && timeline.length > 0 && localTimeline === timeline) return;
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
     
-    const fetchTimeline = async () => {
-      setLoadingTimeline(true);
-      try {
-        const data = await api.stats.getTimeline(days);
-        setLocalTimeline(data);
-      } catch (error) {
+    let isCancelled = false;
+    setLoadingTimeline(true);
+    api.stats.getTimeline(days)
+      .then(data => {
+        if (!isCancelled) setLocalTimeline(data);
+      })
+      .catch(error => {
         console.error("Failed to fetch timeline:", error);
-      } finally {
-        setLoadingTimeline(false);
-      }
+      })
+      .finally(() => {
+        if (!isCancelled) setLoadingTimeline(false);
+      });
+
+    return () => {
+      isCancelled = true;
     };
-    fetchTimeline();
-  }, [days, timeline, localTimeline]);
+  }, [days]);
 
   const chartBreakdown = useMemo(() => {
     return breakdown.slice(0, 8).map(b => ({

@@ -159,8 +159,12 @@ def get_db():
             g.db.execute("PRAGMA busy_timeout = 10000")
             try:
                 g.db.execute("PRAGMA journal_mode = WAL")
+                g.db.execute("PRAGMA synchronous = NORMAL")
+                g.db.execute("PRAGMA cache_size = -64000")
+                g.db.execute("PRAGMA mmap_size = 268435456")
+                g.db.execute("PRAGMA temp_store = MEMORY")
             except sqlite3.OperationalError as e:
-                logger.warning(f"Failed to set WAL mode: {e}")
+                logger.warning(f"Failed to set SQLite performance pragmas: {e}")
     return g.db
 
 def close_db(exception=None):

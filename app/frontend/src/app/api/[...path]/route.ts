@@ -48,13 +48,18 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
   headers.set("X-Request-ID", requestId);
 
   try {
-    const response = await fetch(targetUrl, {
+    const requestOptions: RequestInit = {
       method: req.method,
       headers,
-      body: req.method !== "GET" && req.method !== "HEAD" ? await req.blob() : undefined,
       redirect: "manual",
       signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
-    });
+    };
+    if (req.method !== "GET" && req.method !== "HEAD" && req.body) {
+      requestOptions.body = req.body;
+      (requestOptions as RequestInit & { duplex?: string }).duplex = "half";
+    }
+
+    const response = await fetch(targetUrl, requestOptions);
 
     const responseHeaders = new Headers(response.headers);
     responseHeaders.delete("content-encoding");

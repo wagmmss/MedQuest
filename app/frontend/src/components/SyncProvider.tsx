@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { syncManager } from "@/lib/sync";
+import { localDb } from "@/lib/db";
 import { CloudOff } from "lucide-react";
 
 export function SyncProvider() {
@@ -9,6 +10,7 @@ export function SyncProvider() {
 
   useEffect(() => {
     (window as unknown as { syncManager: typeof syncManager }).syncManager = syncManager;
+    (window as unknown as { localDb: typeof localDb }).localDb = localDb;
     syncManager.init();
     
     // Sync UI with queue length

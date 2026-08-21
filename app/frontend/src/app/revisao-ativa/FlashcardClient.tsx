@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Flashcard } from "@/types/api";
-import { api } from "@/lib/api";
+import { api, OfflineQueuedError } from "@/lib/api";
+import { localDb, getLocalOwnerId } from "@/lib/db";
+import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
@@ -17,8 +19,24 @@ export function FlashcardClient() {
   const fetchDue = useCallback(async () => {
     setLoading(true);
     try {
-      const cards = await api.flashcards.getDue();
-      setQueue(cards);
+      const cards = await api.flashcards.getDue(true);
+      const normalizedCards = cards.map(normalizeFlashcard);
+      setQueue(normalizedCards);
+
+      // Migração automática de cartões legados no IndexedDB local
+      if (typeof window !== "undefined" && localDb) {
+        const uid = getLocalOwnerId();
+        for (const card of normalizedCards) {
+          localDb.flashcards
+            .where({ _owner_id: uid })
+            .filter(f => f.id === card.id)
+            .modify({
+              front: card.front,
+              back: card.back,
+            })
+            .catch(() => {});
+        }
+      }
     } catch (e) {
       console.error("Erro ao buscar flashcards", e);
     } finally {
@@ -29,13 +47,36 @@ export function FlashcardClient() {
   const handleReview = useCallback(async (confidence: string) => {
     if (queue.length === 0 || submitting) return;
     setSubmitting(true);
+    const currentCard = queue[0];
 
     try {
-      await api.flashcards.review(queue[0].id, confidence);
+      await api.flashcards.review(currentCard.id, confidence);
       setQueue(prev => prev.slice(1));
       setFlipped(false);
-    } catch {
-      toast.error("Erro ao enviar avaliação.");
+      if (localDb) {
+        try {
+          const uid = getLocalOwnerId();
+          await localDb.flashcards.where({ _owner_id: uid }).filter(f => f.id === currentCard.id).delete();
+        } catch {
+          // ignore local cleanup error
+        }
+      }
+    } catch (err) {
+      if (err instanceof OfflineQueuedError) {
+        toast("Avaliação salva neste dispositivo e será sincronizada quando a conexão voltar.", { icon: "💾" });
+        setQueue(prev => prev.slice(1));
+        setFlipped(false);
+        if (localDb) {
+          try {
+            const uid = getLocalOwnerId();
+            await localDb.flashcards.where({ _owner_id: uid }).filter(f => f.id === currentCard.id).delete();
+          } catch {
+            // ignore local cleanup error
+          }
+        }
+      } else {
+        toast.error("Erro ao enviar avaliação.");
+      }
     } finally {
       setSubmitting(false);
     }
@@ -172,37 +213,40 @@ export function FlashcardClient() {
         aria-label={flipped ? "Flashcard revelado" : "Clique para revelar o flashcard"}
       >
         {current.is_ai_generated && (
-          <div className="absolute top-4 left-4 text-xs font-semibold text-purple-500 bg-purple-500/10 border border-purple-500/20 px-2 py-1 rounded-full flex items-center gap-1.5" title="Este flashcard foi gerado por Inteligência Artificial e ainda não passou por revisão médica estruturada.">
-            <Sparkles size={12} /> Gerado por IA
+          <div className="absolute top-4 left-4 text-xs font-semibold text-purple-500 bg-purple-500/10 border border-purple-500/20 px-2.5 py-1 rounded-full flex items-center gap-1.5" title="Este flashcard foi gerado e estruturado a partir do seu histórico de erros.">
+            <Sparkles size={12} /> Revisão Ativa MedQuest
           </div>
         )}
 
-        {current.stem && (
-          <div className="w-full mt-4 mb-8 pb-6 border-b border-border/50 text-muted-foreground text-sm md:text-base leading-relaxed text-left opacity-80">
-            <span className="font-bold text-foreground/50 uppercase text-xs tracking-wider mb-3 block">Questão Original (Contexto)</span>
-            <div className="whitespace-pre-wrap">{current.stem}</div>
-          </div>
-        )}
-
-        <p className="text-2xl md:text-3xl font-medium text-foreground text-center leading-relaxed">
+        <div className="w-full text-base md:text-lg font-medium text-foreground text-left leading-relaxed whitespace-pre-line my-4">
           {current.front.split(/({{c1::.*?}})/).map((part, i) => {
             if (part.startsWith("{{c1::") && part.endsWith("}}")) {
               const content = part.substring(6, part.length - 2);
               if (!flipped) {
-                return <span key={i} className="inline-block px-3 py-1 bg-muted text-transparent border-b-2 border-foreground mx-1 rounded select-none">[{content}]</span>;
+                return (
+                  <span key={i} className="inline-block px-3 py-1 bg-purple-500/15 text-purple-600 font-bold border-b-2 border-purple-500 rounded mx-1 select-none animate-pulse">
+                    [...]
+                  </span>
+                );
               }
-              return <span key={i} className="inline-block px-2 py-1 bg-purple-500/20 text-purple-600 border border-purple-500/30 rounded mx-1 font-bold animate-in fade-in zoom-in-95 duration-200">{content}</span>;
+              return (
+                <span key={i} className="inline-block px-2.5 py-1 bg-purple-500/20 text-purple-600 border border-purple-500/40 rounded-lg mx-1 font-bold animate-in fade-in zoom-in-95 duration-200">
+                  {content}
+                </span>
+              );
             }
             return <span key={i}>{part}</span>;
           })}
-        </p>
+        </div>
 
         {flipped && current.back && (
-          <div className="mt-8 pt-8 border-t border-border w-full text-center animate-in slide-in-from-bottom-4 fade-in duration-300">
-            <p className="text-muted-foreground text-lg">{current.back}</p>
+          <div className="mt-6 pt-6 border-t border-border w-full text-left animate-in slide-in-from-bottom-3 fade-in duration-300">
+            <div className="bg-muted/40 p-4 rounded-xl border border-border/60 text-sm md:text-base text-foreground leading-relaxed whitespace-pre-line">
+              {current.back}
+            </div>
             {current.source_context && (
-              <p className="mt-4 text-xs font-semibold text-purple-600/70 uppercase tracking-widest bg-purple-500/10 py-1.5 px-3 rounded-full inline-block">
-                Fonte: {current.source_context}
+              <p className="mt-3 text-xs font-semibold text-purple-600/80 uppercase tracking-wider bg-purple-500/10 py-1 px-3 rounded-full inline-block">
+                Referência: {current.source_context}
               </p>
             )}
           </div>
