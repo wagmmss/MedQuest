@@ -87,9 +87,10 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         q_count = r['q_count']
         
         prog = user_progress.get(subtema, {"ans_count": 0, "correct_count": 0, "attempts": 0})
-        ans_count = prog.get("ans_count") or 0
-        attempts = prog.get("attempts") or 0
-        correct_count = prog.get("correct_count") or 0
+        prog_dict = dict(prog) if prog else {}
+        ans_count = prog_dict.get("ans_count") or 0
+        attempts = prog_dict.get("attempts") or 0
+        correct_count = prog_dict.get("correct_count") or 0
         acc = (correct_count / attempts) if attempts > 0 else 0
         
         remaining_q = max(0, q_count - ans_count)
