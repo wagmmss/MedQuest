@@ -1,147 +1,175 @@
-"""Auditoria read-only de integridade e cobertura do banco local do MedQuest."""
-from __future__ import annotations
-
 import argparse
+import sys
 import json
-import sqlite3
 from pathlib import Path
+from datetime import datetime, timezone
 
+from audit.connection import get_readonly_connection
+from audit.integrity import check_integrity
+from audit.duplication import check_duplication
+from audit.explanations import check_explanations
+from audit.taxonomy import check_taxonomy
+from audit.coverage import check_coverage
+from audit.encoding import check_encoding
 
-DEFAULT_DB = Path(__file__).resolve().parents[1] / "medquest.db"
-PLANNER_CATALOG = Path(__file__).with_name("plannerData.json")
+def build_markdown(data: dict) -> str:
+    md = [
+        "# MedQuest Content & Taxonomy Audit (Sprint C1.1)",
+        f"**Generated At:** {data['generated_at']}",
+        f"**Database Size:** {data['database']['size_bytes']} bytes",
+        "",
+        "## 1. Summary",
+        f"- **Total Questions:** {data['summary']['total_questions']}",
+        f"- **Usable (missing_alts=0):** {data['summary']['usable_questions']}",
+        f"- **No Area:** {data['summary']['no_area']}",
+        f"- **No Subtema:** {data['summary']['no_subtema']}",
+        "",
+        "## 2. Critical Failures (Integrity)",
+        "> [!WARNING]",
+        "> These issues will cause `--strict` mode to fail."
+    ]
 
+    cf = data["critical_failures"]
+    md.extend([
+        f"- **Empty Statements:** {len(cf['empty_statement'])}",
+        f"- **Empty Alternatives:** {len(cf['empty_alternative'])}",
+        f"- **Invalid Correct Letters:** {len(cf['invalid_correct_letter'])}",
+        f"- **Answers w/o Alternative:** {len(cf['answer_without_alternative'])}",
+        f"- **Questions with Duplicated Alt Letters:** {len(cf['duplicated_letters'])}",
+        f"- **Orphan Alternatives:** {len(cf['orphan_records']['alternatives'])}",
+        f"- **Orphan Images:** {len(cf['orphan_records']['images'])}",
+        f"- **missing_alts=0 but Incomplete:** {len(cf['missing_alts_0_incomplete'])}",
+        f"- **Duplicated Source File+Number:** {len(cf['duplicate_source_file_number'])}",
+        ""
+    ])
 
-def scalar(db: sqlite3.Connection, sql: str, params: tuple = ()) -> int:
-    return int(db.execute(sql, params).fetchone()[0] or 0)
+    md.extend([
+        "## 3. Warnings",
+        f"- **missing_alts=1 but Complete:** {len(data['warnings']['missing_alts_1_complete'])} (Possible pedagogical deactivation)",
+        ""
+    ])
 
+    md.extend([
+        "## 4. Human Review Queue (Explanations)",
+        f"- **High Priority (Empty/Placeholder):** {len(data['human_review_queue']['high_priority'])}",
+        f"- **Medium Priority (Too short):** {len(data['human_review_queue']['medium_priority'])}",
+        f"- **Low Priority (Heuristic):** {len(data['human_review_queue']['low_priority'])}",
+        ""
+    ])
 
-def rows(db: sqlite3.Connection, sql: str) -> list[dict]:
-    return [dict(row) for row in db.execute(sql).fetchall()]
+    md.extend([
+        "## 5. Duplication",
+        f"- **Literal Exact Groups:** {data['duplication']['literal_exact']['groups_count']} (Affects {data['duplication']['literal_exact']['affected_questions_count']} Qs)",
+        f"- **Normalized Exact Groups:** {data['duplication']['normalized_exact']['groups_count']} (Affects {data['duplication']['normalized_exact']['affected_questions_count']} Qs)",
+        ""
+    ])
 
+    md.extend([
+        "## 6. Taxonomy Divergence",
+        f"**DB State:** {data['taxonomy']['sqlite_db']['total_areas']} Areas, {data['taxonomy']['sqlite_db']['total_subtemas']} Subtemas",
+        ""
+    ])
 
-def audit(db_path: Path) -> dict:
-    db = sqlite3.connect(db_path)
-    db.row_factory = sqlite3.Row
-    try:
-        question_columns = {
-            row[1] for row in db.execute("PRAGMA table_info(questions)").fetchall()
-        }
-        db_subtemas = rows(db, """
-            SELECT subtema, COUNT(*) AS questions FROM questions
-            WHERE trim(COALESCE(subtema, '')) != ''
-            GROUP BY subtema ORDER BY questions DESC
-        """)
-        with PLANNER_CATALOG.open(encoding="utf-8") as catalog_file:
-            planner_catalog = json.load(catalog_file)
-        catalog_subtemas = {
-            subtema
-            for area_group in planner_catalog
-            for macro in area_group.get("macroThemes", [])
-            for subtema in macro.get("dbSubtemas", [])
-        }
-        db_subtema_names = {item["subtema"] for item in db_subtemas}
-        mapped_question_count = sum(
-            item["questions"] for item in db_subtemas
-            if item["subtema"] in catalog_subtemas
-        )
-        unmapped_question_count = sum(
-            item["questions"] for item in db_subtemas
-            if item["subtema"] not in catalog_subtemas
-        )
+    cat = data['taxonomy']['catalogs']
+    md.append("| Catalog | Status | Missing Areas | Missing Subtemas | Affected Qs |")
+    md.append("|---|---|---|---|---|")
+    for name in ["taxonomy_json", "canonical_subtemas_py", "plannerData_json", "plannerData_ts"]:
+        v = cat[name]
+        status = v["status"]
+        if status == "unverified":
+            md.append(f"| {name} | {status} | - | - | - |")
+        else:
+            md.append(f"| {name} | {status} | {len(v['missing_areas_in_catalog'])} | {len(v['missing_subtemas_in_catalog'])} | {v['affected_questions_by_missing_subtemas']} |")
 
-        result = {
-            "database": str(db_path),
-            "questions": {
-                "total": scalar(db, "SELECT COUNT(*) FROM questions"),
-                "usable": scalar(db, "SELECT COUNT(*) FROM questions WHERE missing_alts = 0"),
-                "missing_alternatives": scalar(db, "SELECT COUNT(*) FROM questions WHERE missing_alts = 1"),
-                "without_area": scalar(db, "SELECT COUNT(*) FROM questions WHERE area IS NULL OR trim(area) = ''"),
-                "without_subtema": scalar(db, "SELECT COUNT(*) FROM questions WHERE subtema IS NULL OR trim(subtema) = ''"),
-                "without_valid_answer": scalar(db, "SELECT COUNT(*) FROM questions WHERE upper(correct_letter) NOT IN ('A','B','C','D','E')"),
-                "duplicate_source_numbers": scalar(db, """
-                    SELECT COUNT(*) FROM (
-                        SELECT source_file, source_number FROM questions
-                        GROUP BY source_file, source_number HAVING COUNT(*) > 1
-                    )
-                """),
-            },
-            "content": {
-                "explanations": scalar(db, "SELECT COUNT(*) FROM explanations WHERE trim(COALESCE(explanation_text, '')) != ''"),
-                "usable_without_explanation": scalar(db, """
-                    SELECT COUNT(*) FROM questions q
-                    LEFT JOIN explanations e ON e.question_id = q.id
-                    WHERE q.missing_alts = 0 AND trim(COALESCE(e.explanation_text, '')) = ''
-                """),
-                "images": scalar(db, "SELECT COUNT(*) FROM question_images"),
-                "questions_with_4_or_5_options": scalar(db, """
-                    SELECT COUNT(*) FROM (
-                        SELECT question_id FROM alternatives
-                        GROUP BY question_id HAVING COUNT(*) IN (4, 5)
-                    )
-                """),
-                "duplicate_alternative_letters": scalar(db, """
-                    SELECT COUNT(*) FROM (
-                        SELECT question_id, upper(letter) FROM alternatives
-                        GROUP BY question_id, upper(letter) HAVING COUNT(*) > 1
-                    )
-                """),
-            },
-            "coverage": {
-                "areas": rows(db, "SELECT area, COUNT(*) AS questions FROM questions GROUP BY area ORDER BY questions DESC"),
-                "institutions": rows(db, "SELECT institution_code, COUNT(*) AS questions FROM questions GROUP BY institution_code ORDER BY questions DESC"),
-                "years": rows(db, "SELECT year, COUNT(*) AS questions FROM questions GROUP BY year ORDER BY year DESC"),
-                "usp_sp_2026_by_area": rows(db, """
-                    SELECT area, COUNT(*) AS questions FROM questions
-                    WHERE institution_code = 'USP-SP' AND year = 2026
-                    GROUP BY area ORDER BY questions DESC
-                """),
-                "distinct_subtemas": scalar(db, "SELECT COUNT(DISTINCT subtema) FROM questions WHERE trim(COALESCE(subtema, '')) != ''"),
-                "subtemas_with_fewer_than_10_questions": [
-                    item for item in db_subtemas if item["questions"] < 10
-                ],
-                "planner_catalog": {
-                    "catalog_subtemas": len(catalog_subtemas),
-                    "database_subtemas_mapped": len(db_subtema_names & catalog_subtemas),
-                    "database_questions_mapped": mapped_question_count,
-                    "database_questions_unmapped": unmapped_question_count,
-                    "database_subtemas_unmapped": [
-                        item for item in db_subtemas if item["subtema"] not in catalog_subtemas
-                    ],
-                    "catalog_subtemas_without_questions": sorted(catalog_subtemas - db_subtema_names),
-                },
-            },
-        }
+    md.extend(["", "### Source Consumers"])
+    for source, consumer in data['taxonomy']['source_consumers'].items():
+        md.append(f"- **{source}**: {consumer}")
 
-        if "specialty" in question_columns:
-            result["questions"]["without_specialty"] = scalar(
-                db, "SELECT COUNT(*) FROM questions WHERE specialty IS NULL OR trim(specialty) = ''"
-            )
-        if "is_verified" in question_columns:
-            result["content"]["verified_questions"] = scalar(
-                db, "SELECT COUNT(*) FROM questions WHERE is_verified = 1"
-            )
-        if "medical_references" in question_columns:
-            result["content"]["questions_with_medical_references"] = scalar(
-                db, "SELECT COUNT(*) FROM questions WHERE trim(COALESCE(medical_references, '')) != ''"
-            )
+    md.extend([
+        "",
+        "## 7. Sprint C2 Proposals",
+        "- **Technical Corrections (Automated)**: Address critical integrity failures systematically (e.g. purging actual orphans, fixing broken structure flags).",
+        "- **Taxonomy Standardization**: Decide on a single source of truth and normalize the database strings, migrating affected questions.",
+        "- **Medical Review**: Have humans or assisted workflows review the explanation queue. (Do not rely blindly on LLMs for final clinical truth)."
+    ])
 
-        try:
-            result["content"]["fts_rows"] = scalar(db, "SELECT COUNT(*) FROM questions_fts")
-        except sqlite3.OperationalError:
-            result["content"]["fts_rows"] = None
-        return result
-    finally:
-        db.close()
+    return "\n".join(md)
 
-
-def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("db", nargs="?", type=Path, default=DEFAULT_DB)
+def main():
+    parser = argparse.ArgumentParser(description="MedQuest Sprint C1.1 Audit")
+    parser.add_argument("--db", default="medquest.db", help="Path to database")
+    parser.add_argument("--output", help="JSON output file")
+    parser.add_argument("--md", help="Markdown output file")
+    parser.add_argument("--strict", action="store_true", help="Exit 1 if critical failures found")
+    parser.add_argument("--short-limit", type=int, default=50, dest="short_explanation_limit")
+    parser.add_argument("--low-coverage-limit", type=int, default=20)
+    parser.add_argument("--max-details", type=int, default=0, help="Max items per distribution to print")
     args = parser.parse_args()
-    if not args.db.is_file():
-        parser.error(f"Banco não encontrado: {args.db}")
-    print(json.dumps(audit(args.db.resolve()), ensure_ascii=False, indent=2))
 
+    scripts_dir = Path(__file__).resolve().parent
+
+    db, size = get_readonly_connection(args.db)
+
+    # 1. Summary
+    tq = db.execute("SELECT count(*) FROM questions").fetchone()[0]
+    uq = db.execute("SELECT count(*) FROM questions WHERE missing_alts = 0").fetchone()[0]
+    na = db.execute("SELECT count(*) FROM questions WHERE missing_alts = 0 AND (area IS NULL OR trim(area) = '')").fetchone()[0]
+    ns = db.execute("SELECT count(*) FROM questions WHERE missing_alts = 0 AND (subtema IS NULL OR trim(subtema) = '')").fetchone()[0]
+
+    # Modules
+    integrity_data = check_integrity(db)
+    duplication_data = check_duplication(db)
+    explanations_data = check_explanations(db, args.short_explanation_limit)
+    taxonomy_data = check_taxonomy(db, scripts_dir)
+    coverage_data = check_coverage(db, scripts_dir, args.low_coverage_limit, args.max_details)
+    encoding_data = check_encoding(db)
+
+    db.close()
+
+    full_data = {
+        "schema_version": "1.1",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "database": {
+            "path": str(Path(args.db).resolve()),
+            "size_bytes": size
+        },
+        "config": {
+            "short_explanation_limit": args.short_explanation_limit,
+            "low_coverage_limit": args.low_coverage_limit,
+            "max_details": args.max_details,
+            "strict_mode": args.strict
+        },
+        "summary": {
+            "total_questions": tq,
+            "usable_questions": uq,
+            "no_area": na,
+            "no_subtema": ns
+        },
+        "integrity": integrity_data, # For backward compat or raw data if needed, but we hoist critical_failures
+        "critical_failures": integrity_data["critical_failures"],
+        "warnings": integrity_data["warnings"],
+        "human_review_queue": explanations_data["human_review_queue"],
+        "duplication": duplication_data,
+        "explanations": explanations_data,
+        "taxonomy": taxonomy_data,
+        "coverage": coverage_data,
+        "encoding": encoding_data
+    }
+
+    if args.output:
+        with open(args.output, "w", encoding="utf-8") as f:
+            json.dump(full_data, f, indent=2, ensure_ascii=False)
+
+    if args.md:
+        with open(args.md, "w", encoding="utf-8") as f:
+            f.write(build_markdown(full_data))
+
+    if args.strict:
+        cf = full_data["critical_failures"]
+        has_critical = any(len(v) > 0 if isinstance(v, list) else (len(v['alternatives']) > 0 or len(v['images']) > 0) for k, v in cf.items())
+        if has_critical:
+            print("ERROR: Critical failures found in strict mode.")
+            sys.exit(1)
 
 if __name__ == "__main__":
     main()
