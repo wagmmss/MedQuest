@@ -47,3 +47,11 @@ def test_meta_cache_is_invalidated_after_attempt(client):
     assert client.get("/api/meta").get_json()["answered_questions"] == 0
     client.post("/api/questions/1/attempt", json={"selected_letter": "B"})
     assert client.get("/api/meta").get_json()["answered_questions"] == 1
+
+
+def test_performance_indexes_cover_user_timeline_and_latest_attempt(client):
+    with client.application.app_context():
+        from api.db import get_db
+        indexes = {row["name"] for row in get_db().execute("PRAGMA index_list(attempts)").fetchall()}
+    assert "idx_attempts_user_question_latest" in indexes
+    assert "idx_attempts_user_answered_at" in indexes

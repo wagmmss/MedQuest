@@ -203,6 +203,7 @@ def init_db(app):
             db.execute("CREATE INDEX IF NOT EXISTS idx_idempotency_lease ON idempotency_keys(user_id, lease_expires_at)")
 
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_question ON attempts (user_id, question_id)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_question_latest ON attempts (user_id, question_id, id DESC)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_correct ON attempts (user_id, is_correct)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area_subtema ON questions (area, subtema)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_spaced_repetition_review ON spaced_repetition (user_id, next_review_date)")
@@ -211,6 +212,7 @@ def init_db(app):
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_year ON questions (year)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_source ON questions (source_file)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_answered_at ON attempts (answered_at)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_answered_at ON attempts (user_id, answered_at)")
 
         # FTS is an optional capability and must not invalidate the required schema.
         try:
