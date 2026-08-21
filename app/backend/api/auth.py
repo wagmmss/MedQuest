@@ -49,6 +49,9 @@ def get_jwks():
     return r.json()
 
 
+# Global PyJWKClient instance to cache keys and avoid rate limits/timeouts
+jwks_client = jwt.PyJWKClient(JWKS_URL, cache_keys=True) if JWKS_URL else None
+
 def require_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -80,7 +83,8 @@ def require_auth(f):
 
         token = auth_header.split(" ")[1]
         try:
-            jwks_client = jwt.PyJWKClient(JWKS_URL)
+            if not jwks_client:
+                return jsonify({"error": "Unauthorized"}), 401
             signing_key = jwks_client.get_signing_key_from_jwt(token)
             data = jwt.decode(
                 token,
