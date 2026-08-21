@@ -1,5 +1,6 @@
 """Application factory do MedQuest (Flask + blueprints)."""
 import logging
+import platform
 
 from flask import Flask, g, jsonify, request
 from flask_cors import CORS
@@ -32,7 +33,12 @@ def create_app(testing=False):
 
     @app.route("/")
     def index():
-        return jsonify({"status": "ok", "app": "MedQuest API", "docs": "/api"})
+        return jsonify({
+            "status": "ok",
+            "app": "MedQuest API",
+            "docs": "/api",
+            "python": platform.python_version(),
+        })
 
     from .auth import require_auth
     
