@@ -30,7 +30,7 @@ export async function POST(request: Request) {
   }
 
   const digest = info && typeof info === "object" && typeof (info as Record<string, unknown>).digest === "string"
-    ? (info as Record<string, unknown>).digest.slice(0, 128)
+    ? ((info as Record<string, unknown>).digest as string).slice(0, 128)
     : "";
 
   // Keep client telemetry on Vercel. Forwarding it to the study-data backend

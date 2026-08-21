@@ -44,12 +44,15 @@ class TursoCursor:
         
     def fetchone(self):
         row = self.cursor.fetchone()
+        self.close()
         if row is None:
             return None
         return dict(zip(self.columns, row))
         
     def fetchall(self):
-        return [dict(zip(self.columns, row)) for row in self.cursor.fetchall()]
+        rows = self.cursor.fetchall()
+        self.close()
+        return [dict(zip(self.columns, row)) for row in rows]
 
     def close(self):
         """Close the underlying cursor when the libsql driver exposes it."""

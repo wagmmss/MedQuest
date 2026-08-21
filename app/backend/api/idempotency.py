@@ -23,7 +23,8 @@ def _owns_lease(db, user_id: str, key: str, lease_token: str, status: str) -> bo
            WHERE user_id = ? AND key = ? AND lease_owner_token = ? AND status = ?""",
         (user_id, key, lease_token, status),
     )
-    row = cursor.fetchone()
+    rows = cursor.fetchall()
+    row = rows[0] if rows else None
     cursor.close()
     return row is not None
 
@@ -77,7 +78,8 @@ def reserve_idempotency(db, user_id: str, path: str, method: str, raw_payload: b
         "SELECT status, method, path, payload_hash, status_code, response_body, lease_expires_at FROM idempotency_keys WHERE user_id = ? AND key = ?",
         (user_id, normalized_key)
     )
-    existing = cursor.fetchone()
+    rows = cursor.fetchall()
+    existing = rows[0] if rows else None
     cursor.close()
 
     if not existing:
@@ -122,7 +124,8 @@ def reserve_idempotency(db, user_id: str, path: str, method: str, raw_payload: b
                 "SELECT status, status_code, response_body FROM idempotency_keys WHERE user_id = ? AND key = ?",
                 (user_id, normalized_key)
             )
-            row = cursor.fetchone()
+            rows = cursor.fetchall()
+            row = rows[0] if rows else None
             cursor.close()
             if row and row["status"] == "completed" and row["response_body"] is not None:
                 return Response(row["response_body"], status=row["status_code"] or 200, mimetype="application/json"), None, None
