@@ -48,7 +48,7 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
   };
 
   const motivationalMessages = [
-    stats.streak_days >= 5 ? `Sua sequência está em 🔥! ${stats.streak_days} dias seguidos.` : null,
+    stats.streak_days >= 5 ? `Você estudou em ${stats.streak_days} dias da sua sequência. Descansos planejados não apagam seu progresso.` : null,
     currentPlannerWeek && currentPlannerWeek.week > 20 ? `Reta final! Você está na Semana ${currentPlannerWeek.week}.` : null,
     pendentes === 0 && stats.distinct_answered > 0 ? "Você já bateu sua meta diária de revisões! 🎉" : null,
     "Aqui está o seu progresso na preparação para a USP."
@@ -229,7 +229,7 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
               {/* Stat Card 3 */}
               <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/20 rounded-xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(234,88,12,0.15)] group relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <span className="material-symbols-outlined text-6xl text-orange-600">local_fire_department</span>
+                  <span className="material-symbols-outlined text-6xl text-orange-600">self_improvement</span>
                 </div>
                 <div className="flex items-center gap-3 mb-4 text-orange-600 transition-transform group-hover:scale-105 origin-left relative z-10">
                   <span className="material-symbols-outlined animate-pulse" data-icon="local_fire_department">local_fire_department</span>

@@ -1,5 +1,7 @@
 """Application factory do MedQuest (Flask + blueprints)."""
-from flask import Flask, jsonify, request
+import logging
+
+from flask import Flask, g, jsonify, request
 from flask_cors import CORS
 from dotenv import load_dotenv
 
@@ -11,18 +13,22 @@ from .questions import bp as questions_bp
 from .stats import bp as stats_bp
 from .plan import bp as plan_bp
 from .flashcards import bp as flashcards_bp
-
-
 from .logs import bp as logs_bp
+from .observability import configure_logging, emit, finish_request, start_request
 
 def create_app(testing=False):
     app = Flask(__name__)
     app.config.from_object(Config)
+    app.config["MAX_CONTENT_LENGTH"] = 1 * 1024 * 1024
     if testing:
         app.config["TESTING"] = True
+    configure_logging(app)
     import os
     frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
     CORS(app, origins=[frontend_url, "http://localhost:3000", "http://127.0.0.1:3000"])
+
+    app.before_request(start_request)
+    app.after_request(finish_request)
 
     @app.route("/")
     def index():
@@ -33,7 +39,7 @@ def create_app(testing=False):
     @app.before_request
     @require_auth
     def authenticate_request():
-        if request.path == "/" or request.method == "OPTIONS" or "/images/" in request.path or "/logs/error" in request.path:
+        if request.path == "/" or request.method == "OPTIONS" or "/images/" in request.path:
             return
         pass
 
@@ -44,7 +50,14 @@ def create_app(testing=False):
         if isinstance(e, HTTPException):
             return jsonify({"error": e.name, "description": e.description}), e.code
         
-        app.logger.error(f"Unhandled Exception: {e}", exc_info=True)
+        emit(
+            "unhandled_exception",
+            level=logging.ERROR,
+            request_id=getattr(g, "request_id", None),
+            route=request.url_rule.rule if request.url_rule else request.path,
+            error_type=type(e).__name__,
+        )
+        app.logger.exception("Unhandled exception request_id=%s", getattr(g, "request_id", None))
         is_debug = app.config.get('DEBUG', False)
         return jsonify({
             "error": "Internal Server Error", 

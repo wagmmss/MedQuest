@@ -5,7 +5,6 @@ import { ptBR } from '@clerk/localizations';
 import { auth } from '@clerk/nextjs/server';
 import { cookies } from 'next/headers';
 import "./globals.css";
-import "material-symbols/outlined.css";
 import { Sidebar } from "@/components/Sidebar";
 import TopNav from "@/components/TopNav";
 import { Toaster } from "react-hot-toast";
@@ -14,6 +13,7 @@ import { DemoButton } from "@/components/DemoButton";
 import { DemoBanner } from "@/components/DemoBanner";
 import { SyncProvider } from "@/components/SyncProvider";
 import { OnboardingTour } from "@/components/OnboardingTour";
+import { WebVitals } from "@/components/WebVitals";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -82,6 +82,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
         </head>
         <body className="font-body-md text-body-md h-screen flex overflow-hidden bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+          <WebVitals />
           <a href="#conteudo-principal" className="skip-link">Pular para o conteúdo principal</a>
           {!userId && !isDemoMode ? (
             <div className="flex w-full h-full items-start justify-center p-8 bg-background relative overflow-y-auto">

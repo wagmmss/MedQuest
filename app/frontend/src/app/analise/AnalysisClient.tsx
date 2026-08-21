@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import { TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat, PredictiveScore, AtRiskTopic, LearningProfile } from "@/types/api";
+import { TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness } from "@/types/api";
 import { AlertTriangle, TrendingUp, Compass, AlarmClock, Lightbulb, Brain, ChevronRight, BarChart3, AlertCircle, Target, Activity } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
@@ -20,7 +20,8 @@ export function AnalysisClient({
   distractors,
   predictiveScore,
   atRiskTopics,
-  learningProfile
+  learningProfile,
+  examReadiness
 }: {
   timeline: TimelineStat[];
   weakTopics: WeakTopic[];
@@ -30,6 +31,7 @@ export function AnalysisClient({
   predictiveScore: PredictiveScore;
   atRiskTopics: AtRiskTopic[];
   learningProfile: LearningProfile;
+  examReadiness: ExamReadiness;
 }) {
   const getRecIcon = (type: string) => {
     switch (type) {
@@ -113,6 +115,36 @@ export function AnalysisClient({
               Iniciar sessão personalizada <ChevronRight size={18} />
             </Link>
           </div>
+        </motion.section>
+
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-card border border-border shadow-sm rounded-2xl p-6"
+        >
+          <div className="flex items-start justify-between gap-4 mb-5">
+            <div>
+              <h2 className="text-xl font-bold text-foreground">Preparação por edital e instituição</h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                Cobertura geral: {Math.round(examReadiness.coverage * 100)}% ({examReadiness.answered} de {examReadiness.available} questões).
+              </p>
+            </div>
+            <Link href="/simulado" className="text-sm font-semibold text-primary hover:underline">Configurar simulado</Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {examReadiness.areas.slice(0, 6).map(area => (
+              <Link key={area.area} href={area.action} className="rounded-xl border border-border p-4 hover:border-primary/40 transition-colors">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-semibold text-foreground">{area.area}</span>
+                  <span className="text-sm text-primary">{Math.round(area.coverage * 100)}%</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  {area.sample === "limited" ? "Amostra limitada — pratique mais para melhorar a estimativa." : `${Math.round((area.accuracy || 0) * 100)}% de acurácia.`}
+                </p>
+              </Link>
+            ))}
+          </div>
+          <p className="text-xs text-muted-foreground mt-4">{examReadiness.disclaimer}</p>
         </motion.section>
         
         {/* Predictive Dashboard */}

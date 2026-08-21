@@ -1,6 +1,7 @@
 """Blueprint: desempenho, recomendações e mapa de cobertura."""
 import time
 from datetime import datetime, timedelta, timezone
+from urllib.parse import urlencode
 
 from flask import Blueprint, jsonify, request, g
 
@@ -52,6 +53,39 @@ class SimpleTTLCache:
                 
 overview_cache = SimpleTTLCache(60)
 
+
+def responsible_streak(days_studied, today, days_per_week=6):
+    """Count active days while honoring configured weekly rest days.
+
+    Rest days preserve continuity but never inflate the displayed streak.
+    """
+    active = {str(day) for day in days_studied if day}
+    target = max(1, min(7, int(days_per_week or 6)))
+    rest_budget = 7 - target
+    active_count = 0
+    cursor = today
+    examined = 0
+    rests_in_block = 0
+    while examined < 366:
+        if str(cursor) in active:
+            active_count += 1
+        elif rests_in_block < rest_budget:
+            rests_in_block += 1
+        else:
+            break
+        examined += 1
+        if examined % 7 == 0:
+            rests_in_block = 0
+        cursor -= timedelta(days=1)
+    current_week_active = sum(str(today - timedelta(days=offset)) in active for offset in range(7))
+    return {
+        "days": active_count,
+        "weekly_target": target,
+        "active_days_last_7": current_week_active,
+        "rest_days_available": max(0, rest_budget - (7 - current_week_active)),
+        "policy": "rest_days_preserve_continuity",
+    }
+
 @bp.route("/stats/overview")
 def overview():
     try:
@@ -102,26 +136,19 @@ def overview():
         "SELECT DISTINCT substr(answered_at, 1, 10) AS day FROM attempts WHERE user_id = ? ORDER BY day DESC", (g.user_id,)
     ).fetchall()
     days_studied = {r["day"] for r in day_rows}
-    streak_days = 0
-    if days_studied:
-        try:
-            tz_offset = int(request.args.get('tz_offset', 0))
-        except (ValueError, TypeError):
-            tz_offset = 0
-        local_now = datetime.now(timezone.utc) + timedelta(minutes=tz_offset)
-        cursor_day = local_now.date()
-        if str(cursor_day) not in days_studied:
-            cursor_day -= timedelta(days=1)
-        while str(cursor_day) in days_studied:
-            streak_days += 1
-            cursor_day -= timedelta(days=1)
+    config = db.execute(
+        "SELECT days_per_week FROM planner_config WHERE user_id = ?", (g.user_id,)
+    ).fetchone()
+    local_today = (now_utc + timedelta(minutes=tz_offset)).date()
+    streak = responsible_streak(days_studied, local_today, config["days_per_week"] if config else 6)
 
     result = {
         "total_questions": total_q, "distinct_answered": distinct_answered,
         "total_attempts": total_attempts, "accuracy_all_attempts": accuracy,
         "accuracy_latest_attempt": accuracy_latest, "coverage_pct": coverage_pct,
         "srs_due_count": srs_due_count, "accuracy_last7": accuracy_last7,
-        "accuracy_prev7": accuracy_prev7, "streak_days": streak_days,
+        "accuracy_prev7": accuracy_prev7, "streak_days": streak["days"],
+        "streak": streak,
         "flashcards_due_count": flashcards_due_count,
     }
     overview_cache.set(cache_key, result)
@@ -329,6 +356,55 @@ def recommendations():
 @bp.route("/stats/learning-profile")
 def learning_profile():
     return jsonify(build_learning_profile(get_db(), g.user_id))
+
+
+@bp.route("/stats/exam-readiness")
+def exam_readiness():
+    """Coverage report for an institution/editable exam scope, isolated by user."""
+    db = get_db()
+    institution = request.args.get("institution", "").strip()[:64]
+    institution_clause = "AND q.institution_code = ?" if institution else ""
+    params = [g.user_id]
+    if institution:
+        params.append(institution)
+    rows = db.execute(f"""
+        SELECT q.area AS area,
+               COUNT(DISTINCT q.id) AS available,
+               COUNT(DISTINCT a.question_id) AS answered,
+               COUNT(a.id) AS attempts,
+               COALESCE(SUM(a.is_correct), 0) AS correct
+        FROM questions q
+        LEFT JOIN attempts a ON a.question_id = q.id AND a.user_id = ?
+        WHERE q.missing_alts = 0 AND q.area IS NOT NULL AND q.area != ''
+              {institution_clause}
+        GROUP BY q.area
+        ORDER BY available DESC
+    """, params).fetchall()
+    areas = []
+    for row in rows:
+        attempts = row["attempts"]
+        available = row["available"]
+        areas.append({
+            "area": row["area"],
+            "available": available,
+            "answered": row["answered"],
+            "coverage": round(row["answered"] / available, 4) if available else 0,
+            "attempts": attempts,
+            "accuracy": round(row["correct"] / attempts, 4) if attempts else None,
+            "sample": "sufficient" if attempts >= 20 else "limited",
+            "action": "/estudar?" + urlencode({"area": row["area"], "status": "new", "limit": 20}),
+        })
+    areas.sort(key=lambda item: (item["coverage"], item["accuracy"] if item["accuracy"] is not None else -1, item["area"]))
+    total_available = sum(item["available"] for item in areas)
+    total_answered = sum(item["answered"] for item in areas)
+    return jsonify({
+        "institution": institution or None,
+        "coverage": round(total_answered / total_available, 4) if total_available else 0,
+        "answered": total_answered,
+        "available": total_available,
+        "areas": areas,
+        "disclaimer": "Projeções com menos de 20 tentativas por área têm amostra limitada.",
+    })
 
 
 @bp.route("/stats/predictive-score")

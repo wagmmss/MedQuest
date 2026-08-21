@@ -111,6 +111,7 @@ export function SimuladoClient({
     institutions: [] as string[],
     years: [] as string[],
     questions_per_area: 20,
+    duration_minutes: 180,
     force_4_options: false
   });
 
@@ -122,6 +123,37 @@ export function SimuladoClient({
   const startLockRef = useRef(false);
   const detailRequestRef = useRef(0);
   const dialogInitialFocusRef = useRef<HTMLButtonElement>(null);
+  const customConfigLoadedRef = useRef(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      try {
+        const saved = localStorage.getItem("medquest_simulado_config");
+        if (saved) {
+          const parsed = JSON.parse(saved) as Partial<typeof customConfig>;
+          setCustomConfig(prev => ({
+            ...prev,
+            institutions: Array.isArray(parsed.institutions) ? parsed.institutions.slice(0, 20) : prev.institutions,
+            years: Array.isArray(parsed.years) ? parsed.years.slice(0, 20) : prev.years,
+            questions_per_area: Math.max(1, Math.min(100, Number(parsed.questions_per_area) || prev.questions_per_area)),
+            duration_minutes: Math.max(15, Math.min(600, Number(parsed.duration_minutes) || prev.duration_minutes)),
+            force_4_options: Boolean(parsed.force_4_options),
+          }));
+        }
+      } catch {
+        localStorage.removeItem("medquest_simulado_config");
+      } finally {
+        customConfigLoadedRef.current = true;
+      }
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (customConfigLoadedRef.current) {
+      localStorage.setItem("medquest_simulado_config", JSON.stringify(customConfig));
+    }
+  }, [customConfig]);
 
   useEffect(() => {
     if (showAreaSummary) dialogInitialFocusRef.current?.focus();
@@ -203,7 +235,7 @@ export function SimuladoClient({
       } else if (simuladoProfile === 'custom' && !hasCustomFilters) {
         qList = await api.questions.getCustomSimulado(customConfig);
         isForce4Options = customConfig.force_4_options;
-        durationHours = (qList.length / 120) * 6;
+        durationHours = customConfig.duration_minutes / 60;
       } else {
         const profile = profilesData.find(p => p.id === simuladoProfile) || profilesData[0];
         durationHours = profile.duration_hours;
@@ -541,6 +573,26 @@ export function SimuladoClient({
               </div>
             </div>
 
+            <div>
+              <label className="block text-sm font-bold text-foreground mb-2">Anos (deixe vazio para todos)</label>
+              <div className="flex flex-wrap gap-2 max-h-28 overflow-y-auto">
+                {(meta?.years || []).map(year => String(year)).map(year => (
+                  <label key={year} className="flex items-center gap-1.5 bg-background border border-border px-2 py-1 rounded text-sm cursor-pointer hover:bg-muted">
+                    <input
+                      type="checkbox"
+                      checked={customConfig.years.includes(year)}
+                      onChange={(event) => setCustomConfig(prev => ({
+                        ...prev,
+                        years: event.target.checked ? [...prev.years, year] : prev.years.filter(item => item !== year),
+                      }))}
+                      className="rounded text-primary focus:ring-primary"
+                    />
+                    {year}
+                  </label>
+                ))}
+              </div>
+            </div>
+
             <div className="flex gap-4">
               <div className="flex-1">
                 <label className="block text-sm font-bold text-foreground mb-2">Questões por Área</label>
@@ -552,6 +604,17 @@ export function SimuladoClient({
                   className="w-full bg-background border border-border rounded-lg p-2 text-foreground focus:ring-2 focus:ring-primary"
                 />
                 <p className="text-xs text-muted-foreground mt-1">Multiplicado por 5 áreas</p>
+              </div>
+              <div className="flex-1">
+                <label className="block text-sm font-bold text-foreground mb-2">Duração (min)</label>
+                <input
+                  type="number"
+                  min="15" max="600" step="15"
+                  value={customConfig.duration_minutes}
+                  onChange={(event) => setCustomConfig(prev => ({ ...prev, duration_minutes: Math.max(15, Math.min(600, parseInt(event.target.value) || 180)) }))}
+                  className="w-full bg-background border border-border rounded-lg p-2 text-foreground focus:ring-2 focus:ring-primary"
+                />
+                <p className="text-xs text-muted-foreground mt-1">Entre 15 min e 10 horas</p>
               </div>
             </div>
 
@@ -585,7 +648,7 @@ export function SimuladoClient({
                 ? `${Math.round((Number(initialFilters.limit || 50) / 120) * 6 * 60)} min` 
                 : (
                     simuladoProfile === 'custom' 
-                      ? `${Math.round(((customConfig.questions_per_area * 5) / 120) * 6)} Horas` 
+                      ? `${customConfig.duration_minutes} min`
                       : `${profilesData.find(p => p.id === simuladoProfile)?.duration_hours || 6} Horas`
                   )}
             </span>

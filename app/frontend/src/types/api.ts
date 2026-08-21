@@ -9,6 +9,13 @@ export interface OverviewStats {
   accuracy_last7: number | null;
   accuracy_prev7: number | null;
   streak_days: number;
+  streak?: {
+    days: number;
+    weekly_target: number;
+    active_days_last_7: number;
+    rest_days_available: number;
+    policy: "rest_days_preserve_continuity";
+  };
   flashcards_due_count?: number;
 }
 
@@ -82,6 +89,24 @@ export interface LearningProfile {
   };
   topics: LearningProfileTopic[];
   method: { deterministic: boolean; signals: string[] };
+}
+
+export interface ExamReadiness {
+  institution: string | null;
+  coverage: number;
+  answered: number;
+  available: number;
+  areas: {
+    area: string;
+    available: number;
+    answered: number;
+    coverage: number;
+    attempts: number;
+    accuracy: number | null;
+    sample: "sufficient" | "limited";
+    action: string;
+  }[];
+  disclaimer: string;
 }
 
 export interface Recommendation {

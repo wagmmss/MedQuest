@@ -44,9 +44,22 @@ class SimpleTTLCache:
                 del self.cache[oldest]
             self.cache[key] = (value, now + self.ttl)
 
+    def clear_user(self, user_id):
+        with self.lock:
+            keys = [key for key in self.cache if isinstance(key, tuple) and key[0] == user_id]
+            for key in keys:
+                del self.cache[key]
+
 meta_cache = SimpleTTLCache(60)
 
 bp = Blueprint("questions", __name__)
+
+
+def invalidate_user_caches(user_id):
+    """Invalidate every derived per-user view after a successful mutation."""
+    meta_cache.clear_user(user_id)
+    from .stats import overview_cache
+    overview_cache.clear_user(user_id)
 
 
 def _sample_ids(db, where_clause, params, limit):
@@ -126,6 +139,8 @@ def simulado_custom():
     data = request.get_json(force=True) or {}
     institutions = data.get("institutions", [])
     years = data.get("years", [])
+    institutions = [str(value)[:64] for value in institutions[:20]] if isinstance(institutions, list) else []
+    years = [str(value)[:4] for value in years[:20]] if isinstance(years, list) else []
     q_per_area = _bounded_int(data.get("questions_per_area"), 20, 1, 100)
     
     areas = ["Cirurgia", "Clínica Médica", "Pediatria", "Ginecologia e Obstetrícia", "Medicina Preventiva e Social"]
@@ -135,12 +150,12 @@ def simulado_custom():
     base_clauses = ["q.missing_alts = 0"]
     base_params = []
     
-    if institutions and isinstance(institutions, list) and len(institutions) > 0:
+    if institutions:
         placeholders = ",".join("?" * len(institutions))
         base_clauses.append(f"q.institution_code IN ({placeholders})")
         base_params.extend(institutions)
         
-    if years and isinstance(years, list) and len(years) > 0:
+    if years:
         placeholders = ",".join("?" * len(years))
         base_clauses.append(f"q.year IN ({placeholders})")
         base_params.extend(years)
@@ -450,6 +465,7 @@ def submit_attempt(qid):
             if lease_token:
                 complete_idempotency(db, g.user_id, 200, resp_data, lease_token)
 
+        invalidate_user_caches(g.user_id)
         return jsonify(resp_data)
     except Exception:
         if lease_token:
@@ -513,6 +529,7 @@ def review_fsrs(qid):
             if lease_token:
                 complete_idempotency(db, g.user_id, 200, resp_data, lease_token)
 
+        invalidate_user_caches(g.user_id)
         return jsonify(resp_data)
     except Exception:
         if lease_token:
@@ -617,6 +634,7 @@ def submit_attempt_batch():
             if lease_token:
                 complete_idempotency(db, g.user_id, 200, resp_data, lease_token)
 
+        invalidate_user_caches(g.user_id)
         return jsonify(resp_data)
     except Exception:
         if lease_token:
@@ -660,6 +678,7 @@ def toggle_favorite(qid):
             if lease_token:
                 complete_idempotency(db, g.user_id, 200, resp_data, lease_token)
 
+        invalidate_user_caches(g.user_id)
         return jsonify(resp_data)
     except Exception:
         if lease_token:

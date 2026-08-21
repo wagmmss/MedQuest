@@ -5,11 +5,13 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
-    "postbuild": "node scripts/validate-sw.mjs",
+    "postbuild": "node scripts/validate-sw.mjs && node scripts/check-performance-budgets.mjs",
     "start": "next start",
     "lint": "eslint",
     "test:e2e": "playwright test",
-    "test:e2e:list": "playwright test --list"
+    "test:e2e:list": "playwright test --list",
+    "audit:deps": "npm audit --audit-level=high",
+    "check:performance": "node scripts/check-performance-budgets.mjs"
   },
   "dependencies": {
     "@clerk/localizations": "^4.15.4",

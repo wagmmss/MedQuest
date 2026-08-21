@@ -3,7 +3,7 @@ import {
   BreakdownStat, DistractorStat, PlannerConfig, PlannerProgressMap, PlannerPlanResponse,
   QuestionMeta, SubtemaItem, QuestionListItem, QuestionDetail, AttemptResult, SearchResult,
   BatchAttemptItem, BatchAttemptResult, BatchDetailResponse, Flashcard, FlashcardGenerateResponse,
-  PredictiveScore, AtRiskTopic, LearningProfile
+  PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness
 } from "@/types/api";
 
 const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 
@@ -84,6 +84,7 @@ export const api = {
     getPredictiveScore: () => apiFetch<PredictiveScore>("/api/stats/predictive-score", { cache: 'no-store' }),
     getAtRiskTopics: () => apiFetch<AtRiskTopic[]>("/api/stats/at-risk", { cache: 'no-store' }),
     getLearningProfile: () => apiFetch<LearningProfile>("/api/stats/learning-profile", { cache: 'no-store' }),
+    getExamReadiness: (institution?: string) => apiFetch<ExamReadiness>(`/api/stats/exam-readiness${institution ? `?institution=${encodeURIComponent(institution)}` : ""}`, { cache: 'no-store' }),
     getBreakdown: (by: 'institution' | 'area' | 'year') => 
       apiFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { cache: 'no-store' }),
     resetProgress: () => 
@@ -167,7 +168,7 @@ export const api = {
     }),
     search: (q: string, semantic: boolean = false) => apiFetch<SearchResult[]>(`/api/search?q=${encodeURIComponent(q)}&semantic=${semantic}`, { cache: 'no-store' }),
     getSimuladoUSP: () => apiFetch<QuestionListItem[]>("/api/simulado/usp", { cache: 'no-store' }),
-    getCustomSimulado: (config: { institutions?: string[], years?: string[], questions_per_area?: number }) => apiFetch<QuestionListItem[]>("/api/simulado/custom", {
+    getCustomSimulado: (config: { institutions?: string[], years?: string[], questions_per_area?: number, duration_minutes?: number, force_4_options?: boolean }) => apiFetch<QuestionListItem[]>("/api/simulado/custom", {
       method: "POST",
       body: JSON.stringify(config)
     }),

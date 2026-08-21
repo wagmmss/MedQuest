@@ -13,6 +13,7 @@ export default async function AnalisePage() {
     serverApi.stats.getPredictiveScore(),
     serverApi.stats.getAtRiskTopics(),
     serverApi.stats.getLearningProfile(),
+    serverApi.stats.getExamReadiness(),
   ]);
 
   const timeline = results[0].status === 'fulfilled' ? results[0].value : [];
@@ -27,6 +28,10 @@ export default async function AnalisePage() {
     goal: { questions_today: 30, configured_daily_questions: 30, reviews_due: 0, target_score: null, exam_date: null },
     topics: [],
     method: { deterministic: true, signals: [] },
+  };
+  const examReadiness = results[8].status === 'fulfilled' ? results[8].value : {
+    institution: null, coverage: 0, answered: 0, available: 0, areas: [],
+    disclaimer: 'Ainda não há dados suficientes para este relatório.',
   };
 
   return (
@@ -61,6 +66,7 @@ export default async function AnalisePage() {
         predictiveScore={predictiveScore}
         atRiskTopics={atRiskTopics}
         learningProfile={learningProfile}
+        examReadiness={examReadiness}
       />
 
     </div>

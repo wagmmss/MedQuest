@@ -20,9 +20,8 @@ export default function GlobalError({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             error: error.message,
-            info: { digest: error.digest, stack: error.stack },
+            info: { digest: error.digest },
             url: window.location.href,
-            user_id: "global-error"
           }),
         });
       } catch (err) {

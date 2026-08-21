@@ -3,7 +3,7 @@ import { getGuestSession } from "./session";
 import { 
   OverviewStats, CoverageResponse, QuestionMeta, PlannerConfig,
   TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat,
-  PlannerPlanResponse, PlannerProgressMap, PredictiveScore, AtRiskTopic, LearningProfile
+  PlannerPlanResponse, PlannerProgressMap, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness
 } from "@/types/api";
 
 export type { QuestionMeta };
@@ -82,6 +82,7 @@ export const serverApi = {
     getPredictiveScore: () => serverFetch<PredictiveScore>("/api/stats/predictive-score", { next: { tags: ['stats'] } }),
     getAtRiskTopics: () => serverFetch<AtRiskTopic[]>("/api/stats/at-risk", { next: { tags: ['stats'] } }),
     getLearningProfile: () => serverFetch<LearningProfile>("/api/stats/learning-profile", { next: { tags: ['stats'] } }),
+    getExamReadiness: () => serverFetch<ExamReadiness>("/api/stats/exam-readiness", { next: { tags: ['stats'] } }),
     getBreakdown: (by: 'institution' | 'area' | 'year') => 
       serverFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { next: { tags: ['stats'] } }),
   },

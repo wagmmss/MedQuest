@@ -5,6 +5,7 @@ import { getGuestSession } from "@/lib/session";
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
 
 async function handler(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+  const requestId = crypto.randomUUID();
   const proxySecret = process.env.FLASK_API_PROXY_SECRET;
   if (!proxySecret) {
     console.error("[PROXY] FLASK_API_PROXY_SECRET is not configured on the server.");
@@ -34,6 +35,7 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
   headers.delete("x-guest-id");
   headers.delete("x-internal-proxy-token");
   headers.delete("x-internal-guest-id");
+  headers.delete("x-request-id");
 
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
@@ -42,6 +44,7 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
   }
 
   headers.set("X-Internal-Proxy-Token", proxySecret);
+  headers.set("X-Request-ID", requestId);
 
   try {
     const response = await fetch(targetUrl, {
@@ -54,6 +57,7 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
     const responseHeaders = new Headers(response.headers);
     responseHeaders.delete("content-encoding");
     responseHeaders.delete("content-length");
+    responseHeaders.set("X-Request-ID", response.headers.get("X-Request-ID") || requestId);
 
     return new NextResponse(response.body, {
       status: response.status,
@@ -62,10 +66,10 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
-    console.error(`[PROXY] Fetch error to ${targetUrl}:`, message);
-    return new NextResponse(JSON.stringify({ error: "Proxy fetch failed", details: message }), {
+    console.error(`[PROXY] request_id=${requestId} upstream failure:`, message);
+    return new NextResponse(JSON.stringify({ error: "Proxy fetch failed", request_id: requestId }), {
       status: 502,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "X-Request-ID": requestId },
     });
   }
 }
