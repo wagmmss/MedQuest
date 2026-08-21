@@ -23,34 +23,28 @@ TURSO_TOKEN = os.environ.get("TURSO_AUTH_TOKEN")
 # ephemeral embedded replica per instance so reads are local while libSQL still
 # forwards writes to the Turso primary.
 _replica_init_lock = Lock()
-_initialized_replicas = set()
+_shared_turso_client = None
 
 
 def _connect_turso(turso_url, turso_token):
+    global _shared_turso_client
+
     import libsql
 
-    replica_path = os.environ.get(
-        "TURSO_REPLICA_PATH",
-        os.path.join(tempfile.gettempdir(), "medquest-turso-replica.db"),
-    )
-    replica_dir = os.path.dirname(os.path.abspath(replica_path))
-    os.makedirs(replica_dir, exist_ok=True)
-
-    client = libsql.connect(
-        replica_path,
-        sync_url=turso_url,
-        auth_token=turso_token,
-    )
-
-    # Each process bootstraps once. Subsequent request connections reuse the
-    # same replica file and avoid repeatedly downloading it.
+    # Usa uma conexão remota direta em vez de réplica embutida (embedded replica).
+    # Réplicas embutidas forçam um download completo do banco no startup (sync),
+    # o que demora mais de 15 segundos no Render e causa Gateway Timeout na Vercel (504/429).
     with _replica_init_lock:
-        if replica_path not in _initialized_replicas:
-            logger.info("Synchronizing Turso embedded replica at %s", replica_path)
-            client.sync()
-            _initialized_replicas.add(replica_path)
+        if _shared_turso_client is None:
+            client = libsql.connect(
+                turso_url,
+                auth_token=turso_token,
+                _check_same_thread=False,
+            )
+            logger.info("Connected to remote Turso database directly (no replica sync)")
+            _shared_turso_client = client
 
-    return client
+    return _shared_turso_client
 
 class TursoCursor:
     """Expose DB-API cursor rows as mappings, matching sqlite3.Row usage."""
@@ -83,9 +77,10 @@ class TursoCursor:
         return getattr(self.cursor, "rowcount", 0)
 
 class TursoConnection:
-    def __init__(self, client):
+    def __init__(self, client, persistent=False):
         self.client = client
         self.tx = False
+        self.persistent = persistent
         
     def begin(self, immediate=False):
         if self.tx:
@@ -126,7 +121,8 @@ class TursoConnection:
     def close(self):
         if self.tx:
             self.rollback()
-        self.client.close()
+        if not self.persistent:
+            self.client.close()
 
 @contextmanager
 def db_transaction(db, immediate=False):
@@ -156,7 +152,7 @@ def get_db():
             if not turso_url.lower().startswith(("libsql://", "wss://")):
                 raise ValueError("TURSO_DATABASE_URL must use libsql:// or wss:// for transaction support")
             client = _connect_turso(turso_url, turso_token)
-            g.db = TursoConnection(client)
+            g.db = TursoConnection(client, persistent=True)
         else:
             db_path = os.environ.get("MEDQUEST_DB", os.path.join(BACKEND_DIR, "medquest.db"))
             g.db = sqlite3.connect(db_path, timeout=10)
