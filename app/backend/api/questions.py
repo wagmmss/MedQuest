@@ -803,6 +803,7 @@ def serve_image(filename):
     static_dir = os.path.join(backend_dir, "static")
     return send_from_directory(static_dir, filename)
 
+@bp.route("/questions/<int:qid>/explain", methods=["GET"])
 @bp.route("/<int:qid>/explain", methods=["GET"])
 def explain_question(qid):
     db = get_db()

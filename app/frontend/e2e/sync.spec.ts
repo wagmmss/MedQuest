@@ -29,10 +29,11 @@ const MOCK_QUESTION_DETAIL = {
 };
 
 test.describe('Offline Sync e Resiliência', () => {
-  test.beforeEach(async ({ context }) => {
+  test.beforeEach(async ({ context, page }) => {
     await context.addCookies([
       { name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' }
     ]);
+    await page.addInitScript(() => localStorage.setItem('medquest_onboarding_v1', 'done'));
   });
 
   test('enfileira tentativa offline, grava no IndexedDB e sincroniza ao reconectar', async ({ page }) => {

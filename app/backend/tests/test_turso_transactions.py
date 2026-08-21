@@ -8,6 +8,7 @@ class FakeCursor:
         self.description = []
         self.rowcount = rows_affected
         self.lastrowid = None
+        self.closed = False
 
     def fetchone(self):
         return None
@@ -15,16 +16,21 @@ class FakeCursor:
     def fetchall(self):
         return []
 
+    def close(self):
+        self.closed = True
+
 
 class FakeClient:
     def __init__(self):
         self.statements = []
         self.committed = False
         self.rolled_back = False
+        self.last_cursor = None
 
     def execute(self, sql, args=()):
         self.statements.append((sql, list(args)))
-        return FakeCursor()
+        self.last_cursor = FakeCursor()
+        return self.last_cursor
 
     def commit(self):
         self.committed = True
@@ -66,6 +72,16 @@ def test_turso_transaction_rolls_back_on_failure():
     assert client.committed is False
     assert client.rolled_back is True
     assert db.tx is False
+
+
+def test_turso_cursor_closes_underlying_cursor():
+    client = FakeClient()
+    db = TursoConnection(client)
+
+    cursor = db.execute("SELECT 1")
+    cursor.close()
+
+    assert client.last_cursor.closed is True
 
 
 def test_http_turso_url_is_rejected_before_startup(monkeypatch):

@@ -60,6 +60,10 @@ async function mockStudyApi(
   });
 }
 
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('medquest_onboarding_v1', 'done'));
+});
+
 test('retoma questão e alternativa ainda não enviada após reload', async ({ page, context }) => {
   await context.addCookies([{ name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' }]);
   await mockStudyApi(page);

@@ -87,10 +87,11 @@ async function mockSimuladoApi(page: Page, onBatchSubmit?: () => void | Promise<
 }
 
 test.describe('Fluxo Completo de Simulado', () => {
-  test.beforeEach(async ({ context }) => {
+  test.beforeEach(async ({ context, page }) => {
     await context.addCookies([
       { name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' }
     ]);
+    await page.addInitScript(() => localStorage.setItem('medquest_onboarding_v1', 'done'));
   });
 
   test('inicia, responde e entrega simulado com exibição de resultados', async ({ page }) => {

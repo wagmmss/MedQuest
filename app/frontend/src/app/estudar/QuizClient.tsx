@@ -203,7 +203,7 @@ export function QuizClient({
     return () => clearTimeout(timer);
   }, [initialFilters, loadQueue, loadQuestionDetail, queue.length, state]);
 
-  useEffect(() => {
+  const persistSession = useCallback((nextSelectedLetter = selectedLetter) => {
     if (!storageReady) return;
     if (state === "PLAYING" || state === "FINISHED") {
       writeLearningSession("quiz", {
@@ -214,7 +214,7 @@ export function QuizClient({
         filters,
         currentDetail,
         sessionAnswers,
-        selectedLetter,
+        selectedLetter: nextSelectedLetter,
         timeSpent: timeSpentSnapshotRef.current,
         savedAt: Date.now(),
       } satisfies SavedQuizState);
@@ -222,6 +222,18 @@ export function QuizClient({
       removeLearningSession("quiz");
     }
   }, [storageReady, state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter]);
+
+  useEffect(() => {
+    persistSession();
+  }, [persistSession]);
+
+  const selectAlternative = useCallback((letter: string) => {
+    if (attemptResult || submitting) return;
+    // Persist synchronously so a reload immediately after selecting an answer
+    // can still restore the in-progress session.
+    persistSession(letter);
+    setSelectedLetter(letter);
+  }, [attemptResult, submitting, persistSession]);
 
   // Effect to fetch dynamic meta when filters change
   useEffect(() => {
@@ -446,7 +458,7 @@ export function QuizClient({
         if (key in altIndexMap) {
           const idx = altIndexMap[key];
           if (idx < currentDetail.alternatives.length) {
-            setSelectedLetter(currentDetail.alternatives[idx].letter);
+            selectAlternative(currentDetail.alternatives[idx].letter);
           }
         } else if (key === "ENTER" || key === " ") {
           if (selectedLetter && !submitting) {
@@ -479,7 +491,7 @@ export function QuizClient({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue, selectedLetter, submitting, handleAttempt, handleReviewFSRS, nextQuestion, prevQuestion]);
+  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue, selectedLetter, submitting, handleAttempt, handleReviewFSRS, nextQuestion, prevQuestion, selectAlternative]);
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -987,7 +999,7 @@ export function QuizClient({
                     {}
                   }
                   key={alt.letter}
-                  onClick={() => !attemptResult && !submitting && setSelectedLetter(alt.letter)}
+                  onClick={() => selectAlternative(alt.letter)}
                   disabled={!!attemptResult || submitting}
                   className={clsx(
                     "text-left p-4 rounded-xl border transition-all flex items-start gap-4 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",

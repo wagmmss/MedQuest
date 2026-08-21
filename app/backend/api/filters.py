@@ -38,7 +38,7 @@ def question_filter_clauses(args):
         params.extend(subtemas)
 
     status = args.get("status", "all")
-    if status == "unanswered":
+    if status in ("unanswered", "new"):
         clauses.append("q.id NOT IN (SELECT question_id FROM attempts WHERE user_id = ?)")
         params.append(g.user_id)
     elif status == "wrong":

@@ -30,6 +30,12 @@ class TursoCursor:
         
     def fetchall(self):
         return [dict(zip(self.columns, row)) for row in self.cursor.fetchall()]
+
+    def close(self):
+        """Close the underlying cursor when the libsql driver exposes it."""
+        close = getattr(self.cursor, "close", None)
+        if close is not None:
+            close()
         
     @property
     def lastrowid(self):
@@ -168,7 +174,17 @@ def init_db(app):
                 created_at TEXT NOT NULL,
                 next_review_date TEXT,
                 fsrs_card TEXT,
-                user_id TEXT DEFAULT '1')""")
+                user_id TEXT DEFAULT '1',
+                source_context TEXT,
+                is_ai_generated INTEGER DEFAULT 0,
+                report_status TEXT)""")
+            existing_fc_cols = _table_cols(db, "flashcards")
+            if "source_context" not in existing_fc_cols:
+                db.execute("ALTER TABLE flashcards ADD COLUMN source_context TEXT")
+            if "is_ai_generated" not in existing_fc_cols:
+                db.execute("ALTER TABLE flashcards ADD COLUMN is_ai_generated INTEGER DEFAULT 0")
+            if "report_status" not in existing_fc_cols:
+                db.execute("ALTER TABLE flashcards ADD COLUMN report_status TEXT")
             
             db.execute("""CREATE TABLE IF NOT EXISTS clinical_cases (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -207,6 +223,7 @@ def init_db(app):
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_correct ON attempts (user_id, is_correct)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area_subtema ON questions (area, subtema)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_spaced_repetition_review ON spaced_repetition (user_id, next_review_date)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_flashcards_user_review ON flashcards (user_id, next_review_date)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area ON questions (area)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_institution ON questions (institution_code)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_year ON questions (year)")
