@@ -41,6 +41,10 @@ class TursoCursor:
     def __init__(self, cursor):
         self.cursor = cursor
         self.columns = [column[0] for column in (cursor.description or [])]
+        self._closed = False
+        
+    def __del__(self):
+        self.close()
         
     def fetchone(self):
         row = self.cursor.fetchone()
@@ -55,10 +59,12 @@ class TursoCursor:
         return [dict(zip(self.columns, row)) for row in rows]
 
     def close(self):
-        """Close the underlying cursor when the libsql driver exposes it."""
-        close = getattr(self.cursor, "close", None)
-        if close is not None:
-            close()
+        if getattr(self, '_closed', True):
+            return
+        close_method = getattr(self.cursor, "close", None)
+        if callable(close_method):
+            close_method()
+        self._closed = True
         
     @property
     def lastrowid(self):
