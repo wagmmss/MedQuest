@@ -18,8 +18,13 @@ export async function getGuestSession(): Promise<string | undefined> {
   try {
     const cookieStore = await cookies();
     const sessionCookie = cookieStore.get("medquest_guest_session");
-    return sessionCookie?.value;
+    if (sessionCookie?.value) {
+      return sessionCookie.value;
+    }
   } catch {
-    return undefined;
+    // Caso invocado em contexto onde cookies() não está disponível
   }
+
+  // Fallback seguro gerando UUID v4 válido se ainda não existir sessão gravada
+  return crypto.randomUUID();
 }
