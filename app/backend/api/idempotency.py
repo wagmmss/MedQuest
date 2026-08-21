@@ -58,11 +58,12 @@ def reserve_idempotency(db, user_id: str, path: str, method: str, raw_payload: b
 
     # INSERT OR IGNORE has the same conflict semantics on SQLite and libSQL.
     try:
-        db.execute(
+        cursor = db.execute(
             """INSERT OR IGNORE INTO idempotency_keys (user_id, key, method, path, payload_hash, status, status_code, response_body, lease_expires_at, lease_owner_token, created_at)
                VALUES (?, ?, ?, ?, ?, 'processing', 0, '', ?, ?, ?)""",
             (user_id, normalized_key, method, path, payload_hash, lease_expires_at, lease_owner_token, created_at)
         )
+        cursor.close()
         reserved = _owns_lease(db, user_id, normalized_key, lease_owner_token, "processing")
         db.commit()
         if reserved:
@@ -98,13 +99,14 @@ def reserve_idempotency(db, user_id: str, path: str, method: str, raw_payload: b
         if existing["status"] == "failed" or now_ts > current_lease:
             # Lease expirado ou status failed -> tentativa de recuperação atômica
             try:
-                db.execute(
+                cursor = db.execute(
                     """UPDATE idempotency_keys 
                        SET status = 'processing', lease_expires_at = ?, payload_hash = ?, method = ?, path = ?, lease_owner_token = ?
                        WHERE user_id = ? AND key = ?
                          AND (status = 'failed' OR (status = 'processing' AND lease_expires_at <= ?))""",
                     (lease_expires_at, payload_hash, method, path, lease_owner_token, user_id, normalized_key, now_ts)
                 )
+                cursor.close()
                 took_over = _owns_lease(db, user_id, normalized_key, lease_owner_token, "processing")
                 db.commit()
                 if took_over:
@@ -141,12 +143,13 @@ def complete_idempotency(db, user_id: str, status_code: int, response_data: dict
     normalized_key = key.lower()
     response_body = json.dumps(response_data)
 
-    db.execute(
+    cursor = db.execute(
         """UPDATE idempotency_keys
            SET status = 'completed', status_code = ?, response_body = ?, lease_expires_at = 0
            WHERE user_id = ? AND key = ? AND lease_owner_token = ? AND status = 'processing'""",
         (status_code, response_body, user_id, normalized_key, lease_token)
     )
+    cursor.close()
     if not _owns_lease(db, user_id, normalized_key, lease_token, "completed"):
         raise LostLeaseError("Idempotency lease was lost before completion")
 
@@ -160,12 +163,13 @@ def fail_idempotency(db, user_id: str, lease_token: str):
         return False
 
     with db_transaction(db, immediate=True):
-        db.execute(
+        cursor = db.execute(
             """UPDATE idempotency_keys
                SET status = 'failed', lease_expires_at = 0
                WHERE user_id = ? AND key = ? AND lease_owner_token = ? AND status = 'processing'""",
             (user_id, key.lower(), lease_token)
         )
+        cursor.close()
         changed = _owns_lease(db, user_id, key.lower(), lease_token, "failed")
     return changed
 
