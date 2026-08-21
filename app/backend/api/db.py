@@ -197,6 +197,10 @@ def init_db(app):
                 user_id TEXT PRIMARY KEY, exam_date TEXT, start_date TEXT,
                 days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30, target_score REAL,
                 updated_at TEXT)""")
+            existing_pc_cols = _table_cols(db, "planner_config")
+            if "target_score" not in existing_pc_cols:
+                db.execute("ALTER TABLE planner_config ADD COLUMN target_score REAL")
+
             db.execute("""CREATE TABLE IF NOT EXISTS flashcards (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 question_id INTEGER NOT NULL,
