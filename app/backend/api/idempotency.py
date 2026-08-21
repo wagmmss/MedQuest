@@ -4,10 +4,11 @@ import logging
 import time
 import uuid
 from datetime import datetime, timezone
-from flask import request, jsonify, Response
+
+from flask import Response, jsonify, request
+
 from .auth import is_valid_uuid_v4
 from .db import db_transaction
-
 
 LEASE_DURATION_SECONDS = 30.0
 logger = logging.getLogger(__name__)
@@ -69,7 +70,7 @@ def reserve_idempotency(db, user_id: str, path: str, method: str, raw_payload: b
         db.commit()
         if reserved:
             return None, None, lease_owner_token
-    except Exception as e:
+    except Exception:
         logger.exception("Unable to reserve idempotency key")
         return None, _database_unavailable(), None
 
@@ -189,7 +190,7 @@ def cleanup_idempotency_keys(db, max_age_days: int = 7):
                       OR (status = 'failed' AND created_at < datetime('now', '-1 day'))""",
                 (f"-{max_age_days} days",)
             )
-        return None
+        return
     except Exception:
         logger.exception("Unable to clean old idempotency keys")
         raise

@@ -1,10 +1,11 @@
-import sys
 import os
+import sys
 
 # Ensure backend folder is in path
 sys.path.insert(0, os.path.abspath("C:/dev/MedQuest/app/backend"))
 
 from dotenv import load_dotenv
+
 load_dotenv("C:/dev/MedQuest/app/backend/.env")
 
 from api.ai import generate_cloze_flashcard

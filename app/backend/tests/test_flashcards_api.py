@@ -1,5 +1,4 @@
 """Testes de integração herméticos para o blueprint de flashcards."""
-import pytest
 
 
 def test_flashcards_generate_and_review(client):

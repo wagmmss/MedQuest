@@ -1,8 +1,10 @@
 from datetime import datetime, timezone
-from flask import Blueprint, jsonify, request, g
-from .db import get_db
+
+from flask import Blueprint, g, jsonify, request
+
 from . import srs
 from .ai import generate_cloze_flashcard
+from .db import get_db
 
 bp = Blueprint("flashcards", __name__)
 

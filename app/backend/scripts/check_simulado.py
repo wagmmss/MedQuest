@@ -1,5 +1,5 @@
 import sqlite3
-import json
+
 conn = sqlite3.connect('medquest.db')
 areas = ["Cirurgia", "Clínica Médica", "Pediatria", "Ginecologia e Obstetrícia", "Medicina Preventiva e Social"]
 total = 0

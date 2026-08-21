@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+
 def run():
     print("Running extract.py...")
     # set the PDF directory explicitly just in case

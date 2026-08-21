@@ -1,7 +1,10 @@
-import sys, os
+import sys
+
 sys.path.append('c:\\dev\\MedQuest\\app\\backend')
-from api.db import get_db
 from flask import Flask
+
+from api.db import get_db
+
 app = Flask(__name__)
 with app.app_context():
     db = get_db()

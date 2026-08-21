@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Backup consistente do medquest.db usando a API de backup online do SQLite.
 

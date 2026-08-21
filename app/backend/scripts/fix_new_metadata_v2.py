@@ -1,6 +1,6 @@
-import sqlite3
 import os
 import re
+import sqlite3
 
 from canonical_subtemas import CANONICAL
 

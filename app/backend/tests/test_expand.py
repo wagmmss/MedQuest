@@ -5,9 +5,11 @@ import sys
 sys.path.insert(0, os.path.abspath("C:/dev/MedQuest/app/backend"))
 
 from dotenv import load_dotenv
+
 load_dotenv("C:/dev/MedQuest/app/backend/.env")
 
 from groq import Groq
+
 
 def test_expansion(query: str):
     api_key = os.environ.get("GROQ_API_KEY")

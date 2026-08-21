@@ -54,9 +54,7 @@ def load_canonical_safely(path: Path) -> dict:
         tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
         candidates = []
         for node in tree.body:
-            if isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id == "CANONICAL" for target in node.targets):
-                candidates.append(node.value)
-            elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name) and node.target.id == "CANONICAL":
+            if isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id == "CANONICAL" for target in node.targets) or isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name) and node.target.id == "CANONICAL":
                 candidates.append(node.value)
         if len(candidates) != 1 or candidates[0] is None:
             raise ValueError("expected exactly one CANONICAL assignment")

@@ -1,7 +1,8 @@
-import sqlite3
 import os
-import json
+import sqlite3
+
 import libsql_client
+
 
 def sync():
     print("Conectando ao SQLite local...")

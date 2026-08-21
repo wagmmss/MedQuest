@@ -1,7 +1,8 @@
-import os
-import uuid
 import sqlite3
+import uuid
+
 import pytest
+
 from api import create_app
 from tests.conftest import SCHEMA_AND_SEED
 

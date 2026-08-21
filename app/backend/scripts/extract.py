@@ -5,18 +5,15 @@ e popula o banco de dados SQLite usado pelo app de estudo.
 Uso:
     python extract.py
 """
+import glob
 import hashlib
 import os
 import re
-import shutil
 import sqlite3
 from collections import Counter
-from datetime import datetime
 
 import fitz  # PyMuPDF
 import pdfplumber
-
-import glob
 
 SRC_DIR = os.environ.get("MEDQUEST_PDF_DIR", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 APP_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

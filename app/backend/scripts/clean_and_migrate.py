@@ -1,5 +1,5 @@
-import sqlite3
 import os
+import sqlite3
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "medquest.db")
 MIGRATION_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "migrations", "004_fts5.sql")

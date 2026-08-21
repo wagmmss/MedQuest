@@ -1,5 +1,3 @@
-import os
-import re
 
 def process_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -14,7 +12,6 @@ def process_file(filepath):
     # Since regex is risky for SQL, we'll do this carefully.
     
     # Actually, writing a regex for this is prone to breaking complex queries.
-    pass
 
 if __name__ == "__main__":
     pass

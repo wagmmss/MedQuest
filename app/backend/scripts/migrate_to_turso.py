@@ -1,6 +1,7 @@
-import sqlite3
 import asyncio
 import os
+import sqlite3
+
 from libsql_client import create_client
 
 TURSO_URL = os.environ["TURSO_DATABASE_URL"]

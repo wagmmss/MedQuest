@@ -1,4 +1,6 @@
-import os, glob, re
+import glob
+import re
+
 
 def check_file(filepath):
     content = open(filepath, 'r', encoding='utf8').read()
@@ -12,8 +14,7 @@ def check_file(filepath):
         q_count = sql.count('?')
         # Count arguments (rough heuristic: count commas + 1, unless it's empty)
         args = args.strip()
-        if args.endswith(','):
-            args = args[:-1] # trailing comma for tuples
+        args = args.removesuffix(',') # trailing comma for tuples
         
         arg_count = 0 if not args else args.count(',') + 1
         

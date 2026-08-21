@@ -1,5 +1,6 @@
 import sqlite3
 
+
 def upgrade_flashcards():
     conn = sqlite3.connect('medquest.db')
     cur = conn.cursor()

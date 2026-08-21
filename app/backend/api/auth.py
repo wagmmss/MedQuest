@@ -1,11 +1,12 @@
-import os
-import hmac
-import uuid
 import base64
+import hmac
+import os
+import uuid
 from functools import lru_cache, wraps
-from flask import request, jsonify, g
+
 import jwt
 import requests
+from flask import g, jsonify, request
 
 CLERK_SECRET = os.getenv("CLERK_SECRET_KEY")
 
@@ -16,8 +17,7 @@ if pk.startswith("pk_test_") or pk.startswith("pk_live_"):
         domain_b64 = pk.split("_")[-1].strip("$")
         domain_b64 += "=" * ((4 - len(domain_b64) % 4) % 4)
         domain = base64.b64decode(domain_b64).decode("utf-8")
-        if domain.endswith("$"):
-            domain = domain[:-1]
+        domain = domain.removesuffix("$")
         JWKS_URL = f"https://{domain}/.well-known/jwks.json"
     except Exception:
         JWKS_URL = None

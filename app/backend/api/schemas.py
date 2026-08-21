@@ -1,23 +1,32 @@
 """Validação de entrada com Pydantic."""
-from typing import Optional, Literal
+from typing import Literal
 
 from pydantic import BaseModel, Field, ValidationError
 
-__all__ = ["AttemptIn", "BatchAttemptItem", "BatchAttemptIn", "ReviewIn", "PlannerConfigIn", "PlannerStudyIn", "PlannerRevisionIn",
-           "GeneratePlanIn", "ValidationError"]
+__all__ = [
+    "AttemptIn",
+    "BatchAttemptIn",
+    "BatchAttemptItem",
+    "GeneratePlanIn",
+    "PlannerConfigIn",
+    "PlannerRevisionIn",
+    "PlannerStudyIn",
+    "ReviewIn",
+    "ValidationError",
+]
 
 
 class AttemptIn(BaseModel):
     selected_letter: str = Field(pattern=r"^[A-Ea-e]$")
-    time_spent_ms: Optional[int] = Field(default=None, ge=0)
-    confidence: Optional[Literal["chutei", "duvida", "certeza", "defer"]] = None
+    time_spent_ms: int | None = Field(default=None, ge=0)
+    confidence: Literal["chutei", "duvida", "certeza", "defer"] | None = None
 
 
 class BatchAttemptItem(BaseModel):
     question_id: int
     selected_letter: str = Field(pattern=r"^[A-Ea-e]$")
-    time_spent_ms: Optional[int] = Field(default=None, ge=0)
-    confidence: Optional[Literal["chutei", "duvida", "certeza", "defer"]] = None
+    time_spent_ms: int | None = Field(default=None, ge=0)
+    confidence: Literal["chutei", "duvida", "certeza", "defer"] | None = None
 
 
 class BatchAttemptIn(BaseModel):
@@ -29,11 +38,11 @@ class ReviewIn(BaseModel):
 
 
 class PlannerConfigIn(BaseModel):
-    exam_date: Optional[str] = None
-    start_date: Optional[str] = None
+    exam_date: str | None = None
+    start_date: str | None = None
     days_per_week: int = Field(default=6, ge=1, le=7)
     hours_per_day: int = Field(default=4, ge=1, le=24)
-    target_score: Optional[float] = Field(default=None, ge=0, le=100)
+    target_score: float | None = Field(default=None, ge=0, le=100)
 
 
 class PlannerStudyIn(BaseModel):
@@ -47,6 +56,6 @@ class PlannerRevisionIn(BaseModel):
 
 class GeneratePlanIn(BaseModel):
     exam_date: str
-    start_date: Optional[str] = None
+    start_date: str | None = None
     hours_per_week: int = Field(default=20, ge=1, le=168)
     intensive: bool = False

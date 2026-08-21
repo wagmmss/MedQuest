@@ -1,5 +1,8 @@
-import os, requests
+import os
+
+import requests
 from dotenv import load_dotenv
+
 load_dotenv()
 
 url = os.environ.get('TURSO_DATABASE_URL').replace('libsql://', 'https://')

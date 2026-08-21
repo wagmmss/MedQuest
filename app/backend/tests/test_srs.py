@@ -1,7 +1,10 @@
 import json
 from datetime import datetime, timezone
-from api.srs import review, _rating
+
 from fsrs import Rating
+
+from api.srs import _rating, review
+
 
 def test_rating_mapping():
     assert _rating(False, "certeza") == Rating.Again

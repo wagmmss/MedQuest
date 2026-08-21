@@ -1,13 +1,19 @@
 """Blueprint: planejador (config, progresso semanal, revisões, geração de plano)."""
 from datetime import datetime, timezone
 
-from flask import Blueprint, jsonify, request, g
-
-from .db import get_db, DB_PATH
-from .schemas import PlannerConfigIn, PlannerStudyIn, PlannerRevisionIn, GeneratePlanIn, ValidationError
+from flask import Blueprint, g, jsonify, request
 
 # planner.py (raiz do backend) — geração do plano anual por pesos históricos USP
 from scripts.planner import generate_annual_plan
+
+from .db import get_db
+from .schemas import (
+    GeneratePlanIn,
+    PlannerConfigIn,
+    PlannerRevisionIn,
+    PlannerStudyIn,
+    ValidationError,
+)
 
 bp = Blueprint("plan", __name__)
 

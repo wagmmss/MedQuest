@@ -1,6 +1,8 @@
-import sqlite3
 import re
+import sqlite3
+
 from .connection import rows
+
 
 def check_encoding(db: sqlite3.Connection) -> dict:
     # Patterns

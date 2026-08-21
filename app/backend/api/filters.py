@@ -1,5 +1,6 @@
 """Construção das cláusulas de filtro da fila de estudo (compartilhado por rotas)."""
 from datetime import datetime, timezone
+
 from flask import g
 
 

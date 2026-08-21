@@ -1,12 +1,12 @@
 """Acesso ao banco (SQLite / Turso) e criação/evolução de tabelas."""
+import logging
 import os
 import sqlite3
-import tempfile
-from threading import local
-from flask import g
-import logging
-from dotenv import load_dotenv
 from contextlib import contextmanager
+from threading import local
+
+from dotenv import load_dotenv
+from flask import g
 
 load_dotenv()
 

@@ -1,5 +1,3 @@
-import os
-import re
 
 def refactor_questions():
     path = r'c:\dev\MedQuest\app\backend\api\questions.py'
@@ -16,7 +14,6 @@ def refactor_questions():
     # Actually, `params` is a list, so I can't just inject it at the end of the query string if the `params` is passed.
     # Wait, the `where` string is built dynamically. 
     # Let's check `api/questions.py` line 95 carefully.
-    pass
 
 if __name__ == "__main__":
     refactor_questions()

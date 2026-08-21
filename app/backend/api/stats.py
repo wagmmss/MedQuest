@@ -3,15 +3,17 @@ import time
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urlencode
 
-from flask import Blueprint, jsonify, request, g
+from flask import Blueprint, g, jsonify, request
 
-from .db import get_db
-from .adaptive import build_learning_profile, fsrs_metrics
 from scripts.planner import USP_WEIGHTS, get_normalized_area
+
+from .adaptive import build_learning_profile, fsrs_metrics
+from .db import get_db
 
 bp = Blueprint("stats", __name__)
 
 from threading import Lock
+
 
 class SimpleTTLCache:
     def __init__(self, ttl_seconds, max_size=500):
@@ -506,8 +508,7 @@ def at_risk():
             topics_risk[subtema] = {"count": 0, "min_retrievability": retrievability}
         
         topics_risk[subtema]["count"] += 1
-        if retrievability < topics_risk[subtema]["min_retrievability"]:
-            topics_risk[subtema]["min_retrievability"] = retrievability
+        topics_risk[subtema]["min_retrievability"] = min(topics_risk[subtema]["min_retrievability"], retrievability)
             
     # A retenção desejada padrão do FSRS é 90%; abaixo disso há risco de esquecimento.
     at_risk_list = []

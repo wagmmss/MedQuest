@@ -1,5 +1,5 @@
-import sqlite3
 import os
+import sqlite3
 
 db = sqlite3.connect('medquest.db')
 
@@ -27,6 +27,7 @@ print(f'static_dir exists? {os.path.exists(static_dir)}')
 
 # Check if app is using Turso (remote DB)
 from dotenv import load_dotenv
+
 load_dotenv()
 turso_url = os.environ.get('TURSO_DATABASE_URL')
 turso_token = os.environ.get('TURSO_AUTH_TOKEN')

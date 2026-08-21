@@ -3,10 +3,9 @@ Fast migration: SQLite local -> Turso cloud via HTTP Pipeline API.
 Uses requests directly with Turso's HTTP pipeline endpoint for maximum speed.
 Sends batches of statements in a single HTTP request.
 """
-import sqlite3
 import os
-import sys
-import json
+import sqlite3
+
 import requests
 
 TURSO_URL = os.environ["TURSO_DATABASE_URL"].replace("libsql://", "https://").replace("wss://", "https://")
@@ -103,7 +102,7 @@ def migrate():
                 make_execute_request(sql),
                 make_close_request(),
             ])
-            print(f"  Tabela criada OK", flush=True)
+            print("  Tabela criada OK", flush=True)
         except Exception as e:
             print(f"  ERRO ao criar tabela: {e}", flush=True)
             continue
@@ -111,7 +110,7 @@ def migrate():
         # Get data
         rows = cursor.execute(f"SELECT * FROM {name}").fetchall()
         if not rows:
-            print(f"  Tabela vazia", flush=True)
+            print("  Tabela vazia", flush=True)
             continue
 
         # Get column names

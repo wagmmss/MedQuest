@@ -64,7 +64,7 @@ def build_repair_plan(db_path: Path, map_path: Path = DEFAULT_MAP) -> dict:
         if critical_ids:
             placeholders = ",".join("?" for _ in critical_ids)
             selected = db.execute(
-                f"SELECT id, missing_alts" + (", status" if "status" in qcols else "")
+                "SELECT id, missing_alts" + (", status" if "status" in qcols else "")
                 + f" FROM questions WHERE id IN ({placeholders}) ORDER BY id",
                 critical_ids,
             ).fetchall()

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Empacota apenas o necessário para hospedar o MedQuest em 'medquest_deploy.zip'
 (na pasta MedQuest). Rode SEMPRE que quiser subir uma versão atualizada.

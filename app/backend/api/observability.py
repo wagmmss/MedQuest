@@ -1,16 +1,15 @@
 """Structured request telemetry with a small in-process performance registry."""
 
-from collections import defaultdict, deque
-from datetime import datetime, timezone
 import json
 import logging
 import math
 import os
 import time
 import uuid
+from collections import defaultdict, deque
+from datetime import datetime, timezone
 
 from flask import g, request
-
 
 logger = logging.getLogger("medquest.telemetry")
 _latencies = defaultdict(lambda: deque(maxlen=500))

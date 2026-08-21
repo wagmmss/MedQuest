@@ -1,5 +1,4 @@
 import sqlite3
-import os
 
 db_path = "c:/Users/wmors/OneDrive/Documentos/MedQuest/app/backend/medquest.db"
 conn = sqlite3.connect(db_path)

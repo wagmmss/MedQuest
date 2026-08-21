@@ -1,11 +1,12 @@
 import os
-import sys
 
 # Load env
 from dotenv import load_dotenv
+
 load_dotenv()
 
 import libsql_client
+
 
 def rebuild():
     url = os.environ.get("TURSO_DATABASE_URL")
@@ -26,7 +27,7 @@ def rebuild():
     for t in triggers:
         try:
             client.execute(f"DROP TRIGGER IF EXISTS {t}")
-        except Exception as e:
+        except Exception:
             pass
             
     print("Dropping old FTS table...")

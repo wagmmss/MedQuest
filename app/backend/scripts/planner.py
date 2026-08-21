@@ -1,8 +1,7 @@
-from datetime import datetime, timedelta
-import sqlite3
-import math
 import json
+import math
 import os
+from datetime import datetime, timedelta
 
 USP_WEIGHTS = {
     "Clínica Médica": 0.30,
@@ -45,8 +44,7 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         return {"error": "A data da prova deve ser no futuro."}
         
     # Cap at 5 years to prevent memory/rendering issues in frontend
-    if total_weeks > 260:
-        total_weeks = 260
+    total_weeks = min(total_weeks, 260)
 
     # Carrega o mesmo catálogo pedagógico exibido no frontend.
     planner_data_path = os.path.join(os.path.dirname(__file__), "plannerData.json")
@@ -152,7 +150,7 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         current_week_hours = 0.0
         
         areas_sorted = sorted(USP_WEIGHTS.keys(), key=lambda x: USP_WEIGHTS[x], reverse=True)
-        for area in topics_by_area.keys():
+        for area in topics_by_area:
             if area not in areas_sorted:
                 areas_sorted.append(area)
         

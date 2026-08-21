@@ -1,5 +1,6 @@
-import sqlite3
 import re
+import sqlite3
+
 
 def fix_images():
     db = sqlite3.connect('medquest.db')

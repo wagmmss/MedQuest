@@ -10,7 +10,7 @@ Mapeia a resposta da questão para uma nota FSRS:
 import json
 from datetime import timezone
 
-from fsrs import Scheduler, Card, Rating
+from fsrs import Card, Rating, Scheduler
 
 _scheduler = Scheduler()
 

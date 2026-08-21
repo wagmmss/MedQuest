@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Reclassifica TODAS as questões (área + subtema) usando a taxonomia canônica v2.
 Diferenças em relação ao reclassify_subtemas.py original:
@@ -15,15 +14,14 @@ Uso:
     python reclassify_all.py --apply      # aplica as mudanças no banco
     python reclassify_all.py --area "Cirurgia"  # apenas uma área
 """
-import os
-import sys
-import json
-import time
 import difflib
-import sqlite3
-import urllib.request
-import urllib.error
+import json
+import os
 import shutil
+import sqlite3
+import time
+import urllib.error
+import urllib.request
 from datetime import datetime
 
 from canonical_subtemas import CANONICAL
@@ -72,7 +70,7 @@ def call_gemini_json(prompt, max_attempts=50):
                 return json.loads(content)
         except urllib.error.HTTPError as e:
             if e.code == 429:
-                log(f"    rate-limit, aguardando 15s...")
+                log("    rate-limit, aguardando 15s...")
                 time.sleep(15)
                 continue
             if 500 <= e.code < 600:
@@ -284,7 +282,7 @@ def main():
     
     conn.close()
     
-    log(f"\n=== CONCLUÍDO ===")
+    log("\n=== CONCLUÍDO ===")
     log(f"Total processado: {total}")
     log(f"Mudanças: {changed}")
     log(f"Sem match: {skipped}")

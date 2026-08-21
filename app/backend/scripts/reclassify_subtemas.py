@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Reclassifica os subtemas fragmentados em uma taxonomia canônica (canonical_subtemas.py),
 usando o Groq em lotes. Seguro e reversível:
@@ -9,14 +8,14 @@ Uso:
     python reclassify_subtemas.py            # todas as áreas
     python reclassify_subtemas.py "Cirurgia" # uma área específica
 """
-import os
-import sys
-import json
-import time
 import difflib
+import json
+import os
 import sqlite3
-import urllib.request
+import sys
+import time
 import urllib.error
+import urllib.request
 
 from canonical_subtemas import CANONICAL
 

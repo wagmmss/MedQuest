@@ -1,6 +1,9 @@
-import os, sys
+import os
+import sys
+
 sys.path.insert(0, '.')
 from dotenv import load_dotenv
+
 load_dotenv()
 import libsql_client
 
@@ -9,6 +12,6 @@ client = libsql_client.create_client_sync(url=os.environ.get('TURSO_DATABASE_URL
 try:
     res = client.execute("SELECT name FROM sqlite_master WHERE type='table'")
     print("Tables:", [r[0] for r in res.rows])
-except Exception as e:
+except Exception:
     import traceback
     traceback.print_exc()

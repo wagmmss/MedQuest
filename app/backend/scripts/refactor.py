@@ -1,5 +1,5 @@
 import re
-import os
+
 
 def refactor_stats():
     path = r'c:\dev\MedQuest\app\backend\api\stats.py'

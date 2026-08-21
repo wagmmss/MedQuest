@@ -1,13 +1,18 @@
-import os
-import uuid
 import hashlib
+import json
 import sqlite3
 import threading
 import time
+import uuid
+
 import pytest
-import json
+
 from api import create_app
-from api.idempotency import cleanup_idempotency_keys, complete_idempotency, LostLeaseError
+from api.idempotency import (
+    LostLeaseError,
+    cleanup_idempotency_keys,
+    complete_idempotency,
+)
 from tests.conftest import SCHEMA_AND_SEED
 
 PROXY_SECRET = "super-secret-proxy-token-12345"
@@ -381,7 +386,7 @@ def test_lost_lease_rolls_back_protected_effect(idemp_app):
     new_token = str(uuid.uuid4())
 
     with idemp_app.test_request_context(headers={"X-Idempotency-Key": key}):
-        from api.db import get_db, db_transaction
+        from api.db import db_transaction, get_db
         db = get_db()
         db.execute(
             """INSERT INTO idempotency_keys

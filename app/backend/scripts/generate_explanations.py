@@ -1,10 +1,11 @@
-import sqlite3
 import argparse
-import requests
 import json
+import os
+import sqlite3
 import time
 from datetime import datetime, timezone
-import os
+
+import requests
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "")
 MODEL_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent?key={API_KEY}"

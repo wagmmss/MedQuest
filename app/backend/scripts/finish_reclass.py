@@ -1,10 +1,11 @@
-# -*- coding: utf-8 -*-
 """
 Finaliza a reclassificação SEM usar API: mapeia manualmente (por rótulo) os
 subtemas não-canônicos que sobraram para a taxonomia canônica.
 Seguro/reversível: subtema_orig já guarda o original. Só faz UPDATE.
 """
-import sqlite3, os
+import os
+import sqlite3
+
 from canonical_subtemas import CANONICAL
 
 DB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "medquest.db")

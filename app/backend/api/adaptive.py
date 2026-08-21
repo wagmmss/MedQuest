@@ -7,7 +7,6 @@ from datetime import datetime, timezone
 
 from fsrs import Card, Scheduler
 
-
 _scheduler = Scheduler(enable_fuzzing=False)
 
 

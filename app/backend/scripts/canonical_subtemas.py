@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Taxonomia canônica de subtemas por área (foco residência USP).
 Usada por reclassify_subtemas.py para agrupar os ~2000 subtemas fragmentados

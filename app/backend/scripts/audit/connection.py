@@ -1,6 +1,6 @@
 import sqlite3
-import sys
 from pathlib import Path
+
 
 def get_readonly_connection(db_path: Path) -> sqlite3.Connection:
     """Abre o banco de dados em modo restritamente read-only."""

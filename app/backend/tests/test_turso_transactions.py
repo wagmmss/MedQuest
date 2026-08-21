@@ -64,10 +64,9 @@ def test_turso_transaction_rolls_back_on_failure():
     client = FakeClient()
     db = TursoConnection(client)
 
-    with pytest.raises(RuntimeError, match="injected failure"):
-        with db_transaction(db):
-            db.execute("INSERT INTO attempts VALUES (?)", (1,))
-            raise RuntimeError("injected failure")
+    with pytest.raises(RuntimeError, match="injected failure"), db_transaction(db):
+        db.execute("INSERT INTO attempts VALUES (?)", (1,))
+        raise RuntimeError("injected failure")
 
     assert client.committed is False
     assert client.rolled_back is True

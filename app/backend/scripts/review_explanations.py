@@ -1,12 +1,12 @@
-import sqlite3
 import argparse
-import requests
-import json
+import os
+import sqlite3
 import time
 from datetime import datetime, timezone
-import os
 
+import requests
 from dotenv import load_dotenv
+
 load_dotenv()
 
 API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
@@ -126,7 +126,7 @@ def review_explanation_with_verification(conn, q_id, stem, correct_letter, curre
     for a in alts:
         alts_text += f"Letra {a[0]}: {a[1]}\n"
         
-    print(f"  > Gerando nova explicação...")
+    print("  > Gerando nova explicação...")
     prompt = PROMPT_TEMPLATE.format(
         stem=stem,
         alternatives=alts_text.strip(),
@@ -141,7 +141,7 @@ def review_explanation_with_verification(conn, q_id, stem, correct_letter, curre
         
     time.sleep(1) # pausa entre chamadas da API
     
-    print(f"  > Verificando veracidade médica...")
+    print("  > Verificando veracidade médica...")
     verify_prompt = VERIFY_PROMPT_TEMPLATE.format(
         stem=stem,
         alternatives=alts_text.strip(),
@@ -155,12 +155,9 @@ def review_explanation_with_verification(conn, q_id, stem, correct_letter, curre
     return verified_explanation or initial_explanation
 
 def clean_markdown(text):
-    if text.startswith("```markdown"):
-        text = text[11:]
-    if text.startswith("```"):
-        text = text[3:]
-    if text.endswith("```"):
-        text = text[:-3]
+    text = text.removeprefix("```markdown")
+    text = text.removeprefix("```")
+    text = text.removesuffix("```")
     return text.strip()
 
 def main():

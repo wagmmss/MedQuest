@@ -2,20 +2,21 @@
 import logging
 import platform
 
+from dotenv import load_dotenv
 from flask import Flask, g, jsonify, request
 from flask_cors import CORS
-from dotenv import load_dotenv
 
 load_dotenv() # Carrega as variáveis de ambiente do arquivo .env
 
 from .config import Config
 from .db import close_db, init_db
-from .questions import bp as questions_bp
-from .stats import bp as stats_bp
-from .plan import bp as plan_bp
 from .flashcards import bp as flashcards_bp
 from .logs import bp as logs_bp
 from .observability import configure_logging, emit, finish_request, start_request
+from .plan import bp as plan_bp
+from .questions import bp as questions_bp
+from .stats import bp as stats_bp
+
 
 def create_app(testing=False):
     app = Flask(__name__)
@@ -47,7 +48,6 @@ def create_app(testing=False):
     def authenticate_request():
         if request.path == "/" or request.method == "OPTIONS" or "/images/" in request.path:
             return
-        pass
 
     from werkzeug.exceptions import HTTPException
 

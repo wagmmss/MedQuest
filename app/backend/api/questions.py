@@ -1,20 +1,20 @@
 """Blueprint: metadados, listagem/fila de estudo, detalhe, tentativa e favoritos."""
-from datetime import datetime, timezone
-import re
 import json
-
-from flask import Blueprint, jsonify, request, g, Response, stream_with_context
-
-from .db import get_db, db_transaction
-from .filters import question_filter_clauses
-from .adaptive import rank_adaptive_candidates
-from .schemas import AttemptIn, BatchAttemptIn, ReviewIn, ValidationError
-from .idempotency import reserve_idempotency, complete_idempotency, fail_idempotency
-from . import srs
-from . import ai
 import random
+import re
 import time
+from datetime import datetime, timezone
 from threading import Lock
+
+from flask import Blueprint, Response, g, jsonify, request, stream_with_context
+
+from . import ai, srs
+from .adaptive import rank_adaptive_candidates
+from .db import db_transaction, get_db
+from .filters import question_filter_clauses
+from .idempotency import complete_idempotency, fail_idempotency, reserve_idempotency
+from .schemas import AttemptIn, BatchAttemptIn, ReviewIn, ValidationError
+
 
 class SimpleTTLCache:
     def __init__(self, ttl_seconds, max_size=500):
@@ -798,6 +798,7 @@ def question_batch_detail():
 @bp.route("/images/<path:filename>")
 def serve_image(filename):
     import os
+
     from flask import send_from_directory
     backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     static_dir = os.path.join(backend_dir, "static")

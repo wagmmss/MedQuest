@@ -3,8 +3,9 @@ import sqlite3
 import sys
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from api.db import get_db
 from flask import Flask
+
+from api.db import get_db
 
 app = Flask(__name__)
 with app.app_context():
