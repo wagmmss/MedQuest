@@ -259,17 +259,23 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
         <div>
-          <h2 className="text-h2 font-bold text-foreground flex items-center gap-2">
-            <CalendarDays className="text-primary" size={24} />
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground flex items-center gap-2">
+            <CalendarDays className="text-primary" size={28} />
             Seu Cronograma de Estudos
           </h2>
           <p className="text-muted-foreground text-sm">Cronograma baseado nos pesos da prova de residência da USP.</p>
         </div>
-        <div className="flex items-center gap-6">
-          <div className="text-right">
-            <div className="text-sm text-muted-foreground">Progresso Total</div>
-            <div className="text-xl font-bold text-foreground">
-              {Object.values(progress).filter(p => p.studied).length} / {plan.length}
+        <div className="flex items-center gap-6 w-full sm:w-auto">
+          <div className="flex-1 sm:w-48">
+            <div className="flex justify-between text-[11px] uppercase tracking-wider font-semibold mb-1">
+              <span className="text-muted-foreground">Progresso</span>
+              <span className="text-primary">{Object.values(progress).filter(p => p.studied).length} / {plan.length}</span>
+            </div>
+            <div className="h-2 w-full bg-muted rounded-full overflow-hidden ring-1 ring-inset ring-black/5 dark:ring-white/5">
+              <div 
+                className="h-full bg-primary transition-all duration-500 shadow-inner" 
+                style={{ width: `${(Object.values(progress).filter(p => p.studied).length / Math.max(1, plan.length)) * 100}%` }}
+              />
             </div>
           </div>
           <button 

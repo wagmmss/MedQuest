@@ -120,20 +120,30 @@ def generate_plan():
     start_date = data.start_date or datetime.now(timezone.utc).isoformat()
     
     db = get_db()
-    rows = db.execute("""
+    q_query = """
         SELECT area, subtema, COUNT(id) as q_count 
         FROM questions 
         WHERE area IS NOT NULL AND subtema IS NOT NULL
         GROUP BY area, subtema
-    """).fetchall()
-    
-    answered = db.execute("""
+    """
+    a_query = """
         SELECT q.subtema, COUNT(DISTINCT a.question_id) as ans_count, SUM(a.is_correct) as correct_count, COUNT(a.id) as attempts
         FROM attempts a
         JOIN questions q ON q.id = a.question_id
         WHERE a.user_id = ? AND q.subtema IS NOT NULL
         GROUP BY q.subtema
-    """, (g.user_id,)).fetchall()
+    """
+    
+    if hasattr(db, "batch"):
+        res = db.batch([
+            (q_query, ()),
+            (a_query, (g.user_id,))
+        ])
+        rows = res[0].fetchall()
+        answered = res[1].fetchall()
+    else:
+        rows = db.execute(q_query).fetchall()
+        answered = db.execute(a_query, (g.user_id,)).fetchall()
     
     answered_map = {r["subtema"]: r for r in answered}
     

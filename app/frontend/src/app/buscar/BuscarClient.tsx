@@ -117,7 +117,7 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
                   <span className="bg-muted px-2 py-1 rounded">{res.subtema}</span>
                 </div>
                 
-                <div className="text-foreground text-body-m leading-relaxed group-hover:text-primary transition-colors">
+                <div className="text-foreground text-base leading-relaxed group-hover:text-primary transition-colors">
                   {res.stem_snippet}
                 </div>
                 

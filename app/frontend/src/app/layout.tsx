@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Geist } from "next/font/google";
 import { ClerkProvider, SignIn } from '@clerk/nextjs';
 import { ptBR } from '@clerk/localizations';
 import { auth } from '@clerk/nextjs/server';
@@ -15,8 +15,8 @@ import { SyncProvider } from "@/components/SyncProvider";
 import { OnboardingTour } from "@/components/OnboardingTour";
 import { WebVitals } from "@/components/WebVitals";
 
-const inter = Inter({
-  variable: "--font-inter",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
 });
 
@@ -62,7 +62,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <ClerkProvider localization={ptBR}>
       <html
         lang="pt-BR"
-        className={`${inter.variable} h-full antialiased`}
+        className={`${geist.variable} font-sans h-full antialiased`}
         suppressHydrationWarning
       >
         <head>
@@ -81,7 +81,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }}
           />
         </head>
-        <body className="font-body-md text-body-md h-screen flex overflow-hidden bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+        <body className="h-screen flex overflow-hidden bg-background text-on-background selection:bg-primary/20 selection:text-primary">
           <WebVitals />
           <a href="#conteudo-principal" className="skip-link">Pular para o conteúdo principal</a>
           {!userId && !isDemoMode ? (

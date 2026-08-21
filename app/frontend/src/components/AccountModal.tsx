@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useUser, useClerk } from "@clerk/nextjs";
@@ -8,6 +8,7 @@ import { localDb, getLocalOwnerId } from "@/lib/db";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { clearLearningSessions } from "@/lib/sessionState";
+import { X, Trash2, LogOut, AlertTriangle, User, ShieldAlert } from "lucide-react";
 
 interface AccountModalProps {
   isOpen: boolean;
@@ -69,7 +70,6 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -78,33 +78,30 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
             className="fixed inset-0 bg-black/60 backdrop-blur-sm"
           />
 
-          {/* Modal Container */}
           <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 15 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 15 }}
             transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
-            className="bg-surface border border-outline-variant rounded-3xl shadow-2xl w-full max-w-md overflow-hidden z-10 flex flex-col relative"
+            className="bg-card border border-border rounded-3xl shadow-2xl w-full max-w-md overflow-hidden z-10 flex flex-col relative"
             role="dialog"
             aria-modal="true"
             aria-labelledby="account-modal-title"
           >
-            {/* Header */}
-            <div className="flex justify-between items-center px-6 py-4 border-b border-outline-variant bg-surface-container-low">
-              <h2 id="account-modal-title" className="font-headline-sm text-headline-sm font-bold text-on-surface">
+            <div className="flex justify-between items-center px-6 py-4 border-b border-border bg-muted/30">
+              <h2 id="account-modal-title" className="text-lg font-bold text-foreground">
                 {step === "profile" ? "Minha Conta" : "Resetar Progresso"}
               </h2>
               <button
                 onClick={() => !isLoading && resetStateAndClose()}
                 disabled={isLoading}
-                className="text-on-surface-variant hover:bg-surface-container-high rounded-full p-1.5 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="text-muted-foreground hover:bg-muted rounded-full p-1.5 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Fechar"
               >
-                <span className="material-symbols-outlined" data-icon="close" aria-hidden="true">close</span>
+                <X size={20} />
               </button>
             </div>
 
-            {/* Content Body */}
             <div className="p-6 flex-1 flex flex-col min-h-[220px]">
               <AnimatePresence mode="wait">
                 {step === "profile" ? (
@@ -116,53 +113,50 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                     transition={{ duration: 0.2 }}
                     className="flex flex-col gap-6"
                   >
-                    {/* User Info Card */}
-                    <div className="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant">
-                      <div className="relative w-16 h-16 rounded-2xl bg-surface-container-high overflow-hidden flex-shrink-0 border-2 border-primary/10 shadow-[0px_2px_8px_rgba(0,0,0,0.05)]">
+                    <div className="flex items-center gap-4 bg-muted/20 p-4 rounded-2xl border border-border">
+                      <div className="relative w-16 h-16 rounded-2xl bg-muted overflow-hidden flex-shrink-0 border-2 border-primary/10 shadow-sm">
                         {isLoaded && user?.imageUrl ? (
                           <Image src={user.imageUrl} alt="Avatar" fill sizes="64px" className="object-cover" />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-primary-container text-on-primary-container">
-                            <span className="material-symbols-outlined text-3xl" data-icon="person">person</span>
+                          <div className="w-full h-full flex items-center justify-center bg-primary/10 text-primary">
+                            <User size={32} />
                           </div>
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-title-lg text-title-lg font-bold text-on-surface truncate">
+                        <h3 className="text-xl font-bold text-foreground truncate">
                           {isLoaded ? (user?.fullName || "Usuário MedQuest") : "Carregando..."}
                         </h3>
-                        <p className="font-body-sm text-body-sm text-on-surface-variant truncate">
+                        <p className="text-sm text-muted-foreground truncate">
                           {isLoaded ? (user?.primaryEmailAddress?.emailAddress || "") : ""}
                         </p>
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 mt-2 rounded-full text-xs font-medium bg-primary-container text-on-primary-container">
-                          <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 mt-2 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
                           Preparação USP
                         </span>
                       </div>
                     </div>
 
-                    {/* Actions Stack */}
                     <div className="flex flex-col gap-3">
                       <button
                         onClick={() => setStep("confirm_reset")}
-                        className="flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-error-container text-on-error-container hover:bg-error/15 border border-error/20 hover:border-error/30 transition-all duration-200 font-label-md text-left w-full cursor-pointer group shadow-[0_1px_2px_rgba(0,0,0,0.05)]"
+                        className="flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-destructive/5 text-destructive hover:bg-destructive/10 border border-destructive/20 hover:border-destructive/30 transition-all duration-200 text-left w-full cursor-pointer group shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive"
                       >
-                        <span className="material-symbols-outlined text-error" data-icon="delete_forever">delete_forever</span>
+                        <Trash2 className="text-destructive shrink-0" size={20} />
                         <div className="flex-1">
-                          <p className="font-bold">Resetar Todo o Progresso</p>
-                          <p className="text-[11px] opacity-80 mt-0.5">Apagar histórico de questões, planos e revisões</p>
+                          <p className="font-bold text-sm">Resetar Todo o Progresso</p>
+                          <p className="text-xs opacity-80 mt-0.5 font-medium">Apagar histórico de questões, planos e revisões</p>
                         </div>
-                        <span className="material-symbols-outlined text-error/60 group-hover:translate-x-0.5 transition-transform" data-icon="chevron_right">chevron_right</span>
                       </button>
 
                       <button
                         onClick={() => signOut({ redirectUrl: "/" })}
-                        className="flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-surface-container-low text-on-surface hover:bg-surface-container-high border border-outline-variant hover:border-outline transition-all duration-200 font-label-md text-left w-full cursor-pointer group"
+                        className="flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-card text-foreground hover:bg-muted/50 border border-border hover:border-border/80 transition-all duration-200 text-left w-full cursor-pointer group shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                       >
-                        <span className="material-symbols-outlined text-on-surface-variant" data-icon="logout">logout</span>
+                        <LogOut className="text-muted-foreground shrink-0" size={20} />
                         <div className="flex-1">
-                          <p className="font-semibold">Sair da Conta</p>
-                          <p className="text-[11px] text-on-surface-variant mt-0.5">Fazer logout da sessão atual</p>
+                          <p className="font-bold text-sm">Sair da Conta</p>
+                          <p className="text-xs text-muted-foreground mt-0.5 font-medium">Fazer logout da sessão atual</p>
                         </div>
                       </button>
                     </div>
@@ -176,22 +170,20 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                     transition={{ duration: 0.2 }}
                     className="flex flex-col gap-5"
                   >
-                    {/* Warning Box */}
-                    <div className="bg-error-container/20 border border-error/25 rounded-2xl p-4 flex gap-3">
-                      <span className="material-symbols-outlined text-error text-2xl flex-shrink-0" data-icon="warning">warning</span>
+                    <div className="bg-destructive/10 border border-destructive/20 rounded-2xl p-4 flex gap-3 shadow-sm">
+                      <ShieldAlert className="text-destructive flex-shrink-0 mt-0.5" size={24} />
                       <div className="flex flex-col gap-1">
-                        <p className="font-bold text-error text-label-lg">Atenção! Esta ação é irreversível.</p>
-                        <p className="text-body-sm text-on-surface-variant leading-relaxed">
+                        <p className="font-bold text-destructive text-sm uppercase tracking-wider">Atenção! Ação irreversível.</p>
+                        <p className="text-sm text-foreground/80 leading-relaxed font-medium">
                           Ao prosseguir, todo o seu histórico de simulados, estatísticas de acertos, favoritos, 
                           cronograma de estudos semanal (Planner) e flashcards serão permanentemente excluídos.
                         </p>
                       </div>
                     </div>
 
-                    {/* Confirmation Input */}
-                    <div className="flex flex-col gap-2">
-                      <label htmlFor="confirm-reset-input" className="text-label-md font-semibold text-on-surface">
-                        Para confirmar, digite <span className="text-error font-bold">RESETAR</span> no campo abaixo:
+                    <div className="flex flex-col gap-2 mt-2">
+                      <label htmlFor="confirm-reset-input" className="text-sm font-bold text-foreground">
+                        Para confirmar, digite <span className="text-destructive">RESETAR</span> no campo abaixo:
                       </label>
                       <input
                         id="confirm-reset-input"
@@ -201,19 +193,18 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                         onChange={(e) => setConfirmText(e.target.value)}
                         placeholder="Digite RESETAR"
                         disabled={isLoading}
-                        className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface text-on-surface focus:outline-none focus:border-error focus:ring-1 focus:ring-error transition-all font-mono tracking-wider text-center"
+                        className="w-full px-4 py-3 rounded-xl border border-border bg-card text-foreground focus:outline-none focus:border-destructive focus:ring-1 focus:ring-destructive transition-all font-mono tracking-widest text-center shadow-sm"
                       />
                     </div>
 
                     {error && (
-                      <p role="alert" className="text-error text-body-sm font-semibold flex items-center gap-1.5 justify-center">
-                        <span className="material-symbols-outlined text-sm" data-icon="error">error</span>
+                      <p role="alert" className="text-destructive text-sm font-bold flex items-center gap-1.5 justify-center">
+                        <AlertTriangle size={16} />
                         {error}
                       </p>
                     )}
 
-                    {/* Buttons Footer (In-Body) */}
-                    <div className="flex gap-3 mt-2">
+                    <div className="flex gap-3 mt-4">
                       <button
                         onClick={() => {
                           setStep("profile");
@@ -221,18 +212,18 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                           setError(null);
                         }}
                         disabled={isLoading}
-                        className="flex-1 py-3 px-4 rounded-xl border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors text-center font-bold text-label-md cursor-pointer disabled:opacity-50"
+                        className="flex-1 py-3 px-4 rounded-xl border border-border text-foreground hover:bg-muted/50 transition-colors text-center font-bold text-sm cursor-pointer disabled:opacity-50 shadow-sm"
                       >
                         Voltar
                       </button>
                       <button
                         onClick={handleResetProgress}
                         disabled={confirmText.toUpperCase() !== "RESETAR" || isLoading}
-                        className="flex-1 py-3 px-4 rounded-xl bg-error text-on-error hover:bg-error/90 disabled:bg-surface-container-highest disabled:text-on-surface/30 disabled:cursor-not-allowed transition-all text-center font-bold text-label-md cursor-pointer flex items-center justify-center gap-2 shadow-md shadow-error/10"
+                        className="flex-1 py-3 px-4 rounded-xl bg-destructive text-destructive-foreground hover:bg-destructive/90 disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed transition-all text-center font-bold text-sm cursor-pointer flex items-center justify-center gap-2 shadow-sm"
                       >
                         {isLoading ? (
                           <>
-                            <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                            <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" fill="none" viewBox="0 0 24 24">
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                             </svg>

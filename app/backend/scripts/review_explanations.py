@@ -9,14 +9,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
-# Modelos gratuitos do OpenRouter em ordem de preferência
+# Modelo Gemini recomendado
 MODELS = [
-    "openrouter/free",
-    "google/gemma-2-9b-it:free",
-    "meta-llama/llama-3-8b-instruct:free"
+    "gemini-flash-latest",
+    "gemini-flash-lite-latest",
+    "gemma-4-31b-it"
 ]
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "medquest.db")

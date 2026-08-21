@@ -108,10 +108,10 @@ export function OfflinePanel() {
   };
 
   return (
-    <div className="bg-surface border border-outline-variant rounded-xl p-6 shadow-sm flex flex-col gap-6">
+    <div className="bg-card border border-border rounded-xl p-6 shadow-sm flex flex-col gap-6">
       <div>
-        <div className="flex items-center justify-between mb-4 pb-2 border-b border-outline-variant">
-          <h3 className="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+        <div className="flex items-center justify-between mb-4 pb-2 border-b border-border">
+          <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
             {isOffline ? (
               <CloudOff className="text-warning" size={24} />
             ) : (
@@ -124,29 +124,29 @@ export function OfflinePanel() {
           </div>
         </div>
 
-        <p className="text-sm text-on-surface-variant mb-6">
+        <p className="text-sm text-muted-foreground mb-6">
           Baixe questões e flashcards para estudar sem internet durante seus plantões. Suas respostas serão sincronizadas automaticamente quando reconectar.
         </p>
 
         <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="bg-surface-container-low rounded-lg p-3 text-center">
-            <p className="text-xs text-on-surface-variant uppercase font-semibold">Questões</p>
-            <p className="font-display-sm text-on-surface">{stats.questions}</p>
+          <div className="bg-muted/50 rounded-lg p-3 text-center border border-border">
+            <p className="text-xs text-muted-foreground uppercase font-semibold">Questões</p>
+            <p className="text-2xl font-bold text-foreground">{stats.questions}</p>
           </div>
-          <div className="bg-surface-container-low rounded-lg p-3 text-center">
-            <p className="text-xs text-on-surface-variant uppercase font-semibold">Flashcards</p>
-            <p className="font-display-sm text-on-surface">{stats.flashcards}</p>
+          <div className="bg-muted/50 rounded-lg p-3 text-center border border-border">
+            <p className="text-xs text-muted-foreground uppercase font-semibold">Flashcards</p>
+            <p className="text-2xl font-bold text-foreground">{stats.flashcards}</p>
           </div>
-          <div className="bg-surface-container-low rounded-lg p-3 text-center">
-            <p className="text-xs text-on-surface-variant uppercase font-semibold">Fila (Envios)</p>
-            <p className="font-display-sm text-on-surface">{stats.queue}</p>
+          <div className="bg-muted/50 rounded-lg p-3 text-center border border-border">
+            <p className="text-xs text-muted-foreground uppercase font-semibold">Fila (Envios)</p>
+            <p className="text-2xl font-bold text-foreground">{stats.queue}</p>
           </div>
         </div>
 
         <button
           onClick={downloadForShift}
           disabled={isDownloading || isOffline}
-          className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-primary text-on-primary font-semibold hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {isDownloading ? (
             <><RefreshCw className="animate-spin" size={20} /> Baixando Carga...</>

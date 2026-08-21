@@ -524,7 +524,7 @@ export function SimuladoClient({
         <h2 className="text-h2 font-bold text-foreground mb-4">
           {hasCustomFilters ? "Simulado Personalizado" : "Novo Simulado"}
         </h2>
-        <p className="text-muted-foreground text-body-m mb-6 max-w-md">
+        <p className="text-muted-foreground text-base mb-6 max-w-md">
           {hasCustomFilters 
             ? "Esta prova irá simular as condições reais de exame usando os filtros que você escolheu."
             : "Selecione o perfil de prova desejado para simular as condições reais do exame."}
@@ -1116,7 +1116,7 @@ export function SimuladoClient({
                 </div>
               )}
               
-              <div className="text-foreground text-body-l leading-relaxed whitespace-pre-wrap mb-8">
+              <div className="text-foreground text-lg leading-relaxed whitespace-pre-wrap mb-8">
                 {qDetail.stem}
               </div>
 
@@ -1202,7 +1202,7 @@ export function SimuladoClient({
                         <BookOpen size={20} className="text-primary" />
                         Comentário do Professor
                       </h3>
-                      <div className="text-foreground text-body-l leading-relaxed whitespace-pre-wrap">
+                      <div className="text-foreground text-lg leading-relaxed whitespace-pre-wrap">
                         {resultsMap[qDetail.id].explanation || "Nenhum comentário disponível para esta questão."}
                       </div>
                       

@@ -199,7 +199,7 @@ export function FlashcardClient() {
 
         {flipped && current.back && (
           <div className="mt-8 pt-8 border-t border-border w-full text-center animate-in slide-in-from-bottom-4 fade-in duration-300">
-            <p className="text-muted-foreground text-body-m">{current.back}</p>
+            <p className="text-muted-foreground text-lg">{current.back}</p>
             {current.source_context && (
               <p className="mt-4 text-xs font-semibold text-purple-600/70 uppercase tracking-widest bg-purple-500/10 py-1.5 px-3 rounded-full inline-block">
                 Fonte: {current.source_context}

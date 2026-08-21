@@ -359,24 +359,34 @@ def questions_count():
 @bp.route("/questions/<int:qid>")
 def question_detail(qid):
     db = get_db()
-    q = db.execute("SELECT * FROM questions WHERE id = ?", (qid,)).fetchone()
+    queries = [
+        ("SELECT * FROM questions WHERE id = ?", (qid,)),
+        ("SELECT letter, text FROM alternatives WHERE question_id = ? ORDER BY letter", (qid,)),
+        ("SELECT file_path FROM question_images WHERE question_id = ? ORDER BY order_index", (qid,)),
+        ("SELECT selected_letter, is_correct FROM attempts WHERE question_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1", (qid, g.user_id)),
+        ("SELECT COUNT(*) as n FROM attempts WHERE question_id = ? AND is_correct = 0 AND user_id = ?", (qid, g.user_id)),
+        ("SELECT 1 FROM favorites WHERE question_id = ? AND user_id = ?", (qid, g.user_id))
+    ]
+    
+    if hasattr(db, "batch"):
+        res = db.batch(queries)
+        q = res[0].fetchone()
+        alts = res[1].fetchall()
+        imgs = res[2].fetchall()
+        last_attempt = res[3].fetchone()
+        times_wrong = res[4].fetchone()["n"]
+        is_favorite = res[5].fetchone()
+    else:
+        q = db.execute(queries[0][0], queries[0][1]).fetchone()
+        alts = db.execute(queries[1][0], queries[1][1]).fetchall()
+        imgs = db.execute(queries[2][0], queries[2][1]).fetchall()
+        last_attempt = db.execute(queries[3][0], queries[3][1]).fetchone()
+        times_wrong = db.execute(queries[4][0], queries[4][1]).fetchone()["n"]
+        is_favorite = db.execute(queries[5][0], queries[5][1]).fetchone()
+        
     if not q:
         return jsonify({"error": "not found"}), 404
-    alts = db.execute(
-        "SELECT letter, text FROM alternatives WHERE question_id = ? ORDER BY letter", (qid,)
-    ).fetchall()
-    imgs = db.execute(
-        "SELECT file_path FROM question_images WHERE question_id = ? ORDER BY order_index", (qid,)
-    ).fetchall()
-    last_attempt = db.execute(
-        "SELECT selected_letter, is_correct FROM attempts WHERE question_id = ? AND user_id = ? ORDER BY id DESC LIMIT 1",
-        (qid, g.user_id),
-    ).fetchone()
-    times_wrong = db.execute(
-        "SELECT COUNT(*) as n FROM attempts WHERE question_id = ? AND is_correct = 0 AND user_id = ?", 
-        (qid, g.user_id)
-    ).fetchone()["n"]
-    is_favorite = db.execute("SELECT 1 FROM favorites WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
+        
     cc = None
     if q.get("clinical_case_id"):
         cc_row = db.execute("SELECT stem, images FROM clinical_cases WHERE id = ?", (q["clinical_case_id"],)).fetchone()
