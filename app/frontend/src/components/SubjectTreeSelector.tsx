@@ -27,7 +27,7 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
     return plannerData.map(areaData => {
       const macroThemes = (areaData.macroThemes || []).map(macro => {
         // Only include details that have available questions (if availableSubtemas is provided)
-        const activeDetails = (macro.details || []).filter(d => !availableSubtemas || availableMap.has(d));
+        const activeDetails = (macro.dbSubtemas || []).filter(d => !availableSubtemas || availableMap.has(d));
         return {
           ...macro,
           activeDetails
