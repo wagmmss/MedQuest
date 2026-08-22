@@ -126,20 +126,9 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
             continue
             
         theory_hours = meta["theory_hours"]
-        # Reduce theory time significantly if user is already highly proficient
-        if ans_count >= 5 and acc >= 0.7:
-            theory_hours = theory_hours * 0.3
-            
-        # Cada subtema ainda pendente recebe um bloco próprio de questões.
-        # O banco disponível define se há prática a fazer, não reduz o bloco
-        # para poucos minutos quando há poucas questões cadastradas.
-        practice_hours = practice_hours_per_subtema if remaining_q > 0 else 0.0
+        practice_hours = practice_hours_per_subtema
         total_topic_hours = theory_hours + practice_hours
         
-        # Skip if topic requires almost no time and user is already very proficient
-        if total_topic_hours < 0.2 and acc >= 0.7:
-            continue
-            
         total_required_hours += total_topic_hours
         
         # Priority score: High Yield = 100, plus area weight
