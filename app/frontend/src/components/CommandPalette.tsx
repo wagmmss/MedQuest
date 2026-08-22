@@ -131,7 +131,7 @@ export function CommandPalette() {
         <div id="command-palette-results" className="max-h-[60vh] overflow-y-auto p-2" aria-live="polite" aria-busy={loading}>
           {query.length === 0 ? (
             <div className="px-3 py-8 text-center text-muted-foreground text-sm">
-              Tente buscar por &quot;Cardiologia&quot;, &quot;Simulado USP&quot; ou &quot;Revisão&quot;.
+              Tente buscar por &quot;Cardiologia&quot;, &quot;Simulados&quot; ou &quot;Revisão&quot;.
             </div>
           ) : loading && results.length === 0 ? (
             <div className="px-3 py-8 text-center text-muted-foreground text-sm flex items-center justify-center gap-2">
@@ -164,7 +164,7 @@ export function CommandPalette() {
                       onClick={() => { setOpen(false); router.push("/simulado"); }}
                     >
                       <span className="material-symbols-outlined text-primary text-sm" data-icon="description">description</span>
-                      <span>Iniciar Simulado USP</span>
+                      <span>Iniciar Simulado</span>
                     </button>
                   )}
                   {("clínica médica clinica cardiologia nefrologia".includes(query.toLowerCase())) && (

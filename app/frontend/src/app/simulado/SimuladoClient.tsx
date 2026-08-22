@@ -559,43 +559,85 @@ export function SimuladoClient({
 
   if (state === "START") {
     return (
-      <div className="bg-card border border-border shadow-1 rounded-xl p-8 max-w-2xl mx-auto w-full text-center flex flex-col items-center">
-        <div className="w-20 h-20 bg-primary/20 text-primary rounded-2xl flex items-center justify-center mb-6">
-          <FileSignature size={40} />
+      <div className="bg-card border border-border shadow-1 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto w-full flex flex-col items-center">
+        <div className="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 ring-1 ring-primary/20">
+          <FileSignature size={32} />
         </div>
-        <h2 className="text-h2 font-bold text-foreground mb-4">
+        <h2 className="text-3xl font-bold text-foreground mb-3 text-center tracking-tight">
           {hasCustomFilters ? "Simulado Personalizado" : "Novo Simulado"}
         </h2>
-        <p className="text-muted-foreground text-base mb-6 max-w-md">
+        <p className="text-muted-foreground text-base mb-8 max-w-lg text-center">
           {hasCustomFilters 
             ? "Esta prova irá simular as condições reais de exame usando os filtros que você escolheu."
-            : "Selecione o perfil de prova desejado para simular as condições reais do exame."}
+            : "Selecione a instituição desejada ou crie um simulado com as suas próprias configurações."}
         </p>
 
         {!hasCustomFilters && (
-          <div className="w-full max-w-md mb-6">
-            <select
-              value={simuladoProfile}
-              onChange={(e) => setSimuladoProfile(e.target.value as SimuladoProfile)}
-              className="w-full bg-background border border-border rounded-lg p-3 text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-primary/50"
+          <div className="w-full mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {profilesData.map(p => (
+              <div 
+                key={p.id}
+                onClick={() => setSimuladoProfile(p.id as SimuladoProfile)}
+                className={clsx(
+                  "cursor-pointer rounded-xl border p-5 flex flex-col gap-2 transition-all duration-200 relative overflow-hidden group",
+                  simuladoProfile === p.id 
+                    ? "border-primary bg-primary/5 ring-1 ring-primary shadow-sm"
+                    : "border-border bg-card hover:border-primary/50 hover:bg-muted/50"
+                )}
+              >
+                {simuladoProfile === p.id && (
+                  <div className="absolute top-3 right-3 text-primary">
+                    <CheckCircle2 size={20} className="animate-in zoom-in" />
+                  </div>
+                )}
+                <div className="flex items-center gap-3">
+                  <div className={clsx("p-2 rounded-lg flex items-center justify-center transition-colors", simuladoProfile === p.id ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary")}>
+                    <span className="material-symbols-outlined text-[20px]" data-icon="school">school</span>
+                  </div>
+                  <h3 className="font-bold text-foreground text-lg tracking-tight">{p.name}</h3>
+                </div>
+                <div className="text-sm text-muted-foreground mt-1 flex flex-col gap-0.5">
+                  <span>{p.questions} Questões • {p.alternatives} Alternativas</span>
+                  <span>{p.duration_hours} Horas de Duração</span>
+                </div>
+              </div>
+            ))}
+
+            <div 
+              onClick={() => setSimuladoProfile("custom")}
+              className={clsx(
+                "cursor-pointer rounded-xl border p-5 flex flex-col gap-2 transition-all duration-200 relative overflow-hidden group",
+                simuladoProfile === "custom" 
+                  ? "border-primary bg-primary/5 ring-1 ring-primary shadow-sm"
+                  : "border-border bg-card hover:border-primary/50 hover:bg-muted/50"
+              )}
             >
-              {profilesData.map(p => (
-                <option key={p.id} className="bg-background text-foreground" value={p.id}>
-                  {p.name} ({p.questions} Qs, {p.alternatives} Alternativas)
-                </option>
-              ))}
-              <option className="bg-background text-foreground" value="custom">Configuração Personalizada</option>
-            </select>
+              {simuladoProfile === "custom" && (
+                <div className="absolute top-3 right-3 text-primary">
+                  <CheckCircle2 size={20} className="animate-in zoom-in" />
+                </div>
+              )}
+              <div className="flex items-center gap-3">
+                <div className={clsx("p-2 rounded-lg flex items-center justify-center transition-colors", simuladoProfile === "custom" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary")}>
+                  <span className="material-symbols-outlined text-[20px]" data-icon="tune">tune</span>
+                </div>
+                <h3 className="font-bold text-foreground text-lg tracking-tight">Personalizado</h3>
+              </div>
+              <div className="text-sm text-muted-foreground mt-1 flex flex-col gap-0.5">
+                <span>Escolha as bancas e anos</span>
+                <span>Configure tempo e questões</span>
+              </div>
+            </div>
           </div>
         )}
 
         {simuladoProfile === 'custom' && !hasCustomFilters && (
-          <div className="w-full max-w-md mb-6 bg-muted/30 p-4 rounded-xl border border-border text-left flex flex-col gap-4 animate-in slide-in-from-top-2">
+          <div className="w-full mb-8 bg-muted/30 p-6 rounded-2xl border border-border text-left flex flex-col gap-5 animate-in slide-in-from-top-4 fade-in duration-300">
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">Bancas Incluídas (deixe vazio para todas)</label>
               <div className="flex flex-wrap gap-2">
                 {(meta?.institutions.map(i => i.institution_code) || ['USP-SP', 'USP-RP', 'UNICAMP']).filter(i => !['SUS-SP', 'ENARE'].includes(i)).map(inst => (
-                  <label key={inst} className="flex items-center gap-1.5 bg-background border border-border px-2 py-1 rounded text-sm cursor-pointer hover:bg-muted">
+                  <label key={inst} className="flex items-center gap-1.5 bg-background border border-border px-3 py-1.5 rounded-lg text-sm cursor-pointer hover:bg-muted transition-colors">
                     <input 
                       type="checkbox" 
                       checked={customConfig.institutions.includes(inst)}
@@ -607,7 +649,7 @@ export function SimuladoClient({
                             : prev.institutions.filter(i => i !== inst)
                         }))
                       }}
-                      className="rounded text-primary focus:ring-primary"
+                      className="rounded text-primary focus:ring-primary w-4 h-4"
                     />
                     {inst}
                   </label>
@@ -617,9 +659,9 @@ export function SimuladoClient({
 
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">Anos (deixe vazio para todos)</label>
-              <div className="flex flex-wrap gap-2 max-h-28 overflow-y-auto">
+              <div className="flex flex-wrap gap-2 max-h-32 overflow-y-auto pr-2 custom-scrollbar">
                 {(meta?.years || []).map(year => String(year)).map(year => (
-                  <label key={year} className="flex items-center gap-1.5 bg-background border border-border px-2 py-1 rounded text-sm cursor-pointer hover:bg-muted">
+                  <label key={year} className="flex items-center gap-1.5 bg-background border border-border px-3 py-1.5 rounded-lg text-sm cursor-pointer hover:bg-muted transition-colors">
                     <input
                       type="checkbox"
                       checked={customConfig.years.includes(year)}
@@ -627,7 +669,7 @@ export function SimuladoClient({
                         ...prev,
                         years: event.target.checked ? [...prev.years, year] : prev.years.filter(item => item !== year),
                       }))}
-                      className="rounded text-primary focus:ring-primary"
+                      className="rounded text-primary focus:ring-primary w-4 h-4"
                     />
                     {year}
                   </label>
@@ -635,56 +677,70 @@ export function SimuladoClient({
               </div>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-5">
               <div className="flex-1">
                 <label className="block text-sm font-bold text-foreground mb-2">Questões por Área</label>
-                <input 
-                  type="number" 
-                  min="5" max="30" 
-                  value={customConfig.questions_per_area}
-                  onChange={(e) => setCustomConfig(prev => ({ ...prev, questions_per_area: parseInt(e.target.value) || 20 }))}
-                  className="w-full bg-background border border-border rounded-lg p-2 text-foreground focus:ring-2 focus:ring-primary"
-                />
-                <p className="text-xs text-muted-foreground mt-1">Multiplicado por 5 áreas</p>
+                <div className="relative">
+                  <input 
+                    type="number" 
+                    min="5" max="30" 
+                    value={customConfig.questions_per_area}
+                    onChange={(e) => setCustomConfig(prev => ({ ...prev, questions_per_area: parseInt(e.target.value) || 20 }))}
+                    className="w-full bg-background border border-border rounded-xl p-3 text-foreground focus:ring-2 focus:ring-primary/50 transition-shadow outline-none"
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground mt-1.5 font-medium flex items-center gap-1">
+                  <span className="material-symbols-outlined text-[14px]">info</span>
+                  Multiplicado por 5 grandes áreas
+                </p>
               </div>
               <div className="flex-1">
-                <label className="block text-sm font-bold text-foreground mb-2">Duração (min)</label>
-                <input
-                  type="number"
-                  min="15" max="600" step="15"
-                  value={customConfig.duration_minutes}
-                  onChange={(event) => setCustomConfig(prev => ({ ...prev, duration_minutes: Math.max(15, Math.min(600, parseInt(event.target.value) || 180)) }))}
-                  className="w-full bg-background border border-border rounded-lg p-2 text-foreground focus:ring-2 focus:ring-primary"
-                />
-                <p className="text-xs text-muted-foreground mt-1">Entre 15 min e 10 horas</p>
+                <label className="block text-sm font-bold text-foreground mb-2">Duração (minutos)</label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    min="15" max="600" step="15"
+                    value={customConfig.duration_minutes}
+                    onChange={(event) => setCustomConfig(prev => ({ ...prev, duration_minutes: Math.max(15, Math.min(600, parseInt(event.target.value) || 180)) }))}
+                    className="w-full bg-background border border-border rounded-xl p-3 text-foreground focus:ring-2 focus:ring-primary/50 transition-shadow outline-none"
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground mt-1.5 font-medium flex items-center gap-1">
+                  <span className="material-symbols-outlined text-[14px]">info</span>
+                  Entre 15 min e 10 horas
+                </p>
               </div>
             </div>
 
-            <label className="flex items-center gap-2 cursor-pointer border-t border-border pt-4 mt-2">
+            <label className="flex items-center gap-3 cursor-pointer border-t border-border/50 pt-5 mt-2 group">
               <input 
                 type="checkbox" 
                 checked={customConfig.force_4_options}
                 onChange={(e) => setCustomConfig(prev => ({ ...prev, force_4_options: e.target.checked }))}
-                className="rounded text-primary focus:ring-primary w-4 h-4"
+                className="rounded text-primary focus:ring-primary w-5 h-5 cursor-pointer"
               />
-              <span className="text-sm font-bold text-foreground">Forçar 4 Alternativas (Estilo USP 2026)</span>
+              <span className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">Forçar 4 Alternativas (Estilo Nova Prova USP)</span>
             </label>
           </div>
         )}
         
-        <div className="grid grid-cols-2 gap-4 w-full max-w-md mb-8 text-left">
-          <div className="bg-muted rounded-lg p-4">
-            <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Questões</span>
+        <div className="grid grid-cols-2 gap-4 w-full max-w-lg mb-8 text-left">
+          <div className="bg-muted/50 rounded-xl p-4 border border-border/50">
+            <span className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground uppercase mb-1.5 tracking-wider">
+              <span className="material-symbols-outlined text-[14px]">list_alt</span> Questões
+            </span>
             <span className="text-lg font-bold text-foreground">
               {hasCustomFilters ? (initialFilters.limit || "Até 50") : (
                 simuladoProfile === 'custom' 
                   ? (customConfig.questions_per_area * 5) 
                   : (profilesData.find(p => p.id === simuladoProfile)?.questions || 120)
-              )} (Múltipla Escolha)
+              )} <span className="text-sm font-medium text-muted-foreground">un</span>
             </span>
           </div>
-          <div className="bg-muted rounded-lg p-4">
-            <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Duração</span>
+          <div className="bg-muted/50 rounded-xl p-4 border border-border/50">
+            <span className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground uppercase mb-1.5 tracking-wider">
+              <span className="material-symbols-outlined text-[14px]">timer</span> Duração
+            </span>
             <span className="text-lg font-bold text-foreground">
               {hasCustomFilters 
                 ? `${Math.round((Number(initialFilters.limit || 50) / 120) * 6 * 60)} min` 
@@ -696,8 +752,10 @@ export function SimuladoClient({
             </span>
           </div>
           {!hasCustomFilters && (
-            <div className="bg-muted rounded-lg p-4 col-span-2">
-              <span className="block text-xs font-bold text-muted-foreground uppercase mb-1">Balanceamento</span>
+            <div className="bg-muted/50 rounded-xl p-4 col-span-2 border border-border/50">
+              <span className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground uppercase mb-1.5 tracking-wider">
+                <span className="material-symbols-outlined text-[14px]">balance</span> Balanceamento
+              </span>
               <span className="text-sm font-medium text-foreground">
                 {simuladoProfile === 'custom' 
                   ? `${customConfig.questions_per_area} Clínica • ${customConfig.questions_per_area} Cirurgia • ${customConfig.questions_per_area} Pediatria • ${customConfig.questions_per_area} GO • ${customConfig.questions_per_area} Preventiva`
@@ -707,34 +765,34 @@ export function SimuladoClient({
           )}
         </div>
 
-        <div className="bg-warning/10 text-warning border border-warning/20 rounded-lg p-4 flex items-start gap-3 w-full max-w-md mb-8 text-left text-sm">
-          <AlertTriangle size={20} className="shrink-0 mt-0.5" />
-          <p>
+        <div className="bg-warning/10 text-warning-foreground border border-warning/20 rounded-xl p-4 flex items-start gap-3 w-full max-w-lg mb-8 text-left text-sm shadow-sm">
+          <AlertTriangle size={20} className="shrink-0 mt-0.5 text-warning" />
+          <p className="font-medium text-warning-foreground/90">
             Você não receberá feedback imediato ao clicar nas alternativas. 
             O resultado e os comentários só serão exibidos ao finalizar a prova.
           </p>
         </div>
 
-        <div className="flex flex-col gap-3 w-full max-w-md">
+        <div className="flex flex-col sm:flex-row gap-3 w-full max-w-lg">
           {hasSavedState && (
             <button 
               onClick={resumeSimulado}
               disabled={!clientReady}
-              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0"
+              className="flex-1 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold py-3.5 px-6 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow-md disabled:opacity-60"
             >
               <RotateCcw size={20} />
-              Continuar Simulado em Andamento
+              Continuar Andamento
             </button>
           )}
           <button 
             onClick={startSimulado}
             disabled={!clientReady}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0"
+            className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 px-6 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow-md disabled:opacity-60"
           >
             <Play size={20} fill="currentColor" />
             {hasSavedState
-              ? (hasCustomFilters ? "Iniciar Novo Personalizado" : "Iniciar Novo Simulado")
-              : "Iniciar Simulado Agora"}
+              ? (hasCustomFilters ? "Novo Personalizado" : "Novo Simulado")
+              : "Iniciar Agora"}
           </button>
         </div>
       </div>

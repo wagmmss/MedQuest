@@ -285,7 +285,7 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
           <ul className="flex flex-col gap-2">
             {[
               { href: "/estudar", icon: "menu_book", title: "Estudar Questões", desc: "Filtre por especialidade ou tema", colorClass: "text-primary", bgClass: "bg-primary/10 ring-primary/20", groupHoverBg: "group-hover:bg-primary", groupHoverText: "group-hover:text-primary-foreground" },
-              { href: "/simulado", icon: "description", title: "Simulado USP", desc: "Realize provas na íntegra", colorClass: "text-secondary", bgClass: "bg-secondary/10 ring-secondary/20", groupHoverBg: "group-hover:bg-secondary", groupHoverText: "group-hover:text-secondary-foreground" },
+              { href: "/simulado", icon: "description", title: "Simulados", desc: "Realize provas na íntegra", colorClass: "text-secondary", bgClass: "bg-secondary/10 ring-secondary/20", groupHoverBg: "group-hover:bg-secondary", groupHoverText: "group-hover:text-secondary-foreground" },
               { href: "/planner", icon: "calendar_month", title: "Planner Anual", desc: "Acompanhe seu cronograma", colorClass: "text-blue-500 dark:text-blue-400", bgClass: "bg-blue-500/10 ring-blue-500/20", groupHoverBg: "group-hover:bg-blue-600", groupHoverText: "group-hover:text-white" },
               { href: "/revisao-ativa", icon: "auto_awesome", title: "Revisão Ativa", desc: "Estude com flashcards de IA", colorClass: "text-purple-500 dark:text-purple-400", bgClass: "bg-purple-500/10 ring-purple-500/20", groupHoverBg: "group-hover:bg-purple-600", groupHoverText: "group-hover:text-white" }
             ].map((item) => (

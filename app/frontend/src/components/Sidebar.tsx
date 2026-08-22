@@ -17,7 +17,7 @@ const NAV_ITEMS = [
   { href: "/planner", label: "Planner", icon: "calendar_month" },
   { href: "/estudar", label: "Estudar", icon: "menu_book" },
   { href: "/revisao-ativa", label: "Revisão Ativa", icon: "psychology" },
-  { href: "/simulado", label: "Simulado USP", icon: "description" },
+  { href: "/simulado", label: "Simulados", icon: "description" },
 ];
 
 export function Sidebar() {
