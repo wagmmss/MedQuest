@@ -11,6 +11,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 
+import { SubjectTreeSelector } from "@/components/SubjectTreeSelector";
 import { ImageViewer } from "@/components/ImageViewer";
 import { useZenMode } from "@/hooks/useZenMode";
 import Image from "next/image";
@@ -752,6 +753,17 @@ export function QuizClient({
                   ))}
                 </div>
               )}
+              
+              <SubjectTreeSelector 
+                selectedSubtemas={Array.isArray(filters.subtema) ? filters.subtema : (filters.subtema ? [filters.subtema] : [])} 
+                onChange={(newSelection) => {
+                  const newFilters = { ...filters };
+                  if (newSelection.length > 0) newFilters.subtema = newSelection;
+                  else delete newFilters.subtema;
+                  setFilters(newFilters);
+                }}
+                availableSubtemas={dynamicMeta.subtemas}
+              />
             </div>
           </div>
 

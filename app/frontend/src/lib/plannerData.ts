@@ -6,9 +6,10 @@ export const plannerData = [
         "theme": "Transição Demográfica/Epidemiológica e Indicadores de Saúde",
         "highYield": true,
         "dbSubtemas": [
-          "Transição Demográfica e Epidemiológica",
-          "Indicadores de Saúde",
-          "Epidemiologia das Doenças Transmissíveis"
+          "Transição demográfica (envelhecimento, queda de fecundidade, pirâmide etária) e transição epidemiológica (tripla carga de doenças)",
+          "Indicadores de mortalidade: coeficiente de mortalidade geral, infantil, neonatal, materna e razão de mortalidade materna",
+          "Indicadores de morbidade: incidência, prevalência, letalidade; padronização de taxas",
+          "Esperança de vida, anos potenciais de vida perdidos e DALY"
         ],
         "details": [
           "Transição demográfica (envelhecimento, queda de fecundidade, pirâmide etária) e transição epidemiológica (tripla carga de doenças)",
@@ -21,7 +22,10 @@ export const plannerData = [
         "theme": "História das Políticas de Saúde e Reforma Sanitária",
         "highYield": false,
         "dbSubtemas": [
-          "Modelos de Atenção e Reforma Sanitária"
+          "Do modelo sanitarista-campanhista e previdenciário (INAMPS) ao SUS",
+          "8ª Conferência Nacional de Saúde (1986) e o Movimento da Reforma Sanitária",
+          "Constituição de 1988: saúde como direito de todos e dever do Estado",
+          "Modelos de atenção à saúde e determinantes sociais da saúde (Dahlgren e Whitehead)"
         ],
         "details": [
           "Do modelo sanitarista-campanhista e previdenciário (INAMPS) ao SUS",
@@ -34,9 +38,10 @@ export const plannerData = [
         "theme": "Princípios do SUS e Atenção Primária à Saúde",
         "highYield": true,
         "dbSubtemas": [
-          "Princípios e Diretrizes do SUS",
-          "Atenção Primária à Saúde",
-          "Ferramentas da APS (SOAP, PTS, Método Centrado na Pessoa)"
+          "Princípios doutrinários: universalidade, integralidade e equidade",
+          "Princípios organizativos: descentralização, regionalização, hierarquização, participação popular",
+          "Atributos da APS (Starfield): primeiro contato, longitudinalidade, integralidade, coordenação",
+          "Política Nacional de Atenção Básica (PNAB) e Estratégia Saúde da Família (eSF, eAP, NASF)"
         ],
         "details": [
           "Princípios doutrinários: universalidade, integralidade e equidade",
@@ -49,8 +54,10 @@ export const plannerData = [
         "theme": "Legislação, Financiamento e Controle Social do SUS",
         "highYield": false,
         "dbSubtemas": [
-          "Legislação e Financiamento do SUS",
-          "Controle Social e Participação Popular"
+          "Lei 8.080/90 (organização e funcionamento) e Lei 8.142/90 (participação e financiamento)",
+          "Conselhos de Saúde (permanentes, paritários, deliberativos) vs Conferências (a cada 4 anos)",
+          "Financiamento tripartite, blocos de financiamento e emenda constitucional do piso da saúde",
+          "Pacto pela Saúde, Decreto 7.508/2011, COAP e comissões intergestores (CIT, CIB, CIR)"
         ],
         "details": [
           "Lei 8.080/90 (organização e funcionamento) e Lei 8.142/90 (participação e financiamento)",
@@ -63,8 +70,10 @@ export const plannerData = [
         "theme": "Redes de Atenção e Sistemas de Informação em Saúde",
         "highYield": false,
         "dbSubtemas": [
-          "Redes de Atenção à Saúde",
-          "Sistemas de Informação em Saúde"
+          "Redes de Atenção à Saúde (RAS): APS como coordenadora e ordenadora do cuidado",
+          "Sistemas de informação: SIM (mortalidade), SINASC (nascidos vivos), SINAN (agravos), SIH, SIA, e-SUS",
+          "Declaração de óbito e declaração de nascido vivo: preenchimento e fluxo",
+          "Redes temáticas: Cegonha, Urgência e Emergência, RAPS (saúde mental)"
         ],
         "details": [
           "Redes de Atenção à Saúde (RAS): APS como coordenadora e ordenadora do cuidado",
@@ -77,8 +86,10 @@ export const plannerData = [
         "theme": "Vigilância em Saúde e Notificação Compulsória",
         "highYield": true,
         "dbSubtemas": [
-          "Vigilância em Saúde e Notificação Compulsória",
-          "Vigilância Sanitária"
+          "Vigilância epidemiológica, sanitária, ambiental e saúde do trabalhador",
+          "Lista Nacional de Notificação Compulsória: notificação imediata (24h) vs semanal",
+          "Investigação de surtos e epidemias; curva epidêmica; medidas de controle e bloqueio",
+          "Endemia, epidemia, pandemia; níveis endêmicos e canal endêmico"
         ],
         "details": [
           "Vigilância epidemiológica, sanitária, ambiental e saúde do trabalhador",
@@ -91,8 +102,10 @@ export const plannerData = [
         "theme": "Delineamentos de Estudos Epidemiológicos",
         "highYield": true,
         "dbSubtemas": [
-          "Estudos Observacionais (Coorte, Caso-Controle, Transversal, Ecológico)",
-          "Ensaios Clínicos e Randomização"
+          "Observacionais: coorte, caso-controle, transversal e ecológico (vantagens, desvantagens, vieses)",
+          "Experimentais: ensaio clínico randomizado, cegamento, intenção de tratar",
+          "Medidas de associação: Risco Relativo, Odds Ratio, Razão de Prevalência",
+          "Vieses de seleção, aferição e confusão; hierarquia das evidências"
         ],
         "details": [
           "Observacionais: coorte, caso-controle, transversal e ecológico (vantagens, desvantagens, vieses)",
@@ -105,11 +118,10 @@ export const plannerData = [
         "theme": "Bioestatística, Testes Diagnósticos e MBE",
         "highYield": true,
         "dbSubtemas": [
-          "Bioestatística e Testes de Hipótese",
-          "Testes Diagnósticos (Sensibilidade, VPP, ROC)",
-          "Medicina Baseada em Evidências",
-          "Medidas de Associação e Impacto (RR, OR, NNT)",
-          "Razão de Verossimilhança"
+          "Sensibilidade, especificidade, valor preditivo positivo/negativo e influência da prevalência",
+          "Razão de verossimilhança, curva ROC e ponto de corte",
+          "Medidas de impacto: risco atribuível, redução absoluta/relativa de risco, NNT e NNH",
+          "Testes de hipótese: valor-p, intervalo de confiança, erros tipo I e II, poder do estudo"
         ],
         "details": [
           "Sensibilidade, especificidade, valor preditivo positivo/negativo e influência da prevalência",
@@ -122,9 +134,10 @@ export const plannerData = [
         "theme": "Níveis de Prevenção, Rastreamento e Prevenção Quaternária",
         "highYield": false,
         "dbSubtemas": [
-          "Níveis de Prevenção e Prevenção Quaternária",
-          "Rastreamento Populacional",
-          "Imunização e Programas de Saúde"
+          "Níveis de prevenção de Leavell & Clark (primária, secundária, terciária) e prevenção quaternária",
+          "Critérios de Wilson e Jungner para rastreamento populacional",
+          "Vieses do rastreamento: lead time, length time e sobrediagnóstico",
+          "Principais programas de rastreamento no Brasil (colo de útero, mama, e outros)"
         ],
         "details": [
           "Níveis de prevenção de Leavell & Clark (primária, secundária, terciária) e prevenção quaternária",
@@ -137,7 +150,10 @@ export const plannerData = [
         "theme": "Saúde Ocupacional e do Trabalhador",
         "highYield": true,
         "dbSubtemas": [
-          "Saúde Ocupacional e do Trabalhador"
+          "Classificação de Schilling (I: causa necessária; II: fator contributivo; III: agravante)",
+          "Pneumoconioses (silicose, asbestose, antracose) — clínica e achados radiológicos",
+          "LER/DORT, PAIR (perda auditiva induzida por ruído) e transtornos mentais no trabalho",
+          "Acidente de trabalho com material biológico: profilaxia pós-exposição e CAT"
         ],
         "details": [
           "Classificação de Schilling (I: causa necessária; II: fator contributivo; III: agravante)",
@@ -150,7 +166,10 @@ export const plannerData = [
         "theme": "Ética Médica, Bioética e Documentos Médicos",
         "highYield": false,
         "dbSubtemas": [
-          "Ética Médica e Bioética"
+          "Princípios da bioética: autonomia, beneficência, não-maleficência e justiça",
+          "Sigilo médico, consentimento informado e autonomia do paciente/menor",
+          "Atestados, declarações e prontuário; responsabilidade civil e ética",
+          "Diretrizes antecipadas de vontade, terminalidade e ortotanásia"
         ],
         "details": [
           "Princípios da bioética: autonomia, beneficência, não-maleficência e justiça",
@@ -168,9 +187,10 @@ export const plannerData = [
         "theme": "Crescimento e Desenvolvimento Infantil",
         "highYield": true,
         "dbSubtemas": [
-          "Crescimento e Desenvolvimento",
-          "Pneumonia com Derrame Pleural",
-          "Ventilação com Bolsa-Máscara"
+          "Curvas de crescimento da OMS (escore Z e percentil para peso, estatura e perímetro cefálico)",
+          "Causas de baixa estatura (familiar, atraso constitucional, patológicas)",
+          "Marcos do desenvolvimento neuropsicomotor (motor, cognitivo, linguagem, social)",
+          "Sinais de alerta para transtorno do espectro autista e atraso global do desenvolvimento"
         ],
         "details": [
           "Curvas de crescimento da OMS (escore Z e percentil para peso, estatura e perímetro cefálico)",
@@ -183,8 +203,10 @@ export const plannerData = [
         "theme": "Aleitamento Materno e Alimentação Complementar",
         "highYield": true,
         "dbSubtemas": [
-          "Aleitamento Materno e Alimentação",
-          "Imunodeficiências"
+          "Vantagens do aleitamento; contraindicações formais (HIV, HTLV) e temporárias",
+          "Composição do leite (colostro, transição, maduro) e tipos de amamentação",
+          "Manejo de intercorrências: fissuras, ingurgitamento, mastite, baixa produção",
+          "Introdução alimentar (a partir dos 6 meses) e suplementação de ferro e vitamina D"
         ],
         "details": [
           "Vantagens do aleitamento; contraindicações formais (HIV, HTLV) e temporárias",
@@ -197,7 +219,10 @@ export const plannerData = [
         "theme": "Imunização — Calendário Nacional (PNI)",
         "highYield": true,
         "dbSubtemas": [
-          "Imunização (PNI)"
+          "Esquema do primeiro ano de vida (BCG, hepatite B, penta, VIP/VOP, pneumo, rota, meningo)",
+          "Vacinas de vírus vivos vs inativados e contraindicações específicas",
+          "Eventos adversos pós-vacinais e conduta",
+          "Situações especiais: prematuros, imunodeprimidos, gestantes e comunicantes"
         ],
         "details": [
           "Esquema do primeiro ano de vida (BCG, hepatite B, penta, VIP/VOP, pneumo, rota, meningo)",
@@ -210,9 +235,10 @@ export const plannerData = [
         "theme": "Triagem Neonatal e Cuidados com o Recém-Nascido",
         "highYield": false,
         "dbSubtemas": [
-          "Triagem Neonatal e Cuidados com o Recém-Nascido",
-          "Febre Reumática e Doenças Pós-infecciosas",
-          "Teste do Coraçãozinho"
+          "Testes de triagem: pezinho (biológico), orelhinha (auditivo), olhinho (reflexo vermelho), coraçãozinho (oximetria)",
+          "Doenças triadas no teste do pezinho (hipotireoidismo congênito, fenilcetonúria, anemia falciforme e outras)",
+          "Cuidados de rotina na sala de parto e alojamento conjunto",
+          "Avaliação da idade gestacional (Capurro, New Ballard) e classificação do RN (PIG/AIG/GIG)"
         ],
         "details": [
           "Testes de triagem: pezinho (biológico), orelhinha (auditivo), olhinho (reflexo vermelho), coraçãozinho (oximetria)",
@@ -225,10 +251,10 @@ export const plannerData = [
         "theme": "Neonatologia: Reanimação e Distúrbios Respiratórios do RN",
         "highYield": true,
         "dbSubtemas": [
-          "Reanimação Neonatal",
-          "Distúrbios Respiratórios do Recém-Nascido",
-          "Sepse Neonatal",
-          "Síndrome do Bebê Sacudido"
+          "Fluxograma de reanimação neonatal da SBP (RN ≥34 sem e <34 sem)",
+          "Síndrome do desconforto respiratório (doença da membrana hialina) e uso de surfactante",
+          "Taquipneia transitória do RN e síndrome de aspiração meconial",
+          "Sepse neonatal precoce e tardia: fatores de risco, clínica e conduta"
         ],
         "details": [
           "Fluxograma de reanimação neonatal da SBP (RN ≥34 sem e <34 sem)",
@@ -241,8 +267,10 @@ export const plannerData = [
         "theme": "Icterícia Neonatal e Infecções Congênitas",
         "highYield": true,
         "dbSubtemas": [
-          "Icterícia Neonatal",
-          "Infecções Congênitas (STORCH e Sífilis)"
+          "Icterícia fisiológica vs patológica; incompatibilidade ABO e Rh",
+          "Indicações de fototerapia e exsanguineotransfusão; kernicterus",
+          "Infecções congênitas (STORCH): sífilis, toxoplasmose, rubéola, CMV, Zika",
+          "Rastreamento, achados clínicos e conduta na sífilis congênita"
         ],
         "details": [
           "Icterícia fisiológica vs patológica; incompatibilidade ABO e Rh",
@@ -255,8 +283,10 @@ export const plannerData = [
         "theme": "Diarreia Aguda, Reidratação e Distúrbios Hidroeletrolíticos",
         "highYield": true,
         "dbSubtemas": [
-          "Diarreia Aguda e Reidratação",
-          "Distúrbios Hidroeletrolíticos e Fluidoterapia"
+          "Fisiopatologia da diarreia (osmótica, secretora, invasiva) e principais agentes",
+          "Avaliação do estado de hidratação e Planos A, B e C do Ministério da Saúde",
+          "Distúrbios do sódio na desidratação; hidratação parenteral (Holliday-Segar)",
+          "Uso de zinco, probióticos e indicações de antibiótico na diarreia infantil"
         ],
         "details": [
           "Fisiopatologia da diarreia (osmótica, secretora, invasiva) e principais agentes",
@@ -269,13 +299,10 @@ export const plannerData = [
         "theme": "Infecções Respiratórias Agudas e Asma na Infância",
         "highYield": true,
         "dbSubtemas": [
-          "Infecções Respiratórias Agudas (Pneumonia, Bronquiolite, Crupe)",
-          "Asma na Infância",
-          "Bronquiolite",
-          "Fluidoterapia de Manutenção",
-          "Hipocalemia na Infância",
-          "Laringotraqueíte (Crupe)",
-          "Neoplasias na Infância"
+          "Pneumonias por faixa etária (etiologia, clínica, critérios de internação, antibiótico)",
+          "Bronquiolite viral aguda (VSR): diagnóstico clínico e manejo de suporte",
+          "Crupe viral, epiglotite e laringites; otite média aguda e sinusite",
+          "Diagnóstico e tratamento de manutenção e crise da asma na criança"
         ],
         "details": [
           "Pneumonias por faixa etária (etiologia, clínica, critérios de internação, antibiótico)",
@@ -288,9 +315,10 @@ export const plannerData = [
         "theme": "Doenças Exantemáticas e Doença de Kawasaki",
         "highYield": true,
         "dbSubtemas": [
-          "Doenças Exantemáticas",
-          "Kawasaki e Vasculites (Henoch-Schönlein)",
-          "Pneumonia - Complicação"
+          "Sarampo, rubéola, eritema infeccioso, exantema súbito, escarlatina e varicela",
+          "Período de incubação, pródromo e progressão do exantema de cada doença",
+          "Doença de Kawasaki: critérios diagnósticos, risco de aneurisma coronariano e tratamento (IVIG + AAS)",
+          "Complicações e profilaxia pós-exposição"
         ],
         "details": [
           "Sarampo, rubéola, eritema infeccioso, exantema súbito, escarlatina e varicela",
@@ -303,8 +331,10 @@ export const plannerData = [
         "theme": "Parasitoses, Anemias e Verminoses na Infância",
         "highYield": false,
         "dbSubtemas": [
-          "Parasitoses e Verminoses",
-          "Anemias na Infância"
+          "Anemia ferropriva: rastreamento, profilaxia e tratamento; anemias hemolíticas na criança",
+          "Principais helmintíases (ascaridíase, ancilostomíase, enterobíase, teníase) e protozooses (giardíase, amebíase)",
+          "Ciclos, clínica e tratamento antiparasitário",
+          "Larva migrans, estrongiloidíase e esquistossomose"
         ],
         "details": [
           "Anemia ferropriva: rastreamento, profilaxia e tratamento; anemias hemolíticas na criança",
@@ -317,7 +347,10 @@ export const plannerData = [
         "theme": "Desnutrição, Obesidade e Distúrbios Nutricionais",
         "highYield": false,
         "dbSubtemas": [
-          "Desnutrição e Obesidade Infantil"
+          "Desnutrição energético-proteica: marasmo, kwashiorkor e manejo das complicações",
+          "Obesidade infantil: diagnóstico (IMC/idade), comorbidades e abordagem",
+          "Deficiências de micronutrientes (vitamina A, D, ferro, zinco, iodo)",
+          "Distúrbios do crescimento associados à nutrição"
         ],
         "details": [
           "Desnutrição energético-proteica: marasmo, kwashiorkor e manejo das complicações",
@@ -330,7 +363,10 @@ export const plannerData = [
         "theme": "Cardiopatias Congênitas e Sopros na Infância",
         "highYield": false,
         "dbSubtemas": [
-          "Cardiopatias Congênitas"
+          "Sopro inocente vs patológico; sinais de alerta",
+          "Cardiopatias acianóticas (CIV, CIA, PCA, coarctação de aorta)",
+          "Cardiopatias cianóticas (Tetralogia de Fallot, transposição de grandes vasos)",
+          "Rastreamento por oximetria e conduta inicial no RN cianótico"
         ],
         "details": [
           "Sopro inocente vs patológico; sinais de alerta",
@@ -343,13 +379,10 @@ export const plannerData = [
         "theme": "Nefro-urologia Pediátrica",
         "highYield": false,
         "dbSubtemas": [
-          "Infecção do Trato Urinário e Refluxo",
-          "Glomerulopatias na Infância (Nefrótica, Nefrítica, SHU)",
-          "Dermatologia Pediátrica",
-          "Hematologia Pediátrica",
-          "Infecção do Trato Urinário",
-          "Oftalmologia e Otorrinolaringologia Pediátrica",
-          "Ortopedia e Reumatologia Pediátrica"
+          "Infecção do trato urinário na criança: diagnóstico, tratamento e investigação de imagem",
+          "Refluxo vesicoureteral e bexiga neurogênica",
+          "Síndrome nefrótica (lesões mínimas) vs síndrome nefrítica (GNPE)",
+          "Glomerulonefrite difusa aguda pós-estreptocócica: clínica e evolução"
         ],
         "details": [
           "Infecção do trato urinário na criança: diagnóstico, tratamento e investigação de imagem",
@@ -362,14 +395,10 @@ export const plannerData = [
         "theme": "Emergências Pediátricas, Convulsão Febril e PALS",
         "highYield": false,
         "dbSubtemas": [
-          "Convulsão Febril e Emergências Neurológicas",
-          "Parada Cardiorrespiratória Pediátrica (PALS)",
-          "Cetoacidose Diabética na Infância",
-          "Cetoacidose Diabética",
-          "Crise Asmática Grave",
-          "Edema Cerebral - Cetoacidose Diabética",
-          "Emergências e Intoxicações Pediátricas",
-          "Trauma Cranioencefálico não Acidental"
+          "Crise convulsiva febril simples vs complexa: conduta e investigação",
+          "Suporte básico e avançado de vida em pediatria (PALS) e reconhecimento de choque",
+          "Traumatismo cranioencefálico (regras do PECARN para TC)",
+          "Cetoacidose diabética, anafilaxia e intoxicações na criança"
         ],
         "details": [
           "Crise convulsiva febril simples vs complexa: conduta e investigação",
@@ -382,8 +411,10 @@ export const plannerData = [
         "theme": "Maus-Tratos, Adolescência e Puberdade",
         "highYield": false,
         "dbSubtemas": [
-          "Maus-tratos e Violência",
-          "Adolescência e Puberdade"
+          "Identificação de maus-tratos (físico, sexual, negligência) e notificação/Conselho Tutelar",
+          "Estágios de Tanner e sequência normal da puberdade em meninos e meninas",
+          "Puberdade precoce e atraso puberal",
+          "Confidencialidade, sexualidade e saúde do adolescente"
         ],
         "details": [
           "Identificação de maus-tratos (físico, sexual, negligência) e notificação/Conselho Tutelar",
@@ -395,30 +426,7 @@ export const plannerData = [
       {
         "theme": "Outros Tópicos",
         "highYield": false,
-        "dbSubtemas": [
-          "Aleitamento Materno e Alimentação Complementar",
-          "Anemias e Doença Falciforme na Infância",
-          "Cetoacidose Diabética e Diabetes na Infância",
-          "Crescimento e Desenvolvimento Neuropsicomotor",
-          "Desnutrição, Obesidade e Avaliação Nutricional Infantil",
-          "Diarreia Aguda, Reidratação e Parasitoses",
-          "Doenças Exantemáticas e Infectocontagiosas",
-          "Doenças Gastrointestinais Crônicas (Doença Celíaca, APLV, DII)",
-          "Febre Reumática",
-          "Fibrose Cística e Doenças Respiratórias Crônicas",
-          "Hematologia Pediátrica (Coagulopatias e PTI)",
-          "Imunização (PNI) e Calendário Vacinal",
-          "Imunodeficiências Primárias",
-          "Infecção do Trato Urinário e Refluxo Vesicoureteral",
-          "Maus-tratos e Violência contra a Criança",
-          "Neoplasias na Infância e Neutropenia Febril",
-          "Período Neonatal: Doenças Hematológicas e Icterícia",
-          "Período Neonatal: Doenças Infecciosas e Sífilis/STORCH",
-          "Período Neonatal: Doenças Neurológicas e Sensoriais",
-          "Período Neonatal: Doenças Respiratórias",
-          "Período Neonatal: Doenças do Metabolismo",
-          "Sala de Parto e Reanimação Neonatal"
-        ],
+        "dbSubtemas": [],
         "details": []
       }
     ]
@@ -430,11 +438,10 @@ export const plannerData = [
         "theme": "Ciclo Menstrual e Fisiologia Hormonal",
         "highYield": true,
         "dbSubtemas": [
-          "Ciclo Menstrual e Fisiologia Hormonal",
-          "Distócia de Ombro",
-          "Fator Tuboperitoneal",
-          "Inserção de DIU",
-          "Problemas da Amamentação"
+          "Eixo hipotálamo-hipófise-ovário e fases folicular, ovulatória e lútea",
+          "Ações de FSH, LH, estrogênio e progesterona ao longo do ciclo",
+          "Ciclo endometrial: proliferativo, secretor e menstruação",
+          "Puberdade feminina, telarca, pubarca e menarca"
         ],
         "details": [
           "Eixo hipotálamo-hipófise-ovário e fases folicular, ovulatória e lútea",
@@ -447,8 +454,10 @@ export const plannerData = [
         "theme": "Anticoncepção e Planejamento Familiar",
         "highYield": true,
         "dbSubtemas": [
-          "Anticoncepção e Planejamento Familiar",
-          "Aborto Legal e Violência Sexual"
+          "Métodos combinados e de progestagênio isolado: indicações e efeitos adversos",
+          "Critérios de Elegibilidade da OMS (categorias 1 a 4)",
+          "LARC: DIU de cobre, DIU de levonorgestrel e implante",
+          "Contracepção de emergência e métodos definitivos"
         ],
         "details": [
           "Métodos combinados e de progestagênio isolado: indicações e efeitos adversos",
@@ -461,8 +470,10 @@ export const plannerData = [
         "theme": "Amenorreia, SOP e Hiperandrogenismo",
         "highYield": false,
         "dbSubtemas": [
-          "Amenorreia e Síndrome dos Ovários Policísticos",
-          "Síndrome de Asherman"
+          "Amenorreia primária e secundária: investigação por compartimentos",
+          "Síndrome dos ovários policísticos: critérios de Rotterdam e manejo",
+          "Hiperprolactinemia e insuficiência ovariana prematura",
+          "Hirsutismo e diagnóstico diferencial do hiperandrogenismo"
         ],
         "details": [
           "Amenorreia primária e secundária: investigação por compartimentos",
@@ -475,9 +486,10 @@ export const plannerData = [
         "theme": "Sangramento Uterino Anormal, Miomatose e Endometriose",
         "highYield": false,
         "dbSubtemas": [
-          "Sangramento Uterino Anormal e Miomatose",
-          "Endometriose",
-          "Dor Pélvica Aguda"
+          "Classificação PALM-COEIN do sangramento uterino anormal",
+          "Leiomioma uterino: classificação FIGO, clínica e tratamento",
+          "Endometriose: fisiopatologia, dor pélvica, infertilidade e tratamento",
+          "Adenomiose e pólipos endometriais"
         ],
         "details": [
           "Classificação PALM-COEIN do sangramento uterino anormal",
@@ -490,9 +502,10 @@ export const plannerData = [
         "theme": "Vulvovaginites, IST e Doença Inflamatória Pélvica",
         "highYield": true,
         "dbSubtemas": [
-          "Vulvovaginites e Cervicites",
-          "Doença Inflamatória Pélvica e IST",
-          "Vaginose Bacteriana"
+          "Vaginose bacteriana, candidíase e tricomoníase (critérios de Amsel, pH, microscopia)",
+          "Cervicites por clamídia e gonococo; abordagem sindrômica das IST",
+          "Sífilis, herpes genital, cancro mole, HPV e donovanose",
+          "Doença inflamatória pélvica: critérios diagnósticos, tratamento e complicações"
         ],
         "details": [
           "Vaginose bacteriana, candidíase e tricomoníase (critérios de Amsel, pH, microscopia)",
@@ -505,7 +518,10 @@ export const plannerData = [
         "theme": "Climatério e Terapia Hormonal",
         "highYield": false,
         "dbSubtemas": [
-          "Climatério e Terapia Hormonal"
+          "Transição menopáusica e diagnóstico da menopausa",
+          "Indicações e contraindicações da terapia de reposição hormonal",
+          "Esquemas de TRH (estrogênio isolado vs combinado) e riscos",
+          "Manejo não hormonal dos sintomas e rastreamento de osteoporose"
         ],
         "details": [
           "Transição menopáusica e diagnóstico da menopausa",
@@ -518,7 +534,10 @@ export const plannerData = [
         "theme": "Rastreamento e Câncer de Colo Uterino",
         "highYield": true,
         "dbSubtemas": [
-          "Rastreamento e Câncer de Colo Uterino"
+          "Rastreamento com citologia (Papanicolau): idade de início e periodicidade",
+          "Conduta nas alterações citológicas (ASC-US, LSIL, ASC-H, HSIL, AGC)",
+          "Colposcopia, biópsia e tratamento das lesões precursoras (NIC)",
+          "Papel do HPV, vacinação e estadiamento do câncer de colo"
         ],
         "details": [
           "Rastreamento com citologia (Papanicolau): idade de início e periodicidade",
@@ -531,7 +550,10 @@ export const plannerData = [
         "theme": "Mastologia: Rastreamento, Nódulos e Câncer de Mama",
         "highYield": true,
         "dbSubtemas": [
-          "Mastologia e Câncer de Mama"
+          "Rastreamento mamográfico: idade, periodicidade e classificação BI-RADS",
+          "Nódulos benignos (fibroadenoma, cisto) vs sinais de malignidade",
+          "Investigação do nódulo (tríade diagnóstica) e derrame papilar",
+          "Fatores de risco, tipos histológicos e princípios do tratamento do câncer de mama"
         ],
         "details": [
           "Rastreamento mamográfico: idade, periodicidade e classificação BI-RADS",
@@ -544,8 +566,10 @@ export const plannerData = [
         "theme": "Câncer de Endométrio, Ovário e Incontinência/Distopias",
         "highYield": false,
         "dbSubtemas": [
-          "Câncer de Endométrio e Ovário",
-          "Incontinência Urinária e Prolapsos"
+          "Câncer de endométrio: fatores de risco, sangramento pós-menopausa e investigação",
+          "Câncer de ovário: tipos, marcadores e apresentação tardia",
+          "Incontinência urinária de esforço vs de urgência: diagnóstico e tratamento",
+          "Distopias genitais (prolapsos): classificação POP-Q e conduta"
         ],
         "details": [
           "Câncer de endométrio: fatores de risco, sangramento pós-menopausa e investigação",
@@ -558,9 +582,10 @@ export const plannerData = [
         "theme": "Assistência Pré-Natal de Baixo e Alto Risco",
         "highYield": true,
         "dbSubtemas": [
-          "Assistência Pré-natal",
-          "Gestação de Alto Risco",
-          "Lesão Intraepitelial de Alto Grau (Conização)"
+          "Exames de rotina por trimestre e cálculo da idade gestacional/DPP",
+          "Suplementação de ácido fólico e ferro; ganho de peso na gestação",
+          "Vacinação na gestação (dTpa, hepatite B, influenza) e contraindicadas",
+          "Rastreamento de Streptococcus do grupo B e profilaxia intraparto"
         ],
         "details": [
           "Exames de rotina por trimestre e cálculo da idade gestacional/DPP",
@@ -573,9 +598,10 @@ export const plannerData = [
         "theme": "Mecanismo e Assistência ao Parto",
         "highYield": true,
         "dbSubtemas": [
-          "Mecanismo e Assistência ao Parto",
-          "Insinuação Fetal",
-          "Partograma e Tipo de Bacia"
+          "Tempos do mecanismo de parto (insinuação, descida, rotação, desprendimento)",
+          "Fases clínicas do parto e uso/interpretação do partograma",
+          "Distocias funcionais, de trajeto e de apresentação; indicações de cesárea e fórceps",
+          "Analgesia de parto e assistência ao período expulsivo"
         ],
         "details": [
           "Tempos do mecanismo de parto (insinuação, descida, rotação, desprendimento)",
@@ -588,7 +614,10 @@ export const plannerData = [
         "theme": "Síndromes Hipertensivas da Gestação",
         "highYield": true,
         "dbSubtemas": [
-          "Síndromes Hipertensivas da Gestação"
+          "Classificação: HAS crônica, pré-eclâmpsia, eclâmpsia e sobreposta",
+          "Critérios de gravidade e iminência de eclâmpsia",
+          "Sulfato de magnésio (Zuspan/Pritchard), toxicidade e antídoto (gluconato de cálcio)",
+          "Síndrome HELLP: diagnóstico laboratorial e conduta"
         ],
         "details": [
           "Classificação: HAS crônica, pré-eclâmpsia, eclâmpsia e sobreposta",
@@ -601,8 +630,10 @@ export const plannerData = [
         "theme": "Diabetes e Outras Intercorrências Clínicas da Gestação",
         "highYield": false,
         "dbSubtemas": [
-          "Diabetes Gestacional",
-          "Infecções na Gestação (HIV, Sífilis, STORCH)"
+          "Diabetes gestacional: rastreamento, TOTG 75g e metas de controle",
+          "Diabetes pré-gestacional e repercussões fetais",
+          "Infecção urinária, bacteriúria assintomática e pielonefrite na gestação",
+          "Transmissão vertical do HIV, hepatites e sífilis"
         ],
         "details": [
           "Diabetes gestacional: rastreamento, TOTG 75g e metas de controle",
@@ -615,8 +646,10 @@ export const plannerData = [
         "theme": "Hemorragias da Primeira Metade da Gestação",
         "highYield": true,
         "dbSubtemas": [
-          "Abortamento e Doença Trofoblástica",
-          "Gestação Ectópica"
+          "Abortamento (ameaça, completo, incompleto, retido, infectado): clínica e conduta",
+          "Gravidez ectópica: diagnóstico e critérios para metotrexato vs cirurgia",
+          "Doença trofoblástica gestacional (mola completa vs parcial) e seguimento com beta-hCG",
+          "Diagnóstico diferencial por ultrassom e dosagens de beta-hCG"
         ],
         "details": [
           "Abortamento (ameaça, completo, incompleto, retido, infectado): clínica e conduta",
@@ -629,8 +662,10 @@ export const plannerData = [
         "theme": "Hemorragias da Segunda Metade e Prematuridade",
         "highYield": true,
         "dbSubtemas": [
-          "Hemorragias da 2ª Metade (DPP, Placenta Prévia)",
-          "Trabalho de Parto Prematuro e Rotura de Membranas"
+          "Descolamento prematuro de placenta vs placenta prévia: quadro e conduta",
+          "Rotura uterina e rotura de vasa prévia",
+          "Trabalho de parto prematuro: tocólise e corticoterapia antenatal",
+          "Amniorrexe prematura: diagnóstico, riscos e conduta conforme idade gestacional"
         ],
         "details": [
           "Descolamento prematuro de placenta vs placenta prévia: quadro e conduta",
@@ -643,9 +678,10 @@ export const plannerData = [
         "theme": "Vitalidade Fetal, RCF e Puerpério",
         "highYield": false,
         "dbSubtemas": [
-          "Vitalidade Fetal e Restrição de Crescimento",
-          "Puerpério e Hemorragia Pós-parto",
-          "Infecção Puerperal"
+          "Avaliação da vitalidade fetal: cardiotocografia, perfil biofísico e Doppler",
+          "Restrição de crescimento fetal: classificação e dopplerfluxometria",
+          "Puerpério fisiológico e patológico; hemorragia pós-parto (4 T) e atonia uterina",
+          "Infecção puerperal e mastite puerperal"
         ],
         "details": [
           "Avaliação da vitalidade fetal: cardiotocografia, perfil biofísico e Doppler",
@@ -657,14 +693,7 @@ export const plannerData = [
       {
         "theme": "Outros Tópicos",
         "highYield": false,
-        "dbSubtemas": [
-          "Diabetes Gestacional e Diabetes na Gestação",
-          "Endometriose e Dor Pélvica Crônica",
-          "Gestação de Alto Risco e Intercorrências Clínicas",
-          "Infertilidade Conjugal",
-          "Sangramento da Primeira Metade da Gestação (Aborto, Ectópica, Mola)",
-          "Sangramento da Segunda Metade da Gestação (DPP, Placenta Prévia)"
-        ],
+        "dbSubtemas": [],
         "details": []
       }
     ]
@@ -676,15 +705,10 @@ export const plannerData = [
         "theme": "Avaliação Pré-Operatória e Risco Cirúrgico",
         "highYield": false,
         "dbSubtemas": [
-          "Avaliação Pré-operatória e Risco Cirúrgico",
-          "Carcinoma de Cavidade Oral",
-          "Emergências Oftalmológicas",
-          "Melanoma - Margens Cirúrgicas",
-          "Oftalmologia",
-          "Suporte Nutricional Perioperatório",
-          "Trauma Hepático",
-          "Tumores de Pele e Partes Moles",
-          "Urologia"
+          "Classificação ASA e índice de risco cardíaco revisado (Lee)",
+          "Manejo perioperatório de anticoagulantes, antiagregantes, hipoglicemiantes e anti-hipertensivos",
+          "Jejum pré-operatório e profilaxia de TEV (escore de Caprini)",
+          "Avaliação pulmonar e do paciente diabético/renal"
         ],
         "details": [
           "Classificação ASA e índice de risco cardíaco revisado (Lee)",
@@ -697,7 +721,10 @@ export const plannerData = [
         "theme": "Resposta Metabólica ao Trauma e Pós-Operatório",
         "highYield": true,
         "dbSubtemas": [
-          "Resposta Metabólica ao Trauma e Pós-operatório"
+          "Fases da resposta metabólica ao trauma (hormônios contrarreguladores e citocinas)",
+          "Febre pós-operatória: causas conforme o tempo (24h, 72h, tardia)",
+          "Complicações pós-operatórias: íleo, deiscência, fístulas e abscessos",
+          "Nutrição perioperatória e reabilitação (ERAS/ACERTO)"
         ],
         "details": [
           "Fases da resposta metabólica ao trauma (hormônios contrarreguladores e citocinas)",
@@ -710,7 +737,10 @@ export const plannerData = [
         "theme": "Cicatrização, Infecção de Sítio Cirúrgico e Suturas",
         "highYield": false,
         "dbSubtemas": [
-          "Infecção de Sítio Cirúrgico e Cicatrização"
+          "Fases da cicatrização e fatores que a prejudicam",
+          "Classificação das feridas operatórias e profilaxia antibiótica cirúrgica",
+          "Infecção de sítio cirúrgico: diagnóstico e conduta",
+          "Fios de sutura (absorvíveis/inabsorvíveis, mono/multifilamentares) e técnicas"
         ],
         "details": [
           "Fases da cicatrização e fatores que a prejudicam",
@@ -723,8 +753,10 @@ export const plannerData = [
         "theme": "ATLS — Atendimento Inicial ao Politraumatizado",
         "highYield": true,
         "dbSubtemas": [
-          "Atendimento Inicial ao Trauma (ATLS)",
-          "Choque e Transfusão no Trauma"
+          "Sistemática ABCDE do trauma e avaliação primária",
+          "Via aérea definitiva: indicações (IOT, cricotireoidostomia)",
+          "Choque hemorrágico: classes de hemorragia e ressuscitação",
+          "Protocolo de transfusão maciça e ácido tranexâmico"
         ],
         "details": [
           "Sistemática ABCDE do trauma e avaliação primária",
@@ -737,7 +769,10 @@ export const plannerData = [
         "theme": "Trauma Torácico",
         "highYield": true,
         "dbSubtemas": [
-          "Trauma Torácico"
+          "Pneumotórax hipertensivo e aberto: diagnóstico clínico e conduta imediata",
+          "Hemotórax maciço e tórax instável",
+          "Tamponamento cardíaco (tríade de Beck) e toracotomia de reanimação",
+          "Contusão pulmonar, lesão de aorta e drenagem torácica"
         ],
         "details": [
           "Pneumotórax hipertensivo e aberto: diagnóstico clínico e conduta imediata",
@@ -750,11 +785,10 @@ export const plannerData = [
         "theme": "Trauma Abdominal e Choque",
         "highYield": true,
         "dbSubtemas": [
-          "Trauma Abdominal",
-          "Trauma Cranioencefálico e Raquimedular",
-          "Trauma Cervical e Vascular",
-          "Trauma Pélvico",
-          "Trauma Abdominal Fechado"
+          "Trauma abdominal fechado vs penetrante: indicações de laparotomia",
+          "FAST/e-FAST e tomografia no trauma; lavado peritoneal",
+          "Manejo conservador de lesões de vísceras maciças (fígado e baço)",
+          "Trauma pélvico, cirurgia de controle de danos e síndrome compartimental abdominal"
         ],
         "details": [
           "Trauma abdominal fechado vs penetrante: indicações de laparotomia",
@@ -767,8 +801,10 @@ export const plannerData = [
         "theme": "Queimaduras",
         "highYield": false,
         "dbSubtemas": [
-          "Queimaduras",
-          "Cuidados Pós-Operatórios"
+          "Profundidade e extensão (regra dos nove de Wallace)",
+          "Fórmula de Parkland para reposição volêmica nas primeiras 24h",
+          "Critérios de transferência para centro de queimados",
+          "Lesão inalatória, escarotomia e cuidados com a ferida"
         ],
         "details": [
           "Profundidade e extensão (regra dos nove de Wallace)",
@@ -781,9 +817,10 @@ export const plannerData = [
         "theme": "Abdome Agudo Inflamatório",
         "highYield": true,
         "dbSubtemas": [
-          "Apendicite Aguda",
-          "Colecistite e Colelitíase",
-          "Diverticulite Aguda"
+          "Apendicite aguda: clínica, escore de Alvarado, imagem e tratamento",
+          "Colecistite aguda: critérios de Tóquio e colecistectomia",
+          "Diverticulite aguda: classificação de Hinchey e conduta clínica vs cirúrgica",
+          "Pancreatite (visão geral) e diagnóstico diferencial do abdome agudo"
         ],
         "details": [
           "Apendicite aguda: clínica, escore de Alvarado, imagem e tratamento",
@@ -796,11 +833,10 @@ export const plannerData = [
         "theme": "Abdome Agudo Obstrutivo, Perfurativo e Vascular",
         "highYield": false,
         "dbSubtemas": [
-          "Abdome Agudo Obstrutivo",
-          "Abdome Agudo Perfurativo",
-          "Isquemia Mesentérica",
-          "Isquemia Mesentérica Aguda",
-          "Obstrução Intestinal por Aderências"
+          "Obstrução alta vs baixa (bridas, volvo, neoplasia, íleo biliar)",
+          "Abdome perfurativo (pneumoperitônio, sinal de Jobert)",
+          "Isquemia mesentérica aguda: dor desproporcional, acidose e angio-TC",
+          "Íleo paralítico pós-operatório e síndrome de Ogilvie"
         ],
         "details": [
           "Obstrução alta vs baixa (bridas, volvo, neoplasia, íleo biliar)",
@@ -813,7 +849,10 @@ export const plannerData = [
         "theme": "Hérnias da Parede Abdominal",
         "highYield": true,
         "dbSubtemas": [
-          "Hérnias da Parede Abdominal"
+          "Anatomia do canal inguinal e triângulo de Hesselbach",
+          "Hérnia inguinal indireta, direta e femoral (crural)",
+          "Classificação de Nyhus e técnicas de correção (Lichtenstein, laparoscópica)",
+          "Hérnia redutível, encarcerada e estrangulada: conduta"
         ],
         "details": [
           "Anatomia do canal inguinal e triângulo de Hesselbach",
@@ -826,8 +865,10 @@ export const plannerData = [
         "theme": "Doenças Biliares e Pancreatite Aguda",
         "highYield": true,
         "dbSubtemas": [
-          "Coledocolitíase e Colangite",
-          "Pancreatite Aguda"
+          "Colelitíase, coledocolitíase (indicação de CPRE) e colangite (tríade de Charcot/pêntade de Reynolds)",
+          "Pancreatite aguda: critérios diagnósticos e de gravidade (Ranson, Atlanta)",
+          "Manejo clínico inicial (hidratação, analgesia, nutrição precoce)",
+          "Complicações (pseudocisto, necrose infectada) e conduta"
         ],
         "details": [
           "Colelitíase, coledocolitíase (indicação de CPRE) e colangite (tríade de Charcot/pêntade de Reynolds)",
@@ -840,7 +881,10 @@ export const plannerData = [
         "theme": "Esôfago: DRGE, Acalasia e Câncer",
         "highYield": false,
         "dbSubtemas": [
-          "Doenças do Esôfago (DRGE, Acalasia, Câncer)"
+          "DRGE: diagnóstico, complicações e esôfago de Barrett",
+          "Acalasia e distúrbios motores; manometria esofágica",
+          "Câncer de esôfago (escamoso vs adenocarcinoma) e fatores de risco",
+          "Hérnia de hiato e divertículos esofágicos"
         ],
         "details": [
           "DRGE: diagnóstico, complicações e esôfago de Barrett",
@@ -853,10 +897,10 @@ export const plannerData = [
         "theme": "Estômago: Úlcera Péptica, HDA e Câncer Gástrico",
         "highYield": true,
         "dbSubtemas": [
-          "Estômago (Úlcera, HDA, Câncer Gástrico)",
-          "Cirurgia Bariátrica",
-          "Cirurgia Pediátrica",
-          "Úlcera Péptica Perfurada"
+          "Doença ulcerosa péptica, H. pylori e complicações (perfuração, obstrução)",
+          "Hemorragia digestiva alta: classificação de Forrest e abordagem endoscópica",
+          "Câncer gástrico: fatores de risco, tipos e estadiamento",
+          "Cirurgia bariátrica: indicações e principais técnicas"
         ],
         "details": [
           "Doença ulcerosa péptica, H. pylori e complicações (perfuração, obstrução)",
@@ -869,10 +913,10 @@ export const plannerData = [
         "theme": "Cólon, Reto e Ânus",
         "highYield": true,
         "dbSubtemas": [
-          "Câncer Colorretal",
-          "Doenças Orificiais (Hemorroida, Fissura, Fístula)",
-          "Câncer Colorretal Obstrutivo",
-          "Fissura Anal"
+          "Câncer colorretal: rastreamento, fatores de risco e estadiamento",
+          "Doença diverticular dos cólons e suas complicações",
+          "Doença inflamatória intestinal (Crohn vs retocolite) — visão cirúrgica",
+          "Doenças orificiais: hemorroidas, fissura anal, fístula e abscesso perianal"
         ],
         "details": [
           "Câncer colorretal: rastreamento, fatores de risco e estadiamento",
@@ -885,7 +929,10 @@ export const plannerData = [
         "theme": "Cirurgia Vascular",
         "highYield": false,
         "dbSubtemas": [
-          "Cirurgia Vascular (Aneurisma, Isquemia Arterial, Varizes)"
+          "Aneurisma de aorta abdominal: rastreamento e indicação de correção",
+          "Isquemia arterial aguda (5 P) e crônica (claudicação intermitente)",
+          "Doença venosa: varizes, insuficiência venosa e trombose venosa profunda",
+          "Pé diabético e úlceras vasculares"
         ],
         "details": [
           "Aneurisma de aorta abdominal: rastreamento e indicação de correção",
@@ -898,7 +945,10 @@ export const plannerData = [
         "theme": "Tireoide, Paratireoide e Cabeça e Pescoço",
         "highYield": false,
         "dbSubtemas": [
-          "Tireoide e Paratireoide"
+          "Nódulo de tireoide: investigação (PAAF, classificação de Bethesda)",
+          "Câncer de tireoide (papilífero, folicular, medular) e conduta",
+          "Hiperparatireoidismo e manejo cirúrgico",
+          "Massas cervicais e princípios do câncer de cabeça e pescoço"
         ],
         "details": [
           "Nódulo de tireoide: investigação (PAAF, classificação de Bethesda)",
@@ -916,12 +966,10 @@ export const plannerData = [
         "theme": "Hipertensão Arterial Sistêmica",
         "highYield": true,
         "dbSubtemas": [
-          "Hipertensão Arterial Sistêmica",
-          "Capnografia",
-          "Dermatologia",
-          "Glomerulopatias",
-          "Otorrinolaringologia",
-          "Valvopatias"
+          "Diagnóstico e estratificação de risco cardiovascular",
+          "Tratamento não medicamentoso e classes de primeira linha (IECA, BRA, BCC, tiazídicos)",
+          "Hipertensão resistente e secundária (renovascular, hiperaldosteronismo, feocromocitoma)",
+          "Urgência vs emergência hipertensiva e lesão de órgão-alvo"
         ],
         "details": [
           "Diagnóstico e estratificação de risco cardiovascular",
@@ -934,7 +982,10 @@ export const plannerData = [
         "theme": "Dislipidemia e Prevenção Cardiovascular",
         "highYield": false,
         "dbSubtemas": [
-          "Dislipidemia e Risco Cardiovascular"
+          "Metas de LDL conforme risco cardiovascular",
+          "Estatinas, ezetimiba e inibidores de PCSK9",
+          "Hipertrigliceridemia e risco de pancreatite",
+          "Estratificação de risco (escores) e prevenção primária vs secundária"
         ],
         "details": [
           "Metas de LDL conforme risco cardiovascular",
@@ -947,7 +998,10 @@ export const plannerData = [
         "theme": "Diabetes Mellitus e Complicações Agudas",
         "highYield": true,
         "dbSubtemas": [
-          "Diabetes Mellitus e Complicações Agudas"
+          "Critérios diagnósticos (glicemia, TOTG, HbA1c) e pré-diabetes",
+          "Tratamento do DM2 (metformina, iSGLT2, análogos de GLP-1, sulfonilureias)",
+          "Insulinoterapia no DM1 (basal-bolus)",
+          "Cetoacidose diabética e estado hiperosmolar: manejo de insulina, volume e potássio"
         ],
         "details": [
           "Critérios diagnósticos (glicemia, TOTG, HbA1c) e pré-diabetes",
@@ -960,8 +1014,10 @@ export const plannerData = [
         "theme": "Tireoidopatias e Distúrbios da Adrenal",
         "highYield": false,
         "dbSubtemas": [
-          "Tireoidopatias",
-          "Distúrbios da Adrenal e Hipófise"
+          "Hipotireoidismo e hipertireoidismo (Graves, bócio, tireoidites)",
+          "Crise tireotóxica e coma mixedematoso",
+          "Insuficiência adrenal e crise addisoniana; síndrome de Cushing",
+          "Interpretação de TSH, T4 livre e autoanticorpos"
         ],
         "details": [
           "Hipotireoidismo e hipertireoidismo (Graves, bócio, tireoidites)",
@@ -974,7 +1030,10 @@ export const plannerData = [
         "theme": "Síndromes Coronarianas Agudas",
         "highYield": true,
         "dbSubtemas": [
-          "Síndromes Coronarianas Agudas"
+          "IAM com supra de ST: ECG por parede e indicação de reperfusão (trombólise vs angioplastia)",
+          "SCA sem supra e angina instável: estratificação (GRACE/TIMI)",
+          "Dupla antiagregação, anticoagulação e terapia adjuvante",
+          "Complicações mecânicas e elétricas do infarto"
         ],
         "details": [
           "IAM com supra de ST: ECG por parede e indicação de reperfusão (trombólise vs angioplastia)",
@@ -987,8 +1046,10 @@ export const plannerData = [
         "theme": "Insuficiência Cardíaca",
         "highYield": true,
         "dbSubtemas": [
-          "Insuficiência Cardíaca",
-          "Radiografia de Tórax na Insuficiência Cardíaca"
+          "Diagnóstico (critérios de Framingham) e classificação por fração de ejeção",
+          "Terapia que reduz mortalidade na ICFEr (IECA/BRA/ARNI, betabloqueador, antagonista de aldosterona, iSGLT2)",
+          "IC aguda: perfis hemodinâmicos e tratamento no pronto-socorro",
+          "Dispositivos, ressincronização e manejo das descompensações"
         ],
         "details": [
           "Diagnóstico (critérios de Framingham) e classificação por fração de ejeção",
@@ -1001,7 +1062,10 @@ export const plannerData = [
         "theme": "Arritmias e Fibrilação Atrial",
         "highYield": false,
         "dbSubtemas": [
-          "Arritmias e Fibrilação Atrial"
+          "Fibrilação atrial: controle de ritmo vs frequência e anticoagulação (CHA2DS2-VASc, HAS-BLED)",
+          "Taquiarritmias de QRS estreito e largo: conduta na instabilidade vs estabilidade",
+          "Bradiarritmias e bloqueios atrioventriculares; indicação de marca-passo",
+          "Parada cardiorrespiratória: ritmos chocáveis e não chocáveis"
         ],
         "details": [
           "Fibrilação atrial: controle de ritmo vs frequência e anticoagulação (CHA2DS2-VASc, HAS-BLED)",
@@ -1014,7 +1078,10 @@ export const plannerData = [
         "theme": "Asma e DPOC",
         "highYield": true,
         "dbSubtemas": [
-          "Asma e DPOC"
+          "Diagnóstico diferencial pela espirometria (reversibilidade)",
+          "Tratamento de manutenção da asma (GINA) e da crise",
+          "Tratamento do DPOC (GOLD) e exacerbação (antibiótico, corticoide, VNI)",
+          "Oxigenoterapia domiciliar prolongada: critérios e benefício"
         ],
         "details": [
           "Diagnóstico diferencial pela espirometria (reversibilidade)",
@@ -1027,9 +1094,10 @@ export const plannerData = [
         "theme": "Tromboembolismo Venoso, TEP e Derrame Pleural",
         "highYield": true,
         "dbSubtemas": [
-          "Tromboembolismo Venoso e TEP",
-          "Derrame Pleural e Doenças Pleurais",
-          "Derrame Pleural Complicado (Empiema)"
+          "TVP e TEP: escores de probabilidade (Wells), D-dímero e angio-TC",
+          "Estratificação de gravidade do TEP e indicação de trombólise",
+          "Anticoagulação (heparinas, DOACs) e tempo de tratamento",
+          "Derrame pleural: critérios de Light (transudato vs exsudato) e toracocentese"
         ],
         "details": [
           "TVP e TEP: escores de probabilidade (Wells), D-dímero e angio-TC",
@@ -1042,10 +1110,10 @@ export const plannerData = [
         "theme": "Pneumonia, Tuberculose e Infecções Respiratórias",
         "highYield": true,
         "dbSubtemas": [
-          "Pneumonia e Infecções Respiratórias",
-          "Tuberculose",
-          "Doenças Pulmonares Intersticiais",
-          "Pneumonia Adquirida na Comunidade"
+          "Pneumonia adquirida na comunidade: CURB-65, local de tratamento e antibiótico empírico",
+          "Pneumonia hospitalar e associada à ventilação",
+          "Tuberculose: diagnóstico, esquema RIPE e tratamento da ILTB",
+          "Micoses pulmonares e abscesso pulmonar"
         ],
         "details": [
           "Pneumonia adquirida na comunidade: CURB-65, local de tratamento e antibiótico empírico",
@@ -1058,9 +1126,10 @@ export const plannerData = [
         "theme": "Nefrologia: IRA e Doença Renal Crônica",
         "highYield": true,
         "dbSubtemas": [
-          "Injúria Renal Aguda",
-          "Doença Renal Crônica",
-          "Osteoporose e Doença Óssea"
+          "Lesão renal aguda: classificação KDIGO e diferenciação pré-renal/renal/pós-renal",
+          "Doença renal crônica: estadiamento (TFG e albuminúria) e complicações",
+          "Distúrbio mineral e ósseo, anemia da DRC",
+          "Indicações de diálise de urgência (hipercalemia, acidose, volemia, uremia)"
         ],
         "details": [
           "Lesão renal aguda: classificação KDIGO e diferenciação pré-renal/renal/pós-renal",
@@ -1073,8 +1142,10 @@ export const plannerData = [
         "theme": "Distúrbios Hidroeletrolíticos e Ácido-Básicos",
         "highYield": true,
         "dbSubtemas": [
-          "Distúrbios Hidroeletrolíticos e Ácido-Base",
-          "Ascite - Diuréticos"
+          "Hiponatremia (por volemia e osmolaridade) e risco de mielinólise por correção rápida",
+          "Hipernatremia e distúrbios do potássio (ECG e estabilização de membrana)",
+          "Acidose metabólica: ânion gap e diagnóstico diferencial",
+          "Interpretação da gasometria (distúrbios respiratórios e compensações)"
         ],
         "details": [
           "Hiponatremia (por volemia e osmolaridade) e risco de mielinólise por correção rápida",
@@ -1087,8 +1158,10 @@ export const plannerData = [
         "theme": "Gastroenterologia: DRGE, Úlcera e DII",
         "highYield": false,
         "dbSubtemas": [
-          "Doenças do Esôfago e Estômago",
-          "Doença Inflamatória Intestinal e Diarreia Crônica"
+          "Dispepsia, DRGE e H. pylori: diagnóstico e tratamento",
+          "Doença inflamatória intestinal (Crohn vs retocolite ulcerativa)",
+          "Diarreia crônica, síndromes disabsortivas e doença celíaca",
+          "Síndrome do intestino irritável e hemorragia digestiva baixa"
         ],
         "details": [
           "Dispepsia, DRGE e H. pylori: diagnóstico e tratamento",
@@ -1101,8 +1174,10 @@ export const plannerData = [
         "theme": "Hepatologia: Hepatites, Cirrose e Complicações",
         "highYield": true,
         "dbSubtemas": [
-          "Hepatites Virais",
-          "Cirrose e Complicações"
+          "Hepatites virais A, B, C, D e E: sorologias e história natural",
+          "Cirrose e suas complicações (ascite, PBE, encefalopatia, síndrome hepatorrenal)",
+          "Hemorragia por varizes esofágicas: profilaxia e tratamento",
+          "Insuficiência hepática aguda e rastreamento de carcinoma hepatocelular"
         ],
         "details": [
           "Hepatites virais A, B, C, D e E: sorologias e história natural",
@@ -1115,10 +1190,10 @@ export const plannerData = [
         "theme": "Hematologia: Anemias, Neoplasias e Coagulação",
         "highYield": false,
         "dbSubtemas": [
-          "Anemias",
-          "Leucemias e Linfomas",
-          "Distúrbios da Coagulação e Plaquetas",
-          "Oncologia e Neoplasias"
+          "Investigação das anemias (micro, normo e macrocíticas); ferropriva, doença crônica e megaloblástica",
+          "Anemias hemolíticas e falciforme",
+          "Leucemias e linfomas: apresentação e diagnóstico inicial",
+          "Distúrbios da hemostasia, plaquetopenias (PTI) e coagulopatias"
         ],
         "details": [
           "Investigação das anemias (micro, normo e macrocíticas); ferropriva, doença crônica e megaloblástica",
@@ -1131,8 +1206,10 @@ export const plannerData = [
         "theme": "Reumatologia: AR, LES, Gota e Vasculites",
         "highYield": false,
         "dbSubtemas": [
-          "Artrites e Doenças Reumatológicas (AR, Gota, Osteoartrite)",
-          "Lúpus e Doenças Autoimunes Sistêmicas"
+          "Artrite reumatoide: critérios, autoanticorpos e tratamento",
+          "Lúpus eritematoso sistêmico: critérios diagnósticos e nefrite lúpica",
+          "Gota e artrites por cristais; abordagem da monoartrite aguda",
+          "Espondiloartrites e vasculites sistêmicas"
         ],
         "details": [
           "Artrite reumatoide: critérios, autoanticorpos e tratamento",
@@ -1145,11 +1222,10 @@ export const plannerData = [
         "theme": "Neurologia: AVC, Cefaleias, Epilepsia e Demências",
         "highYield": true,
         "dbSubtemas": [
-          "AVC e Doenças Cerebrovasculares",
-          "Cefaleias",
-          "Epilepsia e Doenças Neuromusculares",
-          "Demências e Parkinson",
-          "Acidente Vascular Cerebral Isquêmico"
+          "AVC isquêmico: janela de trombólise e trombectomia; AVC hemorrágico e HSA",
+          "Cefaleias primárias (enxaqueca, tensional, em salvas) e sinais de alarme",
+          "Epilepsia e estado de mal epiléptico",
+          "Demências (Alzheimer, vascular) e síndromes parkinsonianas"
         ],
         "details": [
           "AVC isquêmico: janela de trombólise e trombectomia; AVC hemorrágico e HSA",
@@ -1162,9 +1238,10 @@ export const plannerData = [
         "theme": "Infectologia: HIV, Arboviroses e Endocardite",
         "highYield": true,
         "dbSubtemas": [
-          "HIV/AIDS e Infecções Oportunistas",
-          "Arboviroses e Doenças Infecciosas Tropicais",
-          "Endocardite Infecciosa"
+          "HIV/AIDS: diagnóstico, TARV, infecções oportunistas e profilaxias",
+          "Dengue, zika e chikungunya: classificação de risco e manejo",
+          "Endocardite infecciosa (critérios de Duke) e sepse/choque séptico (bundle da 1ª hora)",
+          "Meningites, ITU/pielonefrite, celulite e leptospirose"
         ],
         "details": [
           "HIV/AIDS: diagnóstico, TARV, infecções oportunistas e profilaxias",
@@ -1177,9 +1254,10 @@ export const plannerData = [
         "theme": "Emergências Clínicas e Toxicologia",
         "highYield": true,
         "dbSubtemas": [
-          "Sepse e Choque",
-          "Emergências Clínicas e Intoxicações",
-          "Pneumotórax Iatrogênico"
+          "Parada cardiorrespiratória e ACLS; cuidados pós-parada",
+          "Choque (hipovolêmico, cardiogênico, distributivo, obstrutivo) e anafilaxia",
+          "Intoxicações comuns e antídotos; distúrbios do nível de consciência",
+          "Abordagem do paciente grave e sinais de deterioração"
         ],
         "details": [
           "Parada cardiorrespiratória e ACLS; cuidados pós-parada",
@@ -1192,7 +1270,10 @@ export const plannerData = [
         "theme": "Psiquiatria: Depressão, Ansiedade e Emergências",
         "highYield": false,
         "dbSubtemas": [
-          "Transtornos Psiquiátricos"
+          "Transtornos depressivos e de ansiedade: diagnóstico e tratamento",
+          "Transtorno bipolar e espectro da esquizofrenia",
+          "Emergências psiquiátricas: risco de suicídio, agitação e síndromes por substâncias",
+          "Delirium vs demência; síndrome serotoninérgica e neuroléptica maligna"
         ],
         "details": [
           "Transtornos depressivos e de ansiedade: diagnóstico e tratamento",
@@ -1205,7 +1286,10 @@ export const plannerData = [
         "theme": "Geriatria e Cuidados Paliativos",
         "highYield": false,
         "dbSubtemas": [
-          "Geriatria e Cuidados Paliativos"
+          "Grandes síndromes geriátricas (quedas, imobilidade, incontinência, delirium)",
+          "Avaliação geriátrica ampla e polifarmácia (critérios de Beers)",
+          "Cuidados paliativos: controle de sintomas e comunicação de más notícias",
+          "Terminalidade, ortotanásia e manejo da dor"
         ],
         "details": [
           "Grandes síndromes geriátricas (quedas, imobilidade, incontinência, delirium)",
@@ -1217,7 +1301,12 @@ export const plannerData = [
       {
         "theme": "Reta Final: Revisão Integrada e Simulados",
         "highYield": true,
-        "dbSubtemas": [],
+        "dbSubtemas": [
+          "Revisão dos temas de alto rendimento das 5 áreas",
+          "Resolução de provas anteriores da USP (HC-FMUSP e HCRP) cronometradas",
+          "Foco nas suas áreas e subtemas mais fracos (ver Análise de Desempenho)",
+          "Simulados completos e ajuste fino da estratégia de prova"
+        ],
         "details": [
           "Revisão dos temas de alto rendimento das 5 áreas",
           "Resolução de provas anteriores da USP (HC-FMUSP e HCRP) cronometradas",
@@ -1228,29 +1317,7 @@ export const plannerData = [
       {
         "theme": "Outros Tópicos",
         "highYield": false,
-        "dbSubtemas": [
-          "Asma",
-          "DPOC",
-          "Dependência Química e Tabagismo",
-          "Dermatologia (Lesões Cutâneas, Eczemas, Psoríase)",
-          "Diabetes Mellitus e Complicações",
-          "Doenças Pulmonares Intersticiais e Outras Pneumopatias",
-          "Doenças das Vias Biliares e Pâncreas",
-          "Doenças do Esôfago e Estômago (DRGE, Úlcera, Dispepsia)",
-          "Glomerulopatias e Síndrome Nefrótica/Nefrítica",
-          "Infecções de Pele e ISTs (Sífilis, Hanseníase, Micoses)",
-          "Leucemias, Linfomas e Mieloma",
-          "Litíase Urinária e Infecção Urinária",
-          "Lúpus e Doenças Autoimunes Sistêmicas (Esclerose, Vasculites)",
-          "Oftalmologia Clínica",
-          "Oncologia (Rastreio e Neoplasias Sólidas)",
-          "Osteoporose e Doença Óssea Metabólica",
-          "Parada Cardiorrespiratória e Suporte Avançado de Vida",
-          "Pericardiopatias",
-          "Síndromes Coronarianas Agudas (IAM e Angina)",
-          "Transtornos Psiquiátricos (Depressão, Ansiedade, Psicoses)",
-          "Ventilação Mecânica e Medicina Intensiva"
-        ],
+        "dbSubtemas": [],
         "details": []
       }
     ]
@@ -1261,46 +1328,7 @@ export const plannerData = [
       {
         "theme": "Outros Tópicos",
         "highYield": false,
-        "dbSubtemas": [
-          "Abdome Agudo Obstrutivo",
-          "Abdome Agudo Perfurativo",
-          "Anestesiologia e Técnica Operatória",
-          "Aneurismas e Dissecção de Aorta",
-          "Apendicite Aguda",
-          "Atendimento Inicial ao Trauma (ATLS)",
-          "Avaliação Pré-operatória e Risco Cirúrgico",
-          "Choque e Transfusão no Trauma",
-          "Cirurgia Bariátrica e Complicações",
-          "Cirurgia Pediátrica",
-          "Cirurgia Torácica e Mediastino",
-          "Cirurgia Vascular Periférica (Isquemia Arterial, Varizes, TVP)",
-          "Colecistite e Colelitíase",
-          "Coledocolitíase e Colangite",
-          "Câncer Colorretal",
-          "Diverticulite Aguda",
-          "Doenças Orificiais (Hemorroida, Fissura, Fístula)",
-          "Doenças do Esôfago (DRGE, Acalasia, Câncer)",
-          "Estômago (Úlcera, HDA, Câncer Gástrico)",
-          "Hérnias da Parede Abdominal",
-          "Infecção de Sítio Cirúrgico e Cicatrização",
-          "Isquemia Mesentérica",
-          "Neurocirurgia (Hemorragia, Hidrocefalia, Tumor)",
-          "Oftalmologia Cirúrgica",
-          "Ortopedia e Fraturas",
-          "Otorrinolaringologia Cirúrgica",
-          "Pancreatite Aguda",
-          "Queimaduras",
-          "Resposta Metabólica ao Trauma e Pós-operatório",
-          "Tireoide e Paratireoide",
-          "Trauma Abdominal",
-          "Trauma Cervical e Vascular",
-          "Trauma Cranioencefálico e Raquimedular",
-          "Trauma Pélvico e Urológico",
-          "Trauma Torácico",
-          "Tumores de Pele e Partes Moles",
-          "Tumores de Pele e Partes Moles (Melanoma, CBC, CEC)",
-          "Urologia (Litíase, HPB, Neoplasia Renal, Escroto Agudo)"
-        ],
+        "dbSubtemas": [],
         "details": []
       }
     ]
@@ -1311,37 +1339,7 @@ export const plannerData = [
       {
         "theme": "Outros Tópicos",
         "highYield": false,
-        "dbSubtemas": [
-          "Atenção Primária à Saúde",
-          "Bioestatística e Testes de Hipótese",
-          "Comunicação Médico-Paciente e Humanização",
-          "Controle Social e Participação Popular",
-          "Determinantes Sociais da Saúde e Vulnerabilidade",
-          "Epidemiologia das Doenças Transmissíveis",
-          "Estatística de Testes Diagnósticos",
-          "Estratégia Saúde da Família e Equipe Multiprofissional",
-          "Estudos Epidemiológicos (Análise Estatística e Aplicação)",
-          "Estudos Epidemiológicos (Classificação e Desenho)",
-          "Estudos Observacionais (Coorte, Caso-Controle, Transversal, Ecológico)",
-          "Ferramentas da APS (SOAP, PTS, Genograma, Método Centrado na Pessoa)",
-          "Imunização e Programas de Saúde",
-          "Indicadores de Saúde e Mortalidade",
-          "Legislação e Financiamento do SUS",
-          "Medicina Baseada em Evidências e Revisão Sistemática",
-          "Modelos de Atenção e Reforma Sanitária",
-          "Níveis de Prevenção e Prevenção Quaternária",
-          "Princípios e Diretrizes do SUS",
-          "Rastreamento Populacional",
-          "Redes de Atenção à Saúde",
-          "Saúde Indígena e Populações Específicas",
-          "Saúde Mental na Atenção Primária",
-          "Saúde Ocupacional e do Trabalhador",
-          "Sistemas de Informação em Saúde",
-          "Transição Demográfica e Epidemiológica",
-          "Vigilância Sanitária e Ambiental",
-          "Vigilância em Saúde e Notificação Compulsória",
-          "Ética Médica e Bioética"
-        ],
+        "dbSubtemas": [],
         "details": []
       }
     ]
