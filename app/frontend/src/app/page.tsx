@@ -1,5 +1,5 @@
 import { serverApi } from "@/lib/server-api";
-import { OverviewStats, PlannerWeek } from "@/types/api";
+import { OverviewStats, PlannerWeek, TimelineStat, BreakdownStat } from "@/types/api";
 import { currentUser } from '@clerk/nextjs/server';
 import { DashboardClient } from "./DashboardClient";
 
@@ -8,6 +8,19 @@ export default async function Dashboard() {
   const user = await currentUser();
 
   let currentPlannerWeek: PlannerWeek | null = null;
+  let timelineStats: TimelineStat[] = [];
+  let breakdownStats: BreakdownStat[] = [];
+  try {
+    const [timeline, breakdown] = await Promise.all([
+      serverApi.stats.getTimeline(180),
+      serverApi.stats.getBreakdown("area")
+    ]);
+    timelineStats = timeline;
+    breakdownStats = breakdown;
+  } catch (e) {
+    console.error("Failed to fetch timeline or breakdown for dashboard", e);
+  }
+
   try {
     const config = await serverApi.planner.getConfig();
     if (config && config.exam_date && config.start_date) {
@@ -43,6 +56,8 @@ export default async function Dashboard() {
       stats={stats} 
       currentPlannerWeek={currentPlannerWeek} 
       firstName={firstName} 
+      timelineStats={timelineStats}
+      breakdownStats={breakdownStats}
     />
   );
 }

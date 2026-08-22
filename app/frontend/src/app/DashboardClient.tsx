@@ -4,24 +4,40 @@ import Link from "next/link";
 import { OverviewStats, PlannerWeek } from "@/types/api";
 import { OfflinePanel } from "@/components/OfflinePanel";
 import { motion, Variants } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { triggerConfetti } from "@/lib/confetti";
 import clsx from "clsx";
+import { readLearningSession } from "@/lib/sessionState";
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from "recharts";
 
 interface DashboardClientProps {
   stats: OverviewStats;
   currentPlannerWeek: PlannerWeek | null;
   firstName: string;
+  timelineStats?: any[];
+  breakdownStats?: any[];
 }
 
-export function DashboardClient({ stats, currentPlannerWeek, firstName }: DashboardClientProps) {
+export function DashboardClient({ stats, currentPlannerWeek, firstName, timelineStats, breakdownStats }: DashboardClientProps) {
   const hasAnimated = useRef(false);
+  const [activeSession, setActiveSession] = useState<{ kind: "quiz" | "simulado"; url: string } | null>(null);
 
   useEffect(() => {
     // Dispara confete se as revisões diárias estiverem zeradas e houver pelo menos 1 questão feita
     if (stats.srs_due_count === 0 && stats.flashcards_due_count === 0 && stats.distinct_answered > 0 && !hasAnimated.current) {
       hasAnimated.current = true;
       triggerConfetti();
+    }
+
+    // Check for active sessions
+    const hasSimulado = readLearningSession("simulado", (val): val is any => true);
+    if (hasSimulado && hasSimulado.state && hasSimulado.state !== "RESULTS" && hasSimulado.state !== "OFFLINE_SUBMITTED") {
+      setActiveSession({ kind: "simulado", url: "/simulado" });
+    } else {
+      const hasQuiz = readLearningSession("quiz", (val): val is any => true);
+      if (hasQuiz && hasQuiz.state && hasQuiz.state !== "RESULTS") {
+        setActiveSession({ kind: "quiz", url: "/estudar" });
+      }
     }
   }, [stats]);
 
@@ -41,6 +57,85 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
       opacity: 1,
       transition: { staggerChildren: 0.1 }
     }
+  };
+
+  const renderHeatmap = () => {
+    if (!timelineStats || timelineStats.length === 0) return null;
+    
+    const today = new Date();
+    const days = 180;
+    const startDate = new Date(today.getTime() - (days - 1) * 24 * 60 * 60 * 1000);
+    startDate.setDate(startDate.getDate() - startDate.getDay()); // align to Sunday
+    const totalDays = Math.floor((today.getTime() - startDate.getTime()) / (24*60*60*1000)) + 1;
+    
+    const activityMap = new Map<string, number>();
+    timelineStats.forEach(t => {
+      activityMap.set(t.day, t.attempts);
+    });
+
+    const grid = [];
+    for (let i = 0; i < totalDays; i++) {
+      const d = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000);
+      const dateStr = d.toISOString().split('T')[0];
+      const count = activityMap.get(dateStr) || 0;
+      
+      let colorClass = "bg-muted/50 dark:bg-muted/20";
+      if (count > 0 && count <= 10) colorClass = "bg-primary/30";
+      else if (count > 10 && count <= 30) colorClass = "bg-primary/50";
+      else if (count > 30 && count <= 60) colorClass = "bg-primary/70";
+      else if (count > 60) colorClass = "bg-primary";
+      
+      grid.push(
+        <div 
+          key={dateStr}
+          title={`${dateStr}: ${count} questões`}
+          className={clsx("w-[14px] h-[14px] rounded-[3px] transition-colors hover:ring-2 ring-primary/50", colorClass)}
+        />
+      );
+    }
+
+    return (
+      <div className="flex flex-col h-full justify-between">
+        <div className="flex items-center gap-2 mb-4 text-foreground transition-transform group-hover:translate-x-1">
+          <span className="material-symbols-outlined text-[20px]" data-icon="calendar_month">calendar_month</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Atividade (Últimos 6 meses)</span>
+        </div>
+        <div className="flex-1 w-full overflow-x-auto pb-2 scrollbar-thin">
+          <div className="flex flex-col flex-wrap gap-1 h-[105px] min-w-max content-start">
+            {grid}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderRadar = () => {
+    if (!breakdownStats || breakdownStats.length === 0) return null;
+    
+    // Format data for Recharts (Top 5 areas)
+    const data = breakdownStats.slice(0, 5).map(stat => ({
+      subject: stat.label.substring(0, 15) + (stat.label.length > 15 ? '...' : ''),
+      A: Math.round(stat.accuracy * 100),
+      fullMark: 100,
+    }));
+
+    return (
+      <div className="flex flex-col h-full justify-between w-full relative">
+        <div className="flex items-center gap-2 text-foreground transition-transform group-hover:translate-x-1 absolute top-0 left-0 z-10">
+          <span className="material-symbols-outlined text-[20px]" data-icon="radar">radar</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Performance por Área</span>
+        </div>
+        <div className="flex-1 w-full h-[220px] mt-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <RadarChart cx="50%" cy="50%" outerRadius="65%" data={data}>
+              <PolarGrid stroke="currentColor" className="text-border" />
+              <PolarAngleAxis dataKey="subject" tick={{ fill: 'currentColor', fontSize: 11, fontWeight: 500, className: 'text-muted-foreground' }} />
+              <Radar name="Acurácia" dataKey="A" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.4} />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    );
   };
 
   const itemVariants: Variants = {
@@ -73,6 +168,28 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
           {motivationalMessage}
         </p>
       </motion.section>
+
+      {/* Resume Session Banner */}
+      {activeSession && (
+        <motion.div variants={itemVariants} className="w-full">
+          <Link href={activeSession.url} className="bg-primary text-primary-foreground border-none rounded-2xl p-4 sm:p-6 shadow-md flex items-center justify-between hover:bg-primary/90 transition-all group">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-primary-foreground/20 flex items-center justify-center text-primary-foreground">
+                <span className="material-symbols-outlined text-[28px]" data-icon={activeSession.kind === "simulado" ? "history_edu" : "play_lesson"}>
+                  {activeSession.kind === "simulado" ? "history_edu" : "play_lesson"}
+                </span>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold">Retomar {activeSession.kind === "simulado" ? "Simulado" : "Sessão de Estudos"}</h3>
+                <p className="text-sm text-primary-foreground/80 font-medium">Você tem uma sessão em andamento. Clique para continuar.</p>
+              </div>
+            </div>
+            <div className="hidden sm:flex items-center gap-2 font-bold bg-primary-foreground text-primary px-4 py-2 rounded-lg group-hover:scale-105 transition-transform">
+              Continuar <span className="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+            </div>
+          </Link>
+        </motion.div>
+      )}
 
       {/* Plano Diário (3 Cards) */}
       <motion.div variants={itemVariants} className="flex flex-col gap-4">
@@ -186,7 +303,7 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
       {/* Bento Grid Layout */}
       <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-12 gap-5 mt-4">
         {/* Weekly Progress Summary (4 Stats) */}
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-12">
           {stats.distinct_answered === 0 ? (
             <div className="bg-card border border-border/50 rounded-2xl p-8 flex flex-col items-center justify-center text-center h-full shadow-sm">
               <motion.div 
@@ -205,103 +322,86 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName }: Dashbo
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 h-full">
-              {/* Stat Card 1 */}
-              <div className="bg-card border border-border/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-border group">
-                <div className="flex items-center gap-2 mb-4 text-primary transition-transform group-hover:translate-x-1">
-                  <span className="material-symbols-outlined text-[20px]" data-icon="task_alt">task_alt</span>
-                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Questões Feitas</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-5 h-full w-full">
+              
+              {/* Radar Chart (Col Span 4) */}
+              {breakdownStats && breakdownStats.length > 0 && (
+                <div className="lg:col-span-4 bg-card border border-border/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-border group min-h-[250px]">
+                  {renderRadar()}
                 </div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-black text-foreground tracking-tight">{stats.distinct_answered}</span>
-                  <span className="text-sm text-muted-foreground font-semibold">únicas</span>
-                </div>
-              </div>
+              )}
 
-              {/* Stat Card 2 */}
-              <div className="bg-card border border-border/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-border group">
-                <div className="flex items-center gap-2 mb-4 text-primary transition-transform group-hover:translate-x-1">
-                  <span className="material-symbols-outlined text-[20px]" data-icon="my_location">my_location</span>
-                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Acurácia Geral</span>
+              {/* Heatmap (Col Span 4 or 8) */}
+              {timelineStats && timelineStats.length > 0 && (
+                <div className={clsx("bg-card border border-border/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-border group overflow-hidden", breakdownStats && breakdownStats.length > 0 ? "lg:col-span-4" : "lg:col-span-8")}>
+                  {renderHeatmap()}
                 </div>
-                <div>
-                  <span className="text-4xl font-black text-foreground tracking-tight">{accuracyFormatted}</span>
-                </div>
-              </div>
+              )}
 
-              {/* Stat Card 3 (Streak) */}
-              <div className="bg-orange-500/5 dark:bg-orange-500/10 border border-orange-500/20 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-orange-500/30 group relative overflow-hidden">
-                <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] dark:opacity-10 group-hover:opacity-10 transition-opacity pointer-events-none">
-                  <span className="material-symbols-outlined text-8xl text-orange-600">self_improvement</span>
+              {/* Small Stats Group (Col Span 4) */}
+              <div className="lg:col-span-4 grid grid-cols-2 gap-4">
+                {/* Stat Card 1 */}
+                <div className="bg-card border border-border/50 rounded-2xl p-4 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-border group">
+                  <div className="flex items-center gap-2 mb-2 text-primary transition-transform group-hover:translate-x-1">
+                    <span className="material-symbols-outlined text-[18px]" data-icon="task_alt">task_alt</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Questões</span>
+                  </div>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-2xl font-black text-foreground tracking-tight">{stats.distinct_answered}</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 mb-4 text-orange-600 dark:text-orange-400 transition-transform group-hover:translate-x-1 relative z-10">
-                  <span className="material-symbols-outlined text-[20px] animate-pulse" data-icon="local_fire_department">local_fire_department</span>
-                  <span className="text-xs font-bold uppercase tracking-wider">Ofensiva Atual</span>
-                </div>
-                <div className="relative z-10 flex items-baseline gap-2">
-                  <span className="text-4xl font-black text-orange-700 dark:text-orange-400 tracking-tight">{stats.streak_days}</span>
-                  <span className="text-sm text-orange-600/70 dark:text-orange-400/70 font-semibold">dias</span>
-                </div>
-              </div>
 
-              {/* Stat Card 4 (Nível XP) */}
-              <div className="bg-card border border-border/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-border group">
-                <div className="flex items-center justify-between mb-5">
-                  <div className="flex items-center gap-2 text-indigo-500 transition-transform group-hover:translate-x-1">
-                    <span className="material-symbols-outlined text-[20px]" data-icon="social_leaderboard">social_leaderboard</span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Nível XP</span>
+                {/* Stat Card 2 */}
+                <div className="bg-card border border-border/50 rounded-2xl p-4 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-border group">
+                  <div className="flex items-center gap-2 mb-2 text-primary transition-transform group-hover:translate-x-1">
+                    <span className="material-symbols-outlined text-[18px]" data-icon="my_location">my_location</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Acurácia</span>
                   </div>
-                  <span className="text-xs font-bold text-indigo-700 bg-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-300 px-2.5 py-1 rounded-full ring-1 ring-indigo-500/20">
-                    Lvl {nivelAtual}
-                  </span>
+                  <div>
+                    <span className="text-2xl font-black text-foreground tracking-tight">{accuracyFormatted}</span>
+                  </div>
                 </div>
-                <div>
-                  <div className="flex justify-between text-[11px] mb-2 text-muted-foreground font-semibold uppercase tracking-wider">
-                    <span>{xpAtual} XP</span>
-                    <span>{xpProximoNivel} XP</span>
+
+                {/* Stat Card 3 (Streak) */}
+                <div className="bg-orange-500/5 dark:bg-orange-500/10 border border-orange-500/20 rounded-2xl p-4 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-orange-500/30 group relative overflow-hidden">
+                  <div className="absolute -top-4 -right-4 p-2 opacity-[0.03] dark:opacity-10 group-hover:opacity-10 transition-opacity pointer-events-none">
+                    <span className="material-symbols-outlined text-5xl text-orange-600">self_improvement</span>
                   </div>
-                  <div className="w-full bg-muted rounded-full h-2.5 overflow-hidden ring-1 ring-inset ring-black/5 dark:ring-white/5">
-                    <motion.div 
-                      initial={{ width: 0 }}
-                      animate={{ width: `${progressoNivel}%` }}
-                      transition={{ duration: 1.5, ease: "easeOut" }}
-                      className="bg-indigo-500 h-2.5 rounded-full shadow-inner" 
-                    />
+                  <div className="flex items-center gap-2 mb-2 text-orange-600 dark:text-orange-400 transition-transform group-hover:translate-x-1 relative z-10">
+                    <span className="material-symbols-outlined text-[18px] animate-pulse" data-icon="local_fire_department">local_fire_department</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider">Ofensiva</span>
                   </div>
-                  <span className="block mt-3 text-xs text-muted-foreground font-medium">
-                    Faltam <strong className="text-foreground">{xpProximoNivel - xpAtual} XP</strong> para o próximo nível
-                  </span>
+                  <div className="relative z-10 flex items-baseline gap-1">
+                    <span className="text-2xl font-black text-orange-700 dark:text-orange-400 tracking-tight">{stats.streak_days}</span>
+                    <span className="text-xs text-orange-600/70 dark:text-orange-400/70 font-semibold">dias</span>
+                  </div>
+                </div>
+
+                {/* Stat Card 4 (Nível XP) */}
+                <div className="bg-card border border-border/50 rounded-2xl p-4 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-border group">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-1.5 text-indigo-500 transition-transform group-hover:translate-x-1">
+                      <span className="material-symbols-outlined text-[18px]" data-icon="social_leaderboard">social_leaderboard</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Nível</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-baseline gap-1 mb-1">
+                      <span className="text-2xl font-black text-indigo-700 dark:text-indigo-400 tracking-tight">Lvl {nivelAtual}</span>
+                    </div>
+                    <div className="w-full bg-muted rounded-full h-1.5 overflow-hidden ring-1 ring-inset ring-black/5 dark:ring-white/5">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: `${progressoNivel}%` }}
+                        transition={{ duration: 1.5, ease: "easeOut" }}
+                        className="bg-indigo-500 h-1.5 rounded-full shadow-inner" 
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           )}
-        </div>
-
-        {/* Quick Access List */}
-        <div className="lg:col-span-4 bg-card border border-border/50 rounded-2xl p-6 shadow-sm flex flex-col">
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="text-lg font-bold text-foreground tracking-tight">Acesso Rápido</h3>
-          </div>
-          <ul className="flex flex-col gap-2">
-            {[
-              { href: "/estudar", icon: "menu_book", title: "Estudar Questões", desc: "Filtre por especialidade ou tema", colorClass: "text-primary", bgClass: "bg-primary/10 ring-primary/20", groupHoverBg: "group-hover:bg-primary", groupHoverText: "group-hover:text-primary-foreground" },
-              { href: "/simulado", icon: "description", title: "Simulados", desc: "Realize provas na íntegra", colorClass: "text-secondary", bgClass: "bg-secondary/10 ring-secondary/20", groupHoverBg: "group-hover:bg-secondary", groupHoverText: "group-hover:text-secondary-foreground" },
-              { href: "/planner", icon: "calendar_month", title: "Planner Anual", desc: "Acompanhe seu cronograma", colorClass: "text-blue-500 dark:text-blue-400", bgClass: "bg-blue-500/10 ring-blue-500/20", groupHoverBg: "group-hover:bg-blue-600", groupHoverText: "group-hover:text-white" },
-              { href: "/revisao-ativa", icon: "auto_awesome", title: "Revisão Ativa", desc: "Estude com flashcards de IA", colorClass: "text-purple-500 dark:text-purple-400", bgClass: "bg-purple-500/10 ring-purple-500/20", groupHoverBg: "group-hover:bg-purple-600", groupHoverText: "group-hover:text-white" }
-            ].map((item) => (
-              <motion.li key={item.href} whileHover={{ x: 4 }} transition={{ type: "spring", stiffness: 400, damping: 30 }}>
-                <Link href={item.href} className="flex items-center gap-4 p-3 rounded-xl hover:bg-muted/50 transition-colors cursor-pointer group">
-                  <div className={clsx("p-2.5 rounded-xl transition-colors ring-1", item.colorClass, item.bgClass, item.groupHoverBg, item.groupHoverText)}>
-                    <span className="material-symbols-outlined text-[20px]" data-icon={item.icon}>{item.icon}</span>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-foreground">{item.title}</h4>
-                    <p className="text-xs text-muted-foreground font-medium mt-0.5">{item.desc}</p>
-                  </div>
-                </Link>
-              </motion.li>
-            ))}
-          </ul>
         </div>
         
         {/* Offline Panel */}
