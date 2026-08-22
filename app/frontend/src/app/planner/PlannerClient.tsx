@@ -20,6 +20,11 @@ const getAreaColorClass = (areaName: string) => {
   return "bg-area-clinica text-area-clinica";
 };
 
+const formatHours = (hours: number) => hours.toLocaleString("pt-BR", {
+  minimumFractionDigits: Number.isInteger(hours) ? 0 : 1,
+  maximumFractionDigits: 1,
+});
+
 const TopicRow = memo(function TopicRow({ 
   t, 
   checkedTopics, 
@@ -76,7 +81,15 @@ const TopicRow = memo(function TopicRow({
               </>
             )}
             <span>•</span>
-            <span className="flex items-center gap-1"><Clock size={10} /> {t.estimated_hours}h estimadas</span>
+            <span className="flex items-center gap-1">
+              <Clock size={10} /> {formatHours(t.estimated_theory_hours)}h de aulas regulares + {formatHours(t.estimated_practice_hours)}h de questões = {formatHours(t.estimated_hours)}h
+            </span>
+            {t.theory_source === "katomart" && (
+              <>
+                <span>•</span>
+                <span title={t.course_module || undefined}>Baseado no Katomart</span>
+              </>
+            )}
             <span>•</span>
             <span>{t.questions_available} questões disponíveis</span>
           </div>

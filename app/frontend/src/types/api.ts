@@ -164,7 +164,11 @@ export interface PlannerTopic {
   area: string;
   subtema: string;
   questions_available: number;
+  estimated_theory_hours: number;
+  estimated_practice_hours: number;
   estimated_hours: number;
+  theory_source: "katomart" | "pedagogical_estimate";
+  course_module: string | null;
 }
 
 export interface PlannerWeek {

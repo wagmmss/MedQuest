@@ -11,6 +11,8 @@ USP_WEIGHTS = {
     "Preventiva": 0.20
 }
 
+DEFAULT_PRACTICE_HOURS_PER_SUBTEMA = 2.0
+
 def get_normalized_area(raw_area):
     if not raw_area: return "Outros"
     # Using substrings to avoid encoding issues with the SQLite output
@@ -54,19 +56,39 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
     except Exception:
         planner_meta = []
 
+    duration_catalog_path = os.path.join(os.path.dirname(__file__), "katomartCourseDurations.json")
+    try:
+        with open(duration_catalog_path, "r", encoding="utf-8") as f:
+            duration_catalog = json.load(f)
+    except Exception:
+        duration_catalog = {}
+
+    katomart_subtemas = duration_catalog.get("subtemas", {})
+    practice_hours_per_subtema = duration_catalog.get("source", {}).get(
+        "practice_hours_per_subtema",
+        DEFAULT_PRACTICE_HOURS_PER_SUBTEMA,
+    )
+
     # Cria dicionário de subtemas para fácil acesso.
     meta_dict = {}
     for area_group in planner_meta:
         for macro in area_group.get("macroThemes", []):
             is_high_yield = macro.get("highYield", False)
-            # Cada objetivo representa cerca de 15 min de teoria, com piso de
-            # 1 h por tema para que tópicos curtos não desapareçam do plano.
-            theory_hours = max(1.0, len(macro.get("details", [])) * 0.25)
+            # Fallback pedagógico para subtemas sem correspondência segura no
+            # catálogo local de aulas do Katomart.
+            fallback_theory_hours = max(1.0, len(macro.get("details", [])) * 0.25)
 
             for db_subtema in macro.get("dbSubtemas", []):
+                course_match = katomart_subtemas.get(db_subtema)
                 meta_dict[db_subtema] = {
                     "highYield": is_high_yield,
-                    "theory_hours": theory_hours
+                    "theory_hours": (
+                        course_match.get("theory_hours", fallback_theory_hours)
+                        if course_match
+                        else fallback_theory_hours
+                    ),
+                    "theory_source": "katomart" if course_match else "pedagogical_estimate",
+                    "course_module": course_match.get("module") if course_match else None,
                 }
 
     # Rows now provided via argument
@@ -93,7 +115,12 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         
         remaining_q = max(0, q_count - ans_count)
         
-        meta = meta_dict.get(subtema, {"highYield": False, "theory_hours": 1.0})
+        meta = meta_dict.get(subtema, {
+            "highYield": False,
+            "theory_hours": 1.0,
+            "theory_source": "pedagogical_estimate",
+            "course_module": None,
+        })
         
         if intensive and not meta["highYield"]:
             continue
@@ -103,8 +130,10 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         if ans_count >= 5 and acc >= 0.7:
             theory_hours = theory_hours * 0.3
             
-        # 3 mins (0.05h) per question
-        practice_hours = remaining_q * 0.05
+        # Cada subtema ainda pendente recebe um bloco próprio de questões.
+        # O banco disponível define se há prática a fazer, não reduz o bloco
+        # para poucos minutos quando há poucas questões cadastradas.
+        practice_hours = practice_hours_per_subtema if remaining_q > 0 else 0.0
         total_topic_hours = theory_hours + practice_hours
         
         # Skip if topic requires almost no time and user is already very proficient
@@ -126,7 +155,11 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
             "area": norm_area,
             "subtema": subtema,
             "questions_available": remaining_q,
-            "estimated_hours": total_topic_hours,
+            "estimated_theory_hours": round(theory_hours, 2),
+            "estimated_practice_hours": round(practice_hours, 2),
+            "estimated_hours": round(total_topic_hours, 2),
+            "theory_source": meta["theory_source"],
+            "course_module": meta["course_module"],
             "priority": priority
         })
 
