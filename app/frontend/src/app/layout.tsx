@@ -27,11 +27,11 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "MedQuest | Preparação USP",
+  title: "MedQuest",
   description: "A melhor plataforma de estudos para a Residência Médica da USP, com planejamento anual inteligente.",
   manifest: "/manifest.json",
   openGraph: {
-    title: "MedQuest | Preparação USP",
+    title: "MedQuest",
     description: "A melhor plataforma de estudos para a Residência Médica da USP, com planejamento anual inteligente.",
     url: "https://medquest.com.br",
     siteName: "MedQuest",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MedQuest | Preparação USP",
+    title: "MedQuest",
     description: "A melhor plataforma de estudos para a Residência Médica da USP, com planejamento anual inteligente.",
   },
   appleWebApp: {

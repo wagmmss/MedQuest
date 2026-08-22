@@ -94,7 +94,9 @@ export function QuizClient({
   const [isOfflineSaved, setIsOfflineSaved] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [generatingFlashcard, setGeneratingFlashcard] = useState(false);
+  const [savingFlashcard, setSavingFlashcard] = useState(false);
   const [flashcardResult, setFlashcardResult] = useState<FlashcardGenerateResponse | null>(null);
+  const [draftFlashcard, setDraftFlashcard] = useState<{front: string; back: string; context: string} | null>(null);
   const [generatingBatchFlashcards, setGeneratingBatchFlashcards] = useState(false);
   const [batchFlashcardsResult, setBatchFlashcardsResult] = useState<{ count: number } | null>(null);
   
@@ -127,6 +129,7 @@ export function QuizClient({
     setSelectedLetter(null);
     setIsOfflineSaved(false);
     setFlashcardResult(null);
+    setDraftFlashcard(null);
     setTimeSpent(0);
 
     // Se já estiver no cache, carrega instantaneamente sem tela de loading
@@ -383,17 +386,41 @@ export function QuizClient({
   }, [attemptResult, isOfflineSaved, submitting, currentDetail, selectedLetter, timeSpent]);
 
   const handleGenerateFlashcard = async () => {
-    if (!currentDetail || !selectedLetter) return;
+    if (!currentDetail) return;
     setGeneratingFlashcard(true);
+    setDraftFlashcard(null);
     try {
-      const res = await api.flashcards.generate(currentDetail.id, selectedLetter);
-      const normalized = normalizeFlashcard({ ...res, stem: currentDetail.stem });
-      setFlashcardResult(normalized);
-      toast.success("Flashcard criado e inserido na sua Revisão Ativa!");
+      const res = await api.flashcards.preview(currentDetail.id, selectedLetter || undefined);
+      setDraftFlashcard({
+        front: res.front,
+        back: res.back,
+        context: res.context
+      });
     } catch {
-      toast.error("Erro ao gerar flashcard.");
+      toast.error("Erro ao gerar prévia do flashcard.");
     } finally {
       setGeneratingFlashcard(false);
+    }
+  };
+
+  const handleSaveFlashcard = async () => {
+    if (!currentDetail || !draftFlashcard) return;
+    setSavingFlashcard(true);
+    try {
+      const res = await api.flashcards.save(
+        currentDetail.id, 
+        draftFlashcard.front, 
+        draftFlashcard.back, 
+        draftFlashcard.context
+      );
+      const normalized = normalizeFlashcard({ ...res, stem: currentDetail.stem });
+      setFlashcardResult(normalized);
+      setDraftFlashcard(null);
+      toast.success("Flashcard criado e inserido na sua Revisão Ativa!");
+    } catch {
+      toast.error("Erro ao salvar flashcard.");
+    } finally {
+      setSavingFlashcard(false);
     }
   };
 
@@ -1202,7 +1229,7 @@ export function QuizClient({
                     </div>
                   ) : null}
                   
-                  {!attemptResult.is_correct && !flashcardResult && (
+                  {!flashcardResult && !draftFlashcard && (
                     <div className="mt-6">
                       <button 
                         onClick={handleGenerateFlashcard}
@@ -1214,8 +1241,55 @@ export function QuizClient({
                         ) : (
                           <Sparkles size={16} />
                         )}
-                        {generatingFlashcard ? "Gerando Flashcard do Erro..." : "Gerar Flashcard desta Questão"}
+                        {generatingFlashcard ? "Gerando Flashcard com IA..." : "Criar Flashcard com IA"}
                       </button>
+                    </div>
+                  )}
+
+                  {draftFlashcard && (
+                    <div className="mt-6 bg-purple-500/10 border border-purple-500/25 rounded-2xl p-5 animate-in slide-in-from-bottom-2">
+                      <div className="flex items-center gap-2 text-purple-600 font-bold text-sm mb-4">
+                        <Sparkles size={16} /> Editar Flashcard
+                      </div>
+                      <div className="space-y-4">
+                        <div>
+                          <label className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Frente</label>
+                          <textarea 
+                            value={draftFlashcard.front}
+                            onChange={(e) => setDraftFlashcard({ ...draftFlashcard, front: e.target.value })}
+                            className="w-full bg-background border border-border rounded-lg p-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary min-h-[100px]"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Verso</label>
+                          <textarea 
+                            value={draftFlashcard.back}
+                            onChange={(e) => setDraftFlashcard({ ...draftFlashcard, back: e.target.value })}
+                            className="w-full bg-background border border-border rounded-lg p-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary min-h-[120px]"
+                          />
+                        </div>
+                        <div className="flex justify-end gap-3 pt-2">
+                          <button 
+                            onClick={() => setDraftFlashcard(null)}
+                            disabled={savingFlashcard}
+                            className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            Cancelar
+                          </button>
+                          <button 
+                            onClick={handleSaveFlashcard}
+                            disabled={savingFlashcard}
+                            className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-5 rounded-lg transition-colors text-sm shadow-sm disabled:opacity-50"
+                          >
+                            {savingFlashcard ? (
+                              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            ) : (
+                              <BookOpen size={16} />
+                            )}
+                            Salvar Flashcard
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   )}
 

@@ -155,20 +155,31 @@ def generate_cloze_flashcard(
     correct_clean = _clean_option_text(correct_text)
     wrong_clean = _clean_option_text(wrong_text)
 
+    prompt_wrong_section = f"""O QUE O ALUNO MARCOU (ERRADO):
+{wrong_clean}
+
+A RESPOSTA CORRETA (GABARITO):
+{correct_clean}
+""" if wrong_clean else f"""A RESPOSTA CORRETA (GABARITO):
+{correct_clean}
+"""
+
+    prompt_back_instructions = f"""2. No campo "back":
+   - Coloque o "💡 Pulo do Gato" (a regra de ouro médica / conduta padrão-ouro).
+   - Explique "⚠️ Por que não '{wrong_clean}'?" apontando a armadilha do distrator que fez o aluno errar.
+""" if wrong_clean else """2. No campo "back":
+   - Coloque o "💡 Pulo do Gato" (a regra de ouro médica / conduta padrão-ouro e/ou explicação central).
+"""
+
     prompt = f"""
 Você é um preceptor médico especialista em preparação para residência médica (USP, SUS-SP, ENARE).
-O aluno errou uma questão e você deve criar um flashcard PERFEITO no formato Cloze (Repetição Espaçada FSRS).
+O aluno deseja criar um flashcard PERFEITO no formato Cloze (Repetição Espaçada FSRS) para esta questão.
 
 ÁREA/TEMA: {area} - {subtema or topic}
 ENUNCIADO DA QUESTÃO:
 {stem}
 
-O QUE O ALUNO MARCOU (ERRADO):
-{wrong_clean}
-
-A RESPOSTA CORRETA (GABARITO):
-{correct_clean}
-
+{prompt_wrong_section}
 COMENTÁRIO/EXPLICAÇÃO DO PROFESSOR:
 {explanation or 'Nenhuma explicação fornecida.'}
 
@@ -178,15 +189,12 @@ DIRETRIZES OBRIGATÓRIAS:
    - Resuma o caso clínico essencial do enunciado em 1-2 frases claras com os achados-chave.
    - Em seguida, coloque a pergunta clínica com a omissão cloze da resposta correta: "👉 Conduta / Diagnóstico: {{{{c1::{correct_clean}}}}}"
    - NUNCA mencione letras de alternativas (como A, B, C, D) no texto do flashcard.
-2. No campo "back":
-   - Coloque o "💡 Pulo do Gato" (a regra de ouro médica / conduta padrão-ouro).
-   - Explique "⚠️ Por que não '{wrong_clean}'?" apontando a armadilha do distrator que fez o aluno errar.
-3. No campo "context": "{area} > {subtema or topic}"
+{prompt_back_instructions}3. No campo "context": "{area} > {subtema or topic}"
 
 Responda EXCLUSIVAMENTE em JSON válido:
 {{
   "front": "[Tema] Resumo do caso clínico...\\n\\n👉 Pergunta clínica: {{{{c1::resposta}}}}",
-  "back": "💡 Pulo do Gato:\\n...\\n\\n⚠️ Por que não '{wrong_clean}'?\\n...",
+  "back": "💡 Pulo do Gato:\\n...",
   "context": "{area} > {subtema or topic}"
 }}
 """

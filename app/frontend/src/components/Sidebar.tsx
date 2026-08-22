@@ -45,7 +45,6 @@ export function Sidebar() {
             <span className="material-symbols-outlined text-[20px]" data-icon="local_hospital">local_hospital</span>
           </div>
           <h1 className="font-semibold text-lg text-foreground tracking-tight">MedQuest</h1>
-          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-widest mt-1">Preparação USP</p>
         </div>
 
         <nav className="flex-1 flex flex-col gap-1.5 overflow-y-auto px-1" aria-label="Navegação principal">

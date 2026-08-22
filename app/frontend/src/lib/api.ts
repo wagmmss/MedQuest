@@ -344,6 +344,98 @@ export const api = {
     },
   },
   flashcards: {
+    preview: async (question_id: number, wrong_letter?: string) => {
+      const getLocalFallback = async (): Promise<{ front: string; back: string; context: string; } | null> => {
+        // Simple local fallback just to avoid breaking offline mode, 
+        // ideally we would format it similarly to backend.
+        if (typeof window !== "undefined" && localDb) {
+           // We can mock a simple preview
+           return { front: "[Draft] Pergunta...", back: "Gabarito...", context: "Local" };
+        }
+        return null;
+      };
+
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const local = await getLocalFallback();
+        if (local) return local;
+      }
+
+      try {
+        const res = await apiFetch<any>(`/api/flashcards/preview`, {
+          method: "POST",
+          body: JSON.stringify({ question_id, wrong_letter: wrong_letter || "" })
+        });
+        return res;
+      } catch (err) {
+        const local = await getLocalFallback();
+        if (local) return local;
+        throw err;
+      }
+    },
+    save: async (question_id: number, front: string, back: string, context: string) => {
+      const getLocalFallback = async (): Promise<FlashcardGenerateResponse | null> => {
+        if (typeof window !== "undefined" && localDb) {
+          try {
+            const uid = getLocalOwnerId();
+            const q = await localDb.questions.where('_owner_id').equals(uid).filter(item => item.id === question_id).first();
+            if (q) {
+              const mockCard = {
+                id: Date.now(),
+                question_id,
+                front,
+                back,
+                next_review_date: new Date().toISOString(),
+                stem: q.stem,
+                is_ai_generated: true,
+                source_context: context,
+                _owner_id: uid,
+              };
+              await localDb.flashcards.put(mockCard as any);
+              return {
+                id: mockCard.id,
+                question_id,
+                front: mockCard.front,
+                back: mockCard.back,
+                context: mockCard.source_context
+              };
+            }
+          } catch (e) {
+            console.error("Dexie error saving local flashcard", e);
+          }
+        }
+        return null;
+      };
+
+      if (typeof window !== "undefined" && !navigator.onLine) {
+        const local = await getLocalFallback();
+        if (local) return local;
+      }
+
+      try {
+        const res = await apiFetch<FlashcardGenerateResponse>(`/api/flashcards/save`, {
+          method: "POST",
+          body: JSON.stringify({ question_id, front, back, context })
+        });
+        if (typeof window !== "undefined" && localDb && res) {
+          const uid = getLocalOwnerId();
+          await localDb.flashcards.put({
+            id: res.id,
+            question_id: res.question_id,
+            front: res.front,
+            back: res.back,
+            next_review_date: new Date().toISOString(),
+            is_ai_generated: true,
+            source_context: res.context,
+            _owner_id: uid,
+          } as any);
+        }
+        return res;
+      } catch (err) {
+        const local = await getLocalFallback();
+        if (local) return local;
+        throw err;
+      }
+    },
     generate: async (question_id: number, wrong_letter: string) => {
       const formatLocalCard = (q: any, wrongLetter: string) => {
         const correctAlt = q.alternatives?.find((a: any) => a.letter === q.correct_letter);

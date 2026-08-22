@@ -14,34 +14,7 @@ import { ImageViewer } from "@/components/ImageViewer";
 import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
 import { AutoSizer } from "react-virtualized-auto-sizer";
 import Image from "next/image";
-import profilesDataRaw from "@/lib/profiles.json";
-import {
-  LEARNING_SESSION_VERSION,
-  readLearningSession,
-  removeLearningSession,
-  writeLearningSession,
-} from "@/lib/sessionState";
-
-interface ProfileData {
-  id: string;
-  name: string;
-  questions: number;
-  alternatives: number;
-  duration_hours: number;
-  is_force_4_options: boolean;
-  fetch_method: "getSimuladoUSP" | "getList";
-  fetch_args?: Record<string, string | string[]>;
-  balance_label?: string;
-}
-
-const profilesData = profilesDataRaw as ProfileData[];
-
-function deadlineFromNow(seconds: number): number {
-  return Date.now() + seconds * 1000;
-}
-
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS" | "OFFLINE_SUBMITTED";
-type SimuladoProfile = "usp_2026" | "usp_history" | "unicamp" | "custom";
 
 interface SavedSimuladoState {
   version: number;
@@ -100,6 +73,8 @@ export function SimuladoClient({
   const [batchFlashcardsResult, setBatchFlashcardsResult] = useState<{ count: number } | null>(null);
   const [questionFlashcardsMap, setQuestionFlashcardsMap] = useState<Record<number, FlashcardGenerateResponse>>({});
   const [generatingSingleFlashcard, setGeneratingSingleFlashcard] = useState<number | null>(null);
+  const [draftFlashcardsMap, setDraftFlashcardsMap] = useState<Record<number, { front: string; back: string; context: string }>>({});
+  const [savingSingleFlashcard, setSavingSingleFlashcard] = useState<number | null>(null);
   
   // Marcar para revisar
   const [flagged, setFlagged] = useState<Record<number, boolean>>({});
@@ -111,9 +86,6 @@ export function SimuladoClient({
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const deadlineRef = useRef(0);
   const hasCustomFilters = Object.keys(initialFilters).length > 0;
-  const [simuladoProfile, setSimuladoProfile] = useState<SimuladoProfile>(
-    hasCustomFilters ? 'custom' : 'usp_2026'
-  );
   
   const [customConfig, setCustomConfig] = useState({
     institutions: [] as string[],
@@ -240,22 +212,10 @@ export function SimuladoClient({
         const limit = initialFilters.limit || "50";
         qList = await api.questions.getList({ ...initialFilters, limit });
         durationHours = (qList.length / 120) * 6;
-      } else if (simuladoProfile === 'custom' && !hasCustomFilters) {
+      } else {
         qList = await api.questions.getCustomSimulado(customConfig);
         isForce4Options = customConfig.force_4_options;
         durationHours = customConfig.duration_minutes / 60;
-      } else {
-        const profile = profilesData.find(p => p.id === simuladoProfile) || profilesData[0];
-        durationHours = profile.duration_hours;
-        isForce4Options = profile.is_force_4_options;
-        
-        if (profile.fetch_method === "getSimuladoUSP") {
-          qList = await api.questions.getSimuladoUSP();
-        } else if (profile.fetch_method === "getList" && profile.fetch_args) {
-          qList = await api.questions.getList(profile.fetch_args);
-        } else {
-          qList = await api.questions.getSimuladoUSP();
-        }
       }
 
       if (qList.length === 0) {
@@ -358,15 +318,34 @@ export function SimuladoClient({
     if (generatingSingleFlashcard) return;
     setGeneratingSingleFlashcard(qid);
     try {
-      const res = await api.flashcards.generate(qid, wrongLetter);
+      const res = await api.flashcards.preview(qid, wrongLetter || undefined);
+      setDraftFlashcardsMap(prev => ({ ...prev, [qid]: res }));
+    } catch {
+      toast.error("Erro ao gerar prévia do flashcard.");
+    } finally {
+      setGeneratingSingleFlashcard(null);
+    }
+  };
+
+  const handleSaveSingleFlashcard = async (qid: number) => {
+    const draft = draftFlashcardsMap[qid];
+    if (!draft || savingSingleFlashcard) return;
+    setSavingSingleFlashcard(qid);
+    try {
+      const res = await api.flashcards.save(qid, draft.front, draft.back, draft.context);
       const qDetail = detailsCache[qid];
       const normalized = normalizeFlashcard({ ...res, stem: qDetail?.stem || "" });
       setQuestionFlashcardsMap(prev => ({ ...prev, [qid]: normalized }));
+      setDraftFlashcardsMap(prev => {
+        const next = { ...prev };
+        delete next[qid];
+        return next;
+      });
       toast.success("Flashcard criado e inserido na sua Revisão Ativa!");
     } catch {
-      toast.error("Erro ao gerar flashcard.");
+      toast.error("Erro ao salvar flashcard.");
     } finally {
-      setGeneratingSingleFlashcard(null);
+      setSavingSingleFlashcard(null);
     }
   };
 
@@ -569,69 +548,10 @@ export function SimuladoClient({
         <p className="text-muted-foreground text-base mb-8 max-w-lg text-center">
           {hasCustomFilters 
             ? "Esta prova irá simular as condições reais de exame usando os filtros que você escolheu."
-            : "Selecione a instituição desejada ou crie um simulado com as suas próprias configurações."}
+            : "Crie um simulado com as suas próprias configurações."}
         </p>
 
         {!hasCustomFilters && (
-          <div className="w-full mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {profilesData.map(p => (
-              <div 
-                key={p.id}
-                onClick={() => setSimuladoProfile(p.id as SimuladoProfile)}
-                className={clsx(
-                  "cursor-pointer rounded-xl border p-5 flex flex-col gap-2 transition-all duration-200 relative overflow-hidden group",
-                  simuladoProfile === p.id 
-                    ? "border-primary bg-primary/5 ring-1 ring-primary shadow-sm"
-                    : "border-border bg-card hover:border-primary/50 hover:bg-muted/50"
-                )}
-              >
-                {simuladoProfile === p.id && (
-                  <div className="absolute top-3 right-3 text-primary">
-                    <CheckCircle2 size={20} className="animate-in zoom-in" />
-                  </div>
-                )}
-                <div className="flex items-center gap-3">
-                  <div className={clsx("p-2 rounded-lg flex items-center justify-center transition-colors", simuladoProfile === p.id ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary")}>
-                    <span className="material-symbols-outlined text-[20px]" data-icon="school">school</span>
-                  </div>
-                  <h3 className="font-bold text-foreground text-lg tracking-tight">{p.name}</h3>
-                </div>
-                <div className="text-sm text-muted-foreground mt-1 flex flex-col gap-0.5">
-                  <span>{p.questions} Questões • {p.alternatives} Alternativas</span>
-                  <span>{p.duration_hours} Horas de Duração</span>
-                </div>
-              </div>
-            ))}
-
-            <div 
-              onClick={() => setSimuladoProfile("custom")}
-              className={clsx(
-                "cursor-pointer rounded-xl border p-5 flex flex-col gap-2 transition-all duration-200 relative overflow-hidden group",
-                simuladoProfile === "custom" 
-                  ? "border-primary bg-primary/5 ring-1 ring-primary shadow-sm"
-                  : "border-border bg-card hover:border-primary/50 hover:bg-muted/50"
-              )}
-            >
-              {simuladoProfile === "custom" && (
-                <div className="absolute top-3 right-3 text-primary">
-                  <CheckCircle2 size={20} className="animate-in zoom-in" />
-                </div>
-              )}
-              <div className="flex items-center gap-3">
-                <div className={clsx("p-2 rounded-lg flex items-center justify-center transition-colors", simuladoProfile === "custom" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary")}>
-                  <span className="material-symbols-outlined text-[20px]" data-icon="tune">tune</span>
-                </div>
-                <h3 className="font-bold text-foreground text-lg tracking-tight">Personalizado</h3>
-              </div>
-              <div className="text-sm text-muted-foreground mt-1 flex flex-col gap-0.5">
-                <span>Escolha as bancas e anos</span>
-                <span>Configure tempo e questões</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {simuladoProfile === 'custom' && !hasCustomFilters && (
           <div className="w-full mb-8 bg-muted/30 p-6 rounded-2xl border border-border text-left flex flex-col gap-5 animate-in slide-in-from-top-4 fade-in duration-300">
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">Bancas Incluídas (deixe vazio para todas)</label>
@@ -730,11 +650,7 @@ export function SimuladoClient({
               <span className="material-symbols-outlined text-[14px]">list_alt</span> Questões
             </span>
             <span className="text-lg font-bold text-foreground">
-              {hasCustomFilters ? (initialFilters.limit || "Até 50") : (
-                simuladoProfile === 'custom' 
-                  ? (customConfig.questions_per_area * 5) 
-                  : (profilesData.find(p => p.id === simuladoProfile)?.questions || 120)
-              )} <span className="text-sm font-medium text-muted-foreground">un</span>
+              {hasCustomFilters ? (initialFilters.limit || "Até 50") : (customConfig.questions_per_area * 5)} <span className="text-sm font-medium text-muted-foreground">un</span>
             </span>
           </div>
           <div className="bg-muted/50 rounded-xl p-4 border border-border/50">
@@ -744,11 +660,8 @@ export function SimuladoClient({
             <span className="text-lg font-bold text-foreground">
               {hasCustomFilters 
                 ? `${Math.round((Number(initialFilters.limit || 50) / 120) * 6 * 60)} min` 
-                : (
-                    simuladoProfile === 'custom' 
-                      ? `${customConfig.duration_minutes} min`
-                      : `${profilesData.find(p => p.id === simuladoProfile)?.duration_hours || 6} Horas`
-                  )}
+                : `${customConfig.duration_minutes} min`
+              }
             </span>
           </div>
           {!hasCustomFilters && (
@@ -757,9 +670,7 @@ export function SimuladoClient({
                 <span className="material-symbols-outlined text-[14px]">balance</span> Balanceamento
               </span>
               <span className="text-sm font-medium text-foreground">
-                {simuladoProfile === 'custom' 
-                  ? `${customConfig.questions_per_area} Clínica • ${customConfig.questions_per_area} Cirurgia • ${customConfig.questions_per_area} Pediatria • ${customConfig.questions_per_area} GO • ${customConfig.questions_per_area} Preventiva`
-                  : profilesData.find(p => p.id === simuladoProfile)?.balance_label || 'Balanceamento Automático'}
+                {`${customConfig.questions_per_area} Clínica • ${customConfig.questions_per_area} Cirurgia • ${customConfig.questions_per_area} Pediatria • ${customConfig.questions_per_area} GO • ${customConfig.questions_per_area} Preventiva`}
               </span>
             </div>
           )}
@@ -1359,10 +1270,10 @@ export function SimuladoClient({
                         </div>
                       )}
 
-                      {!resultsMap[qDetail.id].is_correct && answers[qDetail.id] && !questionFlashcardsMap[qDetail.id] && (
+                      {!questionFlashcardsMap[qDetail.id] && !draftFlashcardsMap[qDetail.id] && (
                         <div className="mt-6 pt-5 border-t border-border">
                           <button
-                            onClick={() => handleGenerateSingleFlashcard(qDetail.id, answers[qDetail.id])}
+                            onClick={() => handleGenerateSingleFlashcard(qDetail.id, answers[qDetail.id] || "")}
                             disabled={generatingSingleFlashcard === qDetail.id}
                             className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-sm transition-all disabled:opacity-50 cursor-pointer text-sm"
                           >
@@ -1371,35 +1282,86 @@ export function SimuladoClient({
                             ) : (
                               <Sparkles size={16} />
                             )}
-                            {generatingSingleFlashcard === qDetail.id ? "Gerando Flashcard..." : "Gerar Flashcard desta Questão"}
+                            {generatingSingleFlashcard === qDetail.id ? "Gerando Flashcard com IA..." : "Criar Flashcard com IA"}
                           </button>
                         </div>
                       )}
 
-                      {questionFlashcardsMap[qDetail.id] && (
-                        <div className="mt-6 bg-purple-500/10 border border-purple-500/25 rounded-2xl p-5 animate-in slide-in-from-bottom-2 text-left">
-                          <div className="flex items-center justify-between gap-2 mb-3">
-                            <div className="flex items-center gap-2 text-purple-600 font-bold text-sm">
-                              <Sparkles size={16} /> Flashcard Salvo na Revisão Ativa!
+                      {draftFlashcardsMap[qDetail.id] && (
+                        <div className="mt-6 pt-5 border-t border-border">
+                          <div className="bg-purple-500/10 border border-purple-500/25 rounded-2xl p-5 animate-in slide-in-from-bottom-2 text-left">
+                            <div className="flex items-center gap-2 text-purple-600 font-bold text-sm mb-4">
+                              <Sparkles size={16} /> Editar Flashcard
                             </div>
-                            <Link 
-                              href="/revisao-ativa"
-                              className="text-xs font-bold text-purple-600 hover:underline flex items-center gap-1"
-                            >
-                              Ir para Revisão Ativa →
-                            </Link>
-                          </div>
-                          <div className="text-foreground text-sm space-y-2">
-                            <div className="font-medium bg-background p-3.5 rounded-lg border border-border leading-relaxed whitespace-pre-line text-sm">
-                              <span className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Frente:</span>
-                              {questionFlashcardsMap[qDetail.id].front}
-                            </div>
-                            {questionFlashcardsMap[qDetail.id].back && (
-                              <div className="text-muted-foreground bg-background p-3.5 rounded-lg border border-border leading-relaxed whitespace-pre-line text-sm">
-                                <span className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Verso:</span>
-                                {questionFlashcardsMap[qDetail.id].back}
+                            <div className="space-y-4">
+                              <div>
+                                <label className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Frente</label>
+                                <textarea 
+                                  value={draftFlashcardsMap[qDetail.id].front}
+                                  onChange={(e) => setDraftFlashcardsMap(prev => ({ ...prev, [qDetail.id]: { ...prev[qDetail.id], front: e.target.value } }))}
+                                  className="w-full bg-background border border-border rounded-lg p-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary min-h-[100px]"
+                                />
                               </div>
-                            )}
+                              <div>
+                                <label className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Verso</label>
+                                <textarea 
+                                  value={draftFlashcardsMap[qDetail.id].back}
+                                  onChange={(e) => setDraftFlashcardsMap(prev => ({ ...prev, [qDetail.id]: { ...prev[qDetail.id], back: e.target.value } }))}
+                                  className="w-full bg-background border border-border rounded-lg p-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary min-h-[120px]"
+                                />
+                              </div>
+                              <div className="flex justify-end gap-3 pt-2">
+                                <button 
+                                  onClick={() => setDraftFlashcardsMap(prev => { const next = {...prev}; delete next[qDetail.id]; return next; })}
+                                  disabled={savingSingleFlashcard === qDetail.id}
+                                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                  Cancelar
+                                </button>
+                                <button 
+                                  onClick={() => handleSaveSingleFlashcard(qDetail.id)}
+                                  disabled={savingSingleFlashcard === qDetail.id}
+                                  className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-5 rounded-lg transition-colors text-sm shadow-sm disabled:opacity-50"
+                                >
+                                  {savingSingleFlashcard === qDetail.id ? (
+                                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                  ) : (
+                                    <BookOpen size={16} />
+                                  )}
+                                  Salvar Flashcard
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {questionFlashcardsMap[qDetail.id] && (
+                        <div className="mt-6 pt-5 border-t border-border">
+                          <div className="bg-purple-500/10 border border-purple-500/25 rounded-2xl p-5 animate-in slide-in-from-bottom-2 text-left">
+                            <div className="flex items-center justify-between gap-2 mb-3">
+                              <div className="flex items-center gap-2 text-purple-600 font-bold text-sm">
+                                <Sparkles size={16} /> Flashcard Salvo na Revisão Ativa!
+                              </div>
+                              <Link 
+                                href="/revisao-ativa"
+                                className="text-xs font-bold text-purple-600 hover:underline flex items-center gap-1"
+                              >
+                                Ir para Revisão Ativa →
+                              </Link>
+                            </div>
+                            <div className="text-foreground text-sm space-y-2">
+                              <div className="font-medium bg-background p-3.5 rounded-lg border border-border leading-relaxed whitespace-pre-line text-sm">
+                                <span className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Frente:</span>
+                                {questionFlashcardsMap[qDetail.id].front}
+                              </div>
+                              {questionFlashcardsMap[qDetail.id].back && (
+                                <div className="text-muted-foreground bg-background p-3.5 rounded-lg border border-border leading-relaxed whitespace-pre-line text-sm">
+                                  <span className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Verso:</span>
+                                  {questionFlashcardsMap[qDetail.id].back}
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </div>
                       )}

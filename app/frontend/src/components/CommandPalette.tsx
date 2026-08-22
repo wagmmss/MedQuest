@@ -158,13 +158,13 @@ export function CommandPalette() {
               {query.length > 0 && (
                 <>
                   <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">Ações Rápidas</div>
-                  {("simulado usp prova exame".includes(query.toLowerCase())) && (
+                  {("simulados prova exame".includes(query.toLowerCase())) && (
                     <button
                       className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors"
                       onClick={() => { setOpen(false); router.push("/simulado"); }}
                     >
                       <span className="material-symbols-outlined text-primary text-sm" data-icon="description">description</span>
-                      <span>Iniciar Simulado</span>
+                      <span>Simulados</span>
                     </button>
                   )}
                   {("clínica médica clinica cardiologia nefrologia".includes(query.toLowerCase())) && (
