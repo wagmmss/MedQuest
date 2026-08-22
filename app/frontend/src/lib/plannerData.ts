@@ -793,20 +793,36 @@ export const plannerData = [
         ]
       },
       {
-        "theme": "Abdome Agudo Obstrutivo, Perfurativo e Vascular",
+        "theme": "Abdome Agudo Obstrutivo",
         "highYield": false,
         "dbSubtemas": [
           "Abdome Agudo Obstrutivo",
-          "Abdome Agudo Perfurativo",
-          "Isquemia Mesentérica",
-          "Isquemia Mesentérica Aguda",
           "Obstrução Intestinal por Aderências"
         ],
         "details": [
           "Obstrução alta vs baixa (bridas, volvo, neoplasia, íleo biliar)",
-          "Abdome perfurativo (pneumoperitônio, sinal de Jobert)",
-          "Isquemia mesentérica aguda: dor desproporcional, acidose e angio-TC",
           "Íleo paralítico pós-operatório e síndrome de Ogilvie"
+        ]
+      },
+      {
+        "theme": "Abdome Agudo Perfurativo",
+        "highYield": false,
+        "dbSubtemas": [
+          "Abdome Agudo Perfurativo"
+        ],
+        "details": [
+          "Abdome perfurativo (pneumoperitônio, sinal de Jobert)"
+        ]
+      },
+      {
+        "theme": "Abdome Agudo Vascular",
+        "highYield": false,
+        "dbSubtemas": [
+          "Isquemia Mesentérica",
+          "Isquemia Mesentérica Aguda"
+        ],
+        "details": [
+          "Isquemia mesentérica aguda: dor desproporcional, acidose e angio-TC"
         ]
       },
       {
@@ -1142,17 +1158,35 @@ export const plannerData = [
         ]
       },
       {
-        "theme": "Neurologia: AVC, Cefaleias, Epilepsia e Demências",
+        "theme": "Neurologia: AVC Isquêmico",
         "highYield": true,
         "dbSubtemas": [
-          "AVC e Doenças Cerebrovasculares",
-          "Cefaleias",
-          "Epilepsia e Doenças Neuromusculares",
-          "Demências e Parkinson",
           "Acidente Vascular Cerebral Isquêmico"
         ],
         "details": [
-          "AVC isquêmico: janela de trombólise e trombectomia; AVC hemorrágico e HSA",
+          "AVC isquêmico: janela de trombólise e trombectomia"
+        ]
+      },
+      {
+        "theme": "Neurologia: AVC Hemorrágico e Doenças Cerebrovasculares",
+        "highYield": true,
+        "dbSubtemas": [
+          "AVC e Doenças Cerebrovasculares"
+        ],
+        "details": [
+          "AVC hemorrágico e Hemorragia Subaracnoidea (HSA)",
+          "Anatomia vascular cerebral e correlação clínica"
+        ]
+      },
+      {
+        "theme": "Neurologia: Cefaleias, Epilepsia e Demências",
+        "highYield": false,
+        "dbSubtemas": [
+          "Cefaleias",
+          "Epilepsia e Doenças Neuromusculares",
+          "Demências e Parkinson"
+        ],
+        "details": [
           "Cefaleias primárias (enxaqueca, tensional, em salvas) e sinais de alarme",
           "Epilepsia e estado de mal epiléptico",
           "Demências (Alzheimer, vascular) e síndromes parkinsonianas"
