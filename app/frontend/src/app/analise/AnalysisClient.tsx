@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState, useEffect, useRef } from "react";
-import { TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness } from "@/types/api";
-import { AlertTriangle, TrendingUp, Compass, AlarmClock, Lightbulb, Brain, ChevronRight, BarChart3, AlertCircle, Target, Activity } from "lucide-react";
+import { TimelineStat, WeakTopic, BreakdownStat, DistractorStat, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness } from "@/types/api";
+import { AlertTriangle, TrendingUp, Brain, ChevronRight, BarChart3, AlertCircle, Target, Activity } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
 import { api } from "@/lib/api";
@@ -15,7 +15,6 @@ import { motion } from 'framer-motion';
 export function AnalysisClient({
   timeline,
   weakTopics,
-  recommendations,
   breakdown,
   distractors,
   predictiveScore,
@@ -25,7 +24,6 @@ export function AnalysisClient({
 }: {
   timeline: TimelineStat[];
   weakTopics: WeakTopic[];
-  recommendations: Recommendation[];
   breakdown: BreakdownStat[];
   distractors: DistractorStat[];
   predictiveScore: PredictiveScore;
@@ -33,17 +31,6 @@ export function AnalysisClient({
   learningProfile: LearningProfile;
   examReadiness: ExamReadiness;
 }) {
-  const getRecIcon = (type: string) => {
-    switch (type) {
-      case "srs_due": return <AlarmClock className="text-primary group-hover:scale-110 transition-transform" size={24} />;
-      case "weak_topic":
-      case "weak_area": return <AlertTriangle className="text-warning group-hover:scale-110 transition-transform" size={24} />;
-      case "explore": return <Compass className="text-secondary group-hover:scale-110 transition-transform" size={24} />;
-      case "praise": return <TrendingUp className="text-success group-hover:scale-110 transition-transform" size={24} />;
-      default: return <Lightbulb className="text-muted-foreground group-hover:scale-110 transition-transform" size={24} />;
-    }
-  };
-
   const [days, setDays] = useState<number>(14);
   const [localTimeline, setLocalTimeline] = useState<TimelineStat[]>(timeline);
   const [loadingTimeline, setLoadingTimeline] = useState(false);
@@ -240,58 +227,6 @@ export function AnalysisClient({
                 )}
               </div>
             </div>
-          </div>
-        </motion.section>
-
-        {/* Recommendations */}
-        <motion.section 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-primary/10 rounded-lg">
-              <Brain size={24} className="text-primary" />
-            </div>
-            <h2 className="text-2xl font-bold text-foreground">
-              Recomendações Inteligentes
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {recommendations.length > 0 ? (
-              recommendations.map((rec, idx) => {
-                const queryParams = new URLSearchParams(rec.filters).toString();
-                const href = queryParams ? `/estudar?${queryParams}` : "/estudar";
-                return (
-                  <Link 
-                    key={idx} 
-                    href={href}
-                    className="group relative bg-card border border-border shadow-sm hover:shadow-md hover:border-primary/50 rounded-2xl p-6 flex flex-col transition-all overflow-hidden isolation-auto"
-                  >
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -z-10 group-hover:bg-primary/10 transition-colors" />
-                    
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="p-3 bg-background rounded-xl border border-border shadow-sm">
-                        {getRecIcon(rec.type)}
-                      </div>
-                      <h3 className="font-bold text-lg text-foreground leading-tight mt-1 group-hover:text-primary transition-colors">{rec.title}</h3>
-                    </div>
-                    <p className="text-muted-foreground text-sm flex-1 mb-6 leading-relaxed">{rec.description}</p>
-                    <div className="mt-auto flex items-center justify-between text-sm font-semibold text-primary">
-                      <span>{rec.cta}</span>
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                        <ChevronRight size={16} />
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })
-            ) : (
-              <div className="col-span-full bg-card border border-border rounded-2xl p-8 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
-                <Target size={40} className="text-muted-foreground/50" />
-                <p>Responda mais algumas questões para receber recomendações personalizadas.</p>
-              </div>
-            )}
           </div>
         </motion.section>
 
@@ -518,76 +453,42 @@ export function AnalysisClient({
               <AlertTriangle size={24} className="text-warning" />
             </div>
             <h2 className="text-2xl font-bold text-foreground">
-              Tópicos Fracos
+              Tópicos Fracos & Armadilhas
             </h2>
           </div>
           <div className="bg-card/50 backdrop-blur-xl border border-white/10 shadow-sm rounded-2xl overflow-hidden flex flex-col">
             <div className="p-4 border-b border-border/50 bg-muted/20">
-              <p className="text-sm text-muted-foreground leading-relaxed">Tópicos com menor índice de acertos. Priorize estudá-los.</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Tópicos com menor índice de acertos e as alternativas incorretas que você mais assinala. Priorize estudá-los.
+              </p>
             </div>
             <div className="divide-y divide-border/50">
               {weakTopics.length > 0 ? (
-                weakTopics.slice(0, 8).map((wt) => (
-                  <Link key={wt.topic} href={`/estudar?subtema=${encodeURIComponent(wt.topic)}&limit=50`} className="p-4 hover:bg-muted/30 transition-colors flex items-center justify-between gap-4 group">
-                    <div className="min-w-0 flex-1">
-                      <p className="font-medium text-foreground truncate group-hover:text-primary transition-colors" title={wt.topic}>{wt.topic}</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">{wt.correct} acertos de {wt.attempts} totais</p>
-                    </div>
-                    <div className="flex items-center gap-3 shrink-0">
-                      <span className={clsx("font-bold text-lg", wt.accuracy < 0.5 ? "text-destructive" : "text-warning")}>
-                        {(wt.accuracy * 100).toFixed(0)}%
-                      </span>
-                      <ChevronRight size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
-                  </Link>
-                ))
-              ) : (
-                <div className="p-8 text-center text-muted-foreground flex flex-col items-center gap-3">
-                  <Target size={32} className="text-muted-foreground/50" />
-                  <p>Nenhum tópico fraco identificado ainda.</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Distractors (New Feature) */}
-        <motion.section 
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-destructive/10 rounded-lg">
-              <AlertCircle size={24} className="text-destructive" />
-            </div>
-            <h2 className="text-2xl font-bold text-foreground">
-              Análise de Distratores
-            </h2>
-          </div>
-          <div className="bg-card/50 backdrop-blur-xl border border-white/10 shadow-sm rounded-2xl overflow-hidden">
-            <div className="p-4 border-b border-border/50 bg-muted/20">
-              <p className="text-sm text-muted-foreground leading-relaxed">Alternativas incorretas que você mais assinala. Fique atento a essas armadilhas.</p>
-            </div>
-            <div className="divide-y divide-border/50">
-              {distractors.length > 0 ? (
-                distractors.slice(0, 5).map((d, i) => {
-                  const worstChoice = d.wrong_choices[0];
-                  if (!worstChoice) return null;
+                weakTopics.slice(0, 8).map((wt) => {
+                  const distractor = distractors.find(d => d.subtema === wt.topic);
+                  const worstChoice = distractor?.wrong_choices?.[0];
+                  
                   return (
-                    <Link key={i} href={`/estudar?subtema=${encodeURIComponent(d.subtema)}&limit=50`} className="p-4 flex items-center justify-between gap-4 hover:bg-muted/30 transition-colors group">
+                    <Link key={wt.topic} href={`/estudar?subtema=${encodeURIComponent(wt.topic)}&limit=50`} className="p-4 hover:bg-muted/30 transition-colors flex items-center justify-between gap-4 group">
                       <div className="min-w-0 flex-1">
-                        <div className="font-medium text-foreground truncate group-hover:text-primary transition-colors" title={d.subtema}>{d.subtema}</div>
-                        <div className="text-sm text-muted-foreground mt-1 flex items-center gap-1.5 flex-wrap">
-                          <span>A alternativa</span>
-                          <span className="inline-flex items-center justify-center bg-muted font-bold text-foreground w-6 h-6 rounded text-xs uppercase border border-border">
-                            {worstChoice.letter}
-                          </span>
-                          <span>foi escolhida incorretamente</span>
-                          <span className="font-bold text-destructive bg-destructive/10 px-1.5 py-0.5 rounded">{worstChoice.count} vez(es)</span>
-                        </div>
+                        <p className="font-medium text-foreground truncate group-hover:text-primary transition-colors" title={wt.topic}>{wt.topic}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{wt.correct} acertos de {wt.attempts} totais</p>
+                        
+                        {worstChoice && (
+                          <div className="mt-2 flex items-center gap-1.5 flex-wrap bg-destructive/5 w-fit p-1.5 rounded-md border border-destructive/10">
+                            <AlertCircle size={12} className="text-destructive" />
+                            <span className="text-xs text-muted-foreground">Você costuma errar marcando a</span>
+                            <span className="inline-flex items-center justify-center bg-background font-bold text-foreground w-5 h-5 rounded text-[10px] uppercase border border-border">
+                              {worstChoice.letter}
+                            </span>
+                            <span className="font-semibold text-destructive text-xs">({worstChoice.count}x)</span>
+                          </div>
+                        )}
                       </div>
-                      <div className="flex items-center gap-3 shrink-0">
+                      <div className="flex flex-col items-end gap-1 shrink-0">
+                        <span className={clsx("font-bold text-lg", wt.accuracy < 0.5 ? "text-destructive" : "text-warning")}>
+                          {(wt.accuracy * 100).toFixed(0)}%
+                        </span>
                         <ChevronRight size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
                     </Link>
@@ -595,8 +496,8 @@ export function AnalysisClient({
                 })
               ) : (
                 <div className="p-8 text-center text-muted-foreground flex flex-col items-center gap-3">
-                  <AlertCircle size={32} className="text-muted-foreground/50" />
-                  <p className="text-sm">Não há distratores suficientes mapeados.</p>
+                  <Target size={32} className="text-muted-foreground/50" />
+                  <p>Nenhum tópico fraco identificado ainda.</p>
                 </div>
               )}
             </div>

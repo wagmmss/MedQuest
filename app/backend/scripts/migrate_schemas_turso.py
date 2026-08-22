@@ -29,7 +29,7 @@ c.execute("""CREATE TABLE planner_progress (
     user_id TEXT, PRIMARY KEY (week, user_id))""")
 c.execute("""CREATE TABLE planner_config (
     user_id TEXT PRIMARY KEY, exam_date TEXT, start_date TEXT,
-    days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30,
+    days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30, target_score REAL,
     updated_at TEXT)""")
 c.execute("""CREATE TABLE flashcards (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

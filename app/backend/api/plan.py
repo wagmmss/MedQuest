@@ -37,15 +37,33 @@ def planner_config():
         except ValidationError as e:
             return jsonify({"error": "invalid input", "details": e.errors()}), 400
         with db_transaction(db, immediate=True):
-            db.execute("""
-                INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT(user_id) DO UPDATE SET
-                    exam_date = excluded.exam_date, start_date = excluded.start_date,
-                    days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
-                    updated_at = excluded.updated_at, target_score = excluded.target_score
-            """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
-                  datetime.now(timezone.utc).isoformat(), cfg.target_score))
+            try:
+                db.execute("""
+                    INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(user_id) DO UPDATE SET
+                        exam_date = excluded.exam_date, start_date = excluded.start_date,
+                        days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
+                        updated_at = excluded.updated_at, target_score = excluded.target_score
+                """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
+                      datetime.now(timezone.utc).isoformat(), cfg.target_score))
+            except Exception as e:
+                # Se falhar (ex: coluna target_score não existe devido a script de migration manual executado sem restart do app),
+                # tenta adicionar a coluna e executa de novo.
+                err_msg = str(e).lower()
+                if "target_score" in err_msg or "has no column" in err_msg or "no such column" in err_msg:
+                    db.execute("ALTER TABLE planner_config ADD COLUMN target_score REAL")
+                    db.execute("""
+                        INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                        ON CONFLICT(user_id) DO UPDATE SET
+                            exam_date = excluded.exam_date, start_date = excluded.start_date,
+                            days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
+                            updated_at = excluded.updated_at, target_score = excluded.target_score
+                    """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
+                          datetime.now(timezone.utc).isoformat(), cfg.target_score))
+                else:
+                    raise e
         invalidate_user_caches(g.user_id)
         return jsonify({"success": True})
 
