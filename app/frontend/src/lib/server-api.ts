@@ -9,7 +9,7 @@ import {
 export type { QuestionMeta };
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
-const API_REQUEST_TIMEOUT_MS = 15_000;
+const API_REQUEST_TIMEOUT_MS = 60_000;
 
 export function isDynamicServerUsageError(error: unknown): boolean {
   if (!(error instanceof Error)) return false;

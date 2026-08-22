@@ -145,13 +145,15 @@ def complete_idempotency(db, user_id: str, status_code: int, response_data: dict
     normalized_key = key.lower()
     response_body = json.dumps(response_data)
 
-    cursor = db.execute(
-        """UPDATE idempotency_keys
-           SET status = 'completed', status_code = ?, response_body = ?, lease_expires_at = 0
-           WHERE user_id = ? AND key = ? AND lease_owner_token = ? AND status = 'processing'""",
-        (status_code, response_body, user_id, normalized_key, lease_token)
-    )
-    cursor.close()
+    with db_transaction(db, immediate=True):
+        cursor = db.execute(
+            """UPDATE idempotency_keys
+               SET status = 'completed', status_code = ?, response_body = ?, lease_expires_at = 0
+               WHERE user_id = ? AND key = ? AND lease_owner_token = ? AND status = 'processing'""",
+            (status_code, response_body, user_id, normalized_key, lease_token)
+        )
+        cursor.close()
+
     if not _owns_lease(db, user_id, normalized_key, lease_token, "completed"):
         raise LostLeaseError("Idempotency lease was lost before completion")
 
