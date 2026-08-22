@@ -10,13 +10,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.environ.get("GEMINI_API_KEY", "")
+API_KEY = os.environ.get("DEEPSEEK_API_KEY")
 
-# Modelo Gemini recomendado
+# Modelo DeepSeek
 MODELS = [
-    "gemini-flash-latest",
-    "gemini-flash-lite-latest",
-    "gemma-4-31b-it"
+    "deepseek-chat"
 ]
 
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "medquest.db")
@@ -61,43 +59,50 @@ def get_alternatives_for_question(conn, q_id):
     c = conn.cursor()
     return c.execute("SELECT letter, text FROM alternatives WHERE question_id = ? ORDER BY letter", (q_id,)).fetchall()
 
-def call_gemini_batch(prompt):
-    for model in MODELS:
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={API_KEY}"
-        headers = {"Content-Type": "application/json"}
+def call_deepseek_batch(prompt):
+    url = "https://api.deepseek.com/chat/completions"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {API_KEY}"
+    }
+    
+    retries = 0
+    while retries < 5:
+        payload = {
+            "model": "deepseek-chat",
+            "messages": [{"role": "user", "content": prompt}],
+            "response_format": {"type": "json_object"}
+        }
         
-        retries = 0
-        while retries < 5:
-            payload = {
-                "contents": [{"parts": [{"text": prompt}]}],
-                "generationConfig": {
-                    "responseMimeType": "application/json"
-                }
-            }
-            
-            try:
-                response = requests.post(url, headers=headers, json=payload, timeout=120)
-                if response.status_code == 200:
-                    data = response.json()
-                    content = data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
-                    if content:
+        try:
+            response = requests.post(url, headers=headers, json=payload, timeout=120)
+            if response.status_code == 200:
+                data = response.json()
+                content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+                if content:
+                    try:
+                        return json.loads(content)
+                    except json.JSONDecodeError as je:
+                        print(f"  [deepseek-chat] Erro ao parsear JSON: {je}")
+                        print(f"  [deepseek-chat] Conteúdo bruto: {content[:500]}...")
+                        # Pode ter retornado markdown de JSON (```json ... ```)
                         try:
-                            return json.loads(content)
-                        except json.JSONDecodeError as je:
-                            print(f"  [{model}] Erro ao parsear JSON: {je}")
-                            print(f"  [{model}] Conteúdo bruto: {content[:500]}...")
+                            clean_content = content.replace("```json", "").replace("```", "").strip()
+                            return json.loads(clean_content)
+                        except:
                             break
-                elif response.status_code in (429, 503):
-                    print(f"  [{model}] Rate limit ou sobrecarga ({response.status_code}). Esperando 10s...")
-                    time.sleep(10)
-                    retries += 1
-                    continue
-                else:
-                    print(f"  [{model}] Erro na API: {response.status_code} - {response.text}")
-                    break
-            except Exception as e:
-                print(f"  [{model}] Exceção: {e}")
+            elif response.status_code in (429, 503):
+                print(f"  [deepseek-chat] Rate limit ou sobrecarga ({response.status_code}). Esperando 5s...")
+                time.sleep(5)
+                retries += 1
+                continue
+            else:
+                print(f"  [deepseek-chat] Erro na API: {response.status_code} - {response.text}")
                 break
+        except Exception as e:
+            print(f"  [deepseek-chat] Exceção: {e}")
+            retries += 1
+            time.sleep(5)
             
     return None
 
@@ -128,7 +133,7 @@ def process_batch(conn, batch):
         
     prompt = BATCH_PROMPT.format(questions_json=json.dumps(questions_data, ensure_ascii=False, indent=2))
     
-    results = call_gemini_batch(prompt)
+    results = call_deepseek_batch(prompt)
     return results
 
 def main():
@@ -154,11 +159,22 @@ def main():
         
         if not results:
             print(f"Falha ao processar lote {i//args.batch_size + 1}.")
-            time.sleep(5)
+            time.sleep(1)
             continue
             
         now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         
+        # Extrai a lista caso a API tenha envelopado em um objeto {"explanations": [...]}
+        if isinstance(results, dict):
+            # Tenta pegar o primeiro valor que seja uma lista
+            for val in results.values():
+                if isinstance(val, list):
+                    results = val
+                    break
+            else:
+                # Se não achou lista, empacota num array
+                results = [results]
+                
         for item in results:
             if not isinstance(item, dict):
                 continue
@@ -177,7 +193,8 @@ def main():
                     print(f"Erro DB ao atualizar {q_id}: {db_e}")
                     
         conn.commit()
-        time.sleep(2)
+        # Removido sleep longo para acelerar
+        time.sleep(0.5)
         
     print(f"\\nFinalizado! {success_count} explicações revisadas e validadas com sucesso.")
 

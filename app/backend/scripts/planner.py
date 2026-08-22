@@ -143,6 +143,7 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         all_topics.append({
             "area": norm_area,
             "subtema": subtema,
+            "subtopics": r.get('topics', '').split(',') if r.get('topics') else [],
             "questions_available": remaining_q,
             "estimated_theory_hours": round(theory_hours, 2),
             "estimated_practice_hours": round(practice_hours, 2),

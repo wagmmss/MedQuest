@@ -10,6 +10,67 @@ from .questions import invalidate_user_caches
 
 bp = Blueprint("flashcards", __name__)
 
+@bp.route("/flashcards/generate", methods=["POST"])
+def generate():
+    data = request.get_json() or {}
+    question_id = data.get("question_id")
+    wrong_letter = data.get("wrong_letter", "").upper()
+
+    if not question_id or not wrong_letter:
+        return jsonify({"error": "question_id e wrong_letter sao obrigatorios."}), 400
+
+    db = get_db()
+    
+    q = db.execute("SELECT stem, correct_letter, area, subtema, topic FROM questions WHERE id = ?", (question_id,)).fetchone()
+    if not q:
+        return jsonify({"error": "Questao nao encontrada."}), 404
+        
+    correct_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (question_id, q["correct_letter"])).fetchone()
+    wrong_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (question_id, wrong_letter)).fetchone()
+    exp = db.execute("SELECT explanation_text FROM explanations WHERE question_id = ?", (question_id,)).fetchone()
+    
+    if not correct_alt or not wrong_alt:
+        return jsonify({"error": "Alternativas nao encontradas."}), 404
+
+    card_data = generate_cloze_flashcard(
+        stem=q["stem"], 
+        correct_text=correct_alt["text"], 
+        wrong_text=wrong_alt["text"], 
+        explanation=exp["explanation_text"] if exp else "",
+        area=q["area"] or "",
+        subtema=q["subtema"] or "",
+        topic=q["topic"] or "",
+        correct_letter=q["correct_letter"],
+        wrong_letter=wrong_letter
+    )
+
+    now = datetime.now(timezone.utc).isoformat()
+    with db_transaction(db, immediate=True):
+        existing = db.execute("SELECT id FROM flashcards WHERE question_id = ? AND user_id = ?", (question_id, g.user_id)).fetchone()
+        if existing:
+            db.execute("""
+                UPDATE flashcards
+                SET front = ?, back = ?, source_context = ?, next_review_date = ?
+                WHERE id = ? AND user_id = ?
+            """, (card_data.get("front", ""), card_data.get("back", ""), card_data.get("context", ""), now, existing["id"], g.user_id))
+            card_id = existing["id"]
+        else:
+            cursor = db.execute("""
+                INSERT INTO flashcards (question_id, front, back, created_at, next_review_date, fsrs_card, user_id, source_context, is_ai_generated)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)
+            """, (question_id, card_data.get("front", ""), card_data.get("back", ""), now, now, None, g.user_id, card_data.get("context", "")))
+            card_id = cursor.lastrowid
+        
+    invalidate_user_caches(g.user_id)
+
+    return jsonify({
+        "id": card_id,
+        "question_id": question_id,
+        "front": card_data.get("front", ""),
+        "back": card_data.get("back", ""),
+        "context": card_data.get("context", "")
+    })
+
 @bp.route("/flashcards/preview", methods=["POST"])
 def preview():
     data = request.get_json() or {}

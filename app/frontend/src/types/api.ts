@@ -163,6 +163,7 @@ export interface PlannerConfig {
 export interface PlannerTopic {
   area: string;
   subtema: string;
+  subtopics?: string[];
   questions_available: number;
   estimated_theory_hours: number;
   estimated_practice_hours: number;
@@ -205,6 +206,7 @@ export interface QuestionMeta {
   areas: { area: string; n: number }[];
   specialties: { specialty: string; n: number }[];
   subtemas: { subtema: string; n: number }[];
+  topics?: { topic: string; n: number }[];
   total_questions: number;
   answered_questions: number;
 }
@@ -314,6 +316,7 @@ export interface FlashcardGenerateResponse {
   question_id: number;
   front: string;
   back: string;
+  context?: string;
 }
 
 export interface BatchFlashcardGenerateResponse {

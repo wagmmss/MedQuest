@@ -427,7 +427,7 @@ export function QuizClient({
 
   const handleGenerateAllWrongFlashcards = async () => {
     const wrongItems = Object.entries(sessionAnswers)
-      .filter(([_, ans]) => ans.result && !ans.result.is_correct)
+      .filter(([, ans]) => ans.result && !ans.result.is_correct)
       .map(([qid, ans]) => ({ question_id: Number(qid), wrong_letter: ans.letter }));
 
     if (wrongItems.length === 0) return;
@@ -754,16 +754,21 @@ export function QuizClient({
                 </div>
               )}
               
-              <SubjectTreeSelector 
-                selectedSubtemas={Array.isArray(filters.subtema) ? filters.subtema : (filters.subtema ? [filters.subtema] : [])} 
-                onChange={(newSelection) => {
-                  const newFilters = { ...filters };
-                  if (newSelection.length > 0) newFilters.subtema = newSelection;
-                  else delete newFilters.subtema;
-                  setFilters(newFilters);
-                }}
-                availableSubtemas={dynamicMeta.subtemas}
-              />
+              <div className="mt-6 pt-4 border-t border-border">
+                <label className="text-sm font-medium text-foreground mb-3 flex items-center justify-between">
+                  <span>Subtópicos / Árvore de Temas</span>
+                </label>
+                <SubjectTreeSelector 
+                  selectedSubtemas={Array.isArray(filters.topic) ? filters.topic : (filters.topic ? [filters.topic] : [])} 
+                  onChange={(newSelection) => {
+                    const newFilters = { ...filters };
+                    if (newSelection.length > 0) newFilters.topic = newSelection;
+                    else delete newFilters.topic;
+                    setFilters(newFilters);
+                  }}
+                  availableSubtemas={dynamicMeta.topics?.map(t => ({ subtema: t.topic, n: t.n }))}
+                />
+              </div>
             </div>
           </div>
 
@@ -809,7 +814,7 @@ export function QuizClient({
     const totalAnswered = Object.keys(sessionAnswers).length;
     const correctCount = Object.values(sessionAnswers).filter(a => a.result?.is_correct).length;
     const wrongItems = Object.entries(sessionAnswers)
-      .filter(([_, ans]) => ans.result && !ans.result.is_correct)
+      .filter(([, ans]) => ans.result && !ans.result.is_correct)
       .map(([qid, ans]) => ({ question_id: Number(qid), wrong_letter: ans.letter }));
     const accuracy = totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
 

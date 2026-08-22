@@ -57,3 +57,7 @@ export function clearLearningSessions(): void {
   removeLearningSession("quiz");
   removeLearningSession("simulado");
 }
+
+export function deadlineFromNow(seconds: number): number {
+  return Date.now() + seconds * 1000;
+}

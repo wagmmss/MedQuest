@@ -147,7 +147,7 @@ def generate_plan():
     
     db = get_db()
     q_query = """
-        SELECT area, subtema, COUNT(id) as q_count 
+        SELECT area, subtema, GROUP_CONCAT(DISTINCT topic) as topics, COUNT(id) as q_count 
         FROM questions 
         WHERE area IS NOT NULL AND subtema IS NOT NULL
         GROUP BY area, subtema

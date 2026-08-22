@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
 import subprocess
 import sys
@@ -222,14 +223,15 @@ def test_json_contract_and_determinism(valid_db: Path) -> None:
 
 
 def test_cli_strict_zero_and_one_without_traceback(valid_db: Path, tmp_path: Path) -> None:
-    good = subprocess.run([sys.executable, str(VALIDATE), "--db", str(valid_db), "--strict", "--max-details", "1"], capture_output=True, text=True)
+    env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+    good = subprocess.run([sys.executable, str(VALIDATE), "--db", str(valid_db), "--strict", "--max-details", "1"], capture_output=True, text=True, encoding="utf-8", env=env)
     assert good.returncode == 0
     assert "Traceback" not in good.stderr
     db = sqlite3.connect(valid_db)
     insert_question(db, 2, correct="Z", alt_count=2)
     db.commit(); db.close()
     output = tmp_path / "strict.json"
-    bad = subprocess.run([sys.executable, str(VALIDATE), "--db", str(valid_db), "--strict", "--output", str(output)], capture_output=True, text=True)
+    bad = subprocess.run([sys.executable, str(VALIDATE), "--db", str(valid_db), "--strict", "--output", str(output)], capture_output=True, text=True, encoding="utf-8", env=env)
     assert bad.returncode == 1
     assert "Falhas críticas" in bad.stderr
     assert "Traceback" not in bad.stderr

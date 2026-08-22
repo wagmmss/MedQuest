@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 
 import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
+import { LEARNING_SESSION_VERSION, readLearningSession, writeLearningSession, removeLearningSession, deadlineFromNow } from "@/lib/sessionState";
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
 import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
@@ -162,7 +163,7 @@ export function SimuladoClient({
       setForce4Options(saved.force4Options);
       setQueueId(saved.queueId);
         
-      const ids = saved.queue.map((question) => question.id);
+      const ids = saved.queue.map((question: QuestionListItem) => question.id);
       api.questions.getBatch(ids, saved.force4Options).then(batchRes => {
         const cache: Record<number, QuestionDetail> = {};
         for (const q of batchRes.questions) cache[q.id] = q;

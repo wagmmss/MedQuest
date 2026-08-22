@@ -345,7 +345,7 @@ export const api = {
   },
   flashcards: {
     preview: async (question_id: number, wrong_letter?: string) => {
-      const getLocalFallback = async (): Promise<{ front: string; back: string; context: string; } | null> => {
+      const getLocalFallback = async (): Promise<{ front: string; back: string; context: string } | null> => {
         // Simple local fallback just to avoid breaking offline mode, 
         // ideally we would format it similarly to backend.
         if (typeof window !== "undefined" && localDb) {
@@ -361,7 +361,7 @@ export const api = {
       }
 
       try {
-        const res = await apiFetch<any>(`/api/flashcards/preview`, {
+        const res = await apiFetch<{ front: string; back: string; context: string }>(`/api/flashcards/preview`, {
           method: "POST",
           body: JSON.stringify({ question_id, wrong_letter: wrong_letter || "" })
         });
@@ -379,7 +379,7 @@ export const api = {
             const uid = getLocalOwnerId();
             const q = await localDb.questions.where('_owner_id').equals(uid).filter(item => item.id === question_id).first();
             if (q) {
-              const mockCard = {
+              const mockCard: Flashcard & { _owner_id: string } = {
                 id: Date.now(),
                 question_id,
                 front,
@@ -390,7 +390,7 @@ export const api = {
                 source_context: context,
                 _owner_id: uid,
               };
-              await localDb.flashcards.put(mockCard as any);
+              await localDb.flashcards.put(mockCard);
               return {
                 id: mockCard.id,
                 question_id,
@@ -418,7 +418,7 @@ export const api = {
         });
         if (typeof window !== "undefined" && localDb && res) {
           const uid = getLocalOwnerId();
-          await localDb.flashcards.put({
+          const cardToPut: Flashcard & { _owner_id: string } = {
             id: res.id,
             question_id: res.question_id,
             front: res.front,
@@ -427,7 +427,8 @@ export const api = {
             is_ai_generated: true,
             source_context: res.context,
             _owner_id: uid,
-          } as any);
+          };
+          await localDb.flashcards.put(cardToPut);
         }
         return res;
       } catch (err) {
@@ -437,9 +438,9 @@ export const api = {
       }
     },
     generate: async (question_id: number, wrong_letter: string) => {
-      const formatLocalCard = (q: any, wrongLetter: string) => {
-        const correctAlt = q.alternatives?.find((a: any) => a.letter === q.correct_letter);
-        const wrongAlt = q.alternatives?.find((a: any) => a.letter === wrongLetter);
+      const formatLocalCard = (q: QuestionDetail, wrongLetter: string) => {
+        const correctAlt = q.alternatives?.find(a => "letter" in a && (a as { letter: string; is_correct?: boolean }).is_correct);
+        const wrongAlt = q.alternatives?.find(a => a.letter === wrongLetter);
         const correctClean = (correctAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
         const wrongClean = (wrongAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
         const tag = `[${q.subtema || q.topic || q.area || "Caso Clínico"}]`;
@@ -469,7 +470,7 @@ export const api = {
             const q = await localDb.questions.where('_owner_id').equals(uid).filter(item => item.id === question_id).first();
             if (q) {
               const { front, back, context } = formatLocalCard(q, wrong_letter);
-              const mockCard = {
+              const mockCard: Flashcard & { _owner_id: string } = {
                 id: Date.now(),
                 question_id,
                 front,
@@ -480,7 +481,7 @@ export const api = {
                 source_context: context,
                 _owner_id: uid,
               };
-              await localDb.flashcards.put(mockCard as any);
+              await localDb.flashcards.put(mockCard);
               return {
                 id: mockCard.id,
                 question_id,
@@ -508,7 +509,7 @@ export const api = {
         });
         if (typeof window !== "undefined" && localDb && res) {
           const uid = getLocalOwnerId();
-          await localDb.flashcards.put({
+          const cardToPut: Flashcard & { _owner_id: string } = {
             id: res.id,
             question_id: res.question_id,
             front: res.front,
@@ -517,7 +518,8 @@ export const api = {
             is_ai_generated: true,
             source_context: res.context,
             _owner_id: uid,
-          } as any);
+          };
+          await localDb.flashcards.put(cardToPut);
         }
         return res;
       } catch (err) {
@@ -527,9 +529,9 @@ export const api = {
       }
     },
     generateBatch: async (items: Array<{ question_id: number; wrong_letter: string }>) => {
-      const formatLocalCard = (q: any, wrongLetter: string) => {
-        const correctAlt = q.alternatives?.find((a: any) => a.letter === q.correct_letter);
-        const wrongAlt = q.alternatives?.find((a: any) => a.letter === wrongLetter);
+      const formatLocalCard = (q: QuestionDetail, wrongLetter: string) => {
+        const correctAlt = q.alternatives?.find(a => "letter" in a && (a as { letter: string; is_correct?: boolean }).is_correct);
+        const wrongAlt = q.alternatives?.find(a => a.letter === wrongLetter);
         const correctClean = (correctAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
         const wrongClean = (wrongAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
         const tag = `[${q.subtema || q.topic || q.area || "Caso Clínico"}]`;
@@ -562,7 +564,7 @@ export const api = {
               if (q) {
                 const { front, back, context } = formatLocalCard(q, item.wrong_letter);
                 const cardId = Date.now() + Math.floor(Math.random() * 1000);
-                const mockCard = {
+                const mockCard: Flashcard & { _owner_id: string } = {
                   id: cardId,
                   question_id: item.question_id,
                   front,
@@ -573,7 +575,7 @@ export const api = {
                   source_context: context,
                   _owner_id: uid,
                 };
-                await localDb.flashcards.put(mockCard as any);
+                await localDb.flashcards.put(mockCard);
                 created.push({
                   id: mockCard.id,
                   question_id: mockCard.question_id,
@@ -605,7 +607,7 @@ export const api = {
         });
         if (typeof window !== "undefined" && localDb && res.flashcards) {
           const uid = getLocalOwnerId();
-          await localDb.flashcards.bulkPut(res.flashcards.map(f => ({
+          const cardsToPut: Array<Flashcard & { _owner_id: string }> = res.flashcards.map(f => ({
             id: f.id,
             question_id: f.question_id,
             front: f.front,
@@ -613,7 +615,8 @@ export const api = {
             next_review_date: new Date().toISOString(),
             is_ai_generated: true,
             _owner_id: uid,
-          } as any)));
+          }));
+          await localDb.flashcards.bulkPut(cardsToPut);
         }
         return res;
       } catch (err) {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { OverviewStats, PlannerWeek } from "@/types/api";
+import { OverviewStats, PlannerWeek, TimelineStat, BreakdownStat } from "@/types/api";
 import { OfflinePanel } from "@/components/OfflinePanel";
 import { motion, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -14,8 +14,8 @@ interface DashboardClientProps {
   stats: OverviewStats;
   currentPlannerWeek: PlannerWeek | null;
   firstName: string;
-  timelineStats?: any[];
-  breakdownStats?: any[];
+  timelineStats?: TimelineStat[];
+  breakdownStats?: BreakdownStat[];
 }
 
 export function DashboardClient({ stats, currentPlannerWeek, firstName, timelineStats, breakdownStats }: DashboardClientProps) {
@@ -28,18 +28,26 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName, timeline
       hasAnimated.current = true;
       triggerConfetti();
     }
+  }, [stats]);
 
+  useEffect(() => {
     // Check for active sessions
-    const hasSimulado = readLearningSession("simulado", (val): val is any => true);
-    if (hasSimulado && hasSimulado.state && hasSimulado.state !== "RESULTS" && hasSimulado.state !== "OFFLINE_SUBMITTED") {
-      setActiveSession({ kind: "simulado", url: "/simulado" });
+    const hasSimulado = readLearningSession<{ state?: string }>(
+      "simulado",
+      (val): val is { state?: string } => typeof val === "object" && val !== null
+    );
+    if (hasSimulado?.state && hasSimulado.state !== "RESULTS" && hasSimulado.state !== "OFFLINE_SUBMITTED") {
+      window.queueMicrotask(() => setActiveSession({ kind: "simulado", url: "/simulado" }));
     } else {
-      const hasQuiz = readLearningSession("quiz", (val): val is any => true);
-      if (hasQuiz && hasQuiz.state && hasQuiz.state !== "RESULTS") {
-        setActiveSession({ kind: "quiz", url: "/estudar" });
+      const hasQuiz = readLearningSession<{ state?: string }>(
+        "quiz",
+        (val): val is { state?: string } => typeof val === "object" && val !== null
+      );
+      if (hasQuiz?.state && hasQuiz.state !== "RESULTS") {
+        window.queueMicrotask(() => setActiveSession({ kind: "quiz", url: "/estudar" }));
       }
     }
-  }, [stats]);
+  }, []);
 
   const accuracyFormatted = stats.accuracy_all_attempts != null 
     ? (stats.accuracy_all_attempts * 100).toFixed(1) + "%" 
@@ -48,7 +56,6 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName, timeline
   const pendentes = (stats.srs_due_count || 0) + (stats.flashcards_due_count || 0);
   const xpAtual = stats.distinct_answered * 10;
   const nivelAtual = Math.floor(xpAtual / 100) + 1;
-  const xpProximoNivel = nivelAtual * 100;
   const progressoNivel = (xpAtual % 100);
 
   const containerVariants: Variants = {

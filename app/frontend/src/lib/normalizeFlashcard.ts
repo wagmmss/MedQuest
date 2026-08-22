@@ -7,11 +7,10 @@
  * (Estudar, Simulado) para garantir consistência visual.
  */
 
-interface FlashcardLike {
+export interface FlashcardLike {
   front: string;
   back: string;
   stem?: string;
-  [key: string]: unknown;
 }
 
 const LOW_QUALITY_PATTERNS = [

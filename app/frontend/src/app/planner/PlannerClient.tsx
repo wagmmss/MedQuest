@@ -45,9 +45,9 @@ const TopicRow = memo(function TopicRow({
             {info?.highYield && <span title="Tema de Alto Rendimento na USP" className="text-lg leading-none">🔥</span>}
           </summary>
           
-          {info?.details && info.details.length > 0 && (
+          {t.subtopics && t.subtopics.length > 0 && (
             <div className="mt-2 mb-2 flex flex-col gap-2 pl-1">
-              {info.details.map((d: string, i: number) => {
+              {t.subtopics.map((d: string, i: number) => {
                 const key = `planner-${t.subtema}-${i}`;
                 const isChecked = !!checkedTopics[key];
                 return (

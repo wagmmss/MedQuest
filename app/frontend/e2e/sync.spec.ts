@@ -188,9 +188,9 @@ test.describe('Offline Sync e Resiliência', () => {
 
     // 1. Acessa /simulado, aguarda o localDb carregar, popula e recarrega
     await page.goto('/simulado');
-    await page.waitForFunction(() => typeof (window as any).localDb !== 'undefined');
+    await page.waitForFunction(() => typeof (window as unknown as { localDb?: { questions: { put: (item: unknown) => Promise<unknown> } } }).localDb !== 'undefined');
     await page.evaluate(async ({ mockQuestion, ownerId }) => {
-      const win = window as any;
+      const win = window as unknown as { localDb: { questions: { put: (item: unknown) => Promise<unknown> } } };
       await win.localDb.questions.put({
         ...mockQuestion,
         _owner_id: ownerId,
@@ -225,9 +225,9 @@ test.describe('Offline Sync e Resiliência', () => {
 
     // 1. Acessa /revisao-ativa, aguarda localDb, popula e recarrega
     await page.goto('/revisao-ativa');
-    await page.waitForFunction(() => typeof (window as any).localDb !== 'undefined');
+    await page.waitForFunction(() => typeof (window as unknown as { localDb?: { flashcards: { put: (item: unknown) => Promise<unknown> } } }).localDb !== 'undefined');
     await page.evaluate(async (ownerId) => {
-      const win = window as any;
+      const win = window as unknown as { localDb: { flashcards: { put: (item: unknown) => Promise<unknown> } } };
       await win.localDb.flashcards.put({
         id: 101,
         question_id: 1,

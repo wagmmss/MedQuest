@@ -7,7 +7,6 @@ export default async function AnalisePage() {
   const results = await Promise.allSettled([
     serverApi.stats.getTimeline(),
     serverApi.stats.getWeakTopics(),
-    serverApi.stats.getRecommendations(),
     serverApi.stats.getBreakdown("institution"),
     serverApi.stats.getDistractors(),
     serverApi.stats.getPredictiveScore(),
@@ -18,18 +17,17 @@ export default async function AnalisePage() {
 
   const timeline = results[0].status === 'fulfilled' ? results[0].value : [];
   const weakTopics = results[1].status === 'fulfilled' ? results[1].value : [];
-  const recommendations = results[2].status === 'fulfilled' ? results[2].value : [];
-  const breakdown = results[3].status === 'fulfilled' ? results[3].value : [];
-  const distractors = results[4].status === 'fulfilled' ? results[4].value : [];
-  const predictiveScore = results[5].status === 'fulfilled' ? results[5].value : { projected_score: 0, target_score: null, areas: [] };
-  const atRiskTopics = results[6].status === 'fulfilled' ? results[6].value : [];
-  const learningProfile = results[7].status === 'fulfilled' ? results[7].value : {
+  const breakdown = results[2].status === 'fulfilled' ? results[2].value : [];
+  const distractors = results[3].status === 'fulfilled' ? results[3].value : [];
+  const predictiveScore = results[4].status === 'fulfilled' ? results[4].value : { projected_score: 0, target_score: null, areas: [] };
+  const atRiskTopics = results[5].status === 'fulfilled' ? results[5].value : [];
+  const learningProfile = results[6].status === 'fulfilled' ? results[6].value : {
     generated_at: '',
     goal: { questions_today: 30, configured_daily_questions: 30, reviews_due: 0, target_score: null, exam_date: null },
     topics: [],
     method: { deterministic: true, signals: [] },
   };
-  const examReadiness = results[8].status === 'fulfilled' ? results[8].value : {
+  const examReadiness = results[7].status === 'fulfilled' ? results[7].value : {
     institution: null, coverage: 0, answered: 0, available: 0, areas: [],
     disclaimer: 'Ainda não há dados suficientes para este relatório.',
   };
@@ -60,7 +58,6 @@ export default async function AnalisePage() {
       <AnalysisClient 
         timeline={timeline}
         weakTopics={weakTopics}
-        recommendations={recommendations}
         breakdown={breakdown}
         distractors={distractors}
         predictiveScore={predictiveScore}

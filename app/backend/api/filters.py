@@ -38,6 +38,11 @@ def question_filter_clauses(args):
         clauses.append(f"q.subtema IN ({','.join('?' * len(subtemas))})")
         params.extend(subtemas)
 
+    topics = args.getlist("topic")
+    if topics:
+        clauses.append(f"q.topic IN ({','.join('?' * len(topics))})")
+        params.extend(topics)
+
     status = args.get("status", "all")
     if status in ("unanswered", "new"):
         clauses.append("q.id NOT IN (SELECT question_id FROM attempts WHERE user_id = ?)")

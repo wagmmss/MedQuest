@@ -269,6 +269,7 @@ def meta():
         (f"SELECT DISTINCT q.year FROM questions q WHERE q.year IS NOT NULL AND {where} ORDER BY q.year", params),
         (f"SELECT q.area, COUNT(*) n FROM questions q WHERE q.area IS NOT NULL AND q.area != '' AND {where} GROUP BY q.area ORDER BY n DESC", params),
         (f"SELECT q.subtema, COUNT(*) n FROM questions q WHERE q.subtema IS NOT NULL AND q.subtema != '' AND {where_no_subtema} GROUP BY q.subtema ORDER BY n DESC LIMIT 300", params_no_subtema),
+        (f"SELECT q.topic, COUNT(*) n FROM questions q WHERE q.topic IS NOT NULL AND q.topic != '' AND {where_no_subtema} GROUP BY q.topic ORDER BY n DESC LIMIT 500", params_no_subtema),
         (f"SELECT COUNT(*) n FROM questions q WHERE {where}", params),
         (f"SELECT COUNT(DISTINCT q.id) n FROM questions q WHERE {where} AND q.id IN (SELECT question_id FROM attempts WHERE user_id = ?)", answered_params)
     ]
@@ -279,15 +280,17 @@ def meta():
         years = results[1].fetchall()
         areas = results[2].fetchall()
         subtemas = results[3].fetchall()
-        total = results[4].fetchone()["n"]
-        answered = results[5].fetchone()["n"]
+        topics = results[4].fetchall()
+        total = results[5].fetchone()["n"]
+        answered = results[6].fetchone()["n"]
     else:
         institutions = db.execute(queries[0][0], queries[0][1]).fetchall()
         years = db.execute(queries[1][0], queries[1][1]).fetchall()
         areas = db.execute(queries[2][0], queries[2][1]).fetchall()
         subtemas = db.execute(queries[3][0], queries[3][1]).fetchall()
-        total = db.execute(queries[4][0], queries[4][1]).fetchone()["n"]
-        answered = db.execute(queries[5][0], queries[5][1]).fetchone()["n"]
+        topics = db.execute(queries[4][0], queries[4][1]).fetchall()
+        total = db.execute(queries[5][0], queries[5][1]).fetchone()["n"]
+        answered = db.execute(queries[6][0], queries[6][1]).fetchone()["n"]
     
     result = {
         "institutions": [dict(r) for r in institutions],
@@ -296,6 +299,7 @@ def meta():
         "areas": [dict(r) for r in areas],
         "specialties": [],
         "subtemas": [dict(r) for r in subtemas],
+        "topics": [dict(r) for r in topics],
         "total_questions": total,
         "answered_questions": answered,
     }
