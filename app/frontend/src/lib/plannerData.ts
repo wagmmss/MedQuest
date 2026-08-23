@@ -1385,3 +1385,27 @@ export const plannerData = [
     ]
   }
 ];
+
+export interface SubtemaDetails {
+  macroThemeName: string;
+  highYield: boolean;
+  details: string[];
+}
+
+export function getSubtemaDetails(
+  subtema: string
+): SubtemaDetails | null {
+  for (const area of plannerData) {
+    for (const macroTheme of area.macroThemes) {
+      if (macroTheme.dbSubtemas.includes(subtema)) {
+        return {
+          macroThemeName: macroTheme.theme,
+          highYield: macroTheme.highYield,
+          details: macroTheme.details
+        };
+      }
+    }
+  }
+  return null;
+}
+
