@@ -11,375 +11,1270 @@
     ]
   },
   "subtemas": {
-    "AVC e Doenças Cerebrovasculares": {
-      "theory_hours": 2.0,
-      "module": "AVC",
-      "match_confidence": 0.92
-    },
-    "Abdome Agudo Obstrutivo": {
-      "theory_hours": 0.99,
-      "module": "Abdome Agudo Obstrutivo",
-      "match_confidence": 1.0
-    },
-    "Abdome Agudo Perfurativo": {
-      "theory_hours": 1.23,
-      "module": "Abdome Agudo Perfurativo",
-      "match_confidence": 1.0
-    },
-    "Amenorreia e Síndrome dos Ovários Policísticos": {
-      "theory_hours": 2.37,
-      "module": "Amenorreias e Síndrome dos Ovários Policísticos",
-      "match_confidence": 0.79
-    },
-    "Anemias": {
-      "theory_hours": 2.95,
-      "module": "Anemias e Hemoglobinopatias",
-      "match_confidence": 0.9
-    },
-    "Anestesiologia e Técnica Operatória": {
-      "theory_hours": 2.28,
-      "module": "Anestesia + Técnica Operatória",
-      "match_confidence": 1.0
-    },
-    "Aneurismas e Dissecção de Aorta": {
-      "theory_hours": 0.53,
-      "module": "Aneurismas",
-      "match_confidence": 0.9
-    },
-    "Assistência Pré-natal": {
-      "theory_hours": 2.55,
-      "module": "Pré-Natal",
-      "match_confidence": 0.9
-    },
-    "Atenção Primária à Saúde": {
-      "theory_hours": 2.23,
-      "module": "Atenção Primária à Saúde",
-      "match_confidence": 1.0
-    },
-    "Cardiopatias Congênitas": {
-      "theory_hours": 1.6,
-      "module": "Cardiopatias Congênitas",
-      "match_confidence": 1.0
-    },
-    "Cefaleias": {
-      "theory_hours": 1.0,
-      "module": "Cefaleias",
-      "match_confidence": 1.0
-    },
-    "Ciclo Menstrual e Fisiologia Hormonal": {
-      "theory_hours": 1.24,
-      "module": "Ciclo Menstrual",
-      "match_confidence": 0.9
-    },
-    "Cirrose e Complicações": {
-      "theory_hours": 2.66,
-      "module": "Cirrose, Insuficiência Hepática e Complicações",
-      "match_confidence": 0.87
-    },
-    "Cirurgia Pediátrica": {
-      "theory_hours": 1.44,
-      "module": "Cirurgia Pediátrica",
-      "match_confidence": 1.0
-    },
-    "Cirurgia Torácica e Mediastino": {
-      "theory_hours": 0.9,
-      "module": "Cirurgia Torácica",
-      "match_confidence": 0.9
-    },
-    "Climatério e Terapia Hormonal": {
-      "theory_hours": 1.81,
-      "module": "Climatério",
-      "match_confidence": 0.9
-    },
-    "Crescimento e Desenvolvimento": {
-      "theory_hours": 1.26,
-      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
-      "match_confidence": 0.9
-    },
-    "Crescimento e Desenvolvimento Neuropsicomotor": {
-      "theory_hours": 1.26,
-      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
-      "match_confidence": 0.65
-    },
-    "Cuidados Pós-Operatórios": {
-      "theory_hours": 2.77,
-      "module": "Cuidados e Complicações Pós-Operatórias",
-      "match_confidence": 1.0
-    },
-    "Diabetes Mellitus e Complicações": {
-      "theory_hours": 1.71,
-      "module": "Diabetes",
-      "match_confidence": 0.9
-    },
-    "Diabetes Mellitus e Complicações Agudas": {
-      "theory_hours": 1.71,
-      "module": "Diabetes",
-      "match_confidence": 0.9
-    },
-    "Diarreia Aguda, Reidratação e Parasitoses": {
-      "theory_hours": 0.99,
-      "module": "Parasitoses",
-      "match_confidence": 0.9
-    },
-    "Distúrbios Hidroeletrolíticos e Ácido-Base": {
-      "theory_hours": 2.43,
-      "module": "Distúrbios Hidroeletrolíticos e Acidobásicos",
-      "match_confidence": 1.0
-    },
-    "Doença Inflamatória Pélvica e IST": {
-      "theory_hours": 1.69,
-      "module": "Doença Inflamatória Pélvica e Violência Sexual",
-      "match_confidence": 0.74
-    },
-    "Doenças Exantemáticas": {
-      "theory_hours": 1.54,
-      "module": "Doenças Exantemáticas",
-      "match_confidence": 1.0
-    },
-    "Doenças Exantemáticas e Infectocontagiosas": {
-      "theory_hours": 1.54,
-      "module": "Doenças Exantemáticas",
-      "match_confidence": 0.9
-    },
-    "Doenças Pulmonares Intersticiais": {
-      "theory_hours": 1.76,
-      "module": "Doenças pulmonares intersticiais",
-      "match_confidence": 1.0
-    },
-    "Doenças Pulmonares Intersticiais e Outras Pneumopatias": {
-      "theory_hours": 1.76,
-      "module": "Doenças pulmonares intersticiais",
-      "match_confidence": 0.9
-    },
-    "Endometriose e Dor Pélvica Crônica": {
-      "theory_hours": 1.83,
-      "module": "Dor pélvica crônica",
-      "match_confidence": 0.9
-    },
-    "Estatística de Testes Diagnósticos": {
+    "Bioestatística e Testes de Hipótese": {
       "theory_hours": 1.91,
       "module": "Estatística de Testes Diagnósticos",
-      "match_confidence": 1.0
-    },
-    "Estudos Epidemiológicos (Análise Estatística e Aplicação)": {
-      "theory_hours": 1.91,
-      "module": "Estudos Epidemiológicos (Análise Estatística e Aplicação)",
-      "match_confidence": 1.0
-    },
-    "Estudos Epidemiológicos (Classificação e Desenho)": {
-      "theory_hours": 1.6,
-      "module": "Estudos Epidemiológicos (Classificação)",
-      "match_confidence": 0.9
-    },
-    "Glomerulopatias": {
-      "theory_hours": 1.9,
-      "module": "Glomerulopatias e Tubulopatias",
-      "match_confidence": 0.9
-    },
-    "Hipertensão Arterial Sistêmica": {
-      "theory_hours": 2.25,
-      "module": "Hipertensão Arterial Sistêmica",
-      "match_confidence": 1.0
-    },
-    "Hérnias da Parede Abdominal": {
-      "theory_hours": 2.34,
-      "module": "Hérnias",
-      "match_confidence": 0.9
-    },
-    "Incontinência Urinária e Prolapsos": {
-      "theory_hours": 1.77,
-      "module": "Incontinência Urinária e Prolapsos de Órgãos Pélvicos",
-      "match_confidence": 0.9
-    },
-    "Infecção do Trato Urinário": {
-      "theory_hours": 0.56,
-      "module": "Infecção do Trato Urinário (ITU)",
       "match_confidence": 0.95
     },
-    "Infecção do Trato Urinário e Refluxo": {
-      "theory_hours": 0.56,
-      "module": "Infecção do Trato Urinário (ITU)",
-      "match_confidence": 0.76
+    "Estudos Observacionais (Coorte, Caso-Controle, Transversal, Ecológico)": {
+      "theory_hours": 0.8,
+      "module": "Estudos Epidemiológicos (Classificação)",
+      "match_confidence": 0.95
     },
-    "Infecção do Trato Urinário e Refluxo Vesicoureteral": {
-      "theory_hours": 0.56,
-      "module": "Infecção do Trato Urinário (ITU)",
-      "match_confidence": 0.63
+    "Legislação e Financiamento do SUS": {
+      "theory_hours": 0.25,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
     },
-    "Infertilidade Conjugal": {
-      "theory_hours": 1.41,
-      "module": "Infertilidade conjugal",
-      "match_confidence": 1.0
+    "Modelos de Atenção e Reforma Sanitária": {
+      "theory_hours": 0.25,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
     },
-    "Insuficiência Cardíaca": {
-      "theory_hours": 2.24,
-      "module": "Insuficiência Cardíaca",
-      "match_confidence": 1.0
+    "Princípios e Diretrizes do SUS": {
+      "theory_hours": 0.25,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
     },
-    "Lúpus e Doenças Autoimunes Sistêmicas (Esclerose, Vasculites)": {
-      "theory_hours": 1.49,
-      "module": "Vasculites",
-      "match_confidence": 0.9
-    },
-    "Mecanismo e Assistência ao Parto": {
-      "theory_hours": 3.64,
-      "module": "Estática fetal, Pelve e Mecanismo de Parto + Assistência ao Parto",
-      "match_confidence": 1.0
+    "Redes de Atenção à Saúde": {
+      "theory_hours": 0.25,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
     },
     "Níveis de Prevenção e Prevenção Quaternária": {
-      "theory_hours": 1.9,
+      "theory_hours": 0.95,
       "module": "Níveis de Prevenção",
-      "match_confidence": 0.9
-    },
-    "Parasitoses e Verminoses": {
-      "theory_hours": 0.99,
-      "module": "Parasitoses",
-      "match_confidence": 0.9
-    },
-    "Período Neonatal: Doenças Hematológicas e Icterícia": {
-      "theory_hours": 1.29,
-      "module": "Período Neonatal: Doenças Hematológicas",
-      "match_confidence": 0.9
-    },
-    "Período Neonatal: Doenças Infecciosas e Sífilis/STORCH": {
-      "theory_hours": 1.77,
-      "module": "Período Neonatal: Doenças Infecciosas",
-      "match_confidence": 0.9
-    },
-    "Período Neonatal: Doenças Neurológicas e Sensoriais": {
-      "theory_hours": 1.29,
-      "module": "Período Neonatal: Doenças Hematológicas",
-      "match_confidence": 0.64
-    },
-    "Período Neonatal: Doenças Respiratórias": {
-      "theory_hours": 0.88,
-      "module": "Período Neonatal: Doenças Respiratórias",
-      "match_confidence": 1.0
-    },
-    "Período Neonatal: Doenças do Metabolismo": {
-      "theory_hours": 0.54,
-      "module": "Período Neonatal: Doenças do Metabolismo",
-      "match_confidence": 1.0
-    },
-    "Puerpério e Hemorragia Pós-parto": {
-      "theory_hours": 1.88,
-      "module": "Puerpério",
-      "match_confidence": 0.9
-    },
-    "Queimaduras": {
-      "theory_hours": 0.91,
-      "module": "Queimaduras",
-      "match_confidence": 1.0
-    },
-    "Radiografia de Tórax na Insuficiência Cardíaca": {
-      "theory_hours": 2.24,
-      "module": "Insuficiência Cardíaca",
-      "match_confidence": 0.9
-    },
-    "Rastreamento e Câncer de Colo Uterino": {
-      "theory_hours": 1.78,
-      "module": "Rastreamento do Câncer de Colo Uterino",
-      "match_confidence": 0.99
-    },
-    "Sala de Parto e Reanimação Neonatal": {
-      "theory_hours": 2.26,
-      "module": "Sala de Parto",
-      "match_confidence": 0.9
-    },
-    "Sangramento da Primeira Metade da Gestação (Aborto, Ectópica, Mola)": {
-      "theory_hours": 1.83,
-      "module": "Sangramento da Primeira Metade da Gestação",
-      "match_confidence": 0.9
-    },
-    "Sangramento da Segunda Metade da Gestação (DPP, Placenta Prévia)": {
-      "theory_hours": 1.31,
-      "module": "Sangramento da Segunda Metade da Gestação",
-      "match_confidence": 0.9
-    },
-    "Saúde Mental na Atenção Primária": {
-      "theory_hours": 2.23,
-      "module": "Atenção Primária à Saúde",
-      "match_confidence": 0.75
-    },
-    "Saúde Ocupacional e do Trabalhador": {
-      "theory_hours": 1.82,
-      "module": "Vigilância em Saúde do Trabalhador",
-      "match_confidence": 1.0
-    },
-    "Sepse e Choque": {
-      "theory_hours": 2.53,
-      "module": "Sepse, Choque Séptico e Outros tipos de Choque",
-      "match_confidence": 0.8
-    },
-    "Síndromes Coronarianas Agudas": {
-      "theory_hours": 2.34,
-      "module": "Síndrome Coronariana e Diagnósticos Diferenciais",
-      "match_confidence": 0.9
-    },
-    "Síndromes Hipertensivas da Gestação": {
-      "theory_hours": 1.31,
-      "module": "Síndromes Hipertensivas da Gestação",
-      "match_confidence": 1.0
-    },
-    "Tireoidopatias": {
-      "theory_hours": 2.04,
-      "module": "Tireoide",
-      "match_confidence": 1.0
-    },
-    "Trabalho de Parto Prematuro e Rotura de Membranas": {
-      "theory_hours": 1.04,
-      "module": "Trabalho de parto prematuro",
-      "match_confidence": 0.9
-    },
-    "Trauma Abdominal": {
-      "theory_hours": 1.11,
-      "module": "Trauma Abdominal",
-      "match_confidence": 1.0
-    },
-    "Trauma Abdominal Fechado": {
-      "theory_hours": 1.11,
-      "module": "Trauma Abdominal",
-      "match_confidence": 0.9
-    },
-    "Trauma Cranioencefálico e Raquimedular": {
-      "theory_hours": 0.98,
-      "module": "Trauma Cranioencefálico (TCE)",
-      "match_confidence": 0.68
-    },
-    "Trauma Torácico": {
-      "theory_hours": 1.12,
-      "module": "Trauma Torácico",
-      "match_confidence": 1.0
-    },
-    "Tromboembolismo Venoso e TEP": {
-      "theory_hours": 1.84,
-      "module": "Embolia Pulmonar e Hipertensão Pulmonar",
-      "match_confidence": 0.9
-    },
-    "Tuberculose": {
-      "theory_hours": 1.48,
-      "module": "Tuberculose",
-      "match_confidence": 1.0
-    },
-    "Valvopatias": {
-      "theory_hours": 3.01,
-      "module": "Valvopatias e Cardiomiopatias",
-      "match_confidence": 0.9
+      "match_confidence": 0.95
     },
     "Vigilância em Saúde e Notificação Compulsória": {
       "theory_hours": 1.85,
       "module": "Notificação",
-      "match_confidence": 0.9
+      "match_confidence": 0.95
     },
-    "Vulvovaginites e Cervicites": {
-      "theory_hours": 0.93,
-      "module": "Vulvovaginites",
-      "match_confidence": 0.9
+    "Saúde Ocupacional e do Trabalhador": {
+      "theory_hours": 1.82,
+      "module": "Vigilância em Saúde do Trabalhador",
+      "match_confidence": 0.95
+    },
+    "Transição Demográfica e Epidemiológica": {
+      "theory_hours": 0.8,
+      "module": "Estudos Epidemiológicos (Classificação)",
+      "match_confidence": 0.95
     },
     "Ética Médica e Bioética": {
-      "theory_hours": 1.67,
+      "theory_hours": 0.42,
       "module": "Ética médica, Bioética e Documentação",
-      "match_confidence": 0.92
+      "match_confidence": 0.95
+    },
+    "Curvas de crescimento da OMS (escore Z e percentil para peso, estatura e perímetro cefálico)": {
+      "theory_hours": 0.25,
+      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "match_confidence": 0.95
+    },
+    "Marcos do desenvolvimento neuropsicomotor (motor, cognitivo, linguagem, social)": {
+      "theory_hours": 0.63,
+      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "match_confidence": 0.95
+    },
+    "Causas de baixa estatura (familiar, atraso constitucional, patológicas)": {
+      "theory_hours": 0.25,
+      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "match_confidence": 0.95
+    },
+    "Obesidade infantil: diagnóstico (IMC/idade), comorbidades e abordagem": {
+      "theory_hours": 0.25,
+      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "match_confidence": 0.95
+    },
+    "Estágios de Tanner e sequência normal da puberdade em meninos e meninas": {
+      "theory_hours": 0.25,
+      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "match_confidence": 0.95
+    },
+    "Puberdade precoce e atraso puberal": {
+      "theory_hours": 0.25,
+      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "match_confidence": 0.95
+    },
+    "Sinais de alerta para transtorno do espectro autista e atraso global do desenvolvimento": {
+      "theory_hours": 0.63,
+      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "match_confidence": 0.95
+    },
+    "Confidencialidade, sexualidade e saúde do adolescente": {
+      "theory_hours": 0.37,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Composição do leite (colostro, transição, maduro) e tipos de amamentação": {
+      "theory_hours": 0.25,
+      "module": "Período Neonatal: Doenças do Metabolismo",
+      "match_confidence": 0.95
+    },
+    "Vantagens do aleitamento; contraindicações formais (HIV, HTLV) e temporárias": {
+      "theory_hours": 0.44,
+      "module": "Período Neonatal: Doenças Infecciosas",
+      "match_confidence": 0.95
+    },
+    "Manejo de intercorrências: fissuras, ingurgitamento, mastite, baixa produção": {
+      "theory_hours": 0.63,
+      "module": "Puerpério",
+      "match_confidence": 0.95
+    },
+    "Introdução alimentar (a partir dos 6 meses) e suplementação de ferro e vitamina D": {
+      "theory_hours": 0.25,
+      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "match_confidence": 0.95
+    },
+    "Avaliação da idade gestacional (Capurro, New Ballard) e classificação do RN (PIG/AIG/GIG)": {
+      "theory_hours": 0.56,
+      "module": "Sala de Parto",
+      "match_confidence": 0.95
+    },
+    "Cuidados de rotina na sala de parto e alojamento conjunto": {
+      "theory_hours": 0.56,
+      "module": "Sala de Parto",
+      "match_confidence": 0.95
+    },
+    "Fluxograma de reanimação neonatal da SBP (RN ≥34 sem e <34 sem)": {
+      "theory_hours": 0.56,
+      "module": "Sala de Parto",
+      "match_confidence": 0.95
+    },
+    "Rastreamento por oximetria e conduta inicial no RN cianótico": {
+      "theory_hours": 0.56,
+      "module": "Sala de Parto",
+      "match_confidence": 0.95
+    },
+    "Síndrome do desconforto respiratório (doença da membrana hialina) e uso de surfactante": {
+      "theory_hours": 0.25,
+      "module": "Período Neonatal: Doenças Respiratórias",
+      "match_confidence": 0.95
+    },
+    "Taquipneia transitória do RN e síndrome de aspiração meconial": {
+      "theory_hours": 0.25,
+      "module": "Período Neonatal: Doenças Respiratórias",
+      "match_confidence": 0.95
+    },
+    "Sepse neonatal precoce e tardia: fatores de risco, clínica e conduta": {
+      "theory_hours": 0.44,
+      "module": "Período Neonatal: Doenças Infecciosas",
+      "match_confidence": 0.95
+    },
+    "Infecções congênitas (STORCH): sífilis, toxoplasmose, rubéola, CMV, Zika": {
+      "theory_hours": 0.44,
+      "module": "Período Neonatal: Doenças Infecciosas",
+      "match_confidence": 0.95
+    },
+    "Rastreamento, achados clínicos e conduta na sífilis congênita": {
+      "theory_hours": 0.44,
+      "module": "Período Neonatal: Doenças Infecciosas",
+      "match_confidence": 0.95
+    },
+    "Icterícia fisiológica vs patológica; incompatibilidade ABO e Rh": {
+      "theory_hours": 0.65,
+      "module": "Período Neonatal: Doenças Hematológicas",
+      "match_confidence": 0.95
+    },
+    "Indicações de fototerapia e exsanguineotransfusão; kernicterus": {
+      "theory_hours": 0.65,
+      "module": "Período Neonatal: Doenças Hematológicas",
+      "match_confidence": 0.95
+    },
+    "Doenças triadas no teste do pezinho (hipotireoidismo congênito, fenilcetonúria, anemia falciforme e outras)": {
+      "theory_hours": 0.25,
+      "module": "Período Neonatal: Doenças do Metabolismo",
+      "match_confidence": 0.95
+    },
+    "Testes de triagem: pezinho (biológico), orelhinha (auditivo), olhinho (reflexo vermelho), coraçãozinho (oximetria)": {
+      "theory_hours": 0.25,
+      "module": "Período Neonatal: Doenças do Metabolismo",
+      "match_confidence": 0.95
+    },
+    "Cardiopatias acianóticas (CIV, CIA, PCA, coarctação de aorta)": {
+      "theory_hours": 0.4,
+      "module": "Cardiopatias Congênitas",
+      "match_confidence": 0.95
+    },
+    "Cardiopatias cianóticas (Tetralogia de Fallot, transposição de grandes vasos)": {
+      "theory_hours": 0.4,
+      "module": "Cardiopatias Congênitas",
+      "match_confidence": 0.95
+    },
+    "Sopro inocente vs patológico; sinais de alerta": {
+      "theory_hours": 0.4,
+      "module": "Cardiopatias Congênitas",
+      "match_confidence": 0.95
+    },
+    "Sarampo, rubéola, eritema infeccioso, exantema súbito, escarlatina e varicela": {
+      "theory_hours": 0.77,
+      "module": "Doenças Exantemáticas",
+      "match_confidence": 0.95
+    },
+    "Período de incubação, pródromo e progressão do exantema de cada doença": {
+      "theory_hours": 0.77,
+      "module": "Doenças Exantemáticas",
+      "match_confidence": 0.95
+    },
+    "Bronquiolite viral aguda (VSR): diagnóstico clínico e manejo de suporte": {
+      "theory_hours": 0.25,
+      "module": "Período Neonatal: Doenças Respiratórias",
+      "match_confidence": 0.95
+    },
+    "Crupe viral, epiglotite e laringites; otite média aguda e sinusite": {
+      "theory_hours": 0.25,
+      "module": "Período Neonatal: Doenças Respiratórias",
+      "match_confidence": 0.95
+    },
+    "Diagnóstico e tratamento de manutenção e crise da asma na criança": {
+      "theory_hours": 0.25,
+      "module": "Período Neonatal: Doenças Respiratórias",
+      "match_confidence": 0.95
+    },
+    "Pneumonias por faixa etária (etiologia, clínica, critérios de internação, antibiótico)": {
+      "theory_hours": 0.25,
+      "module": "Período Neonatal: Doenças Respiratórias",
+      "match_confidence": 0.95
+    },
+    "Principais helmintíases (ascaridíase, ancilostomíase, enterobíase, teníase) e protozooses (giardíase, amebíase)": {
+      "theory_hours": 0.33,
+      "module": "Parasitoses",
+      "match_confidence": 0.95
+    },
+    "Larva migrans, estrongiloidíase e esquistossomose": {
+      "theory_hours": 0.33,
+      "module": "Parasitoses",
+      "match_confidence": 0.95
+    },
+    "Ciclos, clínica e tratamento antiparasitário": {
+      "theory_hours": 0.33,
+      "module": "Parasitoses",
+      "match_confidence": 0.95
+    },
+    "Fisiopatologia da diarreia (osmótica, secretora, invasiva) e principais agentes": {
+      "theory_hours": 0.25,
+      "module": "Parasitoses",
+      "match_confidence": 0.95
+    },
+    "Avaliação do estado de hidratação e Planos A, B e C do Ministério da Saúde": {
+      "theory_hours": 0.25,
+      "module": "Parasitoses",
+      "match_confidence": 0.95
+    },
+    "Distúrbios do sódio na desidratação; hidratação parenteral (Holliday-Segar)": {
+      "theory_hours": 0.25,
+      "module": "Parasitoses",
+      "match_confidence": 0.95
+    },
+    "Uso de zinco, probióticos e indicações de antibiótico na diarreia infantil": {
+      "theory_hours": 0.25,
+      "module": "Parasitoses",
+      "match_confidence": 0.95
+    },
+    "Infecção do trato urinário na criança: diagnóstico, tratamento e investigação de imagem": {
+      "theory_hours": 0.56,
+      "module": "Infecção do Trato Urinário (ITU)",
+      "match_confidence": 0.95
+    },
+    "Glomerulonefrite difusa aguda pós-estreptocócica: clínica e evolução": {
+      "theory_hours": 0.38,
+      "module": "Glomerulopatias e Tubulopatias",
+      "match_confidence": 0.95
+    },
+    "Síndrome nefrótica (lesões mínimas) vs síndrome nefrítica (GNPE)": {
+      "theory_hours": 0.38,
+      "module": "Glomerulopatias e Tubulopatias",
+      "match_confidence": 0.95
+    },
+    "Anemia ferropriva: rastreamento, profilaxia e tratamento; anemias hemolíticas na criança": {
+      "theory_hours": 0.59,
+      "module": "Anemias e Hemoglobinopatias",
+      "match_confidence": 0.95
+    },
+    "Cetoacidose diabética, anafilaxia e intoxicações na criança": {
+      "theory_hours": 0.85,
+      "module": "Diabetes",
+      "match_confidence": 0.95
+    },
+    "Deficiências de micronutrientes (vitamina A, D, ferro, zinco, iodo)": {
+      "theory_hours": 0.25,
+      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "match_confidence": 0.95
+    },
+    "Desnutrição energético-proteica: marasmo, kwashiorkor e manejo das complicações": {
+      "theory_hours": 0.25,
+      "module": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "match_confidence": 0.95
+    },
+    "Esquema do primeiro ano de vida (BCG, hepatite B, penta, VIP/VOP, pneumo, rota, meningo)": {
+      "theory_hours": 0.25,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Eventos adversos pós-vacinais e conduta": {
+      "theory_hours": 0.25,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Vacinas de vírus vivos vs inativados e contraindicações específicas": {
+      "theory_hours": 0.25,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Situações especiais: prematuros, imunodeprimidos, gestantes e comunicantes": {
+      "theory_hours": 0.25,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Suporte básico e avançado de vida em pediatria (PALS) e reconhecimento de choque": {
+      "theory_hours": 0.32,
+      "module": "Sepse, Choque Séptico e Outros tipos de Choque",
+      "match_confidence": 0.95
+    },
+    "Crise convulsiva febril simples vs complexa: conduta e investigação": {
+      "theory_hours": 0.33,
+      "module": "Cefaleias",
+      "match_confidence": 0.95
+    },
+    "Traumatismo cranioencefálico (regras do PECARN para TC)": {
+      "theory_hours": 0.25,
+      "module": "Trauma Cranioencefálico (TCE)",
+      "match_confidence": 0.95
+    },
+    "Doença de Kawasaki: critérios diagnósticos, risco de aneurisma coronariano e tratamento (IVIG + AAS)": {
+      "theory_hours": 0.4,
+      "module": "Cardiopatias Congênitas",
+      "match_confidence": 0.95
+    },
+    "Identificação de maus-tratos (físico, sexual, negligência) e notificação/Conselho Tutelar": {
+      "theory_hours": 0.42,
+      "module": "Ética médica, Bioética e Documentação",
+      "match_confidence": 0.95
+    },
+    "Complicações e profilaxia pós-exposição": {
+      "theory_hours": 0.39,
+      "module": "Doenças Exantemáticas",
+      "match_confidence": 0.95
+    },
+    "Exames de rotina por trimestre e cálculo da idade gestacional/DPP": {
+      "theory_hours": 0.42,
+      "module": "Pré-Natal",
+      "match_confidence": 0.95
+    },
+    "Suplementação de ácido fólico e ferro; ganho de peso na gestação": {
+      "theory_hours": 0.42,
+      "module": "Pré-Natal",
+      "match_confidence": 0.95
+    },
+    "Vacinação na gestação (dTpa, hepatite B, influenza) e contraindicadas": {
+      "theory_hours": 0.42,
+      "module": "Pré-Natal",
+      "match_confidence": 0.95
+    },
+    "Rastreamento de Streptococcus do grupo B e profilaxia intraparto": {
+      "theory_hours": 0.42,
+      "module": "Pré-Natal",
+      "match_confidence": 0.95
+    },
+    "Classificação: HAS crônica, pré-eclâmpsia, eclâmpsia e sobreposta": {
+      "theory_hours": 0.44,
+      "module": "Síndromes Hipertensivas da Gestação",
+      "match_confidence": 0.95
+    },
+    "Critérios de gravidade e iminência de eclâmpsia": {
+      "theory_hours": 0.44,
+      "module": "Síndromes Hipertensivas da Gestação",
+      "match_confidence": 0.95
+    },
+    "Síndrome HELLP: diagnóstico laboratorial e conduta": {
+      "theory_hours": 0.44,
+      "module": "Síndromes Hipertensivas da Gestação",
+      "match_confidence": 0.95
+    },
+    "Diabetes gestacional: rastreamento, TOTG 75g e metas de controle": {
+      "theory_hours": 0.34,
+      "module": "Diabetes",
+      "match_confidence": 0.95
+    },
+    "Diabetes pré-gestacional e repercussões fetais": {
+      "theory_hours": 0.34,
+      "module": "Diabetes",
+      "match_confidence": 0.95
+    },
+    "Abortamento (ameaça, completo, incompleto, retido, infectado): clínica e conduta": {
+      "theory_hours": 0.46,
+      "module": "Sangramento da Primeira Metade da Gestação",
+      "match_confidence": 0.95
+    },
+    "Gravidez ectópica: diagnóstico e critérios para metotrexato vs cirurgia": {
+      "theory_hours": 0.46,
+      "module": "Sangramento da Primeira Metade da Gestação",
+      "match_confidence": 0.95
+    },
+    "Diagnóstico diferencial por ultrassom e dosagens de beta-hCG": {
+      "theory_hours": 0.46,
+      "module": "Sangramento da Primeira Metade da Gestação",
+      "match_confidence": 0.95
+    },
+    "Doença trofoblástica gestacional (mola completa vs parcial) e seguimento com beta-hCG": {
+      "theory_hours": 0.46,
+      "module": "Sangramento da Primeira Metade da Gestação",
+      "match_confidence": 0.95
+    },
+    "Descolamento prematuro de placenta vs placenta prévia: quadro e conduta": {
+      "theory_hours": 0.66,
+      "module": "Sangramento da Segunda Metade da Gestação",
+      "match_confidence": 0.95
+    },
+    "Rotura uterina e rotura de vasa prévia": {
+      "theory_hours": 0.66,
+      "module": "Sangramento da Segunda Metade da Gestação",
+      "match_confidence": 0.95
+    },
+    "Trabalho de parto prematuro: tocólise e corticoterapia antenatal": {
+      "theory_hours": 0.52,
+      "module": "Trabalho de parto prematuro",
+      "match_confidence": 0.95
+    },
+    "Amniorrexe prematura: diagnóstico, riscos e conduta conforme idade gestacional": {
+      "theory_hours": 0.52,
+      "module": "Trabalho de parto prematuro",
+      "match_confidence": 0.95
+    },
+    "Tempos do mecanismo de parto (insinuação, descida, rotação, desprendimento)": {
+      "theory_hours": 0.61,
+      "module": "Estática fetal, Pelve e Mecanismo de Parto + Assistência ao Parto",
+      "match_confidence": 0.95
+    },
+    "Fases clínicas do parto e uso/interpretação do partograma": {
+      "theory_hours": 0.61,
+      "module": "Estática fetal, Pelve e Mecanismo de Parto + Assistência ao Parto",
+      "match_confidence": 0.95
+    },
+    "Analgesia de parto e assistência ao período expulsivo": {
+      "theory_hours": 0.61,
+      "module": "Estática fetal, Pelve e Mecanismo de Parto + Assistência ao Parto",
+      "match_confidence": 0.95
+    },
+    "Distocias funcionais, de trajeto e de apresentação; indicações de cesárea e fórceps": {
+      "theory_hours": 0.61,
+      "module": "Estática fetal, Pelve e Mecanismo de Parto + Assistência ao Parto",
+      "match_confidence": 0.95
+    },
+    "Avaliação da vitalidade fetal: cardiotocografia, perfil biofísico e Doppler": {
+      "theory_hours": 0.61,
+      "module": "Estática fetal, Pelve e Mecanismo de Parto + Assistência ao Parto",
+      "match_confidence": 0.95
+    },
+    "Restrição de crescimento fetal: classificação e dopplerfluxometria": {
+      "theory_hours": 0.61,
+      "module": "Estática fetal, Pelve e Mecanismo de Parto + Assistência ao Parto",
+      "match_confidence": 0.95
+    },
+    "Puerpério fisiológico e patológico; hemorragia pós-parto (4 T) e atonia uterina": {
+      "theory_hours": 0.63,
+      "module": "Puerpério",
+      "match_confidence": 0.95
+    },
+    "Infecção puerperal e mastite puerperal": {
+      "theory_hours": 0.63,
+      "module": "Puerpério",
+      "match_confidence": 0.95
+    },
+    "Eixo hipotálamo-hipófise-ovário e fases folicular, ovulatória e lútea": {
+      "theory_hours": 0.25,
+      "module": "Ciclo Menstrual",
+      "match_confidence": 0.95
+    },
+    "Ações de FSH, LH, estrogênio e progesterona ao longo do ciclo": {
+      "theory_hours": 0.25,
+      "module": "Ciclo Menstrual",
+      "match_confidence": 0.95
+    },
+    "Puberdade feminina, telarca, pubarca e menarca": {
+      "theory_hours": 0.25,
+      "module": "Ciclo Menstrual",
+      "match_confidence": 0.95
+    },
+    "Amenorreia primária e secundária: investigação por compartimentos": {
+      "theory_hours": 0.59,
+      "module": "Amenorreias e Síndrome dos Ovários Policísticos",
+      "match_confidence": 0.95
+    },
+    "Síndrome dos ovários policísticos: critérios de Rotterdam e manejo": {
+      "theory_hours": 0.59,
+      "module": "Amenorreias e Síndrome dos Ovários Policísticos",
+      "match_confidence": 0.95
+    },
+    "Hiperprolactinemia e insuficiência ovariana prematura": {
+      "theory_hours": 0.59,
+      "module": "Amenorreias e Síndrome dos Ovários Policísticos",
+      "match_confidence": 0.95
+    },
+    "Transição menopáusica e diagnóstico da menopausa": {
+      "theory_hours": 0.3,
+      "module": "Climatério",
+      "match_confidence": 0.95
+    },
+    "Esquemas de TRH (estrogênio isolado vs combinado) e riscos": {
+      "theory_hours": 0.3,
+      "module": "Climatério",
+      "match_confidence": 0.95
+    },
+    "Indicações e contraindicações da terapia de reposição hormonal": {
+      "theory_hours": 0.3,
+      "module": "Climatério",
+      "match_confidence": 0.95
+    },
+    "Manejo não hormonal dos sintomas e rastreamento de osteoporose": {
+      "theory_hours": 0.3,
+      "module": "Climatério",
+      "match_confidence": 0.95
+    },
+    "Classificação PALM-COEIN do sangramento uterino anormal": {
+      "theory_hours": 0.25,
+      "module": "Ciclo Menstrual",
+      "match_confidence": 0.95
+    },
+    "Adenomiose e pólipos endometriais": {
+      "theory_hours": 0.61,
+      "module": "Dor pélvica crônica",
+      "match_confidence": 0.95
+    },
+    "Leiomioma uterino: classificação FIGO, clínica e tratamento": {
+      "theory_hours": 0.61,
+      "module": "Dor pélvica crônica",
+      "match_confidence": 0.95
+    },
+    "Endometriose: fisiopatologia, dor pélvica, infertilidade e tratamento": {
+      "theory_hours": 0.61,
+      "module": "Dor pélvica crônica",
+      "match_confidence": 0.95
+    },
+    "Doença inflamatória pélvica: critérios diagnósticos, tratamento e complicações": {
+      "theory_hours": 0.56,
+      "module": "Doença Inflamatória Pélvica e Violência Sexual",
+      "match_confidence": 0.95
+    },
+    "Cervicites por clamídia e gonococo; abordagem sindrômica das IST": {
+      "theory_hours": 0.56,
+      "module": "Doença Inflamatória Pélvica e Violência Sexual",
+      "match_confidence": 0.95
+    },
+    "Vaginose bacteriana, candidíase e tricomoníase (critérios de Amsel, pH, microscopia)": {
+      "theory_hours": 0.93,
+      "module": "Vulvovaginites",
+      "match_confidence": 0.95
+    },
+    "Sífilis, herpes genital, cancro mole, HPV e donovanose": {
+      "theory_hours": 0.56,
+      "module": "Doença Inflamatória Pélvica e Violência Sexual",
+      "match_confidence": 0.95
+    },
+    "Rastreamento com citologia (Papanicolau): idade de início e periodicidade": {
+      "theory_hours": 0.25,
+      "module": "Rastreamento do Câncer de Colo Uterino",
+      "match_confidence": 0.95
+    },
+    "Conduta nas alterações citológicas (ASC-US, LSIL, ASC-H, HSIL, AGC)": {
+      "theory_hours": 0.25,
+      "module": "Rastreamento do Câncer de Colo Uterino",
+      "match_confidence": 0.95
+    },
+    "Colposcopia, biópsia e tratamento das lesões precursoras (NIC)": {
+      "theory_hours": 0.25,
+      "module": "Rastreamento do Câncer de Colo Uterino",
+      "match_confidence": 0.95
+    },
+    "Papel do HPV, vacinação e estadiamento do câncer de colo": {
+      "theory_hours": 0.25,
+      "module": "Rastreamento do Câncer de Colo Uterino",
+      "match_confidence": 0.95
+    },
+    "Fatores de risco, tipos histológicos e princípios do tratamento do câncer de mama": {
+      "theory_hours": 0.25,
+      "module": "Rastreamento do Câncer de Colo Uterino",
+      "match_confidence": 0.95
+    },
+    "Investigação do nódulo (tríade diagnóstica) e derrame papilar": {
+      "theory_hours": 0.25,
+      "module": "Rastreamento do Câncer de Colo Uterino",
+      "match_confidence": 0.95
+    },
+    "Nódulos benignos (fibroadenoma, cisto) vs sinais de malignidade": {
+      "theory_hours": 0.25,
+      "module": "Rastreamento do Câncer de Colo Uterino",
+      "match_confidence": 0.95
+    },
+    "Rastreamento mamográfico: idade, periodicidade e classificação BI-RADS": {
+      "theory_hours": 0.25,
+      "module": "Rastreamento do Câncer de Colo Uterino",
+      "match_confidence": 0.95
+    },
+    "Câncer de endométrio: fatores de risco, sangramento pós-menopausa e investigação": {
+      "theory_hours": 0.3,
+      "module": "Climatério",
+      "match_confidence": 0.95
+    },
+    "Câncer de ovário: tipos, marcadores e apresentação tardia": {
+      "theory_hours": 0.3,
+      "module": "Climatério",
+      "match_confidence": 0.95
+    },
+    "Incontinência urinária de esforço vs de urgência: diagnóstico e tratamento": {
+      "theory_hours": 0.89,
+      "module": "Incontinência Urinária e Prolapsos de Órgãos Pélvicos",
+      "match_confidence": 0.95
+    },
+    "Distopias genitais (prolapsos): classificação POP-Q e conduta": {
+      "theory_hours": 0.89,
+      "module": "Incontinência Urinária e Prolapsos de Órgãos Pélvicos",
+      "match_confidence": 0.95
+    },
+    "Métodos combinados e de progestagênio isolado: indicações e efeitos adversos": {
+      "theory_hours": 0.25,
+      "module": "Ciclo Menstrual",
+      "match_confidence": 0.95
+    },
+    "LARC: DIU de cobre, DIU de levonorgestrel e implante": {
+      "theory_hours": 0.25,
+      "module": "Ciclo Menstrual",
+      "match_confidence": 0.95
+    },
+    "Contracepção de emergência e métodos definitivos": {
+      "theory_hours": 0.25,
+      "module": "Ciclo Menstrual",
+      "match_confidence": 0.95
+    },
+    "Critérios de Elegibilidade da OMS (categorias 1 a 4)": {
+      "theory_hours": 0.25,
+      "module": "Ciclo Menstrual",
+      "match_confidence": 0.95
+    },
+    "Transmissão vertical do HIV, hepatites e sífilis": {
+      "theory_hours": 0.42,
+      "module": "Pré-Natal",
+      "match_confidence": 0.95
+    },
+    "Infecção urinária, bacteriúria assintomática e pielonefrite na gestação": {
+      "theory_hours": 0.42,
+      "module": "Pré-Natal",
+      "match_confidence": 0.95
+    },
+    "Hirsutismo e diagnóstico diferencial do hiperandrogenismo": {
+      "theory_hours": 0.59,
+      "module": "Amenorreias e Síndrome dos Ovários Policísticos",
+      "match_confidence": 0.95
+    },
+    "Abdome Agudo Obstrutivo": {
+      "theory_hours": 0.25,
+      "module": "Abdome Agudo Obstrutivo",
+      "match_confidence": 0.95
+    },
+    "Abdome Agudo Perfurativo": {
+      "theory_hours": 1.23,
+      "module": "Abdome Agudo Perfurativo",
+      "match_confidence": 0.95
+    },
+    "Anestesiologia e Técnica Operatória": {
+      "theory_hours": 0.38,
+      "module": "Anestesia + Técnica Operatória",
+      "match_confidence": 0.95
+    },
+    "Aneurismas e Dissecção de Aorta": {
+      "theory_hours": 0.53,
+      "module": "Aneurismas",
+      "match_confidence": 0.95
+    },
+    "Apendicite Aguda": {
+      "theory_hours": 0.25,
+      "module": "Abdome Agudo Obstrutivo",
+      "match_confidence": 0.95
+    },
+    "Atendimento Inicial ao Trauma (ATLS)": {
+      "theory_hours": 0.37,
+      "module": "Trauma Abdominal",
+      "match_confidence": 0.95
+    },
+    "Avaliação Pré-operatória e Risco Cirúrgico": {
+      "theory_hours": 0.38,
+      "module": "Anestesia + Técnica Operatória",
+      "match_confidence": 0.95
+    },
+    "Choque e Transfusão no Trauma": {
+      "theory_hours": 0.32,
+      "module": "Sepse, Choque Séptico e Outros tipos de Choque",
+      "match_confidence": 0.95
+    },
+    "Cirurgia Bariátrica e Complicações": {
+      "theory_hours": 0.72,
+      "module": "Cirurgia Pediátrica",
+      "match_confidence": 0.95
+    },
+    "Cirurgia Pediátrica": {
+      "theory_hours": 0.72,
+      "module": "Cirurgia Pediátrica",
+      "match_confidence": 0.95
+    },
+    "Cirurgia Torácica e Mediastino": {
+      "theory_hours": 0.25,
+      "module": "Cirurgia Torácica",
+      "match_confidence": 0.95
+    },
+    "Cirurgia Vascular Periférica (Isquemia Arterial, Varizes, TVP)": {
+      "theory_hours": 0.46,
+      "module": "Embolia Pulmonar e Hipertensão Pulmonar",
+      "match_confidence": 0.95
+    },
+    "Colecistite e Colelitíase": {
+      "theory_hours": 0.25,
+      "module": "Abdome Agudo Obstrutivo",
+      "match_confidence": 0.95
+    },
+    "Coledocolitíase e Colangite": {
+      "theory_hours": 0.25,
+      "module": "Abdome Agudo Obstrutivo",
+      "match_confidence": 0.95
+    },
+    "Câncer Colorretal": {
+      "theory_hours": 0.25,
+      "module": "Abdome Agudo Obstrutivo",
+      "match_confidence": 0.95
+    },
+    "Diverticulite Aguda": {
+      "theory_hours": 0.25,
+      "module": "Abdome Agudo Obstrutivo",
+      "match_confidence": 0.95
+    },
+    "Doenças Orificiais (Hemorroida, Fissura, Fístula)": {
+      "theory_hours": 1.17,
+      "module": "Hérnias",
+      "match_confidence": 0.95
+    },
+    "Doenças do Esôfago (DRGE, Acalasia, Câncer)": {
+      "theory_hours": 0.25,
+      "module": "Cirurgia Torácica",
+      "match_confidence": 0.95
+    },
+    "Estômago (Úlcera, HDA, Câncer Gástrico)": {
+      "theory_hours": 0.25,
+      "module": "Cirurgia Torácica",
+      "match_confidence": 0.95
+    },
+    "Hérnias da Parede Abdominal": {
+      "theory_hours": 1.17,
+      "module": "Hérnias",
+      "match_confidence": 0.95
+    },
+    "Infecção de Sítio Cirúrgico e Cicatrização": {
+      "theory_hours": 1.39,
+      "module": "Cuidados e Complicações Pós-Operatórias",
+      "match_confidence": 0.95
+    },
+    "Isquemia Mesentérica": {
+      "theory_hours": 0.25,
+      "module": "Abdome Agudo Obstrutivo",
+      "match_confidence": 0.95
+    },
+    "Neurocirurgia (Hemorragia, Hidrocefalia, Tumor)": {
+      "theory_hours": 0.25,
+      "module": "Trauma Cranioencefálico (TCE)",
+      "match_confidence": 0.95
+    },
+    "Oftalmologia Cirúrgica": {
+      "theory_hours": 0.38,
+      "module": "Anestesia + Técnica Operatória",
+      "match_confidence": 0.95
+    },
+    "Ortopedia e Fraturas": {
+      "theory_hours": 0.25,
+      "module": "Trauma Cranioencefálico (TCE)",
+      "match_confidence": 0.95
+    },
+    "Otorrinolaringologia Cirúrgica": {
+      "theory_hours": 0.38,
+      "module": "Anestesia + Técnica Operatória",
+      "match_confidence": 0.95
+    },
+    "Pancreatite Aguda": {
+      "theory_hours": 0.25,
+      "module": "Abdome Agudo Obstrutivo",
+      "match_confidence": 0.95
+    },
+    "Queimaduras": {
+      "theory_hours": 0.91,
+      "module": "Queimaduras",
+      "match_confidence": 0.95
+    },
+    "Resposta Metabólica ao Trauma e Pós-operatório": {
+      "theory_hours": 1.39,
+      "module": "Cuidados e Complicações Pós-Operatórias",
+      "match_confidence": 0.95
+    },
+    "Tireoide e Paratireoide": {
+      "theory_hours": 0.41,
+      "module": "Tireoide",
+      "match_confidence": 0.95
+    },
+    "Trauma Abdominal": {
+      "theory_hours": 0.37,
+      "module": "Trauma Abdominal",
+      "match_confidence": 0.95
+    },
+    "Trauma Cervical e Vascular": {
+      "theory_hours": 0.56,
+      "module": "Trauma Torácico",
+      "match_confidence": 0.95
+    },
+    "Trauma Cranioencefálico e Raquimedular": {
+      "theory_hours": 0.25,
+      "module": "Trauma Cranioencefálico (TCE)",
+      "match_confidence": 0.95
+    },
+    "Trauma Pélvico e Urológico": {
+      "theory_hours": 0.37,
+      "module": "Trauma Abdominal",
+      "match_confidence": 0.95
+    },
+    "Trauma Torácico": {
+      "theory_hours": 0.56,
+      "module": "Trauma Torácico",
+      "match_confidence": 0.95
+    },
+    "Tumores de Pele e Partes Moles": {
+      "theory_hours": 0.38,
+      "module": "Anestesia + Técnica Operatória",
+      "match_confidence": 0.95
+    },
+    "Tumores de Pele e Partes Moles (Melanoma, CBC, CEC)": {
+      "theory_hours": 0.38,
+      "module": "Anestesia + Técnica Operatória",
+      "match_confidence": 0.95
+    },
+    "Urologia (Litíase, HPB, Neoplasia Renal, Escroto Agudo)": {
+      "theory_hours": 0.56,
+      "module": "Infecção do Trato Urinário (ITU)",
+      "match_confidence": 0.95
+    },
+    "AVC isquêmico: janela de trombólise e trombectomia; AVC hemorrágico e HSA": {
+      "theory_hours": 1.5,
+      "module": "AVC",
+      "match_confidence": 1.0
+    },
+    "Abordagem do paciente grave e sinais de deterioração": {
+      "theory_hours": 0.32,
+      "module": "Sepse, Choque Séptico e Outros tipos de Choque",
+      "match_confidence": 0.95
+    },
+    "Choque (hipovolêmico, cardiogênico, distributivo, obstrutivo) e anafilaxia": {
+      "theory_hours": 0.32,
+      "module": "Sepse, Choque Séptico e Outros tipos de Choque",
+      "match_confidence": 0.95
+    },
+    "Acidose metabólica: ânion gap e diagnóstico diferencial": {
+      "theory_hours": 0.61,
+      "module": "Distúrbios Hidroeletrolíticos e Acidobásicos",
+      "match_confidence": 0.95
+    },
+    "Anemias hemolíticas e falciforme": {
+      "theory_hours": 0.59,
+      "module": "Anemias e Hemoglobinopatias",
+      "match_confidence": 0.95
+    },
+    "Anticoagulação (heparinas, DOACs) e tempo de tratamento": {
+      "theory_hours": 0.46,
+      "module": "Embolia Pulmonar e Hipertensão Pulmonar",
+      "match_confidence": 0.95
+    },
+    "Artrite reumatoide: critérios, autoanticorpos e tratamento": {
+      "theory_hours": 0.37,
+      "module": "Vasculites",
+      "match_confidence": 0.95
+    },
+    "Avaliação geriátrica ampla e polifarmácia (critérios de Beers)": {
+      "theory_hours": 0.25,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Grandes síndromes geriátricas (quedas, imobilidade, incontinência, delirium)": {
+      "theory_hours": 0.25,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Bradiarritmias e bloqueios atrioventriculares; indicação de marca-passo": {
+      "theory_hours": 0.45,
+      "module": "Insuficiência Cardíaca",
+      "match_confidence": 0.95
+    },
+    "Cefaleias primárias (enxaqueca, tensional, em salvas) e sinais de alarme": {
+      "theory_hours": 0.33,
+      "module": "Cefaleias",
+      "match_confidence": 0.95
+    },
+    "Cetoacidose diabética e estado hiperosmolar: manejo de insulina, volume e potássio": {
+      "theory_hours": 0.85,
+      "module": "Diabetes",
+      "match_confidence": 0.95
+    },
+    "Critérios diagnósticos (glicemia, TOTG, HbA1c) e pré-diabetes": {
+      "theory_hours": 0.34,
+      "module": "Diabetes",
+      "match_confidence": 0.95
+    },
+    "Cirrose e suas complicações (ascite, PBE, encefalopatia, síndrome hepatorrenal)": {
+      "theory_hours": 0.67,
+      "module": "Cirrose, Insuficiência Hepática e Complicações",
+      "match_confidence": 0.95
+    },
+    "Complicações mecânicas e elétricas do infarto": {
+      "theory_hours": 0.47,
+      "module": "Síndrome Coronariana e Diagnósticos Diferenciais",
+      "match_confidence": 0.95
+    },
+    "Crise tireotóxica e coma mixedematoso": {
+      "theory_hours": 0.41,
+      "module": "Tireoide",
+      "match_confidence": 0.95
+    },
+    "Cuidados paliativos: controle de sintomas e comunicação de más notícias": {
+      "theory_hours": 0.42,
+      "module": "Ética médica, Bioética e Documentação",
+      "match_confidence": 0.95
+    },
+    "Delirium vs demência; síndrome serotoninérgica e neuroléptica maligna": {
+      "theory_hours": 0.37,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Demências (Alzheimer, vascular) e síndromes parkinsonianas": {
+      "theory_hours": 0.37,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Dengue, zika e chikungunya: classificação de risco e manejo": {
+      "theory_hours": 0.39,
+      "module": "Doenças Exantemáticas",
+      "match_confidence": 0.95
+    },
+    "Derrame pleural: critérios de Light (transudato vs exsudato) e toracocentese": {
+      "theory_hours": 0.88,
+      "module": "Doenças pulmonares intersticiais",
+      "match_confidence": 0.95
+    },
+    "Diagnóstico (critérios de Framingham) e classificação por fração de ejeção": {
+      "theory_hours": 0.45,
+      "module": "Insuficiência Cardíaca",
+      "match_confidence": 0.95
+    },
+    "Diagnóstico diferencial pela espirometria (reversibilidade)": {
+      "theory_hours": 0.88,
+      "module": "Doenças pulmonares intersticiais",
+      "match_confidence": 0.95
+    },
+    "Diagnóstico e estratificação de risco cardiovascular": {
+      "theory_hours": 0.45,
+      "module": "Hipertensão Arterial Sistêmica",
+      "match_confidence": 0.95
+    },
+    "Diarreia crônica, síndromes disabsortivas e doença celíaca": {
+      "theory_hours": 0.25,
+      "module": "Parasitoses",
+      "match_confidence": 0.95
+    },
+    "Dispepsia, DRGE e H. pylori: diagnóstico e tratamento": {
+      "theory_hours": 0.25,
+      "module": "Cirurgia Torácica",
+      "match_confidence": 0.95
+    },
+    "Dispositivos, ressincronização e manejo das descompensações": {
+      "theory_hours": 0.45,
+      "module": "Insuficiência Cardíaca",
+      "match_confidence": 0.95
+    },
+    "Distúrbio mineral e ósseo, anemia da DRC": {
+      "theory_hours": 1.0,
+      "module": "Unknown",
+      "match_confidence": 0.0
+    },
+    "Doença renal crônica: estadiamento (TFG e albuminúria) e complicações": {
+      "theory_hours": 0.38,
+      "module": "Glomerulopatias e Tubulopatias",
+      "match_confidence": 0.95
+    },
+    "Distúrbios da hemostasia, plaquetopenias (PTI) e coagulopatias": {
+      "theory_hours": 0.59,
+      "module": "Anemias e Hemoglobinopatias",
+      "match_confidence": 0.95
+    },
+    "Doença inflamatória intestinal (Crohn vs retocolite ulcerativa)": {
+      "theory_hours": 0.25,
+      "module": "Parasitoses",
+      "match_confidence": 0.95
+    },
+    "Dupla antiagregação, anticoagulação e terapia adjuvante": {
+      "theory_hours": 0.47,
+      "module": "Síndrome Coronariana e Diagnósticos Diferenciais",
+      "match_confidence": 0.95
+    },
+    "Emergências psiquiátricas: risco de suicídio, agitação e síndromes por substâncias": {
+      "theory_hours": 0.37,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Endocardite infecciosa (critérios de Duke) e sepse/choque séptico (bundle da 1ª hora)": {
+      "theory_hours": 0.32,
+      "module": "Sepse, Choque Séptico e Outros tipos de Choque",
+      "match_confidence": 0.95
+    },
+    "Epilepsia e estado de mal epiléptico": {
+      "theory_hours": 0.33,
+      "module": "Cefaleias",
+      "match_confidence": 0.95
+    },
+    "Espondiloartrites e vasculites sistêmicas": {
+      "theory_hours": 0.37,
+      "module": "Vasculites",
+      "match_confidence": 0.95
+    },
+    "Estatinas, ezetimiba e inibidores de PCSK9": {
+      "theory_hours": 0.47,
+      "module": "Síndrome Coronariana e Diagnósticos Diferenciais",
+      "match_confidence": 0.95
+    },
+    "Estratificação de gravidade do TEP e indicação de trombólise": {
+      "theory_hours": 0.46,
+      "module": "Embolia Pulmonar e Hipertensão Pulmonar",
+      "match_confidence": 0.95
+    },
+    "Estratificação de risco (escores) e prevenção primária vs secundária": {
+      "theory_hours": 0.95,
+      "module": "Níveis de Prevenção",
+      "match_confidence": 0.95
+    },
+    "Fibrilação atrial: controle de ritmo vs frequência e anticoagulação (CHA2DS2-VASc, HAS-BLED)": {
+      "theory_hours": 1.5,
+      "module": "Valvopatias e Cardiomiopatias",
+      "match_confidence": 0.95
+    },
+    "Gota e artrites por cristais; abordagem da monoartrite aguda": {
+      "theory_hours": 0.37,
+      "module": "Vasculites",
+      "match_confidence": 0.95
+    },
+    "HIV/AIDS: diagnóstico, TARV, infecções oportunistas e profilaxias": {
+      "theory_hours": 0.39,
+      "module": "Doenças Exantemáticas",
+      "match_confidence": 0.95
+    },
+    "IAM com supra de ST: ECG por parede e indicação de reperfusão (trombólise vs angioplastia)": {
+      "theory_hours": 0.47,
+      "module": "Síndrome Coronariana e Diagnósticos Diferenciais",
+      "match_confidence": 0.95
+    },
+    "SCA sem supra e angina instável: estratificação (GRACE/TIMI)": {
+      "theory_hours": 0.47,
+      "module": "Síndrome Coronariana e Diagnósticos Diferenciais",
+      "match_confidence": 0.95
+    },
+    "IC aguda: perfis hemodinâmicos e tratamento no pronto-socorro": {
+      "theory_hours": 0.45,
+      "module": "Insuficiência Cardíaca",
+      "match_confidence": 0.95
+    },
+    "Terapia que reduz mortalidade na ICFEr (IECA/BRA/ARNI, betabloqueador, antagonista de aldosterona, iSGLT2)": {
+      "theory_hours": 0.45,
+      "module": "Insuficiência Cardíaca",
+      "match_confidence": 0.95
+    },
+    "Hipertensão resistente e secundária (renovascular, hiperaldosteronismo, feocromocitoma)": {
+      "theory_hours": 0.45,
+      "module": "Hipertensão Arterial Sistêmica",
+      "match_confidence": 0.95
+    },
+    "Tratamento não medicamentoso e classes de primeira linha (IECA, BRA, BCC, tiazídicos)": {
+      "theory_hours": 0.45,
+      "module": "Hipertensão Arterial Sistêmica",
+      "match_confidence": 0.95
+    },
+    "Urgência vs emergência hipertensiva e lesão de órgão-alvo": {
+      "theory_hours": 0.45,
+      "module": "Hipertensão Arterial Sistêmica",
+      "match_confidence": 0.95
+    },
+    "Insulinoterapia no DM1 (basal-bolus)": {
+      "theory_hours": 0.34,
+      "module": "Diabetes",
+      "match_confidence": 0.95
+    },
+    "Tratamento do DM2 (metformina, iSGLT2, análogos de GLP-1, sulfonilureias)": {
+      "theory_hours": 0.34,
+      "module": "Diabetes",
+      "match_confidence": 0.95
+    },
+    "Hipernatremia e distúrbios do potássio (ECG e estabilização de membrana)": {
+      "theory_hours": 0.61,
+      "module": "Distúrbios Hidroeletrolíticos e Acidobásicos",
+      "match_confidence": 0.95
+    },
+    "Hiponatremia (por volemia e osmolaridade) e risco de mielinólise por correção rápida": {
+      "theory_hours": 0.61,
+      "module": "Distúrbios Hidroeletrolíticos e Acidobásicos",
+      "match_confidence": 0.95
+    },
+    "Interpretação da gasometria (distúrbios respiratórios e compensações)": {
+      "theory_hours": 0.61,
+      "module": "Distúrbios Hidroeletrolíticos e Acidobásicos",
+      "match_confidence": 0.95
+    },
+    "Hipotireoidismo e hipertireoidismo (Graves, bócio, tireoidites)": {
+      "theory_hours": 0.41,
+      "module": "Tireoide",
+      "match_confidence": 0.95
+    },
+    "Interpretação de TSH, T4 livre e autoanticorpos": {
+      "theory_hours": 0.41,
+      "module": "Tireoide",
+      "match_confidence": 0.95
+    },
+    "Meningites, ITU/pielonefrite, celulite e leptospirose": {
+      "theory_hours": 0.39,
+      "module": "Doenças Exantemáticas",
+      "match_confidence": 0.95
+    },
+    "Pneumonia adquirida na comunidade: CURB-65, local de tratamento e antibiótico empírico": {
+      "theory_hours": 0.29,
+      "module": "Doenças pulmonares intersticiais",
+      "match_confidence": 0.95
+    },
+    "Pneumonia hospitalar e associada à ventilação": {
+      "theory_hours": 0.29,
+      "module": "Doenças pulmonares intersticiais",
+      "match_confidence": 0.95
+    },
+    "Parada cardiorrespiratória e ACLS; cuidados pós-parada": {
+      "theory_hours": 0.32,
+      "module": "Sepse, Choque Séptico e Outros tipos de Choque",
+      "match_confidence": 0.95
+    },
+    "Parada cardiorrespiratória: ritmos chocáveis e não chocáveis": {
+      "theory_hours": 0.32,
+      "module": "Sepse, Choque Séptico e Outros tipos de Choque",
+      "match_confidence": 0.95
+    },
+    "Tratamento de manutenção da asma (GINA) e da crise": {
+      "theory_hours": 0.29,
+      "module": "Doenças pulmonares intersticiais",
+      "match_confidence": 0.95
+    },
+    "Tratamento do DPOC (GOLD) e exacerbação (antibiótico, corticoide, VNI)": {
+      "theory_hours": 0.29,
+      "module": "Doenças pulmonares intersticiais",
+      "match_confidence": 0.95
+    },
+    "Tuberculose: diagnóstico, esquema RIPE e tratamento da ILTB": {
+      "theory_hours": 1.48,
+      "module": "Tuberculose",
+      "match_confidence": 0.95
+    },
+    "Investigação das anemias (micro, normo e macrocíticas); ferropriva, doença crônica e megaloblástica": {
+      "theory_hours": 0.59,
+      "module": "Anemias e Hemoglobinopatias",
+      "match_confidence": 0.95
+    },
+    "Lesão renal aguda: classificação KDIGO e diferenciação pré-renal/renal/pós-renal": {
+      "theory_hours": 0.38,
+      "module": "Glomerulopatias e Tubulopatias",
+      "match_confidence": 0.95
+    },
+    "Indicações de diálise de urgência (hipercalemia, acidose, volemia, uremia)": {
+      "theory_hours": 0.38,
+      "module": "Glomerulopatias e Tubulopatias",
+      "match_confidence": 0.95
+    },
+    "Hemorragia por varizes esofágicas: profilaxia e tratamento": {
+      "theory_hours": 0.67,
+      "module": "Cirrose, Insuficiência Hepática e Complicações",
+      "match_confidence": 0.95
+    },
+    "Hepatites virais A, B, C, D e E: sorologias e história natural": {
+      "theory_hours": 0.67,
+      "module": "Cirrose, Insuficiência Hepática e Complicações",
+      "match_confidence": 0.95
+    },
+    "Insuficiência hepática aguda e rastreamento de carcinoma hepatocelular": {
+      "theory_hours": 0.67,
+      "module": "Cirrose, Insuficiência Hepática e Complicações",
+      "match_confidence": 0.95
+    },
+    "Lúpus eritematoso sistêmico: critérios diagnósticos e nefrite lúpica": {
+      "theory_hours": 0.37,
+      "module": "Vasculites",
+      "match_confidence": 0.95
+    },
+    "Leucemias e linfomas: apresentação e diagnóstico inicial": {
+      "theory_hours": 0.59,
+      "module": "Anemias e Hemoglobinopatias",
+      "match_confidence": 0.95
+    },
+    "TVP e TEP: escores de probabilidade (Wells), D-dímero e angio-TC": {
+      "theory_hours": 0.46,
+      "module": "Embolia Pulmonar e Hipertensão Pulmonar",
+      "match_confidence": 0.95
+    },
+    "Taquiarritmias de QRS estreito e largo: conduta na instabilidade vs estabilidade": {
+      "theory_hours": 1.5,
+      "module": "Valvopatias e Cardiomiopatias",
+      "match_confidence": 0.95
+    },
+    "Intoxicações comuns e antídotos; distúrbios do nível de consciência": {
+      "theory_hours": 0.32,
+      "module": "Sepse, Choque Séptico e Outros tipos de Choque",
+      "match_confidence": 0.95
+    },
+    "Micoses pulmonares e abscesso pulmonar": {
+      "theory_hours": 0.29,
+      "module": "Doenças pulmonares intersticiais",
+      "match_confidence": 0.95
+    },
+    "Síndrome do intestino irritável e hemorragia digestiva baixa": {
+      "theory_hours": 0.25,
+      "module": "Parasitoses",
+      "match_confidence": 0.95
+    },
+    "Insuficiência adrenal e crise addisoniana; síndrome de Cushing": {
+      "theory_hours": 0.41,
+      "module": "Tireoide",
+      "match_confidence": 0.95
+    },
+    "Oxigenoterapia domiciliar prolongada: critérios e benefício": {
+      "theory_hours": 0.29,
+      "module": "Doenças pulmonares intersticiais",
+      "match_confidence": 0.95
+    },
+    "Transtorno bipolar e espectro da esquizofrenia": {
+      "theory_hours": 0.37,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Transtornos depressivos e de ansiedade: diagnóstico e tratamento": {
+      "theory_hours": 0.37,
+      "module": "Atenção Primária à Saúde",
+      "match_confidence": 0.95
+    },
+    "Revisão dos temas de alto rendimento das 5 áreas": {
+      "theory_hours": 1.0,
+      "module": "Unknown",
+      "match_confidence": 0.0
+    },
+    "Metas de LDL conforme risco cardiovascular": {
+      "theory_hours": 0.45,
+      "module": "Hipertensão Arterial Sistêmica",
+      "match_confidence": 0.95
+    },
+    "Terminalidade, ortotanásia e manejo da dor": {
+      "theory_hours": 0.42,
+      "module": "Ética médica, Bioética e Documentação",
+      "match_confidence": 0.95
     }
   }
 }
