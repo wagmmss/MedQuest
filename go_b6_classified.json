@@ -1,0 +1,702 @@
+[
+  {
+    "id": 5360,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Diabetes Gestacional e Pré-Gestacional",
+    "confidence": 1.0,
+    "rationale": "Rastreamento, metas glicêmicas, terapia farmacológica e repercussões materno-fetais do diabetes na gestação."
+  },
+  {
+    "id": 5361,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Investigação diagnóstica das amenorreias primárias e secundárias, falência ovariana e critérios de Roterdã na SOP."
+  },
+  {
+    "id": 5362,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de assistência pré-natal de baixo e alto risco, rotina laboratorial, vacinação e fisiologia das modificações gravídicas."
+  },
+  {
+    "id": 5363,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5364,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "confidence": 1.0,
+    "rationale": "Métodos biofísicos e dopplervelocimétricos de avaliação da vitalidade fetal intrauterina e diagnóstico de sofrimento fetal agudo/crônico."
+  },
+  {
+    "id": 5365,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+    "confidence": 1.0,
+    "rationale": "Classificação, profilaxia, manejo clínico e prevenção de convulsões com sulfato de magnésio nas síndromes hipertensivas da gravidez."
+  },
+  {
+    "id": 5366,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+    "confidence": 1.0,
+    "rationale": "Critérios diagnósticos e tratamento da DIP (estadiamento de Monif) e protocolo de atendimento integral à vítima de violência sexual."
+  },
+  {
+    "id": 5367,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Diabetes Gestacional e Pré-Gestacional",
+    "confidence": 1.0,
+    "rationale": "Rastreamento, metas glicêmicas, terapia farmacológica e repercussões materno-fetais do diabetes na gestação."
+  },
+  {
+    "id": 5368,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Investigação diagnóstica das amenorreias primárias e secundárias, falência ovariana e critérios de Roterdã na SOP."
+  },
+  {
+    "id": 5369,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5370,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+    "confidence": 1.0,
+    "rationale": "Classificação, profilaxia, manejo clínico e prevenção de convulsões com sulfato de magnésio nas síndromes hipertensivas da gravidez."
+  },
+  {
+    "id": 5371,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5372,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta nas hemorragias da primeira metade da gestação (formas de abortamento, gravidez ectópica e doença trofoblástica)."
+  },
+  {
+    "id": 5373,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de urgência e manejo das hemorragias da segunda metade da gestação (DPP, placenta prévia, acretismo e rotura uterina)."
+  },
+  {
+    "id": 5374,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5375,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "confidence": 1.0,
+    "rationale": "Assistência clínica aos períodos do trabalho de parto, interpretação do partograma, conduta nas distocias, partos instrumentados e classificação de Robson."
+  },
+  {
+    "id": 5376,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5377,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5378,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5379,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5380,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "confidence": 1.0,
+    "rationale": "Métodos biofísicos e dopplervelocimétricos de avaliação da vitalidade fetal intrauterina e diagnóstico de sofrimento fetal agudo/crônico."
+  },
+  {
+    "id": 5381,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+    "confidence": 1.0,
+    "rationale": "Critérios diagnósticos e tratamento da DIP (estadiamento de Monif) e protocolo de atendimento integral à vítima de violência sexual."
+  },
+  {
+    "id": 5490,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5530,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5611,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5703,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+    "confidence": 1.0,
+    "rationale": "Critérios diagnósticos e tratamento da DIP (estadiamento de Monif) e protocolo de atendimento integral à vítima de violência sexual."
+  },
+  {
+    "id": 5764,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de assistência pré-natal de baixo e alto risco, rotina laboratorial, vacinação e fisiologia das modificações gravídicas."
+  },
+  {
+    "id": 5795,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5902,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de assistência pré-natal de baixo e alto risco, rotina laboratorial, vacinação e fisiologia das modificações gravídicas."
+  },
+  {
+    "id": 5917,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "confidence": 1.0,
+    "rationale": "Quadro clínico, propedêutica laparoscópica/imagiológica e manejo da endometriose pélvica profunda, adenomiose e dor pélvica crônica."
+  },
+  {
+    "id": 5918,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5919,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5920,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "confidence": 1.0,
+    "rationale": "Rastreamento mamográfico, classificação BI-RADS, propedêutica e estadiamento do câncer de mama."
+  },
+  {
+    "id": 5921,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Critérios de elegibilidade médica da OMS, tipos de métodos contraceptivos hormonais, dispositivos intrauterinos e esterilização cirúrgica."
+  },
+  {
+    "id": 5922,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+    "confidence": 1.0,
+    "rationale": "Avaliação e conduta em patologias mamárias benignas (fibroadenomas, cistos, mastites e alterações funcionais)."
+  },
+  {
+    "id": 5923,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+    "confidence": 1.0,
+    "rationale": "Classificação PALM-COEIN do sangramento uterino anormal e diagnóstico/tratamento de leiomiomas uterinos e pólipos na menacme."
+  },
+  {
+    "id": 5924,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Critérios de elegibilidade médica da OMS, tipos de métodos contraceptivos hormonais, dispositivos intrauterinos e esterilização cirúrgica."
+  },
+  {
+    "id": 5925,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "confidence": 1.0,
+    "rationale": "Quadro clínico, propedêutica laparoscópica/imagiológica e manejo da endometriose pélvica profunda, adenomiose e dor pélvica crônica."
+  },
+  {
+    "id": 5926,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "confidence": 1.0,
+    "rationale": "Rastreamento mamográfico, classificação BI-RADS, propedêutica e estadiamento do câncer de mama."
+  },
+  {
+    "id": 5927,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Propedêutica do sangramento uterino na pós-menopausa, hiperplasias endometriais e neoplasias do endométrio/corpo uterino."
+  },
+  {
+    "id": 5928,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e manejo da incontinência urinária de esforço, bexiga hiperativa e prolapso de órgãos pélvicos (POP-Q)."
+  },
+  {
+    "id": 5929,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Critérios de elegibilidade médica da OMS, tipos de métodos contraceptivos hormonais, dispositivos intrauterinos e esterilização cirúrgica."
+  },
+  {
+    "id": 5930,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "confidence": 1.0,
+    "rationale": "Quadro clínico, propedêutica laparoscópica/imagiológica e manejo da endometriose pélvica profunda, adenomiose e dor pélvica crônica."
+  },
+  {
+    "id": 5931,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5932,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+    "confidence": 1.0,
+    "rationale": "Classificação PALM-COEIN do sangramento uterino anormal e diagnóstico/tratamento de leiomiomas uterinos e pólipos na menacme."
+  },
+  {
+    "id": 5933,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5934,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico e laboratorial das principais vulvovaginites (vaginose bacteriana, candidíase vulvovaginal e tricomoníase)."
+  },
+  {
+    "id": 5935,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5936,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Investigação diagnóstica das amenorreias primárias e secundárias, falência ovariana e critérios de Roterdã na SOP."
+  },
+  {
+    "id": 5937,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+    "confidence": 1.0,
+    "rationale": "Classificação PALM-COEIN do sangramento uterino anormal e diagnóstico/tratamento de leiomiomas uterinos e pólipos na menacme."
+  },
+  {
+    "id": 5938,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "confidence": 1.0,
+    "rationale": "Rastreamento mamográfico, classificação BI-RADS, propedêutica e estadiamento do câncer de mama."
+  },
+  {
+    "id": 5939,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5940,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "confidence": 1.0,
+    "rationale": "Quadro clínico, propedêutica laparoscópica/imagiológica e manejo da endometriose pélvica profunda, adenomiose e dor pélvica crônica."
+  },
+  {
+    "id": 5941,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+    "confidence": 1.0,
+    "rationale": "Classificação PALM-COEIN do sangramento uterino anormal e diagnóstico/tratamento de leiomiomas uterinos e pólipos na menacme."
+  },
+  {
+    "id": 5942,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Úlceras Genitais e Infecções Sexualmente Transmissíveis na Mulher",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial e tratamento das úlceras genitais e infecções sexualmente transmissíveis na mulher."
+  },
+  {
+    "id": 5943,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto",
+    "confidence": 1.0,
+    "rationale": "Estudo da bacia obstétrica, estática fetal, diâmetros anatômicos e tempos do mecanismo de parto."
+  },
+  {
+    "id": 5944,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5945,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5946,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "confidence": 1.0,
+    "rationale": "Rastreamento mamográfico, classificação BI-RADS, propedêutica e estadiamento do câncer de mama."
+  },
+  {
+    "id": 5947,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Propedêutica do sangramento uterino na pós-menopausa, hiperplasias endometriais e neoplasias do endométrio/corpo uterino."
+  },
+  {
+    "id": 5948,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Propedêutica do sangramento uterino na pós-menopausa, hiperplasias endometriais e neoplasias do endométrio/corpo uterino."
+  },
+  {
+    "id": 5949,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Investigação diagnóstica das amenorreias primárias e secundárias, falência ovariana e critérios de Roterdã na SOP."
+  },
+  {
+    "id": 5950,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação e Propêdêutica da Infertilidade Conjugal",
+    "confidence": 1.0,
+    "rationale": "Investigação sistemática e propêdêutica do casal infértil (fatores masculino, tuboperitoneal, ovulatório e uterino) e técnicas de reprodução assistida."
+  },
+  {
+    "id": 5951,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5952,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 5953,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Propedêutica do sangramento uterino na pós-menopausa, hiperplasias endometriais e neoplasias do endométrio/corpo uterino."
+  },
+  {
+    "id": 5954,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Investigação diagnóstica das amenorreias primárias e secundárias, falência ovariana e critérios de Roterdã na SOP."
+  },
+  {
+    "id": 5955,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "confidence": 1.0,
+    "rationale": "Rastreamento mamográfico, classificação BI-RADS, propedêutica e estadiamento do câncer de mama."
+  },
+  {
+    "id": 5956,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e manejo da incontinência urinária de esforço, bexiga hiperativa e prolapso de órgãos pélvicos (POP-Q)."
+  },
+  {
+    "id": 5957,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "confidence": 1.0,
+    "rationale": "Quadro clínico, propedêutica laparoscópica/imagiológica e manejo da endometriose pélvica profunda, adenomiose e dor pélvica crônica."
+  },
+  {
+    "id": 5958,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "confidence": 1.0,
+    "rationale": "Rastreamento mamográfico, classificação BI-RADS, propedêutica e estadiamento do câncer de mama."
+  },
+  {
+    "id": 5959,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5960,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Critérios de elegibilidade médica da OMS, tipos de métodos contraceptivos hormonais, dispositivos intrauterinos e esterilização cirúrgica."
+  },
+  {
+    "id": 5961,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Critérios de elegibilidade médica da OMS, tipos de métodos contraceptivos hormonais, dispositivos intrauterinos e esterilização cirúrgica."
+  },
+  {
+    "id": 5962,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+    "confidence": 1.0,
+    "rationale": "Avaliação e conduta em patologias mamárias benignas (fibroadenomas, cistos, mastites e alterações funcionais)."
+  },
+  {
+    "id": 5963,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Critérios de elegibilidade médica da OMS, tipos de métodos contraceptivos hormonais, dispositivos intrauterinos e esterilização cirúrgica."
+  },
+  {
+    "id": 5964,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Critérios de elegibilidade médica da OMS, tipos de métodos contraceptivos hormonais, dispositivos intrauterinos e esterilização cirúrgica."
+  },
+  {
+    "id": 5965,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5966,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de rastreamento do câncer do colo uterino, citologia oncótica (Papanicolau), teste molecular de DNA-HPV e vacinação."
+  },
+  {
+    "id": 5967,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+    "confidence": 1.0,
+    "rationale": "Classificação PALM-COEIN do sangramento uterino anormal e diagnóstico/tratamento de leiomiomas uterinos e pólipos na menacme."
+  },
+  {
+    "id": 6930,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento e conduta terapêutica no câncer do colo uterino e suas lesões precursoras (NIC II/III e neoplasias invasoras)."
+  },
+  {
+    "id": 6931,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Diabetes Gestacional e Pré-Gestacional",
+    "confidence": 1.0,
+    "rationale": "Rastreamento, metas glicêmicas, terapia farmacológica e repercussões materno-fetais do diabetes na gestação."
+  },
+  {
+    "id": 6932,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "confidence": 1.0,
+    "rationale": "Rastreamento, tratamento e medidas de prevenção da transmissão vertical de infecções congênitas e perinatais."
+  },
+  {
+    "id": 6933,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "confidence": 1.0,
+    "rationale": "Rastreamento, tratamento e medidas de prevenção da transmissão vertical de infecções congênitas e perinatais."
+  },
+  {
+    "id": 6934,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "confidence": 1.0,
+    "rationale": "Métodos biofísicos e dopplervelocimétricos de avaliação da vitalidade fetal intrauterina e diagnóstico de sofrimento fetal agudo/crônico."
+  },
+  {
+    "id": 6935,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "confidence": 1.0,
+    "rationale": "Métodos biofísicos e dopplervelocimétricos de avaliação da vitalidade fetal intrauterina e diagnóstico de sofrimento fetal agudo/crônico."
+  },
+  {
+    "id": 6936,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "confidence": 1.0,
+    "rationale": "Assistência clínica aos períodos do trabalho de parto, interpretação do partograma, conduta nas distocias, partos instrumentados e classificação de Robson."
+  },
+  {
+    "id": 6937,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+    "confidence": 1.0,
+    "rationale": "Classificação, profilaxia, manejo clínico e prevenção de convulsões com sulfato de magnésio nas síndromes hipertensivas da gravidez."
+  },
+  {
+    "id": 6938,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "confidence": 1.0,
+    "rationale": "Métodos biofísicos e dopplervelocimétricos de avaliação da vitalidade fetal intrauterina e diagnóstico de sofrimento fetal agudo/crônico."
+  },
+  {
+    "id": 6939,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "confidence": 1.0,
+    "rationale": "Métodos biofísicos e dopplervelocimétricos de avaliação da vitalidade fetal intrauterina e diagnóstico de sofrimento fetal agudo/crônico."
+  },
+  {
+    "id": 6940,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "confidence": 1.0,
+    "rationale": "Métodos biofísicos e dopplervelocimétricos de avaliação da vitalidade fetal intrauterina e diagnóstico de sofrimento fetal agudo/crônico."
+  },
+  {
+    "id": 6941,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Investigação diagnóstica das amenorreias primárias e secundárias, falência ovariana e critérios de Roterdã na SOP."
+  },
+  {
+    "id": 6942,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto",
+    "confidence": 1.0,
+    "rationale": "Estudo da bacia obstétrica, estática fetal, diâmetros anatômicos e tempos do mecanismo de parto."
+  },
+  {
+    "id": 6943,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta nas hemorragias da primeira metade da gestação (formas de abortamento, gravidez ectópica e doença trofoblástica)."
+  },
+  {
+    "id": 6944,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de urgência e manejo das hemorragias da segunda metade da gestação (DPP, placenta prévia, acretismo e rotura uterina)."
+  },
+  {
+    "id": 6945,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de urgência e manejo das hemorragias da segunda metade da gestação (DPP, placenta prévia, acretismo e rotura uterina)."
+  },
+  {
+    "id": 6946,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Critérios de elegibilidade médica da OMS, tipos de métodos contraceptivos hormonais, dispositivos intrauterinos e esterilização cirúrgica."
+  },
+  {
+    "id": 6947,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "confidence": 1.0,
+    "rationale": "Assistência clínica aos períodos do trabalho de parto, interpretação do partograma, conduta nas distocias, partos instrumentados e classificação de Robson."
+  },
+  {
+    "id": 6948,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, conduta conservadora e interrupção na rotura prematura de membranas ovulares (RPMO) e diagnóstico/tratamento da corioamnionite."
+  },
+  {
+    "id": 6949,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "confidence": 1.0,
+    "rationale": "Rastreamento, tratamento e medidas de prevenção da transmissão vertical de infecções congênitas e perinatais."
+  }
+]

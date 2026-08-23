@@ -1,0 +1,902 @@
+[
+  {
+    "id": 2618,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Sistema Único de Saúde - Quadro clínico Tratamento",
+    "stem": "Um paciente de 57 anos de idade, diabético, em uso de insulina, e hipertenso, dirigiu ‑ se ao pronto atendimento com queixa de febre e tosse produtiva há dois dias. No exame físico: PA de 140x90 mmHg; FC de 88 bpm; saturação de O2 de 96% em ar ambiente; FR de 22 irpm; e boa perfusão periférica. Exames: Hb 13,5; leucócitos 13.500; plaquetas 250.000; ureia 37; CR 1,1; sódio 137; e potássio 4,3. RX de tórax do paciente mostrado a seguir. Em conjunto com o paciente, optou ‑ se por entregar receitas de antibiótico para tratamento domiciliar e por retorno em caso de ausência de melhora ou piora clínica. Com base nessa situação hipotética, assinale a alternativa que apresenta a conduta mais adequada para o paciente.",
+    "alternatives": "  A) amoxilicina com clavulanato + azitromicina [GABARITO]\n  B) amoxicilina\n  C) azitromicina\n  D) ceftriaxone\n  E) oxacilina",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Paciente com PAC elegível para tratamento ambulatorial (CURB-65 baixo), porém com comorbidades de risco (diabetes e hipertensão), exige terapia combinada (beta-lactâmico + macrolídeo) ou fluoroquinolona respiratória.\n\n****Alternativa Correta** (A)**: O paciente apresenta quadro de Pneumonia Adquirida na Comunidade (PAC) leve, sendo elegível para tratamento"
+  },
+  {
+    "id": 2619,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Tratamento",
+    "stem": "Um homem de setenta anos de idade, ex-tabagista (dez anos/maço), sem outras comorbidades, apresenta, há cinco dias, quadro de tosse, com expectoração amarelada, acompanhado de febre diária de 38,3 °C e dor torácica de característica pleurítica e ventilatório dependente. Há um dia, evoluiu com piora progressiva do quadro, passando a apresentar diculdade para respirar. Ao exame físico: agitação importante; confusão mental; FC de 114 bpm; FR de 28 irpm; e PA, bilateralmente, de 80 x 62 mmHg. Foram realizados exames complementares para a avaliação e foi prescrita uma antibioticoterapia empírica. Com base nesse caso hipotético, é correto armar que o provável agente etiológico e o tratamento empírico para o contexto epidemiológico atual mais adequado, respectivamente, são:",
+    "alternatives": "  A) Haemophilus influenzae ; e meropenem, associado à claritromicina.\n  B) Pneumocystis jirovecii; e sulfametoxazol com trimetoprima.\n  C) Streptococcus pneumoniae ; e amoxicilina, associada à claritromicina.\n  D) Staphylococcus aureus ; e vancomicina, associada à claritromicina.\n  E) Streptococcus pneumoniae ; e ceftriaxona, associada à claritromicina. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Instabilidade hemodinâmica e confusão mental definem PAC grave com indicação de UTI; a cobertura empírica padrão de UTI exige um beta-lactâmico IV de amplo espectro associado a um macrolídeo.\n\n****Alternativa Correta** (E)**: O paciente apresenta critérios de gravidade que indicam internação em terapia intensiva devido à instabilidade hemodinâmica (PA 80x6"
+  },
+  {
+    "id": 2620,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+    "topic": "Sistema Único de Saúde - Tratamento",
+    "stem": "Paciente FMN, masculino, de 28 anos de idade, comparece a consulta ambulatorial com queixa de febre aferida acima de 38,5 o C, astenia, tosse produtiva, sem dispneia referida ou aferida, com teste negativo para covid-19. O médico que o atende o diagnostica com pneumonia adquirida na comunidade (PAC). A PAC constitui a principal causa de morte no mundo; apesar da vasta microbiota respiratória, o Streptococcus pneumoniae permanece sendo a bactéria de maior prevalência entre os agentes etiológicos agudos. Com base no caso clínico apresentado, assinale a alternativa correta, quanto ao nível de atenção em que deve ser realizado o tratamento do referido paciente e quanto à terapia mais indicada nesse caso, seguindo as recomendações para o manejo da pneumonia adquirida na comunidade da SBPT.",
+    "alternatives": "  A) Trata-se de candidato ao tratamento ambulatorial; recomenda-se uso empírico de piperacilina-tazobactam endovenoso em hospital.\n  B) Trata-se de caso de tratamento hospitalar como PAC grave, devendo-se avaliar UTI e recomendando-se uso empírico de piperacilina-tazobactam endovenoso.\n  C) Trata-se de candidato ao tratamento ambulatorial, recomendando-se uso empírico de monoterapia com β - lactâmico ou macrolídeo. [GABARITO]\n  D) Trata-se de caso de tratamento hospitalar como PAC grave, devendo-se avaliar UTI e recomendando-se uso empírico de vancomicina e meropenem endovenoso.\n  E) Trata-se de candidato ao tratamento ambulatorial, devendo-se guiar antibiótico somente após resultado de cultura de escarro.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Paciente jovem, hígido e sem critérios de gravidade (CURB-65 = 0) tem indicação absoluta de tratamento ambulatorial com monoterapia oral.\n\n****Alternativa Correta** (C)**: O paciente é jovem (28 anos), previamente hígido, sem comorbidades e sem critérios clínicos ou laboratoriais de gravidade (sem dispneia, hipoxemia ou confusão mental). Conforme a SBPT, t"
+  },
+  {
+    "id": 2621,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+    "topic": "Sistema Único de Saúde - Definição Tratamento",
+    "stem": "Uma paciente de 78 anos de idade, com antecedentes de doença renal crônica dialítica, foi internada devido à hiponatremia secundária à polifarmácia, com sódio admissional 115. Na manhã do terceiro dia de internação, apresentou piora neurológica e necessitou de intubação orotraqueal e transferência para a UTI. Na manhã do quarto dia de internação, foram vistos picos febris. Inltrado à direita no RX de tórax, secreção traqueal purulenta, leucocitose com desvio à esquerda, aumento de PCR e sódio 132. Com base nessa situação hipotética, assinale a alternativa que apresenta, correta e respectivamente, o esquema terapêutico mais indicado e a classificação da patologia.",
+    "alternatives": "  A) cefepime e pneumonia associada à ventilação mecânica\n  B) ceftriaxone e pneumonia associada à ventilação mecânica\n  C) meropenem + vancomicina e pneumonia nosocomial que requer ventilação mecânica [GABARITO]\n  D) meropenem + vancomicina e pneumonia associada à ventilação mecânica\n  E) ceftriaxone e pneumonia nosocomial que requer ventilação mecânica",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Pneumonia que surge após a admissão hospitalar, mas antes de 48 horas da intubação, é pneumonia nosocomial (e não PAV). Paciente dialítico tem alto risco para multirresistentes e exige meropenem + vancomicina.\n\n****Alternativa Correta** (C)**: A infecção pulmonar que se manifesta após a admissão, porém com intubação realizada no terceiro dia de internação "
+  },
+  {
+    "id": 2622,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Celulite, Erisipela, Osteomielite e Infecções de Partes Moles",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Prevenção Definição",
+    "stem": "Homem de 75 anos com histórico de hipertensão e etilismo crônico encontra-se internado na enfermaria da cirurgia geral para tratamento de uma infecção de partes moles (erisipela). No segundo dia de internação, foi submetido à passagem de sonda nasoenteral devido à recusa alimentar. No 6º dia de internação, iniciou quadro de febre (38,9 ºC), taquipneia e alteração do nível de consciência. A ausculta torácica revela estertores crepitantes difusos. Radiograa de tórax mostra infiltrado pulmonar difuso bilateral. Considerando o quadro clínico, assinale a alternativa correta.",
+    "alternatives": "  A) A presença de sonda nasoenteral representa um fator de risco para pneumonia nosocomial por facilitar broncoaspiração e translocação bacteriana. [GABARITO]\n  B) O quadro sugere pneumonia adquirida na comunidade, considerando que o paciente não foi submetido à ventilação mecânica nessa internação.\n  C) O quadro sugere pneumonia nosocomial de início precoce (< 7 dias), o que geralmente indica um pior prognóstico.\n  D) A pneumonia associada à ventilação mecânica ocorre após 72 horas de ventilação mecânica invasiva.\n  E) O uso de inibidores da bomba de prótons poderia ter prevenido esse tipo de complicação em pacientes hospitalizados.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Sonda enteral prejudica o fechamento do esfíncter esofágico e facilita a microaspiração do conteúdo gástrico colonizado, elevando o risco de pneumonia nosocomial.\n\n****Alternativa Correta** (A)**: A passagem de sonda enteral (nasoenteral ou nasogástrica) interfere na competência mecânica do esfíncter esofágico inferior, predispondo ao refluxo gastroesofági"
+  },
+  {
+    "id": 2625,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Infecção por C difficile Diagnóstico da Diarreia Aguda Etiopatogenia",
+    "stem": "Uma mulher de 18 anos de idade, sem antecedentes pessoais e familiares relevantes, dirigiu ‑ se ao pronto ‑ socorro de um hospital municipal com náusea, vômitos, diarreia líquida sem produtos patológicos, mialgia, sensação febril e astenia. Esse quadro teve início dois dias antes da admissão, com piora no dia atual, com sete episódios de fezes líquidas nas últimas 24 horas. A paciente relatou inapetência e diculdade para ingerir líquidos e comprimidos. Ao exame físico: afebril; regular estado geral; levemente desidratada; bem perfundida e com extremidades quentes; abdome ácido; um pouco de dor à palpação profunda difusamente; sem sinais de peritonite; e sinais vitais marcando PA de 110 x 75 mmHg e FC de 87 bpm. A equipe do hospital municipal optou pela internação hospitalar para hidratação, sintomáticos e antibioticoterapia endovenosa (ceftriaxone e metronidazol). Os exames admissionais evidenciaram PCR de 19 (elevado), função renal e hemograma sem alterações dignas de nota, a não ser pela discreta leucocitose. No segundo dia de internação, já havia ampla melhora do quadro de diarreia, PCR de 9, porém ainda inapetente e um pouco nauseada. Portanto, optaram por manter a internação por mais um dia. No terceiro dia de internação, a paciente relatou muita náusea, gosto metálico na boca, inapetência sem melhora. A mãe da paciente no leito preocupada e nervosa pela ausência de melhora sintomática da lha. Exames com PCR de 4, enzimas hepáticas, canaliculares, bilirrubinas e coagulograma sem alterações. O quadro de diarreia seguiu em ampla melhora. Somente no quinto dia de internação, a paciente evoluiu com melhora clínica signicativa. A equipe médica realizou alta hospitalar com ciprooxacino via oral para completar sete dias em domicílio. Após duas semanas, a paciente retornou devido a um novo episódio diarreico, que teve início no dia anterior, com picos febris aferidos de 37,9 oC. A mãe da paciente estava extremamente nervosa e exigiu uma tomograa de abdome. Os médicos do pronto ‑ socorro, então, solicitaram uma tomograa computadorizada de abdome, que evidenciou sinais de processo inamatório, predominando no intestino grosso. Com base nessa situação hipotética, assinale a conduta adequada, considerando esse quadro clínico.",
+    "alternatives": "  A) solicitação de colonoscopia devido à suspeita de retocolite ulcerativa\n  B) solicitação de colonoscopia devido à suspeita de doença de Crohn\n  C) solicitação de pesquisa para C. Difficile e uso de metronidazol empírico\n  D) solicitação de pesquisa para C. Difficile e uso de vancomicina oral empírica [GABARITO]\n  E) Solicitação de pesquisa para C. Difficile e uso de vancomicina endovenosa empírica",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Diarreia associada a uso prévio de antibióticos de amplo espectro com recidiva dos sintomas sugere fortemente infecção por *Clostridioides difficile*, tratada preferencialmente com vancomicina oral.\n\n****Alternativa Correta** (D)**: O uso prolongado de antibióticos perturba a microbiota colônica, propiciando a proliferação de *Clostridioides difficile*. A "
+  },
+  {
+    "id": 2626,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Endocardite Infecciosa e Sepse de Foco Endovascular",
+    "topic": "Sistema Único de Saúde - SOFA score",
+    "stem": "Cada uma das alternativas a seguir apresenta um paciente e algumas de suas informações clínicas. Entre essas alternativas, assinale aquela que apresenta o paciente com maior gravidade e provável quadro de sepse.",
+    "alternatives": "  A) mulher de 27 anos de idade, após litotripsia para nefrolitíase, afebril, com FC de 102 bpm e PA igual a 90 mmHg × 40 mmHg, com confusão mental e com contagem de leucócitos igual a 9.000/µL [GABARITO]\n  B) homem de 45 anos de idade, com pancreatite, temperatura igual a 38 o C, FC igual a 110 bpm, PA de 110 mmHg × 60 mmHg e contagem de leucócitos igual a 14.000/µL\n  C) mulher de 53 anos, em pós-operatório imediato de ressecção de tumor de cólon, que está taquicárdica e requer intubação orotraqueal\n  D) senhora que reside em casa de repouso, de 84 anos de idade, com cultura de urina positiva para Proteus spp\n  E) homem de 18 anos de idade que apresentou quadro de apendicite gangrenosa, estando agora no pós-operatório imediato de uma apendicectomia laparoscópica, febril (39º C) e taquicárdico (FC = 130 bpm), com PA igual a 140 mmHg × 70 mmHg",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Segundo o Sepsis-3, a presença de alteração do estado mental combinada com hipotensão define disfunção orgânica aguda, caracterizando um quadro de sepse grave.\n\n****Alternativa Correta** (A)**: A paciente apresenta critérios do escore qSOFA (confusão mental e pressão arterial sistólica <= 100 mmHg), indicando disfunção orgânica associada a um foco infeccio"
+  },
+  {
+    "id": 2629,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Etiologia Manifestações clínicas",
+    "stem": "Homem, 30 anos de idade, apresenta cefaleia e rigidez de nuca. Coleta líquido cefalorraquidiano, que mostra: • Pressão de abertura discretamente elevada • Células: 300/mm³ – predomínio linfomononuclear • Proteína: 450 mg/dL (normal: 15 a 60 mg/dL) • Glicose: 35 mg/dL (normal: 50 a 80 mg/dL) Esses achados sugerem qual etiologia da meningite?",
+    "alternatives": "  A) Meningocócica.\n  B) Pneumocócica.\n  C) Viral.\n  D) Tuberculose. [GABARITO]\n  E) Herpética.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A combinação de LCR linfocitário com proteínas absurdamente altas (> 400 mg/dL) e glicose baixa é a marca registrada da meningite tuberculosa (dissociação proteíno-citológica acentuada).\n\n****Alternativa Correta** (D)**: O quadro liquórico com pleocitose linfomononuclear moderada, proteína extremamente elevada (neste caso, 450 mg/dL devido ao intenso bloqu"
+  },
+  {
+    "id": 2633,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Lúpus Eritematoso Sistêmico (LES), Esclerose Sistêmica e Miopatias Inflamatórias",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Lesão renal aguda LRA Lúpus Eritematoso Sistêmico LES Quadro clínico",
+    "stem": "Uma mulher de 23 anos de idade, com antecedentes de lúpus eritematoso sistêmico com atividade articular bem controlada, em uso de hidroxicloroquina, compareceu ao pronto ‑ socorro com quadro agudo de tosse, dispneia, febre, náusea e mal ‑ estar, desidratação, piora das dores articulares e rash malar. Nos exames admissionais, constatou ‑ se ureia de 88 e creatinina de 2,1. Foi notada a presença de consolidação em base direita nos raios X de tórax. A paciente fez exames ambulatoriais recentes que não apresentaram alteração na função renal. Com base nessa situação hipotética, quanto à investigação da etiologia da injúria renal apresentada, assinale a alternativa que apresenta o tratamento correto.",
+    "alternatives": "  A) Além de hidratar a paciente, a depender da evolução clínico laboratorial, seria prudente solicitação de C3, C4 e anti ‑ DNA, além da avaliação de possível proteinúria. [GABARITO]\n  B) Além de hidratar a paciente, a depender da evolução clínico laboratorial, seria prudente solicitação de C3, C4 e anti ‑ la, além da avaliação de possível proteinúria.\n  C) Paciente já possui indicação de biópsia renal para determinar a classe da nefrite lúpica apresentada.\n  D) Além de hidratar a paciente, a depender da evolução clínico laboratorial, seria prudente solicitação de C3, C4 e P ‑ ANCA, como também de avaliação de possível proteinúria.\n  E) Além de hidratar a paciente, a depender da evolução clínico laboratorial, seria prudente a solicitação de C3, C4 e anti ‑ histona, como também de avaliação de possível proteinúria.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Diante de um paciente lúpico com piora aguda da função renal e febre, devemos investigar simultaneamente causas infecciosas (pneumonia), atividade da doença de base (nefrite lúpica) e sepse/desidratação.\n\n****Alternativa Correta** (A)**: A paciente apresenta quadro respiratório compatível com pneumonia e piora renal aguda (LRA), associada a manifestações d"
+  },
+  {
+    "id": 2634,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Sistema Único de Saúde - Diagnóstico Abordagem diagnóstica Etiologia Pósrenal",
+    "stem": "Um homem de setenta anos de idade, obeso, portador de hipertensão arterial sistêmica, em uso de losartana 50 mg de 12/12h, hidrocloratiazida 25 mg/dia e diabetes, em uso de metformina 850 mg/dia, dirigiu ‑ se ao pronto ‑ socorro com história de dor intensa em hipogástrio há um dia, com diurese reduzida há quatro dias. Nos exames admissionais, apresentou: CR 4,5; ureia 85; K 4,5; Na 135; e pH 7,30, com HCO3 22. Com base nessa situação hipotética, assinale a alternativa correta.",
+    "alternatives": "  A) O paciente apresenta importante elevação de creatinina, além de acidose metabólica, com indicação de internação para realização de hemodiálise.\n  B) O paciente deve ser submetido a uma sondagem vesical de alívio e deve ser internado para controle de função renal e diurese e investigação do possível fator obstrutivo. [GABARITO]\n  C) Em caso de lesão renal aguda, sem etiologia definida, devem ‑ se manter os anti ‑ hipertensivos do paciente, independentemente da classe, visto que eles têm efeito protetor renal.\n  D) O paciente possui indicação de reposição de bicarbonato endovenoso.\n  E) Pelo padrão das escórias, o quadro sugere lesão renal aguda pré ‑ renal, devendo ser iniciada hidratação vigorosa imediatamente.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Idoso com dor intensa em hipogástrio, diurese reduzida e insuficiência renal aguda oligúrica clássica: pense imediatamente em retenção urinária aguda (bexigoma) por obstrução infravesical.\n\n****Alternativa Correta** (B)**: A tríade de dor em hipogástrio, oligúria e LRA obstrutiva em idoso do sexo masculino aponta para obstrução urinária aguda (ex: Hiperpla"
+  },
+  {
+    "id": 2635,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Diagnóstico Tratamento Lesão Renal Aguda no Hepatopata",
+    "stem": "Um homem de 57 anos de idade, acometido por cirrose hepática de etiologia alcoólica com hepatocarcinoma associado, foi internado devido ao aumento de volume abdominal, dor abdominal e confusão mental. Foi realizada uma punção diagnóstica, com 375 neutrólos no líquido puncionado, albumina soro 1,9 e albumina do líquido ascítico 0,6 e culturas em andamento. Foi, então, iniciada antibioticoterapia empírica e diureticoterapia com furosemida e espironolactona. No terceiro dia de internação, a paciente evoluiu com oligoanúria, teve piora do edema periférico, creatinina de 2,9 (na entrada, era de 0,8), ureia de 93, potássio 5,7, gasometria com pH 7,28 e bicarbonato 15. A respeito dos dados gasométricos apresentados em um contexto de injúria renal aguda, assinale a alternativa correta.",
+    "alternatives": "  A) O paciente possui indicação bem estabelecida de reposição endovenosa de bicarbonato devido ao valor de pH apresentado.\n  B) O tratamento da hipercalemia, por si só, seria suficiente para a correção do pH.\n  C) Ao realizar a insulina associada à glicose em pacientes com injúria renal, o risco de hipoglicemia é maior que na população geral. [GABARITO]\n  D) A alteração gasométrica apresentada pode ser um efeito adverso da furosemida, independentemente da piora de função renal ocorrida.\n  E) Para a hipercalemia apresentada, podem ‑ se realizar glicose + insulina, inalação com b2 agonista e furosemida.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Lembre-se de que a insulina é parcialmente metabolizada pelos rins; na insuficiência renal, sua meia-vida aumenta, elevando expressivamente o risco de hipoglicemia iatrogênica.\n\n****Alternativa Correta** (C)**: Pacientes com disfunção renal aguda ou crônica apresentam clearance diminuído de insulina. Por esse motivo, a utilização da solução polarizante (in"
+  },
+  {
+    "id": 2636,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Diagnóstico Abordagem diagnóstica Etiologia Pósrenal",
+    "stem": "Um homem de 57 anos de idade, acometido por cirrose hepática de etiologia alcoólica com hepatocarcinoma associado, foi internado devido ao aumento de volume abdominal, dor abdominal e confusão mental. Foi realizada uma punção diagnóstica, com 375 neutrólos no líquido puncionado, albumina soro 1,9 e albumina do líquido ascítico 0,6 e culturas em andamento. Foi, então, iniciada antibioticoterapia empírica e diureticoterapia com furosemida e espironolactona. No terceiro dia de internação, a paciente evoluiu com oligoanúria, teve piora do edema periférico, creatinina de 2,9 (na entrada, era de 0,8), ureia de 93, potássio 5,7, gasometria com pH 7,28 e bicarbonato 15. Sobre o caso acima, assinale a alternativa adequada.",
+    "alternatives": "  A) A melhora dos níveis de ureia e creatinina com uso de albumina confirmaria a hipótese diagnóstica de síndrome hepatorrenal.\n  B) Pode ‑ se diminuir a dose dos diuréticos, porém é possível mantê ‑ los em uso para manejo volêmico.\n  C) Devem ‑ se manter diuréticos e aumentar o aporte hídrico para evitar piora dos níveis de ureia/creatinina e para manter o manejo do edema.\n  D) Devido à acidose metabólica grave, o paciente encontra ‑ se em urgência dialítica.\n  E) A exclusão de um componente pós ‑ renal associado poderia ajudar a confirmar uma condição de pior prognóstico ao paciente. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Diante de uma LRA em paciente cirrótico, antes de fechar o diagnóstico de Síndrome Hepatorrenal (SHR), é obrigatório excluir causas obstrutivas (pós-renais) e parenquimatosas primárias.\n\n****Alternativa Correta** (E)**: Para o diagnóstico de Síndrome Hepatorrenal (uma complicação funcional e de prognóstico sombrio da cirrose avançada), é critério obrigatór"
+  },
+  {
+    "id": 2637,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Abordagem diagnóstica",
+    "stem": "Uma mulher de 78 anos de idade, com histórico de múltiplas cirurgias prévias, apresenta quadro de abdome agudo obstrutivo. Foi submetida a uma laparotomia exploradora com extensa lise de aderências, procedimento que teve duração de 7 horas. Recebeu 2 litros de cristaloide durante a cirurgia e urinou 200 mL. A creatinina sérica teve um incremento de 0,6 mg/dL no dia seguinte. Outros dados da paciente: PA = 90 mmHg × 60 mmHg; FC = 110 bpm. Assinale a alternativa que apresenta a conduta que deve ser evitada nesse caso hipotético.",
+    "alternatives": "  A) descartar obstrução de sonda vesical\n  B) verificar valor da hemoglobina sérica\n  C) calcular a fração de excreção de sódio\n  D) administrar volume\n  E) iniciar amina vasoativa para manter a pressão arterial média em torno de 65 mmHg [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Nunca inicie aminas vasoativas para corrigir hipotensão por hipovolemia antes de repor o volume intravascular adequadamente; isso gera vasoconstrição e isquemia tecidual grave.\n\n****Alternativa Correta** (E)**: A paciente apresenta sinais claros de choque hipovolêmico no pós-operatório (taquicardia, hipotensão, oligúria e LRA) após procedimento cirúrgico l"
+  },
+  {
+    "id": 2639,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Insifuciência cardíaca",
+    "stem": "Homem, 75 anos de idade, ex-tabagista, portador de insuciência cardíaca, em uso de furosemida, losartana, espironolactona, carvedilol e dapaglifozina, é admitido por rebaixamento do nível de consciência. Apresenta sódio de 114 mEq/L. A osmolaridade sérica está diminuída e a urinária está aumentada. O sódio urinário é de 5 mEq/L. A causa da hiponatremia é",
+    "alternatives": "  A) insuficiência cardíaca descompensada. [GABARITO]\n  B) uso do diurético.\n  C) secreção inapropriada de hormônio antidiurético.\n  D) insuficiência adrenal concomitante.\n  E) polidipsia primária.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Hiponatremia hipotônica com sódio urinário muito baixo (< 10-20 mEq/L) em paciente com IC grave aponta para a ativação neuro-hormonal com ávida retenção renal de sódio e água.\n\n****Alternativa Correta** (A)**: Na insuficiência cardíaca descompensada, o débito cardíaco reduzido provoca queda do volume arterial efetivo. Isso ativa o sistema renina-angiotensi"
+  },
+  {
+    "id": 2640,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Gluconato de cálcio Manifestações clínicas da hipercalemia",
+    "stem": "Homem, 73 anos de idade, hipertenso, em uso de losartana e anlodipino, diabético, em uso de dapaglifozina, e com doença renal crônica não dialítica, procura atendimento por dor torácica. Pressão arterial de 80 × 50 mmHg. Monitorização mostra taquicardia ventricular monomórfica. Após cardioversão elétrica sincronizada, é realizado o eletrocardiograma a seguir: (Arquivo pessoal; imagem usada com autorização) A conduta imediata é",
+    "alternatives": "  A) AAS, clopidogrel e enoxaparina.\n  B) AAS, clopidogrel e angioplastia primária.\n  C) nitroglicerina.\n  D) gluconato de cálcio. [GABARITO]\n  E) estudo eletrofisiológico.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: QRS extremamente alargado fundindo-se com a onda T (padrão em \"onda senoidal\") após PCR ou em vigência de bradi/taquiarritmia em paciente renal crônico é hipercalemia grave até prova em contrário.\n\n****Alternativa Correta** (D)**: O eletrocardiograma pós-cardioversão exibe o clássico padrão de \"onda senoidal\", sinal eletrocardiográfico gravíssimo que indic"
+  },
+  {
+    "id": 2644,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Neurologia Parkinsonismo Secundário Etiologias",
+    "stem": "Homem de 60 anos de idade refere início, há 4 meses, de bradicinesia, passos curtos, tremores e diculdade para realização das suas atividades diárias. Refere uso de cinarizina e lorazepam. Com base nesse caso clínico, assinale a alternativa que apresenta, respectivamente, o diagnóstico mais provável e a melhor conduta.",
+    "alternatives": "  A) parkinsonismo secundário; suspender a cinarizina e o lorazepam [GABARITO]\n  B) labirintopatia; otimizar o tratamento com a cinarizina\n  C) doença de Alzheimer; introdução de levodopa\n  D) tremor essencial; introduzir betabloqueador\n  E) doença de Parkinson; manter os medicamentos em uso e iniciar fisioterapia motora diária",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Idoso com parkinsonismo de início subagudo em uso de cinarizina (antagonista dopaminérgico) tem parkinsonismo medicamentoso. A conduta imediata é suspender a droga causal.\n\n****Alternativa Correta** (A)**: O paciente desenvolveu um quadro de síndrome parkinsoniana (bradicinesia, tremores, rigidez e alteração de marcha) de início subagudo (4 meses). A cinar"
+  },
+  {
+    "id": 2645,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+    "topic": "Sistema Único de Saúde - Neurologia Estado Confusional Agudo Delirium Quadro Clínico",
+    "stem": "Uma mulher de 82 anos de idade, com antecedentes pessoais de diabetes melito não insulino-dependente e doença de Alzheimer em fase moderada, foi levada ao pronto-socorro com história de diarreia líquida sem sangue ou muco há 3 dias, além de queda do estado geral, sem febre. Evoluiu com piora há 1 dia, apresentando apatia e lenticação. Ao exame, encontra-se desidratada, hemodinamicamente estável e eupneica e apresenta décit de atenção e sonolência, sem décits neurológicos focais. Outros dados da paciente: saturação de oxigênio = 97% e glicemia capilar = 110 mg/dL. Considerando-se esse caso clínico, é correto armar que, de acordo com as possibilidades diagnósticas, a conduta inicial deverá incluir, além de hidratação endovenosa e teste para covid-19,",
+    "alternatives": "  A) coleta de hemograma, urina I, eletrólitos e função renal. [GABARITO]\n  B) tomografia de crânio e gasometria arterial.\n  C) ressonância de crânio e gasometria venosa.\n  D) coleta de hemoculturas e gasometria arterial.\n  E) tomografia de tórax e ultrassonografia de abdome.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Idoso com demência que apresenta alteração aguda da atenção (delirium) após fator estressor clínico (diarreia/desidratação) exige investigação laboratorial básica para identificar a causa desencadeante.\n\n****Alternativa Correta** (A)**: O paciente idoso com declínio cognitivo prévio (Alzheimer) que apresenta alteração súbita ou subaguda da atenção, apatia "
+  },
+  {
+    "id": 2646,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Sistema Único de Saúde - Neurologia Demências Avaliação Cognitiva",
+    "stem": "Uma mulher de 78 anos de idade, com antecedentes pessoais de hipertensão arterial sistêmica e de diabetes melito não insulino-dependente, comparece à consulta médica de rotina em unidade básica de saúde (UBS) acompanhada do lho. Ele refere que sua mãe faz uso correto dos medicamentos, já que ele mesmo os administra para ela há, aproximadamente, 1 ano, pois percebeu que a mãe estava se confundindo para tomá-los assim que houve uma alteração na prescrição. Ele se queixa de que sua mãe está apresentando décit auditivo, de que está repetitiva e apática. A paciente, por sua vez, não apresenta queixas. Com relação a esse caso hipotético, assinale a alternativa, entre as apresentadas a seguir, que representa, respectivamente, o diagnóstico provável e a orientação adequada.",
+    "alternatives": "  A) depressão; orientar o filho que é indicada psicoterapia para esse caso e que deve ser introduzido o clonazepam\n  B) delirium ; orientar o filho a acompanhar a paciente ao pronto-socorro imediatamente\n  C) síndrome demencial; orientar o filho acerca da necessidade de supervisão constante [GABARITO]\n  D) alterações inerentes ao envelhecimento fisiológico; informar o filho de que essa situação é normal na idade da mãe\n  E) doença de Pick; orientar o filho que o quadro é reversível com o tratamento",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Perda de funcionalidade para atividades cotidianas complexas (como gerenciar a própria medicação) associada a declínio cognitivo em idoso define Síndrome Demencial.\n\n****Alternativa Correta** (C)**: O relato de perda de funcionalidade para atividades cotidianas complexas (tomar os medicamentos corretamente) há aproximadamente 1 ano, associado a sintomas co"
+  },
+  {
+    "id": 2647,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Anamnese Exame Físico Sinais de Alarme",
+    "stem": "Uma mulher de 54 anos de idade, diabética, hipertensa e dislipidêmica, em uso irregular de medicações, compareceu ao pronto ‑ socorro com cefaleia intensa, vômitos, náusea, turvação visual e escotomas. O acompanhante relatou que o quadro evoluiu paulatinamente durante os últimos dias, com piora importante no dia atual. Na admissão, foram notados os seguintes sinais vitais: FC 117 bpm; PA 210 x 145 mmHg; FR 21 irpm; e dextro 120. Ainda com base na situação hipotética apresentada, e na imagem da ressonância magnética de crânio acima, assinale a alternativa correta.",
+    "alternatives": "  A) A principal hipótese diagnóstica é um AVCI com lesão sequelar em região occipital.\n  B) A principal hipótese diagnóstica é um AVC hemorrágico com hemorragia intraparenquimatosa em região occipital.\n  C) A principal hipótese diagnóstica é uma hemorragia subaracnóidea.\n  D) A principal hipótese diagnóstica é uma hemorragia subdural.\n  E) A principal hipótese diagnóstica é a síndrome da encefalopatia posterior reversível. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Crise hipertensiva grave associada a cefaleia, alterações visuais e edema vasogênico parieto-occipital simétrico na RM é o marco da PRES (Síndrome da Encefalopatia Posterior Reversível).\n\n****Alternativa Correta** (E)**: O quadro de emergência hipertensiva grave (PA 210x145 mmHg) associado a sintomas visuais (turvação e escotomas), cefaleia, vômitos e aos "
+  },
+  {
+    "id": 2648,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Anamnese Exame Físico Sinais de Alarme",
+    "stem": "Uma mulher de 32 anos de idade, com antecedentes de ansiedade e enxaqueca, compareceu ao pronto ‑ socorro trazida por uma viatura do SAMU acompanhada por uma amiga, com relato de cefaleia holocraniana intensa, que teve início duas horas antes, além de vômitos intensos, mal ‑ estar e rebaixamento do nível de consciência durante o transporte. A seguir, consta a tomografia computadorizada do crânio. Assinale a alternativa adequada.",
+    "alternatives": "  A) hemorragia subaracnóidea Fischer IV [GABARITO]\n  B) hemorragia subaracnóidea Fischer III\n  C) acidente vascular encefálico isquêmico com transformação hemorrágica intraparenquimatosa\n  D) enxaqueca\n  E) encefalite viral",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Cefaleia súbita \"em trovoada\" com rebaixamento e sangue difuso nos ventrículos na TC grita Hemorragia Subaracnoidea (HSA) - a presença de coágulos intraventriculares define a classificação de Fisher IV.\n\n****Alternativa Correta** (A)**: A apresentação clínica com cefaleia de pico hiperagudo (\"em trovoada\"), vômitos e rebaixamento do nível de consciência é "
+  },
+  {
+    "id": 2649,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Anamnese Exame Físico Sinais de Alarme",
+    "stem": "Uma mulher de 23 anos de idade foi internada devido à cefaleia pulsátil bilateral com fono/fotofobia associada. A paciente relatou estar com náuseas intensas naquele momento e solicitou medicamento para o controle dos sintomas. Com base nessa situação hipotética, assinale a alternativa que apresenta o esquema adequado para o controle sintomático, considerando ‑ se que a paciente não possui alergias.",
+    "alternatives": "  A) dimenidriato + piridoxina\n  B) metoclopramida + dexametasona [GABARITO]\n  C) ondansetrona + tramadol\n  D) metoclopramida + tramadol\n  E) ondansetrona + cetoprofeno",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: No PS, crise de enxaqueca grave se combate com a associação de um antiemético dopaminérgico (metoclopramida) e um corticoide (dexametasona) para prevenir recidivas.\n\n****Alternativa Correta** (B)**: A metoclopramida atua nos receptores dopaminérgicos centrais, exercendo duplo papel: alívio da náusea e potente ação analgésica sinérgica no controle da enxaqu"
+  },
+  {
+    "id": 2651,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Complicações Acidose respiratória aguda",
+    "stem": "Mulher, 35 anos de idade, tabagista, é admitida para investigação de fraqueza muscular ascendente e progressiva que se iniciou cerca de três semanas após quadro de síndrome gripal, sendo diagnosticada síndrome de Guillain-Barré. Evoluiu com desconforto respiratório progressivo, expansibilidade torácica globalmente reduzida, sons respiratórios presentes, porém difusamente diminuídos sem ruídos adventícios. Frequência respiratória de 16 rpm. Radiograa de tórax sem alterações significativas. Qual gasometria arterial em ar ambiente é compatível com o quadro clínico?",
+    "alternatives": "  A) PaO₂ = 55 mmHg, PaCO₂ = 28 mmHg; SatO₂ = 85%.\n  B) PaO₂ = 55 mmHg; PaCO₂ = 55 mmHg; SatO₂ = 85%. [GABARITO]\n  C) PaO₂ = 80 mmHg; PaCO₂ = 30 mmHg; SatO₂ = 94%.\n  D) PaO₂ = 80 mmHg; PaCO₂ = 55 mmHg; SatO₂ = 94%.\n  E) PaO₂ = 100 mmHg; PaCO₂ = 35 mmHg; SatO₂ = 99%.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Fraqueza muscular respiratória causa falha de bomba (hipoventilação alveolar pura), resultando simultaneamente em retenção de CO2 (hipercapnia) e queda de O2 (hipoxemia).\n\n****Alternativa Correta** (B)**: Na Síndrome de Guillain-Barré com acometimento dos músculos respiratórios, ocorre insuficiência respiratória hipercapnica por hipoventilação. Como o parê"
+  },
+  {
+    "id": 2652,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Síndrome da Fragilidade",
+    "stem": "A síndrome da fragilidade é uma condição genética de origem neuroendócrina, que gera maior vulnerabilidade às doenças ou aos estresses agudos nos idosos. É caracterizada por massa e força muscular reduzida e baixa energia para a s atividades do dia a dia, com consequente impacto na resposta a eventos estressores. Indivíduos frágeis estão mais suscetíveis a complicações clínicas e a eventos adversos, e isso deve ser considerado no contexto do planejamento de intervenções e no seguimento clínico ambulatorial e hospitalar. Seus sintomas mais comuns são",
+    "alternatives": "  A) perda voluntária de peso, dispneia, redução da velocidade de marcha e tremor de extremidades.\n  B) disgeusia, perda da dentição, fraqueza, redução da velocidade de marcha e exaustão.\n  C) perda involuntária de peso, porém sem perda de força muscular, redução da velocidade de marcha e exaustão.\n  D) os psicológicos, como, por exemplo, depressão, redução da velocidade de marcha e exaustão.\n  E) perda involuntária de peso, fraqueza, redução da velocidade de marcha e exaustão. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Lembre da regra dos 5 critérios de Fried para fragilidade: perda de peso, fraqueza, exaustão, lentidão e baixo nível de atividade física.\n\n****Alternativa Correta** (E)**: O fenótipo de fragilidade de Fried baseia-se na presença de pelo menos três dos seguintes critérios objetivos: perda ponderal involuntária, diminuição da força de preensão palmar, fadiga"
+  },
+  {
+    "id": 2653,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Sistema Único de Saúde - Acidentes Vasculares Cerebrais AVC Acidente Vascular Cerebral Isquêmico Tratamento da Fase Aguda do Acidente Vascular Cerebral Isquêmico",
+    "stem": "Uma mulher de 72 anos de idade deu entrada no hospital, levada por familiares, que relataram que ela apresentara “fraqueza muscular súbita em braço e em perna esquerdos” há 30 minutos. É previamente hipertensa, porém bem controlada, e estava em investigação para uma arritmia cardíaca (sic). Ao exame físico, foi constatada uma hemiplegia dimidiada e um desvio de rima labial e do olhar conjugado. Realizou uma TC de crânio sem contraste, que descartou eventos hemorrágicos. Com base nesse caso hipotético e considerando que a paciente tem critérios de elegibilidade para a terapia trombolítica, é uma contraindicação à trombólise no acidente vascular encefálico o(a)",
+    "alternatives": "  A) diagnóstico clínico de acidente vascular cerebral isquêmico, causando deficit neurológico mensurável.\n  B) hemorragia gastrointestinal nos últimos 21 dias. [GABARITO]\n  C) evento isquêmico prévio ou o trauma cranioencefálico grave há cinco anos.\n  D) evidência de isquemia na tomografia.\n  E) idade acima de setenta anos.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Hemorragias internas recentes (como gastrointestinal ou urinária nos últimos 21 dias) representam contraindicação absoluta à trombólise intravenosa pelo risco iminente de sangramento catastrófico.\n\n****Alternativa Correta** (B)**: A presença de hemorragia gastrointestinal recente (dentro de 21 dias) é uma contraindicação absoluta à administração de trombol"
+  },
+  {
+    "id": 2654,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+    "topic": "Sistema Único de Saúde - Tratamento da Fase Aguda do Acidente Vascular Cerebral Isquêmico Trombólise Endovenosa",
+    "stem": "Um paciente de 63 anos de idade, radialista, hipertenso e dislipidêmico, dirigiu ‑ se ao pronto ‑ socorro com queixa de afasia moderada, iniciada há duas horas e trinta minutos da admissão. Glicemia capilar sem alterações e TC de crânio sem contraste sem alterações dignas de nota. NIH menor que 3 pontos. Sinais vitais: PA de 175x100 mmHg; FC de 112 bpm; TEC < 3s; e FR de 20 irpm. Com base nessa situação hipotética, assinale a alternativa correta.",
+    "alternatives": "  A) Está indicada a trombólise química. [GABARITO]\n  B) O paciente possui contraindicação à trombólise, devido a NIH muito baixo.\n  C) O paciente possui contraindicação à trombólise, devido à pressão arterial muito elevada.\n  D) Devem ‑ se solicitar e aguardar enzimas hepáticas, coagulograma e plaquetas, com a finalidade de averiguar se há outras possíveis contraindicações para trombolisar o paciente.\n  E) Ainda não há dados suficientes para diagnosticar AVC isquêmico, portanto não está indicada a trombólise química.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Déficit neurológico focal agudo com menos de 4,5 horas, TC sem sangue e que gera incapacidade funcional (como afasia em um radialista) tem indicação formal de trombólise, mesmo com NIHSS baixo.\n\n****Alternativa Correta** (A)**: O paciente encontra-se dentro da janela terapêutica (2h30min), com tomografia sem hemorragia e apresenta um déficit incapacitante "
+  },
+  {
+    "id": 2658,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Sistema Único de Saúde - Síndromes Vestibulares Centrais Vertigem Posicional Paroxística Benigna Síndrome de Meniére",
+    "stem": "Uma idosa de 78 anos de idade, diabética, hipertensa e dislipidêmica, dirigiu ‑ se ao pronto ‑ socorro com queixa de tontura contínua e espontânea, iniciada no dia anterior, com bastante náusea associada. Ela realizou TC de crânio, sem alterações isquêmicas ou hemorrágicas. Com base nessa situação hipotética, assinale a alternativa correta.",
+    "alternatives": "  A) A paciente provavelmente apresenta quadro de labirintite aguda, sem sinais de alarme, podendo receber alta para casa com cinarizina e dramin.\n  B) Em pacientes idosos com alto risco cardiovascular, o padrão contínuo e não provocado de tontura deve ser investigado com RNM de crânio. [GABARITO]\n  C) Dado o tempo de evolução, caso fosse um acidente vascular encefálico, já se observariam lesões isquêmicas na TC. O diagnóstico mais provável é VPPB.\n  D) Dado o tempo de evolução, caso fosse um acidente vascular encefálico, já se observariam lesões isquêmicas na TC. O diagnóstico mais provável é neurite vestibular.\n  E) O quadro sugere doença de Menière, mas deve haver internação, para que se descartem outras causas menos prováveis, como acidente vascular encefálico.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Tontura contínua em idosos vasculopatas é AVC de fossa posterior até prova em contrário; tomografia normal nas primeiras 24 horas não descarta isquemia e exige ressonância magnética (RNM).\n\n****Alternativa Correta** (B)**: A paciente apresenta uma Síndrome Vestibular Aguda (SVA) caracterizada por tontura contínua e espontânea, associada a múltiplos fatores"
+  },
+  {
+    "id": 2659,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+    "topic": "Sistema Único de Saúde - Pneumologia Profilaxia TEVTEP Fármacos e agentes relacionados a hemostasia secundária",
+    "stem": "Uma mulher de 32 anos de idade, sem antecedentes pessoais prévios, referindo somente irmão de mesmos pais com “doença no sangue”, deu entrada em setor de emergência, referindo dor em hemitórax direito, ventilatório-dependente, de início súbito há três horas da admissão, sem fatores de melhora e associada à leve dispneia. Ao exame físico: lúcida e orientada; pressão arterial bilateral de 140 x 86 mmHg; FC de 104 bpm; sat. de O₂ de 90% em ar ambiente; FR de 26; peso igual a 60 kg; e altura igual a 1,60 m. ECG apresentando taquicardia sinusal e radiograa de tórax sem alterações. Realizou outros exames, que evidenciaram: hemoglobina 10,8 g/dL; leucócitos 6.800/mm³; plaquetas 410.000/mm³; ureia 23 mg/dL; creatinina 0,9 mg/dL; sódio 141 mEq/L; K 4,9 mEq/L; e clearance de creatinina 93 mL/min. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor opção de tratamento inicial do tromboembolismo pulmonar para a paciente.",
+    "alternatives": "  A) varfarina 5 mg, um comprimido diário durante a internação\n  B) enoxaparina 40 mg, SC, ao dia, por noventa dias\n  C) enoxaparina 60 mg, SC, de 12/12 h, durante a internação [GABARITO]\n  D) heparina não fracionada 5.000 U, SC, de 12/12 h, por noventa dias\n  E) heparina não fracionada 5.000 U, SC, de 8/8 h, por sessenta dias",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: TEP agudo exige anticoagulação plena imediata. O tratamento de escolha é a heparina de baixo peso molecular (enoxaparina) calculada pelo peso (1 mg/kg de 12/12h).\n\n****Alternativa Correta** (C)**: A paciente apresenta um quadro clínico compatível com tromboembolismo pulmonar (TEP) agudo, encontrando-se hemodinamicamente estável, porém taquicárdica e hipoxê"
+  },
+  {
+    "id": 2660,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Pneumologia Síndrome de veia cava superior",
+    "stem": "Um homem de 67 anos de idade, tabagista de longa data, com alta carga tabágica (86 anos/maço), compareceu à consulta ambulatorial, relatando dispneia progressiva aos esforços, associada à piora da tosse, que já possuía cronicamente. Relatou que sua esposa vinha notando seu rosto mais avermelhado ultimamente, além de leve assimetria em membro superior direito, que foi constatada em seu exame físico. Com base nesse caso hipotético, é correto armar que o diagnóstico mais provável é o de",
+    "alternatives": "  A) trombose de veia jugular.\n  B) DPOC exacerbado.\n  C) insuficiência cardíaca congestiva.\n  D) síndrome da veia cava superior. [GABARITO]\n  E) síndrome da veia cava inferior.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Tabagista pesado com pletora facial, tosse crônica piorada e edema assimétrico em membro superior aponta diretamente para compressão da veia cava superior por neoplasia pulmonar.\n\n****Alternativa Correta** (D)**: O quadro clínico descrito de dispneia progressiva, piora da tosse em tabagista pesado (86 maços-ano), associado a pletora facial (rosto avermelha"
+  },
+  {
+    "id": 2661,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "topic": "Sistema Único de Saúde - Pneumologia Tabagismo",
+    "stem": "Recomenda-se que, pelo risco que oferece à saúde do indivíduo, o tabagismo passivo seja frequentemente indagado aos usuários dos serviços de saúde (tanto quanto o tabagismo ativo), incluindo também as crianças. Nesse sentido, pode constituir-se como importante estratégia de identicação de fumantes e motivação destes para abandono do tabaco, sendo as principais consequências e efeitos de longo prazo do fumo passivo, o(a)",
+    "alternatives": "  A) diminuição do risco cardiovascular na idade adulta.\n  B) aumento do risco em 90% de câncer de pulmão.\n  C) aumento do risco em 50% de infarto do miocárdio.\n  D) aumento do risco de câncer de seios da face. [GABARITO]\n  E) diminuição de bronquite crônica e enfisema pulmonar.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A fumaça ambiental do tabaco é carcinogênica; além do câncer de pulmão e infarto, o fumo passivo aumenta o risco de neoplasias de vias aéreas superiores, como seios da face.\n\n****Alternativa Correta** (D)**: O tabagismo passivo é uma importante questão de saúde pública e reconhecidamente um fator de risco para diversas patologias neoplásicas e cardiovascul"
+  },
+  {
+    "id": 2662,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Quadro clínico",
+    "stem": "Um paciente relatou queixa de dispneia quando em decúbito lateral direito, porém não apresentava dispneia quando em decúbito lateral esquerdo. Com base nessa situação hipotética, assinale a alternativa que apresenta, correta e respectivamente, o nome desse sinal e a possível patologia.",
+    "alternatives": "  A) lateropneia e atelectasia à direita\n  B) lateropneia e derrame pleural à esquerda\n  C) trepopneia e derrame pleural à direita\n  D) lateropneia e derrame pleural à direita\n  E) trepopneia e derrame pleural à esquerda [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Trepopneia é a dispneia dependente de decúbito lateral. O paciente deita sobre o pulmão doente para deixar o pulmão sadio livre para respirar (derrame pleural esquerdo = dispneia em decúbito lateral direito).\n\n****Alternativa Correta** (E)**: A trepopneia é o termo semiológico que designa a dispneia que surge ou piora quando o paciente assume um decúbito l"
+  },
+  {
+    "id": 2663,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Derrame pleural na insuficiência cardíaca",
+    "stem": "Um homem de 68 anos, portador de insuciência cardíaca congestiva, encontra-se no primeiro dia de internação devido à queixa de dispneia progressiva, iniciada há alguns dias. Ao exame, apresentou macicez a punho-percussão da base pulmonar direita, bem como murmúrio vesicular abolido. Radiograa de tórax evidencia velamento do seio costofrênico direito. Foi solicitada avaliação da cirurgia torácica que realizou toracocentese diagnóstico. No procedimento, houve saída de 600 mL de líquido claro. A relação proteína pleural/proteína sérica é de 0,2, e a relação DHL pleural/DHL sérica é de 0,4. A análise citológica negou malignidade. Houve melhora dos sintomas, mas a radiograa de controle mostrou falha na reexpansão pulmonar. Considerando os achados e o caso clínico descrito, assinale a alternativa correta.",
+    "alternatives": "  A) O líquido tem características de exsudato possivelmente relacionado à pneumonia hospitalar. A antibioticoterapia deve incluir cobertura para germes multirresistentes e acompanhamento.\n  B) A falha de re-expansão pulmonar após toracocentese com transudato é patognomônico de neoplasia oculta. O paciente deve ser estadiado e submetido à cirurgia.\n  C) O líquido tem características de transudato, sendo a insuciência cardíaca a principal causa. A falha de reexpansão sugere encarceramento pulmonar. [GABARITO]\n  D) O líquido é do tipo exsudato e, após o tratamento da infecção, deve ser realizada pleurodese química como tratamento de primeira linha.\n  E) Mesmo se tratando de líquido do tipo transudato e havendo falha na re-expansão pulmonar, a videotoracoscopia é contraindicada. Em derrames benignos esta é uma medida excessiva e deve ser desestimulada.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Relações de proteína pleural/sérica < 0,5 e DHL pleural/sérico < 0,6 definem transudato, sendo a insuficiência cardíaca a causa mais comum, enquanto a falha de reexpansão aponta para encarceramento pulmonar.\n\n****Alternativa Correta** (C)**: Os critérios de Light classificam o líquido pleural como transudato quando a relação proteína pleural/sérica é < 0,5"
+  },
+  {
+    "id": 2664,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Reabilitação pulmonar",
+    "stem": "Homem de 68 anos apresenta-se para uma consulta de seguimento de rotina na UBS/Estratégia de Saúde da Família. Ele tem Doença Pulmonar Ostrutiva Crônica (DPOC) diagnosticado, há oito anos, e tabagismo de 35 maços-ano, tendo cessado o consumo de tabaco há cinco anos. Atualmente, a terapêutica consiste de tiotrópio e salmeterol (LAMA + LABA), ao qual demonstra boa adesão. Apesar da terapêutica correta, o paciente relata dispneia persistente que impacta signicativamente a sua qualidade de vida. A pontuação na escala de dispneia do Modifled Medical Research Council (mMRC) é de 3. Essa limitação afeta a sua capacidade de realizar tarefas domésticas e atividades de lazer. No último ano, ele teve uma exacerbação moderada, que foi gerida em ambulatório com um ciclo de corticosteroide e antibioterapia orais. Os resultados laboratoriais recentes são notáveis por contagem sérica de eosinólos de 96 células/mm³. O paciente reside numa região caracterizada por invernos frios e verões quentes e úmidos, com alertas esporádicos sobre a qualidade do ar devido a incêndios florestais em áreas vizinhas. A partir do quadro clínico apresentado, é correto afirmar que a conduta de escolha é",
+    "alternatives": "  A) aconselhá-lo sobre a manutenção de temperaturas interiores acima de 16 °C, durante o inverno, e em espaços de dormir abaixo de 28 °C durante as ondas de calor de verão.\n  B) agendar um teste de espirometria pré-broncodilatador, na sua próxima visita, para avaliar com maior precisão o seu nível atual de obstrução do fluxo aéreo e, assim, guiar-se pela gravidade da DPOC.\n  C) administrar a vacina pneumocócica polissacarídica PPSV23 e aconselhá-lo a receber a vacina conjugada PCV13 um ano depois.\n  D) escalonar o seu tratamento atual para uma terapia tripla em um único inalador (LAMA/LABA + corticoide inalatório) com o objetivo de reduzir o risco de futuras exacerbações.\n  E) encaminhá-lo para um programa abrangente de reabilitação pulmonar para melhorar a tolerância ao exercício e reduzir os sintomas de dispneia. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Paciente com DPOC sintomático (mMRC ≥ 2) em uso de LAMA + LABA que mantém limitações funcionais graves tem indicação formal de reabilitação pulmonar.\n\n****Alternativa Correta** (E)**: Segundo as diretrizes GOLD, pacientes sintomáticos apesar da otimização da terapia broncodilatadora dupla (LAMA + LABA) devem ser encaminhados para programas estruturados de "
+  },
+  {
+    "id": 2665,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Broncodilatadores",
+    "stem": "Mulher, 68 anos de idade, tabagista 75 anos-maço, apresenta dispneia e tosse há 2 anos. Fez espirometria, que mostrou VEF1 de 60% do predito e relação VEF1/VFC de 0,65. Apresentou um episódio de exacerbação da dispneia, com necessidade de internação hospitalar, uso de broncodilatadores e antibiótico há 4 meses. A terapia ambulatorial ideal é",
+    "alternatives": "  A) salmeterol + fluticasona, apenas se crise.\n  B) salmeterol + fluticasona, diariamente.\n  C) salmeterol apenas, diariamente.\n  D) tiotrópio apenas, diariamente.\n  E) umeclidínio/vilanterol, diariamente. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Paciente com DPOC e história de exacerbação grave recente (internação) pertence ao Grupo E da GOLD e deve iniciar dupla broncodilatação diária (LAMA + LABA).\n\n****Alternativa Correta** (E)**: A paciente apresenta espirometria compatível com DPOC (VEF1/CVF < 0,70) e histórico de hospitalização por exacerbação nos últimos 12 meses, classificando-se no Grupo "
+  },
+  {
+    "id": 2666,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+    "topic": "Sistema Único de Saúde - Tromboembolismo Pulmonar TEP Profilaxia TEVTEP",
+    "stem": "Paciente, JVCC, 25 anos de idade, apresentou quadro de dispneia súbita e dessaturação 4 horas após realização de cirurgia intra-abdominal. Após a realização de exames complementares, foi diagnosticada com tromboembolia pulmonar aguda. A partir desse caso clínico hipotético, assinale a alternativa correta, em relação ao tempo de duração da anticoagulação, segundo a SBACV.",
+    "alternatives": "  A) O objetivo de prolongar a duração do tratamento é garantir a recorrência de TVP. O risco será menor se a TVP ocorrer na presença de fatores de risco reversíveis, como cirurgias, e maior se a TVP for idiopática ou na presença de câncer.\n  B) Devem-se ponderar os riscos e benefícios para a anticoagulação estendida por tempo indefinido, mas não se deve adaptá-la de acordo a situação clínica de cada paciente.\n  C) O objetivo de prolongar a duração do tratamento é prevenir a recorrência de TVP. O risco será menor se a TVP ocorrer na presença de fatores de risco reversíveis, como cirurgias, e maior se a TVP for idiopática ou na presença de câncer. [GABARITO]\n  D) Não se devem ponderar os riscos e benefícios para a anticoagulação estendida por tempo indefinido, nem adaptar de acordo a situação clínica de cada paciente.\n  E) O objetivo de encurtar a duração do tratamento é prevenir a recorrência de TVP. O risco será menor se a TVP ocorrer na presença de fatores de risco reversíveis, como cirurgias, e maior se a TVP for idiopática ou na presença de câncer.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: O objetivo da anticoagulação prolongada é prevenir a recorrência de TVP/TEP, sendo o risco menor em eventos provocados por fatores reversíveis (cirurgias) e maior em casos idiopáticos ou oncológicos.\n\n****Alternativa Correta** (C)**: O manejo da duração da anticoagulação pós-tromboembolismo baseia-se na prevenção secundária de novos eventos tromboembólicos"
+  },
+  {
+    "id": 2667,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+    "topic": "Sistema Único de Saúde - Manifestações clínicas POCUS Anticoagulação",
+    "stem": "Uma mulher de 57 anos de idade, hipertensa, diabética e dislipidêmica foi internada na enfermaria de clínica médica devido a pielonefrite e, atualmente, está em D5 de ceftriaxone endovenoso. Exames realizados no momento: Hb 10,6; leucócitos 17.350, à custa de neutrólos; ureia 78; CR 1,34 (CLCR 46); e PCR 32. TC de abdômen apenas com nefrograma estriado à direita, urina 1 da admissão com leucocitúria e nitrito positivo. Devido a desconforto torácico e leve dessaturação, foi solicitada uma angiotomograa arterial de tórax, que deu positivo para tromboembolismo pulmonar em ramo proximal de artéria pulmonar direita. Durante a noite, houve piora clínica: PA de 89x57 mmHg; FC de 118 bpm; temperatura de 38,7 oC; e TEC = 4,5 segundos. As imagens a seguir representam a ultrassonografia à beira leito. Além das imagens anteriores, não havia alterações pleuropulmonares signicativas. Cava com variabilidade inspiratória > 50 %. Não foi observado sinal de McConnell ou D sign . Com base nessa situação hipotética, assinale a alternativa que apresenta a conduta inicial terapêutica que deverá ser adotada.",
+    "alternatives": "  A) trombólise química, coleta de hemoculturas e urocultura e escalonamento de antibióticoterapia\n  B) anticoagulação plena, coleta de hemoculturas e urocultura e escalonamento de antibióticoterapia [GABARITO]\n  C) trombólise química, coleta de urocultura e escalonamento de antibióticoterapia\n  D) trombólise química, coleta de hemoculturas e urocultura e manutenção do ceftriaxone\n  E) anticoagulação plena, coleta de hemoculturas e de urocultura e manutenção de ceftriaxone",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: TEP sem disfunção de ventrículo direito ao ecocardiograma associado a choque séptico decorrente de foco urinário requer anticoagulação plena e escalonamento de antibiótico, sem indicação de trombólise.\n\n****Alternativa Correta** (B)**: A paciente apresenta TEP proximal associado a instabilidade hemodinâmica, porém a avaliação clínica integrada (evolução em"
+  },
+  {
+    "id": 2668,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Tomografia de tórax",
+    "stem": "Correlacionar imagens tomográficas com quadro clínico. A. homem de meia idade, tabagista, dispneia progressiva aos esforços com meses de evolução, espirometria com vef1/cvf > 70, estertores predominando no final da inspiração ao exame físico B. mulher de 67 anos de idade, tabagista, tosse crônica, dispneia aos esforços, policitemia no hemograma, tempo expiratório prolongado, ausculta pulmonar com murmúrios vesicular reduzidos globalmente C. homem de 68 anos de idade, hipertenso mal ‑ controlado, cardiopata, piora de dispneia, edema de membros inferiores, ortopneia, ausculta abolida em bases e estertores em ápice pulmonar D. jovem de 27 anos de idade, com antecedente de hepatopatia em investigação, com relatos de dispneia durante os esforços físicos, ausculta com murmúrios vesiculares diminuído em bases pulmonares",
+    "alternatives": "  A) A ‐ 4, B ‐ 3, C ‐ 1, D ‐ 2 [GABARITO]\n  B) A ‐ 3, B ‐ 2, C ‐ 1, D ‐ 4\n  C) A ‐ 3, B ‐ 2, C ‐ 4, D ‐ 1\n  D) A ‐ 3, B ‐ 1, C ‐ 2, D ‐ 4\n  E) A ‐ 4, B ‐ 3, C ‐ 2, D ‐ 1",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Conecte o perfil espirométrico e epidemiológico ao padrão tomográfico clássico: restrição com velcro = fibrose (faveolamento); obstrução com tabagismo = enfisema; ortopneia com estertores apicais ou congestão = edema/cardiopatia.\n\n****Alternativa Correta** (A)**: A correlação apresentada está perfeita. O paciente A (tabagista, dispneia progressiva, VEF1/CV"
+  },
+  {
+    "id": 2669,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Sistema Único de Saúde - Tosse crônica Definição",
+    "stem": "Maria, de 78 anos de idade, é tabagista e tem carga tabágica de oitenta anos ‑ maço. Ela foi à UBS para reavaliar uma tosse que não passa há mais de dois meses e recentemente piorou. Diversos exames foram feitos para investigar a tosse de Maria, mas todos tiveram resultados incipientes. No relato do prontuário, foram observados BK no escarro negativo, RX de tórax com leve aumento dos espaços intercostais e exames laboratoriais sem alteração. Ela contou que, nos últimos quatro dias, após ter tomado friagem, teve uma piora importante da tosse, com saída de secreção amarelada, e teve um piora da diculdade respiratória ao caminhar. Com base nessa situação hipotética, assinale a alternativa que apresenta o diagnóstico mais provável no caso de Maria.",
+    "alternatives": "  A) asma crônica\n  B) DPOC exacerbado [GABARITO]\n  C) tuberculose pulmonar\n  D) crise asmática\n  E) fibrose pulmonar",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Tabagista pesado de longa data com tosse crônica e piora aguda com escarro purulento após fator desencadeante aponta direto para exacerbação de DPOC.\n\n****Alternativa Correta** (B)**: A paciente é idosa com carga tabágica massiva (80 anos-maço) e sinais radiológicos de hiperinsuflação (aumento de espaços intercostais), preenchendo critérios para Doença Pul"
+  },
+  {
+    "id": 2670,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Pneumopatia Intersticial Usual PIU Fibrose Pulmonar Idiopática FPI",
+    "stem": "Mulher, 66 anos de idade, com queixa de dispneia progressiva há um ano e tosse seca. Ex-tabagista 20 anos-maço. Sem outros antecedentes relevantes. Em espirometria, apresenta CVF de 68% do previsto e VEF1/CVF: 0,84. Tomograa de tórax mostra padrão de reticulado subpleural e basal, favo de mel e bronquiectasias de tração, sem vidro fosco significativo. A terapia deve ser iniciada com",
+    "alternatives": "  A) nintedanibe. [GABARITO]\n  B) micofenolato.\n  C) pulsoterapia com metilprednisolona.\n  D) prednisona 40 mg/dia.\n  E) tiotrópio + olodaterol.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Tosse seca, dispneia progressiva, padrão restritivo e tomografia com favo de mel sem vidro fosco = Fibrose Pulmonar Idiopática (FPI). O tratamento de escolha é antifibrótico.\n\n****Alternativa Correta** (A)**: A paciente apresenta quadro clínico e radiológico (reticulado subpleural, faveolamento e bronquiectasias de tração sem vidro fosco significativo) clá"
+  },
+  {
+    "id": 2671,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Exames complementares Antígeno leucocitário humano HLA Manifestações articulares",
+    "stem": "Homem, 29 anos de idade, apresenta dor lombar há 6 meses com irradiação para as nádegas, com piora no repouso e melhora com exercício físico. Apresenta rigidez matinal com duração de, aproximadamente, 1 hora e melhora ao longo do dia. Há 2 meses, apresenta edema em região do tendão calcâneo. Não apresenta outros sintomas ou antecedentes. Ao exame físico, apresenta limitação da flexão lombar e redução da expansão torácica. Qual dos exames a seguir será positivo?",
+    "alternatives": "  A) Anticorpo antinuclear.\n  B) Fator reumatoide.\n  C) HLA-B27. [GABARITO]\n  D) c-ANCA.\n  E) anti-CCP.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Dor lombar inflamatória em jovem + entesite (tendão calcâneo) + rigidez matinal = Espondilite Anquilosante, cujo marcador genético clássico é o HLA-B27.\n\n****Alternativa Correta** (C)**: O paciente é um homem jovem com dor lombar de características inflamatórias (piora no repouso, melhora com o exercício, rigidez matinal prolongada), associada a entesite d"
+  },
+  {
+    "id": 2672,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Manifestações clínicas Manifestações clínicas não critério Síndrome do anticorpo antifosfolipídeo SAAF",
+    "stem": "Uma mulher de 27 anos de idade, doente renal crônica dialítica devido à nefrite lúpica, com perdas de duas gestações prévias e AVC isquêmico há um ano, compareceu ao hospital com edema assimétrico de membro inferior esquerdo, realizou usg Doppler, conrmando diagnóstico de tvp. A paciente apresentou os seguintes valores para os sinais vitais: PA 145 x 95; FC 89 bpm; sat. 99% em ar ambiente; FR 15 irpm; e livedo reticular notado em membros inferiores. Estava consciente e orientada, e com extremidades quentes. Ainda em ambiente de observação no pronto ‑ socorro, a paciente relatou que possuía condições financeiras para a compra de medicamentos e desejava tratar ‑ se em casa. Considerando a situação hipotética apresentada, assinale a alternativa correta.",
+    "alternatives": "  A) A paciente pode ter alta com apixabana via oral, devido ao fato de este ser o anticoagulante oral direto com menor metabolização renal.\n  B) A paciente pode ter alta com rivaroxabana, devido à sua metabolização ser predominantemente hepática.\n  C) A paciente deve ser internada para avaliar possíveis complicações devido aos antecedentes apresentados, realizar início de anticoagulação com heparina endovenosa e transição para apixabana oral no momento da alta.\n  D) A paciente deve ser internada, anticoagulação endovenosa com heparina e início de marevan até inr próximo ao alvo. [GABARITO]\n  E) A paciente deve ser internada, e, assim, deve ‑ se proceder à anticoagulação com heparina de baixo peso molecular (enoxaparina) e dar início a marevan até inr próximo ao alvo.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: SAF de alto risco (trombose arterial + venosa) + DRC em diálise exige internação, anticoagulação parenteral com HNF (pois a HBPM acumula) e transição para varfarina.\n\n****Alternativa Correta** (D)**: A paciente apresenta critérios definitivos para Síndrome do Anticorpo Antifosfolipídeo (SAF) catastrófica/alto risco (história de AVC isquêmico, perdas gestac"
+  },
+  {
+    "id": 2731,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Atributos gerais da Atenção Primária à Saúde APS",
+    "stem": "José é médico em um consultório de rua na cidade de São Paulo e recebeu o seguinte relato de um paciente sobre o uso de substâncias: “Pô, meu chapa, essa parada da coca é cabulosa, tá ligado? Tipo, primeiro tem que ter a babila na mão, aí, é chapar o pino no lugar certo, saca? A boca é onde rola a parada, onde se encontra e onde se apaga de vez. E a parada é pesada, mano, tem que car ligado na ta, porque, se pintar cana, já era. Tem que se ligar no esquema do cemitério, pra não tomar uma bandeira, vacilão.” Com base nessa situação hipotética, é correto armar que o atributo da atenção primária que José mais deve exercitar nessa situação, a respeito da fala é o(a)",
+    "alternatives": "  A) integralidade.\n  B) acesso.\n  C) longitudinalidade.\n  D) orientação comunitária.\n  E) competência cultural. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Gírias, dialetos e códigos de populações específicas exigem competência cultural do médico para viabilizar a comunicação.\n\n****Alternativa Correta** (E)**: A competência cultural é a habilidade do profissional de saúde em reconhecer, compreender e respeitar os valores, crenças, linguagem e códigos próprios de grupos populacionais específicos, permitindo um"
+  },
+  {
+    "id": 2752,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Polifarmácia Desprescrição de medicações em idosos",
+    "stem": "Um dos principais riscos a que a população idosa está sujeita é o sobretratamento. É muito comum encontrar prescrições que não vão inuenciar a qualidade de vida nem prolongar o tempo de vida da pessoa idosa, o que poderá gerar riscos superiores aos benefícios. Considerando essas informações, assinale a alternativa que apresenta uma situação clínica que representa um sobretratamento em uma população idosa.",
+    "alternatives": "  A) uso de sulfonilureias para DM tipo 2, em população acima de oitenta anos de idade [GABARITO]\n  B) uso de estatina em alto risco cardiovascular, em pessoas acima de 65 anos de idade\n  C) uso de IECA para HAS, em pós ‑ IAM, após os oitenta anos de idade\n  D) uso de tiotrópio para DPOC após os 75 anos de idade\n  E) uso de sertralina para depressão após os noventa anos de idade",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Sulfonilureias de ação prolongada (como glibenclamida) em idosos acima de 80 anos = alto risco de hipoglicemia grave = sobretratamento (*overtreatment*).\n\n****Alternativa Correta** (A)**: O uso de sulfonilureias em pacientes com mais de 80 anos é desaconselhado pelos Critérios de Beers devido ao alto risco de hipoglicemias graves, prolongadas e de difícil "
+  },
+  {
+    "id": 2753,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Protocolos de prevenção de quedas Atividade física",
+    "stem": "Homem de 78 anos, viúvo há 2 anos, reside sozinho, tem hipertensão, diabetes, osteoartrite sintomática em ambos os joelhos e hiperplasia prostática benigna. Na consulta de retorno, relata episódio de queda em casa há um mês. A queda ocorreu sem perda de consciência, ao se levantar rapidamente do sofá, resultando em contusões leves, sem fraturas. Queixa-se também de “tontura” ocasional, principalmente ao mudar de postura, e dor nos joelhos que limita sua capacidade de realizar caminhadas mais longas, impactando suas atividades sociais. Medicações em uso: losartana (50 mg/dia); clortalidona (25 mg/dia); glibenclamida (10 mg/dia); metformina (2.550 mg/dia); doxazosina (4 mg à noite); diclofenaco (50 mg, 1 cp/dia, utilizado de forma intermitente “quando a dor aperta”). Ao exame físico: pressão arterial: 132 x 78 mmHg (sentado), 110 x 68 mmHg (em pé, após 1 minuto); frequência cardíaca: 72 bpm; IMC: 28 kg/m² ; teste Timed Up and Go : realizado em 15 segundos, com alguma diculdade para se levantar da cadeira. Exames séricos atuais: HbA1c: 7,0%; creatinina: 1,3 mg/dL ( clearance : 55 mL/min/1.73m² ). Caderneta de vacinação: registros da infância e algumas doses de reforço da vacina dupla adulto (dT), porém desatualizada. Considerando o cenário clínico apresentado e as diretrizes mais recentes para a promoção do envelhecimento saudável e prevenção de complicações na atenção primária à saúde, a melhor conduta é",
+    "alternatives": "  A) aplicar o Mini-Exame do Estado Mental (MEEM) como rastreio de rotina para décit cognitivo, considerando a idade do paciente e o relato de queda, para detectar precocemente uma possível síndrome demencial.\n  B) aplicar a vacina de herpes-zóster com vírus vivo atenuado, o reforço da dT e administrar a vacina pneumocócica 23-valente para ampliar a cobertura vacinal do paciente.\n  C) adicionar um inibidor da SGLT2 para otimizar o controle glicêmico e nefroproteção, intensicar a terapia anti- hipertensiva para atingir uma meta de PA < 120 x 70 mmHg, visando maior proteção cardiovascular.\n  D) encaminhar o paciente para um programa de exercícios físicos multicomponentes, com foco em fortalecimento muscular, equilíbrio e treino de marcha, como estratégia primária para a prevenção de futuras quedas e melhora da capacidade funcional. [GABARITO]\n  E) iniciar a desprescrição da glibenclamida, substituindo-a por glimepirida, reavaliar a necessidade da doxazosina, devido ao risco de hipotensão, e solicitar exames complementares para investigação de tontura e arritmias.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Idoso com quedas, tontura ortostática e fragilidade beneficia-se mais de intervenções que melhoram a marcha e o equilíbrio do que de restrições rígidas ou exames desnecessários.\n\n****Alternativa Correta** (D)**: O paciente apresenta alto risco de quedas (queda recente, polifarmácia, tontura ortostática e Timed Up and Go prolongado). A literatura demonstra "
+  },
+  {
+    "id": 2754,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Cuidados paliativos",
+    "stem": "Diversos estudos recentes com evidências cientícas robustas demonstram que o cuidado paliativo inuencia positivamente na qualidade de vida e impacta na redução de custos nos serviços de saúde. Acerca desse tema, assinale a alternativa correta.",
+    "alternatives": "  A) Opioides fortes, como morfina e metadona, só devem ser usados em pacientes com cuidados paliativos, durante o processo de morte.\n  B) É um dever do médico informar o diagnóstico ao paciente quando ele desejar saber, mesmo que a família se oponha. [GABARITO]\n  C) Opioides e benzodiazepínicos são proscritos para controle sintomático da dispneia.\n  D) O haloperidol deve ser evitado a todo custo como tratamento para náuseas e vômitos.\n  E) Os cuidados paliativos somente devem ser instituídos quando o cuidado “curativo” se esgotar.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A autonomia do paciente é soberana nos cuidados paliativos; se ele quer saber o diagnóstico, sua vontade prevalece sobre a oposição familiar.\n\n****Alternativa Correta** (B)**: De acordo com a bioética e os princípios paliativistas, a vontade do paciente capaz de conhecer seu diagnóstico e prognóstico deve ser respeitada, sobrepondo-se aos desejos de oculta"
+  },
+  {
+    "id": 2755,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Cuidados paliativos",
+    "stem": "Antônio, de 97 anos de idade, foi atendido em visita domiciliar de rotina por seu médico de família. Ele possui um câncer de bexiga em estágio IV, avançado. Seu médico já conduziu as diretivas antecipadas de vontade de Antônio e foi acordado que era de sua vontade ter seu óbito domiciliar. Nas últimas três semanas, os familiares notaram que a respiração de Antônio estava mais ruidosa e curta. No entanto, sempre que colocavam o oxímetro em seu dedo, sua saturação estava em 97%. O exame físico conduzido pelo médico não evidenciou alterações na ausculta pulmonar e contou uma FR de 28 ipm. Com base nessa situação hipotética, assinale a alternativa que apresenta a opção medicamentosa com maior evidência para dar conforto a Antônio",
+    "alternatives": "  A) morfina [GABARITO]\n  B) oxigênio\n  C) lorazepam\n  D) diazepam\n  E) dexametasona",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Dispneia em paciente paliativo com saturação normal se trata com morfina, não com oxigênio.\n\n****Alternativa Correta** (A)**: A morfina em baixas doses é o tratamento de primeira linha com maior evidência científica para o alívio da dispneia em pacientes oncológicos avançados, atuando no centro respiratório e diminuindo a sensação de falta de ar, mesmo com"
+  },
+  {
+    "id": 2756,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Cuidados paliativos",
+    "stem": "Um homem de 88 anos de idade compareceu ao pronto ‑ socorro, trazido pela esposa, que relatou que o cônjuge possui Alzheimer. Nos últimos meses, evoluiu com piora cognitiva progressiva e diminuição da aceitação oral. O paciente fazia acompanhamento ambulatorial com neurologista, que já havia armado a progressão da doença. O paciente é totalmente dependente para executar atividades básicas e, nos últimos meses, ele encontra ‑ se acamado. Ao exame físico: paciente severamente desidratado; emagrecido; perfusão periférica limítrofe; FC 112; PA 85 x 55 mmHg; glicemia 88; não contactuante; sonolento; e reage apenas a estímulo tátil. Com base nessa situação hipotética, assinale a alternativa correta.",
+    "alternatives": "  A) Deve ser procedida intubação orotraqueal, solicitação de tomografia computadorizada de crânio, assim como exames laboratoriais e sondagem nasoenteral para dieta e hidratação.\n  B) Deve ‑ se conversar com a esposa, entender as diretivas do paciente, expor a ausência de benefício na realização de procedimentos invasivos e tomar uma decisão médica compartilhada com a família. Após a limitação de medidas invasivas, deve ‑ se realizar a passagem de sonda nasoenteral para dieta, como também realizar a solicitação de exames laboratoriais inicialmente e hidratar o paciente, sempre sem realizar qualquer procedimento que potencialmente possa causar dor ou sofrimento.\n  C) Deve ‑ se conversar com a esposa, entender as diretivas do paciente, expor a ausência de benefício na realização de procedimentos invasivos e tomar uma decisão médica compartilhada com a família. Nesse momento, o paciente já se encontra nos últimos momentos de vida e, idealmente, não deve ‑ se realizar infusão de dieta artificial e(ou) tentar reverter as novas intercorrências agudas. [GABARITO]\n  D) Deve ‑ se conversar com a esposa, entender as preferências dela e, posteriormente, assumir a conduta conforme o que a família acreditou ser o mais adequado.\n  E) Deve ‑ se conversar com a esposa, entender as diretivas do paciente, expor a ausência de benefício na realização de procedimentos invasivos e tomar uma decisão médica compartilhada com a família. Nesse momento, o paciente já se encontra nos últimos momentos de vida e devem ‑ se, apenas, manter a hidratação, os sintomáticos e a dieta em via alternativa, sem a solicitação de exames, pois são as medidas com benefícios bem estabelecidos (estabelecidos em literatura médica) nessa fase de evolução da doença.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Demência avançada em fase terminal pede foco exclusivo no conforto, evitando exames, hidratação artificial ou sondas que geram sofrimento.\n\n****Alternativa Correta** (C)**: Em pacientes com demência terminal, a recusa alimentar e a piora clínica fazem parte da história natural da doença. A conduta ética e proporcional consiste em alinhar expectativas com a"
+  },
+  {
+    "id": 2760,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Morbimortalidade por grupos etários Doenças crônicas não transmissíveis",
+    "stem": "Assinale a alternativa que apresenta a ordem de prevalência dos tumores na população brasileira, com exceção dos tumores de pele.",
+    "alternatives": "  A) nos homens, próstata, pulmão e colorretal; e, nas mulheres, mama, colorretal e colo do útero\n  B) nos homens, próstata, colorretal e pulmão; e, nas mulheres, mama, colo do útero e colorretal\n  C) nos homens, próstata, colorretal e pulmão; e, nas mulheres, mama, colorretal e colo do útero [GABARITO]\n  D) nos homens, colorretal, próstata e pulmão; e, nas mulheres, colorretal mama e colo do útero\n  E) nos homens, próstata, pulmão e gástrico; e, nas mulheres, mama, colo do útero e pulmão",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Lembre-se do pódio oncológico nacional (excluindo pele não melanoma): Homens = Próstata, Colorretal e Pulmão; Mulheres = Mama, Colorretal e Colo do Útero.\n\n****Alternativa Correta** (C)**: Segundo as estatísticas oficiais do INCA, a ordem de incidência dos tumores mais frequentes no Brasil, excluindo o câncer de pele não melanoma, é: para os homens, prósta"
+  },
+  {
+    "id": 2907,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Tratamento da Depressão",
+    "stem": "Um homem de 35 anos de idade compareceu à unidade básica de saúde com queixas de cansaço excessivo, diculdade de concentração e perda de interesse nas atividades que costumava apreciar. Ele trabalhava como motorista de ônibus e relatou que os sintomas começaram há alguns meses, mas que se intensicaram recentemente. Ele negou histórico psiquiátrico anterior e armou que o ambiente de trabalho tem sido estressante. Após uma avaliação inicial, ele apresentou sintomas compatíveis com um quadro leve de depressão, sem sinais de ideação suicida. Com base nessa situação hipotética, a conduta indicada para o paciente segundo as diretrizes do SUS para o atendimento de saúde mental na atenção primária, é",
+    "alternatives": "  A) encaminhar o paciente imediatamente para um psiquiatra.\n  B) prescrever antidepressivos sem avaliação de outras abordagens.\n  C) agendar consultas periódicas para acompanhamento e iniciar apoio psicossocial na unidade básica de saúde. [GABARITO]\n  D) recomendar que o paciente busque terapia em uma clínica privada.\n  E) solicitar exames laboratoriais antes de iniciar qualquer ação de acompanhamento.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Depressão leve na Atenção Primária (SUS) deve ser manejada na própria UBS com seguimento regular e apoio psicossocial, sem encaminhamento precoce.\n\n****Alternativa Correta** (C)**: Segundo as diretrizes da Atenção Primária à Saúde (APS) no SUS, os transtornos mentais comuns de intensidade leve devem ser acolhidos e acompanhados na própria Unidade Básica de"
+  },
+  {
+    "id": 2910,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+    "topic": "Sistema Único de Saúde - Intoxicações Exógenas Sumário dos Tóxicos e Antídotos",
+    "stem": "Quanto à intoxicação exógena, considere as seguintes possibilidades de quadros clínicos, agentes causadores e medidas de tratamento específicas. A partir dessas informações, assinale a alternativa que apresenta a correlação mais adequada entre o quadro clínico, o agente causador e a medida de tratamento.",
+    "alternatives": "  A) A-1-X; B-2-Y; C-3-Z\n  B) A-2-X; B-3-Z; C-1-Y [GABARITO]\n  C) A-3-Z; B-1-Y; C-2-X\n  D) A-1-Z; B-2-X; C-3-Y\n  E) A-2-Y; B-1-X; C-3-Z",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Reconheça as tríades toxicológicas clássicas: bradicardia com hipotensão remete a betabloqueadores/bloqueadores de canal de cálcio (Antídoto: Glucagon/Cálcio); miose, broncorreia e salivação formam a síndrome colinérgica por organofosforados (Antídoto: Atropina); miose puntiforme e bradipneia definem a síndrome opioide (Antídoto: Naloxona).\n\n****Alternativ"
+  },
+  {
+    "id": 2912,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+    "topic": "Sistema Único de Saúde - Síndrome Narcótica",
+    "stem": "Uma mulher de 23 anos de idade foi levada por seus familiares ao setor de emergência, por rebaixamento do nível de consciência. Ela fora encontrada em sua casa, pelos familiares, desacordada e ao lado de embalagens vazias de comprimidos, em especial, os que sua avó, em cuidados paliativos, utiliza para controle da dor. Tem antecedentes de uso de drogas ilícitas e etilismo. Exame físico: letárgica; abertura ocular ao estímulo doloroso; balbucia palavras quando estimulada; e com miose bilateral e bradipneia. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor escolha de antídoto para a paciente.",
+    "alternatives": "  A) flumazenil\n  B) fisostigmina\n  C) glicose e tiamina\n  D) naloxona [GABARITO]\n  E) glucagon",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Tríade clássica da intoxicação por opioides: rebaixamento do nível de consciência, miose puntiforme e depressão respiratória (bradipneia). O antídoto é a naloxona.\n\n****Alternativa Correta** (D)**: A paciente apresenta o quadro clássico de intoxicação aguda por opioides (histórico de acesso a analgésicos potentes de uso paliativo da avó), caracterizado pel"
+  },
+  {
+    "id": 2916,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Políticas de Saúde Mental e Atenção Psicossocial (CAPS)",
+    "topic": "Sistema Único de Saúde - Reforma Psiquiátrica e Psiquiatria Social A Saúde Mental no Brasil Nova Política Nacional de Saúde Mental",
+    "stem": "A redução de danos é uma ferramenta que pode ser utilizada em diversos problemas de saúde. Um exemplo de caso onde foi usada a redução de danos é o(a)",
+    "alternatives": "  A) consumo de água gelada com hortelã por pessoas com fissura na cessação do tabagismo.\n  B) uso de naltrexona para tratamento de dependência alcoólica.\n  C) uso de cigarro eletrônico ao invés da redução da carga tabágica para tratamento do tabagismo.\n  D) uso de dissulfiram na prevenção de recaída para pessoas em manutenção do tratamento de dependência alcoólica.\n  E) substituição do consumo de açúcar refinado por adoçante para pessoas com diabetes tipo 2. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Redução de danos busca minimizar riscos sem exigir abstinência imediata; trocar açúcar por adoçante no diabetes exemplifica perfeitamente essa premissa na nutrição.\n\n****Alternativa Correta** (E)**: A estratégia de Redução de Danos (RD) consiste em oferecer alternativas e minimizar consequências negativas de hábitos ou condições crônicas quando a abstinênc"
+  },
+  {
+    "id": 3080,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Endocardite Infecciosa e Sepse de Foco Endovascular",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Critérios de Duke modificados",
+    "stem": "Paciente diabético e hipertenso apresenta queda do estado geral. Na investigação é feito fundo de olho que mostra hemorragias retinianas próximas ao disco óptico caracterizando manchas de Roth. O mais indicado é realizar",
+    "alternatives": "  A) anti-HIV + VDRL.\n  B) doppler transcraniano + angiotomografia encefálica.\n  C) ressonância magnética de encéfalo + líquor.\n  D) ecocardiograma + hemoculturas. [GABARITO]\n  E) coagulograma + fator antinuclear (FAN).",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Manchas de Roth no fundo de olho são hemorragias retinianas com centro claro altamente sugestivas de Endocardite Infecciosa, exigindo a realização imediata de hemoculturas e ecocardiograma.\n\n****Alternativa Correta** (D)**: As manchas de Roth representam depósitos de imunocomplexos ou micro-êmbolos sépticos na retina que levam a infarto da camada de fibras"
+  },
+  {
+    "id": 3081,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Características Ultrassonográficas dos Nódulos",
+    "stem": "Considere os quatro achados ultrassonográficos na avaliação de nódulo tireoidiano: I. Hipoecogenicidade. II. Calcificações ininterruptas (“casca de ovo”). III. Formato mais alto que largo. IV. Aparência espongiforme. Representam aumento de risco de câncer, APENAS",
+    "alternatives": "  A) I e IV.\n  B) I e II.\n  C) II e III.\n  D) II e IV.\n  E) I e III. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Hipoecogenicidade e o formato 'mais alto que largo' são os maiores preditores ultrassonográficos de malignidade na tireoide.\n\n****Alternativa Correta** (E)**: A hipoecogenicidade (I) reflete a alta celularidade típica de carcinomas tireoidianos. O formato mais alto que largo (maior no sentido anteroposterior do que transverso) (III) indica que o nódulo cre"
+  },
+  {
+    "id": 3082,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+    "topic": "Fundação Carlos Chagas (FCC) Hospital Sírio-Libanês - HSL Doença de von Willebrand",
+    "stem": "Foram analisados 100 pacientes com síndrome de von Willebrand adquirida. Em 48 destes pacientes haverá com maior probabilidade a presença de doença",
+    "alternatives": "  A) cardiovascular.\n  B) tireoidiana.\n  C) mieloproliferativa.\n  D) linfoproliferativa. [GABARITO]\n  E) autoimune.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Síndrome de von Willebrand adquirida? Pense imediatamente em doenças linfoproliferativas (como mieloma múltiplo e macroglobulinemia de Waldenström) e neoplasias mieloproliferativas.\n\n****Alternativa Correta** (D)**: A síndrome de von Willebrand adquirida é uma coagulopatia rara que mimetiza a forma congênita, mas ocorre em adultos sem história prévia de sa"
+  },
+  {
+    "id": 3083,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+    "topic": "Fundação Carlos Chagas (FCC) Hospital Sírio-Libanês - HSL Neurologia Acidentes Vasculares Cerebrais AVC Cefaleias Secundárias",
+    "stem": "Considere a frequência de alguns sintomas em três subtipos de acidente vascular cerebral: Hemorragia intraparenquimatosa, isquemia cerebral e hemorragia subaracnoide correspondem, respectivamente, aos subtipos",
+    "alternatives": "  A) , e .\n  B) , e . [GABARITO]\n  C) , e .\n  D) , e .\n  E) , e .",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Conecte a apresentação clínica e fisiopatológica ao tipo de AVC: AVE isquêmico costuma ter déficit focal progressivo ou súbito sem pico hipertensivo dramático inicial; hemorragia intraparenquimatosa cursa com déficit neurológico de instalação rápida e hipertensão grave; e hemorragia subaracnoide clássica apresenta cefaleia súbita e intensa.\n\n****Alternativ"
+  },
+  {
+    "id": 3084,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+    "topic": "Fundação Carlos Chagas (FCC) Hospital Sírio-Libanês - HSL Fatores desencadeantes",
+    "stem": "Em relação à amônia, o aumento da produção, absorção ou da sua entrada no cérebro podem precipitar encefalopatia hepática em cirróticos. Tal fato associa-se a fatores como obstipação, hemorragia gastointestinal,",
+    "alternatives": "  A) acidose metabólica e hipocalemia.\n  B) acidose mista e hipocalemia.\n  C) acidose metabólica e hipercalemia.\n  D) alcalose metabólica e hipocalemia. [GABARITO]\n  E) alcalose metabólica e hipercalemia.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Lembre-se da dupla perigosa na encefalopatia hepática: Alcalose metabólica (facilita a entrada de amônia no cérebro) + Hipocalemia (aumenta a produção renal de amônia).\n\n****Alternativa Correta** (D)**: A alcalose metabólica eleva a fração não ionizada da amônia (NH3), que é lipossolúvel e atravessa facilmente a barreira hematoencefálica em direção ao sist"
+  },
+  {
+    "id": 3085,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Nefrologia As grandes síndromes glomerulares Glomerulonefrite rapidamente progressiva",
+    "stem": "Situações variadas como infecção por HIV, doença de Still, hemofagocitose, uso de bifosfonatos e transplante renal estão associadas à seguinte nefropatia:",
+    "alternatives": "  A) Amiloidose renal.\n  B) Nefropatia mesangial.\n  C) Glomerulonefrite membranoproliferativa.\n  D) Nefropatia de lesões mínimas.\n  E) Glomerulopatia colapsante. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: A glomerulopatia colapsante é uma variante da GESF associada a infecções virais (HIV), condições inflamatórias sistêmicas (doença de Still), hemofagocitose, uso de bifosfonatos e complicações pós-transplante renal.\n\n****Alternativa Correta** (E)**: A glomerulopatia colapsante é uma variante histológica da glomeruloesclerose segmentar e focal (GESF), caract"
+  },
+  {
+    "id": 3087,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Endocardite Infecciosa e Sepse de Foco Endovascular",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Infectologia Quadro clínico",
+    "stem": "Nas endocardites infecciosas podem surgir sinais bastante característicos entre os quais NÃO se incluem:",
+    "alternatives": "  A) pápulo-pústulas em polpas digitais.\n  B) manchas cutâneas róseas, com bordas definidas e centro pálido, evanescentes, não pruriginosas, principalmente no tronco. [GABARITO]\n  C) petéquias em extremidades e palato.\n  D) pequenas hemorragias em farpas subungueais.\n  E) máculas palmo-plantares.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A questão pede a manifestação cutânea que NÃO faz parte da endocardite infecciosa. As lesões descritas na B são características de exantema viral ou eritema marginal (febre reumática), não de fenômenos embólicos ou imunológicos da endocardite.\n\n****Alternativa Correta** (B)**: As manchas cutâneas róseas com bordas definidas e centro pálido, evanescentes e "
+  },
+  {
+    "id": 3088,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Vasculites Sistêmicas dos Grandes, Médios e Pequenos Vasos",
+    "topic": "Fundação Carlos Chagas (FCC) Hospital Sírio-Libanês - HSL Reumatologia Vasculite crioglobulinêmica",
+    "stem": "Mulher de 38 anos desenvolve artralgia, púrpura e fraqueza por meses tendo sido diagnosticada com síndrome de crioglobulinemia mista. A causa mais comum desta síndrome é",
+    "alternatives": "  A) dermatomiosite/polimiosite.\n  B) lúpus eritematoso sistêmico.\n  C) tuberculose pulmonar.\n  D) hepatite C. [GABARITO]\n  E) linfoma de Hodgkin.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A principal causa de crioglobulinemia mista é a infecção crônica pelo vírus da hepatite C (HCV). Memorize essa associação: crioglobulinemia mista → hepatite C.\n\n****Alternativa Correta** (D)**: A crioglobulinemia mista (tipos II e III) é uma vasculite de pequenos vasos mediada por imunocomplexos. A infecção crônica pelo vírus da hepatite C (HCV) é responsá"
+  },
+  {
+    "id": 3089,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "topic": "Fundação Carlos Chagas (FCC) Hospital Sírio-Libanês - HSL Abscesso pulmonar",
+    "stem": "Homem de 42 anos, com alcoolismo grave, vivendo em situação precária de higiene, procura o pronto-socorro com queixa de febre, sudorese noturna, cansaço, anorexia, emagrecimento e tosse produtiva há 1 semana. Está toxemiado, emagrecido, dentes em mau estado, taquipneico, PA: 108 × 68 mmHg, pulso no: 98 bpm, saturando 94% em ar ambiente; tem estertores nos e grosseiros no 1/3 inferior do pulmão direito, sem outras alterações signicativas. Imagens dos pulmões a seguir. O tratamento empírico deve incluir, necessariamente, cobertura contra",
+    "alternatives": "  A) bacilo de Koch.\n  B) fungos.\n  C) S.aureus.\n  D) Pseudomonas aeruginosa.\n  E) anaeróbios. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Pneumonia aspirativa em paciente com alcoolismo e má higiene dental: a cobertura obrigatória é para anaeróbios da cavidade oral.\n\n****Alternativa Correta** (E)**: O paciente apresenta fatores de risco típicos para pneumonia aspirativa: alcoolismo, dentes em mau estado (má higiene oral) e quadro pulmonar agudo com acometimento de segmento dependente (terço "
+  },
+  {
+    "id": 3090,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Tratamento da Hipertensão arterial",
+    "stem": "O tratamento de hipertensão arterial sistêmica tem como objetivo a diminuição do risco cardiovascular do paciente. O principal determinante na busca desse objetivo é",
+    "alternatives": "  A) iniciar o tratamento com 2 anti-hipertensivos, sendo um deles um diurético.\n  B) a utilização de pelo menos uma droga capaz de diminuir a pressão arterial e exercer efeito cardioprotetor.\n  C) a utilização inicial de medicação capaz de inibir a enzima de conversão da angiotensina.\n  D) diminuição da pressão arterial até a meta previamente determinada. [GABARITO]\n  E) iniciar o tratamento com medicação capaz de realizar a diminuição da resistência arterial periférica bloqueando canais de cálcio.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: O que realmente dita a redução do risco cardiovascular na Hipertensão Arterial Sistêmica é atingir a meta pressórica estabelecida, independentemente da classe de anti-hipertensivo utilizada.\n\n****Alternativa Correta** (D)**: A meta fundamental no tratamento da hipertensão arterial é a redução da pressão arterial aos níveis recomendados pelas diretrizes atu"
+  },
+  {
+    "id": 3091,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Lúpus Eritematoso Sistêmico (LES), Esclerose Sistêmica e Miopatias Inflamatórias",
+    "topic": "Fundação Carlos Chagas (FCC) Hospital Sírio-Libanês - HSL Cardiologia Quadro clínico",
+    "stem": "Mulher de 46 anos portadora de lúpus eritematoso sistêmico em remissão, atualmente no processo de retirada de prednisona, tomando 10 mg em dias alternados, é atendida no pronto-socorro com queixa de dor precordial de natureza progressiva há cerca de 6 horas. O exame físico não mostra alterações signicativas. O eletrocardiograma realizado na sala de emergência é mostrado abaixo: O diagnóstico mais provavelmente é de",
+    "alternatives": "  A) pericardite aguda. [GABARITO]\n  B) infarto agudo do miocárdio em área inferior.\n  C) infarto antigo do miocárdio em ventrículo direito.\n  D) infarto agudo do miocárdio em parede lateral.\n  E) distúrbio de condução no ramo direito.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Dor precordial em paciente com lúpus eritematoso sistêmico (muitas vezes associada à redução de corticoides) com supradesnivelamento de ST difuso é sinônimo de pericardite aguda (serosite).\n\n****Alternativa Correta** (A)**: A pericardite aguda é a manifestação cardíaca mais comum do lúpus eritematoso sistêmico. O quadro clínico clássico envolve dor torácic"
+  },
+  {
+    "id": 3092,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Reumatologia Gota",
+    "stem": "NÃO é droga que pode ser utilizada com a nalidade de promover a diminuição da concentração plasmática de ácido úrico:",
+    "alternatives": "  A) Alopurinol.\n  B) Benzobromarona.\n  C) Colchicina. [GABARITO]\n  D) Febuxostat.\n  E) Probenecida.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A colchicina é um anti-inflamatório puro usado para crises de gota; ela trata a dor e a inflamação, mas não reduz o ácido úrico no sangue.\n\n****Alternativa Correta** (C)**: A colchicina atua inibindo a polimerização dos microtúbulos e a função dos neutrófilos, sendo altamente eficaz no alívio e na profilaxia das crises inflamatórias agudas de gota. No enta"
+  },
+  {
+    "id": 3093,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Agentes etiológicos Quadro clínico",
+    "stem": "Paciente de 36 anos sem comorbidades signicativas desenvolve pneumonia adquirida na comunidade. Uma coleta adequada de secreção traqueal detecta S.aureus como agente etiológico. Essa infecção pulmonar está associada, mais provavelmente, a",
+    "alternatives": "  A) uso endovenoso de drogas ilícitas.\n  B) surtos em escolas ou comunidades fechadas.\n  C) vacinação recente contra Influenza.\n  D) sinusopatia aguda.\n  E) infecção recente por Influenza. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Pneumonia grave por Staphylococcus aureus em jovens e adultos sem comorbidades clássicas tem forte associação com infecção recente pelo vírus da Influenza.\n\n****Alternativa Correta** (E)**: A infecção pelo vírus da Influenza causa importante dano e desepitelização da mucosa do trato respiratório, o que facilita drasticamente a adesão e a invasão bacteriana"
+  },
+  {
+    "id": 3094,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Cardiologia Infarto de ventriculo direito",
+    "stem": "Homem de 64 anos, diabético, em uso de daglifozina, procura atendimento de urgência por dor precordial intensa há 1 hora; está hemodinamicamente estável, com ausculta cardíaca e pulmonar normais, sem outros achados signicativos. O ECG e o ecocardiograma mostram alterações típicas de infarto agudo do miocárdio de ventrículo direito, com elevação do segmento ST. Nas primeiras 24-48 horas deve ser empregado com cautela, ou mesmo evitado, o uso de",
+    "alternatives": "  A) ácido acetilsalicílico.\n  B) nitratos. [GABARITO]\n  C) inibidor de P2Y12.\n  D) heparina de baixo peso molecular.\n  E) betabloqueadores.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: No infarto de ventrículo direito, o coração depende totalmente da pré-carga para manter o débito cardíaco; nitratos causam grave hipotensão e choque.\n\n****Alternativa Correta** (B)**: No infarto agudo do miocárdio com acometimento do ventrículo direito, o miocárdio ventricular direito perde sua contratilidade e passa a depender criticamente de uma adequada"
+  },
+  {
+    "id": 3098,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Neurologia Estado Confusional Agudo Delirium Quadro Clínico",
+    "stem": "Uma senhora de 85 anos de idade está no 2º pós-operatório de colecistectomia laparoscópica por colecistite aguda com empiema, perfurada e bloqueada. A operação não teve intercorrências. A paciente passou a apresentar confusão mental, alucinações e agitação. Pulso: 80 bpm, regular, PA: 120 × 70 mmHg. T: 36,5 °C, SatO₂: 98%, em ar ambiente. O exame do abdome revela um pouco de dor em hipocôndrio direito. Está em uso de ceftriaxona, losartana, metformina, rosuvastatina, alopurinol e hidroclorotiazida. A conduta diante do diagnóstico mais provável deve ser",
+    "alternatives": "  A) ampliação da antibioticoterapia para incluir imipenem.\n  B) reavaliar as medicações e procurar distúrbios hidroeletrolíticos. [GABARITO]\n  C) anticoagulação plena.\n  D) AAS.\n  E) suspensão da ceftriaxona.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Delirium no pós-operatório de idosos é multifatorial. A conduta inicial exige afastar distúrbios metabólicos/hidroeletrolíticos e revisar a polifarmácia, antes de presumir infecções ou novas doenças vasculares.\n\n****Alternativa Correta** (B)**: A paciente idosa apresenta quadro agudo de confusão mental e alucinações (delirium) no pós-operatório sem sinais "
+  },
+  {
+    "id": 3109,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Fundação Carlos Chagas (FCC) Hospital Sírio-Libanês - HSL COVID 19",
+    "stem": "De acordo com a Sociedade Brasileira de Cardiologia, as vacinas contra Covid-19",
+    "alternatives": "  A) induzem trombose da veia cerebral em taxa superior àquela observada em pacientes hospitalizados com Covid- 19.\n  B) são contraindicadas em indivíduos com história prévia de tromboembolismo venoso, com base em evidências de metanálises.\n  C) não são seguras para pacientes cardíacos e seus benefícios não superam os riscos de efeitos adversos relacionados.\n  D) têm como principais efeitos adversos cardiovasculares a trombose com trombocitopenia imune e a miocardite. [GABARITO]\n  E) que utilizam vetor de adenovírus causam miocardite em adultos idosos.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Os principais efeitos adversos cardiovasculares das vacinas contra Covid-19 documentados são a trombose com trombocitopenia imune (vetores virais) e a miocardite (RNA mensageiro).\n\n****Alternativa Correta** (D)**: Conforme as diretrizes e posicionamentos da Sociedade Brasileira de Cardiologia (SBC), os eventos adversos cardiovasculares raros associados às "
+  },
+  {
+    "id": 3110,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Cardiologia Estratificação do risco cardiovascular global e metas terapêuticas",
+    "stem": "Mulher de 57 anos, em tratamento de diabetes mellitus tipo 2 (DM2) há 4 anos. Alimentação equilibrada e saudável, não é tabagista, pratica musculação 2 vezes por semana e caminhada 5 vezes por semana desde que soube do diagnóstico. Antecedentes familiares – mãe e irmã com DM2, sem doenças cardiovasculares graves ou câncer. Está assintomática. IMC: 24. PA: 110 × 70. Hb glicada: 6,8. Creatinina: 0,70. Microalbuminúria: 5 mg/g. Colesterol total: 186. HDL: 60. Triglicérides (TGD):135. O risco cardiovascular (RCV) desta paciente de acordo com a Diretriz Brasileira de Dislipidemias de 2017 é:",
+    "alternatives": "  A) RCV alto devido ao histórico familiar, idade e valor da microalbuminúria.\n  B) RCV intermediário devido ao diagnóstico DM2 recente, valor do HDL e Hb glicada.\n  C) RCV muito alto devido ao diagnóstico de DM2, histórico familiar e valor de TGD.\n  D) RCV intermediário devido ao tempo de evolução do diabetes e valor do LDL.\n  E) RCV alto devido a idade e diagnóstico de DM2. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Diabético tipo 2 com mais de 50 anos (no caso, 57 anos) já é classificado diretamente como de risco cardiovascular alto, independentemente de outros fatores de risco adicionais isolados.\n\n****Alternativa Correta** (E)**: De acordo com a Diretriz Brasileira de Dislipidemias e Prevenção da Aterosclerose, o paciente com Diabetes Mellitus tipo 2 é estratificad"
+  },
+  {
+    "id": 3113,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Endocardite Infecciosa e Sepse de Foco Endovascular",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Infectologia Infecção de corrente sanguínea ICS",
+    "stem": "Um paciente de 78 anos de idade, doente renal crônico dialítico em uso de cateter de Shilley em veia femoral à direita, encontrava-se no oitavo dia de internação na enfermaria de clínica médica da Santa Casa de São Paulo, devido à agudização da doença de base, quando evoluiu com febre e calafrios, apresentando hiperemia ao redor do cateter de diálise. A equipe prontamente realizou a coleta de três pares de hemoculturas, sendo duas de sangue periférico e uma do cateter, além de iniciar a administração de ceftazidima e vancomicina empiricamente. Após alguns dias, foi observado crescimento de Staphylococcus aureus MRSA nas hemoculturas. Também foi notada a presença de cocos gram-positivos em identicação nas hemoculturas solicitadas 48 horas após os primeiros pares. O paciente encontra-se em estabilidade hemodinâmica, afebril, conforme o exame físico atual, sem sopros audíveis. Há seis dias em uso de vancomicina, está com aparente boa resposta clínica. Sem evidência de vegetações no ecocardiograma transtorácico. Entre as alternativas a seguir, assinale aquela que apresenta a melhor conduta a ser seguida no caso clínico acima.",
+    "alternatives": "  A) manter antibioticoterapia com vancomicina por mais oito dias\n  B) descalonar antibioticoterapia para oxacilina e mantê-la por mais oito dias\n  C) descalonar antibioticoterapia para oxacilina e solicitar ecocardiograma transesofágico\n  D) manter vancomicina e solicitar ecocardiograma transesofágico [GABARITO]\n  E) manter antibioticoterapia com vancomicina por mais dezesseis dias",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Bacteremia por *Staphylococcus aureus* com foco removido mas com hemoculturas persistentes após 48h exige troca do ecocardiograma transtorácico por um **transesofágico** e manutenção da antibioticoterapia apropriada para o patógeno.\n\n****Alternativa Correta** (D)**: O paciente apresenta infecção de corrente sanguínea por *Staphylococcus aureus* resistente "
+  },
+  {
+    "id": 3114,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Insuficiência Cardíaca",
+    "stem": "Em uma consulta no ambulatório de clínica médica da Santa Casa de São Paulo, uma mulher idosa, de 72 anos de idade, hipertensa, ex-tabagista (vinte anos-maço), dislipidêmica, obesa, com evento trombótico prévio havia dois anos durante internação por covid-19, queixa-se de dispneia aos esforços físicos, edema de membros inferiores, ortopneia e dispneia paroxística noturna há dois meses. Traz consigo um ecocardiograma transtorácico recente, realizado em ritmo irregular, com fração de ejeção de 57%, aumento de átrio esquerdo, hipertensão arterial pulmonar com valor de 37 mmHg e relação VD/VE preservada. Entre as alternativas a seguir, assinale aquela que apresenta a hipótese diagnóstica mais provável da causa da dispneia na paciente retratada no caso clínico acima.",
+    "alternatives": "  A) tromboembolismo pulmonar crônico, com cor pulmonale\n  B) insuficiência cardíaca [GABARITO]\n  C) doença pulmonar obstrutiva crônica com cor pulmonale\n  D) hipertensão arterial pulmonar idiopática\n  E) síndrome pós-covid",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Fração de ejeção preservada ($\\ge$ 50%) associada a sintomas típicos de congestão e comorbidades metabólicas (HAS, obesidade, dislipidemia) define a **Insuficiência Cardíaca com Fração de Ejeção Preservada (ICFEP)**.\n\n****Alternativa Correta** (B)**: A paciente apresenta quadro clássico de insuficiência cardíaca (dispneia aos esforços, ortopneia, DPN e ede"
+  },
+  {
+    "id": 3115,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Neurologia Acidentes Vasculares Cerebrais AVC Acidente Vascular Cerebral Isquêmico",
+    "stem": "Um paciente idoso, de 82 anos de idade, com acidente vascular cerebral isquêmico (AVCI) prévio, acontecido há quinze anos, e com sequelas mínimas, apresenta hipertensão arterial sistêmica e dislipidemia. Faz uso domiciliar de AAS, rosuvastatina, propranolol e hidroclorotiazida. Em consulta na clínica médica da Santa Casa de São Paulo, queixa-se de tontura provocada e episódica. Entre as alternativas a seguir, assinale aquela que apresenta a hipótese diagnóstica mais provável a ser investigada na consulta referida no caso clínico acima e a conduta posterior, respectivamente.",
+    "alternatives": "  A) acidente vascular cerebral (AVC) de fossa posterior — solicitar ressonância magnética de crânio\n  B) hipotensão postural — avaliar a troca ou suspensão do propranolol, pois ele está mais associado ao quadro em questão, quando comparado ao diurético\n  C) vertigem posicional paroxística benigna (VPPB), pois se trata da causa de tontura provocada e episódica mais comum — referenciar o caso ao otorrinolaringologista e iniciar terapêutica com fludrocortisona\n  D) hipotensão postural — entre as medidas diagnósticas e terapêuticas iniciais, inclui-se avaliar a troca ou suspensão da hidroclorotiazida, pois ela está mais associada ao quadro em questão que o beta-bloqueador [GABARITO]\n  E) AVC de fossa posterior — encaminhar o paciente ao pronto-socorro",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Idoso em uso de anti-hipertensivos que apresenta tontura episódica e relacionada à mudança de decúbito deve sempre levantar a suspeita de hipotensão postural. Entre as drogas de uso comum, os diuréticos (como a hidroclorotiazida) são grandes causadores de depleção de volume e queda pressórica ortostática.\n\n****Alternativa Correta** (D)**: A hipotensão post"
+  },
+  {
+    "id": 3116,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Apixabana",
+    "stem": "Um paciente doente renal crônico, em piora progressiva nos últimos meses, encontrava-se no oitavo dia de internação na enfermaria de clínica médica da Santa Casa de São Paulo, devido ao diagnóstico de tromboembolismo pulmonar. Evoluiu com melhora clínica, seu escore de PESI era de baixo risco, seu ecocardiograma não apresentou alterações; troponina e BNP estavam normais. Estava em uso de heparina em bomba de infusão contínua ajustada conforme TTPA. No momento da alta hospitalar, tinha clearance de creatinina de 18 mL/min/1,73 m². Possui boas condições sociais. Entre os fármacos a seguir, o mais adequado ao paciente do caso clínico acima é",
+    "alternatives": "  A) rivaroxabana, pois promove a menor excreção renal entre os novos anticoagulantes orais (Noacs).\n  B) apixabana, pois promove a menor excreção renal entre os Noacs. [GABARITO]\n  C) dabigatrana, pois promove a menor excreção renal entre os Noacs.\n  D) marevan, pois promove baixa excreção renal e menor risco de sangramento em doentes renais crônicos.\n  E) endoxabana, pois promove a menor excreção renal entre os Noacs.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Entre os anticoagulantes orais diretos (DOACs), a apixabana é o fármaco que possui a menor taxa de excreção renal (cerca de 27%), sendo a escolha mais segura para pacientes com doença renal crônica avançada.\n\n****Alternativa Correta** (B)**: A apixabana é metabolizada principalmente pelo fígado (via CYP3A4) com uma menor dependência da eliminação renal em "
+  },
+  {
+    "id": 3117,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Cardiologia Outras causas endócrinas de hipertensão secundária",
+    "stem": "Segundo as Diretrizes Brasileiras de Hipertensão Arterial, a hipertensão arterial secundária é a forma de hipertensão arterial decorrente de uma causa identicável, que pode ser tratada com uma intervenção especíca, a qual determina a cura ou a melhora do controle pressórico. Nesse sentido, são indícios de hipertensão arterial secundária",
+    "alternatives": "  A) hipertensão estágio 3 antes dos trinta anos de idade ou após os 55 anos de idade; e hipertensão resistente ou refratária. [GABARITO]\n  B) uso de hormônios exógenos, fármacos ou outras substâncias que possam diminuir a pressão arterial; e crises de palpitações, sudorese e salivação.\n  C) ausência de apneia obstrutiva do sono; e fácies típicas ou biotipo de doenças que cursam com hipertensão arterial.\n  D) presença de sopros em territórios venosos exclusivamente ou massas abdominais; e assimetria ou ausência de pulsos em MMII.\n  E) hiperpotassemia espontânea ou severa induzida por diuréticos (> 3,0 mEq/L); exame de urina anormal (hematúria glomerular [dismórfica] ou presença de albuminúria/proteinúria); diminuição do RFG estimado; e aumento da creatinina sérica ou alterações de imagem renal.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: A suspeita de hipertensão arterial secundária deve ser levantada em idades extremas de apresentação (jovens < 30 anos ou idosos > 55 anos com hipertensão grave) e naqueles com controle refratário apesar do uso de múltiplos fármacos.\n\n****Alternativa Correta** (A)**: De acordo com as diretrizes de cardiologia, a hipertensão estágio 3 (PA ≥ 160/100 mmHg) em "
+  },
+  {
+    "id": 3118,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Tratamento Quimioprofilaxia primária",
+    "stem": "O Manual de Recomendações para o Controle da Tuberculose no Brasil (2ª ed.), publicado pelo Ministério da Saúde, dene que a probabilidade de uma pessoa saudável se infectar ao ser exposta ao bacilo da tuberculose é de 30%. As pessoas infectadas, em geral, permanecem saudáveis por muitos anos, com imunidade parcial ao bacilo, em uma condição conhecida como infecção latente pelo Mycobacterium tuberculosis (ILTB). Apesar de grande parte da população mundial estar infectada com M. tuberculosis , não há indicação de investigação indiscriminada de ILTB na população em geral. Considerando esse assunto, assinale a alternativa que apresenta um exemplo de população para a qual essa investigação é indicada e que potencialmente se beneficiará do tratamento preconizado.",
+    "alternatives": "  A) adultos que tiveram contato, nos últimos dois anos, com paciente com a forma pulmonar e miliar/disseminada da tuberculose.\n  B) pessoas portadoras do HIV com contagem de CD4+ abaixo de cinquenta células por metro cúbico.\n  C) pessoas em uso de inibidores de TNF alfa ou corticosteroides (equivalente a > 15 mg/dia de prednisona por mais de um mês) [GABARITO]\n  D) indivíduos no período pós-transplante que farão terapia imunossupressora.\n  E) profissionais de saúde e pessoas que vivem ou trabalham no sistema prisional ou em instituições de longa permanência, salvo médicos e enfermeiros.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: O rastreamento e tratamento da infecção latente da tuberculose (ILTB) são obrigatórios em pacientes imunocomprometidos ou que iniciarão terapia imunossupressora potente, como o uso prolongado de corticosteroides em doses altas ou inibidores de TNF-alfa.\n\n****Alternativa Correta** (C)**: Indivíduos em uso de inibidores de TNF-alfa ou corticoterapia crônica "
+  },
+  {
+    "id": 3119,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Síndrome de Lise Tumoral SLT Síndrome de lise tumoral SLT Síndrome de Lise Tumoral",
+    "stem": "A síndrome de lise tumoral é caracterizada pela destruição maciça de células malignas e consequente liberação do seu conteúdo no espaço extracelular. Embora possa ocorrer de modo espontâneo, a síndrome de lise tumoral aparece, e m geral, logo após o início do tratamento com agentes quimioterápicos citotóxicos. A primeira classicação foi desenvolvida por Hande e Garrow, em 1993, e, recentemente, Cairo e Bishop a modicaram. Conforme os critérios mais recentes para o diagnóstico dessa síndrome, é necessário que o paciente apresente, de três dias antes até sete dias depois do tratamento, pelo menos duas das seguintes alterações:",
+    "alternatives": "  A) ácido úrico ≥ 5 mg/dL ou com aumento > 25% do valor de base; potássio ≥ 8 mEq/L ou com aumento > 25% do valor de base; fósforo ≥ 4,5 mg/dL ou com aumento > 25% do valor de base; e(ou) cálcio total ≤ 7 mg/dL ou com redução > 25% do valor de base.\n  B) ácido úrico ≥ 8 mg/dL ou com aumento > 25% do valor de base; potássio ≥ 6 mEq/L ou com aumento > 25% do valor de base; fósforo ≥ 9 mg/dL ou com aumento > 25% do valor de base; e(ou) cálcio total > 7 mg/dL ou com aumento > 25% do valor de base.\n  C) ácido úrico ≥ 5 mg/dL ou com aumento > 25% do valor de base; potássio ≥ 8 mEq/L ou com aumento > 25% do valor de base; fósforo ≥ 9 mg/dL ou com aumento > 25% do valor de base; e(ou) cálcio total > 7 mg/dL ou com aumento > 25% do valor de base.\n  D) ácido úrico ≥ 8 mg/dL ou com aumento > 25% do valor de base; potássio ≥ 6 mEq/L ou com aumento > 25% do valor de base; fósforo ≥ 4,5 mg/dL ou com aumento > 25% do valor de base; e(ou) cálcio total ≤ 7 mg/dL ou com redução > 25% do valor de base. [GABARITO]\n  E) ácido úrico < 8 mg/dL ou com redução > 25% do valor de base; potássio < 6 mEq/L ou com redução > 25% do valor de base; fósforo < 4,5 mg/dL ou com redução > 25% do valor de base; e(ou) cálcio total > 7 mg/dL ou com aumento > 25% do valor de base.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Decore os limites laboratoriais dos critérios de Cairo e Bishop para Síndrome de Lise Tumoral: Ácido Úrico ≥ 8, Potássio ≥ 6, Fósforo ≥ 4,5 e Cálcio ≤ 7 (ou variação de 25% para mais ou para menos).\n\n****Alternativa Correta** (D)**: Os critérios de Cairo e Bishop definem a Síndrome de Lise Tumoral laboratorial pela presença de duas ou mais das seguintes al"
+  },
+  {
+    "id": 3120,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Alterações eletrocardiográficas mais comuns",
+    "stem": "Uma paciente de 71 anos de idade, sem antecedentes patológicos conhecidos, apresentou, subitamente, vômitos, hipertensão arterial, polaciúria e confusão mental. Durante a consulta, foi realizado eletrocardiograma, que, a ̀ primeira vista, não evidenciou anormalidades. O ritmo era sinusal e a frequência cardíaca, assim como as ondas P, QRS e T, estavam normais. Uma análise mais minuciosa identicou alterações que sugerem encurtamento do intervalo QT. A imagem a seguir representa o eletrocardiograma dessa paciente. Assinale a alternativa que apresenta a alteração hidroeletrolítica mais provável no caso clínico acima.",
+    "alternatives": "  A) hipocalemia\n  B) hipercalemia\n  C) hipomagnesemia\n  D) hipocalcemia\n  E) hipercalcemia [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: O encurtamento do intervalo QT é a alteração eletrocardiográfica clássica da hipercalcemia.\n\n****Alternativa Correta** (E)**: A hipercalcemia provoca encurtamento do segmento ST e do intervalo QT no ECG, e está associada a sintomas como confusão mental, vômitos e hipertensão. Nesta paciente, a apresentação súbita com vômitos, hipertensão, polaciúria e conf"
+  },
+  {
+    "id": 3121,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Meningites, Encefalites e Infecções do SNC",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Neurologia Cefaleia por Hipotensão Liquórica Líquor e Ventrículos",
+    "stem": "Um paciente de 45 anos de idade, que tinha realizado cirurgia de exérese de tumor de hipóse havia sete dias, via transfenoidal, compareceu ao pronto-socorro com queixa de cefaleia intensa, febre de 38,5 oC e rinorreia clara e volumosa. Estava consciente, orientado, sem sinais localizatórios. Iniciou-se antibioticoterapia endovenosa e foi realizada internação para investigação diagnóstica. Considerando esse caso hipotético, assinale a alternativa que apresenta a medicação que deve ser utilizada junto ao tratamento dessa complicação.",
+    "alternatives": "  A) dexametasona\n  B) furosemida\n  C) acetazolamida [GABARITO]\n  D) manitol\n  E) desferroxamina",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: O quadro de rinorreia clara e volumosa pós-cirurgia transfenoidal é altamente sugestivo de fístula liquórica. A acetazolamida, ao reduzir a produção de líquor, é uma das medidas conservadoras para facilitar o fechamento da fístula.\n\n****Alternativa Correta** (C)**: A acetazolamida é um inibidor da anidrase carbônica que diminui a produção de líquido cefalo"
+  },
+  {
+    "id": 3122,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Introdução aos distúrbios acidobásicos Distúrbios metabólicos Distúrbios respiratórios",
+    "stem": "Uma paciente de 65 anos idade, com antecedentes de hipertensão e diabetes, deu entrada no pronto-socorro, e seus dados eram os seguintes: paciente sonolenta e taquidispneica; MEG; escala de coma Glasgow 7; FC de 120 bpm; frequência respiratória (FR) de 40 ipm; PA igual a 100 mmHg × 55 mmHg; BRNF 2T sem sopros; MV+ bilateral sem RA. Exame abdominal prejudicado pelo neurológico. Foram colhidos exames, que revelaram o seguinte: pH = 7,32; pCO₂ = 22 mmHg; bicarbonato = 12; pO₂ = 100; saturação = 99%; creatinina = 1,5; ureia = 40 mg/dL (normal: até 40); ácido úrico = 10 (referência para mulheres: 2,4 – 5,7); HB = 10; leucócitos = 10.000; e plaquetas = 80.000. Considerando o caso clínico, assinale a alternativa que apresenta o distúrbio ácido-base compatível com o quadro apresentado.",
+    "alternatives": "  A) acidose metabólica simples\n  B) acidose respiratória simples\n  C) distúrbio misto (acidose metabólica e alcalose respiratória) [GABARITO]\n  D) distúrbio misto (acidose respiratória e alcalose metabólica)\n  E) distúrbio misto (acidose metabólica e acidose respiratória)",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: No distúrbio ácido-base, primeiro avalie o pH e o componente que está alterado na mesma direção. Aqui, pH baixo (acidemia) com HCO3 baixo indica acidose metabólica. A PaCO2 está baixa, mas devemos verificar se é compensação ou distúrbio adicional. A fórmula de Winter fornece a PaCO2 esperada para compensação; se o valor real for menor que o esperado, há al"
+  },
+  {
+    "id": 3123,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Pneumologia Pneumologia Intensiva Ventilação mecânica",
+    "stem": "Uma paciente de 65 anos idade, com antecedentes de hipertensão e diabetes, deu entrada no pronto-socorro, e seus dados eram os seguintes: paciente sonolenta e taquidispneica; MEG; escala de coma Glasgow 7; FC de 120 bpm; frequência respiratória (FR) de 40 ipm; PA igual a 100 mmHg × 55 mmHg; BRNF 2T sem sopros; MV+ bilateral sem RA. Exame abdominal prejudicado pelo neurológico. Foram colhidos exames, que revelaram o seguinte: pH = 7,32; pCO₂ = 22 mmHg; bicarbonato = 12; pO₂ = 100; saturação = 99%; creatinina = 1,5; ureia = 40 mg/dL (normal: até 40); ácido úrico = 10 (referência para mulheres: 2,4 – 5,7); HB = 10; leucócitos = 10.000; e plaquetas = 80.000. Considere que a paciente tenha evoluído com necessidade de ventilação mecânica, sendo colocada no modo ventilatório, conforme apresentado na figura a seguir. Nesse caso, a paciente está sendo ventilada no modo",
+    "alternatives": "  A) assistido-controlado, ciclado à pressão, limitado a tempo.\n  B) controlado, ciclado à pressão, limitado a tempo.\n  C) assistido-controlado, ciclado a tempo, limitado à pressão.\n  D) controlado, ciclado a tempo, limitado à pressão. [GABARITO]\n  E) espontâneo, ciclado à pressão, limitado a tempo.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Paciente em Glasgow 7 não tem drive respiratório espontâneo. Portanto, deve ser ventilado no modo controlado, e a assinatura do gráfico (pressão constante durante a inspiração) indica ciclagem a tempo com limitação à pressão.\n\n****Alternativa Correta** (D)**: O modo controlado é indicado quando o paciente não tem esforço inspiratório espontâneo (como na se"
+  },
+  {
+    "id": 3125,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Cardiologia POCUS Quadro clínico",
+    "stem": "Um paciente de 28 anos de idade foi encaminhado para a sala de emergência com relato de desconforto respiratório. Na admissão, vericou-se pressão arterial de 70 mmHg × 40 mmHg, frequência cardíaca de 130 bpm, frequência respiratória de 20 ipm e saturação de O₂ igual a 95% em ar ambiente. Foi realizada uma ultrassonograa à beira do leito. Abaixo está representada a imagem do corte quatro câmaras. A partir do caso clínico acima, assinale a alternativa que apresenta o quadro clínico mais provável do paciente.",
+    "alternatives": "  A) turgência jugular, alternância elétrica no eletrocardiograma e antecedentes de tuberculose [GABARITO]\n  B) antecedentes de asma, sibilos difusos e tempo expiratório prolongado\n  C) empastamento em panturrilha direita, eletrocardiograma com S1Q3T3 e antecedentes de imobilização prolongada\n  D) edema de mucosas e sibilos há dez minutos e antecedentes de alergia alimentar grave a corante\n  E) antecedentes de transtorno de ansiedade generalizada, tremores e sensação de morte iminente após discussão familiar",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Choque obstrutivo com hipotensão grave, taquicardia e ultrassom demonstrando derrame pericárdico volumoso aponta diretamente para o tamponamento cardíaco.\n\n****Alternativa Correta** (A)**: O quadro clínico descreve um paciente em choque obstrutivo (hipotensão e taquicardia) com evidência ecocardiográfica de derrame pericárdico importante (corte quatro câma"
+  },
+  {
+    "id": 3126,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Neurologia Encefalopatia de WernickeKorsakoff Quadro Clínico",
+    "stem": "Um homem de quarenta anos de idade, em situação de rua, foi levado pelo SAMU ao hospital, devido a rebaixamento do nível de consciência em via pública. Na admissão, foram vericados sinais de desnutrição importante, hálito etílico e glicemia de 25 mg/dL. O paciente foi tratado exclusivamente com glicose endovenosa, evoluindo com melhora do nível de consciência e surgimento de confusão mental, nistagmo e ataxia. Foi realizada uma tomograa de crânio, cujo resultado está representado abaixo. Com relação ao caso clínico acima, assinale a alternativa que apresenta, respectivamente, o diagnóstico mais provável e o tratamento indicado ao paciente.",
+    "alternatives": "  A) encefalopatia de Wernicke — reposição de tiamina [GABARITO]\n  B) hematoma epidural — craniectomia descompressiva\n  C) deficiência de vitamina A — reposição de retinol\n  D) hemorragia intraparenquimatosa — derivação ventricular\n  E) esclerose lateral amiotrófica — plasmaférese",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Nunca administre glicose venosa isolada a pacientes desnutridos ou etilistas crônicos sem antes repor tiamina (vitamina B1), sob o risco de precipitar a Encefalopatia de Wernicke.\n\n****Alternativa Correta** (A)**: A administração de carga de glicose em um paciente com estoques de tiamina depletados (pelo etilismo crônico e desnutrição) consome a vitamina r"
+  },
+  {
+    "id": 3130,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Pneumologia Toracocentese diagnóstica",
+    "stem": "Durante uma toracocentese diagnóstica, foram observados os seguintes resultados da análise do líquido pleural: relação entre níveis de proteína do líquido sérico maior que 0,5; relação entre dosagem do DHL do líquido sérico maior que 0,6. Com base nesse caso hipotético, assinale a alternativa correta.",
+    "alternatives": "  A) Trata-se de exsudato, podendo ter como diagnóstico diferencial uma insuficiência cardíaca.\n  B) Trata-se de transudato, podendo ter como diagnóstico diferencial uma insuficiência cardíaca.\n  C) Trata-se de transudato, podendo ter como diagnóstico diferencial uma infecção pulmonar.\n  D) Trata-se de exsudato, podendo ter como diagnóstico diferencial uma infecção pulmonar. [GABARITO]\n  E) Trata-se de transudato, podendo ter como diagnóstico diferencial uma neoplasia pleural.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Decore os critérios de Light! Se proteína pleural/sérica > 0,5 ou DHL pleural/sérico > 0,6 (ou DHL pleural > 2/3 do limite superior da normalidade), o líquido é classificado obrigatoriamente como exsudato.\n\n****Alternativa Correta** (D)**: A alternativa D está correta ao classificar o líquido como exsudato e citar infecção pulmonar (como pneumonia ou derra"
+  },
+  {
+    "id": 3138,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Medicina de Família e Comunidade Insulinoterapia no tratamento do diabetes mellitus tipo 2",
+    "stem": "Osvaldo, de 59 anos de idade, em acompanhamento de diabetes melito tipo 2 com médico de família e comunidade, compareceu à consulta de rotina. Está tomando o teto das doses de metformina e glibenclamida, com boa adesão. Além disso, como adotou as mudanças de estilo de vida recomendadas pela equipe, está no peso ideal. Entre os exames solicitados, identificou-se HbA1C = 10,2. No caso clínico acima, a conduta mais adequada é",
+    "alternatives": "  A) orientar dosagem de glicemia capilar em jejum e após refeições, bem como administrar insulina regular 4 U, caso esteja alterada.\n  B) orientar dosagem de glicemia capilar, no jejum e antes das refeições, e encaminhar o paciente ao endocrinologista.\n  C) iniciar insulina NPH 10 U antes de dormir, iniciar controle de glicemia capilar e orientar retornos em intervalos breves, para ajustes de dose. [GABARITO]\n  D) iniciar insulina NPH 0,2 U/kg ao acordar e insulina regular 2 U após refeições, se a glicemia capilar estiver alterada.\n  E) encaminhar o paciente ao endocrinologista, para avaliação do melhor esquema de insulinoterapia para ele, e retirar a metformina do esquema terapêutico.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: HbA1c >9% em uso de dose máxima de dois orais indica insulinoterapia; o esquema inicial na APS é NPH basal noturna e monitorização glicêmica.\n\n****Alternativa Correta** (C)**: O paciente tem diabetes tipo 2 em uso de metformina e glibenclamida em dose máxima, com HbA1c de 10,2%, configurando falha terapêutica. A conduta adequada é iniciar insulina basal (N"
+  },
+  {
+    "id": 3139,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "topic": "Santa Casa de Misericórdia de São Paulo - SCMSP Medicina de Família e Comunidade Tratamento da Hipertensão arterial",
+    "stem": "Pedro, de 62 anos de idade, hipertenso, não tem conseguido manter bom controle da pressão arterial com uso de inibidor da enzima de conversão da angiotensina (IECA) associado a diurético tiazídico, apesar de ser aderente à proposta terapêutica, incluindo todas as mudanças de estilo de vida. No caso clínico acima, uma boa opção a ser adotada no âmbito da atenção primária à saúde é",
+    "alternatives": "  A) associar bloqueador de canal de cálcio, por ser uma classe medicamentosa com boa sinergia para o caso. [GABARITO]\n  B) solicitar exames para hipertensão secundária, bastante comum na faixa etária do paciente.\n  C) encaminhar o paciente ao cardiologista, pois se trata de uma hipertensão de difícil controle em nível de atenção primária.\n  D) encaminhar o paciente ao nefrologista, pois se trata de uma hipertensão de difícil controle em nível de atenção primária.\n  E) trocar o IECA por betabloqueador, pois este com o diurético tiazídico constitui a associação com melhor controle de pressão arterial e de lesões de órgãos-alvo.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Quando a PA não controla com dupla terapia (IECA + diurético), o próximo passo é adicionar bloqueador de canal de cálcio, formando a tríade clássica.\n\n****Alternativa Correta** (A)**: O paciente hipertenso em uso de IECA e diurético tiazídico sem controle pressórico, após adesão e mudanças de estilo de vida, tem indicação de associar bloqueador de canal de"
+  },
+  {
+    "id": 3140,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Diagnóstico endoscópico Rastreio Câncer Colorretal",
+    "stem": "Mulher de 68 anos de idade, previamente hígida, que não toma nenhum remédio, procura a Unidade Básica de Saúde por queixa de fraqueza e um cansaço, que nunca teve antes. Conta que há dois meses vem tendo fadiga e desânimo. O único antecedente relevante que refere é uma tendência a ressecamento. Mas nega sangramento nas fezes e queixas dispépticas. Ao exame clínico, está eutróca, mas bastante descorada. Além de discreta taquicardia, não foi achada nenhuma outra alteração nem no exame físico geral nem especíco. Foi feito exame de sangue que mostrou anemia hipocrômica e microcítica. Hemoglobina: 7,2 g/dL; hematócrito: 21%. O exame protoparasitológico de fezes teve a primeira amostra negativa. A melhor conduta para esta paciente, neste momento, dentre as abaixo, é:",
+    "alternatives": "  A) Solicitar colonoscopia. [GABARITO]\n  B) Reposição de ferro por via oral.\n  C) Tratar parasitose empiricamente.\n  D) Encaminhar para hematologista.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Todo homem ou mulher na pós-menopausa com anemia ferropriva (hipocrômica e microcítica) sem causa aparente tem indicação formal de investigação de sangramento gastrointestinal oculto com endoscopia digestiva alta e colonoscopia.\n\n****Alternativa Correta** (A)**: A paciente é idosa, sem queixas digestivas evidentes, mas apresenta um quadro clássico de anemi"
+  },
+  {
+    "id": 3141,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Fatores de Risco",
+    "stem": "Senhora de 47 anos de idade, tabagista, obesa e etilista social, é atendida no ambulatório por dispepsia há vários anos. Já fez tratamento para erradicação de Helicobacter pylori , há muito tempo. Não fez controle. Sempre teve “dor de estômago”, mas agora queixa-se de perda ponderal signicativa no último mês. O fator de risco a que este tumor está mais comumente relacionado é",
+    "alternatives": "  A) etilismo.\n  B) infecção por H. pylori . [GABARITO]\n  C) obesidade.\n  D) tabagismo.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: O principal fator de risco para o adenocarcinoma gástrico é a infecção crônica pelo *Helicobacter pylori*, atuando como o gatilho primordial para a cascata de Correa (gastrite atrônica, metaplasia, displasia e adenocarcinoma).\n\n****Alternativa Correta** (B)**: A infecção pelo *Helicobacter pylori* é reconhecida pela Organização Mundial da Saúde (OMS) como "
+  },
+  {
+    "id": 3152,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Manejo do nódulo abordagem diagnóstica",
+    "stem": "Homem de 75 anos de idade retorna ao ambulatório por quadro de tosse há cerca de 3 semanas, com melhora parcial nos últimos dias. É hipertenso e tabagista de 60 anos-maço. A tomograa de tórax revela nódulo periférico, sólido, de 1,2 cm de diâmetro, em lobo superior direito. Não mostra outras alterações. O paciente nega emagrecimento, febre, dor torácica ou hemoptise. Queixa-se apenas de tosse, que diz que até já melhorou um pouco. A melhor conduta para este paciente, dentre as abaixo, é:",
+    "alternatives": "  A) Toracoscopia com excisão do nódulo.\n  B) Biópsia por broncoscopia.\n  C) Seguimento com tomografia anual.\n  D) Biópsia percutânea. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Nódulo sólido >8 mm em paciente de alto risco (tabagista pesado) exige avaliação diagnóstica imediata; como é periférico, a biópsia percutânea é o método mais adequado.\n\n****Alternativa Correta** (D)**: A biópsia percutânea guiada por tomografia é o procedimento de escolha para nódulos pulmonares periféricos, pois permite a obtenção de material para diagnó"
+  },
+  {
+    "id": 3153,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Cistite complicada",
+    "stem": "Homem de 56 anos de idade apresenta quadro de disúria, polaciúria, sensação de peso pélvico e dor perineal há 4 dias. Exame de urina evidencia leucocitúria maciça. A terapia antimicrobiana mais apropriada para este paciente, dentre as abaixo, é",
+    "alternatives": "  A) azitromicina dose única.\n  B) azitromicina por 14 dias.\n  C) ciprofloxacina por 7 dias.\n  D) ciprofloxacina por 28 dias. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Prostatite bacteriana aguda em homem com leucocitúria maciça e sintomas urinários baixos: tratar com fluoroquinolona por 4-6 semanas para erradicar a infecção prostática.\n\n****Alternativa Correta** (D)**: A prostatite bacteriana aguda é uma infecção do parênquima prostático, geralmente causada por bactérias gram-negativas, como E. coli. O tratamento empíri"
+  },
+  {
+    "id": 3154,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Endocardite Infecciosa e Sepse de Foco Endovascular",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Infecção de corrente sanguínea ICS Tratamento",
+    "stem": "Paciente internado para tratamento de embolia pulmonar, está recebendo heparina por um cateter venoso central. No sexto dia de permanência deste acesso, paciente se apresenta em bom estado geral, afebril, mas o local do cateter está doloroso à palpação, com leve hiperemia e presença de pequena quantidade de secreção. A conduta mais apropriada para este paciente, dentre as abaixo, é",
+    "alternatives": "  A) coletar cultura da secreção e remover o acesso caso paciente desenvolva febre.\n  B) remover o acesso sem necessidade de coletar culturas.\n  C) coletar hemocultura e remover o acesso. [GABARITO]\n  D) iniciar antibioticoterapia de amplo espectro e manter o acesso.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Sinais inflamatórios locais no sítio do cateter venoso central, mesmo sem febre, indicam infecção associada ao cateter: remover o cateter e coletar hemoculturas.\n\n****Alternativa Correta** (C)**: A presença de dor, hiperemia e secreção no local de inserção do cateter venoso central sugere infecção local. De acordo com as diretrizes de infecção de corrente "
+  },
+  {
+    "id": 3155,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Diagnóstico Tratamento",
+    "stem": "Ao se candidatar à doação de sangue, um paciente de 32 anos realiza exames de triagem e tem os seguintes resultados: VDRL 1/1 e FTA-ABS positivo. Ele não se lembra de ter apresentado qualquer sintoma de sílis e nunca foi tratado. Atualmente apresenta encontros sexuais casuais. Encaminhado para coleta de líquido cefalorraquidiano que se mostrou normal sem qualquer evidência de sífilis. Entre as seguintes opções, a melhor para este paciente é",
+    "alternatives": "  A) dose única de 2.400.000 UI de penicilina benzatina.\n  B) dose semanal de 2.400.00 UI de penicilina benzatina por três semanas. [GABARITO]\n  C) penicilina cristalina endovenosa, 18 milhões de unidades por dez dias.\n  D) orientar paciente que se trata de doença pregressa e não precisa de tratamento",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: VDRL reagente e FTA-ABS positivo confirmam sífilis. Com líquor normal e sem tratamento prévio documentado, o caso é de sífilis latente tardia, tratada com 3 doses semanais de penicilina benzatina.\n\n****Alternativa Correta** (B)**: O paciente apresenta sorologia reagente para sífilis (VDRL e FTA-ABS positivos) e nega tratamento prévio. O exame de líquor nor"
+  },
+  {
+    "id": 3156,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Diagnóstico",
+    "stem": "Paciente, 34 anos, sexo masculino, natural de Três Marias, interior de Minas Gerais, há 5 meses apresenta quadro de tosse produtiva com expectoração mucoide, acompanhada de febre vespertina não mensurada e emagrecimento. Procurou assistência médica, tendo sido medicado com Amoxicilina por 10 dias, sem melhora do quadro e posteriormente com Amoxicilina/Clavulanato por 14 dias. Evolui com piora do cansaço e passa a apresentar dispneia aos esforços habituais, associada à presença de escarro hemoptoico. Ao exame físico paciente apresenta-se com regular estado geral, ausência de linfadenomegalias, temperatura axilar de 36,5 ºC, taquipneia (26 irpm) e crepitações inspiratórias bilateralmente. O restante do exame normal. Radiograa de tórax com áreas de consolidação pulmonar, macronodulares bilaterais, principalmente em terços médios e ausência de derrame pleural. A tomograa computadorizada de alta resolução do tórax evidenciou imagens macronodulares difusas, periféricas, principalmente em terços médios, com comprometimento peribroncovascular discreto e ausência de cavitações. Pesquisa e culturas de BAAR em exame de escarro (cinco amostras) foram negativas; PPD não-reator; radiograa de seios da face sem alterações signicativas. Realizou-se lavado broncoalveolar, por meio de brobroncoscopia, com obtenção de líquido hemorrágico. As pesquisas de P. jiroveci, BAAR e fungos foram negativas. O exame citopatológico desse líquido não evidenciou células neoplásicas. A hipótese diagnóstica mais provável neste caso, dentre as abaixo, é",
+    "alternatives": "  A) paracoccidioidomicose. [GABARITO]\n  B) fibrose cística.\n  C) granulomatose de Wegener.\n  D) tuberculose pulmonar.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Paciente de zona rural de Minas Gerais com quadro pulmonar subagudo, febre, escarro hemoptoico e BAAR repetidamente negativo aponta diretamente para micose sistêmica endêmica.\n\n****Alternativa Correta** (A)**: A paracoccidioidomicose (PCM) é uma micose sistêmica granulomatosa muito prevalente em áreas rurais da América Latina, com forte casuística no inter"
+  },
+  {
+    "id": 3157,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Tratamento Baciloscopia",
+    "stem": "Paciente de 68 anos de idade teve diagnóstico de pneumonia há cerca de três meses, tratada com acetilcefuroxima oral, com boa resposta clínica. Procura agora novamente o serviço de pronto atendimento com quadro de febre, mais pronunciada à noite, tosse produtiva e dor ventilatório dependente, iniciados há 72 horas, em uso de claritromicina por via oral, sem resposta apropriada. Coletou dois exames para pesquisa de bacilos álcool-ácido resistentes (BAAR) que resultaram negativos. Ao exame físico, apresenta febre de 38,1 °C, FR: 26 imp e sonolência. Radiograa evidencia opacicação heterogênea em terço médio do hemitórax direito, e a presença de broncogramas aéreos, além de um pequeno derrame pleural. A melhor conduta para este paciente, dentre as abaixo, é",
+    "alternatives": "  A) levofloxacina por via oral e reavaliá-lo em 72 horas.\n  B) internação para investigação e antibioticoterapia endovenosa.\n  C) iniciar tratamento para tuberculose. [GABARITO]\n  D) iniciar tratamento com anfotericina B.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Pneumonia que não melhora com antibioticoterapia habitual e BAAR inicial negativo em país de alta endemicidade exige investigação aprofundada e consideração de tuberculose pulmonar.\n\n****Alternativa Correta** (C)**: Na prática clínica e em provas de residência médica, diante de um quadro clínico sugestivo de pneumonia que evolui com falha terapêutica aos a"
+  },
+  {
+    "id": 3158,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Valvopatias Adquiridas e Miocardiopatias",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Cardiologia Cardiomiopatia hipertrófica",
+    "stem": "Paciente de 40 anos, com sobrepeso, inicia programa de atividade física por conta própria. Não tem nenhuma comorbidade. Um dia, após correr 5 km, apresentou quadro de lipotimia e dor torácica que melhoraram após descanso. O exame físico é normal. Solicitado ECG mostrado abaixo. Entre as hipóteses diagnósticas abaixo, a mais provável para esta paciente é:",
+    "alternatives": "  A) doença cardíaca isquêmica.\n  B) estenose aórtica.\n  C) cardiomiopatia hipertrófica. [GABARITO]\n  D) disautonomia.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Sintomas de lipotimia ou dor torácica desencadeados pelo esforço físico intenso em indivíduo jovem e sem comorbidades clássicas são o cartão de visitas da cardiomiopatia hipertrófica.\n\n****Alternativa Correta** (C)**: A cardiomiopatia hipertrófica é uma doença miocárdica genética caracterizada por hipertrofia ventricular esquerda não explicada por carga pr"
+  },
+  {
+    "id": 3160,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Diagnóstico de obesidade Critérios diagnósticos de síndrome metabólica",
+    "stem": "Homem de 50 anos procura clínico para saber se tem diabetes. Traz consigo exames que mostram glicemia de jejum: 112 mg/dL e 118 mg/dL (em duas ocasiões diferentes), triglicérides: 220 mg/dL, HDL: 30 mg/dL e LDL: 130 mg/dL. Seu exame físico revela IMC: 28 kg/m² e circunferência abdominal: 106 cm. Entre os diagnósticos abaixo, o mais provável para este paciente é",
+    "alternatives": "  A) obesidade grau I.\n  B) hipercolesterolemia.\n  C) diabetes.\n  D) síndrome metabólica. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A presença simultânea de obesidade central, alteração dos triglicérides, baixo HDL e glicemia de jejum na faixa de pré-diabetes fecha o diagnóstico clássico de síndrome metabólica.\n\n****Alternativa Correta** (D)**: O paciente preenche os critérios da NCEP-ATP III para Síndrome Metabólica, pois apresenta pelo menos três dos seguintes componentes: circunferê"
+  },
+  {
+    "id": 3161,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Hepatologia Encefalopatia hepática",
+    "stem": "Paciente de 68 anos, procura o médico clínico da AMA por causa de aumento progressivo do volume abdominal há 2 meses e perda de peso há um mês. A esposa refere que ele está trocando o dia pela noite, mais irritado, sem paciência e ca esquecido às vezes. O exame clínico mostra paciente em REG, descorado +/4+, ictérico ++/4+ e afebril. Presença de aranhas vasculares em tórax e abdome e ascite volumosa e tensa. Foi feita paracentese e o estudo do líquido revelou gradiente soro-ascite de albumina maior que 1,1 e citológico com 450 leucócitos/mm3 e 252 neutrólos/mm³. O diagnóstico mais provável para este paciente, dentre as opções, é encefalopatia hepática grau",
+    "alternatives": "  A) I e peritonite bacteriana espontânea. [GABARITO]\n  B) II sem peritonite.\n  C) II e peritonite bacteriana espontânea.\n  D) I sem peritonite.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Lembre-se que a contagem de neutrófilos no líquido ascítico maior que 250/mm³ define Peritonite Bacteriana Espontânea (PBE), enquanto a inversão do ciclo sono-vigília e a irritabilidade marcam a encefalopatia grau I.\n\n****Alternativa Correta** (A)**: O paciente apresenta cirrose hepática descompensada com sinais de encefalopatia hepática grau I, caracteriz"
+  },
+  {
+    "id": 3162,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Quadro clínico da anemia megaloblástica",
+    "stem": "Senhor de 70 anos, sempre muito saudável e ativo, procurou serviço de Hematologia por causa de anemia. Foi aventada anemia hemolítica autoimune associada ao uso de alfa-metildopa que usava há 20 anos para tratar hipertensão. O anti- hipertensivo foi trocado por amlodipina e o paciente recebeu prescrição de ácido fólico para recuperação da anemia. Três meses após, o paciente retorna com quadro demencial e discreta marcha talonante. Dentre as opções abaixo, o diagnóstico mais provável para este paciente é",
+    "alternatives": "  A) sífilis terciária.\n  B) deficiência de vitamina B12. [GABARITO]\n  C) hidrocefalia de pressão normal.\n  D) hipotireoidismo autoimune.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A associação clássica de demência, alterações hematológicas e marcha talonante (por acometimento dos cordões posteriores da medula) aponta diretamente para a deficiência de vitamina B12.\n\n****Alternativa Correta** (B)**: A deficiência de vitamina B12 cursa com a clássica degeneração combinada subaguda da medula espinhal, manifestando-se por distúrbio de ma"
+  },
+  {
+    "id": 3163,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Neurologia Acidentes Vasculares Cerebrais AVC Acidente Vascular Cerebral Isquêmico",
+    "stem": "Paciente do sexo masculino, 62 anos, pardo, é levado ao pronto-socorro por apresentar fala enrolada e diculdade para andar há 1 hora. Esposa conta que o marido é hipertenso, mas faz tratamento irregular porque acha que o remédio deixa ele tonto. Nega outras comorbidades. Ao exame físico, apresenta-se em regular estado geral, desorientado, PA: 198 × 130 mmHg, conrmada em duas medidas, FC: 124 bpm, eupneico, afebril, corado e hidratado. O exame neurológico mostrou hemiplegia à direita com desvio de rima. Tomograa sem sinais de sangramento. Entre as opções abaixo, a melhor conduta imediata é:",
+    "alternatives": "  A) Trombólise com rt-PA imediata.\n  B) Captopril sublingual.\n  C) Nitropussiato intravenoso. [GABARITO]\n  D) Anticoagulação com heparina não fracionada.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Diante de um AVC isquêmico agudo elegível para trombólise com PA acima de 185x110 mmHg, a prioridade absoluta é infundir anti-hipertensivo venoso de ação rápida para baixar a pressão antes de liberar o trombolítico.\n\n****Alternativa Correta** (C)**: O paciente apresenta um Acidente Vascular Encefálico Isquêmico (AVEI) em janela terapêutica, mas associado a"
+  },
+  {
+    "id": 3164,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Asma Quadro clínico e exames complementares",
+    "stem": "MJ, sexo masculino, 18 anos foi levado pela mãe ao pronto-socorro devido a falta de ar e dor torácica. Refere crises de tosse e falta de ar com piora progressiva, desde quando voltou da praia, há 10 dias. Lá jogou vôlei com os amigos e dormiu na casa da família que estava fechada há mais ou menos um ano. Apresentou quadro gripal a 15 dias atrás. Mãe refere que MJ apresentava alergia a pó e mofo na infância e episódios semelhantes ao atual que melhoravam com inalação com fenoterol, o que não ocorreu desta vez. A última crise que ambos se lembram foi quando MJ tinha 9 anos. O exame físico revela paciente com IMC: 18 kg/m2, agitado, taquidispneico (FR: 28 ipm), FC: 130 bpm, com presença de pulso paradoxal, murmúrio vesicular difusamente diminuído sem ruídos adventícios, mantendo decúbito elevado. Ausculta cardíaca com bulhas rítmicas, normofonéticas sem sopros. Dentre as opções, a principal hipótese diagnóstica para este paciente é",
+    "alternatives": "  A) pneumotórax.\n  B) pericardite.\n  C) miocardite.\n  D) crise de asma. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Dispneia grave, sibilância difusa, uso de musculatura acessória e a presença de pulso paradoxal em paciente com história de atopia definem uma crise de asma grave.\n\n****Alternativa Correta** (D)**: O quadro clínico é clássico de uma crise grave de asma (status asmático). A exposição a alérgenos e irritantes (mofo na casa fechada), somada à infecção viral r"
+  },
+  {
+    "id": 3165,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "topic": "Hospital Israelita Albert Einstein - HIAE Fundação Carlos Chagas (FCC) Crise Tireotóxica Betabloqueadores",
+    "stem": "Rapaz de 25 anos procura atendimento por causa de aparecimento de arritmia súbita. Sua única outra queixa é o emagrecimento de 5 kg nos dois últimos meses, sem causa aparente. Ao exame físico ele se apresenta ansioso, com espessamento da pele e enrijecimento da face anterior das pernas, tremores em mãos, taquicardia sinusal (120 bpm), PA: 138 × 71 mmHg; FR: 18 ipm. Entre as opções abaixo, o melhor tratamento inicial para este paciente é",
+    "alternatives": "  A) metimazol 10 mg uma ao dia e propranolol 40 mg de 12/12h. [GABARITO]\n  B) dexametasona 10 mg 1 × por dia e levotiroxina 75 mcg.\n  C) atenolol 50 mg uma vez ao dia e dexametasona 10 mg 1 × por dia.\n  D) propiltiouracil 150 mg de 8/8h e dexametasona 10 mg 1 × por dia.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Paciente jovem com emagrecimento, taquicardia, tremores e sinais de dermopatia infiltrativa (mixedema pretibial), que é o achado dermatológico clássico e patognomônico da Doença de Graves.\n\n****Alternativa Correta** (A)**: O tratamento inicial padrão para o hipertireoidismo por Doença de Graves leve a moderada consiste no uso de um tionamídico (metimazol) "
+  },
+  {
+    "id": 3169,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Diagnóstico",
+    "stem": "Em relação ao diagnóstico e tratamento da sífilis, é correto afirmar:",
+    "alternatives": "  A) Na gestante com sífilis latente pode-se prescrever ceftriaxona 2 gramas endovenoso por 7 dias.\n  B) O tratamento alternativo da sífilis primária é com doxiciclina 100mg 12/12 horas por 7 dias.\n  C) A sífilis latente tardia é tratada com benzilpenicilina 1,2 milhão UI endovenoso semanal por 5 semanas.\n  D) O exame de líquor é realizado mensalmente na neurossífilis até a sua normalização.\n  E) Teste não-treponêmico reagente e teste treponêmico não reagente pode significar cicatriz sorológica. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Testes não-treponêmicos (VDRL/RPR) avaliam atividade de doença e podem cicatrizar (tornar-se não reagentes ou baixos títulos), enquanto os treponêmicos costumam permanecer reagentes para o resto da vida, gerando a chamada cicatriz sorológica.\n\n****Alternativa Correta** (E)**: Um resultado de teste não-treponêmico reagente associado a um teste treponêmico n"
+  }
+]

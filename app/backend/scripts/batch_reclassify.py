@@ -63,17 +63,21 @@ def normalize_str(s: str) -> str:
 
 def match_canonical_subtema(target_area: str, subtema_raw: str) -> str:
     """Garante que o subtema corresponda exatamente a um dos subtemas canônicos da área."""
+    if not subtema_raw:
+        return CANONICAL_TAXONOMY.get(target_area, ["Geral"])[0]
+
+    # Normalizar área
     if target_area not in CANONICAL_TAXONOMY:
-        # Tenta casar área
         norm_area = normalize_str(target_area)
         for valid_a in VALID_AREAS:
             if normalize_str(valid_a) == norm_area:
                 target_area = valid_a
                 break
         else:
-            return subtema_raw
+            target_area = "Clínica Médica"
 
     available = CANONICAL_TAXONOMY[target_area]
+    
     # 1. Match exato
     if subtema_raw in available:
         return subtema_raw
@@ -84,15 +88,25 @@ def match_canonical_subtema(target_area: str, subtema_raw: str) -> str:
         if normalize_str(s) == norm_target:
             return s
             
-    # 3. Match por similaridade / substring
+    # 3. Match por substring
     for s in available:
-        if norm_target in normalize_str(s) or normalize_str(s) in norm_target:
+        norm_s = normalize_str(s)
+        if norm_target in norm_s or norm_s in norm_target:
             return s
             
-    # 4. Fuzzy match mais próximo
-    matches = difflib.get_close_matches(subtema_raw, available, n=1, cutoff=0.6)
+    # 4. Fuzzy match na mesma área
+    matches = difflib.get_close_matches(subtema_raw, available, n=1, cutoff=0.5)
     if matches:
         return matches[0]
+
+    # 5. Se não encontrou na área, procurar em TODAS as outras áreas (caso o modelo tenha trocado a área)
+    for other_a, subs in CANONICAL_TAXONOMY.items():
+        for s in subs:
+            if normalize_str(s) == norm_target or norm_target in normalize_str(s):
+                return s
+        matches_other = difflib.get_close_matches(subtema_raw, subs, n=1, cutoff=0.6)
+        if matches_other:
+            return matches_other[0]
         
     return available[0]
 
@@ -117,15 +131,9 @@ def init_audit_table(conn: sqlite3.Connection):
     conn.commit()
 
 
-_last_gemini_429 = 0
-
-def call_gemini(prompt: str, model="gemini-3.6-flash") -> dict:
-    global _last_gemini_429
+def call_gemini(prompt: str, model="gemini-3.6-flash", max_retries=5) -> dict:
     if not GEMINI_API_KEY:
         raise ValueError("GEMINI_API_KEY não configurada.")
-    # Se sofreu 429 nos últimos 20 segundos, evita tentar Gemini para não atrasar
-    if time.time() - _last_gemini_429 < 20:
-        raise RuntimeError("Gemini em cooldown de 429.")
         
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={GEMINI_API_KEY}"
     payload = {
@@ -138,19 +146,27 @@ def call_gemini(prompt: str, model="gemini-3.6-flash") -> dict:
     data_bytes = json.dumps(payload).encode("utf-8")
     headers = {"Content-Type": "application/json"}
     
-    try:
-        req = urllib.request.Request(url, data=data_bytes, headers=headers)
-        with urllib.request.urlopen(req, timeout=90) as resp:
-            result = json.loads(resp.read().decode("utf-8"))
-            text_content = result["candidates"][0]["content"]["parts"][0]["text"]
-            return json.loads(text_content)
-    except urllib.error.HTTPError as e:
-        if e.code == 429:
-            _last_gemini_429 = time.time()
-            raise RuntimeError("Gemini 429 Rate Limit atingido. Alternando para OpenRouter.")
-        raise
-    except Exception:
-        raise
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, data=data_bytes, headers=headers)
+            with urllib.request.urlopen(req, timeout=90) as resp:
+                result = json.loads(resp.read().decode("utf-8"))
+                text_content = result["candidates"][0]["content"]["parts"][0]["text"]
+                return json.loads(text_content)
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                wait_time = 6 * (attempt + 1)
+                print(f"   [Gemini 429] Aguardando {wait_time}s para liberar cota...")
+                time.sleep(wait_time)
+                continue
+            if attempt == max_retries - 1:
+                raise
+            time.sleep(3)
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise
+            time.sleep(3)
+    raise RuntimeError("Falha após retries no Gemini.")
 
 
 DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY") or ENV_KEYS.get("DEEPSEEK_API_KEY")
@@ -225,89 +241,63 @@ def call_openrouter(prompt: str, model="meta-llama/llama-3.3-70b-instruct", max_
 
 
 def classify_batch_ai(batch: list[dict], model_provider="deepseek", target_area_focus=None) -> list[dict]:
-    """Envia lote para classificação médica estruturada com foco de área quando disponível."""
-    if target_area_focus and target_area_focus in CANONICAL_TAXONOMY:
-        area_subtemas = CANONICAL_TAXONOMY[target_area_focus]
-        other_areas = [a for a in VALID_AREAS if a != target_area_focus]
-        tax_section = f"""SUBTEMAS CANÔNICOS DE {target_area_focus.upper()}:
-{json.dumps(area_subtemas, indent=2, ensure_ascii=False)}
+    """Envia lote para classificação médica estruturada com a taxonomia canônica completa de 170 subtemas."""
+    tax_section = f"TAXONOMIA OFICIAL (5 GRANDES ÁREAS E 170 SUBTEMAS):\n{json.dumps(CANONICAL_TAXONOMY, ensure_ascii=False)}"
 
-OUTRAS GRANDES ÁREAS (use apenas se a questão pertencer estritamente a outra especialidade):
-{json.dumps(other_areas, indent=2, ensure_ascii=False)}"""
-    else:
-        tax_section = f"""TAXONOMIA OFICIAL PERMITIDA (5 ÁREAS E 170 SUBTEMAS):
-{json.dumps(CANONICAL_TAXONOMY, indent=2, ensure_ascii=False)}"""
-
-    system_instructions = f"""Você é um Médico Especialista e Examinador Oficial de Concursos de Residência Médica (padrão USP, UNIFESP, ENARE, SUS-SP, UFRJ, IAMSPE).
-Sua missão é classificar cada questão com 100% de acurácia em exatamente UMA das 5 Grandes Áreas e em exatamente UM Subtema Canônico dessa área.
+    system_instructions = f"""Médico Examinador Oficial de Residência Médica. Classifique cada questão em exatamente 1 Grande Área e 1 Subtema canônico.
 
 {tax_section}
 
-DIRETRIZES MÉDICAS DE CLASSIFICAÇÃO:
-1. 'target_area' DEVE ser estritamente uma das 5 chaves: 'Cirurgia', 'Clínica Médica', 'Ginecologia e Obstetrícia', 'Pediatria', 'Medicina Preventiva'.
-2. 'target_subtema' DEVE ser uma string existente na lista de subtemas da 'target_area' selecionada.
-3. Avalie o caso clínico, as alternativas, o GABARITO OFICIAL marcado e a explicação médica:
-   - Questões de cirurgia do trauma ou procedimentos cirúrgicos devem ir para 'Cirurgia' (a menos que seja puramente trauma obstétrico ou cirurgia pediátrica específica).
-   - DISTINÇÃO ORTOPÉDICA E DO TRAUMA:
-     * 'Trauma de Face e Pescoço (Trauma Cervical e Fraturas Maxilofaciais)': trauma facial, fraturas dos ossos da face (mandíbula, Le Fort, maxila, zigomático, assoalho de órbita) e ferimentos/trauma cervical.
-     * 'Fraturas Ósseas e Princípios Gerais de Osteossíntese': princípios de fraturas de ossos do corpo (fêmur, tíbia, rádio, etc.), classificação de Gustilo para fraturas expostas, consolidação óssea e técnicas de osteossíntese.
-     * 'Trauma Ortopédico de Extremidades e Síndrome Compartimental': trauma de membros com repercussão vascular, lesão de partes moles e síndrome compartimental.
-     * 'Ortopedia Pediátrica: Displasia do Quadril, Pé Torto e Epifisiólise': condições ortopédicas infantis exclusivas.
-   - Casos clínicos de infecção congênita, sala de parto, triagem neonatal ou puericultura vão para 'Pediatria'.
-   - Gestação, parto, puerpério, distúrbios menstruais, anticoncepção e câncer ginecológico vão para 'Ginecologia e Obstetrícia'.
-   - SUS, epidemiologia, bioestatística, saúde do trabalhador, vigilância sanitária vão para 'Medicina Preventiva'.
-   - Doenças clínicas do adulto não cirúrgico vão para 'Clínica Médica'.
-4. Justifique cada classificação com uma justificativa clínica direta de 1 frase.
+DIRETRIZES CLÍNICAS:
+- 'a': uma das 5 áreas ('Cirurgia', 'Clínica Médica', 'Ginecologia e Obstetrícia', 'Pediatria', 'Medicina Preventiva').
+- 's': string EXATA do subtema canônico pertencente à área escolhida.
+- Avalie caso clínico, alternativas, gabarito e explicação médica.
+- Trauma cirúrgico/procedimentos cirúrgicos→Cirurgia.
+- DISTINÇÃO EM CIRURGIA:
+  * 'Trauma de Face e Pescoço (Trauma Cervical e Fraturas Maxilofaciais)': trauma facial e cervical.
+  * 'Fraturas Ósseas e Princípios Gerais de Osteossíntese': fraturas ósseas gerais, Gustilo, osteossíntese.
+  * 'Trauma Ortopédico de Extremidades e Síndrome Compartimental': membros, partes moles, síndrome compartimental.
+  * 'Ortopedia Pediátrica: Displasia do Quadril, Pé Torto e Epifisiólise': afecções ortopédicas pediátricas.
+- Doenças/infecções na infância, neonatologia, puericultura→Pediatria.
+- Gestação, parto, puerpério, distúrbios ginecológicos→Ginecologia e Obstetrícia.
+- SUS, epidemiologia, bioestatística, saúde coletiva/trabalhador→Medicina Preventiva.
+- Doenças clínicas do adulto não cirúrgico→Clínica Médica.
 
-Retorne EXCLUSIVAMENTE um objeto JSON no formato:
-{{
-  "results": [
-    {{
-      "id": <int>,
-      "target_area": "<Área>",
-      "target_subtema": "<Subtema da Área>",
-      "confidence": <float entre 0.0 e 1.0>,
-      "rationale": "<justificativa clínica em 1 frase>"
-    }}
-  ]
-}}"""
+JSON: {{"r":[{{"id":<int>,"a":"<Área>","s":"<Subtema>","c":<0.0-1.0>,"j":"<justificativa clínica>"}}]}}"""
 
-    items_to_send = []
+    items = []
     for q in batch:
-        items_to_send.append({
-            "id": q["id"],
-            "current_area": q["area"],
-            "current_subtema": q["subtema"],
-            "topic": q["topic"] or "",
-            "subtema_orig": q["subtema_orig"] or "",
-            "stem": q["stem"],
-            "alternatives": q["alts_formatted"],
-            "explanation_snippet": q["explanation"][:400] if q["explanation"] else ""
-        })
+        item = {"id": q["id"], "q": q["stem"]}
+        if q["alts_formatted"]:
+            item["alt"] = q["alts_formatted"]
+        exp = (q["explanation"] or "")[:250]
+        if exp:
+            item["exp"] = exp
+        items.append(item)
 
-    user_text = "Classifique rigorosamente as seguintes questões:\n" + json.dumps(items_to_send, indent=2, ensure_ascii=False)
+    user_text = json.dumps(items, ensure_ascii=False, separators=(',', ':'))
     full_prompt = system_instructions + "\n\n" + user_text
 
-    try:
-        if model_provider == "deepseek":
-            response_json = call_deepseek(full_prompt, model="deepseek-chat")
-            model_name = "deepseek-chat"
-        elif model_provider == "gemini":
-            response_json = call_gemini(full_prompt, model="gemini-3.6-flash")
-            model_name = "gemini-3.6-flash"
-        else:
-            response_json = call_openrouter(full_prompt)
-            model_name = "openrouter/llama-3.3-70b"
-    except Exception as e:
-        print(f"   [Provedor {model_provider} falhou]: {e}. Tentando fallback...")
+    for retry in range(5):
         try:
-            response_json = call_gemini(full_prompt, model="gemini-3.6-flash")
-            model_name = "gemini-3.6-flash"
-        except Exception:
-            response_json = call_openrouter(full_prompt)
-            model_name = "openrouter/llama-3.3-70b"
+            if model_provider == "deepseek":
+                response_json = call_deepseek(full_prompt, model="deepseek-chat")
+                model_name = "deepseek-chat"
+            elif model_provider == "gemini":
+                response_json = call_gemini(full_prompt, model="gemini-3.6-flash")
+                model_name = "gemini-3.6-flash"
+            else:
+                response_json = call_openrouter(full_prompt)
+                model_name = "openrouter/llama-3.3-70b"
+            break
+        except Exception as e:
+            wait = 10 * (retry + 1)
+            print(f"   [Provedor {model_provider} falhou (tentativa {retry+1}/5)]: {e}. Aguardando {wait}s...")
+            time.sleep(wait)
+            if retry == 4:
+                raise RuntimeError(f"Falha definitiva após 5 tentativas no provedor {model_provider}: {e}")
 
-    raw_results = response_json.get("results") or response_json.get("classifications") or []
+    raw_results = response_json.get("r") or response_json.get("results") or response_json.get("classifications") or []
     
     # Validação e saneamento dos resultados
     sanitized = []
@@ -317,12 +307,12 @@ Retorne EXCLUSIVAMENTE um objeto JSON no formato:
         qid = q["id"]
         if qid in results_by_id:
             r = results_by_id[qid]
-            raw_area = r.get("target_area", q["area"])
+            raw_area = r.get("a") or r.get("target_area") or q["area"]
             target_area = raw_area if raw_area in VALID_AREAS else q["area"]
             if target_area not in VALID_AREAS:
                 target_area = "Clínica Médica"
                 
-            raw_sub = r.get("target_subtema", q["subtema"])
+            raw_sub = r.get("s") or r.get("target_subtema") or q["subtema"]
             target_subtema = match_canonical_subtema(target_area, raw_sub)
             
             sanitized.append({
@@ -331,8 +321,8 @@ Retorne EXCLUSIVAMENTE um objeto JSON no formato:
                 "old_subtema": q["subtema"],
                 "target_area": target_area,
                 "target_subtema": target_subtema,
-                "confidence": float(r.get("confidence", 0.95)),
-                "rationale": str(r.get("rationale", "")).strip(),
+                "confidence": float(r.get("c") or r.get("confidence") or 0.95),
+                "rationale": str(r.get("j") or r.get("rationale") or "").strip(),
                 "model_used": model_name
             })
         else:
@@ -405,10 +395,10 @@ def main():
     parser.add_argument("--apply", action="store_true", help="Aplica as alterações no banco de dados")
     parser.add_argument("--skip-audited", action="store_true", help="Pula questões já auditadas/classificadas")
     parser.add_argument("--out", default=None, help="Arquivo de saída do relatório Markdown")
-    parser.add_argument("--provider", default="deepseek", choices=["deepseek", "gemini", "openrouter"], help="Provedor de IA")
+    parser.add_argument("--provider", default="gemini", choices=["gemini", "deepseek", "openrouter"], help="Provedor de IA")
     args = parser.parse_args()
 
-    conn = sqlite3.connect(args.db)
+    conn = sqlite3.connect(args.db, timeout=60.0)
     init_audit_table(conn)
 
     ids = [int(x.strip()) for x in args.ids.split(",")] if args.ids else None
@@ -460,7 +450,7 @@ def main():
             print(f"   ✓ Lote {b_idx + 1} classificado com sucesso (modo simulação).")
 
         if b_idx < total_batches - 1:
-            time.sleep(2)
+            time.sleep(4.5 if args.provider == "gemini" else 2.0)
 
     area_changes = sum(1 for r in all_results if r["old_area"] != r["target_area"])
     subtema_changes = sum(1 for r in all_results if r["old_subtema"] != r["target_subtema"])

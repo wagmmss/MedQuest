@@ -1,0 +1,263 @@
+[
+  {
+    "id": 7857,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Avaliação da vitalidade fetal durante o prénatal",
+    "stem": "Gestante de 35 anos, 4G3PN, 37 semanas pela data da última menstruação, com pré-natal irregular, comparece ao pronto- socorro com queixa de dor em baixo ventre e em região lombar, principalmente quando fica muito tempo em pé. Ao exame físico: IMC: 34 kg/m?; PA: 120x80 mmHg. Região lombar com contratura muscular e sensível à palpação. AU: 41 cm. Foco: 148 bpm. DU ausente. Escava completamente ocupada. Manobra de Leopold demonstra mobilidade. Edema Negativo. Toque: colo grosso, posterior, 2 cm de dilatação. Assinale qual é a melhor conduta.",
+    "alternatives": "  A) Indicar analgesia endovenosa e reavaliação.\n  B) Avaliar peso fetal no ultrassom obstétrico. [GABARITO]\n  C) Aguardar trabalho de parto espontâneo.\n  D) Orientar afastamento laborativo.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Altura uterina muito acima da esperada (41 cm às 37 semanas) indica macrossomia/polidrâmnio; solicite USG para estimativa de peso fetal.\n\n****Alternativa Correta** (B)**: Avaliar peso fetal no ultrassom obstétrico. A AU > 2 cm acima do esperado é um alerta para crescimento fetal excessivo, que modifica o planejamento do parto.\n\n**Alternativas Incorretas**:"
+  },
+  {
+    "id": 7859,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Imunizaçao na gestação",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve data da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames: A orientação deverá envolver quais vacinas ao longo do pré-natal, além da influenza já tomada durante campanha vacinal?",
+    "alternatives": "  A) Tríplice viral, covid-19 e DTPa.\n  B) Hepatite B, covid-19 e DTPa. [GABARITO]\n  C) Hepatite B, tríplice viral e DTPa.\n  D) Hepatite B, tríplice viral e covid-19.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Vacinas de vírus vivo atenuado (tríplice viral) são contraindicadas na gestação.\n\n****Alternativa Correta** (B)**: Hepatite B, covid-19 e DTPa. Todas são seguras e indicadas na gestação: Hepatite B se suscetível, Covid-19 a qualquer momento, DTPa a partir de 20 semanas.\n\n**Alternativas Incorretas**:\n- **Letra A**: Tríplice viral é contraindicada na gestaçã"
+  },
+  {
+    "id": 7860,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Assistência ao parto na gestação multipla",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve data da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames: O alvo de idade gestacional para o parto, caso a gravidez não tenha intercorrência, é de:",
+    "alternatives": "  A) 34 semanas.\n  B) 36 semanas.\n  C) 37 semanas. [GABARITO]\n  D) 40 semanas.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Hipertensão crônica controlada: parto programado entre 37 e 38 semanas. Não antes.\n\n****Alternativa Correta** (C)**: 37 semanas. O objetivo é evitar prematuridade iatrogênica. A menos que haja complicações, gestantes hipertensas crônicas podem chegar a 37-38 semanas.\n\n**Alternativas Incorretas**:\n- **Letra A**: 34 semanas, prematuro, sem indicação.\n- **Let"
+  },
+  {
+    "id": 7861,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Orientações gerais Tratamento farmacológico",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve data da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames: Considerando os resultados fetais, qual seria a proposta para o controle ideal da pressão arterial ao longo da gravidez?",
+    "alternatives": "  A) Normalização da PA no 1º trimestre. [GABARITO]\n  B) Normalização da PA no 3º trimestre.\n  C) Manutenção da PA < 160x100 mmHg ao longo da gravidez, sem indicação de normalização.\n  D) Redução em 20% da PA média, independentemente da idade gestacional.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O controle pressórico ideal na hipertensão crônica é normalizar a PA no primeiro trimestre, mantendo-a abaixo de 140/90 mmHg.\n\n****Alternativa Correta** (A)**: Normalização da PA no 1º trimestre. Isso protege a mãe e o feto precocemente. A metildopa é segura.\n\n**Alternativas Incorretas**:\n- **Letra B**: Normalização no 3º trimestre é tarde demais.\n- **Letr"
+  },
+  {
+    "id": 7862,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Acompanhamento prénatal Orientações gerais",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve data da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames: Considere que a paciente veio para consulta neste dia (10/12/2023). Toda a rotina pré-natal foi realizada adequadamente com resultados dentro dos parâmetros de normalidade. Assinale qual é o próximo exame para avaliação fetal que deve ser solicitado, de acordo com a idade gestacional.",
+    "alternatives": "  A) Ecografia com Doppler de artérias uterinas.\n  B) Ecografia morfológica.\n  C) Ecografia de colo uterino.\n  D) Ecocardiograma fetal. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Com 25 semanas (cálculo da IG), o próximo exame de rotina para avaliação fetal é o ecocardiograma fetal (24-28 semanas).\n\n****Alternativa Correta** (D)**: Ecocardiograma fetal. Gestação de alto risco (idade > 35, hipertensão, gestação induzida) indica ecocardiograma entre 24-28 semanas.\n\n**Alternativas Incorretas**:\n- **Letra A**: Doppler de artérias uteri"
+  },
+  {
+    "id": 7863,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "topic": "Antibioticoprofilaxia para EGB na RPM Conduta na RPM entre 24 a 33 67 semanas",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve data da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames: A paciente retorna em consulta com 32 semanas de gravidez, com queixa de aumento de conteúdo vaginal há 1 dia. Refere que teve perda urinária espontânea há 4 horas e que, desde então, sente a vagina úmida. Em avaliação obstétrica, tem-se o seguinte achado: Considerando o diagnóstico observado, assinale qual é a conduta profilática imediata em relação ao uso de ampicilina.",
+    "alternatives": "  A) Aguardar pesquisa de Streptococcus do grupo B para introdução de ampicilina endovenosa.\n  B) Manter ampicilina endovenosa por 48 horas, sem reiniciar se entrar em trabalho de parto.\n  C) Manter ampicilina endovenosa por 48 horas; reiniciar se entrar em trabalho de parto. [GABARITO]\n  D) Manter ampicilina endovenosa por 7 dias; reiniciar se entrar em trabalho de parto.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Na rotura prematura de membranas pré-termo, mantém-se antibioticoprofilaxia por 48 horas; se entrar em trabalho de parto, reinicia-se profilaxia.\n\n****Alternativa Correta** (C)**: Manter ampicilina EV por 48 horas; reiniciar se entrar em trabalho de parto. A conduta preconizada é o uso de ampicilina por 48h, compatível com o período de corticoterapia. Se a"
+  },
+  {
+    "id": 7864,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+    "topic": "Conduta na corioamnionite Conduta na RPM entre 24 a 33 67 semanas",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve data da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames: A paciente retorna em consulta com 32 semanas de gravidez, com queixa de aumento de conteúdo vaginal há 1 dia. Refere que teve perda urinária espontânea há 4 horas e que, desde então, sente a vagina úmida. Uma hora após a admissão, a paciente apresenta queixa de dor em baixo ventre, com contrações irregulares. Os exames laboratoriais demonstram Hb: 11,8 g/dl; Ht: 32,2%; leucócitos: 15.000/mm³; PCR: 20. Considerando boa vitalidade fetal, assinale qual é a conduta obstétrica.",
+    "alternatives": "  A) Indicar o parto imediato. [GABARITO]\n  B) Parto após corticoterapia.\n  C) Inibição de trabalho de parto.\n  D) Controle clínico e laboratorial.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Sinais de infecção (leucocitose, PCR elevado) em RPM pré-termo indica corioamnionite clínica; conduta é parto imediato.\n\n****Alternativa Correta** (A)**: Indicar o parto imediato. A associação de RPM, contrações e exames laboratoriais compatíveis com infecção (leucocitose, PCR alto) indica corioamnionite. A conduta é interromper a gestação para evitar morb"
+  },
+  {
+    "id": 7865,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Ginecologia e Obstetrícia Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Tratamento farmacológico Préeclâmpsia com sinais de gravidade",
+    "stem": "Primigesta, na 31a semana de gestação chega em Unidade de Pronto Atendimento referindo dor de cabeça há dois dias. Nega queixas de turvação visual e epigastralgia. Refere prénatal sem intercorrências até há 2 semanas quando apresentou elevação dos níveis pressóricos. Exame físico: regular estado geral, mucosas coradas, edema de mãos e tornozelos. PA: 160x110mmHg. Altura uterina compatível com a idade gestacional, feto único, cefálico, BCF de 136 bpm e atividade uterina ausente. Qual é a prescrição mais adequada neste momento?",
+    "alternatives": "  A) Hidralazina.\n  B) Metildopa.\n  C) Nifedipina.\n  D) Sulfato de magnésio. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Na pré-eclâmpsia grave com sintomas neurológicos (cefaleia), a prioridade é o sulfato de magnésio para prevenir eclâmpsia.\n\n****Alternativa Correta** (D)**: O sulfato de magnésio é a droga de escolha para prevenção de convulsões em pré-eclâmpsia grave, devendo ser administrado imediatamente.\n\n**Alternativas Incorretas**:\n- **Letra A**: Incorreta, pois hidr"
+  },
+  {
+    "id": 7866,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+    "topic": "Ginecologia e Obstetrícia Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Obstetrícia Prevenção",
+    "stem": "Tercigesta, 27 anos, com gestação de 29 semanas, iniciou o pré-natal tardiamente. Ela vem à consulta para checar exames da rotina. Apresenta tipo sanguíneo A negativo, com Coombs Indireto positivo, anticorpo identificado anti-Jk. Questionada sobre possíveis antecedentes de risco, ela relata que recebeu \"vacina anti-Rh\" apenas após o primeiro parto. No segundo parto, ela teve hemorragia e recebeu dois concentrados de hemácias. Na atual gestação, ela está assintomática e a ultrassonografia obstétrica realizada hoje está normal. Com relação à imunoprofilaxia anti-Rh, qual alternativa representa a melhor conduta nesse caso?",
+    "alternatives": "  A) Imunoglobulina anti-RhD está contraindicada por haver aloimunização.\n  B) Pedir titulação dos anticorpos para decidir conduta.\n  C) Realizar imunoglobulina anti-RhD agora. [GABARITO]\n  D) Repetir Coombs Indireto para confirmar aloimunização.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A paciente é RhD negativa e não está aloimunizada para o antígeno D (apenas para anti-Jk do sistema Kidd). A imunoglobulina anti-RhD é indicada para prevenir sensibilização ao D, mesmo que já haja aloimunização para outro antígeno.\n\n****Alternativa Correta** (C)**: A imunoglobulina anti-RhD está indicada, pois a paciente é Rh negativa e ainda não possui an"
+  },
+  {
+    "id": 7867,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Ginecologia e Obstetrícia Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Obstetrícia Conduta",
+    "stem": "Secundigesta, 31 anos, com 33 semanas de gestação, vem para retorno pré-natal. É portadora de hipertensão arterial crônica, em uso de 750mg/dia de metildopa. Teve o diagnóstico de feto pequeno para a idade gestacional há duas semanas. Realizou outra ultrassonografia ontem com os seguintes achados: peso fetal estimado no percentil 5, maior bolsão de líquido amniótico de 2,0cm, indice de pulsatilidade da artéria umbilical no percentil 92, relação cerebroplacentária no percentil 4, com ducto venoso normal. Ao chegar no ambulatório, assintomática, realizou a seguinte cardiotocografia mostrada na figura a seguir. Cardiotocografia realizada hoje, após lanche da tarde. Qual alternativa apresenta o melhor manejo nesse caso?",
+    "alternatives": "  A) Resolução imediata por cesárea. [GABARITO]\n  B) Realizar perfil biofísico fetal por meio da ultrassonografia.\n  C) Realizar manobras de ressuscitação intrauterina.\n  D) Resolução da gestação após um ciclo de corticosteroides.",
+    "explanation": "**Pulo do Gato**: Analise a gravidade da restrição de crescimento fetal (RCF) e a vitalidade. O feto apresenta RCF grave (percentil 5) com doppler alterado (artéria umbilical e relação cerebroplacentária), indicando centralização e sofrimento fetal crônico. Embora a cardiotocografia não tenha sido fornecida na imagem aqui, em casos de RCF precoce com doppler patológico, qualquer alteração na cardi"
+  },
+  {
+    "id": 7868,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "topic": "Ginecologia e Obstetrícia Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Obstetrícia Tratamento da sífilis na gestação",
+    "stem": "Secundigesta com parto vaginal prévio, 27 anos, 28 semanas de idade gestacional, parceria sexual inconstante até o último relacionamento há dois anos. Nega alterações na atual gravidez, mas referiu lesões exantemáticas que desapareceram sem tratamento há três anos aproximadamente. Dentre seus exames laboratoriais, os únicos alterados foram a quimioluminescênca para sífilis (reagente) e o VDLR (reagente 1/32). Foi prescrita penicilina benzatina 7.200.000UI, divididas em três tomadas semanais. As duas primeiras doses foram aplicadas com intervalo de 1 semana. Comparece na Unidade Básica de Saúde para tomar a terceira dose, verificando se que a última dose foi aplicada há 15 dias atrás. Considerando as atuais diretrizes do Ministério da Saúde, qual seria a conduta correta?",
+    "alternatives": "  A) Fazer a terceira dose e considerar como sífilis tratada.\n  B) Solicitar VDRL e, se o título cair, a gestante pode ser considerada tratada.\n  C) Reiniciar o tratamento completo com penicilina benzatina (3 doses). [GABARITO]\n  D) Nada a fazer, considerar a gestante tratada com duas doses.",
+    "explanation": "**Pulo do Gato**: Para o tratamento de sífilis em gestantes, o Ministério da Saúde é rigoroso: o tratamento só é considerado adequado se iniciado até 30 dias antes do parto, com esquema completo para a fase clínica, com penicilina benzatina e mantendo-se o intervalo máximo de 14 dias entre as doses. Se o intervalo entre as doses exceder 14 dias, o tratamento é considerado inadequado. No caso, a pa"
+  },
+  {
+    "id": 7869,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Ginecologia e Obstetrícia Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Obstetrícia Diagnóstico laboratorial",
+    "stem": "Nuligesta, 27 anos, suspendeu método anticoncepcional combinado oral para tentar engravidar há 4 meses. Relata que tem relações heterossexuais, 2 vezes por semana, com ejaculação vaginal. Geralmente, tem ciclos menstruais regulares, porém o último ocorreu alguns dias depois do habitual. No ciclo atual, também está com a menstruarão atrasada há uma semana. Está assintomática. Fez um teste de urina na UBS com o resultado demonstrado na figura a seguir. Está assintomática. Fez um teste de urina na UBS com o resultado demonstrado na figura a seguir. Segundo o Ministério da Saúde do Brasil, qual é a próxima conduta?",
+    "alternatives": "  A) Prescrever progesterona via oral por 14 dias.\n  B) Conduta expectante até que haja menstruação espontaneamente.\n  C) Repetir o teste imunológico de gestação em 15 dias. [GABARITO]\n  D) Solicitar ultrassonografia transvaginal.",
+    "explanation": "**Pulo do Gato**: O diagnóstico de gravidez é clínico e laboratorial. O teste imunológico de urina detecta o beta-hCG. Se o resultado foi negativo em uma mulher com atraso menstrual, a causa pode ser uma ovulação tardia (ciclos irregulares ou atrasados, como citado no enunciado). A conduta correta, segundo o Ministério da Saúde, não é realizar exames invasivos imediatamente (como USG, a menos que "
+  },
+  {
+    "id": 7870,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Ginecologia e Obstetrícia Obstetrícia Diagnóstico",
+    "stem": "Primigesta de 28 anos com 9 semanas de idade gestacional, sem comorbidades, retoma à consulta de pré-natal sem queixas clínicas ou obstétricas. Exame físico dentro dos padrões de normalidade. Exames laboratoriais: Hemograma com Hb 12,0g/dl; Ht 37%; sorologias não reagentes; glicemia de jejum 93 mg/dl. Considerando condições técnicas e financeiras totais, de acordo com a atual recomendação nacional da Organização Panamericana de Saúde Organização Mundial de Saúde / Ministério da Saúde / Federação Brasileira das Associações de Ginecologiatar Obstetrícia / Sociedade Brasileira de Diabetes, qual deve ser a avaliação complementar para este caso?",
+    "alternatives": "  A) Glicemia de jejum após 24 semanas de idade gestacional.\n  B) Glicemias de jejum e pós prandiais diárias imediatamente. [GABARITO]\n  C) Teste oral de tolerância à glicose com sobrecarga de 75g de glicose anidra após 24 semanas.\n  D) Teste oral de tolerância à glicose com sobrecarga de 75g de glicose anidra imediatamente.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: O valor de glicemia de jejum de 93 mg/dL já se enquadra no diagnóstico de diabetes mellitus gestacional (DMG) segundo os critérios atuais, não sendo necessário aguardar o teste de tolerância oral à glicose (TOTG) para 24 semanas.\n\n****Alternativa Correta** (B)**: Glicemias de jejum e pós-prandiais diárias imediatamente. Com glicemia de jejum ≥ 92 mg/dL no "
+  },
+  {
+    "id": 7871,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "topic": "Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Ginecologia e Obstetrícia Obstetrícia Tonus atonia uterina",
+    "stem": "Parturiente de 38 anos, secundigesta (um parto vaginal anterior há 2 anos), 38 semanas de idade gestacional, chega à maternidade em fase ativa de trabalho de parto, apresentando evolução taquitócica, com nascimento de neonato masculino, 3120g. Apgar 8/10, Realizado manejo ativo do terceiro período do parto. A dequitação placentária ocorre espontânea e completamente após 30 minutos da expulsão fetal, seguida de sangramento via vaginal moderado, mal estar geral, tontura, agitação psicomotora. Antecedentes pessoais. sindrome coronariana aguda com necessidade de cirurgia de revascularização miocárdica há 3 anos em seguimento clínico Exame físico: Regular estado geral, hipocorada (3+/4+), pressão arterial: 80x45 mmHg. Frequência cardíaca: 123 bpm, Frequência respiratória: 24 ipm, saturação de Oz: = 92%. Exame gineco-obstétrico: fundo uterino palpável a 2 cm acima da cicatriz umbilical, consistência amolecida, canal de parto integro. A equipe assistencial imediatamente iniciou primeiro pacote de intervenções com manobra de Hamilton, reposição volêmica com cristaloides e hemocomponentes, infusão de ocitocina e de ácido tranexâmico, porém sem resposta adequada quanto ao sangramento e estabilização clínica. Qual a conduta deve ser indicada em sequência?",
+    "alternatives": "  A) Misoprostol e pressão uterina interna em punho.\n  B) Metilergometrina e sutura hemostática uterina.\n  C) Misoprostol e inserção de balão de tamponamento intrauterino. [GABARITO]\n  D) Metilergometrina e segunda dose de ácido tranexâmico.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Em hemorragia pós-parto por atonia uterina refratária ao primeiro pacote de intervenções, e com contraindicação à metilergometrina (devido a cardiopatia), a conduta seguinte é a inserção de balão de tamponamento intrauterino associado ao misoprostol.\n\n****Alternativa Correta** (C)**: Misoprostol e inserção de balão de tamponamento intrauterino. A metilergo"
+  },
+  {
+    "id": 7872,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Ginecologia e Obstetrícia Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Criterios diagnósticos da préeclampsia",
+    "stem": "Paciente de 35 anos, G2P1 (PC), tempo de amenorreia de 31 semanas, encontra-se no ambulatório de gestação de alto risco em seguimento por Hipertensão Arterial Crônica em uso de metildopa 250mg de 6 em 6h. Nega cefaleia, turvação visual e epigastralgia. Nega sangramento ou outras queixas clínicas e obstétricas. Traz curva pressórica com média de PAS de 160mmHg e média de PAD de 105mmHg. Exame físico: bom estado geral, corada, afebril, com PA: 160x100mmHg, pulso de 82bpm. US obstétrico: feto único, longitudinal cefálico com dorso a esquerda; PBF 8/8; Peso fetal estimado: 1210g no percentil 1. Doppler artéria umbilical com índice de pulsatilidade (IP) de 1,32 no Percentil 98 e Doppler da artéria cerebral média com IP 1,90 valor no Percentil 47. Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Hipertensão arterial crônica com pré-eclampsia sobreposta. [GABARITO]\n  B) Hipertensão arterial crônica com crise hipertensiva.\n  C) Pré-eclampsia com sofrimento fetal agudo.\n  D) Pré-eclampsia com sinais de gravidade.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: A presença de restrição de crescimento fetal (peso < percentil 3) com Doppler de artéria umbilical alterado (IP > p95) em paciente com hipertensão arterial crônica caracteriza pré-eclâmpsia sobreposta.\n\n****Alternativa Correta** (A)**: Hipertensão arterial crônica com pré-eclâmpsia sobreposta. A paciente já tem diagnóstico de HAS crônica e agora apresenta "
+  },
+  {
+    "id": 7873,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+    "topic": "Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Ginecologia e Obstetrícia Obstetrícia Mola hidatiforme",
+    "stem": "Mulher de 20 anos, primigesta, com tempo de amenorreia de 11 semanas, apresenta aumento do volume abdominal desproporcional à idade gestacional, náuseas e sangramento vaginal discreto desde que descobriu a gestação. Realizou USTV com os seguintes achados: útero aumentado de volume (700cm³), com conteúdo na cavidade endometrial heterogêneo com múltiplas vesículas e embrião não identificado. Ovários aumentado de tamanho (200cm³ à direita e 250cm³ à esquerda), com múltiplas imagens císticas. Considerando a principal hipótese diagnóstica, qual a melhor conduta?",
+    "alternatives": "  A) Misoprostol dose única seguido de curetagem uterina e laparoscopia para ooforoplastia.\n  B) Aspiração uterina e laparoscopia para ooforoplastia.\n  C) Misoprostol de 4 em 4 horas seguido de aspiração uterina.\n  D) Dilatação do colo uterino com vela e aspiração intrauterina. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Quadro clássico de mola hidatiforme: útero aumentado, vesículas ao US, cistos teca-luteínicos. O tratamento de escolha é o esvaziamento uterino por aspiração a vácuo, com dilatação cervical prévia.\n\n****Alternativa Correta** (D)**: Dilatação do colo uterino com vela e aspiração intrauterina. O esvaziamento deve ser feito por aspiração (AMIU ou vácuo-aspira"
+  },
+  {
+    "id": 8034,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Ginecologia Quadro clínico Diagnóstico Caso 3",
+    "stem": "Paciente, 27 anos, refere dor pélvica há 2 dias e piora progressiva. Nuligesta, ciclos menstruais regulares, faz uso de abstinência periódica como contracepção. Refere última menstruação há 10 dias. Nega comorbidades ou uso de medicamentos. Ao exame clínico, temperatura 37,6 °C, descorada +/4+, FC 96 bpm, FR 12 irpm, PA 110x70 mmHg. Ao toque vaginal, útero com volume habitual, doloroso à mobilização, regiões anexiais com avaliação limitada pela dor. Teste de gravidez negativo. As imagens ultrassonográficas representativas são apresentadas. Qual o achado de exame especular compatível com a principal hipótese diagnóstica?",
+    "alternatives": "  A) \n  B)  [GABARITO]\n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8035,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Ginecologia Fator tuboperitoneal Histerossalpingografia Caso 3",
+    "stem": "Paciente, 27 anos, refere dor pélvica há 2 dias e piora progressiva. Nuligesta, ciclos menstruais regulares, faz uso de abstinência periódica como contracepção. Refere última menstruação há 10 dias. Nega comorbidades ou uso de medicamentos. Ao exame clínico, temperatura 37,6 °C, descorada +/4+, FC 96 bpm, FR 12 irpm, PA 110x70 mmHg. Ao toque vaginal, útero com volume habitual, doloroso à mobilização, regiões anexiais com avaliação limitada pela dor. Teste de gravidez negativo. As imagens ultrassonográficas representativas são apresentadas. A paciente foi tratada clinicamente com melhora do quadro e, cerca de um ano após este episódio, iniciou tentativa de engravidar; por não conseguir, começou a investigação. Qual o resultado de exame compatível com a condição previamente apresentada?",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8036,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+    "topic": "Ginecologia Síndrome de Asherman",
+    "stem": "Mulher, 28 anos refere ter sido submetida a curetagem uterina por abortamento de 3 meses de gestação, há 6 meses. Desde o procedimento não apresentou menstruações. Nega gestações anteriores, nega uso de medicamentos ou procedimentos cirúrgicos. Qual é a imagem compatível com a principal hipótese diagnóstica?",
+    "alternatives": "  A) \n  B) \n  C)  [GABARITO]\n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8037,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Dispositivos intrauterinos",
+    "stem": "Mulher de 30 anos com antecedente de 2 partos vaginais será submetida a inserção de dispositivo intra uterino. Qual dos seguintes instrumentos é necessário para este procedimento?",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8038,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto",
+    "topic": "Partograma Apresentação",
+    "stem": "Paciente hígida foi submetida a maturação de colo com misoprostol e posterior indução de parto por pós-datismo, conforme partograma apresentado. Qual das figuras a seguir representa a insinuação do feto nesse caso?",
+    "alternatives": "  A) \n  B)  [GABARITO]\n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8056,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Conização Lesão intraepitelial de alto grau",
+    "stem": "Mulher, 26 anos de idade, apresenta diagnóstico de lesão epitelial de alto grau em colo uterino. Qual das figuras a seguir demonstra o procedimento mais adequado a ser realizado para esta paciente?",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8057,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Quadro clínico Diagnóstico",
+    "stem": "Paciente, 36 anos, queixa-se de corrimento vaginal e sensação de ardência vaginal há 10 dias, com odor desagradável e piora após relação sexual. Nega comorbidades ou uso de medicamentos. Nuligesta, refere uso de DIU de cobre há 3 anos. Parceiro sexual único há 12 meses. Exame ginecológico: especular com conteúdo vaginal branco-acinzentado, em grande quantidade, bolhoso e com odor pronunciado, colo epitalizado, apresentado a seguir. Toque vaginal: útero em anteversoflexão, volume habitual, móvel, indolor à mobilização, ausência de massas anexiais. Realizou-se o exame bacterioscópico. Assinale qual o achado compatível com a principal hipótese diagnóstica.",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8059,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "topic": "Partograma Morfologia da bacia",
+    "stem": "Mulher, 32 anos de idade, primigesta com 38 semanas de gravidez, sem doenças, foi admitida na maternidade em trabalho de parto espontâneo. Apresentou amniorrexe espontânea no momento da admissão, com saída de líquido claro com grumos. Ao exame físico, apresentou bom estado geral, corada, normotensa e normocárdica. Abdome gravídico, altura uterina de 33 cm, dinâmica presente, batimento cardíaco fetal presente de 146 bpm. O acompanhamento do trabalho de parto está demonstrado no partograma a seguir: Ao avaliar a evolução do trabalho de parto representado, assinale o provável tipo de pelve da parturiente.",
+    "alternatives": "  A) \n  B) \n  C) \n  D)  [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 8060,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "topic": "Distócia de ombro",
+    "stem": "Paciente de 20 anos, primigesta, 40 semanas, admitida em trabalho de parto com contrações dolorosas rítmicas há 4 horas. Ao exame físico: AU: 38 cm. DU: 3 contrações/10 minutos. Foco: 148 bpm, com acelerações transitórias. Dorso à esquerda, escava completamente ocupada, sulco cervical bem nítido no polo inferior do dorso. Toque: colo médio, medianizado, pérvio para 3 cm, bolsa íntegra. A paciente entra em trabalho de parto alguns dias depois e observa-se, no período expulsivo, após a exteriorização do polo cefálico, a retração do mesmo contra o períneo materno entre as contrações, conforme fotografia a seguir: Assinale a alternativa correta que representa a melhor conduta neste momento.",
+    "alternatives": "  A) \n  B) \n  C) \n  D)  [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 8064,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Intubação orotraqueal",
+    "stem": "Durante o atendimento em sala de parto, um recém-nascido apresentou-se hipotônico e sem choro ao nascer. Foi realizado o clampeamento imediato do cordão umbilical, seguido da aplicação dos passos iniciais de reanimação neonatal. A seguir, a avaliação da FC revelou 30 bpm, associada à ausência de movimentos respiratórios. Iniciada ventilação com pressão positiva com máscara, o paciente foi monitorizado e não apresentou melhora após correção da técnica. Assinale a alternativa que apresenta os dispositivos que podem ser usados para a realização da ventilação, como próximo passo da reanimação neonatal.",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8065,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Glaucoma Congênito Primário Teste do Olhinho Glaucoma congênito",
+    "stem": "Paciente de 6 meses de idade, sexo masculino, comparece no pronto-socorro com lacrimejamento ocular. A mãe relata que, desde o nascimento, notou que os olhos da criança eram maiores do que o normal, além de estarem frequentemente lacrimejando, mesmo sem choro. Aos dois meses, começou a observar que os olhos frequentemente apresentavam vermelhidão e o bebê parecia incomodado com a luz, fechando os olhos em ambientes iluminados. Ao longo dos meses, percebeu piora da irritabilidade, especialmente em dias ensolarados. Não há histórico de doenças oftalmológicas na família. Não há consanguinidade entre os pais. Gestação a termo, sem intercorrências. Parto normal, sem complicações. Desenvolvimento neuropsicomotor adequado para a idade. Assinale a alternativa que apresenta a imagem que ilustra o diagnóstico do quadro clínico descrito.",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) \n  E) ",
+    "explanation": ""
+  },
+  {
+    "id": 8067,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Teste do coraçãozinho Circulação e oxigenação fetal Circulação neonatal",
+    "stem": "Recém-nascido (RN) termo, com idade gestacional de 40 semanas, nasceu de parto vaginal. Gestante não apresentou intercorrências durante o pré-natal. RN nasceu vigoroso, sem necessidade de medidas de reanimação neonatal, boletim de Apgar 9 e 9, no primeiro e quinto minuto de vida. Em alojamento conjunto, foi realizada avaliação propedêutica com sistema cardiorrespiratório normal e demais sistemas sem alterações identificadas. Paciente foi submetido ao teste de oximetria, com 30 horas de vida, conforme demonstrado nas imagens a seguir: Assinale a alternativa que apresenta a imagem com a estrutura anatômica que justifica a necessidade de se utilizar uma medida pré e outra pós-ductal no teste de oximetria neonatal.",
+    "alternatives": "  A) \n  B)  [GABARITO]\n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8069,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Ventilação com pressão positiva",
+    "stem": "Gestante, com 30 anos, primigesta, previamente hígida, realizou 06 consultas de pré-natal. No 3º trimestre foi observado polidrâmnio (ILA de 26 cm) em exame de ultrassonografia. Com 41 semanas de idade gestacional foi submetida a parto cesáreo, devido a falha de indução. Bolsa rota no ato, com líquido claro com grumos. Recém-nascido (RN) do sexo masculino, hipotônico e sem choro, imediatamente após a extração. Realizado o clampeamento imediato do cordão umbilical, foi levado ao berço aquecido, secado e estimulado, posicionado e foram aspiradas vias aéreas superiores. Apresentava-se, em seguida, com frequência cardíaca de 50 bpm e em apneia. Com base nas informações fornecidas, assinale o próximo procedimento a ser realizado.",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  }
+]

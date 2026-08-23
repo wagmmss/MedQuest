@@ -1,0 +1,56 @@
+[
+  {
+    "id": 8052,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+    "topic": "Tratamento da Hipocalemia Fase de manutenção Fase de reposição",
+    "stem": "Paciente, 3 anos de idade, do sexo masculino, previamente hígido, foi admitido no pronto-socorro com quadro de diarreia aguda há dois dias e baixa aceitação de líquidos. Chegou com desidratação grave, sendo obtido acesso venoso periférico e feita hidratação Endovenosa (EV). Após estabilização inicial, apresentou melhora da hidratação e das perdas, porém segue sem aceitar nada por via oral. O seu peso atual é de 14 kg. Os resultados dos exames laboratoriais atuais e o traçado eletrocardiográfico estão apresentados a seguir: Exames laboratoriais: pH: 7.35 pO₂: 100 mmHg pCO₂: 35 mmHg HCO₃ ⁻ : 21,0 mEq/L SatO₂: 99% Potássio: 2,9 mEq/L Sódio: 132 mEq/L Em relação ao caso descrito, qual das prescrições é a mais adequada para o paciente?",
+    "alternatives": "  A) \n  B)  [GABARITO]\n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8053,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Molusco contagioso",
+    "stem": "Menino, 5 anos de idade, é levado à UBS por quadro de lesão de pele há 2 meses. O médico fez o diagnóstico de molusco contagioso. Assinale a alternativa que apresenta a imagem compatível com o diagnóstico.",
+    "alternatives": "  A) \n  B) \n  C)  [GABARITO]\n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8054,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Tomografia Computadorizada de Abdome",
+    "stem": "Homem, 35 anos, procura o Serviço de Emergência com queixa de dor abdominal de forte intensidade, em faixa, no andar superior do abdome. Tem relato de múltiplas passagens no hospital com quadro semelhante. Nega fatores de melhora ou piora. Refere uso contínuo de dipirona e tramadol com controle parcial dos sintomas. Relata perda de peso não quantificada no período e diarreia há 3 meses. Tem antecedente de etilismo de 1 garrafa de “pinga” por dia desde os 15 anos, tendo parado há 6 meses. Ao exame físico encontra-se em bom estado geral; IMC: 19 kg/m², ausculta cardíaca e pulmonar sem alterações, abdome doloroso à palpação profunda sem irritação peritoneal. Considerando a principal hipótese diagnóstica, assinale a alternativa na qual é observada a imagem tomográfica esperada.",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8055,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Diagnóstico ultrassonográfico",
+    "stem": "Mulher, 24 anos de idade, queixa-se de irregularidade menstrual (ciclos com intervalo de 40 dias e duração de 3 dias), aumento de pelos faciais e acne persistente na face e no tronco há cerca de três anos. Refere dificuldade para perder peso. Ao exame clínico, apresentou bom estado geral, corada, hidratada, anictérica, acianótica e afebril; peso de 78 kg, altura 1,65 m e IMC de 27,5 kg/m²; PA de 120x80 mmHg; exame ginecológico com trofismo genital preservado, sem alterações. O exame da pele da face é apresentado na imagem a seguir: Exames laboratoriais: Glicose: 88 mg/dL Hemoglobina glicada: 5,2% Insulina: 12 mU/L Cálculo do HOMA-IR: 2,6 TSH: 1,2 mUI/L Testosterona livre: 34 pmol/L Estradiol na fase folicular: 8,3 ng/dL LH na fase folicular: 16,9 U/L FSH na fase folicular: 2,8 UI/L Prolactina: 33 μg/L Considerando a principal hipótese diagnóstica, qual é a imagem ultrassonográfica ovariana correspondente ao caso descrito?",
+    "alternatives": "  A) \n  B)  [GABARITO]\n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8058,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "topic": "Razão de verossimilhança positiva",
+    "stem": "Homem, 58 anos de idade, procura atendimento por dispneia. A médica residente, que realizou o atendimento, observou a presença de um achado clínico que favoreceu, significativamente, a possibilidade de se tratar de um caso de insuficiência cardíaca. A partir da análise da tabela, assinale a alternativa que contém o achado clínico observado.",
+    "alternatives": "  A) \n  B) \n  C) \n  D)  [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 8066,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Fase de manutenção",
+    "stem": "Paciente de um ano de idade, com antecedente de malformação anorretal com correção parcial, intestino curto e ileostomia, iniciou quadro de dor e distensão abdominal, com vômitos biliares há 1 dia, sendo diagnosticado com abdome agudo obstrutivo. Optou-se por tratamento conservador, mantendo paciente em jejum e reavaliação pela manhã. Faz uso de bicarbonato de sódio 3 mEq/kg/dia, mas não está aceitando as medicações via oral. Realizados os exames complementares a seguir: pH: 7,33 HCO₃ ⁻ : 17 mEq/L Glicose: 96 mg/dL Sódio: 135 mEq/L Potássio: 3.8 mEq/L Cloro: 112 mEq/L Creatinina: 0,5 mg/dL Ureia: 47 mg/dL Peso 10 kg (Bicarbonato de Sódio 8,4% = 1mEq/mL; NaCl 20% = 3,4mEq/mL). Assinale a alternativa que apresenta a melhor prescrição de soro de manutenção isotônico para o paciente.",
+    "alternatives": "  A) \n  B) \n  C) \n  D)  [GABARITO]",
+    "explanation": ""
+  }
+]

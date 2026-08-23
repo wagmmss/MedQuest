@@ -1,0 +1,902 @@
+[
+  {
+    "id": 6950,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Trabalho de Parto Prematuro e Tocólise",
+    "topic": "Trabalho de parto prematuro TPP",
+    "stem": "Multigesta (G4PN3), 32 anos, com 35 semanas de gestação, procurou atendimento com contrações uterinas há 6 horas. Sem outras queixas. Refere que na última gestação, seu recém-nascido teve \"quadro grave, foi transferido para UTI logo no primeiro dia de vida, precisou de antibiótico por 10 dias e quase morreu\". Pré-natal sem intercorrências até o momento, com exames de sangue, culturas e ultrassonograas normais. Exame físico geral normal, altura uterina 33 cm, 4 contrações moderadas de 40 segundos/10 minutos, boa vitalidade fetal e colo curto, dilatado 4 cm, feto cefálico, com bolsa íntegra. Qual é a alternativa adequada na assistência dessa paciente?",
+    "alternatives": "  A) Condução do parto com sulfato de magnésio endovenoso.\n  B) Assistência ao parto com penicilina cristalina endovenosa. [GABARITO]\n  C) Inibição do trabalho de parto com administração de nifedipina oral.\n  D) Duas doses de betametasona intramuscular intercaladas por 24 horas.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Histórico de RN com sepse precoce por EGB é indicação de profilaxia intraparto.\n\n****Alternativa Correta** (B)**: A paciente tem histórico de filho anterior com sepse neonatal precoce, muito provavelmente por Estreptococo do Grupo B (EGB). Essa história é indicação formal de profilaxia intraparto com penicilina cristalina.\n\n**Alternativas Incorretas**:\n- *"
+  },
+  {
+    "id": 6951,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Hepatites na gestação",
+    "stem": "Primigesta, 16 anos, 16 semanas gestacionais, hígida. Encaminhada da rede básica por ser portadora do vírus da hepatite do tipo B decorrente de transmissão vertical. No serviço terciário conrmou-se carga viral = 912 cópias/mL e exames de função hepática normais. Considerando via de parto e amamentação natural, quais são as condutas mais adequadas para esta paciente?",
+    "alternatives": "  A) Parto cesárea e inibir lactação.\n  B) Parto vaginal e inibir lactação.\n  C) Parto cesárea e amamentação natural.\n  D) Parto vaginal e amamentação natural. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Hepatite B não contraindica parto vaginal nem amamentação, se RN receber imunoprofilaxia.\n\n****Alternativa Correta** (D)**: A via de parto e a amamentação não aumentam risco de transmissão do HBV quando o RN recebe imunoglobulina e vacina nas primeiras 12 horas. A cesárea não reduz transmissão.\n\n**Alternativas Incorretas**:\n- **Letra A**: Parto cesárea não"
+  },
+  {
+    "id": 6952,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Predição e prevenção",
+    "stem": "Mulher; 22 anos, G2P1 (1 PN) em seguimento no pré-natal com 33 semanas de gestação pelo ultrassom. Comparece no centro obstétrico com queixa de contrações uterinas há 2 horas, nega perdas vaginais e refere boa movimentação fetal. Ao exame: bom estado geral, pressão arterial: 160 x 110 mmHg. Abdome: gravídico, AU: 32cm, dinâmica: ausente e BCF: 150 bpm. Cardiotocografia: feto ativo. Exames laboratoriais: urina tipo 1: proteinúria ausente, creatinina: 0,7 mg/dL. Hemoglobina: 13,2 g/dL. Plaquetas: 233.000 mm³. Bilirrubina total: 0,6 mg/dL. Transaminase oxalacética (TGO): 26 U/L. Qual o diagnóstico mais adequado neste momento?",
+    "alternatives": "  A) Hipertensão transitória.\n  B) Pré-eclâmpsia.\n  C) Hipertensão arterial crônica.\n  D) Hipertensão gestacional. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Hipertensão sem proteinúria, sem sinais de gravidade, após 20 semanas = hipertensão gestacional.\n\n****Alternativa Correta** (D)**: Paciente com PA 160/110, sem proteinúria e sem critérios de pré-eclâmpsia. Sem histórico prévio de hipertensão, o diagnóstico é hipertensão gestacional.\n\n**Alternativas Incorretas**:\n- **Letra A**: Hipertensão transitória é dia"
+  },
+  {
+    "id": 6953,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+    "topic": "Obstetrícia Doença hemolítica perinatal DHPN",
+    "stem": "Primigesta, 28 anos, O Rh negativo, triagem de anticorpos: negativo, recebeu imunoglobulina anti-D 300 mcg com 28 semanas. Evoluiu para parto vaginal sem intercorrências com 37 semanas. Exames no puerpério: Tipagem sanguínea da mãe: O Rh negativo. Triagem de anticorpo: positivo. Tipagem sanguínea do recém-nascido: O Rh positivo. Qual a melhor conduta?",
+    "alternatives": "  A) Prescrever imunoglobulina anti-D. [GABARITO]\n  B) Considerar diagnóstico de isoimunização Rh.\n  C) Solicitar a titulação de anticorpos.\n  D) Encaminhar ao hematologista.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Coombs indireto positivo no puerpério após imunoglobulina anti-D é esperado; repetir dose.\n\n****Alternativa Correta** (A)**: A paciente recebeu imunoglobulina anti-D com 28 semanas, por isso a triagem de anticorpos é positiva. Deve-se administrar nova dose de imunoglobulina anti-D no pós-parto, pois o RN é Rh positivo.\n\n**Alternativas Incorretas**:\n- **Let"
+  },
+  {
+    "id": 6954,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Trabalho de Parto Prematuro e Tocólise",
+    "topic": "Trabalho de parto prematuro TPP",
+    "stem": "Mulher, 28 anos, G2P1A0, 1 parto pré-termo anterior espontâneo com 32 semanas sem intercorrências, está em seguimento pré-natal em uso de progesterona via vaginal. Comparece no ambulatório para realizar ultrassom morfológico e medida colo uterino. Ultrassom morfológico sem alterações e avaliação do colo uterino com 2,6 cm de comprimento. Qual a conduta clínica?",
+    "alternatives": "  A) Indicar cerclagem.\n  B) Suspender a progesterona.\n  C) Manter a progesterona. [GABARITO]\n  D) Colocar pessário cervical.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Parto pré-termo anterior + colo curto (2,6 cm) já em uso de progesterona: manter.\n\n****Alternativa Correta** (C)**: Paciente com histórico de parto pré-termo e colo curto deve manter progesterona vaginal, conforme protocolos, pois reduz risco de parto pré-termo.\n\n**Alternativas Incorretas**:\n- **Letra A**: Cerclagem é indicada em casos de colo curto com fa"
+  },
+  {
+    "id": 6955,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Aspectos legais relacionados à gestação",
+    "stem": "Gestante, 30 anos, G2P1A0C1, IG 1° USC 26 semanas. Vinha realizando o pré-natal em Unidade de Saúde da Família (USF) quando foi condenada a cumprimento definitivo de pena, com reclusão em regime fechado. Além do parto hospitalar, a gestante terá direito:",
+    "alternatives": "  A) Terminar pré-natal em estabelecimento prisional. Período de amamentação de 6 meses em prisão domiciliar.\n  B) Terminar pré-natal em USF. Retorno para estabelecimento prisional após o parto.\n  C) Terminar pré-natal em unidade prisional. Período de amamentação em berçário de unidade prisional. [GABARITO]\n  D) Terminar pré-natal em USF. Período de amamentação de 6 meses em prisão domiciliar.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Direitos da gestante privada de liberdade: terminar pré-natal na unidade prisional e amamentar em berçário.\n\n****Alternativa Correta** (C)**: A gestante presa tem direito de terminar o pré-natal em unidade prisional e, após o parto, ter período de amamentação em berçário da unidade prisional.\n\n**Alternativas Incorretas**:\n- **Letra A**: Prisão domiciliar p"
+  },
+  {
+    "id": 6968,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+    "topic": "Controle glicêmico",
+    "stem": "A enfermeira aciona o médico plantonista para avaliar a paciente JMB, gestante, de 23 anos de idade. A paciente tem diabetes tipo I e foi internada para ajuste do controle glicêmico. Ela é quartigesta, com 3 abortamentos anteriores. A idade gestacional é de 18 semanas. Chamou a enfermeira por estar com mal estar e sudorese fria. A glicemia capilar é de 38 mg/dL. Na avaliação clínica, a paciente está torporosa e não responde adequadamente aos questionamentos, PA 110x70 mmHg, FC 82. A conduta imediata deve ser:",
+    "alternatives": "  A) Oferecer o lanche da tarde.\n  B) Soro glicosado 5% 300 ml endovenoso. [GABARITO]\n  C) Administrar 15g glicose via oral.\n  D) Glucagon subcutâneo imediato.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Hipoglicemia grave com torpor: glicose IV é a primeira escolha, via oral proscrita.\n\n****Alternativa Correta** (B)**: Soro glicosado 5% endovenoso. A paciente está torporosa, não pode deglutir com segurança; a glicose IV é mandatória.\n\n**Alternativas Incorretas**:\n- **Letra A**: Oferecer lanche – risco de broncoaspiração.\n- **Letra C**: 15g glicose via ora"
+  },
+  {
+    "id": 6969,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Obstetrícia Cardiopatias na gestação Primeiro periodo dilatação",
+    "stem": "Gestante com 34 anos de idade procura pronto atendimento obstétrico com queixa de contrações dolorosas a cada 3 minutos, associada a peso em região púbica. A idade gestacional é de 32 semanas. É tercigesta, com dois partos vaginais prévios (último há 2 anos, sem intercorrências). Está em uso de sertralina 100mg/dia. Refere que está aguardando avaliação de pré-natal de alto risco por queixa de cansaço físico que vem sendo progressivamente mais importante desde o 5º mês de gravidez. Desde o momento em que iniciaram as contrações, sente opressão torácica, diculdade para respirar e sensação de desmaio.No exame clínico, apresenta-se em bom estado geral, PA 94x50 mmHg, FC 126bpm, FR 22 ipm. Ausculta com sopro sistólico aórtico 3+/6+, ejetivo, murmúrios vesiculares presentes com crepitação na em base direita. Abdome gravídico, altura uterina 30 cm, BCF presente e rítmico. Sem edemas de MMII, sem sinais de TVP. Toque vaginal: colo fino, dilatação de 6 cm, apresentação cefálica e bolsa íntegra. O seguimento obstétrico adequado é:",
+    "alternatives": "  A) Inibição de trabalho de parto prematuro com atosibano.\n  B) Iniciar maturação pulmonar fetal com corticoterapia.\n  C) Assistência ao parto com analgesia imediata. [GABARITO]\n  D) Assistir ao período expulsivo com puxos dirigidos.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Cardiopatia descompensada em trabalho de parto: analgesia para reduzir esforço cardíaco.\n\n****Alternativa Correta** (C)**: Assistência ao parto com analgesia imediata. A analgesia reduz a dor e o estresse, protegendo o coração.\n\n**Alternativas Incorretas**:\n- **Letra A**: Tocólise com atosibano – contraindicação relativa em cardiopatia, além de trabalho de"
+  },
+  {
+    "id": 6970,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Obstetrícia Conduta Conduta Valores de referência:",
+    "stem": "Gestante de 43 anos de idade, casada, está em consulta pré-natal após submeter-se a reprodução assistida. É primigesta e tem 33 semanas de gestação. Na avaliação clínica, está em bom estado geral, corada, PA 120 x 75mmHg, FC 78 bpm, IMC 21,4 kg/m². A altura uterina é de 31 cm. O BCF está presente e é rítmico. Tônus normal. Traz ultrassonograa obstétrica mostrando feto único, cefálico, com dorso à esquerda e placenta posterior. Índice de líquido amniótico 9 cm e peso estimado 1685g (percentil 5). Na mesma consulta foi realizada a seguinte avaliação de vitalidade fetal: A umb PI: 030 a 1,40 A umb S/D: 1,24 a 3,40 A orientação a ser dada à paciente quanto à resolução da gravidez é:",
+    "alternatives": "  A) Indicar parto com 34 semanas de gestação.\n  B) Programar parto no termo precoce.\n  C) Aguardar termo tardio.\n  D) Aguardar até 40 semanas de gestação. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: RCIU com doppler normal: vigilância; aguardar termo.\n\n****Alternativa Correta** (D)**: Aguardar até 40 semanas de gestação. A paciente tem RCIU (percentil 5), mas os Doppler de artéria umbilical estão normais, indicando vitalidade preservada. Não há indicação de interrupção prematura; deve-se acompanhar e aguardar o termo.\n\n**Alternativas Incorretas**:\n- *"
+  },
+  {
+    "id": 6971,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Segundo periodo expulsivo",
+    "stem": "Com base nas novas orientações de cuidados no parto, o que se pode dizer a respeito da indicação do procedimento ilustrado na figura a seguir?",
+    "alternatives": "  A) É praticado se houver risco de lacerações graves. [GABARITO]\n  B) Trata-se de um procedimento proscrito.\n  C) Está reservado para primigestas.\n  D) É indicado apenas em partos instrumentalizados.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Episiotomia seletiva: apenas em situações de risco de laceração grave ou necessidade de ampliação do canal de parto.\n\n****Alternativa Correta** (A)**: É praticado se houver risco de lacerações graves. A episiotomia não deve ser rotineira; só é indicada em casos específicos para evitar lacerações graves ou facilitar parto instrumental.\n\n**Alternativas Incor"
+  },
+  {
+    "id": 6972,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "topic": "Obstetrícia Tratamento da toxoplasmose na gestação Diagnóstico na gestação",
+    "stem": "Gestante de 23 anos de idade está em sua primeira gestação. Iniciou o pré-natal com 19 semanas de gestação. Está em acompanhamento irregular na UBS pois trabalha como atendente em um pet Shop e está sem tempo para as consultas. Vem encaminhada ao pré-natal de alto risco com 25 semanas de gestação com os exames descritos a seguir. Qual é a conduta pré-natal imediata?",
+    "alternatives": "  A) Iniciar ácido fólico em dose dobrada.\n  B) Iniciar pirimetamina associada a sulfadiazina.\n  C) Iniciar espiramicina isolada. [GABARITO]\n  D) Iniciar espiramicina associada a pirimetamina.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: O caso descreve a profilaxia da transmissão vertical da toxoplasmose congênita. Quando diagnosticada a infecção materna (ou soroconversão) sem evidência de infecção fetal clara, a droga de escolha para tentar evitar a passagem do parasita pela placenta é a espiramicina (alternativa C). Ela é um antibiótico bacteriostático que atua na placenta. A associação"
+  },
+  {
+    "id": 6973,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Partograma Parto vaginal operatório Avaliação da vitalidade fetal intraparto",
+    "stem": "Primigesta de 21 anos de idade, está com 38 semanas de gestação e iniciou trabalho de parto espontâneo. O partograma e a cardiotocografia estão apresentados a seguir. Qual é o método indicado para ultimação do parto?",
+    "alternatives": "  A) Abreviação com vácuo extrator.\n  B) Cesárea segmentar transversa.\n  C) Aguardar parto espontâneo.\n  D) Rotação com fórcipe Kielland. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Quando o partograma indica parada de descida ou rotação em um segundo estágio prolongado com sofrimento fetal iminente, o fórcipe é o instrumento de escolha. A alternativa D é correta pois o fórcipe de Kielland é especificamente indicado para corrigir distocias de rotação (assinclitismo ou occipito-posterior), permitindo a rotação manual da cabeça fetal no"
+  },
+  {
+    "id": 6974,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Obstetrícia Cardiotocografia intraparto",
+    "stem": "Primigesta de 21 anos de idade, está com 38 semanas de gestação e iniciou trabalho de parto espontâneo. O partograma e a cardiotocografia estão apresentados a seguir. A fisiopatologia do traçado da cardiotocografia apresentado inclui:",
+    "alternatives": "  A) Compressão funicular.\n  B) Compressão do pólo cefálico.\n  C) Bloqueio átrio ventricular fetal.\n  D) Acidemia fetal [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A presença de desacelerações tardias ou variáveis graves (variabilidade reduzida ou ausente) no traçado cardiotocográfico, associada a alterações persistentes, reflete acidemia fetal. A alternativa D é a correta, pois a fisiopatologia desses traçados graves aponta para um estado de hipóxia com acidose metabólica. As opções A e B (compressão funicular ou ce"
+  },
+  {
+    "id": 6975,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "topic": "Infecção puerperal endometrite puerperal Partograma",
+    "stem": "Paciente hígida foi submetida a maturação de colo com misoprostol e posterior indução de parto por pós-datismo, conforme partograma apresentado. Paciente evoluiu com dor e diculdade de deambulação no pós-parto, necessitando analgésico de resgate. No 2º dia pós- parto, apresenta temperatura oral aferida de 38,6\u0000C. No exame clínico, está em bom estado geral e eupneica. O abdome é doloroso à palpação, com sinal de descompressão brusca negativo e ruídos hidroaéreos presentes. A ferida cirúrgica tem bom aspecto. A loquiação é fétida. A conduta inicial indicada para essa paciente é:",
+    "alternatives": "  A) Administrar antibiótico. [GABARITO]\n  B) Aspirar restos ovulares.\n  C) Anticoagulação plena.\n  D) Histerectomia subtotal.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O diagnóstico é endometrite pós-parto, caracterizada pela tríade: febre, dor uterina e lóquios fétidos. A conduta padrão ouro é o tratamento antibiótico de amplo espectro para cobrir polimicrobianos. A alternativa A é a correta. As opções B, C e D estão incorretas: a curetagem (B) só é indicada se houver suspeita clara de restos placentários volumosos com "
+  },
+  {
+    "id": 6977,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Eclâmpsia",
+    "stem": "Gestante de 25 anos de idade, primigesta, com 33 semanas e 3 dias de gravidez, chega ao pronto atendimento obstétrico em crise convulsiva tônico-clônica generalizada. O companheiro refere que a paciente estava com dor de cabeça intensa antes da convulsão. No exame clínico, está em mau estado geral, descorada +/4, hidratada, Pressão arterial 152 x 105 mmHg, FC 92 bpm, FR 18 ipm, Saturação 96%, edema de MMII de 3+/4. No exame obstétrico, AU 33 cm, BCF presente e rítmico, dinâmica uterina presente (2 contrações em 10 minutos), toque vaginal com colo dilatado 3 cm, médio, medianizado. Após o tratamento adequado, com estabilização do quadro clínico e avaliação laboratorial, a conduta obstétrica é:",
+    "alternatives": "  A) Cesárea imediata.\n  B) Inibição do trabalho de parto.\n  C) Condução do parto. [GABARITO]\n  D) Cesárea após corticoterapia.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: O caso descreve uma eclâmpsia com 33 semanas. Uma vez que a paciente foi estabilizada (estabilização materna é sempre o passo número um), a conduta obstétrica visa o término da gestação, mas não necessariamente por via cirúrgica imediata se o trabalho de parto está em curso e a mãe está estável. A alternativa C é a correta: se o colo está favorável e a pac"
+  },
+  {
+    "id": 6978,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Medicamentoso",
+    "stem": "Paciente de 20 anos, primigesta, com 22 semanas de idade gestacional, portadora de diabetes mellitus tipo 1, sem outras comorbidades, retorna à consulta de pré-natal sem queixas clínicas ou obstétricas. Em tratamento regular com atividade física, controle dietético e insulinoterapia com múltiplas doses diárias de insulina Neutral Protamine Hagedom e insulina regular. Exame físico geral e obstétrico dentro dos padrões de normalidade para o período gestacional. Ganho de peso de 300 g em uma semana. A análise do perl glicêmico da última semana está demonstrada na tabela a seguir: Qual a conduta mais adequada para este caso clínico?",
+    "alternatives": "  A) Aumentar dose de insulina NPH e manter dose de insulina regular conforme prescrição anterior.\n  B) Reduzir dose de insulina NPH ao deitar e manter dose de insulina regular em relação à prescrição previa.\n  C) Manter dose de insulina NPH e regular de acordo com a última prescrição do pré- natal.\n  D) Manter dose de insulina NPH e aumentar dose de insulina regular em relação à última prescrição. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Para ajustar a insulinoterapia, observe o perfil glicêmico e identifique o momento da hiperglicemia. Se a paciente apresenta hiperglicemia pós-prandial (após o café da manhã, almoço ou jantar), deve-se ajustar a insulina de ação rápida (Regular). A alternativa D é a correta pois, ao analisar as glicemias pós-prandiais elevadas, o ajuste correto é o aumento"
+  },
+  {
+    "id": 6979,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Complicações",
+    "stem": "26 anos, G2P1A0 (1 parto normal anterior a termo sem intercorrências) 14 semanas de gestação gemelar dicoriônica, comparece à consulta para iniciar pré-natal. Antecedentes pessoais nega patologias e refere gravidez espontânea. Ao exame: peso: 92 kg, estatura 1,65 cm, bom estado geral com pressão arterial: 105 x 72 mmHg. Altura uterina de 16 cm, ausculta fetal do feto A de 142 bpm e do feto B de 156 bpm. Qual a conduta medicamentosa adequada?",
+    "alternatives": "  A) AAS e enoxaparina.\n  B) AAS isoladamente.\n  C) Enoxaparina e cálcio.\n  D) AAS e cálcio. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A paciente apresenta gestação gemelar, o que confere risco aumentado para pré-eclâmpsia. As diretrizes da Febrasgo recomendam o uso profilático de AAS (100 a 150 mg) em gestantes com fatores de risco moderados ou altos para pré-eclâmpsia. Além disso, a suplementação de cálcio é recomendada para todas as gestantes com baixa ingestão dietética, especialmente"
+  },
+  {
+    "id": 6980,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Conduta obstétrica Artéria cerebral média ACM",
+    "stem": "Secundigesta (G2P0A1), 29 anos, 33 semanas, portadora de hipertensão arterial crônica, em uso de anti-hipertensivos com bom controle. Comparece para consulta de pré-natal, sem queixas. Exames laboratoriais normais. Exame físico: pressão arterial 140x90 mmHg, restante do exame físico geral normal, altura uterina 30 cm, sem contrações, frequência cardíaca fetal 130 bpm. A cardiotocograa realizada hoje está demonstrada abaixo (gura). A ultrassonograa obstétrica de hoje mostrou feto único, anatomia normal, peso estimado de 1793 gramas (percentil 4), placenta grau I, maior bolsão de líquido amniótico de 3,2 cm, perl biofísico fetal de 8/8. Doppler da artéria umbilical: IP = 1,12 (percentil 85). Qual alternativa possui a melhor conduta para o caso?",
+    "alternatives": "  A) Realizar estudo Doppler da artéria cerebral média fetal. [GABARITO]\n  B) Realizar nova cardiotocografia em 6 horas.\n  C) Resolver a gestação após um ciclo de corticosteroide.\n  D) Avaliar índices de impedância das artérias uterinas maternas.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O feto apresenta restrição de crescimento intrauterino (percentil 4). O Doppler de artéria umbilical está normal (percentil 85), o que indica que a resistência placentária ainda não está elevada. Diante de um feto pequeno, o próximo passo é avaliar a redistribuição de fluxo sanguíneo fetal, e o melhor marcador para isso é a artéria cerebral média (ACM). O "
+  },
+  {
+    "id": 6981,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Primeiro periodo dilatação Distocia de dilatação Distocia de dilatação",
+    "stem": "Primigesta, 30 anos, com 40 semanas, é internada na fase ativa do trabalho de parto, com boa vitalidade fetal na admissão. Pré-natal sem intercorrências. Ela traz um plano de parto no qual rejeita o uso de ocitócicos, analgesia farmacológica e episiotomia. A parturiente se mantém bastante ativa, com alternância de posturas. As 21 horas, ela é reavaliada, apresentando sinais vitais normais, altura uterina de 37 cm, atividade uterina de 4 contrações de 50 segundos/10 minutos e batimentos cardíacos fetais sem desacelerações. O registro gráco do trabalho de parto está representado na gura. Escolha a alternativa com a melhor conduta nesse caso.",
+    "alternatives": "  A) Indicar resolução de gestação por parto cesárea.\n  B) Promover corioamniorrexe artificial imediatamente. [GABARITO]\n  C) Convencer a paciente a aceitar analgesia farmacológica.\n  D) Explicar sobre a necessidade de ocitocina endovenosa.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A análise do partograma mostra que a paciente entrou em uma fase de desaceleração ou parada secundária da dilatação (fase ativa prolongada). Considerando que a vitalidade fetal está preservada e as contrações estão presentes, porém ineficazes para a progressão, a amniotomia (corioamniorrexe artificial) é a medida de escolha para estimular o trabalho de par"
+  },
+  {
+    "id": 6982,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Primeiro periodo dilatação Cardiotocografia intraparto",
+    "stem": "Primigesta, 22 anos, com 41 semanas, internou no início da fase ativa da dilatação com contrações moderadas e perda de tampão mucoso. Sem outras queixas. Pré-natal sem intercorrências. Há 30 minutos, queixou-se de muita dor e solicitou analgesia farmacológica. Foi submetida à bloqueio combinado raqui-peridural. Reavaliação após analgesia: sinais vitais maternos normais, atividade uterina de 4 contrações moderadas de 40 segundos em 10 minutos. A avaliação da vitalidade fetal está demonstrada na cardiotocograa exibida abaixo (gura). Toque: colo no, centrado, dilatado 8 cm, feto cefálico, em zero de DeLee, bolsa íntegra. Escolha a melhor conduta na assistência a este trabalho de parto.",
+    "alternatives": "  A) Realizar ausculta intermitente da frequência cardíaca fetal. [GABARITO]\n  B) Promover corioamniorrexe artificial.\n  C) Indicar resolução da gestação por cesárea.\n  D) Instituir manobras de reanimação fetal.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Após a analgesia, a cardiotocografia deve ser avaliada. No entanto, o padrão ouro e a recomendação atual para o trabalho de parto de baixo risco, mesmo após analgesia, é a ausculta intermitente, desde que o traçado prévio não tenha mostrado alterações de hipóxia fetal. A bolsa íntegra e a evolução favorável (8 cm de dilatação) não justificam a amniotomia n"
+  },
+  {
+    "id": 6983,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Parto",
+    "stem": "Primigesta, 23 anos, não realizou pré-natal, 39 semanas, moradora de rua, é trazida a maternidade pelo SAMU com queixa de dor no baixo ventre. Ao exame está normotensa, atividade uterina: 2 contrações fracas de 30 segundos em 10 minutos, BCF 148 bpm, sem desacelerações. Toque vaginal apresenta 3 cm de dilatação. O teste rápido para HIV apresenta resultado positivo, teste para sífilis é não reagente. Qual a conduta mais adequada para esta paciente?",
+    "alternatives": "  A) Iniciar AZT intravenoso e recomendar parto por via obstétrica.\n  B) Iniciar AZT intravenoso e indicar cesárea após 3 horas. [GABARITO]\n  C) Iniciar raltegravir e indicar cesárea após 3 horas.\n  D) Indicar parto cesárea imediatamente.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Para gestantes com HIV, o protocolo preconiza o uso de AZT venoso durante o trabalho de parto para reduzir a transmissão vertical. A indicação de via de parto depende da carga viral. Como a paciente não realizou pré-natal e desconhecemos a carga viral, a cesárea eletiva é indicada se a dilatação for menor que 3 a 4 cm, preferencialmente após 3 horas de iní"
+  },
+  {
+    "id": 6984,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Tratamento",
+    "stem": "Paciente de 29 anos, secundigesta (parto normal anterior há 3 anos), idade gestacional de 33 semanas, chega ao pronto atendimento da maternidade com história de contrações uterinas há três horas, dilatação cervical de 4 cm e polo cefálico em 1+ De Lee, evoluindo há 10 minutos com dor abdominal importante contínua e com aumento súbito de tônus uterino e alteração de vitalidade fetal durante a avaliação clínica. Ao exame físico: pressão arterial 80 x 50 mmHg, frequência cardíaca 115 bpm, frequência respiratória 24 irpm, Aparelhos respiratório e cardiovascular: dentro dos padrões de normalidade. Exame obstétrico: altura uterina = 35 cm, tônus uterino aumentado, ausculta fetal = 114 bpm com desacelerações até 97 bpm, movimentação fetal ausente. Toque vagina: colo uterino grosso, posterior, consistência rme, pérvio 2 cm, apresentação fetal cefálica. Em associação aos cuidados de estabilização clínica, qual a conduta imediata mais adequada?",
+    "alternatives": "  A) Parto cesárea.\n  B) Amniotomia. [GABARITO]\n  C) Ácido tranexâmico.\n  D) Corticosteroide.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Estamos diante de um quadro de Descolamento Prematuro de Placenta (DPP) com sofrimento fetal agudo e instabilidade materna. O ponto crítico aqui é que a paciente apresenta hipertonia uterina e sinais de choque hipovolêmico. A alternativa correta é a amniotomia, pois, em casos de DPP com feto vivo, a rotura artificial das membranas (amniotomia) ajuda a redu"
+  },
+  {
+    "id": 6985,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Monitorização pós tratamento",
+    "stem": "Gestante G3P1A1, 27 anos, 16 semanas de gravidez, veio encaminhada de unidade básica por diagnóstico de sílis. Referia inicio recente de uma nova parceria sexual e história de que há dois meses apresentou lesão genital única, ulcerada e indolor (pequeno lábio), a qual desapareceu sem tratamento. Há duas semanas iniciou o pré- natal, vericando-se que a quimioluminescência para sífilis era positiva e o Rapid Plasm Reagin (RPR) era de 1;128. Demais exames da rotina laboratorial pré-natal sem alterações. Ela e o parceiro foram tratados corretamente com penicilina benzatina e receberam todas as orientações para evitar novas infecções. Qual é a dinâmica prevista para a redução dos anticorpos reagínicos da sílis no controle deste tratamento?",
+    "alternatives": "  A) Duas diluições em 90 dias. [GABARITO]\n  B) Três diluições em 120 dias.\n  C) Cinco diluições em 180 dias.\n  D) Uma diluição em 60 dias.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O seguimento sorológico da sífilis, especialmente na gestante, baseia-se na queda dos títulos do VDRL ou RPR. A resposta esperada ao tratamento adequado é a queda dos títulos em pelo menos duas diluições (ex: de 1:128 para 1:32) em um período de até 90 dias após o tratamento. Este é o padrão ouro de resposta imunológica esperado no controle de cura. As out"
+  },
+  {
+    "id": 6986,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Conduta na RPM entre 24 a 33 67 semanas",
+    "stem": "Primigesta, 24 anos, 33 semanas, apresenta-se ao centro obstétrico com queixa de perda líquida genital em grande quantidade há 18 horas. Refere contrações esporádicas. Relata pré-natal sem intercorrências até o momento. Exame físico geral normal. Altura uterina de 28 cm, atividade uterina ausente e ao exame especular observou-se grande quantidade de líquido em fundo de saco vaginal. Toque vaginal mostrou colo dilatado 2 cm. O resultado do exame de cristalização foi positivo. Cardiotocografia com feto reativo. No manejo desse caso, qual prescrição é a mais adequada?",
+    "alternatives": "  A) Betametasona e penicilina cristalina. [GABARITO]\n  B) Ocitocina e penicilina cristalina.\n  C) Betametasona e sulfato de magnésio.\n  D) Misoprostol e sulfato de magnésio.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Diagnóstico de Rotura Prematura de Membranas Ovulares (RPMO) em feto pré-termo (33 semanas). A conduta padrão para este cenário é a corticoterapia antenatal (betametasona) para maturação pulmonar fetal e antibioticoprofilaxia (penicilina cristalina) para prevenir a infecção por Estreptococo do grupo B, visto que o feto está com menos de 34 semanas e não há"
+  },
+  {
+    "id": 6988,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Corioamnionite",
+    "stem": "Sr.ª AS, secundigesta com 32 semanas de gravidez, com 1 parto vaginal há 3 anos, vem ao pronto atendimento com queixa de corrimento de odor fétido há 6 dias, inicialmente em pequena quantidade, hoje chegou a molhar a roupa. Ao exame clínico, bom estado geral afebril, FC114, PA 10x7, altura uterina 27 cm, BCF 162, dinâmica uterina 3 contrações fracas em 10 minutos. Forro vaginal úmido. Aspecto de forro vaginal e de exame especular abaixo. Colo médio, 2cm de dilatação. Qual deve ser a conduta obstétrica?",
+    "alternatives": "  A) Inibição do trabalho de parto.\n  B) Indução de parto. [GABARITO]\n  C) Realização de cerclagem do colo.\n  D) Tratamento antimicrobiano vaginal.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A associação de corrimento fétido, taquicardia materna e taquicardia fetal em gestação pré-termo é sugestiva de corioamnionite, que é indicação absoluta de interrupção da gestação, independentemente da idade gestacional.\n\n****Alternativa Correta** (B)**: A paciente apresenta quadro compatível com rotura prematura de membranas ovulares (RPMO) e sinais clíni"
+  },
+  {
+    "id": 6989,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "topic": "Parada secundária da dilatação",
+    "stem": "O partograma abaixo caracteriza:",
+    "alternatives": "  A) Fase de latência.\n  B) Vício pélvico.\n  C) Distocia funcional. [GABARITO]\n  D) Expulsivo prolongado.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Distocia funcional é a parada da progressão do trabalho de parto (dilatação ou descida) por alteração na contratilidade uterina, sem desproporção céfalo-pélvica.\n\n****Alternativa Correta** (C)**: O partograma apresentado caracteriza uma distocia funcional, que se manifesta por uma parada secundária da dilatação cervical ou da descida da apresentação, apesa"
+  },
+  {
+    "id": 6990,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Cálculo da idade gestacional pela ultrassonografia IG USG",
+    "stem": "Paciente de 16 anos de idade procura o serviço de saúde preocupada porque acha que a barriga está pequena e não sente o bebê mexer ainda. Não iniciou pré-natal por medo de contar para os pais da gravidez, não se lembra da data da última menstruação, mas acha que está com 7 meses (lembra de ter sangrado em maio). Nega doenças, refere uso eventual de maconha e cigarro. Ao exame obstétrico, altura uterina 22cm, BCF presente e rítmico ao sonar, especular sem alterações, toque vaginal com colo amolecido, grosso e impérvio. Realizada ultrassonograa obstétrica, com peso fetal estimado de 650g e índice de líquido amniótico de 10cm, biometria compatível com 24 semanas. A orientação para a paciente é de que:",
+    "alternatives": "  A) A datação da gravidez é de 24 semanas, seguir pré-natal normal.\n  B) Realizar dopplervelocimetria de artérias uterinas.\n  C) É necessário repetir a ultrassonografia em 14 a 21 dias para confirmar a datação. [GABARITO]\n  D) Realizar amniocentese e cariótipo fetal.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Quando a idade gestacional não é confirmada por ultrassom precoce e há discrepância entre a clínica e a ultrassonografia atual, é mandatório repetir o exame em 2 a 3 semanas para avaliar o crescimento e confirmar a datação.\n\n****Alternativa Correta** (C)**: A paciente não realizou ultrassom no primeiro trimestre, que é o padrão-ouro para datação. Na ausênc"
+  },
+  {
+    "id": 6991,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+    "topic": "Particularidades no puerpério",
+    "stem": "Paciente com diagnóstico pré-natal de diabetes gestacional realizado no teste de tolerância á glicose com 26 semanas, controlada com insulina NPH e regular. No pós-parto imediato a prescrição deve contemplar:",
+    "alternatives": "  A) Dieta geral e suspensão da terapêutica hipoglicemiante, sem controle de glicemia. [GABARITO]\n  B) Dieta para diabetes, manter insulina, controle de glicemia capilar às refeições.\n  C) Dieta para diabetes, suspensão da terapêutica hipoglicemiante, glicemia às refeições.\n  D) Dieta geral, iniciar hipoglicemiante oral, controle de glicemia capilar às refeições.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: No diabetes gestacional, a resistência insulínica é causada por hormônios placentários. Após a dequitação, a glicemia tende a normalizar rapidamente, devendo-se suspender a insulina e liberar a dieta.\n\n****Alternativa Correta** (A)**: No pós-parto imediato, a paciente com diabetes gestacional deve suspender a insulina, pois a resistência insulínica desapar"
+  },
+  {
+    "id": 6992,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Trabalho de parto prematuro TPP",
+    "stem": "Quartigesta com 3 partos vaginais anteriores, 28 semanas de gravidez, vem ao pronto atendimento com queixa de dor em hipogástrio há 3 horas. Nega sangramento e refere secreção vaginal aumentada. Ao exame, bom estado geral, normotensa, afebril. Abdômen gravídico, normotônico, 2 contrações fracas em 10 minutos, BCF presente ritmico 140bpm. Especular com secreção bolhosa amarela fluida abundante, toque vaginal com colo amolecido, grosso, entreaberto. Qual é a conduta recomendada neste momento?",
+    "alternatives": "  A) Nifedipina.\n  B) Metronidazol. [GABARITO]\n  C) Betametasona.\n  D) Progesterona.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Corrimento bolhoso amarelo com odor fétido sugere vaginose bacteriana ou tricomoníase, que pode desencadear trabalho de parto prematuro. O tratamento específico da infecção é a medida inicial.\n\n****Alternativa Correta** (B)**: A paciente apresenta secreção vaginal anormal (bolhosa, amarela, fluida) sugestiva de infecção vaginal, como vaginose bacteriana ou"
+  },
+  {
+    "id": 6993,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Interpretação Conduta",
+    "stem": "Gestante, 32 anos de idade, secundigesta com uma cesárea anterior, 40 semanas e 2 dias de gravidez. Refere contrações irregulares e redução de movimentação fetal há 1 dia. Ao exame clínico, bom estado geral, corada, PA 120x70mmHg, altura uterina 30 cm, BCF presente rítmico. Toque vaginal com colo grosso, posterior, impérvio. Vitalidade fetal: tônus adequado, movimentação corpórea e respiratória presentes, índice de líquido amniótico de 4,2 cm. Cardiotocografia apresentada. Qual é a conduta adequada neste momento?",
+    "alternatives": "  A) Controlar a vitalidade fetal em 2 dias.\n  B) Preparar o colo com prostaglandina.\n  C) Indicar parto de imediato por via alta. [GABARITO]\n  D) Realizar hidratação materna e reavaliação.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Oligodramnia (ILA < 5 cm) em gestação a termo é indicação de resolução imediata, especialmente com colo desfavorável, sendo a cesariana a via mais segura.\n\n****Alternativa Correta** (C)**: A paciente apresenta oligodramnia (ILA 4,2 cm), que é um sinal de sofrimento fetal crônico e indica a necessidade de interrupção da gestação. Como o colo está desfavoráv"
+  },
+  {
+    "id": 6994,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Conduta",
+    "stem": "Primigesta, 27 anos de idade, vem para iniciar pré-natal. É hipertensa crônica diagnosticada aos 22 anos de idade, fez uso de enalapril por 3 anos e, após mudança de hábitos de vida, suspendeu o tratamento medicamentoso. Tem diabetes tipo 2, usava metformina antes de engravidar que também suspendeu. Idade gestacional de 9 semanas, assintomática. Ao exame clínico inicial, apresenta pressão arterial de 166x102mmHg, confirmada em segunda ocasião. Nesse momento, qual é a conduta com relação à pressão arterial?",
+    "alternatives": "  A) Tratamento medicamentoso ambulatorial. [GABARITO]\n  B) Tratamento endovenoso em regime de internação.\n  C) Sulfato de magnésio em regime de urgência.\n  D) Não há necessidade de tratamento pressórico.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Hipertensão crônica com PA > 160/110 mmHg requer tratamento medicamentoso, mesmo assintomática; o tratamento pode ser feito ambulatorialmente se não houver sinais de emergência.\n\n****Alternativa Correta** (A)**: A paciente tem hipertensão crônica e apresenta PA 166x102 mmHg, confirmada. Como está assintomática e sem critérios de emergência hipertensiva, o "
+  },
+  {
+    "id": 6996,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+    "topic": "Abortamento inevitável",
+    "stem": "Paciente secundigesta com 9 semanas de gravidez pela data da última menstruação, refere cólica abdominal de forte intensidade e sangramento vaginal volumoso e espontâneo. Ao exame especular, moderada quantidade de sangue em fundo de saco posterior, com sangramento ativo. Toque vaginal com colo pérvio para 2 cm. Qual é a principal hipótese diagnóstica?",
+    "alternatives": "  A) Abortamento retido.\n  B) Gestação incipiente.\n  C) Abortamento inevitável. [GABARITO]\n  D) Incompetência cervical.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Sangramento vaginal volumoso com colo pérvio e dor abdominal em gestação inicial é característico de abortamento inevitável.\n\n****Alternativa Correta** (C)**: A paciente apresenta quadro de sangramento vaginal volumoso, cólica abdominal e colo uterino dilatado (pérvio a 2 cm). Isso define um abortamento inevitável, ou seja, a gestação não pode ser mantida,"
+  },
+  {
+    "id": 7152,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "topic": "Apendicetomia Aberta x Apendicectomia Laparoscópica Causas Apendicite Aguda Complicada",
+    "stem": "Mulher de 27 anos com dor abdominal iniciada há 3 dias, refere dor epigástrica sem fator desencadeante com evolução para dor em andar inferior do abdome, associada a um pico febril de 38,5ºC. Nas últimas 6 horas refere piora da dor que se tornou difusa. No início do quadro procurou atendimento na UPA tendo sido medicada com ciprofloxacino (em uso há 48h) devido a diagnóstico de infecção urinária (sic). Antecedentes: cisto de ovário simples, D.U.M. há 7 dias, sem cirurgias prévias. Sem outras doenças. Ao exame físico: PA 100x60 mmHg, FC 95 bpm, dor à palpação abdominal difusamente, pior em hipogástrio, com dor à descompressão brusca difusamente. IMC: 38 kg/m². Laboratoriais: Hemograma: Hb 14 (VR: 12,0 - 15,5 g/dL), Leucócitos 15000 (VR: 3500 - 10500/mm³); PCR 22 (VR: até 0,5 mg/dL), restante sem alterações. Qual a conduta mais adequada?",
+    "alternatives": "  A) Ultrassom transvaginal.\n  B) Videolaparoscopia. [GABARITO]\n  C) Laparotomia mediana.\n  D) Escalonar antibiótico.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Paciente com peritonite difusa e obesidade: videolaparoscopia é a melhor combinação de diagnóstico e tratamento minimamente invasivo.\n\n****Alternativa Correta** (B)**: A videolaparoscopia permite identificar a causa (apendicite, DIP, etc.) e tratar, evitando uma laparotomia em paciente obeso, reduzindo morbidade.\n\n**Alternativas Incorretas**:\n- **Letra A**"
+  },
+  {
+    "id": 7312,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Investigação",
+    "stem": "Mulher, 28 anos de idade, saudável, com gestação prévia sem intercorrências, procura atendimento ginecológico para iniciar o uso de contracepção hormonal combinada. Ela não possui história pessoal ou familiar de trombose venosa profunda, tromboembolia pulmonar ou complicações gestacionais. Soube por amigos do risco de trombose relacionado ao uso desse tipo de contraceptivo e solicita a realização de exames para pesquisa de trombofilias hereditárias antes de iniciar o método. A tabela de prevalência de trombofilias hereditárias é apresentada a seguir: Com base nas evidências disponíveis na tabela e o risco de tromboembolia em usuárias de contraceptivos orais, qual é o melhor aconselhamento neste caso?",
+    "alternatives": "  A) Solicitar a pesquisa das trombofilias mais prevalentes na população.\n  B) Solicitar as pesquisas das trombofilias com maior risco relativo de TEV.\n  C) Realizar triagem laboratorial para as trombofilias hereditárias disponíveis.\n  D) Não há necessidade de investigar trombofilias hereditárias. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Rastreamento de trombofilias hereditárias em mulheres assintomáticas sem história pessoal ou familiar de TEV não é recomendado, pois não altera a conduta e pode causar ansiedade.\n\n****Alternativa Correta** (D)**: A paciente não tem história pessoal ou familiar de trombose. O risco de TEV com ACO é pequeno, e a triagem de trombofilias não é custo-efetiva. A"
+  },
+  {
+    "id": 7328,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Hiperêmese gravídica Tireotoxicose gestacional transitória",
+    "stem": "Mulher, 28 anos de idade, 2G1A, com 10 semanas de gestação, procura pronto atendimento por vômitos persistentes há 10 dias, com dificuldade para manter líquidos e alimentos. Refere dor abdominal discreta e perda de 5 kg no período. Nega febre e perdas vaginais. Traz cartão de pré-natal com rotina de exames sem alterações. Relata ter iniciado dimenidrinato oral há cerca de 5 dias, prescrito em outro serviço, mas sem melhora significativa dos sintomas. Ao exame físico, apresenta-se em BEG, PA de 100×60 mmHg, FC de 104 bpm, mucosa oral levemente seca. Abdome flácido, levemente doloroso em epigástrio, sem visceromegalias. • Exames laboratoriais: TGO/AST: 58 U/L TGP/ALT: 65 U/L Bilirrubina total: 0,9 mg/dL β -hCG: 215.000 mUI/mL Urina tipo 1: cetonúria ++/4+ TSH: 0,05 mUI/L T4 livre: 1,1 ng/dL Assinale a alternativa que apresenta a interpretação e conduta mais adequadas para o caso descrito.",
+    "alternatives": "  A) Cetoacidose diabética; solicitar glicemia, gasometria e eletrólitos e iniciar hidratação endovenosa.\n  B) Hiperêmese gravídica com hipertiroidismo transitório; hidratação venosa e otimização dos antieméticos. [GABARITO]\n  C) Hepatite medicamentosa por uso de dimenidrinato; suspender a medicação e iniciar corticoide sistêmico.\n  D) Hipertireoidismo autoimune associado à hepatopatia; iniciar propiltiouracil e monitorar função hepática.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Vômitos incoercíveis no 1º trimestre + β-hCG alto + TSH suprimido + T4L normal = hiperêmese gravídica com hipertireoidismo transitório. Não tratar com antitireoidiano!\n\n****Alternativa Correta** (B)**: A paciente tem hiperêmese gravídica, com hipertireoidismo transitório devido à ação tireotrófica do β-hCG. A conduta é hidratação venosa, antieméticos e rep"
+  },
+  {
+    "id": 7340,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Ginecologia e Obstetrícia Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Infecção Urinária e Bacteriúria Assintomática na gestação ITU Bacteriúria assintomática Bacteriuria assintomática",
+    "stem": "Gestante de 21 anos, G2P1A0, idade gestacional de 33 semanas, portadora de diabetes mellitus gestacional em uso de insulina. Veio para a primeira consulta (caso novo) em Hospital Terciário, referindo ter realizado tratamento para bacteríúria assintomática com cefuroxima por sete dias na Unidade Básica de Saúde. Como deverá ser o controle desta gestante referente à bacteríúria assintomática?",
+    "alternatives": "  A) Solicitar urocultura 7 a 10 dias após o término do tratamento e, sendo negativa, realizar urina tipo 1 mensalmente até o parto.\n  B) Solicitar urina tipo 1 entre 7 a 10 dias após o tratamento e, sendo negativa, repetir mensalmente até o parto.\n  C) Solicitar urocultura 7 a 10 dias após o término do tratamento e, sendo negativa, mensalmente até o parto. [GABARITO]\n  D) Não há necessidade de controle de tratamento em casos de bacteriúria assintomática.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Em gestante com bacteriúria assintomática, o controle de cura é feito com urocultura (não urina tipo I) 7-10 dias após o tratamento, e depois mensalmente.\n\n****Alternativa Correta** (C)**: O rastreamento e seguimento de bacteriúria assintomática na gestação deve ser feito com urocultura (padrão-ouro). Após o tratamento, repete-se a urocultura de 7 a 10 dia"
+  },
+  {
+    "id": 7380,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "topic": "Diagnóstico Indicação Esquema básico inicial",
+    "stem": "Mulher, na 12ª semana de gestação, comparece à consulta de pre ́ -natal com exames solicitados na primeira consulta. Como o resultado da sorologia para HIV foi positivo, foi solicitada dosagem da carga viral, CD4 e genotipagem. De acordo com o Ministério da Saúde, qual a conduta adequada nesse momento?",
+    "alternatives": "  A) Aguardar resultado da genotipagem para iniciar terapia antirretroviral.\n  B) Aguardar resultado da carga viral para avaliar início de tratamento.\n  C) Aguardar resultado do CD4 para avaliar início de tratamento.\n  D) Iniciar tratamento com tenofovir, lamivudina e dolutegravir. [GABARITO]\n  E) Iniciar tratamento com tenofovir, lamivudina e raltegravir.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: O tratamento para HIV em gestantes deve ser iniciado imediatamente após o diagnóstico, independentemente de CD4 ou carga viral.\n\n****Alternativa Correta** (D)**: Conforme o Ministério da Saúde, o esquema de primeira escolha para gestantes virgens de tratamento é tenofovir + lamivudina + dolutegravir (TDF/3TC/DTG). O tratamento deve ser iniciado imediatamen"
+  },
+  {
+    "id": 7395,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Quadro clínico da anemia ferropriva Perda crônica de ferro",
+    "stem": "Paciente 47 anos, sexo feminino, comparece em consulta com queixa de há 3 meses apresentar fadiga, astenia e episódios de tontura. Paciente G1P1A0C0, com método contraceptivo e laqueadura tubária há 12 anos, sem atraso menstrual. Nega uso de medicações, doenças prévias e história familiar de doenças. Exame físico normal. Qual o questionamento mais adequado que o médico deve fazer para complementar a anamnese?",
+    "alternatives": "  A) Perda ponderal não intencional.\n  B) Padrão de fluxo menstrual. [GABARITO]\n  C) Ingesta de alimentos ricos em vit. B12.\n  D) Uso excessivo de álcool.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Em mulheres em idade fértil com fadiga e tontura, a principal hipótese é anemia ferropriva por sangramento uterino anormal. Mesmo com laqueadura, é essencial investigar o padrão menstrual para descartar hipermenorreia.\n\n****Alternativa Correta** (B)**: A pergunta sobre padrão de fluxo menstrual é prioritária para avaliar a causa mais comum de anemia, pois "
+  },
+  {
+    "id": 7400,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Endoscopia Ginecológica Ginecologia e Obstetrícia Profilaxia pósexposição PEP",
+    "stem": "Gestante, 24 anos, G3P2A0, com 12 semanas, com sorologia anti-HIV não reagente na última semana, procurou o serviço de urgência referindo que, durante relação sexual há 26 horas, houve ruptura total do preservativo com ejaculado no canal anal. A paciente está muito ansiosa, pois seu parceiro vive com HIV, sem tratamento e sem controle clínico e laboratorial no último ano. O teste rápido para detecção do HIV da gestante foi negativo. Qual é a conduta mais adequada?",
+    "alternatives": "  A) Fazer profilaxia com lamivudina, tenofovir e dolutegravir. [GABARITO]\n  B) Profilaxia pós-exposição não está indicada nessa idade gestacional.\n  C) Fazer profilaxia somente com zidovudina endovenosa.\n  D) Após este tempo da exposição, não está mais indicada a profilaxia.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: PEP deve ser iniciada até 72 horas após exposição. A gravidez não é contraindicação; pelo contrário, é situação de alto risco para transmissão vertical. O esquema preferencial é TDF + 3TC + DTG (TLD).\n\n****Alternativa Correta** (A)**: A exposição sexual com parceiro HIV+ sem tratamento, há 26 horas, indica PEP com lamivudina, tenofovir e dolutegravir, conf"
+  },
+  {
+    "id": 7453,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Apresentação clínica",
+    "stem": "Mulher, 60 anos de idade, faz uso de terapia hormonal com estrogênio e progesterona, além do uso de alendronato, colecalciferol e carbonato de cálcio. Qual dos seguintes procedimentos poderá ter seu resultado comprometido nesta paciente?",
+    "alternatives": "  A) Litotripsia.\n  B) Cirurgia refrativa.\n  C) Cirurgia de varizes.\n  D) Implante dentário. [GABARITO]",
+    "explanation": "**Pulo do Gato**: A paciente faz uso de bifosfonatos (alendronato), droga conhecida por inibir a reabsorção óssea e alterar o metabolismo do osso mandibular/maxilar. Esse cenário aumenta drasticamente o risco de osteonecrose dos maxilares, especialmente após procedimentos invasivos como implantes dentários (Alternativa D). Litotripsia, cirurgia refrativa e cirurgia de varizes não possuem relação d"
+  },
+  {
+    "id": 7477,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Abordagem da paciente com queixa de corrimento vaginal Etiologia",
+    "stem": "Em relação às Infecções Sexualmente Transmissíveis (ISTs), podemos afirmar que NÃO é um agente etiológico causador do corrimento vaginal/uretral:",
+    "alternatives": "  A) Haemophilus ducreyi. [GABARITO]\n  B) Candida albicans.\n  C) Neisseria gonorrhoeae.\n  D) Mycoplasma genitalium.\n  E) Trichomonas vaginalis.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Haemophilus ducreyi causa cancro mole (úlcera), não corrimento.\n\n****Alternativa Correta** (A)**: Não é agente de corrimento vaginal/uretral.\n\n**Alternativas Incorretas**:\n- **Letra B**: Candida albicans causa vaginite com corrimento.\n- **Letra C**: Neisseria gonorrhoeae causa uretrite com corrimento.\n- **Letra D**: Mycoplasma genitalium causa uretrite não"
+  },
+  {
+    "id": 7506,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Manifestações Clínicas",
+    "stem": "Homem, 66 anos, refere prurido e icterícia há 15 dias. Nega perda de peso, vômitos e alterações do hábito intestinal. Tem diabetes melito em uso de hipoglicemiante oral e é tabagista (20 anos-maço). Ao exame físico encontra-se em bom estado geral, ictérico, FC: 70 bpm e PA: 120x70 mmHg; sem alterações cardiopulmonares, abdome flácido, com massa palpável e indolor no hipocôndrio direito. ⦁ Exames laboratoriais: Hb: 12,1 g/dL Ht: 35% Bilirrubina total: 12 mg/dL Bilirrubina direta: 10,9 mg/dL FA: 327 U/L GGT: 754 U/L TGO/AST: 231 U/L TGP/ALT: 197 U/L Assinale o local mais provável de neoplasia considerada na hipótese diagnóstica.",
+    "alternatives": "  A) Junção dos ductos hepáticos.\n  B) Periampular. [GABARITO]\n  C) Ducto hepático.\n  D) Vesícula biliar.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Icterícia obstrutiva + vesícula palpável e indolor (Lei de Courvoisier-Terrier) = tumor periampular até prova em contrário.\n\n****Alternativa Correta** (B)**: A massa palpável indolor no hipocôndrio direito em paciente ictérico é a vesícula biliar distendida, sugestiva de obstrução maligna distal (periampular), como câncer de cabeça de pâncreas ou ampola.\n\n"
+  },
+  {
+    "id": 7535,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "topic": "Epidemiologia e fatores de risco Bisfosfonatos",
+    "stem": "Paciente, 55 anos, com antecedente de câncer de mama tratado há 2 anos por quadrantectomia mamária e radioterapia, sem necessidade de quimioterapia, mas em uso regular de inibidor de aromatase. Considerando que os efeitos colaterais dessa medicação se fizeram presentes, assinale qual é o medicamento adequado.",
+    "alternatives": "  A) Bifosfonato. [GABARITO]\n  B) Enoxaparina.\n  C) Omeprazol.\n  D) Espironolactona.",
+    "explanation": ""
+  },
+  {
+    "id": 7536,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "topic": "Critérios diagnósticos",
+    "stem": "Primigesta de 20 anos de idade, com 25 semanas de gravidez, com queixa de náuseas, vômitos, dor abdominal e mal- estar há cerca de 12 horas. Ao exame físico: REG, corada, desidratada 2+/4+, anictérica, acianótica, afebril. FR: 20 ipm, Fc: 108 bpm, PA: 120x70 mmHg. Abdome flácido, descompressão brusca negativa. AU: 28 cm. BCF: 160 bpm. DU ausente. Traz os exames colhidos no início do pré-natal, conforme tabela a seguir: Assinale qual é a melhor hipótese diagnóstica neste momento.",
+    "alternatives": "  A) Apendicite.\n  B) Cetoacidose diabética. [GABARITO]\n  C) Hiperêmese gravídica.\n  D) Esteatose hepática aguda.",
+    "explanation": ""
+  },
+  {
+    "id": 7577,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Endoscopia Ginecológica Ginecologia e Obstetrícia Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Obstetrícia Hepatites na gestação Marcadores sorológicos",
+    "stem": "Gestante, G3P2, 26 anos, idade gestacional de 29 semanas, veio encaminhada de unidade básica de saúde devido aos seus resultados sorológicos referentes à hepatite B. O resumo destes exames estão listados a seguir: HBsAg: positivo HBeAg: negativo Anti HBsAg: negativo Anti HBeAg: positivo Anti HBcAg: positivo Baseado nestes exames sorológicos qual das alternativas é considerada correta para essa gestante?",
+    "alternatives": "  A) Solicitar carga viral. [GABARITO]\n  B) Iniciar tenofovir.\n  C) Solicitar novo anti HBsAg.\n  D) Solicitar novo HBsAg.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: HBsAg positivo e HBeAg negativo com Anti-HBe positivo sugere fase crônica inativa. Para avaliar risco de transmissão vertical, é necessária a carga viral.\n\n****Alternativa Correta** (A)**: Solicitar carga viral (DNA-HBV) define a necessidade de profilaxia antiviral (tenofovir) na gestante.\n\n**Alternativas Incorretas**:\n- **Letra B**: Tenofovir é iniciado a"
+  },
+  {
+    "id": 7578,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Síndrome de Rokitansky Fator uterino",
+    "stem": "Adolescente, sexo feminino, 17 anos de idade, procura atendimento por nunca ter menstruado. Refere desenvolvimento puberal normal, com crescimento das mamas iniciado aos 11 anos e aparecimento de pelos pubianos aos 12 anos. Nega dor pélvica, cólicas cíclicas, infecções prévias ou atividade sexual. Apresenta crescimento e desenvolvimento geral dentro da normalidade. Ao exame físico, exibe mamas e pelos pubianos compatíveis com maturidade, genitália externa sem alterações e canal vaginal curto à avaliação ginecológica, sem visualização do colo uterino. O exame abdominal é normal, sem massas palpáveis. Diante do quadro apresentado, qual é o diagnóstico mais provável e qual deve ser a orientação correta sobre seu futuro reprodutivo?",
+    "alternatives": "  A) Síndrome de Mayer–Rokitansky–Küster–Hauser; pode ter filhos biológicos por meio de útero de substituição. [GABARITO]\n  B) Insuficiência ovariana prematura; poderá gestar apenas com óvulos doados.\n  C) Síndrome de insensibilidade androgênica; não há possibilidade de gestação mesmo com técnicas de reprodução assistida.\n  D) Septo vaginal transverso; poderá menstruar e gestar após correção cirúrgica.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Amenorreia primária com caracteres sexuais secundários presentes e ausência de útero/vagina é típico de síndrome de Mayer-Rokitansky-Küster-Hauser (MRKH). Ovários funcionais permitem gestação por útero de substituição.\n\n****Alternativa Correta** (A)**: MRKH: agenesia mülleriana. Ovários normais, coleta de óvulos possível para fertilização in vitro com úter"
+  },
+  {
+    "id": 7579,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Exames complementares Histeroscopia",
+    "stem": "Mulher, 62 anos de idade, menopausada há 6 anos, procura atendimento relatando episódios de sangramento vaginal discreto, porém recorrente nas últimas três semanas, associado a leve desconforto pélvico. É hipertensa e obesa grau I, sem uso de terapia hormonal prévia. No exame ginecológico, apresenta mucosa vaginal atrófica, sem lesões aparentes e colo uterino normal. O ultrassom transvaginal evidencia endométrio medindo 10 mm, com contornos regulares e cavidade bem delimitada. Diante desse quadro, assinale a alternativa que apresenta a conduta mais adequada.",
+    "alternatives": "  A) Prescrever estriol tópico, pois o sangramento decorre de atrofia vaginal.\n  B) Investigar com histeroscopia e coleta de biópsia endometrial dirigida. [GABARITO]\n  C) Suspeitar de mioma submucoso e indicar miomectomia.\n  D) Prescrever progesterona oral por alguns meses e reavaliar posteriormente.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Sangramento pós-menopausa com endométrio > 4-5 mm exige investigação para excluir câncer de endométrio. Histeroscopia com biópsia é o padrão.\n\n****Alternativa Correta** (B)**: Endométrio de 10 mm em pós-menopausa é anormal (normal ≤ 5 mm). Histeroscopia com biópsia dirigida é obrigatória.\n\n**Alternativas Incorretas**:\n- **Letra A**: Estriol tópico só para "
+  },
+  {
+    "id": 7580,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Tratamento cirúrgico",
+    "stem": "Mulher, 67 anos de idade, G3P3, menopausada há 14 anos, com antecedente de hipertensão, obesidade grau II e diabetes tipo 2, procura atendimento por episódios de sangramento vaginal intermitente há dois meses, acompanhados de leve dor hipogástrica. Negava uso de terapia hormonal. Realizou ultrassonografia transvaginal revelando endométrio medindo 18 mm, heterogêneo. Foi submetida à histeroscopia diagnóstica com biópsia, cujo resultado mostrou adenocarcinoma endometrioide grau 1. Encaminhada ao serviço de oncologia, foram realizados exames de estadiamento. A ressonância magnética pélvica demonstrou lesão restrita ao corpo uterino, com invasão superficial do miométrio (menos de 50%) e sem extensão para o colo uterino. Não havia linfonodos pélvicos aumentados e a tomografia de tórax e abdome foi negativa para metástases. Ao exame físico, está em bom estado geral, pressão controlada, sem dor à palpação abdominal e sem massas palpáveis. Avaliação anestésica sem contraindicação cirúrgica. Com base nas informações clínicas, radiológicas e histopatológicas, qual é a conduta terapêutica mais adequada?",
+    "alternatives": "  A) Histerectomia total com salpingo-ooforectomia bilateral associada à avaliação linfonodal pélvica. [GABARITO]\n  B) Radioterapia pélvica exclusiva, já que se trata de tumor de baixo grau.\n  C) Quimioterapia sistêmica seguida de histerectomia, com intenção neoadjuvante.\n  D) Terapia hormonal com progestagênios, deixando a cirurgia apenas para falha terapêutica.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Câncer de endométrio estádio I (restrito ao útero) tem cirurgia como padrão ouro. Histerectomia total + salpingo-ooforectomia bilateral + linfadenectomia pélvica é o tratamento.\n\n****Alternativa Correta** (A)**: Estádio IA (invasão < 50%) é tratado com cirurgia radical com linfadenectomia para estadiamento completo.\n\n**Alternativas Incorretas**:\n- **Letra "
+  },
+  {
+    "id": 7581,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+    "topic": "Candidíase nãocomplicada",
+    "stem": "Mulher, 27 anos de idade, previamente saudável, procura atendimento relatando prurido intenso na região vulvovaginal, ardência e sensação de “queimação” durante a micção há quatro dias. Refere relação sexual estável, nega uso recente de antibióticos e menciona piora dos sintomas perto do período menstrual. Ao exame especular, observa-se corrimento branco, espesso e grumoso, aderido às paredes vaginais. A mucosa vaginal encontra-se hiperemiada e edemaciada. A microscopia do material colhido revelou pseudohifas, sem protozoários móveis ou clue cells . Considerando o quadro apresentado, assinale a alternativa que apresenta a conduta terapêutica mais adequada.",
+    "alternatives": "  A) Metronidazol oral por sete dias.\n  B) Miconazol intravaginal por sete dias. [GABARITO]\n  C) Aciclovir oral em esquema de supressão.\n  D) Clindamicina vaginal por sete dias.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Corrimento branco grumoso com pseudohifas é candidíase vulvovaginal. Tratamento: antifúngico tópico ou oral.\n\n****Alternativa Correta** (B)**: Miconazol intravaginal é tratamento de primeira linha para candidíase.\n\n**Alternativas Incorretas**:\n- **Letra A**: Metronidazol trata tricomoníase e vaginose bacteriana.\n- **Letra C**: Aciclovir trata herpes genita"
+  },
+  {
+    "id": 7582,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Contraindicações",
+    "stem": "Mulher, 32 anos de idade, com diagnóstico de migrânea sem aura, procura a unidade básica de saúde solicitando iniciar método contraceptivo. Faz uso regular de amitriptilina para prevenção das crises, com boa resposta e sem efeitos adversos. Nega tabagismo, trombose prévia, hipertensão ou diabetes. Ao exame físico, apresenta pressão arterial normal e nenhum achado relevante. De acordo com os critérios médicos de elegibilidade da Organização Mundial da Saúde para 2025, qual a orientação correta para essa paciente?",
+    "alternatives": "  A) Pode utilizar qualquer método contraceptivo. [GABARITO]\n  B) Deve evitar contraceptivos hormonais combinados.\n  C) Deve preferir métodos sem etinilestradiol.\n  D) Deve escolher métodos que não sejam orais.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Segundo critérios da OMS, migrânea sem aura é categoria 1 ou 2 para anticoncepcionais combinados, desde que não haja outros fatores de risco. Paciente jovem, sem tabagismo, hipertensão ou aura, pode usar qualquer método.\n\n****Alternativa Correta** (A)**: Pode utilizar qualquer método contraceptivo, incluindo combinados.\n\n**Alternativas Incorretas**:\n- **Le"
+  },
+  {
+    "id": 7583,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Endometrial Ultrassonografia",
+    "stem": "Mulher, 60 anos de idade, G3P3, menopausa há 10 anos, procura atendimento devido à sangramento vaginal abrupto há 15 dias. Refere boa saúde geral, sem uso de terapia hormonal. Ao exame físico, não há lesões cervicais visíveis. O útero é de tamanho normal, sem dor à mobilização. Assinale a alternativa que apresenta a conduta mais apropriada.",
+    "alternatives": "  A) Iniciar progestagênio oral e reavaliar em 3 meses.\n  B) Solicitar histerossalpingografia para avaliar a cavidade endometrial.\n  C) Realizar histeroscopia ambulatorial e biópsia endometrial.\n  D) Realizar ultrassonografia transvaginal e biópsia endometrial se endométrio ≥ 4 mm. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Sangramento pós-menopausa exige investigação: ultrassom transvaginal para medir endométrio; se ≥ 4 mm, biópsia é obrigatória.\n\n****Alternativa Correta** (D)**: Ultrassonografia transvaginal é o primeiro passo; biópsia se endométrio ≥ 4-5 mm.\n\n**Alternativas Incorretas**:\n- **Letra A**: Progesterona empírica é inadequada, retarda diagnóstico.\n- **Letra B**:"
+  },
+  {
+    "id": 7584,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Fator ovulatório Critérios para investigação Anamnese e exame físico",
+    "stem": "Mulher, 32 anos de idade, nuligesta, e marido de 33 anos de idade, desejam engravidar. Referem relacionamento sexual frequente há 2 anos, sem método contraceptivo. Ela apresenta irregularidade menstrual desde a menarca, com ciclos de 45 a 90 dias, fluxo menstrual escasso e sem dismenorreia. Ao exame físico, a paciente apresenta acne de grau II em face, índice de Ferriman de 9, IMC de 22 kg/m², medida da cintura de 85 cm e PA de 110×70 mmHg. • Exames laboratoriais: FSH: 5 mUl/mL (ref.: < 12 mUI/mL) Prolactina: 15 ng/dL (ref.: < 29 ng/mL) TSH: 2 μUI/mL (ref.: 0,45 a 4,5 μU/mL) Testosterona total: 70 ng/dL (ref.: 2,4 a 37 ng/dL) 17-OH progesterona: 125 ng/dL (ref.: < 200 ng/dL) Ultrassonografia pélvica com útero normal e ovários com volume de 12 cm3 e 15 cm3, sem massas anexiais. Histerossalpingografia com trompas pérvias bilateral. Marido com espermograma dentro da normalidade. Segundo as recomendações das Sociedades Internacionais de 2023, qual a melhor conduta para este casal?",
+    "alternatives": "  A) Monitorização da ovulação de ciclo espontâneo para orientar coito natural.\n  B) Indução da ovulação com inibidor da aromatase e coito natural.\n  C) Monitorização da ovulação e inseminação intrauterina.\n  D) Realizar inicialmente a propedêutica mínima da infertilidade. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Casal infértil deve completar propedêutica mínima (espermograma, histerossalpingografia, etc.) antes de tratamentos específicos. A paciente tem ovários policísticos, mas a propedêutica ainda é necessária para descartar outros fatores.\n\n****Alternativa Correta** (D)**: Propedêutica mínima já incluiu histerossalpingografia e espermograma, mas falta documenta"
+  },
+  {
+    "id": 7585,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Tratamento das mulheres que não desejam engravidar",
+    "stem": "Mulher, 20 anos de idade, queixa-se de pele oleosa e acne em face, aumento de pilificação. Manifesta desejo de método contraceptivo, porém não quer tomar pílulas. Apresenta ciclos menstruais irregulares com intervalos de 35 a 160 dias, desde a menarca. Ao exame físico, apresenta PA de 120×80 mmHg, IMC de 29 kg/m², medida de cintura de 90 cm, estadiamento de Tanner M5 e P5, genitália externa púbere e normal, acne grau 3, Índice de Ferriman: 14 e acantose nigricans em região axilar. • Exames laboratoriais: Teste de tolerância à glicose 120 minutos: 140 mg/dL Colesterol: 195 mg/dL HDL: 34 mg/dL, LDL: 163 mg/dL Triglicerídeos: 160 mg/dL TSH, prolactina e 17-OH progesterona normais Além das orientações para modificação dos hábitos de vida com dieta e exercício físico, qual a melhor conduta neste caso clínico?",
+    "alternatives": "  A) Espironolactona, DIU hormonal, Metformina [GABARITO]\n  B) Espironolactona, DIU de cobre, Mio Inositol\n  C) Acetato de ciproterona em baixa dose e DIU hormonal\n  D) Acetato de ciproterona em baixa dose e DIU de cobre.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: SOP com resistência insulínica (acantose, dislipidemia, glicemia alterada) e hiperandrogenismo. Tratamento combina antiandrogênico, proteção endometrial e sensibilizador de insulina.\n\n****Alternativa Correta** (A)**: Espironolactona para hiperandrogenismo, DIU hormonal para proteção endometrial e metformina para resistência insulínica.\n\n**Alternativas Inco"
+  },
+  {
+    "id": 7586,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Abordagem da paciente com queixa de corrimento vaginal",
+    "stem": "Criança, 7 anos de idade, queixa-se de dor na região da vulva há cerca de 2 semanas. A mãe notou presença de corrimento vaginal amarelado na roupa íntima. Nega outras queixas, doenças associadas ou uso de medicamentos. Ao exame físico, peso e estatura no percentil 75, estadiamento de Tanner - M1 e P1. A genitália externa pode ser visualizada na imagem a seguir: Com base no caso descrito, assinale a alternativa que apresenta o provável diagnóstico.",
+    "alternatives": "  A) Vulvovaginite inespecífica. [GABARITO]\n  B) Candidíase.\n  C) Infestação por oxiurose.\n  D) Vaginite bacteriana.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Em meninas pré-púberes, a vulvovaginite inespecífica é a causa mais comum de corrimento. O epitélio hipoestrogênico e higiene inadequada favorecem contaminação.\n\n****Alternativa Correta** (A)**: Vulvovaginite inespecífica é comum em pré-púberes; sintomas e exame sem sinais específicos.\n\n**Alternativas Incorretas**:\n- **Letra B**: Candidíase é rara em pré-p"
+  },
+  {
+    "id": 7588,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "topic": "Cirúrgico",
+    "stem": "Mulher, 32 anos de idade, G4P4A0, com diagnóstico histológico de carcinoma espinocelular do colo uterino, estágio IB1 (FIGO). Assinale a alternativa que apresenta a proposta terapêutica mais adequada para a paciente.",
+    "alternatives": "  A) Histerectomia radical + salpingooforectomia bilateral + linfadenectomia pélvica e/ou para-aórtica.\n  B) Esquema de radioterapia externa / quimioterapia + Braquiterapia de alta dose.\n  C) Histerectomia radical + salpingectomia bilateral + linfadenectomia pélvica e/ou para-aórtica. [GABARITO]\n  D) Quimioterapia neoadjuvante seguida de histerectomia radical + linfadenectomia pélvica e/ou para-aórtica.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: No estádio IB1 do câncer de colo, cirurgia radical é padrão. Em pacientes jovens, salpingectomia bilateral preserva função hormonal, sem ooforectomia.\n\n****Alternativa Correta** (C)**: Histerectomia radical + salpingectomia bilateral + linfadenectomia pélvica/para-aórtica é a conduta adequada.\n\n**Alternativas Incorretas**:\n- **Letra A**: Ooforectomia bilat"
+  },
+  {
+    "id": 7589,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "topic": "BIRADS 2",
+    "stem": "Mulher, 35 anos de idade, queixa-se de mastalgia há 2 meses. Ao exame físico, identifica-se nódulo de 3 cm, móvel, muito doloroso à palpação. Realizou exame de ultrassonografia mamária com o seguinte achado: Assinale a alternativa que indica a categoria BI-RADS® da paciente e a conduta adequada, respectivamente.",
+    "alternatives": "  A) 4a por ser palpável e punção aspirativa por agulha fina.\n  B) 4a por ser palpável e core-biopsy .\n  C) 2 e seguimento, já que o achado não justifica a mastalgia.\n  D) 2 e punção aspirativa por agulha fina já que paciente sintomática. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A ultrassonografia é fundamental na classificação BI-RADS. Nódulos com características benignas (formato ovalado, margens bem definidas e orientação paralela) são classificados como BI-RADS 2 ou 3. No cenário de um nódulo sólido, móvel e muito doloroso, a suspeita principal é de fibroadenoma ou cisto complicado. A alternativa D é correta pois, apesar de pa"
+  },
+  {
+    "id": 7590,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Indicações Tratamento não hormonal dos sintomas climatéricos",
+    "stem": "Mulher, 52 anos de idade, procura a atenção primária com queixas de fogachos frequentes, sudorese noturna e alterações de sono, com ciclos menstruais regulares e volumosos. Qual deve ser a abordagem mais apropriada para o manejo inicial dessa paciente, conforme as diretrizes do Ministério da Saúde?",
+    "alternatives": "  A) Solicitar exames hormonais de rotina para confirmar diagnóstico.\n  B) Iniciar terapia de reposição hormonal para alívio dos sintomas.\n  C) Prescrever antidepressivo inibidor da receptação de serotonina.\n  D) Investigar intensidade dos sintomas e orientar adequação do estilo de vida. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A paciente está na perimenopausa, com ciclos ainda regulares. O diagnóstico do climatério é clínico, não sendo necessário solicitar exames hormonais de rotina. A reposição hormonal não é primeira linha para todas, exigindo avaliação de riscos e contraindicações. Antidepressivos são para casos refratários ou contraindicação de hormônios, mas não como manejo"
+  },
+  {
+    "id": 7591,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "topic": "Mamografia digital Populaçãoalvo e intervalo",
+    "stem": "Mulher, 67 anos de idade, procura atendimento na sua Unidade Básica de Saúde (UBS) para exames de rotina, especialmente preocupada com os exames ginecológicos. Tem vida sexual ativa, não tem comorbidades. Realizou exame citopatológico do colo uterino aos 61 e 64 anos de idade, e mamografia aos 65 anos. Não tem história familiar de câncer, nem teve exames de rastreamento alterados anteriormente. Seguindo as recomendações do Ministério da Saúde para câncer de mama e colo de útero, qual conduta deve ser orientada para a paciente?",
+    "alternatives": "  A) Solicitar apenas mamografia. [GABARITO]\n  B) Solicitar apenas citopatológico de colo de útero.\n  C) Solicitar mamografia e citopatológico de colo de útero.\n  D) Orientar que não há indicação de exames.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Foque nos protocolos de rastreamento do Ministério da Saúde. Para o colo do útero, a faixa etária de rastreio é de 25 a 64 anos. Se a mulher realizou dois exames consecutivos normais nesse intervalo, está dispensada de novos exames. Para o câncer de mama, a recomendação é mamografia bienal para mulheres entre 50 e 69 anos. Como a paciente tem 67 anos e não"
+  },
+  {
+    "id": 7592,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Cirúrgico",
+    "stem": "Mulher, 58 anos de idade, menopausada, refere desconforto pélvico e sensação de “peso” na região vaginal, que se acentua ao final do dia e após longos períodos em pé. Também refere dificuldade para evacuar, com necessidade frequente de realizar manobras digitais para completar a evacuação. Apresenta atividade sexual regular com uso de lubrificantes à base de óleos naturais. Durante o exame ginecológico com manobra de Valsalva, observa-se que a parede vaginal posterior ultrapassa o hímen em 2 cm e o colo uterino exterioriza-se 1 cm além do hímen. Assinale a alternativa que apresenta a melhor conduta terapêutica a ser considerada neste caso.",
+    "alternatives": "  A) Pessário vaginal e fisioterapia pélvica.\n  B) Tratamento com laser de CO₂.\n  C) Histerectomia vaginal e perineocolporrafia. [GABARITO]\n  D) Colpocleise com estrogenioterapia tópica.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: O quadro descreve prolapso de órgãos pélvicos (POP) sintomático, com colo uterino exteriorizando 1 cm além do hímen, caracterizando estádio II/III. A paciente tem vida sexual ativa e é jovem, sendo indicado tratamento cirúrgico para correção anatômica. A histerectomia vaginal com perineocolporrafia é o padrão-ouro para prolapsos uterinos com impacto funcio"
+  },
+  {
+    "id": 7593,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "topic": "Mamografia Quadro clínico",
+    "stem": "Mulher, 39 anos de idade, 26 semanas de gestação, refere que notou aumento assimétrico das mamas ao longo do último mês. Ao exame, nota-se nodulação de aproximadamente 2,5 cm em junção de quadrantes inferiores de mama esquerda, profundo, pouco móvel, sem calor local. Neste caso, recomenda-se:",
+    "alternatives": "  A) Punção aspirativa guiada por ultrassonografia.\n  B) Prosseguir investigação com mamografia. [GABARITO]\n  C) Iniciar tratamento com clindamicina.\n  D) Reavaliar clinicamente em 2 semanas.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Nódulo mamário em gestante deve ser investigado ativamente para descartar câncer de mama gestacional. A conduta é a tríplice avaliação (clínico, imagem e biópsia). A mamografia é segura na gestação com proteção abdominal, sendo indicada para caracterização inicial em pacientes > 35 anos.\n\n****Alternativa Correta** (B)**: A mamografia é o exame de escolha p"
+  },
+  {
+    "id": 7595,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+    "topic": "Indicações",
+    "stem": "Adolescente, 17 anos de idade, chega ao hospital acompanhada da mãe, relatando violência sexual ocorrida há aproximadamente 80 horas. O teste rápido para HIV foi negativo. Qual das condutas é mais apropriada em relação à Profilaxia Pós-exposição (PEP) ao HIV?",
+    "alternatives": "  A) Iniciar PEP com esquema de 28 dias.\n  B) Não iniciar PEP, pois o prazo máximo é 72 horas. [GABARITO]\n  C) Não há indicação, pois o teste rápido para HIV é negativo.\n  D) Aguardar a avaliação da soroconversão em sete dias.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A profilaxia pós-exposição (PEP) para HIV possui prazo máximo de 72 horas após a exposição. Como a paciente compareceu com 80 horas, a eficácia é desprezível e não deve ser iniciada.\n\n****Alternativa Correta** (B)**: O prazo máximo para início da PEP é de 72 horas. Como se passaram 80 horas, a PEP não é indicada.\n\n**Alternativas Incorretas**:\n- **Letra A**"
+  },
+  {
+    "id": 7596,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "topic": "Tratamento",
+    "stem": "Mulher, 24 anos de idade, com queixa de corrimento vaginal amarelado e aumento da secreção nas últimas 48 horas, sem prurido vaginal. Refere dor leve no hipogástrio, sem febre. Ao exame especular, observa-se conteúdo mucopurulento na endocérvice e discreto sangramento. Ao toque, o colo é friável. O teste rápido de Amplificação de Ácido Nucleico (NAAT) é positivo para Neisseria gonorrhoeae e Chlamydia trachomatis . Assinale a alternativa que apresenta o tratamento mais adequado e eficaz atualmente.",
+    "alternatives": "  A) Doxiciclina 100 mg VO por 7 dias em monoterapia.\n  B) Ceftriaxona 500 mg IM em dose única e doxiciclina 100 mg VO por 7 dias.\n  C) Ceftriaxona 500 mg IM em dose única e azitromicina 1 g VO em dose única. [GABARITO]\n  D) Azitromicina 1 g VO em duas doses com 7 dias de intervalo.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Para cervicite por gonococo e clamídia, o tratamento deve cobrir ambos. Ceftriaxona 500 mg IM em dose única é o padrão para gonococo; Azitromicina 1 g VO em dose única é eficaz para clamídia. A doxiciclina também é eficaz para clamídia, mas a azitromicina é igualmente eficaz e mais prática em dose única.\n\n****Alternativa Correta** (C)**: A combinação de ce"
+  },
+  {
+    "id": 7597,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Tratamento não hormonal dos sintomas climatéricos Transtornos do Humor Indicações",
+    "stem": "Mulher, 52 anos de idade, em consulta de rotina refere ciclos menstruais com intervalos de 45 dias há 5 meses. Também notou perda progressiva de interesse sexual e prejuízo no relacionamento conjugal. Nesses meses, relata dificuldade com a memória. Tem estado cansada e já não está mais indo aos almoços com as amigas. Está se alimentando bem, até com mais apetite do que o costume e ganhou peso no último mês. Nega antecedente de trombose venosa ou doença cardiovascular. Exame pélvico mostra mucosa vaginal sem atrofia significativa; restante do exame físico é normal. Ela se considera uma mulher forte, nega tristeza e expressa vontade de tomar um medicamento que pudesse melhorar o sono e reduzir o apetite. Considerando o quadro descrito, assinale a alternativa que apresenta o tratamento medicamentoso mais indicado.",
+    "alternatives": "  A) Testosterona.\n  B) Estrogênio + progesterona.\n  C) Topiramato.\n  D) Sertralina. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A paciente apresenta sintomas depressivos (perda de interesse, isolamento, alterações de memória, ganho de peso) e não sintomas vasomotores típicos do climatério. Não há atrofia vaginal significativa. O tratamento deve ser com antidepressivo (ISRS), como a sertralina.\n\n****Alternativa Correta** (D)**: A sertralina é indicada para o quadro de depressão, que"
+  },
+  {
+    "id": 7598,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "topic": "Populaçãoalvo e intervalo Reação em cadeia da polimerase PCR",
+    "stem": "Mulher, 36 anos de idade, HIV-positiva, com carga viral indetectável e CD4 = 830 células/mm³. Não teve alterações em duas citologias cervicovaginais oncológicas anteriores. Assinale a alternativa que apresenta a melhor estratégia de rastreio para câncer do colo do útero, para esta paciente.",
+    "alternatives": "  A) Citologia oncótico anual. [GABARITO]\n  B) Citologia e teste de HPV a cada 3 anos.\n  C) Colposcopia e citologia oncótica anual.\n  D) Teste de HPV a cada 5 anos.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Em pacientes HIV positivas com imunidade preservada (CD4 alto e carga viral indetectável), o rastreio para câncer de colo é feito anualmente com citologia oncótica, após dois exames anuais negativos. Intervalos maiores são adequados para imunocompetentes, mas não para essa população.\n\n****Alternativa Correta** (A)**: Manter citologia oncótica anual é a con"
+  },
+  {
+    "id": 7599,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "topic": "Muco cervical",
+    "stem": "Mulher, 25 anos de idade, nuligesta, procura aconselhamento sobre métodos de planejamento familiar. Ela deseja evitar métodos hormonais por motivos pessoais e busca uma opção natural. Qual a orientação que deve ser fornecida sobre o reconhecimento do período fértil segundo o método de Billings?",
+    "alternatives": "  A) Muco transparente, viscoso e escorregadio. [GABARITO]\n  B) Muco espesso, opaco e não aderente ao dedo.\n  C) Muco opaco com filância de até dois centímetros.\n  D) Muco esbranquiçado, grumoso e aderente ao dedo.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O método de Billings baseia-se na observação do muco cervical. O período fértil é identificado pelo muco com aspecto de clara de ovo: transparente, viscoso e escorregadio.\n\n****Alternativa Correta** (A)**: Muco transparente, viscoso e escorregadio indica o auge da fertilidade.\n\n**Alternativas Incorretas**:\n- **Letra B**: Muco espesso e opaco é característi"
+  },
+  {
+    "id": 7600,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Benefícios",
+    "stem": "Mulher, 30 anos de idade, faz acompanhamento por lúpus eritematoso sistêmico com síndrome do anticorpo anti- fosfolípide. Teve atividade articular, cutânea e renal, além de duas tromboses venosas profundas. Faz uso atual de varfarina, prednisona, hidroxicloroquina e azatioprina. Está em remissão e deseja iniciar contracepção. Assinale a alternativa que apresenta a opção mais segura.",
+    "alternatives": "  A) Dispositivo intrauterino de cobre.\n  B) Dispositivo intrauterino com levonorgestrel. [GABARITO]\n  C) Pílula com etinilestradiol e levonorgestrel.\n  D) Contraceptivo transdérmico combinado.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Pacientes com Lúpus e SAAF têm alto risco trombótico; estrogênio é contraindicado. O DIU com levonorgestrel é seguro, eficaz e ainda reduz sangramento, sendo a melhor opção.\n\n****Alternativa Correta** (B)**: O DIU com levonorgestrel é a opção mais segura, pois não contém estrogênio e ainda tem benefícios adicionais.\n\n**Alternativas Incorretas**:\n- **Letra "
+  },
+  {
+    "id": 7601,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "topic": "Incontinência urinária mista",
+    "stem": "Mulher, 64 anos de idade, multípara, obesa, apresenta sintomas de perda urinária imediata quando há vontade para urinar e também ao elevar seu neto de dois anos de idade. O estudo urodinâmico é compatível com as queixas. Assinale a alternativa que apresenta a conduta imediata mais apropriada.",
+    "alternatives": "  A) Realizar uretrotomia interna.\n  B) Realizar cirurgia de colpouretropexia.\n  C) Prescrever estrogênio tópico.\n  D) Prescrever anticolinérgicos. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A paciente tem incontinência urinária mista (urgência e esforço). A primeira linha de tratamento conservador é com anticolinérgicos para o componente de urgência. Cirurgia só para o componente de esforço após falha clínica.\n\n****Alternativa Correta** (D)**: Anticolinérgicos são indicados para tratar a bexiga hiperativa e o componente de urgência.\n\n**Altern"
+  },
+  {
+    "id": 7602,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "topic": "Tratamento clínico Benefícios",
+    "stem": "Mulher, 29 anos de idade, com cólica menstrual e menstruação excessiva, apresenta diagnóstico confirmado de endometriose peritoneal por laparoscopia, ocasião em que as lesões peritoniais visíveis foram excisadas. Assinale a alternativa que apresenta a melhor conduta terapêutica neste momento.",
+    "alternatives": "  A) Anti-inflamatório não hormonal.\n  B) Contraceptivo hormonal oral combinado.\n  C) Dispositivo intrauterino de progestagênio. [GABARITO]\n  D) Análogo do GnRH.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Após excisão de lesões de endometriose, o objetivo é prevenir recidiva. O DIU de progestagênio é a melhor opção de manutenção a longo prazo, com efeito local e menos efeitos colaterais que anticoncepcionais orais.\n\n****Alternativa Correta** (C)**: O DIU com levonorgestrel é eficaz na supressão do endométrio e controle dos sintomas, com boa tolerabilidade.\n"
+  },
+  {
+    "id": 7603,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Tratamento clínico Mecanismo de ação Benefícios",
+    "stem": "Mulher, 42 anos de idade, apresenta menstruações com fluxo intenso e duração de 10 dias há mais de 6 meses. Ao exame ginecológico, apresenta útero aumentado, móvel, de superfície regular. Ultrassonografia revela miomas subserosos e intramurais, o maior com 5 cm. Foi indicada a inserção de DIU de progesterona. Qual é o objetivo deste tratamento?",
+    "alternatives": "  A) Reduzir o fluxo sanguíneo ao útero.\n  B) Bloquear o ciclo ovulatório.\n  C) Promover a involução dos leiomiomas.\n  D) Promover atrofia endometrial. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: O DIU de progesterona atua no endométrio, induzindo atrofia, reduzindo o sangramento menstrual. Não reduz miomas nem bloqueia a ovulação de forma consistente.\n\n****Alternativa Correta** (D)**: O mecanismo principal é promover atrofia endometrial, controlando o sangramento intenso.\n\n**Alternativas Incorretas**:\n- **Letra A**: Não reduz fluxo sanguíneo ao út"
+  },
+  {
+    "id": 7604,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "topic": "Biópsias da mama Quadro clínico",
+    "stem": "Paciente do sexo feminino, 46 anos, sem doenças prévias, passou em consulta para realização de rastreamento do câncer de mama com a médica de família e comunidade (MFC). A paciente não tinha queixas mamárias, não tinha história de câncer na família. Negava etilismo, tabagismo e o uso de medicamentos de rotina. Era laqueada há 13 anos. Tinha mamografia de 2 anos antes com laudo BIRADS 1. Exame físico geral sem alterações. Ao exame mamário: Mama esquerda: nódulo firme, indolor, de cerca de 2 cm de diâmetro, no quadrante súpero lateral, com um linfonodo endurecido, indolor, de cerca de 3 cm de diâmetro na axila esquerda. Mama direita e axila direita: não havia alterações. Foram solicitadas mamografia e ultrassonografia das mamas com prioridade. Paciente retorna em 25 dias com laudos: Mamografia: BIRADS 0 à esquerda devido a nódulo de cerca de 1,8 cm de diâmetro no quadrante súpero lateral e linfonodo aumentado na axila esquerda. Ultrassonografia de mamas: BIRADS 3 à esquerda, devido a nódulo no quadrante súpero lateral de cerca de 2 cm de diâmetro e linfonodo na axila esquerda de 2,8 cm. Diante deste quadro, qual a conduta mais adequada?",
+    "alternatives": "  A) Solicitar ressonância nuclear magnética das mamas imediatamente.\n  B) Solicitar nova mamografia para ser realizada em 6 meses.\n  C) Encaminhar ao mastologista com prioridade para realização de biópsia. [GABARITO]\n  D) Solicitar nova ultrassonografia de mamas para ser realizada em 6 meses.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Exame físico alterado (nódulo + linfonodo endurecido) é altamente suspeito de malignidade, independente do BI-RADS de imagem (que é 0 e 3). Não se deve retardar a biópsia.\n\n****Alternativa Correta** (C)**: Encaminhar ao mastologista com prioridade para biópsia é a conduta correta.\n\n**Alternativas Incorretas**:\n- **Letra A**: RNM não é o próximo passo; bióp"
+  },
+  {
+    "id": 7605,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Ginecologia e Obstetrícia Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Tratamento Hiperplasia Endometrial Câncer de endométrio e outros tumores do corpo do útero Quadro clínico",
+    "stem": "Nuligesta de 70 anos, menopausa aos 50 anos sem uso de terapia hormonal. Tem Hipertensão Arterial em uso regular de medicação. Vem referindo sangramento vaginal com três episódios nos últimos 3 meses, em moderada quantidade. Exame físico: Corada, PA: 120x80 mmHg, IMC: 34 kg/m². Exame ginecológico com hipotrofia, sem outras anormalidades. Exames complementares seguem imagens abaixo: Qual a melhor conduta?",
+    "alternatives": "  A) Histerectomia total.\n  B) Dispositivo intrauterino de levonorgestrel.\n  C) Ressecção da lesão. [GABARITO]\n  D) Histerectomia com salpingectomia.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Sangramento pós-menopausa com espessamento endometrial focal (pólipo) = ressecção histeroscópica para diagnóstico e tratamento.\n\n****Alternativa Correta** (C)**: Ressecção da lesão (polipectomia) é o tratamento padrão para pólipo endometrial, permitindo exame anatomopatológico.\n\n**Alternativas Incorretas**:\n- **Letra A**: Histerectomia é radical para pólip"
+  },
+  {
+    "id": 7606,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+    "topic": "Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Ginecologia e Obstetrícia Tratamento clínico Quadro Clínico",
+    "stem": "Mulher de 42 anos, G1C1, laqueada, vem encaminhada a serviço terciário devido a sangramento uterino anormal iniciado há 2 anos, com aumento de volume e duração da menstruação, com piora nos últimos meses. Está em uso de análogo do GnRH há 9 meses com resolução do sangramento. Apresentando sintomas vasomotores e ressecamento vaginal. Comorbidades: HAS bem controlada com uso de medicação, obesidade grau 1. Achados relevantes do exame físico: útero aumentado de volume ao toque vaginal. Exames complementares (realizados no início dos sintomas): ultrassonografia transvaginal mostrando leiomiomatose com presença de múltiplos leiomiomas subserosos e intramurais com volume uterino de 300 cm³. Qual a conduta mais adequada neste caso?",
+    "alternatives": "  A) Indicar histeroscopia cirúrgica.\n  B) Iniciar contraceptivo de progestagênio isolado. [GABARITO]\n  C) Manter análogo de GnRH.\n  D) Iniciar contraceptivo combinado.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Uso prolongado de análogo de GnRH causa hipoestrogenismo e perda óssea. Deve-se trocar para progestagênio isolado para controlar sangramento sem efeitos colaterais.\n\n****Alternativa Correta** (B)**: Iniciar progestagênio isolado é adequado para controle do sangramento e permite suspender o análogo.\n\n**Alternativas Incorretas**:\n- **Letra A**: Histeroscopia"
+  },
+  {
+    "id": 7607,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Indução de ovulação Inseminação intrauterina",
+    "stem": "Nuligesta, 30 anos, há 1 ano mantendo relações sexuais pênis-vagina cerca de 3 vezes por semana, sem uso de métodos contraceptivos e sem sucesso em engravidar. Ciclos menstruais a cada 30 a 32 dias, com 5 a 6 dias de duração e fluxo normal. Há 6 meses com dismenorréia moderada a intensa nos primeiros 2 a 3 dias do ciclo, com melhora parcial com anti- inflamatório não hormonal. Fez uso de contracepção hormonal combinada dos 15 aos 29 anos. Ao exame físico: IMC: 20,3 kg/m²; Ferriman: 2; cintura: 71 cm; PA:110x70 mmHg. Sem alterações ao exame ginecológico. Esposo de 28 anos, saudável, sem antecedentes importantes, hábitos ou uso de medicamentos. Esposo: espermograma sem alterações. Paciente: FSH: 6,3 mIU/mL. Histerossalpingografia sem anormalidades. Ultrassonografia transvaginal com útero sem anormalidades, ovário direito com volume de 6,8 cm³ e 12 folículos antrais e ovário esquerdo com volume de 5,8 cm³ e 6 folículos antrais. Ressonância pélvica sem anormalidades. Qual a melhor abordagem terapêutica para este caso?",
+    "alternatives": "  A) Estimulação ovariana e fertilização in vitro .\n  B) Agonista do GnRH por 3 meses seguido de conduta expectante.\n  C) Indução da ovulação com gonadotrofinas para inseminação intrauterina. [GABARITO]\n  D) Videolaparoscopia cirúrgica.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Infertilidade sem causa aparente após 1 ano, com exames normais, deve-se tentar indução de ovulação + inseminação intrauterina antes de FIV.\n\n****Alternativa Correta** (C)**: Indução da ovulação com gonadotrofinas para IIU é o passo inicial apropriado.\n\n**Alternativas Incorretas**:\n- **Letra A**: FIV é mais invasiva e não é primeira linha em ISCA.\n- **Letr"
+  },
+  {
+    "id": 7608,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário",
+    "topic": "Definição e mecanismo de ação",
+    "stem": "Uma mulher de 30 anos, G2P1A1, saudável, sem queixas, trouxe dosagens hormonais de FSH, LH e estradiol realizadas em outro serviço em uso consistente de Desogestrel oral. Quais resultados esperados em relação aos níveis de FSH, LH e estradiol neste caso?",
+    "alternatives": "  A) FSH: baixo, LH: baixo, Estradiol: baixo.\n  B) FSH: baixo, LH: normal, Estradiol: baixo.\n  C) FSH: normal, LH: normal, Estradiol: normal. [GABARITO]\n  D) FSH: normal, LH: baixo, Estradiol: normal.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Desogestrel é progestagênio isolado que não suprime totalmente o eixo, então níveis de FSH, LH e estradiol permanecem normais ou com leve alteração.\n\n****Alternativa Correta** (C)**: FSH, LH e estradiol normais, pois o progestagênio isolado não bloqueia completamente a hipófise.\n\n**Alternativas Incorretas**:\n- **Letra A**: FSH e LH baixos sugerem supressão"
+  },
+  {
+    "id": 7609,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "topic": "Comportamental Diagnóstico Fisioterapia",
+    "stem": "Nuligesta de 46 anos, refere urgência miccional quase diariamente, e relata incontinência urinária de urgência durante atividade sexual, mais especificamente no orgasmo. Nega incontinência de esforço, e nega incontinência durante penetração em intercurso sexual. Nega sensação de peso ou bola na vagina. Comorbidades: diabetes tipo 2, transtorno de ansiedade em tratamento psicoterápico. Medicações: metformina, glicazida. Refere ter última hemoglobina glicada de 9% realizada há 1 mês. Ao exame físico, IMC: 34 kg/m², vulva sem alterações, ausência de perda de urina durante manobra de Valsalva, classificação POP Q: Aa= 3, Ba= 3, C= 9, D= 10, Ap= 3, Bp= 3, CVT= 10, cp= 3, hg= 3,5. Qual a melhor conduta neste momento?",
+    "alternatives": "  A) Amitriptilina.\n  B) Toxina botulínica intravesical.\n  C) Oxibutinina.\n  D) Perda de peso e fisioterapia. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Em paciente com bexiga hiperativa e obesidade, a primeira linha de tratamento é mudança de estilo de vida, com perda de peso e fisioterapia do assoalho pélvico, especialmente quando há diabetes descompensado.\n\n****Alternativa Correta** (D)**: A perda de peso é eficaz na redução dos sintomas de incontinência, e a fisioterapia é conservadora e sem riscos. De"
+  },
+  {
+    "id": 7610,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Indicações Estrogênio",
+    "stem": "Mulher de 63 anos com menopausa há 8 anos, relata secura, prurido e ardência vaginal, polaciúria, disúria e tenesmo vesical. Antecedente pessoal de tromboembolismo venoso pulmonar há 5 anos após contrair COVID 19. No exame ginecológico foi observada parede vaginal de coloração rósea pálida, diminuição do pregueamento vaginal e pequena quantidade de conteúdo incaracterístico, sem odor. Urina tipo I: exame sem alterações. Qual a conduta mais adequada para essa paciente?",
+    "alternatives": "  A) Terapia hormonal combinada transdérmica.\n  B) Estriol creme vaginal. [GABARITO]\n  C) Metronidazol creme vaginal.\n  D) Hidratante vaginal.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Na Síndrome Geniturinária da Menopausa, com contraindicação à terapia hormonal sistêmica por TEV prévio, o estrogênio local é a escolha segura por sua baixa absorção.\n\n****Alternativa Correta** (B)**: Estriol creme vaginal é eficaz para tratar atrofia vaginal, com mínima absorção sistêmica, sendo seguro mesmo em pacientes com histórico de TEV.\n\n**Alternati"
+  },
+  {
+    "id": 7611,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Introdução Diagnóstico diferencial Exames complementares",
+    "stem": "Mulher de 61 anos, G2P2, menopausa há 11 anos, IMC: 34 kg/m², hipertensa e diabética tipo 2, em uso de tamoxifeno há 3 anos por câncer de mama tratado, procura atendimento ambulatorial em Unidade Básica de Saúde por sangramento vaginal recorrente há cerca de 2 meses. Ao exame: sinais de atrofia vaginal, sem lesões cervicais visíveis. Hemoglobina: 12,6 g/dL, coagulograma normal. A ultrassonografia transvaginal mostra endométrio linear e homogêneo, espessura de 3,5 mm, sem líquido intracavitário, miomas intramurais pequenos sem deformidade evidente da cavidade. Qual é o próximo passo mais adequado na investigação?",
+    "alternatives": "  A) Realizar biópsia endometrial ambulatorial. [GABARITO]\n  B) Repetir a ultrassonografia transvaginal em 6 semanas.\n  C) Iniciar progestagênio cíclico por 3 meses.\n  D) Solicitar ressonância magnética pélvica.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Mulher em uso de tamoxifeno com sangramento vaginal pós-menopausa deve ser investigada para neoplasia endometrial independentemente da espessura endometrial, pois o tamoxifeno pode causar alterações endometriais não detectáveis apenas pela espessura no ultrassom.\n\n****Alternativa Correta** (A)**: A biópsia endometrial é o padrão-ouro para excluir malignida"
+  },
+  {
+    "id": 7612,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Ginecologia e Obstetrícia Fatores de risco Fatores de risco",
+    "stem": "Mulher de 46 anos, G3P3, procura o ambulatório de ginecologia para avaliação de risco oncológico. Tem mãe falecida por câncer de ovário aos 55 anos e uma irmã com câncer de mama diagnosticado aos 42 anos. Nunca usou contraceptivo hormonal, menarca aos 11 anos, menopausa ainda não instalada. Nega cirurgias prévias e não apresenta sintomas atuais. IMC: 27 kg/m². Exame físico normal. Qual a conduta mais adequada neste momento?",
+    "alternatives": "  A) Laqueadura tubária como medida profilática.\n  B) Ooforectomia profilática bilateral.\n  C) Investigação de mutações germinativas. [GABARITO]\n  D) Rastreamento com ultrassonografia transvaginal e CA 125.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Histórico familiar sugestivo de síndrome de predisposição hereditária ao câncer de mama e ovário (mãe com câncer de ovário e irmã com mama em idade precoce) exige investigação genética.\n\n****Alternativa Correta** (C)**: Investigar mutações germinativas (BRCA1/2) é fundamental para avaliar o risco oncológico e orientar medidas de prevenção e rastreamento.\n\n"
+  },
+  {
+    "id": 7613,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Diabetes Gestacional e Pré-Gestacional",
+    "topic": "Tratamento das mulheres que não desejam engravidar",
+    "stem": "Mulher de 25 anos, com quadro clínico com irregularidade menstrual e sinais de hiperandrogenismo, apresentando acantose nigricans. Não deseja engravidar e faz uso regular de Desogestrel (75 mcg/dia). Ao exame físico: IMC: 27,1 kg/m², Pressão Arterial: 130x85 mmHg, Índice de Ferriman Gallwey: 9, Glicemia de jejum:112mg/dL e Glicemia 2h após TOTG (75g):150 mg/dL Qual o tratamento mais adequado para o quadro metabólico desta paciente?",
+    "alternatives": "  A) Metformina. [GABARITO]\n  B) Análogos de GLP 1.\n  C) Sibutramina.\n  D) Estatina.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Paciente com SOP e pré-diabetes (glicemia de jejum 112 mg/dL e TOTG 150 mg/dL) tem resistência insulínica; metformina é o tratamento de escolha para o quadro metabólico.\n\n****Alternativa Correta** (A)**: Metformina melhora a sensibilidade à insulina, auxilia na perda de peso e restaura a ovulação em mulheres com SOP, sendo a primeira linha para o manejo me"
+  },
+  {
+    "id": 7614,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Ginecologia e Obstetrícia Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Candidíase nãocomplicada",
+    "stem": "Gestante de 32 anos, G2P1, idade gestacional de 18 semanas e 2 dias. Na consulta pré-natal refere corrimento e queimação vulvar. Refere ser o segundo episódio nesta gestação. Ao exame especular conteúdo branco grumoso, pH 4,0, microscopia com hidróxido de potássio (KOH) 10% mostrando pseudohifas. Qual a conduta mais adequada para esta gestante?",
+    "alternatives": "  A) Fluconazol 150mg via oral dose única.\n  B) Miconazol creme vaginal 10 noites. [GABARITO]\n  C) Nistatina creme vaginal 10 noites.\n  D) Óvulos vaginais de bicarbonato de sódio a 10% por 10 dias.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Candidíase vulvovaginal recorrente na gestação deve ser tratada com antifúngico tópico por tempo prolongado (7-14 dias); fluconazol oral é contraindicado.\n\n****Alternativa Correta** (B)**: Miconazol creme vaginal por 10 noites é eficaz e seguro na gestação, proporcionando erradicação do fungo.\n\n**Alternativas Incorretas**:\n- **Letra A**: Fluconazol oral é "
+  },
+  {
+    "id": 7615,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Quadro clínico Histeroscopia Histerossonografia",
+    "stem": "Mulher, 60 anos de idade, menopausa aos 52 anos de idade, em uso de tamoxifeno há 2 anos, após tratamento cirúrgico de câncer de mama. Apresenta queixa de sangramento vaginal intermitente há um mês, com duração de 1-2 dias por episódio. Exame físico sem alterações significativas. IMC de 30,2 kg/m². Ultrassonografia transvaginal revela espessura endometrial de 12 mm. Qual é a conduta mais adequada em relação ao caso apresentado?",
+    "alternatives": "  A) Solicitar dosagem de FSH e LH.\n  B) Realizar histeroscopia com biópsia endometrial. [GABARITO]\n  C) Repetir a ultrassonografia transvaginal em 6 meses.\n  D) Realizar ressonância magnética de abdômen e pelve.\n  E) Suspender o tamoxifeno e iniciar um inibidor da aromatase.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Sangramento pós-menopausa com endométrio espessado (> 5 mm) em usuária de tamoxifeno indica necessidade de investigação histológica imediata para excluir câncer endometrial.\n\n****Alternativa Correta** (B)**: Histeroscopia com biópsia endometrial é padrão-ouro, permitindo visualização direta e amostragem tecidual, essencial para diagnóstico de hiperplasia o"
+  },
+  {
+    "id": 7616,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário",
+    "topic": "Fases do ciclo menstrual Conceitos Ovulação",
+    "stem": "Mulher, 27 anos de idade, com ciclos menstruais regulares, variando entre 28 e 32 dias, deseja calcular seu período fértil para tentar engravidar. Com base no método da tabelinha, qual é o intervalo mais provável do período fértil?",
+    "alternatives": "  A) 10º ao 21º dia do ciclo. [GABARITO]\n  B) 11º ao 20º dia do ciclo.\n  C) 12º ao 21º dia do ciclo.\n  D) 13º ao 22º dia do ciclo.\n  E) 14º ao 23º dia do ciclo.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Para calcular o período fértil pelo método de Ogino-Knaus (tabelinha), subtrai-se 18 dias do ciclo mais curto para encontrar o primeiro dia fértil e subtrai-se 11 dias do ciclo mais longo para determinar o último dia fértil. Aplicando aos dados da paciente (ciclos de 28 a 32 dias): início do período fértil = 28 - 18 = 10º dia do ciclo; fim do período férti"
+  },
+  {
+    "id": 7617,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+    "topic": "Mastite lactacional Mastite Situações em que há restrições ao aleitamento materno",
+    "stem": "Puérpera, 28 anos de idade, G1P1, 14º dia pós-parto, apresenta dor e inchaço na mama esquerda, com secreção purulenta pelo mamilo. Ao exame físico, mama esquerda com eritema, edema, área flutuante dolorosa e linfonodos axilares palpáveis. A ultrassonografia revela coleção hipoecogênica de 3,5 cm com adenopatia axilar. O hemograma mostra leucocitose. Além da cobertura antibiótica, assinale a alternativa que apresenta a conduta apropriada.",
+    "alternatives": "  A) Suspensão farmacológica do aleitamento materno com cabergolina e drenagem cirúrgica da mama afetada.\n  B) Manter o aleitamento materno de ambas as mamas e cuidados locais com compressas mornas.\n  C) Suspender, temporariamente, o aleitamento da mama afetada e puncionar a loja de abscesso guiada por ultrassom. [GABARITO]\n  D) Suspender, definitivamente, o aleitamento da mama afetada e realizar limpeza cirúrgica de áreas afetadas.\n  E) Suspensão do aleitamento materno com compressão mecânica e realizar limpeza cirúrgica de áreas afetadas.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Diante de um abscesso mamário puerperal com saída de secreção purulenta pelo mamilo, a amamentação na mama afetada deve ser temporariamente suspensa (mantendo o esvaziamento manual/ordenha para evitar ingurgitamento) até o controle do quadro infeccioso, enquanto a amamentação na mama sadia deve ser mantida normalmente. Para coleções bem delimitadas e < 5 c"
+  },
+  {
+    "id": 7619,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "topic": "Slings",
+    "stem": "Mulher, 50 anos de idade, G3P3C0, é admitida com queixa de perda urinária durante os médios esforços sem melhora com fisioterapia pélvica. Nega uso de medicamentos e comorbidades. Exame físico normal, realizado com a bexiga vazia e não foi observada perda de urina aos esforços. Em relação ao caso apresentado, qual deverá ser a conduta adequada?",
+    "alternatives": "  A) Orientação de urinar a cada três horas.\n  B) Evitar cafeína e bebidas alcoólicas.\n  C) Agonista B3 adrenérgico.\n  D) Anticolinérgico.\n  E) Sling retropúbico. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: A perda involuntária de urina aos médios esforços, sem urgência, define incontinência urinária de esforço (IUE). Quando falha o tratamento conservador, a cirurgia com sling de uretra média é o padrão-ouro.\n\n****Alternativa Correta** (E)**: O sling retropúbico é indicado para IUE refratária à fisioterapia, com alta taxa de sucesso.\n\n**Alternativas Incorreta"
+  },
+  {
+    "id": 7620,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "topic": "Células escamosas atípicas de significado indeterminado quando não se pode excluir lesão de alto grau ASCH",
+    "stem": "Mulher, 26 anos de idade, G0P0, em atendimento de rotina, apresenta o laudo recente de exame citológico do colo uterino com a seguinte conclusão: Células escamosas atípicas de significado indeterminado em que não se pode excluir lesão de alto grau (ASC-H). Exame ginecológico sem alterações. De acordo com a recomendação do Ministério da Saúde, qual a conduta mais adequada neste caso?",
+    "alternatives": "  A) Encaminhar para colposcopia. [GABARITO]\n  B) Solicitar teste para HPV.\n  C) Repetir a citologia em 6 meses.\n  D) Realizar avaliação do canal endocervical.\n  E) Exérese da zona de transformação.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: ASC-H apresenta alto risco de lesão de alto grau, exigindo colposcopia imediata.\n\n****Alternativa Correta** (A)**: Encaminhar para colposcopia permite biópsia dirigida e tratamento precoce.\n\n**Alternativas Incorretas**:\n- **Letra B**: Teste de HPV não substitui colposcopia para ASC-H.\n- **Letra C**: Repetir citologia em 6 meses atrasa diagnóstico, pois ASC"
+  },
+  {
+    "id": 7621,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "topic": "Tratamento cirúrgico Imunoistoquímica e classificação molecular Tratamento adjuvante",
+    "stem": "Mulher, 65 anos de idade, realizou mamografia que apresentou microcalcificações pleomórficas agrupadas de 2 mm no Quadrante Supero-Medial (QSM) da mama direita. Foi realizada biópsia com agulhamento que demonstrou tratar-se de carcinoma intraductal in situ com margens livres de mais de 3 mm. Os receptores estrogênicos e de progesterona eram positivos e o HER-2 negativo. Assinale a alternativa que apresenta a conduta correta.",
+    "alternatives": "  A) Ampliação das margens.\n  B) Avaliação de linfonodo sentinela.\n  C) Radioterapia. [GABARITO]\n  D) Mastectomia.\n  E) Quimioterapia.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: CDIS com margens livres >3mm tratado com cirurgia conservadora + radioterapia reduz recorrência.\n\n****Alternativa Correta** (C)**: Radioterapia adjuvante é padrão após conservação de CDIS, reduzindo recorrência local.\n\n**Alternativas Incorretas**:\n- **Letra A**: Margens já adequadas (>3mm), não há indicação de ampliação.\n- **Letra B**: Linfonodo sentinela "
+  },
+  {
+    "id": 7622,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Disfunções Sexuais Femininas e Dispareunia",
+    "topic": "Sintomas vasomotores Diagnóstico e Exames Complementares Urogenitais",
+    "stem": "Mulher, 52 anos de idade, G2P2, apresenta-se com queixas de fogachos intensos, predominantemente noturnos, que interferem em sua qualidade de sono. Relata ainda redução da lubrificação vaginal, dispareunia e diminuição do desejo sexual. Sua última menstruação ocorreu há cerca de 14 meses. Como antecedentes pessoais, é hipertensa e faz uso regular de medicação para controle da pressão arterial, mantendo níveis adequados. É fisicamente ativa, com quatro sessões semanais de atividade física e segue uma dieta balanceada. Ao exame físico, apresentou PA de 120x80 mmHg, IMC de 23 kg/m², exame das mamas sem alterações e mucosa vaginal hipotrófica ao exame ginecológico. Apresenta mamografia BI- RADS 2, realizada recentemente. Assinale a alternativa que apresenta o tratamento mais adequado para os sintomas climatéricos dessa paciente.",
+    "alternatives": "  A) Estradiol transdérmico e progestágeno oral. [GABARITO]\n  B) Anticoncepção oral combinada.\n  C) Pílula de progestágeno isolada.\n  D) Gabapentina oral.\n  E) Estriol creme vaginal.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Paciente com útero e sintomas vasomotores requer estrogênio + progestágeno; via transdérmica é preferível para reduzir risco trombótico.\n\n****Alternativa Correta** (A)**: Estradiol transdérmico + progestágeno oral é a TRH adequada, controlando fogachos e protegendo endométrio.\n\n**Alternativas Incorretas**:\n- **Letra B**: Anticoncepção oral combinada tem ma"
+  },
+  {
+    "id": 7623,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "topic": "Aborto legal no Brasil",
+    "stem": "Menina, 12 anos de idade, apresenta gestação sem intercorrências clínicas. Está na segunda consulta pré-natal com 13 semanas de gestação. Comparece acompanhada da mãe mas, nesta consulta, relata que foi abusada pelo padrasto e que não gostaria de manter a gestação. Para o procedimento de interrupção legal da gestação, além do termo de consentimento livre e esclarecido assinado pela paciente e seu representante legal, é necessário:",
+    "alternatives": "  A) Autorização judicial.\n  B) Um laudo de corpo delito.\n  C) Não pode ser realizado.\n  D) Um boletim de ocorrência policial.\n  E) Parecer técnico confirmando a idade gestacional. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Para aborto legal por estupro, não é necessário boletim de ocorrência ou autorização judicial; a palavra da vítima é suficiente, mas parecer técnico confirmando idade gestacional é necessário.\n\n****Alternativa Correta** (E)**: Parecer técnico confirmando a idade gestacional é essencial para garantir a segurança do procedimento.\n\n**Alternativas Incorretas**"
+  },
+  {
+    "id": 7624,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "topic": "Ginecologia e Obstetrícia Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Endoscopia Ginecológica BIRADS 0",
+    "stem": "Mulher de 55 anos, nuligesta, menopausada há 7 anos, sem comorbidades, sem antecedentes familiares de câncer, comparece em retorno de consulta ginecológica para checar exames solicitados. Exame físico realizado há 15 dias sem alterações dignas de nota. Exames laboratoriais de rotina normais. Laudo da mamografia descreve área de assimetria focal em região central no terço profundo de mama direita, BI-RADS 0. Paciente refere que última mamografia realizada foi há 5 anos e não tem as grafias guardadas. Qual a conduta mais apropriada nesse caso?",
+    "alternatives": "  A) Realizar biópsia de mama por agulha grossa dirigida por imagem.\n  B) Tranquilizar a paciente e agendar seguimento anual com mamografia.\n  C) Solicitar compressão localizada e ultrassonografia de mama. [GABARITO]\n  D) Agendar retorno em 6 meses com mamografia somente da mama direita.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: BI-RADS 0 significa exame incompleto, necessitando avaliação adicional com compressão localizada e ultrassonografia.\n\n****Alternativa Correta** (C)**: Solicitar compressão localizada e ultrassonografia esclarece a assimetria, evitando biópsia desnecessária.\n\n**Alternativas Incorretas**:\n- **Letra A**: Biópsia sem caracterização prévia é inadequada.\n- **Let"
+  },
+  {
+    "id": 7625,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Disfunções Sexuais Femininas e Dispareunia",
+    "topic": "Células escamosas atípicas de significado indeterminado possivelmente nãoneoplásicaas ASCUS",
+    "stem": "Mulher de 27 anos comparece à Unidade Básica de Saúde para checar resultado de exame citopatológico, sem queixas. Refere ciclos menstruais regulares, nega sangramento intermenstrual, dispareunia, sinusorragia e dor pélvica. Resultado de colpocitologia: células escamosas atípicas de significado indeterminado, possivelmente não neoplásicas. De acordo com as diretrizes do INCA, qual a melhor conduta?",
+    "alternatives": "  A) Repetir citopatológico em 12 meses. [GABARITO]\n  B) Encaminhar para colposcopia.\n  C) Repetir citopatológico em 6 meses.\n  D) Colher novo exame citopatológico imediatamente.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Em mulheres entre 25 e 29 anos, ASC-US deve ser repetido em 12 meses, devido à alta taxa de regressão espontânea.\n\n****Alternativa Correta** (A)**: Repetir citopatológico em 12 meses segue as diretrizes do INCA.\n\n**Alternativas Incorretas**:\n- **Letra B**: Colposcopia é reservada para ASC-H, LSIL persistente ou HSIL.\n- **Letra C**: Repetir em 6 meses é ind"
+  },
+  {
+    "id": 7626,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "topic": "Ginecologia e Obstetrícia Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Mastite periareolar",
+    "stem": "Mulher de 47 anos de idade, G4P4A0, tabagista e sem outras comorbidades refere aparecimento de nódulo doloroso em região periareolar da mama direita há 4 dias. Refere que, há algumas horas, houve drenagem de secreção purulenta. Tem antecedente familiar positivo para câncer: tia paterna com câncer de ovário aos 67 anos de idade e mãe com câncer de mama aos 72 anos de idade. Inspeção estática representada na figura. Qual o diagnóstico mais provável?",
+    "alternatives": "  A) Doença de Paget do mamilo.\n  B) Mastite periductal. [GABARITO]\n  C) Carcinoma inflamatório.\n  D) Mastite granulomatosa.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: O quadro de nódulo periareolar doloroso com drenagem purulenta em tabagista é clássico de mastite periductal.\n\n****Alternativa Correta** (B)**: Mastite periductal é uma inflamação dos ductos, frequente em tabagistas, com infecção secundária e drenagem purulenta.\n\n**Alternativas Incorretas**:\n- **Letra A**: Doença de Paget causa lesão eczematosa do mamilo, "
+  },
+  {
+    "id": 7627,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Anatomia Cirúrgica e Estruturas Pélvicas Femininas",
+    "topic": "Ginecologia e Obstetrícia Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Diagnóstico Tratamento",
+    "stem": "Mulher de 52 anos, G2P2A0 (2PN), DUM há 3 anos, procura atendimento ginecológico com queixa de perda urinária há 8 meses que vem atrapalhando suas atividades habituais. Após orientações comportamentais e de fortalecimento do assoalho pélvico, que não melhoraram as queixas da paciente, foi realizado estudo urodinâmico. O exame físico e o estudo urodinâmico estão representados na figura. Considerando-se a hipótese diagnóstica mais provável, qual a conduta mais apropriada neste momento?",
+    "alternatives": "  A) Colporrafia anterior e posterior.\n  B) Mirabegrona oral.\n  C) Imipramina oral.\n  D) Sling sintético de uretra média. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: IUE confirmada por urodinâmica, refratária a fisioterapia, tem como padrão-ouro o sling de uretra média.\n\n****Alternativa Correta** (D)**: Sling sintético de uretra média é indicado para IUE.\n\n**Alternativas Incorretas**:\n- **Letra A**: Colporrafia é para prolapso, não específica para IUE.\n- **Letra B**: Mirabegrona é para bexiga hiperativa, não IUE.\n- **L"
+  },
+  {
+    "id": 7628,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Tratamento",
+    "stem": "Mulher de 33 anos, foi submetida à cirurgia para ooforoplastia devido à massa anexial benigna. Evoluiu bem no pós- operatório imediato, mas apresentou dor na região inguinal direita que progrediu continuamente. Há 8 meses vem apresentando dor intensa no local, acompanhada de alodínia, formigamento, dor à exposição ao frio e episódios súbitos e repentinos de dor, ambos muito intensos. Tem antecedente de apendicectomia e colecistectomia. A ultrassonografia transvaginal e transabdominal não identificou alterações anatômicas significativas. Com base nestas informações, qual a opção terapêutica mais adequada?",
+    "alternatives": "  A) Adesiólise laparoscópica.\n  B) Neuromodulação lombossacral.\n  C) Gabapentina 1.800 mg ao dia. [GABARITO]\n  D) Canabidiol 100 mg ao dia.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Quadro típico de dor neuropática pós-cirúrgica, com alodínia e dor ao frio, responde a gabapentina.\n\n****Alternativa Correta** (C)**: Gabapentina em dose adequada é primeira linha para dor neuropática.\n\n**Alternativas Incorretas**:\n- **Letra A**: Adesiólise é para dor por aderências, não neuropática.\n- **Letra B**: Neuromodulação é opção para casos refratá"
+  },
+  {
+    "id": 7629,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Ginecologia e Obstetrícia Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Quadro Clínico Ultrassonografia",
+    "stem": "Mulher de 42 anos, G3P2A1, método anticoncepcional: laqueadura tubária, DUM há 12 dias, procura atendimento ginecológico com queixa de sangramento uterino aumentado há 6 meses, com aumento do fluxo, permanecendo cerca de 6 a 7 dias com sangramento associado à dismenorreia moderada. Ao exame físico: PA: 120×70mmHg, FC: 78bpm, abdome plano, normotenso e indolor à palpação. Especular: colo róseo, sem lesões ou conteúdo anormal. Toque: colo cartilaginoso, centrado, indolor à mobilização, útero centrado em Anteversoflexão (AVF), globoso e aumentado de tamanho. Exames complementares: Hb: 11,2g/dl; Ht: 30%; USTV: útero AVF, centrado, volume de 195cm³. Ovário esquerdo: 4,2cm³, ovário direito: 5,7cm³, representado na figura. Qual a hipótese diagnóstica mais provável?",
+    "alternatives": "  A) Adenomiose. [GABARITO]\n  B) Endometriose.\n  C) Hiperplasia endometrial.\n  D) Leiomiomatose.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Útero globoso aumentado, dismenorreia e US com heterogeneidade miometrial indicam adenomiose.\n\n****Alternativa Correta** (A)**: Adenomiose é o diagnóstico mais provável.\n\n**Alternativas Incorretas**:\n- **Letra B**: Endometriose não causa aumento uterino difuso.\n- **Letra C**: Hiperplasia endometrial é diagnóstica por biópsia, não por US.\n- **Letra D**: Lei"
+  },
+  {
+    "id": 7630,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário",
+    "topic": "Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Ginecologia e Obstetrícia Causas funcionais Exames complementares",
+    "stem": "Mulher de 26 anos, nuligesta, refere parada das menstruações. Refere menarca aos 13 anos, seguida de ciclos regulares por 7 anos, após os quais passou a apresentar intervalos menstruais longos de 3 a 4 meses, sendo a última menstruação há dois anos. É triatleta e treina cerca de 6 horas diárias. Associa a alteração menstrual ao aumento na intensidade dos treinos. Nega uso de medicações. No momento sem atividade sexual. Ao exame físico: PA: 90xm60mmHg; IMC: 17,2Kg/m²; índice de Ferriman Gallwey: 2. Mamas sem alterações. Exame ginecológico: mucosa vaginal pálida. Exames complementares: FSH = 1,19mlU/ml (VN = 3,5 a 10,5mlU/ml); prolactina = 12ng/dl (VN menor 25ng/dl) e TSH = 2,1mlU/ml (VN = 0,4 a 4,0MIU/ml). Qual o exame mais relevante a ser solicitado para esta paciente?",
+    "alternatives": "  A) Estradiol.\n  B) Densitometria óssea. [GABARITO]\n  C) Cortisol.\n  D) Perfil lipídico.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Amenorreia hipotalâmica funcional por exercício extremo e baixo peso leva a hipoestrogenismo, com risco de osteoporose.\n\n****Alternativa Correta** (B)**: Densitometria óssea avalia o impacto do hipoestrogenismo crônico.\n\n**Alternativas Incorretas**:\n- **Letra A**: Estradiol é útil para diagnóstico, mas não avalia dano.\n- **Letra C**: Cortisol não é priorit"
+  },
+  {
+    "id": 7631,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Investigação e Propêdêutica da Infertilidade Conjugal",
+    "topic": "Fertilização in vitro",
+    "stem": "Mulher de 36 anos, nuligesta, deseja engravidar. Refere 2 a 3 relações pênis-vagina por semana, sem uso de métodos contraceptivos há 2 anos. Ciclos menstruais regulares. Nega queixas. Nega vícios ou uso de medicações. Exame físico geral e ginecológico sem alterações. Parceiro com 39 anos, sem doenças crônicas. Nega vícios e uso de medicações. Exames complementares: Parceiro: espermograma 1 (critérios de normalidade da OMS, 2021): volume de 4,7 mL, 1,6 milhões de espermatozoides/mL, 5% de motilidade progressiva, 1% de formas normais e 58% de vitalidade. Espermograma 2, realizado cerca de 3 meses após com parâmetros similares. Paciente: histerossalpingografia e ultrassonografia transvaginal sem anormalidades. Qual a abordagem terapêutica mais efetiva para este casal?",
+    "alternatives": "  A) Indução da ovulação com clomifeno para coito programado.\n  B) Indução da ovulação e inseminação intrauterina.\n  C) Estimulação ovariana e injeção intracitoplasmática de espermatozoide. [GABARITO]\n  D) Antioxidantes orais associados a ácidos graxos ômega 3 para o parceiro.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Espermograma mostra oligoastenoteratozoospermia severa; técnicas de baixa complexidade são ineficazes, exigindo ICSI.\n\n****Alternativa Correta** (C)**: FIV com ICSI é necessária para superar o fator masculino grave.\n\n**Alternativas Incorretas**:\n- **Letra A**: Coito programado não supera fator masculino.\n- **Letra B**: Inseminação intrauterina é ineficaz e"
+  },
+  {
+    "id": 7633,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "topic": "Ginecologia e Obstetrícia Endoscopia Ginecológica Residência com pré-requisito - Ginecologia e Obstetrícia (R+ GO) Contraindicações",
+    "stem": "Na unidade básica de saúde, você atende uma mulher de 23 anos, G0, com diagnóstico de diabetes mellitus tipo 1 desde os 12 anos de idade. Deseja contracepção. IMC: 31 Kg/m². PA: 110x65 mmHg. Exame ginecológico sem alterações. Exames de rastreamento recomendados para a idade: normais, com exceção de HDL: 30 mg/dL (VN > 40 mg/dL). Exames de monitoramento da diabetes mellitus: sem alterações. Veja abaixo as figuras de 1 a 4, que apresentam opções de orientação contraceptiva: Considerando os critérios médicos de elegibilidade da Organização Mundial de Saúde (OMS), 2015, qual das figuras apresenta a orientação contraceptiva mais adequada?",
+    "alternatives": "  A) Figura 1.\n  B) Figura 2.\n  C) Figura 3. [GABARITO]\n  D) Figura 4.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Diabética com fatores de risco cardiovascular (IMC, HDL baixo) deve evitar estrogênio; DIU é a melhor opção.\n\n****Alternativa Correta** (C)**: A figura 3 representa um DIU, método de alta eficácia e sem estrogênio.\n\n**Alternativas Incorretas**:\n- **Letra A, B, D**: As demais figuras provavelmente mostram anticoncepcionais combinados, contraindicados por ri"
+  },
+  {
+    "id": 7634,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "topic": "Síndrome de Turner",
+    "stem": "Adolescente, 16 anos de idade, queixa-se de ainda não ter menstruado. Apresenta peso no percentil 60 e altura no percentil 20 em relação às curvas da Organização Mundial da Saúde (OMS). Avaliação de mamas Tanner 2; genitália externa com baixa pilificação (P2), introito vaginal com formação de pequenos lábios e hímen íntegro e perfurado. A ultrassonografia realizada por via abdominal visualiza gônadas pélvicas junto ao útero e volume reduzido, inferior a 2 cm3, com raros folículos e útero diminuído com linha endometrial tênue. Qual é o cariótipo compatível?",
+    "alternatives": "  A) 45 X. [GABARITO]\n  B) 46 XY.\n  C) 47 XXY.\n  D) 46 XX+21.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: A paciente tem 16 anos, amenorreia primária, baixa estatura (altura no percentil 20), gônadas pélvicas pequenas com folículos raros e útero hipoplásico. Isso sugere disgenesia gonadal, sendo a Síndrome de Turner (45,X) a causa mais comum em mulheres com baixa estatura e amenorreia primária.\n\n****Alternativa Correta** (A)**: O cariótipo 45,X (Síndrome de Tu"
+  },
+  {
+    "id": 7635,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "topic": "Slings",
+    "stem": "Mulher, 54 anos de idade, apresenta queixa de perda de urina ao rir e tossir. Será submetida à correção da perda urinária com o material apresentado a seguir, que será introduzido conforme técnica, também apresentada a seguir: Qual é o mecanismo responsável pelo tratamento da incontinência urinária?",
+    "alternatives": "  A) Correção da cistocele.\n  B) Sustentação da uretra. [GABARITO]\n  C) Suspensão da bexiga.\n  D) Reforço do esfíncter uretral.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: O tratamento descrito é um sling mediouretral (TVT ou TOT), que atua fornecendo suporte à uretra média, corrigindo a hipermobilidade uretral, principal causa da incontinência urinária de esforço (IUE). O mecanismo é a sustentação, não a suspensão da bexiga ou correção de cistocele.\n\n****Alternativa Correta** (B)**: O sling é posicionado sob a uretra média,"
+  },
+  {
+    "id": 7636,
+    "current_area": "Ginecologia e Obstetrícia",
+    "current_subtema": "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário",
+    "topic": "Tratamento",
+    "stem": "Mulher, 27 anos de idade, refere dor mamária que se inicia cerca de 15 dias antes da menstruação. A dor é bilateral e intensa, dificultando uso de vestimenta e a realização de atividade física. Faz uso de anti-inflamatórios e analgésicos, sem resultado adequado. Apresenta ciclos menstruais regulares com intervalo de 30 dias. Faz uso de preservativo como contraceptivo. O exame clínico realizado no décimo dia do ciclo menstrual, revela mamas simétricas, sem abaulamentos ou retrações e a palpação é de tecido fibroglandular sem nódulos ou espessamentos identificados. Qual é o tratamento mais eficiente para esta paciente?",
+    "alternatives": "  A) Vitamina E.\n  B) Tamoxifeno. [GABARITO]\n  C) Espironolactona.\n  D) Progesterona natural.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Mastalgia cíclica severa e refratária: o melhor tratamento é o tamoxifeno, um modulador seletivo do receptor de estrogênio que bloqueia a ação do estrogênio no tecido mamário, reduzindo a dor.\n\n****Alternativa Correta** (B)**: O tamoxifeno é eficaz em mastalgia cíclica grave quando outras medidas falham, pois bloqueia os receptores de estrogênio na mama, d"
+  }
+]

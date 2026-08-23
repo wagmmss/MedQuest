@@ -1,0 +1,702 @@
+[
+  {
+    "id": 1780,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+    "confidence": 1.0,
+    "rationale": "Quadro de psicose puerperal / depressão psicótica pós-parto com agressividade ao recém-nascido no 2º dia de puerpério, classificado no tema de patologias do puerpério."
+  },
+  {
+    "id": 1801,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "confidence": 1.0,
+    "rationale": "Abordagem inicial do tabagismo na gestação conforme diretrizes do Ministério da Saúde no contexto da assistência pré-natal."
+  },
+  {
+    "id": 1895,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Massas Anexiais e Neoplasias Ovarianas",
+    "confidence": 1.0,
+    "rationale": "Investigação propedêutica e dosagem de marcadores tumorais (beta-hCG/alfafetoproteína) para tumor ovariano de células germinativas na infância/adolescência."
+  },
+  {
+    "id": 1999,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e tratamento com dose terapêutica de ferro elementar (160-200 mg/dia) para anemia ferropriva na rotina pré-natal."
+  },
+  {
+    "id": 2010,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "confidence": 1.0,
+    "rationale": "Indicação de profilaxia pré-exposição (PrEP) contínua para gestante em parceria sorodiscordante para HIV sem uso de preservativo."
+  },
+  {
+    "id": 2070,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta terapêutica imediata com heparina de baixo peso molecular e angiotomografia para suspeita de tromboembolismo pulmonar na gestação."
+  },
+  {
+    "id": 2096,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Massas Anexiais e Neoplasias Ovarianas",
+    "confidence": 1.0,
+    "rationale": "Apresentação clínica de neoplasia maligna de ovário avançada com ascite, CA-125 elevado, massa anexial e indicação de cirurgia citorredutora primária."
+  },
+  {
+    "id": 2097,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "confidence": 1.0,
+    "rationale": "Manejo conservador inicial com fisioterapia do assoalho pélvico em mulher jovem com incontinência urinária de esforço leve/moderada."
+  },
+  {
+    "id": 2098,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Manejo conservador de complicação (perfuração uterina não complicada) durante histeroscopia diagnóstica para espessamento endometrial."
+  },
+  {
+    "id": 2099,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial de amenorreia secundária associada à hiperprolactinemia (prolactinoma e hipotireoidismo primário)."
+  },
+  {
+    "id": 2100,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Investigação de amenorreia primária com caracteres sexuais secundários normais, compatível com Síndrome de Mayer-Rokitansky-Kuster-Hauser (agenesia mülleriana)."
+  },
+  {
+    "id": 2101,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Úlceras Genitais e Infecções Sexualmente Transmissíveis na Mulher",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e tratamento de úlcera genital por sífilis primária (cancro duro com linfadenopatia) com Penicilina G benzatina 2,4 milhões UI."
+  },
+  {
+    "id": 2102,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "confidence": 1.0,
+    "rationale": "Tratamento conservador de primeira linha com fisioterapia do assoalho pélvico para incontinência urinária de esforço no pós-parto."
+  },
+  {
+    "id": 2103,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+    "confidence": 1.0,
+    "rationale": "Reconhecimento de vaginite inespecífica/fisiológica na infância pré-púbere e orientações de higiene e vestuário."
+  },
+  {
+    "id": 2104,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de síndrome da bexiga hiperativa e efeitos colaterais cognitivos de antimuscarínicos (oxibutinina) em idosas."
+  },
+  {
+    "id": 2105,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+    "confidence": 1.0,
+    "rationale": "Manejo cirúrgico conservador de leiomiomas uterinos sintomáticos com miomectomia histeroscópica e laparoscópica para preservação da fertilidade."
+  },
+  {
+    "id": 2106,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+    "confidence": 1.0,
+    "rationale": "Indicação cirúrgica definitiva de histerectomia por via vaginal para miomatose uterina volumosa sintomática refratária ao tratamento clínico."
+  },
+  {
+    "id": 2107,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta cirúrgica definitiva na adenomiose uterina sintomática com dismenorreia e menorragia em multípara."
+  },
+  {
+    "id": 2108,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "confidence": 1.0,
+    "rationale": "Indicação de tratamento cirúrgico para endometriose profunda infiltrante sintomática com dor incapacitante e contraindicação a terapias hormonais."
+  },
+  {
+    "id": 2109,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "confidence": 1.0,
+    "rationale": "Abordagem cirúrgica conservadora para restauração anatômica em paciente com infertilidade conjugal associada à endometriose profunda de septo retovaginal."
+  },
+  {
+    "id": 2110,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "confidence": 1.0,
+    "rationale": "Conduta escalonada com progestagênio contínuo para dismenorreia primária incapacitante e dor pélvica refratária a AINEs e ACO cíclico em adolescente."
+  },
+  {
+    "id": 2111,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+    "confidence": 1.0,
+    "rationale": "Atendimento imediato à vítima de violência sexual com indicação de contracepção de emergência com levonorgestrel 1,5 mg em dose única."
+  },
+  {
+    "id": 2112,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+    "confidence": 1.0,
+    "rationale": "Aspectos éticos e jurídicos do aborto legal pós-estupro, sendo garantido pelo relato da mulher, sem exigência de boletim de ocorrência ou autorização judicial."
+  },
+  {
+    "id": 2113,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+    "confidence": 1.0,
+    "rationale": "Protocolo de atendimento à violência sexual na infância e janela de tempo para indicação de profilaxia pós-exposição (PEP) ao HIV (até 72 horas)."
+  },
+  {
+    "id": 2114,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+    "confidence": 1.0,
+    "rationale": "Legislação brasileira sobre abortamento legal nos casos de violência sexual/estupro de vulnerável, sendo permitido independentemente da idade gestacional."
+  },
+  {
+    "id": 2115,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de falência ovariana prematura / insuficiência ovariana prematura (IOP) e indicação mandatória de terapia de reposição hormonal."
+  },
+  {
+    "id": 2116,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "confidence": 1.0,
+    "rationale": "Confirmação laboratorial de insuficiência ovariana com FSH elevado e indicação de reposição combinada com estradiol e progesterona."
+  },
+  {
+    "id": 2117,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de Síndrome dos Ovários Policísticos fenótipo B pelos critérios de Rotterdam (hiperandrogenismo clínico + anovulação crônica, com morfologia ovariana normal)."
+  },
+  {
+    "id": 2118,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial de hiperandrogenismo: hirsutismo idiopático caracterizado por evolução lenta, ciclos regulares e ausência de virilização."
+  },
+  {
+    "id": 2119,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "confidence": 1.0,
+    "rationale": "Quadro de virilização severa e rápida na pós-menopausa por hipertecose ovariana / tumores virilizantes."
+  },
+  {
+    "id": 2120,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Critérios de elegibilidade médica da OMS (MEC) para contracepção em usuárias de anticonvulsivantes enzimáticos (topiramato) - categoria 3 para progestagênios orais."
+  },
+  {
+    "id": 2121,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Critérios de elegibilidade para métodos contraceptivos após cirurgia bariátrica disabsortiva, com indicação de vias não orais (injetável parenteral)."
+  },
+  {
+    "id": 2122,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Indicação do Sistema Intrauterino Liberador de Levonorgestrel (SIU-LNG) em paciente com LES e anticorpos antifosfolípides positivos e menorragia."
+  },
+  {
+    "id": 2123,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Cálculo do período fértil pelo método comportamental/natural de Ogino-Knaus baseado na variação da duração dos ciclos menstruais."
+  },
+  {
+    "id": 2124,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Escolha de método contraceptivo parenteral em paciente com sangramento aumentado e leiomiomatose uterina intramural."
+  },
+  {
+    "id": 2125,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Interações farmacológicas entre anticoncepcionais e lamotrigina, priorizando medroxiprogesterona de depósito / métodos não estrogênicos."
+  },
+  {
+    "id": 2126,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Indicação e inserção imediata de implante subdérmico de etonogestrel (LARC) em adolescente com dismenorreia e múltiplos parceiros."
+  },
+  {
+    "id": 2127,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Contracepção de escolha com DIU hormonal em paciente com trombofilia hereditária (Fator V de Leiden) e endometriose no puerpério."
+  },
+  {
+    "id": 2128,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "confidence": 1.0,
+    "rationale": "Legislação atualizada do planejamento familiar (Lei nº 14.443/2022) que aboliu a exigência de consentimento do cônjuge para laqueadura tubária."
+  },
+  {
+    "id": 2129,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "confidence": 1.0,
+    "rationale": "Exames de rotina recomendados no seguimento de mulheres em Terapia de Reposição Hormonal (mamografia, perfil lipídico e glicemia)."
+  },
+  {
+    "id": 2130,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "confidence": 1.0,
+    "rationale": "Tratamento de escolha para a síndrome geniturinária da menopausa / atrofia vaginal isolada com estrogenioterapia tópica vaginal (estriol)."
+  },
+  {
+    "id": 2131,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação e Propêdêutica da Infertilidade Conjugal",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico etiológico de fator tubário de infertilidade por sequela de Doença Inflamatória Pélvica demonstrado na histerossalpingografia."
+  },
+  {
+    "id": 2132,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação e Propêdêutica da Infertilidade Conjugal",
+    "confidence": 1.0,
+    "rationale": "Etapas da propedêutica básica da infertilidade conjugal: indicação de histerossalpingografia para avaliação de permeabilidade tubária e cavidade uterina."
+  },
+  {
+    "id": 2133,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Investigação e Propêdêutica da Infertilidade Conjugal",
+    "confidence": 1.0,
+    "rationale": "Investigação diagnóstica do fator tuboperitoneal na infertilidade conjugal por meio de histerossalpingografia."
+  },
+  {
+    "id": 2134,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Conduta do rastreamento de câncer de colo de útero no pré-natal com indicação de coleta de citologia na consulta em gestante com histórico de LSIL."
+  },
+  {
+    "id": 2135,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Critérios para encerramento do rastreamento citopatológico de câncer de colo uterino aos 65 anos em mulheres com exames prévios normais."
+  },
+  {
+    "id": 2136,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Atualização das diretrizes nacionais de rastreamento com teste de DNA-HPV como rastreamento primário."
+  },
+  {
+    "id": 2137,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Conduta diante de achados colposcópicos maiores/suspeitos de invasão na gestação com biópsia dirigida imediata para descartar neoplasia invasora."
+  },
+  {
+    "id": 2138,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Conduta mandatória de encaminhamento para colposcopia e biópsia diante do achado citopatológico de atipias de células glandulares (ACG-SOE)."
+  },
+  {
+    "id": 2139,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Conduta conservadora em mulheres com menos de 25 anos com LSIL, indicando repetição citológica em 3 anos."
+  },
+  {
+    "id": 2140,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "confidence": 1.0,
+    "rationale": "Seguimento citopatológico trienal de cúpula vaginal após histerectomia em paciente com histórico prévio de NIC 3."
+  },
+  {
+    "id": 2141,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Manejo clínico-oncológico do câncer de colo uterino localmente avançado com hidronefrose obstrutiva: derivação urinária seguida de radio e quimioterapia."
+  },
+  {
+    "id": 2142,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Tratamento padrão do carcinoma epidermoide de colo de útero em estádio avançado (IIIB com uropatia obstrutiva) com radioquimioterapia concomitante."
+  },
+  {
+    "id": 2143,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+    "confidence": 1.0,
+    "rationale": "Indicação de cirurgia preservadora da fertilidade (traquelectomia radical com linfadenectomia pélvica) no câncer de colo microinvasor com invasão linfovascular."
+  },
+  {
+    "id": 2144,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Patologias Benignas e Neoplásicas da Vulva e Vagina",
+    "confidence": 1.0,
+    "rationale": "Associação patogenética entre líquen escleroso vulvar crônico e o desenvolvimento de neoplasia intraepitelial vulvar (NIV) diferenciada."
+  },
+  {
+    "id": 2145,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Patologias Benignas e Neoplásicas da Vulva e Vagina",
+    "confidence": 1.0,
+    "rationale": "Tratamento cirúrgico de carcinoma escamoso invasivo da vulva lateralizado através de hemivulvectomia com biópsia de linfonodo sentinela."
+  },
+  {
+    "id": 2146,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Conduta expectante / observação clínica no sangramento pós-menopausa com espessura endometrial menor que 4 mm (atrofia endometrial)."
+  },
+  {
+    "id": 2147,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Investigação de sangramento pós-menopausa com espessamento endometrial (9 mm) em usuária de tamoxifeno mediante histeroscopia com biópsia."
+  },
+  {
+    "id": 2148,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Suspeita de carcinoma de endométrio em paciente com sangramento pós-menopausa e eco endometrial de 10 mm, investigado por histeroscopia."
+  },
+  {
+    "id": 2149,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Apresentação clínica de neoplasia maligna de endométrio complicada por piometra e sepse ginecológica na pós-menopausa."
+  },
+  {
+    "id": 2150,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Conduta propedêutica invasiva ambulatorial com biópsia endometrial (cureta de Novak/Pipelle) para sangramento pós-menopausa com eco de 15 mm."
+  },
+  {
+    "id": 2151,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Estadiamento cirúrgico do adenocarcinoma endometrioide de endométrio grau 1 superficialmente invasor (baixo risco, sem indicação de linfadenectomia)."
+  },
+  {
+    "id": 2152,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "confidence": 1.0,
+    "rationale": "Estadiamento cirúrgico completo (histerectomia, anexectomia, linfadenectomia pélvica/para-aórtica, omentectomia e lavado) no carcinoma seroso de endométrio."
+  },
+  {
+    "id": 2153,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "confidence": 1.0,
+    "rationale": "Indicação padrão de biópsia assistida a vácuo (mamotomia guiada por mamografia) para investigação histopatológica de microcalcificações pleomórficas agrupadas."
+  },
+  {
+    "id": 2154,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "confidence": 1.0,
+    "rationale": "Indicação de incidência mamográfica complementar com ampliação (magnificação) para avaliação de microcalcificações BI-RADS 0."
+  },
+  {
+    "id": 2155,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "confidence": 1.0,
+    "rationale": "Avaliação radiológica complementar com magnificação/ampliação para calcificações mamárias heterogêneas BI-RADS 0."
+  },
+  {
+    "id": 2156,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "confidence": 1.0,
+    "rationale": "Indicação de mamografia diagnóstica frente ao achado de nódulo mamário palpável com sinais de alarme e linfonodomegalia regional."
+  },
+  {
+    "id": 2157,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "confidence": 1.0,
+    "rationale": "Tratamento conservador de primeira escolha com fisioterapia do assoalho pélvico para incontinência urinária de esforço pura sem prolapso severo."
+  },
+  {
+    "id": 2158,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "confidence": 1.0,
+    "rationale": "Tratamento não cirúrgico inicial de incontinência urinária de esforço/mista leve com fisioterapia pélvica."
+  },
+  {
+    "id": 2159,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "confidence": 1.0,
+    "rationale": "Fisioterapia do assoalho pélvico como conduta inicial em paciente com perda urinária aos grandes esforços e escore POP-Q estável."
+  },
+  {
+    "id": 2255,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+    "confidence": 1.0,
+    "rationale": "Documentos legalmente necessários para o aborto legal por estupro no SUS: Termo de Consentimento e Termo de Responsabilidade, sem exigência de BO ou laudo pericial."
+  },
+  {
+    "id": 2260,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+    "confidence": 1.0,
+    "rationale": "Manejo da hemorragia pós-parto (HPP) por atonia uterina resistente à massagem e ocitocina com uso de misoprostol e balão de tamponamento intrauterino."
+  },
+  {
+    "id": 2261,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "confidence": 1.0,
+    "rationale": "Conduta na gestação prolongada com redução de movimentação e cardiotocografia não reativa: prolongamento do traçado e preparo cervical com misoprostol."
+  },
+  {
+    "id": 2262,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "confidence": 1.0,
+    "rationale": "Indicação de parto operatório vaginal (fórcipe ou vácuo-extrator) para abreviação imediata do período expulsivo no plano +3 de DeLee diante de sofrimento fetal agudo."
+  },
+  {
+    "id": 2263,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Trabalho de Parto Prematuro e Tocólise",
+    "confidence": 1.0,
+    "rationale": "Reconhecimento de falso trabalho de parto / pródromos pré-termo com colo impérvio e conduta expectante com observação clínica da dinâmica uterina."
+  },
+  {
+    "id": 2264,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de sífilis latente tardia/duração indeterminada na gestação com testes treponêmicos reagentes e tratamento com Penicilina benzatina 7,2 milhões UI."
+  },
+  {
+    "id": 2265,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "confidence": 1.0,
+    "rationale": "Rotina laboratorial do pré-natal de baixo risco por volta da 28ª semana: solicitação de hemograma e repetição de sorologias para HIV e sífilis."
+  },
+  {
+    "id": 2266,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Trabalho de Parto Prematuro e Tocólise",
+    "confidence": 1.0,
+    "rationale": "Assistência ao trabalho de parto prematuro inevitável às 33 semanas com infecção por COVID-19, indicando corticoterapia e monitorização cardiotocográfica."
+  },
+  {
+    "id": 2267,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "confidence": 1.0,
+    "rationale": "Identificação do período prodrômico do trabalho de parto a termo com colo grosso/fechado e alta com orientações obstétricas."
+  },
+  {
+    "id": 2268,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de emergência de descolamento prematuro de placenta (DPP) grave com hipertonia uterina, choque hipovolêmico e óbito fetal, exigindo cesárea de urgência."
+  },
+  {
+    "id": 2269,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "confidence": 1.0,
+    "rationale": "Critérios de profilaxia intraparto para Estreptococo do Grupo B (EGB) em gestante sem pré-natal com bolsa rota prolongada (início ao completar 18h / planejamento)."
+  },
+  {
+    "id": 2270,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Diabetes Gestacional e Pré-Gestacional",
+    "confidence": 1.0,
+    "rationale": "Manejo hospitalar urgente com insulinoterapia e isolamento para síndrome gripal em gestante com diabetes gestacional gravemente descompensado."
+  },
+  {
+    "id": 2271,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "confidence": 1.0,
+    "rationale": "Estratificação como pré-natal de alto risco e indicação de investigação para trombofilias após antecedente de óbito fetal inexplicado no 3º trimestre."
+  },
+  {
+    "id": 2272,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta na mastite puerperal aguda não abscesso com antibioticoterapia oral e estímulo à manutenção da amamentação."
+  },
+  {
+    "id": 2273,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+    "confidence": 1.0,
+    "rationale": "Conduta resolutiva com sulfato de magnésio para neuroproteção, antibiótico para EGB e cesárea em trabalho de parto com RPMO e feto pélvico de 27 semanas."
+  },
+  {
+    "id": 2274,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+    "confidence": 1.0,
+    "rationale": "Indicação de laparoscopia / cirurgia de urgência para abdome agudo cirúrgico / peritonite no primeiro trimestre da gestação."
+  },
+  {
+    "id": 2275,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Diabetes Gestacional e Pré-Gestacional",
+    "confidence": 1.0,
+    "rationale": "Interpretação da glicemia de jejum no primeiro trimestre (< 92 mg/dL) e rastreamento de rotina com TOTG entre 24 e 28 semanas."
+  },
+  {
+    "id": 2276,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Massas Anexiais e Neoplasias Ovarianas",
+    "confidence": 1.0,
+    "rationale": "Conduta expectante seriada diante do achado de cisto ovariano simples / corpo lúteo no primeiro trimestre da gestação."
+  },
+  {
+    "id": 2277,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de pielonefrite aguda complicada na gestação após tratamento ambulatorial prévio incompleto ou resistente."
+  },
+  {
+    "id": 2278,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "confidence": 1.0,
+    "rationale": "Prescrições preventivas no pré-natal de alto risco: AAS para profilaxia de pré-eclâmpsia e progesterona para prevenção de prematuridade recorrente."
+  },
+  {
+    "id": 2279,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+    "confidence": 1.0,
+    "rationale": "Conduta em placenta prévia centro-total com acretismo e sangramento estabilizado: corticoterapia para maturação pulmonar e cesárea eletiva planejada."
+  },
+  {
+    "id": 2280,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "confidence": 1.0,
+    "rationale": "Diretrizes de parto para gestante com HIV e carga viral indetectável no final da gestação (indicação de via obstétrica e não necessidade de AZT IV)."
+  },
+  {
+    "id": 2281,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "confidence": 1.0,
+    "rationale": "Interpretação de traçado cardiotocográfico intraparto com variabilidade normal e correção de taquissistolia para resolução de desacelerações variáveis."
+  },
+  {
+    "id": 2282,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de pré-eclâmpsia sobreposta à hipertensão arterial crônica em gestante a termo com sintomas de alarme e indicação de exames e parto."
+  },
+  {
+    "id": 2283,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "confidence": 1.0,
+    "rationale": "Interpretação de exames normais no segundo trimestre e indicação de suplementação profilática universal com 40 mg/dia de ferro elementar."
+  },
+  {
+    "id": 2284,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+    "confidence": 1.0,
+    "rationale": "Manejo expectante conservador na rotura prematura de membranas pré-termo (RPMPT) às 30 semanas com corticoterapia e antibioticoprofilaxia."
+  },
+  {
+    "id": 2285,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Diabetes Gestacional e Pré-Gestacional",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico de Diabetes Mellitus Gestacional (DMG) pelos critérios do TOTG 75g (1h ≥ 180 ou 2h ≥ 153 mg/dL) e conduta terapêutica inicial."
+  },
+  {
+    "id": 2286,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "confidence": 1.0,
+    "rationale": "Prevenção da transmissão vertical da hepatite B com introdução de tenofovir materno no terceiro trimestre para HBeAg reagente e imunoprofilaxia neonatal completa."
+  },
+  {
+    "id": 2287,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+    "confidence": 1.0,
+    "rationale": "Avaliação de sangramento na primeira metade e diagnóstico de gestação inviável pela curva de ascensão inadequada do beta-hCG em 48 horas."
+  },
+  {
+    "id": 2288,
+    "target_area": "Ginecologia e Obstetrícia",
+    "target_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "confidence": 1.0,
+    "rationale": "Indicação formal de profilaxia intraparto com Penicilina G cristalina para Estreptococo do Grupo B devido ao antecedente de bacteriúria na gestação atual."
+  }
+]

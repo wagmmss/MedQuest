@@ -1,0 +1,902 @@
+[
+  {
+    "id": 2076,
+    "current_area": "Cirurgia",
+    "current_subtema": "Câncer de Pulmão, Nódulo Pulmonar Solitário e Tumores do Mediastino",
+    "topic": "Estadiamento anatômico não pequenas células. O TUMOR ESTÁ LOCALIZADO NO BRÔNQUIO:",
+    "stem": "Homem, 58a, apresenta tosse e emagrecimento de 5Kg há dois meses. Radiograma de tórax: opacidade paracardíaca direita, com apagamento do bordo direito do coração e discreto alargamento do mediastino. Biopsia por broncoscopia: carcinoma",
+    "alternatives": "  A) principal direito.\n  B) intermediário.\n  C) do lobo inferior direito.\n  D) do lobo médio. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: O sinal da silhueta no bordo cardíaco direito na radiografia de tórax indica patologia no lobo médio direito.\n\n****Alternativa Correta** (D)**: O lobo médio do pulmão direito está anatomicamente adjacente ao átrio direito. Quando há uma opacidade nesta região (como uma massa tumoral), perde-se a interface de densidades entre o coração e o pulmão, apagando "
+  },
+  {
+    "id": 2077,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Tratamento Quimioterapia Radioterapia",
+    "stem": "Mulher, 58 anos de idade, submeteu-se à ressecção de lesão cerebral que se revelou tratar de metástase de neoplasia pulmonar. Tomograa de tórax: massa em lobo superior direito, espiculada, com dimensões de 4 x 3 cm. A biópsia da lesão revela um adenocarcinoma primário. O estadiamento do tumor não evidencia comprometimento dos linfonodos mediastinais e nem outros sítios de metástase. Qual é a melhor conduta?",
+    "alternatives": "  A) Não tem indicação cirúrgica; tratamento com quimioterapia e radioterapia.\n  B) Lobectomia superior direita com esvaziamento mediastinal; tratamento adjuvante. [GABARITO]\n  C) Segmentectomia com esvaziamento mediastinal; tratamento adjuvante.\n  D) Não tem indicação cirúrgica; tratamento com quimioterapia exclusiva.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A presença de metástase única (como a cerebral) não contraindica a ressecção do tumor primário pulmonar desde que ambos possam ser tratados com intenção curativa e não haja comprometimento mediastinal N2/N3.\n\n****Alternativa Correta** (B)**: A lobectomia associada ao esvaziamento mediastinal sistemático é o tratamento padrão para o tumor primário de pulmão"
+  },
+  {
+    "id": 2078,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Tratamento do câncer não pequenas células",
+    "stem": "Homem, 70 anos de idade, apresenta adenocarcinoma em lobo superior do pulmão esquerdo. Durante estadiamento da neoplasia observou-se comprometimento dos linfonodos das cadeias 4 ipsilateral e 7. Não foram identicadas metástases no PET-CT. Qual a conduta mais adequada?",
+    "alternatives": "  A) Tratamento não cirúrgico. [GABARITO]\n  B) Lobectomia superior esquerda.\n  C) Pneumonectomia esquerda.\n  D) Segmentectomia esquerda.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O acometimento de linfonodo mediastinal contralateral ou múltiplos linfonodos N2 ipsilaterais (como as cadeias 4 e 7 simultâneas) frequentemente classifica a doença como irressecável cirurgicamente, exigindo terapia multimodal.\n\n****Alternativa Correta** (A)**: O comprometimento das cadeias linfonodais mediastinais 4 (mediastinal superior ipsilateral) e 7 "
+  },
+  {
+    "id": 2079,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "topic": "Pneumopatias Intersticiais Hipertensão Pulmonar Bronquiectasias e Pneumotórax Espontâneo",
+    "stem": "Homem, 18 anos de idade, previamente hígido, chega ao PS com queixa de falta de ar iniciada há 1 hora. Exame físico: Escala de Coma de Glasgow = 14, pupilas isocóricas fotorreagentes, FR = 30 irpm, SpO₂ = 70%, ausculta respiratória abolida em hemitórax direito, PA= 80/40 mmHg, FC = 133 bpm, tempo de enchimento capilar = 4 segundos, ausculta cardíaca sem alterações. Qual é o achado esperado na ultrassonografia à beira leito?",
+    "alternatives": "  A) Sinal do código de barras em hemitórax direito. [GABARITO]\n  B) Sobrecarga de câmaras direitas.\n  C) Linhas B em todo hemitórax direito.\n  D) Líquido no espaço pericárdico.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Ausência de deslizamento pleural (*lung sliding*) somada ao modo M formando o sinal do código de barras sela o diagnóstico ultrassonográfico de pneumotórax na emergência.\n\n****Alternativa Correta** (A)**: O paciente apresenta um quadro clássico de pneumotórax hipertensivo (hipotensão, desvio mediastinal, ausência de murmúrio vesicular à direita, hipoxemia "
+  },
+  {
+    "id": 2080,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Bronquiectasias",
+    "stem": "Homem, 35 anos de idade, é admitido no PS com tosse e hemoptise de, aproximadamente, 50 mL ao dia, há 3 dias. Nega febre ou perda de peso. Refere infecções pulmonares de repetição, à esquerda, há alguns anos. Broncoscopia: sangramento no lobo superior esquerdo. O diagnóstico mais provável é",
+    "alternatives": "  A) bronquiectasias. [GABARITO]\n  B) doença pulmonar obstrutiva crônica.\n  C) neoplasia pulmonar.\n  D) corpo estranho de via aérea.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Infecções pulmonares de repetição no mesmo topografia associadas a hemoptise crônica gritom diagnóstico de bronquiectasias.\n\n****Alternativa Correta** (A)**: As bronquiectasias consistem em dilatações irreversíveis dos brônquios decorrentes de infecções crônicas e inflamação. O quadro clínico clássico envolve tosse produtiva crônica e episódios de hemoptis"
+  },
+  {
+    "id": 2081,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Videotoracoscopia Assistida VATS",
+    "stem": "Homem, 23 anos de idade, apresentou primeiro episódio de pneumotórax espontâneo à direita e foi submetido à drenagem pleural. Após expansão e resolução do pneumotórax recebeu alta com orientação para seguimento ambulatorial. Um ano depois apresentou quadro de pneumotórax espontâneo, agora à esquerda, primeiro episódio. Qual é a conduta mais adequada?",
+    "alternatives": "  A) Aguardar 2º episódio para indicar cirurgia.\n  B) Indicar bulectomia e pleurodese bilateral. [GABARITO]\n  C) Drenagem pleural à esquerda e pleurodese à esquerda.\n  D) Drenagem pleural à esquerda e pleurodese à direita.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Pneumotórax espontâneo contralateral após episódio prévio ipsilateral configura doença pulmonar bolhosa bilateral difusa, tendo indicação cirúrgica imediata.\n\n****Alternativa Correta** (B)**: Após o segundo episódio de pneumotórax espontâneo (sendo agora o primeiro contralateral), o risco de novos episódios e de recorrência bilateral simultânea (pneumotóra"
+  },
+  {
+    "id": 2413,
+    "current_area": "Cirurgia",
+    "current_subtema": "Emergências Oftalmológicas e Patologias Oculares Frequentes",
+    "topic": "Oftalmologia",
+    "stem": "Homem, 40 anos de idade, procura PS com quadro de hiperemia, dor e edema palpebrais à esquerda há 2 dias. Nega piora da acuidade visual e doenças pregressas. Ao exame oftalmológico: acuidade visual de 20/20 em ambos olhos, reexos pupilares isofotorreagentes, limitação à adução do olho direito e disco óptico sem edema. Qual é a conduta inicial mais adequada?",
+    "alternatives": "  A) Hemograma e antibioticoterapia oral.\n  B) Tomografia de órbitas com contraste e antibioticoterapia venosa. [GABARITO]\n  C) Dosagem de TSH e T4L, e descompressão orbitária.\n  D) Provas reumatológicas e pulsoterapia.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Limitação à adução (ou qualquer oftalmoplegia) + sinais inflamatórios orbitários indicam celulite orbitária até prova em contrário. Exige tomografia com contraste e antibiótico venoso imediato.\n\n****Alternativa Correta** (B)**: A tomografia de órbitas com contraste é essencial para diferenciar celulite pré-septal de orbitária, identificar abscessos e avali"
+  },
+  {
+    "id": 2416,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Fratura Orbitária",
+    "stem": "Adolescente, 15 anos de idade, sofreu trauma na região orbitária durante uma partida de tênis que evoluiu com equimose e imobilidade quase completa do globo ocular. Exame físico: enoftalmia e rebordo orbitário íntegro à palpação. Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Fratura isolada da maxila\n  B) Fratura isolada do arco zigomático\n  C) Fratura isolada do osso frontal\n  D) Fratura isolada da órbita interna [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A combinação de enoftalmia e imobilidade ocular após trauma orbitário fechado em pacientes jovens aponta para uma fratura da parede medial (órbita interna) com encarceramento muscular.\n\n****Alternativa Correta** (D)**: A fratura isolada da órbita interna (geralmente da lâmina papirácea do osso etmoide) causa a herniação do conteúdo orbitário para o interio"
+  },
+  {
+    "id": 2418,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Avaliação dos Exames de Imagem",
+    "stem": "Homem, 30 anos de idade, com lombalgia, disponibiliza na consulta as imagens do exame abaixo. Assinale a alternativa correta.",
+    "alternatives": "  A) Trata-se de uma ressonância magnética com diagnóstico de espondilite anquilosante.\n  B) Trata-se de uma tomograa computadorizada com diagnóstico de doença degenerativa discal e de hérnia discal extrusa.\n  C) Trata-se de uma ressonância magnética com diagnóstico de doença degenerativa discal e de hérnia discal extrusa. [GABARITO]\n  D) Trata-se de uma tomografia computadorizada com diagnóstico de espondilodiscite infecciosa.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A Ressonância Magnética (RM) é o exame padrão-ouro para avaliar partes moles e medula óssea, permitindo o diagnóstico preciso de patologias discais como a hérnia discal.\n\n****Alternativa Correta** (C)**: A Ressonância Magnética é o método de imagem de escolha para avaliar a coluna vertebral devido à sua excelente resolução de contraste para tecidos moles, "
+  },
+  {
+    "id": 2419,
+    "current_area": "Cirurgia",
+    "current_subtema": "Tendinopatias, Bursites e Síndromes por Sobrecarga Musculoesquelética",
+    "topic": "Testes para Lesão do Manguito Rotador Diagnóstico",
+    "stem": "Homem, 40 anos de idade, com queixa de dor no ombro D após queda ao solo sem desnível. Exame físico sem alterações, exceto por dor e perda de força a rotação lateral do ombro D. Radiografias sem alterações. Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Lesão do tendão do subescapular.\n  B) Lesão do tendão do peitoral maior.\n  C) Lesão do tendão do infraespinhal. [GABARITO]\n  D) Lesão do tendão da cabeça longa do bíceps braquial.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Perda de força na rotação lateral (externa) do ombro isolada após trauma aponta diretamente para o músculo infraespinhal, um dos componentes do manguito rotador.\n\n****Alternativa Correta** (C)**: O músculo infraespinhal é o principal responsável pela rotação lateral (externa) do ombro. Lesões em seu tendão, frequentes após traumas ou quedas, resultam em do"
+  },
+  {
+    "id": 2421,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Outros tumores ósseos",
+    "stem": "Adolescente, 15a, procura médico de família muito preocupada com aumento de volume localizado no terço proximal da região tibial direita há cerca de quatro anos. Nega dor no local e limitação de atividades físicas. Traz exames que conrmam o diagnóstico de osteocondroma. A CONDUTA É:",
+    "alternatives": "  A) Encaminhar para ressecção do tumor, pelo risco elevado de degeneração sarcomatosa para condrossarcoma.\n  B) Realizar acompanhamento clínico e radiológico, sem necessidade de ressecção. [GABARITO]\n  C) Solicitar cintilografia óssea, para diferenciar entre tumor ósseo benigno e maligno.\n  D) Encaminhar para radioterapia, pelo risco elevado de degeneração sarcomatosa para condrossarcoma.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Osteocondroma assintomático em paciente jovem exige apenas seguimento clínico e radiológico periódico devido ao seu comportamento benigno e baixíssimo risco de malignização.\n\n****Alternativa Correta** (B)**: O osteocondroma é o tumor ósseo benigno mais comum, caracterizado por uma projeção recoberta por cartilagem. Em pacientes assintomáticos, a conduta pa"
+  },
+  {
+    "id": 2424,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Osteogênese Imperfeita Conceitos Básicos do Trauma Ortopédico",
+    "stem": "No tratamento conservador das fraturas na osteogênese imperfeita, a imobilização por tempo prolongado pode causar",
+    "alternatives": "  A) formação de calo ósseo mais exuberante.\n  B) diminuição na frequência das fraturas.\n  C) menor desvio angular dos ossos longos.\n  D) osteopenia pelo desuso. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A imobilização prolongada de ossos fragilizados pela falta de carga mecânica e estímulo gravitacional resulta inevitavelmente na perda de massa óssea por desuso.\n\n****Alternativa Correta** (D)**: Na osteogênese imperfeita, o tecido ósseo já é estruturalmente comprometido por defeitos no colágeno tipo I. O desuso decorrente de gessos ou repouso prolongado r"
+  },
+  {
+    "id": 2425,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Fraturas da Coluna Vertebral Lesão Nervosa",
+    "stem": "Mulher, 22 anos de idade, vítima de acidente motociclístico, apresenta avulsão traumática da raiz de C6 a direita. Qual é a localização do déficit sensitivo e motor?",
+    "alternatives": "  A) Face medial do antebraço e extensores do punho.\n  B) Face lateral do antebraço e flexores do punho.\n  C) Face lateral do antebraço e extensores do punho. [GABARITO]\n  D) Face medial do antebraço e flexores do punho.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A raiz de C6 inerva a região lateral do antebraço (sensibilidade) e os músculos extensores do punho (motricidade).\n\n****Alternativa Correta** (C)**: A lesão ou avulsão traumática da raiz cervical de C6 resulta classicamente em déficit sensitivo na face lateral do antebraço e déficit motor nos músculos extensores do punho (como o extensor carpi radialis lon"
+  },
+  {
+    "id": 2426,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Contratura Isquêmica de Volkmann UMA COMPLICAÇÃO QUE PODE OCORRER NESTA SITUAÇÃO CLÍNICA É A SÍNDROME DE COMPARTIMENTO QUE, SE NÃO CONDUZIDA PRECOCEMENTE, PODE LEVAR À:",
+    "stem": "Adolescente, 12a, é trazido ao Pronto Socorro referindo dor em cotovelo direito após ter caído de uma árvore, há uma hora. Exame físico: corado; consciente; orientado; hidratado; fácies de dor. FC=112bpm, FR=21irpm, PA=126x82mmHg. Deformidade em cotovelo direito, doloroso à palpação, e pulsos radiais presentes. Restante sem alterações. Radiograma de cotovelo direito.",
+    "alternatives": "  A) Choque neurogênico.\n  B) Lesão de Baumann.\n  C) Lesão dos nervos ulnar, mediano e braquial.\n  D) Contratura isquêmica de Volkmann. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Trauma grave no cotovelo em crianças e adolescentes pode gerar edema intenso e aumento da pressão intracompartimental, cuja complicação isquêmica temível a longo prazo é a contratura de Volkmann.\n\n****Alternativa Correta** (D)**: A contratação isquêmica de Volkmann é a sequela deformante e incapacitante resultante de uma síndrome compartimental aguda não t"
+  },
+  {
+    "id": 2427,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Fraturas do fêmur proximal",
+    "stem": "Mulher, 78 anos de idade, sofreu queda ao solo sem desnível. Apresenta-se consciente, hemodinamicamente estável e com vias aéreas pérvias. É trazida ao Pronto-socorro sobre uma maca por incapacidade para deambular por dor. Após realização da radiograa de pelve, constatou-se uma fratura desviada e instável do colo do fêmur direito. Assinale a alternativa que descreve CORRETAMENTE a deformidade clínica do membro que essa paciente tipicamente apresenta e os músculos que contribuem para o desvio desta fratura.",
+    "alternatives": "  A) Encurtamento com rotação lateral. Músculos tensor da fáscia lata e quadríceps femural.\n  B) Encurtamento com rotação medial. Músculos glúteo médio e iliopsoas.\n  C) Encurtamento com rotação lateral. Músculos glúteo médio e iliopsoas. [GABARITO]\n  D) Encurtamento com rotação medial. Músculos tensor da fáscia lata e quadríceps femural.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Na fratura do colo do fêmur, o fragmento distal sofre a tração de músculos potentes, resultando no clássico trio: encurtamento, rotação externa (lateral) e abdução leve.\n\n****Alternativa Correta** (C)**: O encurtamento ocorre principalmente pela ação do músculo iliopsoas, que traciona o fêmur proximal e o mantém em flexão e encurtamento. A rotação lateral "
+  },
+  {
+    "id": 2428,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Fraturas do colo do fêmur",
+    "stem": "Homem, 63 anos de idade, diabético tipo 2 bem controlado, apresentou queda ao solo há 3 horas, com trauma lateral do quadril direito, evoluindo com dor intensa, encurtamento aparente e rotação externa do membro inferior direito e sem alterações neurovasculares agudas. Qual é a conduta mais adequada?",
+    "alternatives": "  A) Osteossíntese com placa e parafusos.\n  B) Osteossíntese com haste bloqueada intramedular por via retrógrada\n  C) Osteossíntese com parafusos canulados.\n  D) Artroplastia total do quadril. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Idoso com fratura desviada do colo do fêmur é sinônimo de artroplastia; a escolha entre total ou parcial depende do nível de atividade e autonomia prévia.\n\n****Alternativa Correta** (D)**: A artroplastia total do quadril (ATQ) é o tratamento de escolha para pacientes idosos (como este homem de 63 anos, ativo e hígido com DM controlada) que apresentam fratu"
+  },
+  {
+    "id": 2429,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Fraturas do colo do fêmur",
+    "stem": "Mulher, 78 anos de idade, é trazida ao PS com história de queda da própria altura, evoluindo com dor no quadril D e consequente incapacidade a deambulação. Antecedentes pessoais: dependente de cuidadores em casa de repouso, arritmia, demência e diabetes tipo II sem controle. Radiograas: fratura desviada instável do colo do fêmur D, sem osteoartrose. Qual é a conduta mais adequada?",
+    "alternatives": "  A) Redução e fixação percutânea com parafusos canulados.\n  B) Artroplastia total do quadril.\n  C) Artroplastia parcial do quadril. [GABARITO]\n  D) Redução e fixação com haste cefalomedular.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Idosa institucionalizada, com demência e comorbidades descompensadas com fratura desviada do colo do fêmur = Artroplastia Parcial do Quadril para menor tempo cirúrgico e rápida reabilitação.\n\n****Alternativa Correta** (C)**: A artroplastia parcial (hemiartroplastia) do quadril é a conduta ideal para pacientes idosos com baixa demanda funcional, institucion"
+  },
+  {
+    "id": 2430,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Lesão do ligamento cruzado posterior",
+    "stem": "Homem, 35 anos de idade, vem ao ambulatório de joelho após 3 semanas de acidente de carro no qual sofreu trauma direto no seu joelho esquerdo contra o painel do carro. Refere que na ocasião percebeu grande hematoma, inchaço e dor no joelho. Foi ao pronto socorro e realizou radiograas sem fraturas, sendo recomendado anti-inamatórios e crioterapia. Exame físico: aumento da translação posterior do joelho esquerdo e deslizamento posterior da tíbia. Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Lesão do ligamento cruzado posterior. [GABARITO]\n  B) Lesão do ligamento cruzado anterior.\n  C) Lesão do ligamento menisco-femoral.\n  D) Lesão do ligamento oblíquo posterior.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Trauma direto no joelho contra o painel do carro (\"sinal do painel\") com força no sentido ântero-posterior com a tíbia fletida aponta diretamente para a lesão do Ligamento Cruzado Posterior (LCP).\n\n****Alternativa Correta** (A)**: O mecanismo de trauma clássico do LCP é o impacto direto na face anterior da tíbia com o joelho em flexão (como ocorre com o jo"
+  },
+  {
+    "id": 2449,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Exame Abdominal Manifestações Clínicas Manifestações Clínicas e Exame Físico LENANDER E DE JOBERT, ESTÃO RELACIONADOS, RESPECTIVAMENTE, COM:",
+    "stem": "No exame físico o sinal semiológico, quando presente, auxilia no raciocínio da hipótese diagnóstica. OS SINAIS DE CULLEN,",
+    "alternatives": "  A) Pancreatite aguda, apendicite aguda e úlcera duodenal perfurada. [GABARITO]\n  B) Neoplasia gástrica, pancreatite aguda e diverticulose.\n  C) Ulcera duodenal perfurada, apendicite aguda, diverticulose.\n  D) Pancreatite aguda, neoplasia gástrica e apendicite aguda.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O sinal de Cullen (equimose periumbilical) indica hemorragia retroperitoneal ou intraperitoneal grave, classicamente vista na pancreatite aguda necrotizante e na úlcera péptica perfurada.\n\n****Alternativa Correta** (A)**: O sinal de Cullen traduz a infiltração hemorrágica nos planos subcutâneos periumbilicais, classicamente associado a pancreatite aguda gr"
+  },
+  {
+    "id": 2450,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Vascular e Isquemia Mesentérica",
+    "topic": "Sistema Único de Saúde - Cirurgia Manifestações Clínicas e Exame Físico",
+    "stem": "Um homem de 78 anos de idade, hipertenso e tabagista, com antecedente de infarto agudo do miocárdio há cinco anos, tratado por angioplastia, chegou ao pronto-socorro com dor abdominal difusa de início há uma hora. Ao exame físico, apresentava-se em regular estado geral, muito ansioso, consciente, orientado, com frequência cardíaca de 110 bpm, pressão arterial de 160 x 100 mmHg e tempo de enchimento capilar de 2 s. À palpação, o abdome mostrava-se doloroso difusamente, mas sem sinais de peritonite. Com base nesse caso hipotético, assinale a alternativa que apresenta o diagnóstico mais provável.",
+    "alternatives": "  A) abdome agudo inflamatório\n  B) abdome agudo vascular [GABARITO]\n  C) abdome agudo perfurativo\n  D) abdome agudo hemorrágico\n  E) abdome agudo obstrutivo",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Dor abdominal intensa e desproporcional aos achados do exame físico (abdome flácido, sem peritonite) em paciente com fatores de risco vascular é isquemia mesentérica até prova em contrário.\n\n****Alternativa Correta** (B)**: O quadro de dor abdominal difusa de início súbito, com intensa ansiedade e taquicardia, associado a um abdome surpreendentemente indol"
+  },
+  {
+    "id": 2451,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "topic": "Sistema Único de Saúde - Cirurgia Obstrução Intestinal Alta",
+    "stem": "Uma mulher de 45 anos de idade, sem comorbidades, chegou ao pronto-socorro com dor e distensão abdominal há cerca de cinco dias. Ontem, passou a apresentar vômitos fecaloides. Ao exame físico, apresentava-se em regular estado geral, desidratada, descorada +/4+, eupneica, com frequência cardíaca de 90 bpm e pressão arterial de 110 x 70 mmHg. O exame do abdome revelava distensão e dor difusa, mas sem sinais de peritonite. Não apresentava alterações na gasometria arterial nem leucocitose. Com base nesse caso hipotético, assinale a alternativa que apresenta a descrição correta dessa obstrução intestinal.",
+    "alternatives": "  A) mecânica, baixa e não complicada [GABARITO]\n  B) mecânica, alta e não complicada\n  C) funcional, alta e complicada\n  D) funcional, baixa e não complicada\n  E) funcional, alta e não complicada",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Vômitos fecaloides tardios após cinco dias de distensão em paciente hemodinamicamente estável apontam diretamente para uma obstrução mecânica e baixa, sem sinais de sofrimento vascular.\n\n****Alternativa Correta** (A)**: A apresentação clínica de dor e distensão abdominal progressiva por cinco dias, evoluindo com vômitos fecaloides tardios, caracteriza uma "
+  },
+  {
+    "id": 2452,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+    "topic": "Sistema Único de Saúde - Cirurgia Abdome Agudo Perfurativo",
+    "stem": "Um homem de cinquenta anos de idade, etilista e tabagista, chega ao pronto-socorro por dor abdominal difusa iniciada há cerca de 30 minutos. Ele foi levado pelo médico da unidade básica de saúde, que fez o primeiro atendimento. Esse médico, além das informações clínicas sobre o caso, levou consigo uma radiograa de abdome, que mostrava uma lâmina aérea entre o fígado e o diafragma. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor conduta para o paciente.",
+    "alternatives": "  A) endoscopia digestiva alta\n  B) tomografia computadorizada de abdome\n  C) dosagem de amilase e lipase\n  D) laparotomia exploradora [GABARITO]\n  E) passagem de sonda nasogástrica e reavaliação",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Dor abdominal difusa súbita em paciente de risco somada ao pneumoperitônio no raio-x significa abdome agudo perfurativo: emergência cirúrgica imediata (laparotomia).\n\n****Alternativa Correta** (D)**: O paciente apresenta um quadro clínico clássico de abdome agudo perfurativo (provavelmente úlcera péptica perfurada, considerando o etilismo e tabagismo). A r"
+  },
+  {
+    "id": 2453,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "topic": "Sistema Único de Saúde - Cirurgia Quadro Clínico e Indicações de Tomografia de Crânio",
+    "stem": "Um homem de trinta anos de idade foi levado ao pronto-socorro após ser agredido, com uma paulada na cabeça. Ele falava e respirava sem ruído. Foi colocado o colar cervical, estava eupneico, com ausculta e expansibilidade pulmonar preservadas, tinha uma frequência cardíaca de 72 bpm e pulso radial amplo e cheio, estava corado e com perfusão periférica normal. Como havia um ferimento cortocontuso no couro cabeludo, foi feito um curativo compressivo e solicitado o material para sutura. Enquanto era aguardado o material, a enfermagem acionou a equipe médica para reavaliar o paciente, pois ele estava arresponsivo. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor conduta nesse momento.",
+    "alternatives": "  A) intubação orotraqueal e tomografia computadorizada de crânio [GABARITO]\n  B) máscara de oxigênio, cânula orofaríngea e tomografia computadorizada de crânio\n  C) máscara de oxigênio, anteriorização da mandíbula e tomografia computadorizada de crânio\n  D) cateter de oxigênio, cânula orofaríngea e tomografia computadorizada de crânio\n  E) cateter de oxigênio, anteriorização da mandíbula e tomografia computadorizada de crânio",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Paciente vítima de TCE que evolui repentinamente para inconsciência (intervalo lúcido) apresenta provável hematoma extradural; com Glasgow menor ou igual a 8, a prioridade absoluta é a via aérea definitiva.\n\n****Alternativa Correta** (A)**: O caso descreve a evolução clássica de um hematoma extradural (intervalo lúcido seguido de rebaixamento rápido do nív"
+  },
+  {
+    "id": 2454,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+    "topic": "Sistema Único de Saúde - Cirurgia Trauma Torácico",
+    "stem": "Após receber uma facada no hemitórax direito, sobre o mamilo, um homem de cerca de cinquenta anos de idade foi levado ao hospital. Chegou lá em franca insuciência respiratória. Ele conseguia respirar sem ruídos, mas tinha frequência respiratória de 50 ipm, murmúrio vesicular abolido do lado direito (percussão timpânica) e o oxímetro de pulso apontava saturação de 72%. Com base nesse caso hipotético, assinale a alternativa que apresenta a conduta a ser realizada primeiro.",
+    "alternatives": "  A) intubação orotraqueal\n  B) punção do quinto espaço intercostal direito, entre as linhas axilares média e anterior, com cateter calibroso [GABARITO]\n  C) punção do segundo espaço intercostal direito, na linha mamilar, com cateter calibroso\n  D) drenagem pleural, em selo d'água, no quinto espaço intercostal direito, entre as linhas axilares média e anterior, com cateter calibroso\n  E) radiografia de tórax no leito",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Trauma torácico com insuficiência respiratória grave, murmúrio abolido e timpanismo é pneumotórax hipertensivo: punção de alívio imediata antes de qualquer exame ou drenagem.\n\n****Alternativa Correta** (B)**: Os achados clínicos de dispneia extrema, cianose/hipóxia, ausência de murmúrio vesicular e timpanismo definem um pneumotórax hipertensivo, que causa "
+  },
+  {
+    "id": 2455,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Sistema Único de Saúde - Cirurgia Avaliação Inicial Vias aéreas Ventilação e Choque",
+    "stem": "Uma mulher de vinte anos de idade foi levada ao pronto-socorro após ser atropelada por um ônibus. Foi intubada, no local, pela equipe de atendimento pré-hospitalar, por rebaixamento do nível de consciência. Na avaliação inicial, constatou-se que a cânula orotraqueal estava adequada e foi colocado o colar cervical. Seu tórax expandia bilateralmente e a ausculta era normal (murmúrios vesiculares presentes bilateralmente). Os pulsos periféricos não eram palpáveis e o femoral tinha uma frequência de 140 bpm, no e rápido. A paciente estava descorada e muito mal perfundida (tempo de enchimento capilar maior que 3 segundos). Havia fratura com desvio da perna e da coxa direitas. Com base nesse caso hipotético, assinale a alternativa que apresenta as prováveis fontes para o choque da paciente.",
+    "alternatives": "  A) crânio, tórax, abdome, pelve e ossos longos\n  B) tórax, abdome, pelve e ossos longos\n  C) abdome, pelve e ossos longos [GABARITO]\n  D) pelve e ossos longos\n  E) ossos longos",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Lembre-se que o choque hemorrágico no trauma tem como principais fontes o tórax, o abdome, a pelve e os ossos longos; o crânio não sangra o suficiente para causar choque em adultos.\n\n****Alternativa Correta** (C)**: A paciente apresenta choque hemorrágico grave (taquicardia, pulsos finos, má perfusão e fraturas em membros inferiores). As fontes potenciais "
+  },
+  {
+    "id": 2456,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Sistema Único de Saúde - Cirurgia Traumatismo Craniencefálico Manejo Clínico",
+    "stem": "No pronto-socorro de um hospital, o médico de plantão atende um menino de doze anos de idade, que caiu e bateu a cabeça durante um jogo de futebol. No atendimento inicial, ele se mostrava estável do ponto de vista ventilatório e circulatório, mas tinha 8 pontos na escala de coma de Glasgow, o que motivou o médico a intubá-lo. Foi realizada uma tomograa de crânio, que mostrava um hematoma extradural com desvio de linha média. A equipe de neurocirurgia está operando um caso grave e estará disponível em cerca de uma hora. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor conduta.",
+    "alternatives": "  A) transferir o paciente\n  B) manter o paciente com pressão arterial sistólica acima de 100 mmHg, hemoglobina acima de 7 g/dL, pressão arterial de oxigênio maior que 100 mmHg, pressão arterial de gás carbônico abaixo de 25 mmHg e decúbito elevado e iniciar infusão de manitol endovenoso caso o paciente apresente anisocoria\n  C) manter o paciente com pressão arterial sistólica acima de 100 mmHg, hemoglobina acima de 7 g/dL, pressão arterial de oxigênio maior que 100 mmHg, pressão arterial de gás carbônico abaixo de 25 mmHg e decúbito elevado e iniciar infusão de manitol endovenoso, independentemente de o paciente apresentar anisocoria\n  D) manter o paciente com pressão arterial sistólica acima de 100 mmHg, hemoglobina acima de 7 g/dL, pressão arterial de oxigênio maior que 100 mmHg, pressão arterial de gás carbônico entre 35 e 40 mmHg e decúbito elevado e iniciar infusão de manitol endovenoso caso o paciente apresente anisocoria [GABARITO]\n  E) manter o paciente com pressão arterial sistólica acima de 100 mmHg, hemoglobina acima de 7 g/dL, pressão arterial de oxigênio maior que 100 mmHg, pressão arterial de gás carbônico entre 35 e 40 mmHg e decúbito elevado e iniciar infusão de manitol endovenoso, independentemente de o paciente apresentar anisocoria",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: No TCE grave, mantenha a PaCO2 na faixa normal (35-40 mmHg) para evitar isquemia cerebral por vasoconstrição, e reserve o manitol apenas para casos com sinais claros de herniação (anisocoria).\n\n****Alternativa Correta** (D)**: O manejo clínico do TCE grave visa prevenir lesões secundárias mantendo a pressão de perfusão cerebral adequada. A PaCO2 deve ser m"
+  },
+  {
+    "id": 2457,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "topic": "Sistema Único de Saúde - Cirurgia Avaliação Inicial",
+    "stem": "A respeito da correta exposição do paciente na avaliação primária do atendimento ao politraumatizado, assinale a alternativa incorreta.",
+    "alternatives": "  A) Deve-se retirar toda a roupa do paciente.\n  B) Deve-se rodá-lo em bloco, idealmente com dois auxiliares, e prestar atenção em seu dorso, procurando outras lesões.\n  C) Nos ferimentos penetrantes por arma de fogo, deve-se sempre se preocupar com orifícios de entrada e saída que possam ajudar a entender os trajetos.\n  D) Em pacientes queimados, a retirada das roupas ajuda a cessar o processo de queimadura.\n  E) A prevenção de hipotermia só tem valor nos locais de clima frio caso a sala de trauma não seja aquecida adequadamente. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: A prevenção da hipotermia é obrigatória e salva vidas em TODOS os pacientes com trauma grave, independentemente da temperatura ambiente ou da climatização da sala.\n\n****Alternativa Correta** (E)**: A alternativa está incorreta e, portanto, é o gabarito da questão. A hipotermia faz parte da temida Tríade da Morte no trauma (junto com acidose e coagulopatia)"
+  },
+  {
+    "id": 2458,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+    "topic": "Sistema Único de Saúde - Cirurgia Hérnia Inguinal",
+    "stem": "Um homem de cinquenta anos de idade, com índice de massa corporal de 27 kg/m², realizou tomograa de abdome, há cerca de seis meses, por dor lombar. Na ocasião, foi feito o diagnóstico de ureterolitíase, que foi tratada. Além disso, foi vista, na tomograa, uma hérnia inguinal do lado esquerdo. O paciente não tem nenhuma queixa relacionada à hérnia e ela só é notada ao exame físico durante a manobra de Valsalva, em que é palpado o anel inguinal externo. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor conduta.",
+    "alternatives": "  A) hernioplastia inguinal com tela, por via anterior\n  B) hernioplastia inguinal sem tela, por via anterior\n  C) hernioplastia inguinal por laparoscopia transabdominal pré-peritoneal\n  D) hernioplastia inguinal por laparoscopia totalmente extraperitoneal\n  E) informar ao paciente que a hérnia inguinal assintomática não precisa ser operada [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Hérnia inguinal totalmente assintomática não tem indicação de cirurgia profilática imediata; a conduta padrão ouro atual é a observação clínica vigilante (*watchful waiting*).\n\n****Alternativa Correta** (E)**: De acordo com as diretrizes internacionais, pacientes masculinos com hérnias inguinais totalmente assintomáticas devem ser manejados com observação "
+  },
+  {
+    "id": 2459,
+    "current_area": "Cirurgia",
+    "current_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "topic": "Sistema Único de Saúde - Cirurgia Colelitíase",
+    "stem": "Uma mulher de 45 anos de idade, obesa e diabética, fez ultrassonograa de rotina, que mostrou um cálculo de 1 cm na vesícula biliar. É totalmente assintomática. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor conduta para a paciente.",
+    "alternatives": "  A) repetir a ultrassonografia em seis meses\n  B) tomografia computadorizada de abdome\n  C) ressonância nuclear magnética de abdome\n  D) colecistectomia [GABARITO]\n  E) observação clínica e procurar o cirurgião caso se torne sintomática",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Colelitíase assintomática geralmente não se opera, MAS pacientes com diabetes mellitus ou vesícula em porcelana têm indicação formal de colecistectomia profilática.\n\n****Alternativa Correta** (D)**: Embora a maioria dos pacientes com cálculos biliares assintomáticos apenas realize acompanhamento clínico, o diabetes mellitus é uma exceção clássica. Paciente"
+  },
+  {
+    "id": 2460,
+    "current_area": "Cirurgia",
+    "current_subtema": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "topic": "Sistema Único de Saúde - Cirurgia Doença Hemorroidária",
+    "stem": "Uma mulher de 36 anos de idade, sem comorbidades, procura assistência médica, alegando ter hemorroidas. Tem um hábito intestinal regular, vai ao banheiro a cada dois dias e nega fezes endurecidas e diculdade de evacuação. Não tem antecedente familiar de câncer colorretal. No último mês, teve um episódio de constipação e, após evacuar, notou sangue no papel higiênico. Ao exame proctológico, havia hemorroidas internas não exteriorizadas. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor orientação para a paciente.",
+    "alternatives": "  A) dieta laxativa [GABARITO]\n  B) dieta laxativa e colonoscopia\n  C) dieta laxativa e hemorroidectomia à Milligan-Morgan\n  D) dieta laxativa e hemorroidectomia com grampeamento\n  E) dieta laxativa e tratamento tópico com policresuleno e anestésico",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Sangramento anal indolor associado a hemorroidas internas grau I após episódio de constipação resolve-se com ajuste dietético para evitar fezes endurecidas.\n\n****Alternativa Correta** (A)**: A paciente apresenta doença hemorroidária grau I (hemorroidas internas que sangram, mas não prolapsam). O tratamento inicial padrão é clínico, baseado no aumento da in"
+  },
+  {
+    "id": 2461,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "topic": "Sistema Único de Saúde - Cirurgia Trauma Abdominal Penetrante",
+    "stem": "Um rapaz de dezoito anos de idade envolveu-se em uma briga, sendo agredido com uma facada no abdome. Há um orifício no hipocôndrio direito de cerca de 2 cm. O paciente apresenta-se com frequência cardíaca de 72 bpm, pulso amplo e cheio, corado e com tempo de enchimento capilar menor que 2 segundos. No exame físico do abdome, não há sinais de peritonite e há dúvida com relação à penetração na cavidade. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor conduta para o paciente.",
+    "alternatives": "  A) laparoscopia\n  B) laparotomia mediana\n  C) exploração da ferida, em campo estéril, sob anestesia local [GABARITO]\n  D) tomografia de abdome\n  E) observação",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Ferimento por arma branca em paciente estável e sem peritonite, mas com dúvida de penetração peritoneal, resolve-se com a exploração local da ferida sob anestesia.\n\n****Alternativa Correta** (C)**: Diante de um ferimento penetrante por arma branca com paciente hemodinamicamente estável e abdome sem sinais de peritonite, o primeiro passo quando há dúvida se"
+  },
+  {
+    "id": 2462,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Raquimedular (TRM) e Lesões Vertebrais",
+    "topic": "Sistema Único de Saúde - Cirurgia Trauma Raquimedular e Fraturas da Coluna Vertebral",
+    "stem": "Um homem de 53 anos de idade foi levado ao pronto-socorro pelo resgate, em prancha longa e com colar cervical, após colidir com a sua motocicleta em um veículo parado. Tem suas vias aéreas pérvias, o colar cervical está bem colocado, está eupneico, seu tórax expande, bilateralmente, de maneira simétrica, há murmúrios vesiculares presentes em todos os campos pulmonares, sua frequência cardíaca é de 92 bpm, seu pulso é amplo e cheio, sua pressão arterial é de 120 x 70 mmHg e sua perfusão periférica está preservada. Ele usava capacete no momento do acidente, apresenta-se com Glasgow de 15, não ingeriu bebida alcoólica e nem fez uso de drogas ilícitas. Há fratura exposta da perna direita, com desvio. Com base nesse caso hipotético, assinale a alternativa correta quanto à retirada do colar cervical.",
+    "alternatives": "  A) Caso o paciente não apresente nenhuma deformidade na coluna, nenhum deficit nervoso e, após palpação cervical e movimentação ativa do pescoço, nenhuma dor, o colar poderá ser retirado.\n  B) Pode ser retirado, uma vez que o paciente não tem mecanismo para lesão de coluna cervical.\n  C) Só poderá ser retirado após um exame físico realizado por ortopedista ou neurocirurgião.\n  D) Deveria ter sido retirado na avaliação primária, juntamente com a avaliação da via aérea.\n  E) Só poderá ser retirado após o exame de imagem da coluna cervical. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: A presença de qualquer dor distrativa grave (como uma fratura exposta de membro) impede a avaliação clínica segura da coluna cervical, tornando obrigatório o uso de exames de imagem.\n\n****Alternativa Correta** (E)**: O paciente apresenta uma fratura exposta de perna, o que constitui uma clássica lesão distrativa. Dor intensa em outros locais do corpo masca"
+  },
+  {
+    "id": 2463,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "topic": "Sistema Único de Saúde - Cirurgia Tamponamento Cardíaco",
+    "stem": "Uma mulher de 35 anos de idade chegou ao pronto-socorro após ter recebido uma facada no precórdio. Encontra-se muito ansiosa e agitada. A equipe de cirurgia do hospital e o centro cirúrgico foram prontamente acionados. Sua via aérea e sua ventilação estão preservadas. Ela se apresenta taquicárdica (130 bpm), com pressão arterial de 90 x 70 mmHg e com abafamento de bulhas à ausculta cardíaca. O FAST é positivo no saco pericárdico. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor conduta imediata.",
+    "alternatives": "  A) solicitar ecocardiograma para confirmar a presença de líquido no pericárdio\n  B) pericardiocentese de alívio\n  C) transferir a paciente para o centro cirúrgico, para toracotomia esquerda [GABARITO]\n  D) angiotomografia de tórax\n  E) intubação orotraqueal, tipagem sanguínea e transfusão de concentrados de hemácias tipo O negativo",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Tríade de Beck + FAST positivo em paciente com ferimento precordial significa tamponamento cardíaco traumático; a conduta de urgência é a toracotomia no centro cirúrgico.\n\n****Alternativa Correta** (C)**: A paciente apresenta um quadro clássico de tamponamento cardíaco decorrente de ferimento penetrante por arma branca no precórdio, evidenciado pela Tríade"
+  },
+  {
+    "id": 2464,
+    "current_area": "Cirurgia",
+    "current_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "topic": "Sistema Único de Saúde - Cirurgia Colecistite Aguda Alitiásica",
+    "stem": "Um homem de setenta anos de idade, portador de doença de Chagas e internado na UTI por insuciência cardíaca congestiva (tem fração de ejeção de 25% no ecocardiograma), começou a queixar-se de dor no hipocôndrio direito. Realizou, então, um ultrassom de abdome, que mostrou vesícula biliar de paredes espessadas, hipodistendida e sem cálculos, e hepatomegalia. Ao exame físico, ele apresentava dor no hipocôndrio direito e sinal de Murphy negativo. Seus exames laboratoriais não mostravam aumento de bilirrubinas nem leucocitose. Com base nesse caso hipotético, assinale a alternativa correta.",
+    "alternatives": "  A) Trata-se de colecistite aguda e a melhor conduta é o tratamento clínico com antibióticos.\n  B) Trata-se de colecistite aguda e a melhor conduta é a colecistostomia.\n  C) Trata-se de colecistite aguda e a melhor conduta é a colecistectomia aberta.\n  D) Trata-se de colecistite aguda e a melhor conduta é a colecistectomia videolaparoscópica.\n  E) O paciente não fecha critérios para colecistite aguda. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Espessamento de parede vesicular sem cálculos e sem Murphy positivo em paciente com ICC grave é congestão sistêmica, não colecistite.\n\n****Alternativa Correta** (E)**: O paciente apresenta insuficiência cardíaca congestiva descompensada (FE 25%), o que provoca aumento da pressão venosa central e congestão hepática passiva (explicando a hepatomegalia e a do"
+  },
+  {
+    "id": 2465,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Sistema Único de Saúde - Cirurgia Fissuras Anais",
+    "stem": "Entre as alternativas a seguir, assinale aquela que apresenta uma alteração para a qual, ao exame proctológico, está indicado o uso de pomada tópica de Diltiazen a 2% na região anal.",
+    "alternatives": "  A) sangramento anal com dor contínua há 8 semanas, associado à presença de plicoma, ulceração na linha média anterior, hipertonia esfincteriana e papila hipertrófica [GABARITO]\n  B) sangramento anal sem dor há 6 semanas, associado à presença de abaulamento perianal com saída de secreção purulenta e ulceração na linha média posterior\n  C) sangramento anal sem dor há 3 semanas, associado à presença de abaulamento anal durante as evacuações que regride espontaneamente\n  D) sangramento anal com dor durante as evacuações há 3 semanas, associado à presença de ulceração superficial na linha média posterior e papila hipertrófica\n  E) sangramento anal com incômodo local há 8 semanas, associado à presença de múltiplas lesões verrucosas na margem anal",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Fissura anal crônica cursa com hipertonia esfincteriana e tríade clássica (plicoma, papila hipertrófica e úlcera), sendo tratada clinicamente com bloqueadores de canais de cálcio tópicos como o diltiazem.\n\n****Alternativa Correta** (A)**: O quadro descreve com precisão uma fissura anal crônica: sintomas prolongados (há 8 semanas), dor contínua, sangramento"
+  },
+  {
+    "id": 2466,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Fatores Favoráveis e Desfavoráveis para Fechamento de Fístulas Intestinais",
+    "stem": "Assinale a alternativa que apresenta os fatores que favorecem a perpetuação das fístulas do trato digestivo.",
+    "alternatives": "  A) anemia, fístulas com alto débito, obstrução a jusante e fístulas crônicas [GABARITO]\n  B) desnutrição, doença inflamatória intestinal, obstrução à montante e trajeto curto da fístula\n  C) fístulas agudas, com baixo débito, obstrução a jusante e com múltiplas abordagens\n  D) infecção no local da fístula, doença inflamatória intestinal, fístulas agudas e com baixo débito\n  E) desnutrição, fístulas labiadas, localizadas no trato digestivo baixo e obstrução à montante",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Lembre do mnemônico FRIEND para fatores que impedem o fechamento de fístulas: obstrução distal (a jusante), alto débito, infecção, epitelização, radiação e neoplasia.\n\n****Alternativa Correta** (A)**: Os fatores que dificultam o fechamento espontâneo de uma fístula digestiva incluem condições sistêmicas desfavoráveis, como a desnutrição e a anemia (que pre"
+  },
+  {
+    "id": 2467,
+    "current_area": "Cirurgia",
+    "current_subtema": "Cicatrização, Tratamento de Feridas, Enxertos e Retalhos",
+    "topic": "Sistema Único de Saúde - Cicatrização de Feridas",
+    "stem": "Uma mulher de 55 anos de idade foi submetida a reconstrução mamária com músculo reto abdominal (TRAM) bilateral após mastectomia radical. Está em programação de radioterapia pós-operatória. Com base nesse caso clínico, assinale a alternativa correta, quanto à cicatrização de feridas dessa paciente.",
+    "alternatives": "  A) A presença de leucócitos com contagem de 100 por centímetro quadrado retarda a cicatrização de feridas.\n  B) A denervação tem um efeito deletério na contração da ferida e na epitelização.\n  C) Quimioterapia iniciada 10 a 14 dias após a cirurgia tem pouco efeito sobre o estado final da cicatrização.\n  D) A isquemia tecidual é o principal componente do dano tecidual causado pela irradiação. [GABARITO]\n  E) A radioterapia pós-operatória deve ser adiada por, pelo menos, 4 a 6 meses após a cirurgia, para diminuir a incidência de complicações da ferida.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A radioterapia causa fibrose e hipóxia tecidual crônica primariamente por induzir dano vascular progressivo (endarterite obliterante).\n\n****Alternativa Correta** (D)**: A principal alteração anatomopatológica e fisiopatológica tardia induzida pela radiação nos tecidos moles é a isquemia tecidual, decorrente de uma endarterite obliterante dos pequenos e méd"
+  },
+  {
+    "id": 2468,
+    "current_area": "Cirurgia",
+    "current_subtema": "Técnica Operatória, Diérese, Hemostasia e Síntese (Fios Cirúrgicos)",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Tipos de Sutura e Suas Principais Características Fios de Sutura Materiais e Técnicas de Sutura",
+    "stem": "Nos ferimentos na face, é preferível a sutura por pontos simples e separados, utilizando pontos simples invertidos nos planos profundos, a m de evitar a tensão da sutura nal da pele. Para os planos profundos, dá ‑ se preferência aos os absorvíveis, como o monocryl® 4 ‑ 0, enquanto que, na pele, utilizam ‑ se os inabsorvíveis, como o mononylon® 3 ‑ 0. Os pontos de suturas devem ser realizados próximos às bordas da ferida, e não devem causar tensão tecidual, que pode resultar em isquemia e cicatrizes perpendiculares à ferida, por necrose tissular na área contida pelo fio. Em relação aos ferimentos corto ‑ contusos na face, é correto afirmar",
+    "alternatives": "  A) A sutura deve ser feita com pontos contínuos.\n  B) Não deve ser realizado sutura nos planos profundos.\n  C) Os pontos de sutura devem ser realizado distantes 1 cm da borda da ferida para não causar tensão tecidual\n  D) Na pele, deve ser usado mononylon® 5 ‑ 0 ou 6 ‑ 0. [GABARITO]\n  E) As cicatrizes perpendiculares à ferida não têm relação com o tipo de ponto, e, sim, com a gravidade do ferimento.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Na face, priorize fios inabsorvíveis finos (mononylon 5-0 ou 6-0) e pontos próximos às bordas para minimizar marcas e garantir excelente resultado estético.\n\n****Alternativa Correta** (D)**: Devido à fina espessura da pele da face e à necessidade de minimizar a reação inflamatória e marcas cicatriciais (\"trilho de trem\"), utilizam-se fios inabsorvíveis mon"
+  },
+  {
+    "id": 2469,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+    "topic": "Sistema Único de Saúde - Hérnia Inguinal Fisiopatologia Exame Físico e História Clínica",
+    "stem": "Em relação às hérnias inguinocrurais em adultos, julgue os itens a seguir. I. O tratamento cirúrgico é indicado para homens sintomáticos com hérnia inguinocrural. II. O tratamento cirúrgico é indicado para mulheres não gestantes com hérnia inguinocrural, seja ela sintomática ou assintomática. III. O diagnóstico da hérnia inguinocrural deve ser feito pelo exame clínico. IV. O ultrassom deve ser o exame inicial em casos em que a história clínica é condizente com hérnia e o seu exame físico é vago. V. Os diagnósticos diferenciais incluem linfonodomegalia, hérnia incisional, hidrocele e pubeíte. Assinale a alternativa correta.",
+    "alternatives": "  A) Apenas os itens I e III estão certos.\n  B) Apenas os itens II e V estão certos.\n  C) Apenas os itens I, II e IV estão certos.\n  D) Apenas os itens III, IV e V estão certos.\n  E) Todos os itens estão certos. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Hérnia crural em mulheres tem altíssimo risco de encarceramento, tornando a cirurgia obrigatória mesmo se assintomática.\n\n****Alternativa Correta** (E)**: Todos os itens estão corretos. Homens sintomáticos têm indicação cirúrgica eletiva; mulheres não gestantes com hérnias inguinocrurais têm indicação operatória mandatória devido ao risco elevado de estran"
+  },
+  {
+    "id": 2470,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Fatores de Risco Exame Físico e História Clínica Apresentação Clínica",
+    "stem": "Um paciente de 34 anos de idade queixou ‑ se de dor inguinal na região esquerda, que piorava após a pratica esportiva. Ele negou comorbidades. Apresentava hábito intestinal diário. Ao exame físico, foi evidenciada a presença de hérnia inguinal à esquerda pequena e redutível. Com base nessa situação hipotética, assinale a alternativa incorreta .",
+    "alternatives": "  A) O tratamento cirúrgico está indicado.\n  B) O motivo para definir o momento da cirurgia não é o risco de encarceramento ou estrangulamento, mas, sim, o prejuízo na qualidade de vida.\n  C) Diagnósticos diferenciais incluem linfonodomegalia e hidrocele.\n  D) O melhor exame de imagem para o diagnóstico é a tomografia computadorizada. [GABARITO]\n  E) Desde que o cirurgião domine as técnicas anestésica e cirúrgica, a melhor anestesia para se operar hérnia inguinal por inguinotomia é a anestesia local.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Suspeita de hérnia com exame físico inconclusivo? O exame de imagem inicial de escolha é a ultrassonografia dinâmica, não a tomografia.\n\n****Alternativa Correta** (D)**: A alternativa é incorreta porque o exame de imagem inicial de escolha para avaliação de hérnias inguinais na vigência de exame físico duvidoso é a ultrassonografia da parede abdominal com "
+  },
+  {
+    "id": 2471,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "topic": "Sistema Único de Saúde - Avaliação Inicial Vias aéreas Ventilação e Choque Avaliação Inicial Cenário Atual e Princípios Básicos do ATLS",
+    "stem": "Um paciente, vítima de acidente de moto contra anteparo xo a 60 km/h, com capacete, foi levado pelos bombeiros à sala de trauma, em prancha longa e com colar cervical. Ao exame físico, apresentava frequência cardíaca (FC) de 110 bpm, pressão arterial (PA) de 100 mmHg × 70 mmHg, bacia estável, fratura exposta em coxa direita, com sangramento e pulsos distais de membro inferior direito diminuídos; havia presença de sangue em orofaringe. Chegou com olhos fechados, porém os abre ao ser chamado pelo nome. Localiza dor quando avaliada sua movimentação e expressa palavras desconexas e confusão mental. Tem equimose palpebral bilateral. À ausculta respiratória, os murmúrios vesiculares são presentes; sem ruídos adventícios. Nesse caso hipotético, a sequência mais adequada para identicação e resolução dos problemas desse paciente, segundo os preceitos da avaliação primaria do ATLS, é",
+    "alternatives": "  A) intubação orotraqueal, uma vez que o Glasgow é 8, acesso venoso periférico em membros superiores com início de infusão de solução de ringer lactato aquecido, ligadura dos vasos que apresentam sangramento na fratura exposta.\n  B) intubação nasotraqueal, uma vez que tem sangue na orofaringe, acesso venoso central com início de infusão de solução de ringer lactato aquecido, tamponamento com curativo de sangramento da fratura exposta.\n  C) aspirar sangue da orofaringe e aporte de oxigênio sob máscara a 12 L/min, acessos venosos periféricos em membros superiores com início de infusão de solução de ringer lactato aquecido, alinhamento de membro inferior direito fraturado na tentativa de melhorar sua perfusão e tamponamento do sangramento da fratura exposta com curativo. [GABARITO]\n  D) intubação orotraqueal, uma vez que Glasgow é 10, dissecção de veia safena do membro não fraturado (esquerdo) e início de infusão de solução de ringer lactato aquecido, ligadura dos vasos com sangramento da fratura exposta.\n  E) aspirar sangue de orofaringe e aporte de oxigênio sob máscara a 12 L/min, acesso venoso central com início de infusão de solução de ringer lactato aquecido, tamponamento do sangramento dos vasos da fratura exposta com curativo.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Glasgow não é igual a 8? Não intube por critério neurológico isolado. Na circulação com sangramento externo, faça compressão direta e alinhe fraturas para restaurar a perfusão.\n\n****Alternativa Correta** (C)**: Na avaliação primária pelo ATLS, a via aérea deve ser limpa (aspiração de sangue em orofaringe) e ofertado oxigênio, sem indicação de intubação ime"
+  },
+  {
+    "id": 2472,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Hierarquização do Atendimento e Avaliação Primária",
+    "stem": "Um homem de 27 anos é encaminhado à sala de emergência após colisão de carro contra poste, em alta velocidade. Apresenta-se agitado, com fala desconexa e entrecortada. A equipe pré-hospitalar refere que observou equimose periorbital e um grande ferimento, com exposição óssea, no membro inferior esquerdo. A frequência respiratória é de 35 irpm, frequência cardíaca de 138 bpm, PA: 80 x 50 mmHg, saturação de oxigênio de 85% em ar ambiente. À inspeção inicial, observou-se turgência jugular com desvio traqueal para a direita. Assimetria torácica às custas de hiperdistensão do hemitórax esquerdo e murmúrio vesicular abolido nessa região. O cirurgião realiza punção de alívio no segundo espaço intercostal à esquerda. Com base no cenário descrito e nos princípios do atendimento inicial ao trauma, avalie a conduta do cirurgião.",
+    "alternatives": "  A) A toracostomia foi precipitada, pois o diagnóstico não foi conrmado por exames de imagem, o que impediu o tratamento definitivo da condição de base.\n  B) A prioridade, nesse caso, seria a intubação orotraqueal, pois o paciente apresenta rebaixamento do nível de consciência, indicando proteção de vias aéreas pelo risco de broncoaspiração.\n  C) O tratamento deveria ser iniciado com reposição volêmica vigorosa, pois a alteração do nível de consciência provavelmente tem como etiologia a hipovolemia.\n  D) A resposta verbal do paciente mostra perviedade das vias aéreas, podendo adiar a abordagem das vias aéreas e respiratórias. Deve-se, em seguida, atentar para o risco neurológico frente aos relatos da equipe pré-hospitalar.\n  E) O tratamento foi adequado, pois foi identicada e tratada a ameaça imediata à vida do paciente antes de prosseguir com a avaliação das demais lesões. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Pneumotórax hipertensivo é um diagnóstico estritamente clínico e representa uma emergência médica que exige descompressão imediata antes de qualquer exame ou outra conduta.\n\n****Alternativa Correta** (E)**: O paciente apresenta um quadro clássico de pneumotórax hipertensivo (dispneia grave, hipóxia, taquicardia, choque obstrutivo, turgência jugular, desvio"
+  },
+  {
+    "id": 2473,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Medidas Auxiliares na Avaliação Secundária Exames Complementares",
+    "stem": "Menino, 10 anos de idade, caiu em pista de skate, enquanto descia rampa de cerca de 1 metro de altura. Perdeu a consciência de imediato, foi transportado para a Emergência, em carro particular. Apresenta laceração em couro cabeludo, em região parietal direita e fratura com desvio em antebraço direito. Foi colocado colar cervical, a expansão torácica é simétrica, com ausculta pulmonar e cardíaca sem alterações. O abdome é ácido, sem massas palpáveis. Tem FC = 110 bpm, FR = 24 mrm, PA 100/70 mmHg, SatO₂ 95%, pulsos palpáveis, Tec = 2 seg. Tem pupilas isocóricas e fotorreagentes, abre os olhos ao ser chamado, está confuso e retira o braço quando se toca o local da fratura. Foram puncionados 2 acessos venosos. A seguir, além de avaliação laboratorial da função renal, indica-se a realização de",
+    "alternatives": "  A) tomografia de crânio e de coluna cervical. [GABARITO]\n  B) tipagem sanguínea e iniciar soro de manutenção com volume de 1/3 da necessidade diária.\n  C) sequência rápida para intubação nasotraqueal.\n  D) infusão de soro a 25 graus para diminuir o consumo de oxigênio.\n  E) inserção de cateter para monitoração de pressão intracraniana e redução da fratura de antebraço em centro cirúrgico.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Trauma cranioencefálico com perda de consciência ou confusão mental na faixa pediátrica exige tomografia de crânio imediata conforme as diretrizes do PECARN.\n\n****Alternativa Correta** (A)**: A criança sofreu um trauma de impacto moderado com perda transitória de consciência e apresenta-se confusa (Glasgow estimado em 13). De acordo com o PECARN e o ATLS, "
+  },
+  {
+    "id": 2474,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Avaliação e Manejo Inicial das Vias Aéreas Vias Aéreas Definitivas Não Cirúrgicas",
+    "stem": "Assinale a alternativa que apresenta os medicamentos empregados para a intubação orotraqueal em um adulto politraumatizado.",
+    "alternatives": "  A) succinilcolina 100 mg seguida do etomidato 3 g/kg\n  B) etomidato 0,3 mg/kg seguido da succinilcolina 1 a 2 mg/kg [GABARITO]\n  C) etomidato 3 g/kg seguido da succinilcolina 100 mg\n  D) etomidato 70 g seguido da succinilcolina 100 mg\n  E) succinilcolina 1 mg a 2 mg/kg seguido do etomidato 0,5 mg/kg",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Na Sequência Rápida de Intubação (SRI), sempre administre o agente indutor sedativo antes do bloqueador neuromuscular.\n\n****Alternativa Correta** (B)**: O protocolo padrão de Sequência Rápida de Intubação (SRI) no ATLS emprega um agente indutor hemodinamicamente estável, como o etomidato na dose de 0,3 mg/kg, seguido imediatamente por um bloqueador neuromu"
+  },
+  {
+    "id": 2475,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Avaliação e Manejo Inicial das Vias Aéreas",
+    "stem": "Uma jovem de 24 anos é admitida na sala de trauma após queda de motocicleta em alta velocidade. Está sonolenta, desorientada em tempo e espaço e apresenta hálito etílico. Responde com poucas palavras aos questionamentos da equipe assistente. Apresenta escoriações em face e epistaxe bilateral ativa. Ao exame, observam-se esforço respiratório leve e diculdade para falar. A equipe pré-hospitalar aplicou o colar cervical rígido ainda na cena do trauma, mantendo-o durante todo o transporte e realizou a remoção do capacete (que estava rachado) a quatro mãos. Atualmente, a saturação de oxigênio se encontra em 87%. Considerando a abordagem inicial da via aérea dessa paciente, assinale a alternativa correta.",
+    "alternatives": "  A) A manobra de tração da mandíbula ( jaw-thrust ) é a maneira apropriada de manejo da via aérea nesse momento, associada à oxigenioterapia suplementar, máscara acoplada e saco reservatório não reinalante. [GABARITO]\n  B) Realizar exame físico da região cervical e, caso não haja dor à palpação da linha média, remover o colar cervical que aparenta estar causando dificuldades ventilatórias.\n  C) Administrar oxigênio suplementar, preferencialmente, com cânula nasofaríngea, para, posteriormente, avaliar o quadro neurológico que aparenta estar alterado devido à hipóxia.\n  D) A manobra de elevação do queixo ( chin-lift ) deve ser realizada e posteriormente avaliar se houve melhora do padrão respiratório e da saturação de oxigênio.\n  E) A via aérea somente pode ser abordada após a avaliação radiológica completa da coluna cervical e do crânio, pois caso seja preciso realizar a intubação orotraqueal, a sedação necessária poderia mascarar sintomas neurológicos.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Em vítimas de trauma com suspeita de lesão cervical, a desobstrução das vias aéreas deve ser feita sem estender o pescoço, utilizando a manobra de tração da mandíbula (*jaw-thrust*).\n\n****Alternativa Correta** (A)**: A paciente apresenta rebaixamento do nível de consciência, trauma facial e hipoxemia. Como há suspeita de lesão na coluna cervical por aciden"
+  },
+  {
+    "id": 2476,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "topic": "Sistema Único de Saúde - Via Aérea Definitiva Vias Aéreas Alternativas Não Definitivas",
+    "stem": "Fernanda é uma médica recém ‑ formada. Ela estava trabalhando em uma unidade de resgate avançado com todos os materiais disponíveis e foi chamada para atender um paciente adulto encontrado caído na via pública, o qual tinha indicação de intubação orotraqueal. Após a utilização da medicação pré ‑ intubação, Fernanda não conseguiu a via aérea denitiva após três tentativas e o paciente começou a desaturar. Com base nessa situação hipotética, assinale a alternativa que apresenta a conduta a ser adotada nesse momento.",
+    "alternatives": "  A) realizar a manobra de Sellick e instalar cateter de 2 a 12 litros/minuto\n  B) realizar uma cricotireoidostomia por punção\n  C) realizar uma cricotireoidostomia cirúrgica\n  D) utilizar combitubo (dispositivo extraglótico) [GABARITO]\n  E) tentar novamente a intubação, hiperextendendo o pescoço e colocando um coxin abaixo dos ombros",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Diante do cenário de falha na intubação e falha na oxigenação (\"não consigo intubar, não consigo oxigenar\"), o uso de dispositivos extraglóticos é o passo de resgate imediato antes de recorrer à via aérea cirúrgica.\n\n****Alternativa Correta** (D)**: Em uma situação de via aérea difícil em que a intubação falhou e o paciente está desaturando, o algoritmo es"
+  },
+  {
+    "id": 2477,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "topic": "Sistema Único de Saúde - Respiração e Ventilação Vias Aéreas Definitivas Não Cirúrgicas Avaliação inicial do paciente em choque",
+    "stem": "Em relação ao paciente politraumatizado, assinale a alternativa correta.",
+    "alternatives": "  A) Em caso de retenção urinária, com hematoma perianal, deve ser realizada uma sondagem vesical de demora imediatamente.\n  B) A diurese esperada em um adulto é de 0,5 mL/kg/h. [GABARITO]\n  C) Em crianças menores de seis anos de idade, se não for conseguido o acesso periférico, a segunda opção deve ser o acesso central.\n  D) Na intubação orotraqueal de um adulto, a sequência rápida deve ser etomidato (3 mg/kg) e succinilcolina (1 g/kg).\n  E) Na reposição volêmica inicial no paciente politraumatizado, a solução de preferência é o soro fisiológico.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: No politraumatizado, diurese adequada é 0,5 mL/kg/h em adultos e 1 mL/kg/h em crianças, enquanto a solução de escolha para ressuscitação é o Ringer Lactato.\n\n****Alternativa Correta** (B)**: A monitorização da diurese é um excelente indicador de perfusão tecidual renal e da adequação da ressuscitação volêmica no trauma. A meta de débito urinário recomendad"
+  },
+  {
+    "id": 2478,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "topic": "Sistema Único de Saúde - Trauma Abdominal Fechado",
+    "stem": "Acerca do tratamento não operatório (TNO) no trauma abdominal fechado, assinale a alternativa correta.",
+    "alternatives": "  A) Grau da lesão é condição determinante para esse tratamento poder ser instituído.\n  B) Esse tratamento pode ser feito com diagnóstico ecográfico de lesão de vísceras parenquimatosas como fígado, baço ou rim.\n  C) Esse tratamento pode ser feito em pacientes cujo achado de tomografia ou ultrassom seja líquido livre sem lesão de víscera parenquimatosa, desde que o paciente esteja estável hemodinamicamente e sem sinais de peritonite.\n  D) Esse tratamento pode ser feito em pacientes estáveis hemodinamicamente, desde que o diagnóstico de lesão de víscera parenquimatosa seja feito através de exame de tomografia e que haja acompanhamento intensivo feito por equipe horizontal. [GABARITO]\n  E) Esse tratamento não é a melhor escolha para pacientes com lesão hepática grau III.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: O passaporte para o tratamento não operatório (TNO) no trauma abdominal fechado é a estabilidade hemodinâmica, associada à confirmação por tomografia e suporte intensivo.\n\n****Alternativa Correta** (D)**: O pré-requisito fundamental e indispensável para a indicação do TNO em lesões de vísceras parenquimatosas no trauma abdominal fechado é a estabilidade he"
+  },
+  {
+    "id": 2479,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Sistema Único de Saúde - Trauma Cervical Introdução",
+    "stem": "Um paciente, vítima de ferimento penetrante por arma branca em zona II cervical, foi levado ao pronto-socorro por transeuntes. A avaliação primária era a seguinte: vias aéreas pérvias; murmúrio vesicular presente bilateralmente; frequência cardíaca de 95 batimentos por minuto, tempo de enchimento capilar menor que 3 segundos, pulso cheio; pupilas isocóricas e fotorreagentes, escala de coma de Glasgow 15; ferimento em zona II cervical à direita de aproximadamente 2,0 cm, sem sangramento ativo, sem outros ferimentos. Não havia saída de ar do ferimento. Considerando esse caso clínico, assinale a alternativa correta, com relação à melhor conduta referente ao quadro clínico apresentado por esse paciente.",
+    "alternatives": "  A) O paciente deve ser submetido a exploração digital do ferimento; caso o músculo platisma tenha sido penetrado, o paciente deve ser submetido a endoscopia digestiva e ultrassom Doppler dos vasos cervicais, para avaliação de potenciais lesões relacionadas ao ferimento.\n  B) Mesmo estável hemodinamicamente, o paciente deve ser submetido a cervicotomia exploradora mandatória, uma vez que o ferimento se encontra em zona II cervical.\n  C) Na suspeita de penetração do músculo platisma, o paciente, uma vez estável e sem sinais de sangramento em atividade, deve ser submetido a exames de endoscopia digestiva alta, broncoscopia e arteriografia dos vasos cervicais, para descartar potenciais lesões relacionadas ao ferimento [GABARITO]\n  D) O paciente deve ser submetido a exploração digital do ferimento e, caso o músculo platisma tenha sido penetrado, está indicada a cervicotomia exploradora.\n  E) Uma vez que o paciente está estável, não apresenta sangramento ativo, nem saída de ar do ferimento, não é necessário realizar exames complementares nem cirurgia, podendo ser submetido apenas a sutura do ferimento e mantido em observação; caso permaneça bem, poderá receber alta hospitalar.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Ferimento cervical penetrante com platisma violado em paciente estável dispensa cirurgia imediata, mas exige investigação com EDA, broncoscopia e angiotomografia.\n\n****Alternativa Correta** (C)**: Diante de um ferimento cervical penetrante que ultrapassa o músculo platisma em um paciente hemodinamicamente estável e sem sinais duros de lesão, a conduta mode"
+  },
+  {
+    "id": 2480,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cervical e Fraturas Maxilofaciais",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Introdução Diagnóstico Clínico",
+    "stem": "No que diz respeito ao trauma cervical, assinale a alternativa correta.",
+    "alternatives": "  A) Uma radiografia cervical lateral de qualidade deve incluir da primeira (C1) à sétima (C7) vértebra cervical.\n  B) O choque neurogênico resulta da perda do tônus vasomotor e da inervação parassimpática do coração.\n  C) O resultado da perda do tônus vasomotor resulta na vasoconstrição dos vasos sanguíneos e, consequentemente, na hipertensão.\n  D) A paraplegia completa resulta de lesão ao nível da coluna cervical\n  E) Quando a coluna vertebral é lesada, a principal preocupação deve ser a possibilidade de insuficiência respiratória. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Lesão medular alta (acima de C5) compromete o nervo frênico e paralisa o diafragma, tornando a insuficiência respiratória a maior ameaça imediata.\n\n****Alternativa Correta** (E)**: Quando a coluna cervical é gravemente lesada, especialmente em níveis altos (acima de C5), ocorre o comprometimento da inervação do diafragma (nervo frênico originado em C3-C5),"
+  },
+  {
+    "id": 2481,
+    "current_area": "Cirurgia",
+    "current_subtema": "Princípios Gerais de Fraturas e Osteossíntese",
+    "topic": "Sistema Único de Saúde - Fratura de Base de Crânio Lesão Axonal Difusa Hematoma Extradural",
+    "stem": "Assinale a alternativa que apresenta a correspondência correta entre os elementos.",
+    "alternatives": "  A) concussão – alteração pós ‑ traumática transitória e reversível no status mental, como, por exemplo, perda de consciência ou memória, confusão mental que dura de segundos a minutos e, por definição arbitrária, com tempo < 6h, com ou sem amnésia, retrógrada ou anterógrada [GABARITO]\n  B) lesão axonal difusa – sinal de Battle\n  C) fratura de base de crânio – microrrupturas de axônios na substância branca, podendo ocorrer na síndrome do bebê sacudido\n  D) hematoma subdural – ruptura da artéria meníngea média\n  E) hematoma epidural – na TC, apresenta ‑ se com aspecto côncavo ‑ convexo, acompanhando a curvatura da calota craniana",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Concussão é a alteração neurológica funcional transitória (< 6h) sem lesão estrutural macroscópica visível.\n\n****Alternativa Correta** (A)**: A concussão cerebral caracteriza-se clinicamente como uma alteração pós-traumática transitória e plenamente reversível do estado mental (perda de consciência momentânea, confusão ou amnésia) com duração inferior a 6 "
+  },
+  {
+    "id": 2482,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Mecanismo de Trauma Classificação e Manifestações Clínicas Exames Complementares",
+    "stem": "Uma menina de 5 anos de idade foi levada ao pronto ‑ socorro pelos pais após sofrer uma queda de patinete. Os pais relatam que, no momento da queda, a criança estava sem capacete e bateu a cabeça. Na entrada do pronto ‑ socorro, a criança encontrava ‑ se irritada, um pouco sonolenta, e com algumas escoriações. Durante a avaliação, a menina apresentou episódios de vômitos. Com base nessa situação hipotética, assinale a alternativa que apresenta a conduta adequada para esse caso.",
+    "alternatives": "  A) alta hospitalar, orientando os pais a respeito da benignidade do caso\n  B) prescrever antieméticos, analgésico e hidratação\n  C) orientar retorno em 48 horas para reavaliação e realização de exames de imagem\n  D) encaminhamento para neurocirurgia de urgência\n  E) solicitar tomografia de crânio para avaliar possíveis lesões intracranianas [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Criança < 2 anos com TCE, ou qualquer criança com vômitos persistentes e alteração do estado mental (sonolência/irritabilidade), tem indicação formal de TC de crânio imediata conforme as diretrizes do PECARN.\n\n****Alternativa Correta** (E)**: De acordo com as diretrizes do PECARN (*Pediatric Emergency Care Applied Research Network*) para avaliação de traum"
+  },
+  {
+    "id": 2483,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Raquimedular (TRM) e Lesões Vertebrais",
+    "topic": "Sistema Único de Saúde - Trauma Raquimedular",
+    "stem": "Paciente de 35 anos de idade, masculino, vítima de acidente com colisão de sua moto contra um caminhão, politraumatizado, com suspeita de trauma raquimedular, foi levado ao hospital. Com base nesse caso clínico, assinale a alternativa correta, com relação ao trauma raquimedular.",
+    "alternatives": "  A) A associação de hipotensão e vasoconstrição caracteriza o choque medular.\n  B) A presença do reflexo bulbocavernoso afasta lesão medular.\n  C) A avaliação neurológica e funcional define o prognóstico, além de procurar apontar com exatidão o nível neurológico da lesão e o grau de comprometimento funcional. [GABARITO]\n  D) Em uma avaliação primária, deve-se identificar se a causa do choque é hipovolêmico ou neurogênico, embora o tratamento para ambos seja a administração de grande reposição volêmica.\n  E) O choque medular é uma disfunção autonômica que interfere na manutenção da estabilidade hemodinâmica, resultando em bradicardia, vasoconstrição, hipotensão e aumento da capacidade venosa a paralisia flácida.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Lembre-se: o choque neurogênico cursa com bradicardia e vasodilatação (hipotensão com pele quente e seca), enquanto o choque medular é um estado transitório de arreflexia e flacidez, não sendo um diagnóstico hemodinâmico.\n\n****Alternativa Correta** (C)**: A avaliação neurológica sistematizada — como o exame padronizado pela ASIA (*American Spinal Injury As"
+  },
+  {
+    "id": 2484,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento ao Paciente Queimado e Reposição Volêmica",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Manejo Préhospitalar Estimativa da Superfície Corpórea Queimada e Circulação Escarotomia Analgesia Profilaxia de Tromboembolismo Venoso Descompressão Gástrica Vacinação Antitetânica",
+    "stem": "Em relação às lesões térmicas, assinale a alternativa correta.",
+    "alternatives": "  A) O débito urinário deve ser de 0,5 ml/kg/h, independentemente da natureza da queimadura e idade do paciente.\n  B) Para o cálculo de área queimada irregular, utilizar a palma da mão do doente, excluindo ‑ se os dedos, que representará 1% da área corpórea queimada.\n  C) Logo após as queimaduras de segundo grau, quando a área de superfície corporal for maior que 10%, as bolhas devem ser rompidas e devem ser aplicadas compressas frias.\n  D) Nas queimaduras químicas provocadas por ácidos, agentes neutralizantes devem ser utilizados antes da irrigação com água.\n  E) A síndrome compartimental resulta da combinação da diminuição da elasticidade da pele com o aumento do edema dos tecidos moles. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Escara inelástica + edema volumoso pós-ressuscitação = síndrome compartimental, exigindo descompressão imediata via escarotomia.\n\n****Alternativa Correta** (E)**: A síndrome compartimental em queimados ocorre porque a pele queimada de espessura total torna-se rígida e inextensível (escara), atuando como um torniquete quando o tecido subjacente edematosa ma"
+  },
+  {
+    "id": 2485,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Sistema Único de Saúde - Tratamento Definitivo das Áreas Queimadas Critérios para Admissão em UTI e Unidade de Queimados",
+    "stem": "Henrique era o único médico de plantão no pronto ‑ socorro de um hospital sem cirurgião plástico e acabou de receber um paciente vítima de queimadura com piche nas duas mãos. Com base nessa situação hipotética, assinale a alternativa que apresenta o procedimento a ser realizado após a analgesia e a irrigação do ferimento abundantemente com água corrente de baixo fluxo por, pelo menos, vinte a trinta minutos.",
+    "alternatives": "  A) realizar a remoção do piche e manter o paciente nesse hospital\n  B) curativo estéril oclusivo e encaminhar para um serviço especializado [GABARITO]\n  C) aplicar agentes neutralizantes e encaminhar para um serviço especializado\n  D) manter as mãos para baixo por 48 horas, sem movimentá ‑ las, e encaminhar para um serviço especializado\n  E) deixar a região exposta, realizar antibioticoprofilaxia e manter o paciente nesse hospital",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Piche quente grudou na pele? Nunca arranque a seco! Resfrie, aplique substância graxa (como vaselina) para dissolver gradualmente e encaminhe para o especialista.\n\n****Alternativa Correta** (B)**: Nas queimaduras por piche ou asfalto quente, o material solidifica-se na pele. A remoção mecânica forçada causa avulsão da epiderme e perda tecidual adicional. A"
+  },
+  {
+    "id": 2486,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Exames de Imagem Abdome Agudo Cirúrgico Abdome Agudo Não Cirúrgico",
+    "stem": "A tomograa de abdome e pelve com contraste deve ser solicitada na suspeita clínica de algumas das enfermidades a seguir. Quais das enfermidades abaixo listadas, justica ‑ se a solicitação de tomograa de abdome e pelve com contraste endovenoso I. apendicite aguda retrocecal II. ureterolitíase III. diverticulite aguda complicada IV. pancreatite aguda V. colecistite aguda Assinale a alternativa correta.",
+    "alternatives": "  A) Somente os itens I, II, III e IV estão certos.\n  B) Somente os itens I, II, e V estão certos.\n  C) Somente os itens I, III e IV estão certos. [GABARITO]\n  D) Somente os itens II, III e V estão certos.\n  E) Todos os itens estão certos.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Ureterolitíase se investiga com TC *sem* contraste (para não mascarar o cálculo hiperdenso), e colecistite com ultrassom!\n\n****Alternativa Correta** (C)**: O uso de contraste endovenoso na tomografia é indicado em processos inflamatórios agudos para avaliar perfusão e complicações. A apendicite retrocecal (I) pode ser difícil de visualizar e o contraste aj"
+  },
+  {
+    "id": 2487,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Exames de Imagem Abdome Agudo Cirúrgico",
+    "stem": "Em relação ao abdome agudo (AA), é correto afirmar que",
+    "alternatives": "  A) apendicite aguda é um exemplo de AA infeccioso.\n  B) raios X de abdome não têm utilidade no AA perfurativo e obstrutivo, sendo substituído pela tomografia.\n  C) tomografia é o primeiro exame complementar que deve ser solicitado nos casos de AA hemorrágico\n  D) AA obstrutivo pode evoluir para AA perfurativo. [GABARITO]\n  E) raios X de abdome, ainda hoje, é um exame fundamental nos casos de exame AA vascular.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: O abdome agudo obstrutivo pode evoluir para perfuração devido à distensão severa e isquemia da parede intestinal.\n\n****Alternativa Correta** (D)**: O abdome agudo obstrutivo (AAO), quando não resolvido, causa distensão progressiva das alças intestinais a montante da obstrução. Essa distensão severa gera hipertensão intraluminal que compromete o retorno ven"
+  },
+  {
+    "id": 2488,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+    "topic": "Sistema Único de Saúde - Manifestações Clínicas e Exame Físico Exames Complementares",
+    "stem": "Paciente do sexo feminino, de 35 anos de idade, com queixa de dor abdominal há 5 dias, iniciada em epigastro, agora localizada em fossa ilíaca direita, associada a inapetência e febre não medida, está recebendo atendimento em um hospital. A paciente nega corrimento vaginal. Exames revelaram o seguinte: HB = 12,4; leucograma = 14.900, com desvio à esquerda; urina 1 com leucocitúria; e nitrito negativo. O exame físico revelou dor à palpação de fossa ilíaca direita, com defesa localizada neste quadrante. A respeito desse caso hipotético, assinale a alternativa correta.",
+    "alternatives": "  A) Trata-se de uma infecção de trato urinário; deve-se prescrever antibioticoterapia domiciliar e dar alta à paciente.\n  B) Trata-se de gastroenterite aguda, e a paciente, provavelmente, desenvolverá quadro diarreico nos próximos dias; o tratamento indicado no caso é antiespasmódico e hidratação.\n  C) Trata-se, provavelmente, de apendicite aguda, diagnóstico que pode ser confirmado por exame de tomografia. [GABARITO]\n  D) Trata-se de ureterolitíase; nesse caso, deve-se solicitar avaliação de urologia e dar alta da cirurgia geral.\n  E) Trata-se, certamente, de infecção ginecológica, devendo-se, nesse caso, prescrever antibiótico via oral e creme vaginal e dar alta hospitalar; caso a paciente apresente melhora dos sintomas, deve procurar avaliação de ginecologista.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Dor abdominal que migra do epigástrio para a fossa ilíaca direita, acompanhada de anorexia e leucocitose, é apendicite aguda até prova em contrário.\n\n****Alternativa Correta** (C)**: O quadro clínico descrito (dor abdominal migratória de epigástrio para fossa ilíaca direita, associada a inapetência, febre e leucocitose com desvio à esquerda) é clássico de "
+  },
+  {
+    "id": 2489,
+    "current_area": "Cirurgia",
+    "current_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "topic": "Sistema Único de Saúde - Manifestações Clínicas e Exame Físico",
+    "stem": "Uma mulher de 57 anos de idade estava obesa, diabética, hipertensa, dislipidêmica, com quadro de sete horas de evolução de dor abdominal em hipocôndrio direito, em cólica, com piora pós ‑ alimentar, associada a náuseas e vômitos. O ultrassom de abdômen demonstrava espessamento da parede da vesícula biliar > 5 mm. Com base nessa situação hipotética, assinale a alternativa que apresenta o sinal semiológico mais classicamente associado à patologia descrita.",
+    "alternatives": "  A) descompressão brusca positiva no ponto cístico\n  B) interrupção abrupta da inspiração, por dor, à compressão do ponto cístico [GABARITO]\n  C) defesa observada durante a palpação do ponto cístico\n  D) descompressão brusca positiva no ponto de Mcburney\n  E) macicez no espaço de Traube",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Dor biliar com mais de 6 horas e parede da vesícula espessada (> 5 mm) sela o diagnóstico de colecistite aguda, cujo sinal clássico é o de Murphy.\n\n****Alternativa Correta** (B)**: O quadro de dor biliar prolongada associado a náuseas, vômitos e espessamento da parede da vesícula biliar confirma colecistite aguda. O sinal semiológico patognomônico é o sina"
+  },
+  {
+    "id": 2490,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "topic": "Sistema Único de Saúde - Íleo Biliar Íleo Biliar",
+    "stem": "Assinale a alternativa que apresenta a definição correta de íleo biliar.",
+    "alternatives": "  A) É o extravasamento de bile para o peritôneo, decorrente da ruptura da vesícula biliar secundária a um cálculo obstruindo o infundíbulo da vesícula.\n  B) É a impactação de um cálculo biliar no trato gastrointestinal, após ter passado por uma fístula bilioentérica. [GABARITO]\n  C) É o termo usado quando ocorre a perfuração da vesícula biliar e o posterior extravasamento de bile durante a colecistectomia.\n  D) É a presença de abdome agudo obstrutivo funcional, devido à peritonite secundária à fístula bilioperitoneal.\n  E) É uma fístula bilientérica, normalmente colecistoduodenal, devido à proximidade das estruturas.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Íleo biliar é sinônimo de obstrução mecânica por cálculo biliar que migrou via fístula bilioentérica.\n\n****Alternativa Correta** (B)**: O íleo biliar é uma obstrução mecânica do intestino delgado causada pela impactação intraluminal de um cálculo biliar volumoso (geralmente no íleo terminal). O cálculo atinge o lúmen intestinal após migrar da vesícula bili"
+  },
+  {
+    "id": 2491,
+    "current_area": "Cirurgia",
+    "current_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "topic": "Sistema Único de Saúde - Manifestações Clínicas e Exame Físico Gravidade",
+    "stem": "Quanto à Pêntade de Reinolds, assinale a alternativa correta.",
+    "alternatives": "  A) Seus sintomas são febre, icterícia, dor em hipocôndrio direito, hipotensão e vômitos.\n  B) Seus sintomas são febre, icterícia, dor em hipocôndrio direito, rebaixamento do nível de consciência e hipotensão. [GABARITO]\n  C) Ela representa sepse em quadros de colecistite aguda.\n  D) Nesse caso, o tratamento da causa base é sempre cirúrgico.\n  E) Ela sempre está presente em pacientes com colangite aguda.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Tríade de Charcot mais hipotensão e confusão mental formam a temida Pêntade de Reynolds (colangite aguda grave).\n\n****Alternativa Correta** (B)**: A Pêntade de Reynolds indica colangite aguda ascendente supurativa grave. Ela reúne a Tríade de Charcot (febre com calafrios, icterícia e dor em hipocôndrio direito) somada a hipotensão arterial (choque séptico)"
+  },
+  {
+    "id": 2492,
+    "current_area": "Cirurgia",
+    "current_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "topic": "Sistema Único de Saúde - Manifestações Clínicas e Exame Físico",
+    "stem": "A tríade de Charcot caracteriza-se por",
+    "alternatives": "  A) febre, icterícia e dor em hipocôndrio direito, estando presente em pacientes com colangite aguda. [GABARITO]\n  B) febre, dor em fossa ilíaca direita e icterícia, estando presente em pacientes com apendicite aguda.\n  C) dor em hipocôndrio direito, icterícia e vômitos, estando presente em pacientes com pancreatite aguda.\n  D) febre, icterícia e dor em hipocôndrio direito, estando presente em pacientes com colecistite aguda.\n  E) icterícia, febre e leucocitose, estando presente em pacientes com colangite aguda e colecistite aguda.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: A clássica tríade de Charcot (febre, icterícia e dor em hipocôndrio direito) é o cartão de visitas da colangite aguda.\n\n****Alternativa Correta** (A)**: A colangite aguda é uma infecção bacteriana das vias biliares decorrente de estase biliar (geralmente por coledocolitíase). A apresentação clássica é a Tríade de Charcot, composta por febre (com frequência"
+  },
+  {
+    "id": 2493,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Diverticulite Aguda Manifestações Clínicas Classificação de Los Angeles",
+    "stem": "Qual item correlaciona adequadamente o nome da classificação com a sua descrição I. Classificação de Forrest consiste no sistema de classificação para úlceras pépticas hemorrágicas. II. Classificação de Hinchey consiste no sistema de classificação para diverticulite crônica. III. Classificação de Parks consiste no sistema de classificação para esofagite. IV. Classificação de Los Angeles consiste no sistema de classificação para fístulas perianais. V. Classificação TNM consiste no sistema de classificação para tumores malignos. Assinale a alternativa correta.",
+    "alternatives": "  A) Somente os itens I e V estão certos. [GABARITO]\n  B) Somente os itens I, II e V estão certos.\n  C) Somente os itens III, IV e V estão certos.\n  D) Somente os itens I, III e IV estão certos.\n  E) Todos os itens estão certos.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Associe Forrest a úlceras hemorrágicas e TNM a estadiamento oncológico. As demais definições da questão foram trocadas entre si para confundir o candidato.\n\n****Alternativa Correta** (A)**: Apenas as afirmativas I e V estão corretas. A Classificação de Forrest categoriza o aspecto endoscópico das úlceras pépticas sangrantes para estimar o risco de recidiva"
+  },
+  {
+    "id": 2494,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+    "topic": "Sistema Único de Saúde - Outras Causas de Abdome Agudo Perfurativo Tratamento da Diverticulite Complicada Neoplasia Colorretal",
+    "stem": "Assinale a alternativa que apresenta a enfermidade que não está indicada para a realização da cirurgia de Hartmann",
+    "alternatives": "  A) tumor de sigmoide obstrutivo\n  B) ferimento por arma de fogo no sigmoide maior que 50% da circunferência do cólon, em paciente chocado\n  C) tumor de reto médio irressecável em paciente com abdome agudo obstrutivo [GABARITO]\n  D) diverticulite aguda do sigmoide Hinchey III\n  E) colite isquêmica, evoluindo com estenose e perfuração no ponto de Sudeck",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A cirurgia de Hartmann resseca o segmento doente e fecha o coto distal, sendo inviável quando a lesão obstrutiva é o reto médio irressecável.\n\n****Alternativa Correta** (C)**: Um tumor de reto médio irressecável que causa abdome agudo obstrutivo não pode ser tratado com a cirurgia de Hartmann, pois o reto médio situa-se abaixo da reflexão peritoneal e a su"
+  },
+  {
+    "id": 2495,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "topic": "Sistema Único de Saúde - Abdome Agudo Obstrutivo",
+    "stem": "A respeito do abdome agudo obstrutivo (AAO), assinale a alternativa incorreta .",
+    "alternatives": "  A) AAO classifica-se como alto ou baixo, de acordo com o distúrbio metabólico decorrente do quadro de obstrução.\n  B) Obstrução intestinal em alça fechada é considerada uma emergência cirúrgica.\n  C) Volvo de sigmoide e bridas são causas extrínsecas de obstrução intestinal.\n  D) Neoplasias gástricas ou estenoses antropilóricas não são causas de AAO, pois não provocam parada de eliminação de gases e fezes. [GABARITO]\n  E) Algumas vezes, a primeira manifestação de uma neoplasia de cólon é o quadro obstrutivo.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Fique atento aos distúrbios obstrutivos altos: estenoses pilóricas causam obstrução mecânica e geram vômitos volumosos com alcalose metabólica hipoclorêmica.\n\n****Alternativa Correta** (D)**: A afirmativa D é a incorreta (e portanto a gabaritada) porque afirma erroneamente que neoplasias gástricas e estenoses antropilóricas não causam abdome agudo obstruti"
+  },
+  {
+    "id": 2496,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Hérnias Complicadas Íleo Biliar Outras Causas de Obstrução Instestinal Alta",
+    "stem": "Em relação às causas de abdome agudo obstrutivo (AAO) em alça fechada, julgue os itens a seguir. I. Volvo de sigmoide II. Hérnia interna III. Ileobiliar IV. Tumor de cólon esquerdo estenosante com válvula ileocecal incompetente V. Hérnia inguinal encarcerada",
+    "alternatives": "  A) Somente os itens I, II e V estão certos. [GABARITO]\n  B) Somente os itens I, II, IV e V estão certos.\n  C) Somente os itens II, III e IV estão certos.\n  D) Somente os itens II, III e V estão certos.\n  E) Todos os itens estão certos.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Alça fechada exige oclusão em dois pontos simultâneos ou um ponto com mecanismo de válvula unidirecional (como válvula ileocecal competente associada a tumor cólico).\n\n****Alternativa Correta** (A)**: Estão corretos apenas os itens I, II e V. No volvo de sigmoide (I), na hérnia interna (II) e na hérnia inguinal encarcerada (V), o segmento intestinal sofre "
+  },
+  {
+    "id": 2497,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "topic": "Sistema Único de Saúde - Fecaloma",
+    "stem": "Uma paciente de oitenta anos de idade, com antecedente de AVC prévio e com diculdade de deambulação, foi levada ao pronto ‑ socorro por familiares, devido à dor abdominal, distensão e parada da eliminação de fezes. No exame: desidratada +/4+; anêmica +/4+; e com tumoração palpável de, aproximadamente, 10 cm no hipogastro, com sinal de Gersuny positivo. Não foi permitida a realização do toque retal. Com base nessa situação hipotética, assinale a alternativa que apresenta, correta e respectivamente, o diagnóstico mais provável e o exame indicado no momento.",
+    "alternatives": "  A) massa abdominal a esclarecer e TC de abdome e pelve\n  B) fecaloma e RX de abdômen simples [GABARITO]\n  C) tumor de cólon, TC de abdome e pelve e colonoscopia\n  D) tumor ovariano e ultrassonografia de abdome e transvaginal\n  E) tumor ovariano e RNM de pelve e abdome",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Idosa acamada com constipação e massa palpável no hipogástrio associada ao sinal de Gersuny (crepitação ao toque da massa) é sinônimo de fecaloma, cujo exame inicial de escolha é o RX simples de abdômen.\n\n****Alternativa Correta** (B)**: A paciente idosa, com mobilidade reduzida após AVC, apresenta quadro clássico de impactação fecal (fecaloma). O sinal de"
+  },
+  {
+    "id": 2498,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Complicações Complicações",
+    "stem": "Um paciente de 38 anos com obesidade grau III foi submetido a bypass gástrico laparoscópico com reconstrução em Y de Roux há cerca de 2 anos. Hoje, deu entrada no pronto atendimento devido a quadro de dor abdominal intensa localizada em mesogástrio associada a vômitos biliosos em grande quantidade e de forma recorrente. Refere não evacuar há 3 dias. Ao exame, apresenta abdome globoso e distendido com timpanismo difuso à percussão, bem como ruídos hidroaéreos aumentados. Foi submetido à radiograa de abdome que demonstrou alças de delgado dilatadas com sinal de empilhamento de moedas na região hipogástrica e presença de níveis hidroaéreos, bem como ausência de ar no cólon e reto. Com base no caso clínico descrito, assinale a alternativa correta.",
+    "alternatives": "  A) A principal causa é a presença de hérnia incisional, geralmente localizada na linha infraumbilical.\n  B) O suporte clínico com reposição volêmica e drenagem nasogástrica é suciente para resolução do evento na maioria dos casos.\n  C) Nesse tipo de operação, raramente, ocorre estrangulamento da alça acometida, sendo a causa mais provável a presença de bridas intestinais.\n  D) A abordagem cirúrgica nesse tipo de paciente deve ser precoce devido ao risco de rotura da linha de grampeamento da alça biliopancreática causado pela distensão excessiva. [GABARITO]\n  E) O melhor método para diagnóstico desse tipo de complicação é a radiograa de abdome realizada em decúbito e posição ortostática.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Dor abdominal intensa e vômitos biliosos em paciente com bypass gástrico em Y de Roux exigem cirurgia de urgência pelo risco iminente de necrose e rotura da alça biliopancreática fechada.\n\n****Alternativa Correta** (D)**: No pós-operatório de bypass gástrico em Y de Roux, a obstrução da alça biliopancreática (frequentemente por hérnia interna) gera uma alç"
+  },
+  {
+    "id": 2499,
+    "current_area": "Cirurgia",
+    "current_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "topic": "Sistema Único de Saúde - História Natural da Doença Tratamento Cirúrgico",
+    "stem": "Uma paciente de 45 anos de idade, assintomática, com índice de massa corpórea (IMC) igual a 34, sem comorbidades, compareceu ao consultório após ter sido diagnosticada, por meio de ultrassom de rotina, com colelitíase, tendo o ultrassom evidenciado a presença de microcálculos (menores que 0,5 cm). Nesse caso clínico hipotético,",
+    "alternatives": "  A) a colecistectomia está indicada devido ao risco de pancreatite aguda. [GABARITO]\n  B) a indicação cirúrgica é relativa, pois o risco de complicações é menor que o risco da operação.\n  C) recomenda-se não operar e iniciar dieta pobre em colesterol e ácidos graxos, pois os cálculos são constituídos, na maioria dos casos, por colesterol puro, além de traços de ácidos graxos e fosfolipídios.\n  D) indica-se a colecistectomia após a realização de colangiopancreatografia retrógrada endoscópica, para excluir a presença de microcoledocolitíase.\n  E) a colecistectomia está indicada, devido ao alto risco de desenvolvimento de colecistite aguda e câncer de vesícula.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Microcálculos na vesícula (menores que 0,5 cm) têm alto risco de migração e pancreatite aguda, indicando colecistectomia mesmo em pacientes assintomáticos.\n\n****Alternativa Correta** (A)**: Microcálculos biliares (< 0,5 cm) possuem grande propensão a transpor o ducto cístico e impactar na ampola de Vater, desencadeando pancreatite aguda biliar. Por essa co"
+  },
+  {
+    "id": 2500,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Exame Proctológico",
+    "stem": "Julgue os itens a seguir, acerca das doenças que são possíveis de ser diagnosticadas durante a realização do toque retal. I. Hiperplasia prostática II. Fecaloma III. Retocele IV. Tumor localizado na transição retosigmoide V. Doença hemorroidária interna grau I",
+    "alternatives": "  A) Somente os itens I, II e IV estão certos.\n  B) Somente os itens I, III e V estão certos.\n  C) Somente os itens I, II, IV e V estão certos.\n  D) Somente os itens III e IV estão certos.\n  E) Somente os itens I, II e III estão certos [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: O toque retal avalia o canal anal e o reto distal até cerca de 7-8 cm; lesões mais altas ou hemorroidas internas sem prolapso escapam ao exame.\n\n****Alternativa Correta** (E)**: O toque retal permite palpar o lobo posterior da próstata (I), fezes endurecidas na ampola retal indicativas de fecaloma (II) e a herniação da parede retal anterior caracterizando "
+  },
+  {
+    "id": 2501,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Doenças Orificiais",
+    "stem": "Um jovem de 24 anos, estudante, procura atendimento devido à queixa de dor em região sacrococcígea com início há 07 dias. Refere aumento do volume local e saída de secreção purulenta e fétida de forma intermitente da região afetada. Nos últimos meses, teve episódios semelhantes, mas com menos dor e com melhora espontânea, motivo pelo qual não procurou atendimento médico. Ao exame físico, observa-se região endurecida e dolorosa na linha média da região interglútea, sobre o cóccix. Há um orifício cutâneo com drenagem de secreção. O paciente é hirsuto e possui sobrepeso (IMC 32 kg/m²). Qual o diagnóstico mais provável?",
+    "alternatives": "  A) Fístula anorretal crônica.\n  B) Cisto dermoide.\n  C) Abscesso isquiorretal.\n  D) Hidradenite supurativa perianal.\n  E) Cisto pilonidal infectado. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Dor na região sacrococcígea (sulco interglúteo) com secreção purulenta em paciente hirsuto e com sobrepeso é a definição clássica de cisto pilonidal infectado.\n\n****Alternativa Correta** (E)**: O cisto pilonidal (ou doença pilonidal) acomete tipicamente jovens do sexo masculino, hirsutos e com sobrepeso. O quadro clínico de abscesso e fístula crônica na li"
+  },
+  {
+    "id": 2502,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Sistema Único de Saúde - Apresentação Clínica e Classificação Diagnóstico",
+    "stem": "Assinale a alternativa que apresenta o procedimento necessário, além da anamnese, ao exame proctológico para que seja realizado o diagnóstico de doença hemorroidária.",
+    "alternatives": "  A) inspeção estática e dinâmica da região anal, toque retal, anuscopia e retossigmoidoscopia flexível\n  B) colonoscopia\n  C) anuscopia de alta resolução e toque retal\n  D) palpação, inspeção estática e dinâmica da região anal, toque retal e anuscopia [GABARITO]\n  E) toque retal e retossigmoidoscopia rígida",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: O diagnóstico de hemorroidas é essencialmente clínico e exige inspeção estática/dinâmica, palpação, toque retal e anuscopia no consultório.\n\n****Alternativa Correta** (D)**: O diagnóstico da doença hemorroidária baseia-se na anamnese associada a um exame proctológico completo, que engloba a palpação perianal, inspeção estática e dinâmica (fundamental para "
+  },
+  {
+    "id": 2503,
+    "current_area": "Cirurgia",
+    "current_subtema": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "topic": "Sistema Único de Saúde - Apresentação Clínica e Classificação Diagnóstico Tratamento",
+    "stem": "Um homem de 62 anos de idade, sem comorbidades, foi ao consultório. Levou consigo ultrassonograa, com o laudo compatível com colelitíase, com cálculo de 2 cm. Tinha queixa de alteração do hábito intestinal, empachamento, dor em todo o abdome e sangramento nas fezes intermitente. Exame abdominal sem alterações. Exame proctológico apresentou hemorroida grau 1. Com base nessa situação hipotética, assinale a alternativa que apresenta a melhor conduta a ser adotada no momento.",
+    "alternatives": "  A) indicar colecistectomia e, posteriormente, hemorroidectomia\n  B) indicar colecistectomia e tratar clinicamente a doença hemorroidária\n  C) indicar hemorroidectomia e, posteriormente, colecistectomia\n  D) tratar clinicamente a doença hemorroidária, prosseguir a investigação com TC de abdome total e, caso a TC seja normal, indicar a colecistectomia\n  E) prosseguir a investigação com endoscopia digestiva alta e colonoscopia e tratar clinicamente a doença hemorroidária [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Sintomas de alarme (como sangramento e alteração do hábito intestinal) em idosos exigem investigação endoscópica antes de qualquer tratamento eletivo para achados incidentais.\n\n****Alternativa Correta** (E)**: O paciente é um idoso com alteração recente do hábito intestinal e sangramento retal intermitente, que configuram clássicos \"sinais de alarme\". Tais"
+  },
+  {
+    "id": 2504,
+    "current_area": "Cirurgia",
+    "current_subtema": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Tratamento",
+    "stem": "Um homem de 40 anos apresenta queixa de sangramento anal esporádico às evacuações. Além disso, refere sensação de evacuação incompleta, mas nega dor. Ao exame, exibe hemorroidas internas com prolapso aos esforços, mas com redução espontânea, isto é, sem a necessidade de manobras. O paciente é hígido e nega uso de medicações. Com base nas queixas e no exame físico, qual o tratamento definitivo mais adequado?",
+    "alternatives": "  A) Hemorroidectomia convencional.\n  B) Escleroterapia química com fenol a 5%.\n  C) Ligaduras elásticas em consultório. [GABARITO]\n  D) Procedimento para prolapso hemorroidário (PPH).\n  E) Terapia medicamentosa com anti-inflamatórios, dieta laxativa e modificação do estilo de vida.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Hemorroidas internas de grau II sintomáticas (sangramento e prolapso com redução espontânea) têm na ligadura elástica o tratamento ambulatorial de escolha.\n\n****Alternativa Correta** (C)**: O paciente apresenta hemorroidas internas que prolapsam aos esforços e retornam espontaneamente para o canal anal, o que define um quadro de hemorroidas de grau II. Par"
+  },
+  {
+    "id": 2505,
+    "current_area": "Cirurgia",
+    "current_subtema": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "topic": "Sistema Único de Saúde - Tratamento",
+    "stem": "Assinale a alternativa que apresenta a explicação siopatológica correta para a utilização do diltiazen tópico para o tratamento inicial da fissura anal crônica.",
+    "alternatives": "  A) promover o relaxamento da musculatura esfincteriana [GABARITO]\n  B) evitar a infecção local\n  C) promover a esfincterotomia química\n  D) bloquear os canais de cálcio, evitando a estenose anal\n  E) diminuir o plicoma causado pela fissura",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O diltiazem tópico relaxa o esfíncter anal interno bloqueando os canais de cálcio, combatendo a espasticidade e a isquemia da fissura anal.\n\n****Alternativa Correta** (A)**: A fisiopatologia da fissura anal crônica baseia-se na hipertonia do esfíncter anal interno (EAI), gerando alta pressão de repouso e consequente isquemia local que impede a cicatrização"
+  },
+  {
+    "id": 2506,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Patogênese Apresentação Clínica e Diagnóstico",
+    "stem": "Um homem de 19 anos de idade, hígido, chegou ao consultório com queixa de verruga na região anal. Ao exame, observou ‑ se lesão condilomatosa única de 0,5 cm na margem anal, sem lesões no canal anal. Com base nessa situação hipotética e supondo ‑ se que o médico estará em um ambiente com recurso disponível, assinale a alternativa que apresenta a conduta adequada.",
+    "alternatives": "  A) solicitar hemograma, coagulograma, eletrocardiograma e, após, avaliar os exames, agendar ressecção no centro cirúrgico com laser, com raquianestesia e encaminhamento da peça para anatomia patológica\n  B) tratamento tópico com ácido acético a 50%\n  C) solicitar hemograma, coagulograma, eletrocardiograma e, após, avaliar os exames agendar, ressecção no centro cirúrgico com crioterapia e anestesia local\n  D) solicitar sorologia para hepatite B, C, HIV e sífilis e acompanhar a evolução da lesão\n  E) anestesia local, ressecção a frio com tesoura, encaminhamento da peça para anatomia patológica e solicitação de sorologia para hepatite B, C, HIV e sífilis [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Lesão condilomatosa única e pequena na margem anal é tratada em consultório sob anestesia local, com exames anátomo-patológico e sorologias para ISTs.\n\n****Alternativa Correta** (E)**: O paciente apresenta uma lesão condilomatosa (causada pelo HPV) única, pequena (0,5 cm) e restrita à margem anal, sem envolvimento do canal anal. Nesse cenário de lesão rest"
+  },
+  {
+    "id": 2507,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Tratamento",
+    "stem": "Uma jovem de 27 anos procura atendimento devido à queixa de lesões verrucosas em região perianal. Refere que as lesões apresentaram crescimento progressivo nos últimos três meses. Nega dor, sangramento ou secreções. Refere vida sexual promíscua com múltiplos parceiros e coito anal desprotegido. Ao exame, nota-se lesões múltiplas e extensas, papilomatosas (aspecto de “couve-or”), exofíticas e de coloração rósea com distribuição na margem anal. A anuscopia demonstra extensão da lesão para o interior do canal anal. Há ainda lesões de aspecto semelhante na região vulvar. Com base nos achados, assinale a alternativa que apresenta a conduta mais adequada.",
+    "alternatives": "  A) Tratamento tópico com podofilina em ambas as regiões afetadas e excisão cirúrgica a frio, em caso de recidiva.\n  B) Biópsias a frio das lesões previamente ao tratamento. Em caso positivo para condiloma acuminado, proceder com crioterapia em centro cirúrgico, bem como rastreamento de hepatite B.\n  C) Tratamento tópico com laser e vacinação contra o HPV.\n  D) Excisão cirúrgica das lesões com margens ampliadas e terapia antirretroviral.\n  E) Tratamento local com ácido tricloroacético, programação de eletrocoagulação sob sedação e rastreio para HIV, incluindo dos parceiros. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Lesões extensas no canal anal e genitais exigem tratamento tópico seguro (ATA) ou cirúrgico adequado (eletrocoagulação sob sedação), além do rastreio obrigatório para ISTs como o HIV.\n\n****Alternativa Correta** (E)**: A paciente apresenta condilomatose anogenital extensa, acometendo vulva, margem anal e o canal anal (confirmado por anuscopia). O Ácido Tric"
+  },
+  {
+    "id": 2509,
+    "current_area": "Cirurgia",
+    "current_subtema": "Insuficiência Venosa Crônica e Trombose Venosa Profunda (TVP)",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Fatores de Risco Apresentação Clínica Filtro de Veia Cava",
+    "stem": "Considerando a trombose venosa profunda (TVP), assinale a alternativa correta.",
+    "alternatives": "  A) A combinação de eco ‑ Doppler colorido negativa seguida de D ‑ dímero negativo permite descartar com segurança a hipótese da TVP, com exceção dos pacientes com câncer e TVP recorrente. [GABARITO]\n  B) O risco de embolia pulmonar é maior quando a TVP está localizada abaixo da veia poplítea.\n  C) A avaliação clínica é suficiente para diagnosticar TVP nos casos em que os fatores de risco estão presentes.\n  D) Os fatores de riscos estão relacionados exclusivamente a fatores adquiridos, como idade avançada, câncer, procedimentos cirúrgicos, imobilização, uso de estrogênio, ciclo gravídico ‑ puerperal.\n  E) Empastamento da panturrilha associado aos sinais de Homans e da bandeira são patognomônico de TVP.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Eco-Doppler venoso negativo combinado com D-dímero negativo descarta TVP com segurança em pacientes não pertencentes a grupos de alto risco.\n\n****Alternativa Correta** (A)**: A associação de um exame de imagem (Eco-Doppler colorido) normal a um teste de D-dímero negativo possui um altíssimo valor preditivo negativo (superior a 99%), permitindo a exclusão s"
+  },
+  {
+    "id": 2510,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hiperplasia Prostática Benigna (HPB) e Litíase Urinária",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Tratamento Sintomas",
+    "stem": "Um paciente de 70 anos de idade, em acompanhamento por hiperplasia prostática benigna, em uso de doxazosina, chegou ao pronto ‑ socorro com bexigoma. Com base nessa situação hipotética, assinale a alternativa que apresenta a sequência de atendimento adequada.",
+    "alternatives": "  A) realizar punção suprapúbica de alívio\n  B) passagem de sonda vesical de alívio, caso não seja efetiva a passagem de sonda vesical de demora; e, caso não se obtenha sucesso, realizar a punção suprapúbica de alívio [GABARITO]\n  C) aumentar a dose de doxazosina e encaminhar ao urologista\n  D) passagem de sonda vesical de demora e, caso não se obtenha sucesso, realizar cistostomia por punção, para permitir um rápido esvaziamento da bexiga prevenindo ex vacum\n  E) passagem de sonda vesical de alívio e, caso não seja efetivo, realizar cistostomia cirúrgica",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Diante de retenção urinária aguda, tente sempre a sondagem uretral primeiro; se falhar, recorra à punção suprapúbica de alívio.\n\n****Alternativa Correta** (B)**: A retenção urinária aguda com bexigoma requer descompressão imediata. A primeira linha de tratamento é a passagem de sonda vesical de demora ou de alívio por via transuretral. Caso ocorra falha té"
+  },
+  {
+    "id": 2511,
+    "current_area": "Cirurgia",
+    "current_subtema": "Uro-Oncologia: Câncer de Próstata, Rim, Bexiga e Testículo",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Fatores de Risco e Fatores de Proteção Estadiamento e Estratificação de Risco Tratamento da Doença Localizada",
+    "stem": "A respeito do câncer de próstata, julgue os itens a seguir. I. A partir dos 45 anos de idade, todo homem deve ser submetido ao rastreamento com toque retal e ao antígeno prostático específico (PSA). II. A maioria dos tumores localizados são assintomáticos. III. Muitos homens com a doença menos agressiva tendem a morrer com o câncer em vez de morrer do câncer. IV. Pacientes entre 40 e 50 anos de idade com histórico familiar, afrodescendentes e mutação patogênica no gene BRCA são pacientes de maior risco. V. Diante de um diagnóstico de câncer, a cirurgia, a radioterapia ou as terapias sistêmicas têm de ser indicadas. Assinale a alternativa correta.",
+    "alternatives": "  A) Somente os itens I, II e IV estão certos.\n  B) Somente os itens I, II e V estão certos.\n  C) Somente os itens II, III e IV estão certos. [GABARITO]\n  D) Somente os itens III, IV e V estão certos.\n  E) Todos os itens estão certos.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Lembre-se de que o câncer de próstata inicial é assintomático e muitos pacientes idosos morrem *com* a doença e não *por* causa dela.\n\n****Alternativa Correta** (C)**: Os itens II, III e IV estão corretos. O câncer de próstata localizado é tipicamente assintomático, reforçando a complexidade do rastreio. Devido à sua evolução frequentemente lenta, muitos i"
+  },
+  {
+    "id": 2513,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Sistema Único de Saúde - Materiais e Técnicas de Sutura",
+    "stem": "Uma paciente de dezesseis anos de idade chegou ao pronto ‑ socorro com ferimento cortocontuso supercial na face, de 3 cm, que ocorreu há trinta minutos, e foi atendida pelo médico. Assinale a alternativa que apresenta a conduta que o médico deverá adotar no momento",
+    "alternatives": "  A) realizar a sutura com pontos simples e separados, utilizando fio absorvível, como o Monocryl® 4 ‑ 0\n  B) realizar a sutura com pontos simples e separados, utilizando fio absorvível, como o Mononylon® 6 ‑ 0\n  C) realizar a sutura com pontos simples e separados, utilizando fio inabsorvível, como o Mononylon® 5 ‑ 0 [GABARITO]\n  D) realizar a sutura com pontos intradérmicos, utilizando fio inabsorvível, como o Monocryl® 5 ‑ 0\n  E) encaminhar para o cirurgião plástico",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Ferimentos em face de pacientes jovens exigem excelente resultado estético; o padrão-ouro para a pele são fios inabsorvíveis monofilamentares (como o Mononylon) removidos precocemente.\n\n****Alternativa Correta** (C)**: O uso de fio inabsorvível monofilamentar, como o Mononylon® (5-0 ou 6-0), em pontos simples e separados é a técnica padrão-ouro para ferime"
+  },
+  {
+    "id": 2514,
+    "current_area": "Cirurgia",
+    "current_subtema": "Câncer de Pulmão, Nódulo Pulmonar Solitário e Tumores do Mediastino",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Anatomia do Mediastino",
+    "stem": "Acerca da artéria aorta, assinale a alternativa correta.",
+    "alternatives": "  A) Ramos terminais são: artéria ilíaca comum direita e esquerda.\n  B) Todo o corpo é suprido pela artéria aorta.\n  C) Ramos do arco aórtico são: tronco braquiocefálico; artéria carótida comum direita; e artéria subclávia esquerda.\n  D) Ramos viscerais da aorta abdominal são: tronco celíaco; artérias suprarrenais médias; artéria mesentérica superior; artérias renais; artérias gonadais; e artéria mesentérica inferior. [GABARITO]\n  E) Ramos da aorta torácica são: artérias esofágicas (para o esôfago torácico); artérias subcostais; e intercostais posteriores (terceira à décima primeira).",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Memorize os ramos viscerais da aorta abdominal (Tronco celíaco, Mesentérica Superior, Renais, Gonadais, Supra-renais médias e Mesentérica Inferior).\n\n****Alternativa Correta** (D)**: Descreve com exatidão a anatomia dos ramos viscerais da aorta abdominal, incluindo o tronco celíaco, as artérias suprarrenais médias, artéria mesentérica superior, artérias re"
+  },
+  {
+    "id": 2516,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Sistema Único de Saúde - Cardiologia Tratamento da dissecção aórtica tipo A",
+    "stem": "Um homem idoso apresenta-se em serviço de emergência com relato de dor torácica retroesternal de forte intensidade (10 de 10 em escala numérica) há cerca de uma hora, em rasgante, com irradiação para o dorso. Previamente hipertenso, com uso irregular de medicações, ao exame físico da admissão, estava lúcido e orientado, com fácies de dor, sudoreico, com pressão arterial de MSD 168 x 96 mmHg e MSE 130 x 50 mmHg, frequência cardíaca de 124 bpm, frequência respiratória de 20 rpm, temperatura de 36,7 ⁰C e saturação de 98%. Foram realizadas medidas de estabilização e exames complementares (mostrados a seguir). Com base nesse caso hipotético, assinale a alternativa que apresenta a conduta a ser adotada após os resultados dos últimos exames realizados.",
+    "alternatives": "  A) trombólise, seguida de cineangiocoronariografia de estratificação\n  B) seriar marcadores de lesão miocárdica (troponina seriada)\n  C) realizar dupla antigregação plaquetária e anticoagulação plena\n  D) encaminhar com urgência para centro cirúrgico [GABARITO]\n  E) indicar angioplastia primária em centro de hemodinâmica",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Dor torácica em facada/rasgante irradiada para o dorso associada a assimetria pressórica nos membros é dissecção de aorta (Stanford A) — uma emergência cirúrgica imediata.\n\n****Alternativa Correta** (D)**: O quadro clínico descrito é clássico de Dissecção Aguda de Aorta do Tipo Stanford A (envolvimento da aorta ascendente). Trata-se de uma emergência cirúr"
+  },
+  {
+    "id": 2566,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Insuficiência adrenal secundária Crise adrenal",
+    "stem": "Mulher de 36 anos com histórico de DPOC, em uso de prednisona 10 mg/dia, há 2 anos, dá entrada no pronto atendimento com quadro de dor abdominal difusa associada a distensão e febre. A tomograa de abdome, realizada na admissão, evidenciou sinais de pneumoperitônio. Foi submetida à laparotomia exploradora com achado de úlcera duodenal perfurada, sendo submetida à duodenorraa primária com confecção de patch omental. Durante a abordagem cirúrgica, apresentou quadro de hipotensão refratária à reposição volêmica, sendo necessário uso de drogas vasoativas. Evoluiu com manutenção da hipotensão no pós-operatório imediato, mantendo PA: 80 x 50 mmHg, hipoglicemia (glicemia capilar 56 mg/dL). A diurese também mostra-se diminuída, havendo hiponatremia (Na+ 128 mEq/L) com potássio sérico normal. Com base na hipótese diagnóstica mais provável, assinale a alternativa correta.",
+    "alternatives": "  A) Trata-se de um quadro de insuciência adrenal primária, sendo indicada introdução de mineralocorticoide por via oral para controle hidroeletrolítico no pós-operatório imediato.\n  B) Trata-se de quadro de insuciência adrenal aguda secundária à supressão de corticoterapia prolongada, sendo indicada terapia com hidrocortisona intravenosa. [GABARITO]\n  C) O uso prévio de prednisona impede a ocorrência de insuciência adrenal no perioperatório, sendo a causa da hipotensão, muito provavelmente, séptica.\n  D) O teste de estimulação com ACTH precisa conrmar o diagnóstico antes de qualquer intervenção medicamentosa.\n  E) Os níveis séricos de potássio, estando normais, afastam o diagnóstico de insuciência adrenal aguda, tornando a insuficiência pituitária a principal hipótese.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Uso crônico de corticoide + estresse cirúrgico/séptico agudo + hipotensão refratária + hipoglicemia = **Crise adrenal aguda secundária**. Trate imediatamente com hidrocortisona IV.\n\n****Alternativa Correta** (B)**: A paciente em uso prolongado de prednisona desenvolve atrofia do córtex adrenal por supressão do eixo HHA. Diante de uma grave agressão aguda ("
+  },
+  {
+    "id": 2571,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Sistema Único de Saúde - Manifestações Clínicas Critérios Diagnósticos",
+    "stem": "Acerca de pancreatites agudas, assinale a alternativa incorreta .",
+    "alternatives": "  A) Para o diagnóstico de pancreatite aguda, deve-se considerar o quadro clínico característico, elevação de amilase e(ou) lipase pelo menos três vezes acima dos níveis séricos normais, tomografia computadorizada com contraste endovenoso evidenciando alterações pancreáticas; pelo menos dois desses critérios devem estar presentes.\n  B) A única forma de se considerar uma pancreatite aguda grave é se houver mais que 30% de necrose de parênquima pancreático visualizado em tomografia computadorizada com contraste; na ausência de necrose, a pancreatite sempre deve ser considerada leve. [GABARITO]\n  C) A principal etiologia da pancreatite aguda é biliar.\n  D) Também são causas de pancreatite aguda a hipertrigliceridemia e a hipercalcemia.\n  E) A ecoendoscopia é um exame de imagem importante durante investigação das causas de pancreatite aguda.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A gravidade da pancreatite aguda é definida pela presença de falência orgânica persistente (> 48h), e não exclusivamente pela extensão da necrose parenquimatosa na tomografia.\n\n****Alternativa Correta** (B)**: Esta alternativa é a incorreta e, portanto, o gabarito. Segundo a classificação de Atlanta revisada, a pancreatite aguda é classificada quanto à gra"
+  },
+  {
+    "id": 2572,
+    "current_area": "Cirurgia",
+    "current_subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+    "topic": "Sistema Único de Saúde - Ultrassonografia de Abdome Tomografia Computadorizada de Abdome Outros Exames de Imagem",
+    "stem": "Assinale a alternativa correta em relação à indicação de exames de imagem na pancreatite aguda (PA).",
+    "alternatives": "  A) A presença de alça sentinela, a dilatação do estômago, do duodeno e do cólon transverso e o apagamento do músculo psoas, na radiografia simples de abdômen, são achados que influenciam na estratificação da gravidade da PA.\n  B) A ultrassonografia de abdome tem grande valor na avaliação das vias biliares e do pâncreas, na estratificação da PA e na detecção de necrose pancreática.\n  C) A TC de abdome não é um exame necessário na PA branda. [GABARITO]\n  D) A colangiopancreatografia retrógrada endoscópica (CPRE) está indicada em todos os casos de PA, para excluir a PA de origem biliar.\n  E) A presença de gases intestinais e obesidade são fatores limitantes para a acurácia do exame de tomografia",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Na pancreatite aguda leve e com evolução favorável, a tomografia computadorizada é desnecessária, pois não altera a conduta terapêutica imediata.\n\n****Alternativa Correta** (C)**: Em pacientes com pancreatite aguda branda (leve), cujo diagnóstico é evidente e a evolução clínica é satisfatória, a realização de Tomografia Computadorizada (TC) de abdômen não "
+  },
+  {
+    "id": 2573,
+    "current_area": "Cirurgia",
+    "current_subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+    "topic": "Sistema Único de Saúde - Avaliação da Gravidade Amilase Lipase",
+    "stem": "Em relação à pancreatite aguda (PA), assinale a alternativa incorreta.",
+    "alternatives": "  A) A elevação persistente da amilase é indício de complicação, como o abscesso e o pseudocisto.\n  B) Nos casos de PA letal, a amilase pode estar normal, provavelmente, pela grande destruição glandular.\n  C) A lipase é o melhor indicador de pancreatite em pacientes que são vistos vários dias após o início da crise pancreática.\n  D) Em geral, as grandes elevações dos níveis de enzimas, produzidas no pâncreas, correlacionam ‑ se com a gravidade da PA. [GABARITO]\n  E) A amilase também pode ser detectada nos derrames pleurais e peritoneais pancreáticos, sendo que seu nível varia de três a dez vezes a mais que os valores séricos, obtidos simultaneamente.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Os níveis das enzimas pancreáticas (amilase e lipase) **não** possuem correlação com a gravidade da pancreatite aguda; quadros leves podem ter valores estratosféricos, enquanto necrose maciça pode cursar com enzimas normais.\n\n****Alternativa Correta** (D)**: Os níveis séricos absolutos de amilase e lipase pancreáticas não guardam relação proporcional com a"
+  },
+  {
+    "id": 2574,
+    "current_area": "Cirurgia",
+    "current_subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+    "topic": "Sistema Único de Saúde - Dieta",
+    "stem": "No que se refere à pancreatite aguda, assinale a alternativa correta.",
+    "alternatives": "  A) Só é possível liberar dieta via oral para o paciente quando houver melhora da dor e normalização dos níveis séricos de amilase.\n  B) Só é possível liberar dieta via oral para o paciente quando houver melhora da dor e a tomografia de abdome não mostrar nenhuma complicação local.\n  C) Só é possível liberar dieta via oral para o paciente quando houver melhora do quadro doloroso, sendo que, se esse se mantiver após 48 horas de jejum, dever-se-á iniciar nutrição parenteral exclusiva.\n  D) Só é possível liberar dieta via oral para o paciente quando houver melhora do quadro doloroso, sendo que, se esse se mantiver após 48 horas de jejum, dever-se-á solicitar passagem endoscópica de sonda até após a papila duodenal e iniciar dieta enteral (mesmo que em baixo volume). [GABARITO]\n  E) A dieta enteral por sonda é contraindicada nos pacientes com pancreatite grave, sob ventilação mecânica, em uso de droga vasoativa.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Na pancreatite aguda moderada a grave com jejum prolongado (> 48-72h), priorize a via enteral pós-pilórica para proteger a barreira intestinal, evitando a nutrição parenteral.\n\n****Alternativa Correta** (D)**: Em pacientes com pancreatite aguda que permanecem em jejum por mais de 48 a 72 horas por dor persistente, a passagem endoscópica de sonda nasoentera"
+  },
+  {
+    "id": 2580,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Síndrome de MalloryWeiss",
+    "stem": "Um homem de 35 anos é admitido no pronto atendimento devido a quadro de hematêmese. Refere viagem recente para o litoral, com retorno há 3 dias, após a qual desenvolveu quadro de infecção intestinal aguda com diarreia e vômitos desde então. Refere piora recente dos quadros de vômitos nas últimas 24 horas. Encontra-se hemodinamicamente estável e sem sinais de peritonite. Foi submetido à endoscopia digestiva alta após estabilização inicial que identicou uma laceração linear na região da transição esofagogástrica, sem sangramento ativo. Assinale a alternativa correta.",
+    "alternatives": "  A) A localização mais comum desse tipo de lesão é junto à grande curvatura gástrica.\n  B) A maioria dos casos apresenta sangramento recorrente, sendo indicada abordagem cirúrgica em caso de recorrência.\n  C) A embolização angiográfica da lesão constitui a primeira linha de tratamento em caso de ressangramento.\n  D) Durante a endoscopia, a realização de biópsias é imprescindível para afastar a suspeita de neoplasia.\n  E) A maioria dos casos é autolimitada e apresenta resolução espontânea após 72 horas. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: A Síndrome de Mallory-Weiss decorre de vômitos incoercíveis que geram laceração na transição esofagogástrica; o sangramento resultante é quase sempre autolimitado.\n\n****Alternativa Correta** (E)**: Na grande maioria dos casos (80-90%), a laceração de Mallory-Weiss apresenta sangramento autolimitado que cessa espontaneamente com suporte clínico e inibidores"
+  },
+  {
+    "id": 2581,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+    "topic": "Sistema Único de Saúde - Lesão de Dieulafoy",
+    "stem": "Um homem de trinta anos de idade, sem antecedentes mórbidos, é admitido em um pronto-socorro após episódio copioso de hematêmese. É feito o atendimento inicial e, após estabilização, é solicitada uma endoscopia. O exame encontra grande quantidade de sangue na câmara gástrica, que, após aspirada, revela mucosa gástrica sem alterações, exceto por um grande coágulo aderido no fundo gástrico (o médico examinador optou por não retirá-lo). Não havia varizes de esôfago e a mucosa duodenal era normal. Com base nesse caso hipotético, assinale a alternativa que apresenta a melhor conjectura etiológica para o sangramento do paciente.",
+    "alternatives": "  A) adenocarcinoma gástrico\n  B) úlcera péptica\n  C) malformação vascular da submucosa gástrica [GABARITO]\n  D) hipertensão portal segmentar\n  E) corpo estranho",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: HDA volumosa com mucosa gástrica e duodenal inteiramente normais, exceto por um coágulo aderido no fundo gástrico, é o cartão de visitas clássico da Lesão de Dieulafoy.\n\n****Alternativa Correta** (C)**: A lesão de Dieulafoy consiste em uma malformação vascular da submucosa em que uma artéria calibrosa sofre erosão progressiva e rompe-se para a luz gástrica"
+  },
+  {
+    "id": 2582,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+    "topic": "Sistema Único de Saúde - Classificação de Forrest",
+    "stem": "Com relação à classificação de Forrest para úlceras pépticas com sangramento, assinale a alternativa correta.",
+    "alternatives": "  A) Forrest 2A diz respeito a úlceras com coágulo aderido.\n  B) Forrest 1B diz respeito a úlceras com coto vascular visível.\n  C) Forrest 3 diz respeito a úlceras com pontos de hematina.\n  D) Forrest 2B diz respeito a úlceras com sangramento em babação ou porejamento.\n  E) Forrest 1 A diz respeito a úlceras com sangramento em jato. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Decore a escala Forrest: I = Sangramento ativo (A=Jato, B=Babação); II = Estigmas recentes (A=Vaso visível, B=Coágulo, C=Hematina); III = Sem estigmas (Base limpa).\n\n****Alternativa Correta** (E)**: O Forrest Ia é definido endoscopicamente como o sangramento arterial ativo em jato (*spurting*), que apresenta o maior risco de ressangramento e mortalidade.\n\n"
+  },
+  {
+    "id": 2583,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+    "topic": "Sistema Único de Saúde - Strix - Educação, Avaliação e Projetos Técnicas de Hemostasia Endoscópica Classificação de Forrest",
+    "stem": "Um homem de 55 anos é admitido na sala de urgência devido à hematêmese volumosa há 2 horas, presenciada por familiares. Associou-se a sintomas de melena e hipotensão. Na admissão, apresentava PA: 90 x 50 mmHg, FC: 118 bpm e hemoglobina de 7,8 mg/dL. O cirurgião iniciou medidas de reanimação com solução cristaloide, terapia medicamentosa com omeprazol intravenoso em dose plena e solicitação de transfusão de hemocomponentes. Após cerca de 24 horas da admissão, foi realizada endoscopia digestiva alta que revelou úlcera duodenal, na parede posterior, com presença de vasos visíveis. O endoscopista classicou a lesão como Forrest IIa. Foram realizadas terapia com adrenalina e aplicação de um clipe hemostático sobre o coto vascular. Com base nas diretrizes do manejo da hemorragia digestiva e na classificação de Forrest, avalie a conduta realizada.",
+    "alternatives": "  A) A lesão Forrest IIa é considerada de baixo risco, não havendo indicação de terapia endoscópica.\n  B) A conduta do endoscopista foi adequada, pois trata-se de uma lesão de alto risco para ressangramento e requer tratamento endoscópico. [GABARITO]\n  C) A conduta foi arriscada, pois, em casos de hemorragia exteriorizada por hematêmese, a conduta mais adequada é a realização de endoscopia digestiva alta em, no máximo, 4 horas da admissão.\n  D) A conduta foi excessiva. Como o sangramento já havia cessado, o tratamento endoscópico poderia ter sido realizado com injeção de adrenalina em monoterapia.\n  E) A conduta foi adequada, mas deve-se proceder com um novo exame ( second look ) após 12 horas, para conrmar a eficácia da terapia endoscópica.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Úlceras com sangramento recente (vasos visíveis - Forrest IIa) apresentam risco de ressangramento de até 50% e exigem terapia endoscópica combinada mandatória para evitar complicações fatais.\n\n****Alternativa Correta** (B)**: A conduta do endoscopista foi plenamente adequada. Lesões classificadas como Forrest IIa (vaso visível não sangrante) são considerad"
+  },
+  {
+    "id": 2584,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Tratamento Cirúrgico Da HDA",
+    "stem": "Paciente do sexo masculino dá entrada na sala de emergência por quadro de hematêmese franca e melena, associado à instabilidade hemodinâmica. Foi submetido a medidas de reanimação com expansão volêmica seguidas de intubação orotraqueal para proteção das vias aéreas. Assim que as condições clínicas permitiram, foi realizada uma endoscopia digestiva alta, que evidenciou uma úlcera duodenal bulbar com sangramento ativo em jato. Foi realizada hemostasia com aplicação de clipes hemostáticos havendo a interrupção do sangramento. Após 48 horas de internação, mantém quadro de melena importante, com níveis de hemoglobina ainda baixos. Uma segunda endoscopia foi realizada, e evidenciou-se sangue na região duodenal, não sendo conclusiva. Ao todo, foram necessárias múltiplas transfusões, totalizando 8 concentrados de hemácias no período. No momento: mau estado geral, descorado ++. PA: 90 x 70 mmHg, FC: 105 bpm. Diante do caso, assinale a alternativa que apresenta a conduta mais adequada.",
+    "alternatives": "  A) Indicar cirurgia, pois o paciente agora apresenta sangramento lento, mas contínuo, com necessidade de transfusão diária (> 3U/dia). [GABARITO]\n  B) Manter observação clínica, pois trata-se de melena residual que pode persistir por vários dias devido à intensidade do sangramento ocorrido.\n  C) Realizar nova tentativa de controle endoscópico em 24 horas.\n  D) Realizar exame de cápsula endoscópica de delgado para avaliação de hemorragia digestiva média.\n  E) Realizar cintilografia com hemácias marcadas para avaliação do foco de sangramento.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Sangramento contínuo que necessita de mais de 3 a 4 unidades de concentrado de hemácias por dia ou falha em duas tentativas endoscópicas são indicações clássicas de cirurgia de urgência na HDA.\n\n****Alternativa Correta** (A)**: O paciente apresenta critérios claros de falha terapêutica: sangramento maciço refratário, segunda endoscopia inconclusiva e neces"
+  },
+  {
+    "id": 2586,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Sistema Único de Saúde - Tumor Estromal Gastrointestinal GIST",
+    "stem": "Só recentemente foi esclarecido que essa neoplasia constitui uma entidade bem denida, com sua origem a partir das células intersticiais de Cajal e da expressão da proteína C ‑ Kit. Ocorre, predominantemente, em indivíduos de meia idade (média em torno de sessenta anos de idade), sendo mais comuns no estômago (70%). A ressecção cirúrgica completa é o tratamento padrão, pois é a única modalidade capaz de proporcionar a cura. Considerando essas informações, assinale a alternativa que apresenta o tumor raro do trato gastrointestinal a que as características mencionadas estão relacionadas.",
+    "alternatives": "  A) adenocarcinoma\n  B) tumor carcinoide\n  C) linfoma não Hodgkin\n  D) GIST (tumor estromal gastrointestinal) [GABARITO]\n  E) mucocele de apêndice",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Células de Cajal + expressão de C-Kit (CD117) = GIST (Tumor Estromal Gastrointestinal).\n\n****Alternativa Correta** (D)**: Os Tumores Estromais Gastrointestinais (GIST) originam-se das células intersticiais de Cajal (marcapasso do peristaltismo intestinal) e expressam tipicamente a proteína tirosina-quinase C-Kit (CD117) à imuno-histoquímica. O estômago é o"
+  },
+  {
+    "id": 2587,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Classificações dos Pólipos Sequência AdenomaCarcinoma",
+    "stem": "Em relação aos pólipos colônicos, assinale a alternativa incorreta .",
+    "alternatives": "  A) Pólipos adenomatosos e pólipos serrilhados representam os dois principais subtipos neoplásicos que servem como precursores diretos para a maioria dos câncer colorretal.\n  B) Pólipos serrilhados são uma designação abrangente que inclui pólipos hiperplásicos, lesões serrilhadas sésseis e adenomas serrilhados tradicionais.\n  C) A principal distinção entre pólipos malignos e suas lesões precursoras benignas é sua localização no cólon. [GABARITO]\n  D) Os pólipos adenomatosos podem ser divididos em tipos tubulares, tubulovilosos ou vilosos.\n  E) As lesões polipoides podem ser pediculadas, subpedunculadas ou sésseis.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A diferenciação entre pólipo benigno e maligno nunca depende da topografia, mas sim de critérios histopatológicos rigorosos de invasão em profundidade.\n\n****Alternativa Correta** (C)**: A alternativa é incorreta e, portanto, o gabarito da questão. A distinção entre pólipos colônicos benignos e lesões malignizadas (pólipos malignos) baseia-se exclusivamente"
+  },
+  {
+    "id": 2588,
+    "current_area": "Cirurgia",
+    "current_subtema": "Uro-Oncologia: Câncer de Próstata, Rim, Bexiga e Testículo",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Manifestações Clínicas",
+    "stem": "Homem de 70 anos, antecedentes de hipertensão arterial e tabagismo de longa data (parou há 15 anos). Antecedente de câncer de próstata tratado há 5 anos com cirurgia e radioterapia. Procurou atendimento devido a alterações do hábito intestinal. Refere que há 4 meses iniciou quadro de constipação alternado com evacuações líquidas em grande quantidade, de odor fétido. Refere ainda que são frequentes episódios de empachamento e dor hipogástrica leve. Observa ainda sensação de urgência evacuatória, mas ao ir ao banheiro, frequentemente não apresenta evacuação, mesmo após esforço. No período, observou perda ponderal de 5 kg, mesmo sem alterações do apetite. Nega sangramento nas fezes, mas refere astenia aos esforços e desânimo crescente. Ao exame: abdome doloroso à palpação do hipogástrio, sem sinais de peritonite e toque retal sem presença de sangue ou fezes. Qual o diagnóstico mais provável desse paciente?",
+    "alternatives": "  A) Colite pseudomembranosa.\n  B) Doença diverticular não complicada.\n  C) Doença inflamatória intestinal (retocolite ulcerativa).\n  D) Adenocarcinoma da transição retossigmoideana. [GABARITO]\n  E) Retopatia actínica.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Constipação de início recente alternada com diarreia (pseudodiarreia), tenesmo e perda de peso em idoso grita neoplasia de cólon esquerdo/reto estenosante.\n\n****Alternativa Correta** (D)**: O quadro clínico descrito é clássico de adenocarcinoma da transição retossigmoideana. Tumores localizados no cólon esquerdo e no reto tendem a apresentar crescimento an"
+  },
+  {
+    "id": 2589,
+    "current_area": "Cirurgia",
+    "current_subtema": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "topic": "Sistema Único de Saúde - Rastreio Câncer Colorretal",
+    "stem": "Paciente do sexo feminino, de 53 anos de idade, sem comorbidades, assintomática, sem antecedente familiar de câncer colorretal, realizou exame de sangue oculto nas fezes com guáiaco que veio positivo, sendo indicada a realização de colonoscopia. A colonoscopia evidenciou dois pólipos sésseis, de 0,5 cm cada, localizados no cólon direito (ambos adenoma tubular de baixo grau), um pólipo séssil de 0,8 cm localizado no cólon transverso (adenoma túbulo-viloso de alto grau) e dois pólipos pediculados no sigmoide de 1,2 cm e 1,5 cm (ambos adenoma tubular de baixo grau). Foi realizada polipectomia, com margens livres de todos os pólipos. Com base nesse caso clínico, assinale a alternativa que apresenta o seguimento adequado dessa paciente.",
+    "alternatives": "  A) realizar exame imunoquímico fecal anual e, se alterado, solicitar colonoscopia\n  B) repetir a colonoscopia em 3 anos [GABARITO]\n  C) realizar exame de sangue oculto nas fezes com guáiaco anual e, se positivo, solicitar colonoscopia\n  D) repetir a colonoscopia em 1 ano\n  E) repetir a colonoscopia entre 5 e 7 anos",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Presença de múltiplos adenomas (≥ 3), adenoma grande (≥ 1 cm) ou com displasia de alto grau coloca o paciente na categoria de alto risco, exigindo controle em 3 anos.\n\n****Alternativa Correta** (B)**: A paciente foi submetida a uma polipectomia que revelou 5 pólipos no total, incluindo lesões com critérios estritos de alto risco para o desenvolvimento de l"
+  },
+  {
+    "id": 2592,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Strix - Educação, Avaliação e Projetos Sistema Único de Saúde - Introdução Anatomia Vascular do Trato Gastrointestinal Fisiopatologia",
+    "stem": "Em relação à anatomia da veia porta-hepática, assinale a alternativa correta",
+    "alternatives": "  A) A veia porta possui válvulas intraluminais que impedem a inversão do uxo sanguíneo em direção ao sistema esplênico e mesentérico.\n  B) A veia porta forma-se na altura do hilo hepático, pela confluência dos ramos portais direito e esquerdo.\n  C) A veia porta responde por 25% do uxo sanguíneo hepático, sendo a artéria hepática a principal fonte de vascularização do fígado.\n  D) A formação da veia porta se dá posterior ao colo pancreático, na junção das veias mesentérica superior e esplênica. [GABARITO]\n  E) O ramo portal esquerdo irriga os segmentos V, VI, VII e VIII do fígado.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Veia porta = formada pela união da mesentérica superior com a esplênica atrás do pâncreas, sem válvulas!\n\n****Alternativa Correta** (D)**: A veia porta-hepática tem origem anatômica retroperitoneal, formada posteriormente ao colo do pâncreas (ao nível da vértebra L2) pela junção da veia mesentérica superior com a veia esplênica.\n\n**Alternativas Incorretas*"
+  },
+  {
+    "id": 2655,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Sistema Único de Saúde - Traumatismo Craniencefálico Classificação Quadro Clínico e Indicações de Tomografia de Crânio",
+    "stem": "Um escolar de oito anos de idade foi vítima de acidente bicicleta x ônibus e recebeu o primeiro atendimento rapidamente e adequadamente no local do trauma. Foi levado ao serviço de emergência com Glasgow 8, já intubado, em ventilação mecânica, com expansibilidade simétrica e bilateral. Enquanto aguardava tomografia de crânio, evoluiu com FC de 66 bpm, PA de 170 x 100 mmHg, dilatação pupilar e postura flexora. Com base nesse caso hipotético, assinale a alternativa que apresenta a medida que não deve ser considerada no momento.",
+    "alternatives": "  A) hiperventilação\n  B) administração de FiO₂ a 100%\n  C) manitol\n  D) solução salina hipertônica a 3%\n  E) metilprednisolona [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Corticoide no TCE grave é proibido! O estudo CRASH provou que aumenta a mortalidade.\n\n****Alternativa Correta** (E)**: O uso de corticoides (como a metilprednisolona) é formalmente contraindicado no traumatismo cranioencefálico agudo. Ensaios clínicos randomizados de grande porte (como o estudo CRASH) demonstraram que a corticoterapia aumenta a mortalidade"
+  },
+  {
+    "id": 2656,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Sistema Único de Saúde - Traumatismo Craniencefálico",
+    "stem": "Considerando-se um quadro de traumatismo crânio encefálico em uma criança com menos de 2 anos de idade, é correto afirmar que não é considerado como um mecanismo de trauma grave",
+    "alternatives": "  A) acidente com óbito no local.\n  B) acidente de carro com paciente sendo ejetado do veículo.\n  C) queda de até 50 centímetros. [GABARITO]\n  D) capotamento do veículo.\n  E) queda de bicicleta em baixa velocidade sem capacete.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Para menores de 2 anos, segundo os critérios do PECARN, quedas de baixa altura (abaixo de 90 cm) são consideradas de baixo risco e não configuram mecanismo de trauma grave.\n\n****Alternativa Correta** (C)**: Quedas de pequena altura (até 50 cm ou mesmo até 90 cm em menores de 2 anos) são classificadas como mecanismos de baixo risco cinético e não entram na "
+  }
+]

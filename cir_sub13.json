@@ -1,0 +1,605 @@
+[
+  {
+    "id": 7233,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Diagnóstico Clínico Tratamento",
+    "stem": "Homem, 30 anos, foi vítima de ferimento por projétil de arma de fogo no pescoço. Admissão no Centro de Trauma: A: Conversando. Hálito etílico. SpO₂: 96% com máscara de oxigênio. B: MV presente bilateralmente. Ausência de enfisema de subcutâneo torácico. C: PA: 140x70 mmHg; FC: 105 bpm; tempo de enchimento capilar de 1 segundo. D: Escala de coma de Glasgow de 15 (agitado). E: Ferimento demonstrando na figura a seguir. Ausência de enfisema de subcutâneo. Realizada analgesia com melhora da dor e agitação. Assinale qual é a melhor conduta neste momento do atendimento.",
+    "alternatives": "  A) Exploração local e sutura.\n  B) Cervicotomia exploradora.\n  C) Endoscopia e broncoscopia.\n  D) Tomografia com contraste. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Em ferimentos penetrantes de pescoço, paciente estável e assintomático, a angiotomografia é o exame de escolha.\n\n****Alternativa Correta** (D)**: A tomografia com contraste avalia vasos, vias aéreas e coluna, evitando procedimentos invasivos desnecessários.\n\n**Alternativas Incorretas**:\n- **Letra A**: Exploração local não é segura.\n- **Letra B**: Cervicoto"
+  },
+  {
+    "id": 7234,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "topic": "Neoplasia Colorretal",
+    "stem": "Homem, 75 anos, foi admitido no Serviço de Emergência devido à obstrução intestinal. Realizada tomografia de abdome que evidenciou obstrução no nível do sigmoide, distensão do cólon e intestino delgado e múltiplos nódulos hepáticos compatíveis com lesões secundárias. Foi realizada retossigmoidectomia com colostomia terminal e sepultamento do coto retal. O procedimento durou 04 horas com necessidade de droga vasoativa. Assinale qual a justificativa adequada para não se realizar a anastomose primária.",
+    "alternatives": "  A) Câncer obstrutivo.\n  B) Instabilidade hemodinâmica. [GABARITO]\n  C) Ausência de preparo de cólon.\n  D) Presença de metástase.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Anastomose primária é contraindicada em instabilidade hemodinâmica.\n\n****Alternativa Correta** (B)**: O paciente usou droga vasoativa, indicando hipoperfusão, aumentando risco de deiscência da anastomose. A colostomia é mais segura.\n\n**Alternativas Incorretas**:\n- **Letra A**: Câncer obstrutivo não contraindica anastomose.\n- **Letra C**: Ausência de prepar"
+  },
+  {
+    "id": 7235,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "topic": "Tratamento Cirúrgico Hierarquização do Atendimento e Avaliação Primária Lesão Traumática do Diafragma",
+    "stem": "Homem, 23 anos, vítima de queda de motocicleta em alta velocidade. Avaliação na admissão no Serviço de Emergência: A: Intubado; SpO₂: 93%. B: MV e ausculta diminuídos à esquerda. C: PA: 140x70 mmHg; FC: 90 bpm; FAST negativo. D: Escala de Coma de Glasgow de 3. Sedação. Pupilas anisocóricas, com midríase à esquerda. E: Fratura exposta de perna esquerda, conforme imagem a seguir. O paciente será submetido à analgesia, imunização antitetânica e antibiótico. Após o atendimento inicial, foi encaminhado para exame de tomografia de corpo inteiro com as imagens apresentadas a seguir: Assinale qual é a sequência de tratamento adequada para esse paciente, respectivamente.",
+    "alternatives": "  A) Craniotomia; Laparotomia; Drenagem torácica. [GABARITO]\n  B) Craniotomia; Drenagem torácica; Laparotomia.\n  C) Drenagem torácica; Craniotomia; Laparotomia.\n  D) Drenagem torácica; Laparotomia; Craniotomia.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Anisocoria indica herniação cerebral iminente, prioridade absoluta. Depois laparotomia (lesão abdominal) e drenagem torácica (se necessário).\n\n****Alternativa Correta** (A)**: Craniotomia descomprime o cérebro primeiro, depois laparotomia para lesão abdominal, depois drenagem torácica.\n\n**Alternativas Incorretas**:\n- **Letra B**: Drenagem torácica antes da"
+  },
+  {
+    "id": 7236,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "topic": "Condutas",
+    "stem": "Mulher, 23 anos, caiu de uma altura de 8 metros. Na admissão no serviço de emergência apresentava instabilidade hemodinâmica. No exame físico apresentou instabilidade da bacia. Foi realizado raio-X de bacia, conforme figura a seguir: Foi indicada a colocação de lençol para fechamento temporário do anel pélvico. Qual é o reparo anatômico correto para colocação do lençol, de acordo com a ilustração apresentada?",
+    "alternatives": "  A) Posição 1.\n  B) Posição 2.\n  C) Posição 3. [GABARITO]\n  D) Posição 4.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: O lençol deve ser posicionado ao nível dos grandes trocânteres.\n\n****Alternativa Correta** (C)**: A posição 3 (grandes trocânteres) permite a compressão efetiva do anel pélvico.\n\n**Alternativas Incorretas**:\n- **Posição 1**: Muito alta, não comprime a pelve.\n- **Posição 2**: Muito alta.\n- **Posição 4**: Muito baixa, ineficaz."
+  },
+  {
+    "id": 7237,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Diagnóstico e Princípios de Estadiamento",
+    "stem": "Homem, 37 anos, refere aumento do volume da coxa esquerda que associa com trauma local ocorrido há 6 meses. Nega dor local ou limitação de movimentação. Ao exame físico apresenta massa fibroelástica na face posterior da coxa esquerda de 15 x 10 cm, conforme imagem a seguir: Não apresenta restrição de movimentação e pulsos presentes e normais. Realizada ressonância magnética do membro, que evidenciou lesão profunda em compartimento posterior da coxa, em contato com o nervo ciático. Foi submetido à biópsia que revelou tratar-se de sarcoma de alto grau. Assinale qual deve ser a próxima conduta na condução do caso.",
+    "alternatives": "  A) Cintilografia óssea.\n  B) Tomografia de tórax e abdome. [GABARITO]\n  C) Ressecção com margem tridimensional.\n  D) Quimioterapia e radioterapia.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Sarcoma de alto grau exige estadiamento antes da cirurgia. Pulmão é o principal sítio metastático.\n\n****Alternativa Correta** (B)**: TC de tórax e abdome avalia metástases à distância, essencial para planejar tratamento.\n\n**Alternativas Incorretas**:\n- **Letra A**: Cintilografia óssea não é rotina.\n- **Letra C**: Ressecção sem estadiamento é erro.\n- **Letr"
+  },
+  {
+    "id": 7238,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Vascular e Isquemia Mesentérica",
+    "topic": "Isquemia Mesentérica Nãooclusiva",
+    "stem": "Mulher, 64 anos, está internada na unidade coronariana há 20 dias após parada cardiorrespiratória secundária a infarto agudo do miocárdio. Evoluiu com disfunção cardíaca e desde então, está tomando dobutamina e noradrenalina. Há 1 dia cursou com distensão abdominal e leve dor difusa. Ao exame físico encontra-se orientada, com SpO₂ de 95% em a r ambiente; FC: 80 pbm; PA: 120x70 mmHg; ausculta pulmonar sem alterações; abdome distendido, doloroso à palpação profunda, sem irritação peritoneal, ruídos hidroaéreos diminuídos. Toque retal sem alterações. ⦁ Exames laboratoriais: Hb: 9,8 g/dL Leucócitos: 19.471/mm³ PCR: 272 mg/L (de 3 dias atrás era de 30 mg/L) Cl: 1,7 mg/dL Ureia: 60 mg/dL Amilase: 232 U/L Lipase: 190 U/L k ⁺ : 4,1 mEg/L Na ⁺ : 143 mEg/L Realizada tomografia de abdome apresentada a seguir. Assinale qual é a principal hipótese diagnóstica.",
+    "alternatives": "  A) Síndrome de Ogilvie.\n  B) Pancreatite aguda necrohemorrágica.\n  C) Isquemia mesentérica não oclusiva. [GABARITO]\n  D) Abscesso subfrênico à esquerda.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Uso prolongado de vasopressores causa vasoconstrição esplâncnica e isquemia mesentérica.\n\n****Alternativa Correta** (C)**: O quadro clínico e laboratorial (leucocitose, PCR elevada) e o histórico de noradrenalina indicam isquemia mesentérica não oclusiva.\n\n**Alternativas Incorretas**:\n- **Letra A**: Síndrome de Ogilvie não explica o estado inflamatório.\n- "
+  },
+  {
+    "id": 7240,
+    "current_area": "Cirurgia",
+    "current_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "topic": "Manifestações Clínicas e Exame Físico Exames Complementares Diagnóstico",
+    "stem": "Mulher, 33 anos, internada em Unidade de Terapia Intensiva, há 7 dias, após realização de transplante pulmonar, intubada e sedada. Apresenta agudamente distensão abdominal, reação de dor à palpação abdominal em epigástrio, hipocôndrio direito. Realizada tomografia de abdome, corte coronal, que é apresentada a seguir: ⦁ Exames laboratoriais: Leucócitos 17.000/mm³ PCR: 210 mg/L TGO/AST: 120 U/L TGP/ALT: 160 U/L FA: 74 U/L GGT: 151 U/L Amilase: 170 U/L Lipase: 122 U/L Assinale a alternativa que apresenta o diagnóstico correto.",
+    "alternatives": "  A) Úlcera perfurada.\n  B) Íleo metabólico.\n  C) Colecistite aguda alitiásica. [GABARITO]\n  D) Colangite.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Paciente crítico pós-transplante tem risco de colecistite alitiásica.\n\n****Alternativa Correta** (C)**: Distensão abdominal, dor em hipocôndrio direito, febre, leucocitose e imagem de vesícula distendida com parede espessada são típicos.\n\n**Alternativas Incorretas**:\n- **Letra A**: Úlcera perfurada teria pneumoperitônio.\n- **Letra B**: Íleo metabólico não "
+  },
+  {
+    "id": 7241,
+    "current_area": "Cirurgia",
+    "current_subtema": "Cirurgia Bariátrica e Metabólica",
+    "topic": "Bypass Gástrico em YdeRoux Quadro clínico da anemia ferropriva Reposição parenteral de ferro",
+    "stem": "Mulher, 37 anos, queixa-se de fadiga, fraqueza e queda de cabelo. Refere antecedente de cirurgia bariátrica ( bypass gástrico) há 4 anos. Ao exame físico apresenta-se descorada, unhas quebradiças e sem outras alterações. Assinale qual é a principal hipótese diagnóstica e o respectivo tratamento.",
+    "alternatives": "  A) Anemia ferropriva e reposição endovenosa de ferro. [GABARITO]\n  B) Deficiência de vitamina B12 e reposição oral de complexo B.\n  C) Deficiência de ácido fólico e reposição oral de polivitamínico.\n  D) Deficiência proteica e suplemento oral de proteína.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Em bypass gástrico, há desvio do duodeno e jejuno proximal, principais sítios de absorção de ferro. Portanto, a deficiência de ferro é comum e a reposição oral é insuficiente.\n\n****Alternativa Correta** (A)**: Anemia ferropriva é a principal hipótese, justificada pelo quadro clínico (fadiga, queda de cabelo, unhas quebradiças) e pelo antecedente de bypass "
+  },
+  {
+    "id": 7242,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Apresentação Clínica e Diagnóstico Tratamento",
+    "stem": "Mulher, 15 anos, procura o serviço de Emergência com queixa de febre (38,7 ºC) há 20 dias, dor e hiperemia em região sacrococcígea. Refere dois episódios semelhantes no último ano com melhora espontânea. Ao exame físico, apresenta hiperemia, aumento do volume da pele e dor à palpação na região sacrococcígea com sinal de flutuação, conforme imagem a seguir: Considerando a principal hipótese diagnóstica, assinale a melhor conduta.",
+    "alternatives": "  A) Ressecção ampla.\n  B) Drenagem aberta. [GABARITO]\n  C) Antibioticoterapia.\n  D) Drenagem percutânea.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Abscesso sacrococcígeo agudo (cisto pilonidal infectado) requer drenagem cirúrgica imediata; não se trata com antibioticoterapia isolada nem com ressecção ampla na fase aguda.\n\n****Alternativa Correta** (B)**: Drenagem aberta é o tratamento de escolha para abscesso agudo, aliviando os sintomas e permitindo resolução da infecção.\n\n**Alternativas Incorretas*"
+  },
+  {
+    "id": 7243,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Anestésicos Locais",
+    "stem": "Homem, 25 anos, deu entrada no Serviço de Emergência com ferimento cortocontuso no 3º quirodáctilo direito (QDD) de 3 cm. Opta-se pela realização de um bloqueio troncular na base do 3º QDD para realizar a sutura do ferimento. Assinale a alternativa que apresenta o anestésico mais indicado.",
+    "alternatives": "  A) Ropivacaína.\n  B) Benzocaína.\n  C) Lidocaína sem vasoconstritor. [GABARITO]\n  D) Bupivacaína com vasoconstritor.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Em extremidades (dedos, pênis, nariz), anestésicos com vasoconstritores são contraindicados devido ao risco de necrose por vasoconstrição em áreas de circulação terminal.\n\n****Alternativa Correta** (C)**: Lidocaína sem vasoconstritor é o anestésico de escolha para bloqueio digital, seguro e eficaz.\n\n**Alternativas Incorretas**:\n- **Letra A**: Ropivacaína é"
+  },
+  {
+    "id": 7245,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Cirurgia Geral Malignas",
+    "stem": "Homem de 42 anos apresenta lesão ulcerada em região pré-auricular direita, de rápida evolução, apresentando paralisia facial periférica e presença de múltiplos linfonodos cervicais (figura abaixo). Qual o sítio primário mais provável?",
+    "alternatives": "  A) Conduto auditivo externo.\n  B) Glândula parótida. [GABARITO]\n  C) Mucosa dos seios da face.\n  D) Células de Merkel.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A tríade lesão pré-auricular + paralisia facial + linfonodos cervicais é altamente sugestiva de neoplasia de parótida, pois o nervo facial atravessa a glândula.\n\n****Alternativa Correta** (B)**: O sítio primário mais provável é a glândula parótida, justificando a paralisia facial por invasão neural.\n\n**Alternativas Incorretas**:\n- **Letra A**: Conduto audi"
+  },
+  {
+    "id": 7246,
+    "current_area": "Cirurgia",
+    "current_subtema": "Cicatrização, Tratamento de Feridas, Enxertos e Retalhos",
+    "topic": "Cirurgia Cicatrização de Feridas Tratamento das Hérnias Inguinais",
+    "stem": "Considerando princípios de cicatrização de feridas cirúrgicas, o objetivo é restaurar a anatomia e função mais próxima da normalidade possível. Ao proceder o fechamento de uma herniorrafia inguinal em homem adulto de 45 anos, tabagista, trabalhador na construção civil, temos que considerar os vários fatores locais e sistêmicos que podem afetar o sucesso da cirurgia. Assinale a alternativa correta.",
+    "alternatives": "  A) O tabagismo pouco interfere no processo de cicatrização, desde que suspenda 1 semana antes da cirurgia.\n  B) O tempo para a retirada de pontos da sutura deve considerar restabelecimento da força tênsil da ferida.\n  C) A atividade física pesada deve ser evitada até 6 semanas após a cirurgia e consequentemente o paciente deverá ficar afastado do trabalho. [GABARITO]\n  D) É indicado a utilização do fio de categut cromado para o fechamento da aponeurose e subcutâneo, e o fio de nylon para pontos na pele.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Atividade física pesada aumenta a pressão intra-abdominal, risco de deiscência e recidiva herniária. Espera-se restrição por cerca de 6 semanas.\n\n****Alternativa Correta** (C)**: O paciente deve evitar esforço físico pesado por até 6 semanas para permitir cicatrização adequada da parede abdominal.\n\n**Alternativas Incorretas**:\n- **Letra A**: Tabagismo inte"
+  },
+  {
+    "id": 7247,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento ao Paciente Queimado e Reposição Volêmica",
+    "topic": "Cirurgia Geral Cirurgia Queimadura de Espessura Total 3 Grau",
+    "stem": "Homem de 32 anos sofreu queimadura por escaldo de líquido aquecido em membro superior esquerdo, com acometimento de toda a derme, com leito seco, sem eritema e sem perfusão tecidual a dígito pressão. Refere pouca dor no local. Qual a classificação dessa queimadura em relação a profundidade?",
+    "alternatives": "  A) 2° grau superficial.\n  B) 2° grau profundo.\n  C) 1° grau.\n  D) 3° grau. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Queimadura de 3º grau: derme destruída, leito seco e indolor, sem perfusão (não branqueia à digitopressão).\n\n****Alternativa Correta** (D)**: A descrição (toda derme, leito seco, sem dor) é clássica de queimadura de 3º grau.\n\n**Alternativas Incorretas**:\n- **Letra A**: 2º grau superficial: bolhas e dor intensa.\n- **Letra B**: 2º grau profundo: ainda há dor"
+  },
+  {
+    "id": 7248,
+    "current_area": "Cirurgia",
+    "current_subtema": "Cirurgia Pediátrica e Malformações Digestivas Neonatais",
+    "topic": "Cirurgia Geral Refluxo Gastroesofágico RGE Patogênese e Apresentação Clínica",
+    "stem": "Recém-nascido, feminino, pré-termo de 33 semanas, com 4 semanas de vida. Refere regurgitações de leite há 7 dias. Evoluiu com aumento da frequência das regurgitações. Há dois dias teve dois episódios de vômitos após tentativa de ingesta (aleitamento materno). Os vômitos são de conteúdo exclusivamente alimentar (leite) segundo informações colhidas. Exame físico: desidratado +1/+4, corado e eupneico. Abdome globoso, sem massas palpáveis. Qual a hipótese diagnóstica mais provável?",
+    "alternatives": "  A) Estenose hipertrófica do piloro.\n  B) Refluxo gastroesofágico. [GABARITO]\n  C) Intussuscepção intestinal.\n  D) Vício de rotação intestinal.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Em prematuros, a estenose hipertrófica do piloro é rara. RGE é a causa comum de regurgitação/vômitos no lactente jovem.\n\n****Alternativa Correta** (B)**: RGE é a hipótese mais provável pela idade (4 semanas), prematuridade e ausência de sinais de obstrução.\n\n**Alternativas Incorretas**:\n- **Letra A**: Estenose hipertrófica do piloro é mais comum em lactent"
+  },
+  {
+    "id": 7249,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "topic": "Cirurgia Geral Cirurgia Infecção de Ferida Operatória Infecção de Sítio Cirúrgico ISC Diagnóstico",
+    "stem": "Menino, 12 anos, submetido a apendicectomia há 10 dias. Refere internação prolongada na ocasião da cirurgia, relacionada a perfuração do apêndice e peritonite difusa. Recebeu alta hospitalar no 4° pós operatório afebril, aceitando dieta via oral e com evacuações presentes. Há dois dias refere febre, parada da eliminação de flatus e fezes, vômito (um episódio) e dor abdominal. Exame físico: abdome distendido, ruídos hidroaéreos abolidos, dor à palpação profunda. Ferida operatória com hiperemia. Qual o diagnóstico mais provável?",
+    "alternatives": "  A) Volvo intestinal.\n  B) Brida ou aderência.\n  C) Abscesso de parede.\n  D) Abscesso de cavidade. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Pós-operatório de apendicectomia complicada com peritonite: quadro obstrutivo + febre sugere abscesso intra-abdominal.\n\n****Alternativa Correta** (D)**: Abscesso de cavidade explica febre, íleo paralítico e obstrução.\n\n**Alternativas Incorretas**:\n- **Letra A**: Volvo é raro e não tem relação com cirurgia recente.\n- **Letra B**: Brida é causa de obstrução "
+  },
+  {
+    "id": 7250,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Cirurgia Geral Cirurgia Tratamento Cirúrgico Estratégias da Terapêutica Cirúrgica",
+    "stem": "Homem de 68 anos, com dor em membro inferior direito há um mês. Evoluiu com escurecimento do hálux direito há dez dias. É tabagista (30 anos-maço) e diabético. Ao exame clínico apresenta necrose seca do hálux direito, com temperatura simétrica nos pés, pulsos femorais e poplíteos palpáveis, porém com pulsos distais diminuídos em amplitude. Índice tornozelo braquial de 0,50 à direita e 0,70 à esquerda. Qual a conduta mais adequada?",
+    "alternatives": "  A) Tratamento inicial com sessões de oxigenioterapia hiperbárica.\n  B) Desbridamento precoce e curativo com pressão negativa.\n  C) Angiografia arterial para planejamento de revascularização. [GABARITO]\n  D) Amputação primária do hálux direito com sutura hemostática.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Isquemia crítica de membro (ITB < 0,5 e necrose) requer revascularização urgente. Angiografia é essencial para planejamento.\n\n****Alternativa Correta** (C)**: Angiografia arterial para planejamento de revascularização é a conduta mais adequada para salvar o membro.\n\n**Alternativas Incorretas**:\n- **Letra A**: Oxigenioterapia hiperbárica não é tratamento in"
+  },
+  {
+    "id": 7251,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Cirurgia Geral Cirurgia Apresentação Clínica e Diagnóstico Tratamento",
+    "stem": "Lactente, menino, 4 meses. Informante refere abaulamento inguinal direito aos esforços (choro) com melhora espontânea. Ao exame físico, sem alterações. Genitália de fenótipo masculino característico, testículos palpáveis em bolsa testicular, sem abaulamento inguinal à inspeção. Qual a conduta mais adequada?",
+    "alternatives": "  A) Ultrassonografia diagnóstica.\n  B) Herniorrafia inguinal eletiva. [GABARITO]\n  C) Acompanhamento clínico.\n  D) Observação e reavaliação em 6 horas.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Hérnia inguinal em lactente tem alto risco de encarceramento; correção eletiva é indicada mesmo se redutível.\n\n****Alternativa Correta** (B)**: Herniorrafia inguinal eletiva é a conduta recomendada para evitar complicações.\n\n**Alternativas Incorretas**:\n- **Letra A**: Ultrassonografia é desnecessária com história clássica.\n- **Letra C**: Acompanhamento clí"
+  },
+  {
+    "id": 7252,
+    "current_area": "Cirurgia",
+    "current_subtema": "Técnica Operatória, Diérese, Hemostasia e Síntese (Fios Cirúrgicos)",
+    "topic": "Cirurgia Febre Pósoperatória Diagnósticos Diferenciais",
+    "stem": "Homem de 48 anos, portador de hipertensão arterial controlada, foi submetido a herniorrafia inguinal eletiva em esquema ambulatorial, com técnica cirúrgica sem a utilização de tela. Não foi utilizado antibiótico profilático e a anestesia foi apenas espinhal (raquidiana), sem sedação. Após 24 horas da cirurgia, passou a apresentar temperatura axilar de 38,2°C, além de mialgia e cansaço. Não tem perda de apetite ou dor abdominal. Refere dor no local da incisão, porém tolerável e controlável com as medicações analgésicas e anti-inflamatórias prescritas. Qual a melhor alternativa?",
+    "alternatives": "  A) Não deveria ter sido realizada a cirurgia em caráter ambulatorial por conta da hipertensão arterial sistêmica.\n  B) A causa mais provável da febre neste paciente é atelectasia.\n  C) Deveria ter sido utilizado antibiótico profilático.\n  D) Não é possível descartar totalmente uma causa infecciosa para a febre. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Febre no 1º PO sempre deve ser investigada; não se pode descartar infecção precoce sem avaliação.\n\n****Alternativa Correta** (D)**: Não é possível descartar totalmente causa infecciosa para a febre, pois o quadro é inespecífico.\n\n**Alternativas Incorretas**:\n- **Letra A**: Hipertensão controlada não contraindicava cirurgia ambulatorial.\n- **Letra B**: Atel"
+  },
+  {
+    "id": 7253,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Cirurgia Geral Cirurgia Apresentação Clínica Marcadores Diagnósticos",
+    "stem": "Homem de 22 anos, com história de trauma escrotal leve há 40 dias. Antecedente de criptorquidia. O exame físico revelou a presença de testículo esquerdo aumentado, indolor com nódulo endurecido. Qual a suspeita clínica e a conduta?",
+    "alternatives": "  A) Neoplasia testicular, ultrassonografia, dosagem de alfafetoproteína e BHCG. [GABARITO]\n  B) Orquiepididimite bacteriana, ultrassonografia, antibioticoterapia.\n  C) Orquiepididimite bacterina, urina tipo 1, antibioticoterapia.\n  D) Neoplasia testicular, ultrassonografia, cirurgia.",
+    "explanation": ""
+  },
+  {
+    "id": 7254,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "topic": "Cirurgia Tamponamento Cardíaco",
+    "stem": "Paciente encontrado em via pública desorientado, sem história clinica. É trazido por ambulância em serviço de urgência com quadro de sudorese, dispneia, tempo de enchimento capilar de 6 segundos. Sinais vitais são os seguintes: PA: 50x30 mmHg, FC: 137 bpm, FR: 28 imp, SatO2: 94% e glicemia capilar: 132 mg/dL. Foi realizado ultrassom à beira leito (figura abaixo). Qual a conduta?",
+    "alternatives": "  A) Toracocentese.\n  B) Diurético endovenoso.\n  C) Pericardiocentese. [GABARITO]\n  D) Iniciar vasopressor.",
+    "explanation": ""
+  },
+  {
+    "id": 7255,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Cirurgia Geral Cirurgia Ruptura de Aneurisma da Aorta Abdominal Aneurismas Rotos",
+    "stem": "Homem de 70 anos é admitido em unidade de pronto atendimento com queixa de dor lombar súbita intensa sem fatores de melhora. Relata que é um episódio inédito. Nega dor torácica dispneia ou perda de consciência. Tem antecedente de hipertensão arterial crônica, tabagismo e doença pulmonar obstrutiva crônica. PA: 110 /60 mmHg; FC: 90 bpm. Paciente é obeso de difícil exame abdominal. Giordano negativo. Abaixo segue imagem de tomografia realizada pronto socorro. Exames laboratoriais: Hb: 9,5 g/dl Ht: 39%, Na: 130 mEq/L; K: 5,8 mEq/l Creatinina: 2,5 mg/dl. Qual a melhor conduta?",
+    "alternatives": "  A) Tratamento cirúrgico imediato. [GABARITO]\n  B) Tratamento cirúrgico em 24 a 48 horas.\n  C) Investigação adicional com ressonância nuclear magnética.\n  D) Inicialmente, apenas compensação clínica.",
+    "explanation": ""
+  },
+  {
+    "id": 7256,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Cirurgia Geral Anticoagulação",
+    "stem": "Paciente de 55 anos no 10° pós-operatório de nefrectomia direita videolaparoscópica devido a carcinoma renal de células claras com boa evolução cirúrgica. Voltou em retorno com queixa de edema e dor súbitos de perna direita há 1 dia. Ao exame físico, apresenta panturrilha discretamente edemaciada e empastada, porém com dor controlada. Exames laboratoriais. Hb: 9,0 dl/ml; Ht: 35%; Creat: 1,2 mg/dl; Na: 138 mEq/ml; K: 5,5 mEq/ml; Glicemia jejum:110 mg/dl. Estava usando AAS para profilaxia de tromboembolismo venoso e apresentou 1 episódio leve e autolimitado de epistaxe há 4 dias. Realizou ultrassom venoso em caráter de urgência que evidenciou trombose de veia poplítea. Qual a melhor conduta?",
+    "alternatives": "  A) Repetir ultrassom em 3 dias.\n  B) Enoxaparina.\n  C) Filtro de veia cava.\n  D) Apixabana. [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 7257,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "topic": "Cirurgia Preceitos Básicos em Técnica Operatória",
+    "stem": "Homem de 30 anos, vítima de ferimentos por arma de branca na região abdominal, é admitido em unidade de atendimento de urgência. Ao exame, encontra se desorientado, pálido, pulsos finos, PA: 40 X0 mmHg; FC: 145 bpm; FR: 25 ipm. O abdome está distendido, muito doloroso à palpação e observa-se 3 perfurações na parede abdominal (epigástrio, flanco esquerdo e hipocôndrio esquerdo). É encaminhado à laparotomia exploradora em caráter de emergência. Qual a incisão mais apropriada para esse caso?",
+    "alternatives": "  A) Subcostal esquerda.\n  B) Transversa supraumbilical.\n  C) Paramediana esquerda.\n  D) Mediana supraumbilical. [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 7258,
+    "current_area": "Cirurgia",
+    "current_subtema": "Cirurgia Pediátrica e Malformações Digestivas Neonatais",
+    "topic": "Cirurgia Classificação da Cirurgia Conforme Grau de Contaminação",
+    "stem": "Recém-nascido masculino, 3 semanas de vida, com quadro sugestivo de suboclusão intestinal alta. O diagnóstico de estenose hipertrófica do piloro foi confirmado pelo ultrassom abdominal. Será submetido a correção cirúrgica com a realização de uma piloromiotomia por via laparotômica. Qual a classificação pré-operatória conforme o grau de contaminação?",
+    "alternatives": "  A) Contaminada.\n  B) Infectada.\n  C) Potencialmente contaminada.\n  D) Limpa. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Cirurgia sem abertura de víscera oca e com baixo risco de contaminação é classificada como limpa.\n\n****Alternativa Correta** (D)**: Piloromiotomia é cirurgia limpa, pois não ocorre contaminação significativa.\n\n**Alternativas Incorretas**:\n- **Letra A**: Contaminada envolve contato com secreções contaminadas.\n- **Letra B**: Infectada é quando há infecção pr"
+  },
+  {
+    "id": 7283,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Tratamento do Adenocarcinoma Gástrico",
+    "stem": "Mulher, 48 anos de idade, é diagnosticada com adenocarcinoma gástrico. A lesão elevada, friável e com centro ulcerado é percebida no antro gástrico. Refere não ter nenhuma doença de base e é completamente independente para as atividades cotidianas. O estadiamento clínico não revela linfonodos comprometidos ou lesões metastáticas. Diante do quadro clínico descrito, assinale a alternativa que apresenta o melhor plano terapêutico.",
+    "alternatives": "  A) Ressecção endoscópica da lesão seguida de adjuvância.\n  B) Neoadjuvância com gastrectomia total e linfadenectomia D2.\n  C) Neoadjuvância seguida de gastrectomia parcial com linfadenectomia D2. [GABARITO]\n  D) Gastrectomia parcial up front com linfadenectomia D2. 4000273533",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Para adenocarcinoma gástrico ressecável (estágio ≥ T2 ou linfonodos positivos), a conduta padrão é quimioterapia perioperatória (esquema FLOT) seguida de gastrectomia com linfadenectomia D2. A localização no antro permite gastrectomia parcial.\n\n****Alternativa Correta** (C)**: Neoadjuvância seguida de gastrectomia parcial com linfadenectomia D2 é o tratame"
+  },
+  {
+    "id": 7284,
+    "current_area": "Cirurgia",
+    "current_subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+    "topic": "Neoplasia Mucinosa Papilar Intraductal Conduta",
+    "stem": "Homem, 62 anos de idade, sem comorbidades, é admitido após seu segundo episódio de pancreatite aguda em um serviço de referência em cirurgia. Logo após o primeiro episódio, há 3 anos, realizou colecistectomia pela existência de micro cálculos na vesícula biliar. Agora a equipe solicita colangioressonância, que evidencia lesão cística na cabeça pancreática, de 3,8 cm, comunicando com o ducto pancreático principal. Com base no caso descrito, assinale a alternativa que apresenta o tratamento mais adequado.",
+    "alternatives": "  A) Pancreatectomia do segmento acometido pela lesão. [GABARITO]\n  B) Pancreatectomia total.\n  C) Seguimento com ressonância anual.\n  D) Enucleação com ressecção da lesão cística. 4000273531",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Lesões císticas pancreáticas com comunicação com ducto principal e tamanho >3 cm são consideradas neoplasias mucinosas papilares intraductais (NMP) de alto risco. Segundo os critérios de Fukuoka, lesões >3 cm têm indicação cirúrgica devido ao risco de malignização.\n\n****Alternativa Correta** (A)**: Pancreatectomia do segmento acometido (ex: duodenopancreat"
+  },
+  {
+    "id": 7285,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Tratamento",
+    "stem": "Homem, 48 anos de idade, procura atendimento com queixas de regurgitação e pirose de longa data. Traz consigo endoscopia que descreve mucosa de coloração salmão se estendendo até 3 cm da Junção Esofagogástrica (JEG). O anatomopatológico descreve metaplasia intestinal sem displasia. Sobre o seguimento do paciente, assinale a alternativa correta.",
+    "alternatives": "  A) Não é necessário seguimento endoscópico.\n  B) Deve realizar nova endoscopia em 1 ano.\n  C) Deve realizar nova endoscopia em 5 anos. [GABARITO]\n  D) Deve realizar nova endoscopia em 6 meses. 4000273530",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Esôfago de Barrett sem displasia deve ser acompanhado com endoscopia a cada 3-5 anos. Adequado para esta paciente (provável sexo feminino, embora o texto use \"paciente\" neutro, mas a questão menciona \"Homem\"? De qualquer forma, a regra é geral).\n\n****Alternativa Correta** (C)**: Nova endoscopia em 5 anos é o intervalo recomendado.\n\n**Alternativas Incorreta"
+  },
+  {
+    "id": 7286,
+    "current_area": "Cirurgia",
+    "current_subtema": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "topic": "Rastreio Câncer Colorretal",
+    "stem": "Homem, 32 anos de idade, diagnosticado com adenocarcinoma de cólon em colonoscopia, que também descreve incontáveis pólipos no cólon. Em consulta de retorno, após a cirurgia, questiona a equipe sobre a necessidade de investigação complementar para seu filho, que conta 4 anos de idade. A orientação mais adequada para o paciente é:",
+    "alternatives": "  A) Realizar colonoscopia imediatamente.\n  B) Iniciar segmento colonoscópico aos 10-12 anos de idade. [GABARITO]\n  C) Realizar a primeira colonoscopia 10 anos antes do diagnóstico do pai, ou seja, aos 22 anos de idade.\n  D) Iniciar seguimento colonoscópico aos 50 anos.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A presença de incontáveis pólipos em paciente jovem sugere Polipose Adenomatosa Familiar (PAF). Familiares de primeiro grau devem iniciar colonoscopia anual a partir dos 10-12 anos de idade, pois o risco de adenomas é alto.\n\n****Alternativa Correta** (B)**: Iniciar seguimento colonoscópico aos 10-12 anos.\n\n**Alternativas Incorretas**:\n- **Letra A**: Realiz"
+  },
+  {
+    "id": 7287,
+    "current_area": "Cirurgia",
+    "current_subtema": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+    "topic": "Abordagem Inicial",
+    "stem": "Homem, 62 anos de idade, comparece ao pronto-socorro relatando antecedente de etilismo crônico e cirrose hepática conhecida, após apresentar episódio súbito de hematêmese volumosa, seguido de tontura e quase perda da consciência. À admissão, encontra-se pálido, sudorético e confuso, com extremidades frias. Os sinais vitais evidenciam PA de 85×55 mmHg, FC de 128 bpm, FR de 24 irpm e SpO₂ de 92% em ar ambiente. Ao exame físico, observa-se abdome globoso, indolor, com ascite moderada. Os exames laboratoriais iniciais mostram hemoglobina de 7,2 g/dL e INR de 1,9. Diante do quadro descrito, assinale a alternativa que apresenta a conduta inicial mais adequada.",
+    "alternatives": "  A) Realizar endoscopia digestiva alta imediata para identificação e controle da fonte do sangramento.\n  B) Iniciar inibidor de bomba de prótons intravenoso em dose plena como medida prioritária.\n  C) Priorizar estabilização hemodinâmica com acesso venoso calibroso, reposição volêmica e hemoderivados. [GABARITO]\n  D) Solicitar tomografia computadorizada de abdome com contraste para investigação etiológica. 4000273522",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Em paciente cirrótico com choque hemorrágico (hipotensão, taquicardia, confusão), a prioridade é a estabilização hemodinâmica (ABC). Realizar endoscopia antes da estabilização aumenta o risco de complicações.\n\n****Alternativa Correta** (C)**: Priorizar estabilização hemodinâmica com acesso venoso, reposição volêmica e hemoderivados.\n\n**Alternativas Incorre"
+  },
+  {
+    "id": 7288,
+    "current_area": "Cirurgia",
+    "current_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "topic": "Manifestações Clínicas Diagnóstico por Imagem",
+    "stem": "Homem, idoso, comparece para avaliação clínica com histórico de tabagismo crônico, relatando alteração progressiva da coloração da pele e das mucosas ao longo de semanas. Associa escurecimento da urina, clareamento das fezes e prurido difuso de intensidade crescente, além de perda ponderal não intencional estimada em cerca de 8 kg nos últimos três meses. Nega dor abdominal relevante. Ao exame físico, evidencia-se icterícia cutâneo-mucosa acentuada e palpação de vesícula biliar aumentada, indolor, sem sinais de irritação peritoneal. A investigação laboratorial demonstra padrão colestático, com elevação predominante de fosfatase alcalina e gama-GT. A tomografia computadorizada de abdome revela dilatação das vias biliares intra e extra-hepáticas, sem evidência de litíase. Diante desse quadro, a principal hipótese diagnóstica é:",
+    "alternatives": "  A) Hepatite viral aguda.\n  B) Coledocolitíase.\n  C) Neoplasia de cabeça de pâncreas. [GABARITO]\n  D) Colangite esclerosante primária. 4000273516",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Icterícia colestática indolor, perda de peso e vesícula palpável (sinal de Courvoisier-Terrier) sugerem obstrução biliar maligna, mais comumente neoplasia de cabeça de pâncreas.\n\n****Alternativa Correta** (C)**: Neoplasia de cabeça de pâncreas.\n\n**Alternativas Incorretas**:\n- **Letra A**: Hepatite viral aguda geralmente tem pródromo viral, transaminases el"
+  },
+  {
+    "id": 7319,
+    "current_area": "Cirurgia",
+    "current_subtema": "Oncologia Cutânea: Melanoma, CBC e CEC",
+    "topic": "Diagnóstico estadiamento e fatores prognósticos",
+    "stem": "Mulher, 67 anos de idade, notou lesão pigmentada na face anterior da perna esquerda. Foi realizada biópsia excisional que revelou tratar-se de melanoma com Breslow de 4,5 mm e ulceração. Qual é o próximo passo na condução do caso?",
+    "alternatives": "  A) Ampliação de margens de 1 cm e pesquisa de linfonodo sentinela.\n  B) Ampliação de margens de 2 cm e pesquisa de linfonodo sentinela.\n  C) Ultrassom de região inguinal e ressonância de abdome total.\n  D) Tomografia de tórax, abdome superior e pelve com contraste. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Melanomas com Breslow > 4 mm têm alto risco de metástases à distância. Antes de cirurgia ampla, é mandatório estadiar com exames de imagem.\n\n****Alternativa Correta** (D)**: O melanoma T4 (> 4 mm) apresenta risco significativo de metástases. A tomografia de tórax, abdome e pelve (ou PET-CT) é o padrão para estadiamento inicial.\n\n**Alternativas Incorretas**"
+  },
+  {
+    "id": 7330,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Cirurgia Geral Parâmetros hemodinâmicos no choque Manifestações clínicas",
+    "stem": "Mulher, 60 anos, é admitida no CTI devido a infarto agudo do miocárdio com supra de segmento ST em toda parede anterior há 36 horas. Apresenta dispneia e esforço respiratório. Exames realizados na admissão: Gasometria arterial pH = 7,32, PO₂=55 mmHg, lactato = 4 mmol/L e troponina elevada. Rx de tórax: infiltrado pulmonar bilateral. Ecocardiograma transtorácico com Doppler: função sistólica do ventrículo esquerdo diminuída, aumento do átrio esquerdo e da pressão sistólica da arterial pulmonar. Qual dos fatores abaixo melhor explica o quadro pulmonar descrito acima?",
+    "alternatives": "  A) Diminuição da drenagem linfática do interstício pulmonar.\n  B) Aumento da pressão diastólica do ventrículo esquerdo. [GABARITO]\n  C) A baixa capacitância da circulação pulmonar.\n  D) Recrutamento e distensão dos capilares pulmonar.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Edema pulmonar cardiogênico: a causa é o aumento da pressão hidrostática capilar, decorrente do aumento da pressão diastólica final do VE.\n\n****Alternativa Correta** (B)**: No IAM extenso, a disfunção sistólica do VE leva a aumento da pressão diastólica do VE, que se transmite retrogradamente ao átrio esquerdo e veias pulmonares, elevando a pressão capilar"
+  },
+  {
+    "id": 7332,
+    "current_area": "Cirurgia",
+    "current_subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+    "topic": "Cirurgia Geral Hiperparatireoidismo secundário",
+    "stem": "Homem de 67 anos, comparece para consulta de avaliação pré-operatória. Histórico de 12 anos de doença renal crônica em estágio terminal secundária a nefropatia diabética e hipertensiva, em hemodiálise. Faz uso regular de losartana, metoprolol, amlodipino, insulina e eritropoetina. Há 4 meses, suspendeu o uso de carbonato de cálcio e calcitriol devido à elevação do cálcio sérico. O paciente segue aderente às medicações e restrições dietéticas. Exames laboratoriais recentes: Cálcio sérico: 10.9 mg/dL (VR: 8,6 a 10,2); Fósforo sérico: 5.3 mg/dL (VR: 2,5 a 4,5); Albumina sérica: 3.7 g/dL (VR: 3,5 a 5,0); Hormônio paratireoideo intacto (PTHi): 780 pg/mL (VR: 10 a 65); Qual das seguintes alternativas é a causa mais provável da hipercalcemia desse paciente?",
+    "alternatives": "  A) Hiperplasia das glândulas paratireoides. [GABARITO]\n  B) Produção ectópica de hormônio paratireoideo.\n  C) Aumento da ativação da vitamina D.\n  D) Redução da depuração do hormônio paratireoideo.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: DRC com PTH alto e hipercalcemia: hiperparatireoidismo terciário por hiperplasia paratireoidiana autônoma.\n\n****Alternativa Correta** (A)**: Na DRC avançada, o hiperparatireoidismo secundário evolui com hiperplasia das paratireoides. Com o tempo, as glândulas tornam-se autônomas e secretam PTH excessivamente, levando a hipercalcemia e hiperfosfatemia, conf"
+  },
+  {
+    "id": 7381,
+    "current_area": "Cirurgia",
+    "current_subtema": "Doença do Refluxo Gastroesofágico (DRGE) e Úlcera Péptica",
+    "topic": "Tratamento Cirúrgico da Úlcera Péptica Manifestações Clínicas Classificação de Johnson",
+    "stem": "Mulher, 28 anos de idade, refere dores epigástricas recorrentes e episódios frequentes de vômito. Realizou várias endoscopias que evidenciavam úlcera péptica persistente no antrogástrico, justa ao piloro. A despeito de tratamento adequado até terceira linha para Helicobacter pylori , mantém teste de urease positivo no último exame. A melhor proposta terapêutica diante do caso apresentado é:",
+    "alternatives": "  A) Gastrectomia total.\n  B) Manter IBP em dose dobrada contínuo.\n  C) Repetir tratamento antibiótico por tempo dobrado.\n  D) Gastrectomia parcial com reconstrução em Y de Roux. [GABARITO]\n  E) Derivação gástrica em Y de Roux com exclusão pilórica.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Úlcera péptica refratária ao tratamento clínico (três linhas para H. pylori e IBP) e com provável complicação obstrutiva (vômitos e localização justa-pilórica) tem indicação cirúrgica. A antrectomia remove o estímulo ácido e a reconstrução em Y de Roux desvia o trânsito.\n\n****Alternativa Correta** (D)**: A gastrectomia parcial com reconstrução em Y de Roux"
+  },
+  {
+    "id": 7382,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Sintomas Típicos Tratamento Cirúrgico da DRGE Indicações para o Tratamento Cirúrgico",
+    "stem": "Homem, 22 anos de idade, apresenta regurgitação e pirose como queixas recorrentes nos últimos dois anos. Após endoscopia digestiva alta normal, realizou tratamento com IBP nos últimos 6 meses com resolução dos sintomas, porém recidiva quando suspende medicação, mesmo com todas as medidas dietéticas e comportamentais orientadas, além de perda ponderal (IMC de 26 kg/m²). Procura atendimento para orientação quanto aos próximos passos no seu tratamento. Assinale a alternativa que apresenta a conduta adequada para essa orientação.",
+    "alternatives": "  A) Deve realizar pH-metria para diagnóstico, tendo em vista a refratariedade ao tratamento.\n  B) A cirurgia é proposta adequada ao paciente, dada a idade e necessidade de medicamento contínuo. [GABARITO]\n  C) Deve suspender IBP, pois usos superiores a 6 meses estão associados à maior incidência de demência.\n  D) Nova endoscopia é necessária nesse momento, dada a alta incidência de Barrett nos pacientes com a doença.\n  E) A mudança de IBP para PCAB por 8 semanas está indicada, pois aumenta as chances de descontinuar o tratamento.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Paciente jovem com DRGE que responde bem ao IBP, mas recidiva ao suspender, e não deseja medicação contínua, é candidato ideal à cirurgia antirrefluxo.\n\n****Alternativa Correta** (B)**: A cirurgia (fundoplicatura) é proposta adequada para pacientes jovens com DRGE confirmada (endoscopia normal, mas resposta clínica ao IBP) que necessitam de tratamento cont"
+  },
+  {
+    "id": 7383,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Classificação Histológica de Lauren Apresentação Clínica Diagnóstico",
+    "stem": "Mulher, 34 anos de idade, com queixas recorrentes de epigastralgia, retorna com endoscopia que descreve lesão elevada em antrogástrico. Anatomopatológico confirma adenocarcinoma gástrico pouco diferenciado. Realizadas tomografias de tórax e abdome, sem evidência de adenomegalia ou lesões à distância. Assinale a alternativa que apresenta a melhor conduta no momento.",
+    "alternatives": "  A) Mucosectomia endoscópica.\n  B) Gastrectomia total.\n  C) Laparoscopia para estadiamento. [GABARITO]\n  D) Quimioterapia neoadjuvante.\n  E) PET-Scan.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Em adenocarcinoma gástrico pouco diferenciado, a laparoscopia de estadiamento é mandatória para excluir carcinomatose peritoneal oculta, mesmo com TC negativa.\n\n****Alternativa Correta** (C)**: A laparoscopia para estadiamento é a melhor conduta, pois permite visualizar diretamente a superfície peritoneal e detectar metástases peritoneais não visíveis na T"
+  },
+  {
+    "id": 7384,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Manifestações Clínicas Tratamento Neoadjuvante Diagnóstico endoscópico",
+    "stem": "Homem, 62 anos de idade, é admitido com relato de fezes em fita e sangramento evacuatório recorrente nos últimos 2 meses. Colonoscopia evidenciou lesão vegetante a 5 cm da borda anal, friável ao toque e laudo de anatomopatológico confirma adenocarcinoma. Exames de estadiamento não evidenciaram lesões secundárias. Assinale a alternativa que apresenta o melhor tratamento indicado ao paciente.",
+    "alternatives": "  A) Retossigmoidectomia e posterior adjuvância.\n  B) Quimioterapia paliativa e seguimento clínico.\n  C) Neoadjuvância seguida de novo estadiamento e retossigmoidectomia. [GABARITO]\n  D) Quimioterapia e radioterapia exclusivas, com seguimento vigilante.\n  E) Retossigmoidectomia e seguimento colonoscópico para avaliar necessidade de adjuvância.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Tumores de reto baixo localmente avançados (estágios T3/T4 ou N+) devem ser tratados com neoadjuvância (radioquimioterapia) antes da cirurgia.\n\n****Alternativa Correta** (C)**: A neoadjuvância seguida de novo estadiamento e retossigmoidectomia é o tratamento padrão para adenocarcinoma de reto baixo localmente avançado. Isso reduz o tumor, aumenta a chance "
+  },
+  {
+    "id": 7385,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Indicação",
+    "stem": "Homem, 48 anos de idade, tabagista de longa data, comparece na Unidade Básica de Saúde (UBS) por estar mais cansado que o habitual em esforços cotidianos. Em radiografia realizada após a primeira consulta, o médico percebe o achado apresentado a seguir: Em relação ao caso descrito, a melhor conduta é:",
+    "alternatives": "  A) Toracocentese. [GABARITO]\n  B) Toracostomia.\n  C) Videotoracoscopia.\n  D) Antibiótico de amplo espectro.\n  E) Toracotomia com decorticação.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Em derrame pleural, a toracocentese é o primeiro passo diagnóstico e terapêutico para definir a natureza do líquido (transudato ou exsudato).\n\n****Alternativa Correta** (A)**: A toracocentese é a conduta inicial para investigar o derrame pleural. Permite análise do líquido (bioquímica, citologia, cultura) e pode ser terapêutica se houver grande volume caus"
+  },
+  {
+    "id": 7417,
+    "current_area": "Cirurgia",
+    "current_subtema": "Oncologia Cutânea: Melanoma, CBC e CEC",
+    "topic": "Cirurgia Geral Tratamento e conduta",
+    "stem": "Mulher de 64 anos apresentou diagnóstico de melanoma nodular em antebraço direito, com índice de Breslow de 3,7 milímetros sem a presença de ulceração e com índice mitótico de zero. Foi submetida à ampliação de margens de 2 centímetros e à pesquisa de linfonodo sentinela axilar direito, que revelou a presença de micrometástases. Quais as próximas condutas indicadas no tratamento desta paciente?",
+    "alternatives": "  A) Realizar uma segunda ampliação de margens de 1 cm e seguimento clínico da cadeia linfonodal.\n  B) Realizar uma segunda ampliação de margens de 1 cm e linfadenectomia axilar direita.\n  C) Realizar o seguimento clínico da cadeia linfonodal, sem a necessidade de nova ampliação de margens. [GABARITO]\n  D) Realizar a linfadenectomia axilar direita, sem a necessidade de nova ampliação de margens.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Aplicar os resultados dos estudos MSLT-II e DeCOG-SLT na conduta do melanoma. A paciente possui um melanoma T3a (Breslow 3,7 mm sem ulceração). Já foi realizada a ampliação de margem de 2 cm, o que é o padrão ouro para Breslow acima de 2 mm. O linfonodo sentinela foi positivo (micrometástase). Atualmente, as evidências mostram que a linfadenectomia radical"
+  },
+  {
+    "id": 7418,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Cirurgia Geral Apresentação clínica Diagnóstico",
+    "stem": "Mulher de 85 anos apresenta tumoração eritematosa de cerca de 1 cm de diâmetro, bordos perolados e presença de teleangiectasias há 1 ano na ponta nasal. Qual o diagnóstico mais provável e a conduta mais adequada?",
+    "alternatives": "  A) Melanoma amelanótico; biópsia excisional com margem de 2 mm.\n  B) Carcinoma espinocelular; crioterapia.\n  C) Ceratoacantoma; biópsia incisional.\n  D) Carcinoma basocelular; biópsia excisional com margem de 4 mm. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Identifique as características clássicas do Carcinoma Basocelular (CBC): pápula eritematosa com bordos perolados e telangiectasias em área fotoexposta (ponta nasal).\n\n****Alternativa Correta** (D)**: O CBC é o câncer de pele mais comum. A lesão descrita é típica do CBC nodular. A conduta é biópsia excisional com margem de segurança; 4 mm é adequado para le"
+  },
+  {
+    "id": 7419,
+    "current_area": "Cirurgia",
+    "current_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "topic": "Cirurgia Geral Rabdomiólise",
+    "stem": "Homem, 45 anos de idade, obeso grau 3, IMC atual de 65Kg/m² (mas já perdeu 38Kg de seu peso máximo). Diabético e hipertenso. Foi submetido a cirurgia bariátrica pela técnica de by-pass gástrico em Y de Roux por via laparoscópica. A informação é que sua cirurgia durou mais de três horas por dificuldade técnica em vista de aderências na cavidade abdominal devido à colecistectomia realizada por via aberta há 10 anos. Você, como médico hospitalista, foi avaliar o paciente no segundo dia de pós-operatório. O mesmo queixava-se de dor em região dorsal bilateral e fraqueza. Negava febre, dispneia, dor abdominal, disuria, coluria ou icterícia, mas apresentava urina mais escura. Pensando no diagnóstico mais provável, qual deve ser a conduta para confirmar este diagnóstico e terapia inicial adequada?",
+    "alternatives": "  A) Solicitar bilirrubinas e enzimas canaliculares hepáticas, aumentar a hidratação do paciente e programar colangiorresonância.\n  B) Solicitar urocultura e hemograma e iniciar antibioticoterapia com cobertura para gramnegativos.\n  C) Solicitar creatinofosfoquinase sérica, aumentar a hidratação do paciente e iniciar bicarbonato de sódio endovenoso. [GABARITO]\n  D) Solicitar tomografia de abdome total, iniciar antibioticoterapia com cobertura para gram-negativos e acionar a equipe cirúrgica.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Pós-operatório de cirurgia prolongada, obesidade, dor lombar bilateral e urina escura = rabdomiólise.\n\n****Alternativa Correta** (C)**: A rabdomiólise é causada por compressão muscular durante cirurgia prolongada. O diagnóstico é confirmado por CPK elevada. O tratamento inclui hidratação vigorosa e alcalinização urinária com bicarbonato para prevenir lesão"
+  },
+  {
+    "id": 7420,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Cirurgia Geral Fatores Predisponentes Quadro Clínico",
+    "stem": "Mulher de 38 anos de idade foi trazida para a Unidade de Pronto Atendimento (UPA) onde você é o médico de plantão. O acompanhante refere que a mesma foi submetida a cirurgia bariátrica (não sabe qual a técnica operatória realizada) há 36 dias. Vem evoluindo com vômitos de repetição e precisou ser levada diversas vezes na mesma UPA para receber hidratação endovenosa. Na última semana apresentou fraqueza, parestesias nos pés e dores musculares. Há dois dias começou a reclamar que a visão estava ficando turva (SIC) e como acordou confusa no dia de hoje, o acompanhante a trouxe. Ao exame físico, apresentava-se estável hemodinamicamente e com índice de 14 na Escala de Coma de Glasgow. Qual das alternativas abaixo está CORRETA, com relação ao quadro da paciente?",
+    "alternatives": "  A) A mesma deve receber hidratação endovenosa e ser encaminhada prontamente para um serviço terciário de urgência para realização de uma tomografia de crânio.\n  B) A fisiopatologia deste quadro está mais relacionada aos vômitos de repetição e não tanto ao tipo de cirurgia bariátrica realizada. [GABARITO]\n  C) É prioritário tentar descobrir qual foi a técnica cirúrgica a qual a paciente foi submetida, pois depende disto para se chegar ao diagnóstico e assim tratar o quadro.\n  D) Pensando no diagnóstico de hipoglicemia secundária a provável síndrome de dumping, recomenda-se infundir imediatamente solução glicosada endovenosa.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Pós-bariátrica, vômitos repetidos, confusão e alterações visuais = deficiência de tiamina (Síndrome de Wernicke).\n\n****Alternativa Correta** (B)**: O quadro é causado pela deficiência de vitamina B1, resultante de vômitos persistentes e má absorção, independentemente da técnica cirúrgica. O tratamento é reposição urgente de tiamina.\n\n**Alternativas Incorre"
+  },
+  {
+    "id": 7448,
+    "current_area": "Cirurgia",
+    "current_subtema": "Oncologia Cutânea: Melanoma, CBC e CEC",
+    "topic": "Diagnóstico estadiamento e fatores prognósticos",
+    "stem": "Mulher, 52 anos de idade, apresentou lesão cutânea hipercrômica em antebraço direito. Foi realizada biópsia excisional da lesão, com o seguinte anatomopatológico: Melanoma cutâneo invasivo; Tipo histológico: extensivo superficial; Nível IV de Clark; Breslow: 4,1 mm; Ulceração: presente; Índice mitótico: 3/mm²; Invasão perineural: presente; Margens cirúrgicas radiais: comprometidas; Margens cirúrgicas profundas: livres. Quais são os fatores de maior impacto prognóstico no anatomopatológico do caso apresentado?",
+    "alternatives": "  A) Índice mitótico e tipo histológico.\n  B) Índice mitótico e invasão perineural.\n  C) Breslow e margem radial comprometida.\n  D) Breslow e ulceração. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: No melanoma, os fatores prognósticos mais importantes para estadiamento e sobrevida são a espessura de Breslow e a ulceração.\n\n****Alternativa Correta** (D)**: O estadiamento do melanoma cutâneo (AJCC 8ª edição) utiliza a espessura de Breslow e a ulceração como principais fatores para definir o estágio T. Ambos influenciam diretamente o risco de metástases"
+  },
+  {
+    "id": 7449,
+    "current_area": "Cirurgia",
+    "current_subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+    "topic": "Coleção Fluida Peripancreática Aguda",
+    "stem": "Mulher, 33 anos de idade, está internada na enfermaria há 16 dias devido à pancreatite aguda biliar. No início do quadro, apresentou dor abdominal de difícil controle com piora após alimentação, além de empachamento. Em virtude da baixa aceitação alimentar, foi realizada a passagem de sonda nasoenteral para nutrição. Com 10 dias de evolução, optou-se por realizar a tomografia de abdome, conforme imagens a seguir: Atualmente, no 16º dia de internação, encontra-se sem dor, sem vômitos e aceitação plena da dieta. Ao exame físico, apresentou bom estado geral, afebril, ausculta torácica sem alteração, abdome flácido e doloroso à palpação profunda do epigástrio, sem sinais de irritação peritoneal. Exames laboratoriais: Hb: 11,3 g/dL Leucograma: 11.715/mm³ PCR: 71 mg/L Creatinina: 1,1 mg/dL Ureia: 45 mg/dL Fosfatase alcalina: 79 U/l GGT: 110 U/L TGO/AST: 41 U/L TGP/ALT: 51 U/L Considerando as informações apresentadas, assinale a melhor conduta para o caso.",
+    "alternatives": "  A) Colecistectomia laparoscópica com colangiografia.\n  B) Colangiografia endoscópica seguida de colecistectomia.\n  C) Alta hospitalar com tomografia de controle em 3 meses. [GABARITO]\n  D) Drenagem percutânea da coleção seguida da colecistectomia.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Em paciente com pancreatite biliar complicada por coleção, que evolui clinicamente bem e assintomático, a conduta é expectante, mesmo que a colecistectomia seja necessária, deve-se aguardar a resolução da coleção.\n\n****Alternativa Correta** (C)**: A paciente apresentou pancreatite aguda biliar com coleção peripancreática, evidenciada na TC. No 16º dia, est"
+  },
+  {
+    "id": 7452,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Indicações de PAAF",
+    "stem": "Homem, 27 anos idade, realizou tomografia de tórax com achado incidental de nódulo na tireoide. Na sequência, foi submetido à ultrassonografia Doppler da tireoide que revelou nódulo em terço inferior de lobo esquerdo, predominantemente sólido, hipoecogênico, mais alto do que largo, de margens pouco definidas, com numerosos focos puntiformes hiperecogênicos de permeio, medindo 2,1 x 1,8 x 1,6 cm (TI-RADS ACR 5 - Thyroid Imaging Reporting and Data System American College of Radiology ), com fluxo central e periférico equivalentes ao Doppler colorido (Chammas III). Diante desse cenário, qual deve ser a próxima conduta?",
+    "alternatives": "  A) Ablação por radiofrequência.\n  B) Tireoidectomia parcial esquerda.\n  C) Acompanhamento ultrassonográfico em 6 meses.\n  D) Punção aspirativa por agulha fina e análise citológica. [GABARITO]",
+    "explanation": "**Pulo do Gato**: O sistema TI-RADS ACR 5 indica nódulos com alta suspeição de malignidade. A diretriz atual estabelece que nódulos acima de 1 cm com pontuação 5 devem ser submetidos à punção aspirativa por agulha fina (PAAF) para análise citológica (Alternativa D). As opções de ablação ou cirurgia (A e B) são prematuras antes de uma confirmação diagnóstica citopatológica. O seguimento (Alternativ"
+  },
+  {
+    "id": 7486,
+    "current_area": "Cirurgia",
+    "current_subtema": "Cirurgia Bariátrica e Metabólica",
+    "topic": "Pacientes candidatos à cirurgia bariátrica Contraindicações à cirurgia bariátrica",
+    "stem": "Um paciente de 42 anos com hipertensão e diabetes tipo 2 é avaliado para a possibilidade de cirurgia bariátrica. Ele tem um IMC de 38 kg/m2 e relata várias tentativas sem sucesso de perda de peso com terapia dietética. O paciente está bem informado sobre a cirurgia bariátrica e suas consequências, demonstra motivação para a mudança no estilo de vida após a cirurgia e, não há histórico de uso de álcool ou drogas ilícitas. Está estável clinicamente e não há contraindicações médicas para a cirurgia. Qual dos seguintes critérios, se algum, impediria este paciente de ser um candidato adequado a cirurgia bariátrica, de acordo com as diretrizes fornecidas?",
+    "alternatives": "  A) O IMC do paciente está abaixo de 40 kg/m².\n  B) O paciente apresenta comorbidades médicas agravadas pela obesidade.\n  C) O paciente tem antecedentes de terapia dietética sem sucesso.\n  D) O paciente é estável do ponto de vista psiquiátrico e sem dependência de substâncias.\n  E) Não há critérios que impeçam o paciente de ser um candidato à cirurgia bariátrica. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: O paciente preenche todos os critérios para cirurgia bariátrica: IMC ≥ 35 com comorbidades, falha de tratamento clínico, estabilidade psiquiátrica e ausência de contraindicações.\n\n****Alternativa Correta** (E)**: Não há impedimento algum; o paciente é candidato ideal.\n\n**Alternativas Incorretas**:\n- **Letra A**: IMC < 40 não é impedimento, pois IMC ≥ 35 co"
+  },
+  {
+    "id": 7487,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Tratamento Cirúrgico da DRGE",
+    "stem": "Qual é a indicação correta para cirurgia antirrefluxo laparoscópica (LARS) em pacientes com doença do refluxo gastroesofágico (DRGE)?",
+    "alternatives": "  A) Todos os pacientes com DRGE devem ser submetidos a LARS como primeira linha de tratamento.\n  B) LARS é indicada para pacientes com DRGE e hérnia de hiato tipo I, independente da presença de sintomas.\n  C) LARS é reservada apenas para pacientes com DRGE que desenvolvem complicações tardias, como disfagia.\n  D) LARS deve ser realizada em todos os pacientes com hérnias de hiato, para prevenir o desenvolvimento de DRGE.\n  E) Pacientes com DRGE que apresentam sintomas limitantes apesar da terapia medicamentosa máxima são candidatos para LARS. 4000215067 [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: LARS é para DRGE refratária ao tratamento clínico otimizado, não para todos os casos.\n\n****Alternativa Correta** (E)**: Quando os sintomas são limitantes apesar de terapia medicamentosa máxima (IBP), a cirurgia é indicada.\n\n**Alternativas Incorretas**:\n- **Letra A**: Primeira linha é tratamento clínico (IBP).\n- **Letra B**: Hérnia de hiato assintomática nã"
+  },
+  {
+    "id": 7488,
+    "current_area": "Cirurgia",
+    "current_subtema": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "topic": "Colonoscopia",
+    "stem": "Um homem de 65 anos chega ao pronto socorro com um episódio de hematoquezia. Ele relata passagem de sangue vermelho-brilhante sem coágulos e nega dor abdominal, vômito ou alterações nas fezes. O paciente tem antecedente de hemorroidas e diverticulose. Os sinais vitais são estáveis e o exame físico, incluindo o exame de toque retal, é inespecífico. Sigmoidoscopia não revela fonte ativa de sangramento. Assinale o próximo passo mais apropriado na avaliação deste paciente.",
+    "alternatives": "  A) Iniciar terapia com vasopressina via IV imediatamente.\n  B) Realizar uma colonoscopia após preparo intestinal adequado. [GABARITO]\n  C) Solicitar uma angiografia mesentérica urgente.\n  D) Indicar cirurgia exploratória sem mais investigações diagnósticas.\n  E) Administrar uma transfusão de sangue, apesar dos sinais vitais estáveis. 4000215066",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Em hematoquezia estável, colonoscopia após preparo é o melhor próximo passo para diagnosticar e tratar sangramento.\n\n****Alternativa Correta** (B)**: Colonoscopia permite visualizar todo o cólon, identificar fonte e realizar terapia endoscópica.\n\n**Alternativas Incorretas**:\n- **Letra A**: Vasopressina é para sangramento ativo grave.\n- **Letra C**: Angiogr"
+  },
+  {
+    "id": 7489,
+    "current_area": "Cirurgia",
+    "current_subtema": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "topic": "Fatores de Risco",
+    "stem": "Com base na sequência adenoma-carcinoma, assinale a alternativa correta em relação ao risco de câncer colorretal.",
+    "alternatives": "  A) O tamanho do adenoma é inversamente proporcional ao risco de câncer colorretal.\n  B) A presença de adenomas vilosos não altera o risco de câncer colorretal quando comparado a adenomas tubulares.\n  C) A remoção de adenomas colorretais não afeta a incidência subsequente de câncer colorretal.\n  D) Pacientes com polipose adenomatosa familiar tem risco quase nulo de desenvolver câncer colorretal se não forem submetidos à intervenção cirúrgica.\n  E) Adenomas maiores que 2 cm tem um risco significativamente maior de ser câncer quando comparados com adenomas menores que 1 cm. 4000215064 [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: O risco de malignização é proporcional ao tamanho e componente viloso do adenoma.\n\n****Alternativa Correta** (E)**: Adenomas >2 cm têm risco maior de câncer que os <1 cm.\n\n**Alternativas Incorretas**:\n- **Letra A**: O risco é diretamente proporcional ao tamanho, não inverso.\n- **Letra B**: Adenomas vilosos têm risco maior que tubulares.\n- **Letra C**: A re"
+  },
+  {
+    "id": 7490,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Tumor Estromal Gastrointestinal GIST",
+    "stem": "Mulher de 52 anos com sintomas dispépticos desde os 30 anos, nega perda ponderal e alteração do apetite. A endoscopia evidencia lesão subepitelial de 5 cm de diâmetro em região de corpo na grande curvatura gástrica, confirmada em tomografia. Qual a principal hipótese diagnóstica e conduta diante do caso:",
+    "alternatives": "  A) Adenocarcinoma; Gastrectomia subtotal.\n  B) Linfoma MALT; Erradicação empírica de Helicobacter pylori.\n  C) Tumor neuroendócrino; Gastrectomia total.\n  D) Carcinomatose peritoneal; Investigação de sítio primário.\n  E) GIST; Gastrectomia em cunha. 4000215057 [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Lesão subepitelial gástrica de 5 cm em paciente com sintomas crônicos é típica de GIST.\n\n****Alternativa Correta** (E)**: GIST é a lesão subepitelial mais comum; conduta é ressecção cirúrgica com margens (gastrectomia em cunha).\n\n**Alternativas Incorretas**:\n- **Letra A**: Adenocarcinoma geralmente é lesão ulcerada, não subepitelial.\n- **Letra B**: Linfoma"
+  },
+  {
+    "id": 7491,
+    "current_area": "Cirurgia",
+    "current_subtema": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "topic": "Síndrome de Polipose Adenomatosa Hereditária Rastreio Câncer Colorretal",
+    "stem": "Você atende um pai de 32 anos recentemente submetido à colectomia total por neoplasia de cólon e com diagnóstico de mais de 100 pólipos colônicos em laudo anátomo-patológico. Ele deseja orientação quanto ao seu filho de 8 anos, preocupado com a possibilidade de transmissão hereditária da doença. Diante disso, assinale a melhor orientação:",
+    "alternatives": "  A) Deve iniciar segmento colonoscópico imediato.\n  B) Deve realizar pesquisa genética do Kras.\n  C) Deve realizar pesquisa genética de mutação do APC. [GABARITO]\n  D) Deve iniciar seguimento colonoscópico aos 22 anos.\n  E) Deve iniciar seguimento colonoscópico aos 45 anos 4000215055",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: PAF é causada por mutação no gene APC; em famílias afetadas, deve-se fazer pesquisa genética para identificar portadores.\n\n****Alternativa Correta** (C)**: A pesquisa genética da mutação do APC é o teste indicado para familiares de primeiro grau de paciente com PAF.\n\n**Alternativas Incorretas**:\n- **Letra A**: Colonoscopia imediata não é o primeiro passo; "
+  },
+  {
+    "id": 7495,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Doença de Crohn",
+    "stem": "Paciente masculino, 22 anos, atendido em ambulatório de cirurgia com queixa de múltiplos orifícios perianais com saída de secreção com odor fétido nos últimos seis meses. Conta também que nesse período teve dores abdominais recorrentes, evacuações diarreicas (6 a 8 vezes ao dia) e notou perda ponderal por roupas largas. Nega febre e outras queixas associadas. Considerando a hipótese diagnóstica mais provável e sua apresentação mais prevalente, em eventual exame endoscópico a principal área a ser estudada será:",
+    "alternatives": "  A) Estômago.\n  B) Jejuno proximal.\n  C) Íleo terminal. [GABARITO]\n  D) Sigmoide.\n  E) Reto. 4000215050",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Fístulas perianais + diarreia crônica + perda de peso = Doença de Crohn até prova em contrário. O íleo terminal é o local mais acometido.\n\n****Alternativa Correta** (C)**: O quadro clínico é sugestivo de Doença de Crohn, que classicamente afeta o íleo terminal. A colonoscopia com ileoscopia deve ser realizada.\n\n**Alternativas Incorretas**:\n- **Letra A**: E"
+  },
+  {
+    "id": 7497,
+    "current_area": "Cirurgia",
+    "current_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "topic": "Neoplasia Mucinosa Papilar Intraductal",
+    "stem": "Paciente masculino, 78 anos, refere já ter apresentado mais de 5 episódios de pancreatite aguda. Relata que, depois do segundo episódio, teve diagnóstico de barro biliar e foi submetido à colecistectomia videolaparoscópica. Desde então passou por diversos médicos, tendo o último solicitado uma ressonância magnética com colangio, que descreveu a via biliar livre de cálculos e mostrou a imagem apresentada no corte demonstrado a seguir: Diante do quadro clínico e do exame de imagem, assinale a principal hipótese diagnóstica.",
+    "alternatives": "  A) Neoplasia intrapapilar mucinosa. [GABARITO]\n  B) Neoplasia cística serosa.\n  C) Neoplasia cística mucinosa.\n  D) Adenocarcinoma.\n  E) Pseudocisto.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Pancreatite aguda de repetição + dilatação cística do ducto pancreático = IPMN de ducto principal.\n\n****Alternativa Correta** (A)**: A Neoplasia Intrapapilar Mucinosa (IPMN) do tipo ducto principal manifesta-se com dilatação difusa ou segmentar do ducto pancreático e episódios recorrentes de pancreatite aguda.\n\n**Alternativas Incorretas**:\n- **Letra B**: N"
+  },
+  {
+    "id": 7505,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Tratamento da Doença Metastática",
+    "stem": "Mulher, 61 anos, refere alteração do hábito intestinal há 6 meses, com diarreia intercalada com constipação. Relata sangue nas fezes nesse período. Nega vômitos e perda de peso. Nega comorbidades. Ao exame físico, está em bom estado geral; IMC: 22kg/m²; ausculta torácica sem alterações; abdome flácido, indolor à palpação, sem massas palpáveis; toque retal sem alterações. Apresenta Hb de 10,3 g/dL. Foi submetida à colonoscopia, que evidenciou lesão ulcerada no sigmoide, envolvendo 50% da luz do órgão, sem outras lesões até a válvula ileocecal. A biópsia do sigmoide revelou tratar-se de adenocarcinoma. Realizado estadiamento com a tomografia de abdome apresentada a seguir: Assinale a melhor conduta neste momento.",
+    "alternatives": "  A) Retossigmoidectomia.\n  B) Quimiorradioterapia.\n  C) Colostomia em alça.\n  D) Quimioterapia. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Adenocarcinoma de sigmoide sem metástases à distância e sem obstrução é tratado com cirurgia curativa (retossigmoidectomia). Mas a questão parece ter gabarito questionável; considere o contexto do estadiamento.\n\n****Alternativa Correta** (D)**: Se a tomografia mostrar metástases hepáticas ou peritoneais (não descritas no texto), a quimioterapia seria a con"
+  },
+  {
+    "id": 7507,
+    "current_area": "Cirurgia",
+    "current_subtema": "Cicatrização, Tratamento de Feridas, Enxertos e Retalhos",
+    "topic": "Tratamento",
+    "stem": "Homem, 43 anos, está internado há 35 dias devido à ressecção intestinal extensa em uso de nutrição parenteral exclusiva. Fez uso pós-operatório de ceftriaxone e metronidazol por 5 dias e, desde então, está sem antibiótico. Há 3 horas apresentou temperatura de 38,5 ºC. Ao exame físico, encontra-se em bom estado geral; FC: 80 bpm; PA: 130x80 mmHg; perfusão periférica normal; ausculta pulmonar sem alterações; abdome flácido, indolor e com a ferida operatória sem sinais infecciosos. A inspeção do sítio do cateter encontra-se na imagem a seguir: Exames laboratoriais: ⦁ Hb: 10,2 g/dL ⦁ Leucócitos: 11.330/mm³ ⦁ PCR: 20 mg/L Solicitada coleta de hemocultura. Com base nessas informações, assinale qual é a conduta mais adequada neste momento.",
+    "alternatives": "  A) Manter cateter e iniciar anfotericina e vancomicina.\n  B) Manter cateter e aguardar resultado da hemocultura.\n  C) Retirar cateter e iniciar anfotericina e vancomicina.\n  D) Retirar cateter e aguardar resultado da hemocultura. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Febre em paciente com cateter central + sinais de infecção no sítio = remover cateter e coletar hemoculturas, mesmo sem instabilidade.\n\n****Alternativa Correta** (D)**: A presença de febre e sinais flogísticos no sítio do cateter indica provável infecção relacionada ao cateter. A conduta é retirar o cateter e coletar hemoculturas. Aguardar resultado sem re"
+  },
+  {
+    "id": 7508,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Diagnóstico Tratamento",
+    "stem": "Mulher, 26 anos, procura o cirurgião para avaliação de nódulo hepático em exame de rotina solicitado pelo seu ginecologista. Nega comorbidades, história familiar relevante ou etilismo. Usa anticoncepcional oral há 5 anos. Ao exame, apresenta-se em bom estado geral, sem estigmas de hepatopatia crônica, palpação abdominal sem alterações. Traz ressonância com contraste hepatoespecífico que evidenciou nódulo hipervascular bem delimitado em segmento 6 medindo 4,8 x 4,5 cm, com conteúdo gorduroso. Na fase hepatobiliar, não se observou a captação do meio contraste pela lesão. Assinale qual é o diagnóstico mais provável do nódulo da paciente e a melhor conduta.",
+    "alternatives": "  A) Adenoma hepático, suspensão do anticoncepcional oral e seguimento clínico. [GABARITO]\n  B) Adenoma hepático, suspensão do anticoncepcional oral e nodulectomia.\n  C) Hiperplasia nodular focal, suspensão do anticoncepcional oral e nodulectomia.\n  D) Hiperplasia nodular focal, suspensão do anticoncepcional oral e seguimento clínico.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Adenoma hepático é relacionado ao uso de anticoncepcional oral; a RMC com contraste hepatoespecífico mostra captação na fase hepatobiliar ausente no adenoma.\n\n****Alternativa Correta** (A)**: O diagnóstico é adenoma hepático; conduta é suspender o anticoncepcional e seguimento, pois lesão <5 cm (4,8 cm) não indica cirurgia obrigatória.\n\n**Alternativas Inco"
+  },
+  {
+    "id": 7510,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Diagnóstico e tratamento",
+    "stem": "Homem, 80 anos, produtor rural, apresentou lesão de crescimento progressivo em região malar direita, há dois anos, conforme imagem a seguir: Biópsia realizada confirmou carcinoma epidermoide. O estadiamento com tomografia não identificou comprometimento ósseo ou de linfonodos parotídeos/cervicais. Com relação à lesão cutânea, assinale a conduta mais adequada.",
+    "alternatives": "  A) Sessões de crioterapia com uso concomitante de pomada de imunoterápico.\n  B) Ressecção e fechamento com retalho local. [GABARITO]\n  C) Ressecção e fechamento com retalho microcirúrgico.\n  D) Ressecção micrográfica de MOHS, com fechamento por segunda intenção.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Carcinoma epidermoide cutâneo em área estética exige ressecção com margens, e retalho local proporciona bom resultado.\n\n****Alternativa Correta** (B)**: Ressecção com fechamento por retalho local é o tratamento padrão para lesões pequenas e médias em face.\n\n**Alternativas Incorretas**:\n- **Letra A**: Crioterapia é para lesões precoces não invasivas.\n- **Le"
+  },
+  {
+    "id": 7511,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Otorrinolaringologia Carcinoma Papilífero",
+    "stem": "Mulher, 40 anos, foi submetida à tireoidectomia total por carcinoma papilífero em lobo esquerdo de tireoide há 6 anos, seguida de iodoterapia porque apresentava extravasamento tumoral macroscópico para musculatura pré-tireoidiana. Há 2 meses teve COVID-19 associada a quadro de sinusite, com adequada resolução. Em ultrassonografia anual de rotina foi identificado nódulo cístico de 2 cm, junto à bifurcação da carótida esquerda e linfonodos jugulo-carotídeos, globosos, heterogêneos do mesmo lado. Assinale qual é a principal hipótese diagnóstica.",
+    "alternatives": "  A) Cisto branquial.\n  B) Cisto epidérmico.\n  C) Granuloma de corpo estranho.\n  D) Metástase do carcinoma papilífero. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Carcinoma papilífero de tireoide com metástase linfonodal pode apresentar-se como nódulo cístico cervical.\n\n****Alternativa Correta** (D)**: História prévia de câncer de tireoide com linfonodo cístico indica metástase até prova em contrário.\n\n**Alternativas Incorretas**:\n- **Letra A**: Cisto branquial é mais comum em crianças.\n- **Letra B**: Cisto epidérmi"
+  },
+  {
+    "id": 7512,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Hemodiálise",
+    "stem": "Mulher, 58 anos, com diabetes melito e insuficiência renal crônica, evolui para necessidade de hemodiálise nos próximos dias, mas ainda não tem nenhum acesso para realizar a terapia. Assinale qual é o acesso mais adequado para ser instalado nessa situação.",
+    "alternatives": "  A) Cateter semi-implantável de alto fluxo. [GABARITO]\n  B) Cateter totalmente implantado.\n  C) Fístula arteriovenosa direta.\n  D) Fístula arteriovenosa com prótese.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Necessidade de diálise imediata exige cateter de alto fluxo, pois fístulas levam semanas para maturar.\n\n****Alternativa Correta** (A)**: Cateter semi-implantável de alto fluxo permite início imediato da hemodiálise.\n\n**Alternativas Incorretas**:\n- **Letra B**: Cateter totalmente implantado é para quimioterapia.\n- **Letra C**: FAV direta é definitiva, mas r"
+  },
+  {
+    "id": 7548,
+    "current_area": "Cirurgia",
+    "current_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "topic": "Cirurgia Geral Choque Classificação do Choque",
+    "stem": "Paciente de 25 anos, previamente hígido, admitido no CTI com choque circulatório e sem história clínica. Após a realização das medidas iniciais, a pressão arterial invasiva (PAi) está em 90/35 mmHg e a pressão de pulso (diferença da pressão sistólica e a pressão diastólica) esta em 55 mmHg. Admitindo se PAi calibrada, ajustada e sem interferências, qual o provável tipo de choque?",
+    "alternatives": "  A) Hipovolêmico.\n  B) Distributivo. [GABARITO]\n  C) Cardiogênico.\n  D) Obstrutivo.",
+    "explanation": ""
+  },
+  {
+    "id": 7549,
+    "current_area": "Cirurgia",
+    "current_subtema": "Oncologia Cutânea: Melanoma, CBC e CEC",
+    "topic": "Cirurgia Geral Carcinoma basocelular Carcinoma espinocelular",
+    "stem": "Homem de 56 anos refere surgimento de lesão ulcerada em pavilhão auricular (vide figura) há 8 meses, com crescimento progressivo. Neste período, houve episódios de sangramento após manipulação. Qual é a célula que dá origem a este tipo de neoplasia?",
+    "alternatives": "  A) Condrócito.\n  B) Melanócito.\n  C) Adipócito.\n  D) Queratinócito [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 7550,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "topic": "Craniectomia Descompressiva",
+    "stem": "Paciente masculino de 65 anos, portador de hipertensão arterial crônica, deu entrada no Pronto Atendimento com quadro de perda de força de início súbito no hemicorpo direito há 5 dias. Ao exame neurológico, apresentava escala de coma de Glasgow de 15, pupilas isocóricas, e hemiparesia à direita grau 2. Foi submetido a tomografia computadorizada de crânio, mostrada na figura abaixo. O médico neurocirurgião de plantão foi consultado quanto à indicação de craniectomia descompressiva, e não indicou o procedimento. Qual dos seguintes fatores ele levou em consideração para esta não indicação?",
+    "alternatives": "  A) Idade do paciente.\n  B) Tempo de início dos sintomas. [GABARITO]\n  C) Extensão da área de isquemia.\n  D) Dominância do hemisfério envolvido.",
+    "explanation": ""
+  },
+  {
+    "id": 7893,
+    "current_area": "Cirurgia",
+    "current_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "topic": "Diagnóstico Manifestação Clínica Diagnóstico Diferencial",
+    "stem": "Mulher, 23 anos de idade, faz acompanhamento médico por rinite alérgica, dismenorreia e cefaleia tensional, com uso recorrente de anti-inflamatórios e analgésicos. A paciente comparece em consulta ambulatorial de rotina e refere que, nos últimos 8 meses, procurou o pronto-atendimento quatro vezes por edema em pálpebras e lábios. Um dos episódios foi acompanhado de edema de língua. Outro episódio foi acompanhado de lesões de pele eritematosas, edematosas e pruriginosas. Em um dos casos havia ingerido amendoim. Em duas ocasiões, recebeu adrenalina intramuscular com melhora do quadro. Nega que tenha ocorrido hipotensão, dispneia, diarreia ou dor abdominal nos quatro atendimentos. Qual é a causa mais provável do quadro clínico desta paciente?",
+    "alternatives": "  A) Urticária aguda. [GABARITO]\n  B) Alergia alimentar.\n  C) Anafilaxia recorrente.\n  D) Angioedema hereditário.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: A presença de lesões eritematosas, edematosas e pruriginosas (urticárias) juntamente com angioedema sugere urticária aguda com angioedema.\n\n****Alternativa Correta** (A)**: A urticária aguda é caracterizada por pápulas/placas eritematosas, edematosas e pruriginosas, frequentemente acompanhadas de angioedema (edema de lábios, pálpebras). Os episódios recorr"
+  },
+  {
+    "id": 8025,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "topic": "Cirurgia Suporte Nutricional Perioperatório Caso 9",
+    "stem": "Homem, 59 anos, refere empachamento e vômitos esporádicos que se intensicaram na última semana. Apresentou perda de 6 kg neste período. Nega alteração do hábito intestinal. Trabalha como secretário e na última semana pediu afastamento devido à fraqueza, apesar de realizar sozinho suas tarefas em casa. Tem diabete melito, hipertensão arterial e é tabagista (40 anos.maço). Teve infarto agudo do miocárdio há 7 meses, quando foi submetido à angioplastia e colocação de stent. Faz uso de aspirina, clopidogrel, atenolol, metformina e atorvastatina. Ao exame clínico, encontra-se em bom estado geral: IMC: 21 kg/m²; ausculta pulmonar e cardíaca sem alterações; abdome ácido, escavado e sem massas palpáveis; toque retal sem alterações. Exames laboratoriais: Hb 9,6 g/dL; Ht 29%; VCM 77 fL; HCM 25 pg; albumina 3,1 mg/dL. Realizada endoscopia digestiva alta, que evidenciou lesão estenosante em antro com difícil passagem do gastroscópio infantil. Qual é o dispositivo que tem que ser usado para a nutrição do doente neste momento?",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8026,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "topic": "Cirurgia Trauma Hepático Caso 10",
+    "stem": "Mulher, 33 anos, caiu do terceiro andar do prédio. No atendimento pré-hospitalar, encontrava-se inconsciente, com FC de 120 bpm e PAS de 100 mmHg. Foi realizada entubação orotraqueal e infusão de 1.000 mL de cristaloide e ácido tranexâmico. Na admissão no Serviço de Emergência encontrava-se: I. Entubada, saturação de O₂: 97%; II. MV presente e expansibilidade simétrica; III. FC 130 bpm, PA: 80x50 mmHg; IV. exame da bacia com sinais de instabilidade pélvica; V. realizado FAST que evidenciou presença de líquido livre em todos os quadrantes do abdome. VI. sedada; escala de Coma de Glasgow 3; VII. sem deformidades nos membros ou no dorso; VIII. toque retal sem alterações. Qual é a imagem do FAST esperada para esta paciente?",
+    "alternatives": "  A) \n  B) \n  C)  [GABARITO]\n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8027,
+    "current_area": "Cirurgia",
+    "current_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "topic": "Cirurgia Trauma Hepático Caso 10",
+    "stem": "Mulher, 33 anos, caiu do terceiro andar do prédio. No atendimento pré-hospitalar, encontrava-se inconsciente, com FC de 120 bpm e PAS de 100 mmHg. Foi realizada entubação orotraqueal e infusão de 1.000 mL de cristaloide e ácido tranexâmico. Na admissão no Serviço de Emergência encontrava-se: I. Entubada, saturação de O₂: 97%; II. MV presente e expansibilidade simétrica; III. FC 130 bpm, PA: 80x50 mmHg; IV. exame da bacia com sinais de instabilidade pélvica; V. realizado FAST que evidenciou presença de líquido livre em todos os quadrantes do abdome. VI. sedada; escala de Coma de Glasgow 3; VII. sem deformidades nos membros ou no dorso; VIII. toque retal sem alterações. Foi indicada a colocação de lençol para fechamento temporário do anel pélvico e laparotomia exploradora. Identicado 1,8 L de sangue na cavidade abdominal, decorrente da lesão hepática representada na figura a seguir. No intraoperatório apresentava lactato de 49, BE -6 e pH 7,31. Qual das ilustrações abaixo representa a melhor conduta operatória?",
+    "alternatives": "  A) \n  B) \n  C) \n  D)  [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 8046,
+    "current_area": "Cirurgia",
+    "current_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "topic": "Nutrição em Cirurgia e Recuperação PósOperatória",
+    "stem": "Mulher, 31 anos, foi submetida à colecistectomia laparoscópica devido à colecistite aguda litiásica com 01 dia de evolução. O achado intraoperatório evidenciou vesícula biliar inflamada, sem coleções e necrose. O procedimento foi feito sem intercorrências. Qual das prescrições a seguir deve ser realizada imediatamente após a operação?",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  }
+]

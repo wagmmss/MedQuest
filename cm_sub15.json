@@ -1,0 +1,902 @@
+[
+  {
+    "id": 7466,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+    "topic": "Definição Classificação e fisiopatologia",
+    "stem": "Mulher, 18 anos, trazida pelo SAMU ao hospital por perda de consciência. A paciente estava na fila do supermercado quando de repente sentiu tontura e perdeu a consciência. Em geral, qual é a causa mais comum de síncope?",
+    "alternatives": "  A) Cardíaca.\n  B) Induzida por medicação.\n  C) Neurogênica.\n  D) Psicogênica.\n  E) Vasovagal. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: A síncope vasovagal é a causa mais comum de síncope na população geral, especialmente em jovens, sendo um reflexo autonômico desencadeado por estresse, dor, ou ortostatismo prolongado.\n\n****Alternativa Correta** (E)**: A síncope vasovagal é a etiologia mais frequente.\n\n**Alternativas Incorretas**:\n- **Letra A**: Síncope cardíaca é menos comum e geralmente "
+  },
+  {
+    "id": 7467,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+    "topic": "Indicações de cateterismo de urgência Indicações de cateterismo",
+    "stem": "Paciente do sexo feminino, 72 anos, portadora de HAS, diabetes melito e dislipidemia. Admitida no departamento de emergência com queixa de dor torácica há 30 minutos. Seus sinais vitais são: FC: 90 bpm, PA: 120x80 mmHg, FR: 22 irpm, SatO2 94%. A primeira troponina é negativa e o eletrocardiograma é mostrado na imagem a seguir: Assinale a alternativa que apresenta a principal hipótese diagnóstica e o melhor tratamento.",
+    "alternatives": "  A) Tromboembolismo pulmonar; Anticoagulação.\n  B) Tromboembolismo pulmonar; Filtro de veia cava inferior.\n  C) Infarto agudo do miocárdio; Cateterismo com angioplastia. [GABARITO]\n  D) Hipercalemia; Gluconato de cálcio.\n  E) Hipercalemia; Terapia de substituição renal.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Dor torácica + fatores de risco + ECG sugestivo (mesmo sem supradesnivelamento) indica síndrome coronariana aguda. Troponina negativa não exclui IAM; a conduta é cateterismo.\n\n****Alternativa Correta** (C)**: O quadro é compatível com IAMSSST (Infarto Agudo do Miocárdio sem supradesnivelamento do ST). A estratégia invasiva precoce (cateterismo) é indicada "
+  },
+  {
+    "id": 7468,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "topic": "Apresentação clínica Tratamento e prognóstico",
+    "stem": "Paciente masculino, 64 anos, queixa-se de erupções cutâneas, febre e mal-estar há 4 dias. Iniciou alopurinol para a gota há seis semanas, e não toma nenhum outro medicamento. Nega alergias a medicamentos ou alimentos e nega viagens recentes. Seus sinais vitais são PA: 145x88 mmHg, FC: 80 bpm, FR: 15 irpm SatO2 98%, Temp 38.3 °C. No exame físico, o paciente apresenta erupção cutânea morbiliforme, eritematosa, confluente na face, tronco e extremidades que envolve mais de 50% da área da superfície corporal. O sinal de Nikolsky é negativo e não há envolvimento de mucosas. Além da erupção cutânea, o paciente apresenta linfadenopatias. Exames laboratoriais demonstram eosinofilia e aumento de transaminases hepáticas. Assinale a alternativa que melhor descreve o diagnóstico e planejamento terapêutico imediato.",
+    "alternatives": "  A) NET; Alta com acompanhamento com dermatologia.\n  B) Steven Johnson; Internação em UTI de queimados.\n  C) DRESS; Suspender o alopurinol. [GABARITO]\n  D) NET; Suspender o alopurinol.\n  E) DRESS; Alta com acompanhamento com dermatologia.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A tríade de exantema, febre, linfadenopatia, eosinofilia e disfunção hepática após uso de alopurinol é DRESS. A conduta imediata é suspender a droga.\n\n****Alternativa Correta** (C)**: DRESS é diagnosticado e o tratamento imediato é suspender o alopurinol.\n\n**Alternativas Incorretas**:\n- **Letra A**: NET é descartada pela ausência de Nikolsky positivo e aco"
+  },
+  {
+    "id": 7469,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Tratamento Geral Síndromes do Território VértebroBasilar",
+    "stem": "Paciente do sexo feminino, 75 anos, previamente portadora de HAS. É admitida no Departamento de Emergência com queixa de vertigem súbita há 30 minutos, progressiva, associada a náuseas. Na admissão paciente apresenta PA: 160x100 mmHg, FC: 100 bpm, arrítmica. Exame neurológico com ataxia, hemi-hipoestesia direita e disartria. Assinale a melhor hipótese diagnóstica e conduta.",
+    "alternatives": "  A) Labirintite; Flunarizina.\n  B) Vertigem posicional paroxística benigna; Dimenidrinato.\n  C) Neoplasia de sistema nervoso central; Encaminhar ao otorrinolaringologista.\n  D) AVC; Flunarizina.\n  E) AVC; Dimenidrinato e TC de crânio [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Vertigem + sinais neurológicos focais (ataxia, hemi-hipoestesia, disartria) em idosa hipertensa é AVC até prova em contrário. A conduta imediata é TC e tratamento sintomático.\n\n****Alternativa Correta** (E)**: AVC é a principal hipótese; TC de crânio é essencial para descartar hemorragia, e dimenidrinato pode ser usado para náusea, mas não trata o AVC.\n\n**"
+  },
+  {
+    "id": 7470,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Trombólise Endovenosa",
+    "stem": "Paciente do sexo feminino, 75 anos, previamente portadora de HAS. É admitida no Departamento de Emergência com queixa de vertigem súbita há 30 minutos, progressiva, associada a náuseas. Na admissão paciente apresenta PA: 160x100 mmHg, FC: 100 bpm, arrítmica. Exame neurológico com ataxia, hemi-hipoestesia direita e disartria. Trinta minutos após a admissão, a paciente realizou uma tomografia de crânio sem contraste, que foi laudada como normal. Apresentou melhora das náuseas e dos vômitos após a medicação. Assinale a melhor conduta.",
+    "alternatives": "  A) Alta hospitalar com orientação de buscar médico de família e comunidade na unidade básica de saúde.\n  B) Alta hospitalar com orientação de buscar otorrinolaringologista no ambulatório médico de especialidades.\n  C) Internação em enfermaria para vigilância neurológica.\n  D) Internação hospitalar em UTI com prescrição de AAS e estatina.\n  E) Trombólise endovenosa com alteplase. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: TC normal não exclui AVC isquêmico agudo. Em janela de 4,5h, a trombólise é indicada.\n\n****Alternativa Correta** (E)**: Com sintomas neurológicos agudos e TC sem hemorragia, a trombólise endovenosa deve ser considerada.\n\n**Alternativas Incorretas**:\n- **Letra A**: Alta hospitalar é inadequada.\n- **Letra B**: Alta para otorrino é errada.\n- **Letra C**: Inte"
+  },
+  {
+    "id": 7471,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+    "topic": "Tratamento do choque hipovolêmico Tratamento do choque distributivo",
+    "stem": "As metas pressóricas para um paciente com choque séptico e choque hemorrágico com e sem suspeita de hipertensão intracraniana são, respectivamente:",
+    "alternatives": "  A) PAM de aproximadamente 65 mmHg no choque circulatório.\n  B) PAM > 65 mmHg, PAM > 80 mmHg, PAS 70-90 mmHg. [GABARITO]\n  C) PAM > 65 mmHg no choque séptico e PAS > 70 mmHg no choque hemorrágico em qualquer situação.\n  D) PAM > 80 mmHg, PAM > 65 mmHg, PAS > 70 mmHg.\n  E) Não existem diretrizes que orientem metas de pressão arterial. 4000215099",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Metas pressóricas específicas: PAM ≥65 mmHg no choque séptico; PAM >80 mmHg no choque hemorrágico com TCE; PAS 70-90 mmHg no choque hemorrágico sem TCE.\n\n****Alternativa Correta** (B)**: A sequência correta é PAM >65 mmHg (séptico), PAM >80 mmHg (hemorrágico com suspeita de HIC), PAS 70-90 mmHg (hemorrágico sem suspeita de HIC).\n\n**Alternativas Incorretas*"
+  },
+  {
+    "id": 7472,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Diagnóstico",
+    "stem": "Paciente do sexo masculino, 46 anos, previamente etilista e portador de cirrose. É admitido por dor abdominal, aumento de volume abdominal e inapetência há 1 semana. Nega febre, trauma ou sangramentos. Ao exame: REG, PA: 90x60 mmHg, FC: 108 bpm, FR: 20 irpm, abdome distendido, ascítico, sem sinais de peritonite, ausculta cardiopulmonar fisiológica, edema MMII ++/4. Qual o melhor exame para investigação do quadro?",
+    "alternatives": "  A) Tomografia computadorizada de abdome e pelve.\n  B) Ultrassonografia de abdome total com Doppler.\n  C) Paracentese diagnóstica. [GABARITO]\n  D) Hemograma completo.\n  E) Proteína C reativa. 4000215098",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Cirrótico com ascite e dor abdominal → suspeitar de PBE. Paracentese diagnóstica é o exame de escolha.\n\n****Alternativa Correta** (C)**: A paracentese avalia contagem de neutrófilos no líquido ascítico, permitindo diagnóstico de PBE.\n\n**Alternativas Incorretas**:\n- **Letra A**: TC pode avaliar complicações, mas não diagnostica PBE.\n- **Letra B**: USG avali"
+  },
+  {
+    "id": 7473,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+    "topic": "Tratamento",
+    "stem": "Paciente do sexo masculino, 46 anos, previamente etilista e portador de cirrose. É admitido por dor abdominal, aumento de volume abdominal e inapetência há 1 semana. Nega febre, trauma ou sangramentos. Ao exame: REG, PA: 90x60 mmHg, FC: 108 bpm, FR: 20 irpm, abdome distendido, ascítico, sem sinais de peritonite, ausculta cardiopulmonar fisiológica, edema MMII ++/4. Resultados de exames demonstraram Hb: 11,1 g/dL, leucócitos 10.850/mm³, plaquetas 98.000/mm³. Ultrassonografia e tomografia computadorizada de abdome demonstraram fígado de dimensões reduzidas, esplenomegalia e volumosa ascite. Líquido ascitico com 460 células/mm³, 80% de polimorfonucleares, coloração de Gram parcial negativo, cultura em análise. Assinale qual a melhor conduta.",
+    "alternatives": "  A) Alta hospitalar com furosemida e lactulose VO.\n  B) Alta hospitalar com furosemida e espironolactona.\n  C) Internação hospitalar com furosemida via IV.\n  D) Expansão volêmica com ringer lactato e ceftriaxona.\n  E) Expansão volêmica com albumina e ceftriaxona. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: PBE confirmada (PMN >250) requer antibioticoterapia e albumina para prevenir síndrome hepatorrenal.\n\n****Alternativa Correta** (E)**: Ceftriaxona + albumina é o tratamento padrão para PBE.\n\n**Alternativas Incorretas**:\n- **Letra A**: Alta com diuréticos é inadequada.\n- **Letra B**: Sem antibiótico.\n- **Letra C**: Sem antibiótico.\n- **Letra D**: Ringer lact"
+  },
+  {
+    "id": 7474,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Tratamento",
+    "stem": "Paciente do sexo masculino, 46 anos, previamente etilista e portador de cirrose. É admitido por dor abdominal, aumento de volume abdominal e inapetência há 1 semana. Nega febre, trauma ou sangramentos. Ao exame: REG, PA: 90x60 mmHg, FC: 108 bpm, FR: 20 irpm, abdome distendido, ascítico, sem sinais de peritonite, ausculta cardiopulmonar fisiológica, edema MMII ++/4. Qual a dose de albumina recomendada para o paciente?",
+    "alternatives": "  A) 1,5 g/kg até 6 h após o diagnóstico e mais 1 g/kg no 3º dia. [GABARITO]\n  B) 1 g/kg no 1º e no 2º dia.\n  C) 1 g/kg no 1º e no 3º dia.\n  D) 8 g de albumina por cada litro retirado de ascíte, excluindo os 5 L iniciais retirados.\n  E) Nenhuma das alternativas anteriores está correta.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Na PBE, albumina é dada em dose de 1,5 g/kg no diagnóstico (até 6h) e 1 g/kg no terceiro dia.\n\n****Alternativa Correta** (A)**: Esta é a dose recomendada por estudos (Sort) para reduzir mortalidade e síndrome hepatorrenal.\n\n**Alternativas Incorretas**:\n- **Letra B**: Doses incorretas.\n- **Letra C**: Doses incorretas.\n- **Letra D**: Refere-se a paracentese "
+  },
+  {
+    "id": 7475,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Quadro Clínico",
+    "stem": "Paciente do sexo masculino, 30 anos, admitido com queixa de cefaleia hemicranina, direita, de forte intensidade, pulsátil, associada a foto e fonofobia há 30 minutos. PA: 150x80 mmHg, FC: 80 bpm, FR: 20 irpm, SatO2: 98% em ar ambiente. Imagem de TC apresentada a seguir: Com base nas informações apresentadas, assinale o diagnóstico mais provável.",
+    "alternatives": "  A) Acidente vascular encefálico isquêmico.\n  B) Hemorragia subaracnóide. [GABARITO]\n  C) Hematoma intraparenquimatoso.\n  D) Enxaqueca.\n  E) Hemoventrículo.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Cefaleia súbita e intensa (trovoada) + TC com sangue → Hemorragia subaracnóide, apesar de sintomas típicos de enxaqueca.\n\n****Alternativa Correta** (B)**: A imagem da TC mostra HSA, que é o diagnóstico.\n\n**Alternativas Incorretas**:\n- **Letra A**: AVE isquêmico não é típico de cefaleia súbita intensa.\n- **Letra C**: Hematoma intraparenquimatoso geralmente "
+  },
+  {
+    "id": 7476,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Tratamento Clínico",
+    "stem": "Paciente do sexo masculino, 30 anos, admitido com queixa de cefaleia hemicranina, direita, de forte intensidade, pulsátil, associada a foto e fonofobia há 30 minutos. PA: 150x80 mmHg, FC: 80 bpm, FR: 20 irpm, SatO2: 98% em ar ambiente. Imagem de TC apresentada a seguir: Qual medicação deve ser a indicada?",
+    "alternatives": "  A) Fenitoína.\n  B) Nitroglicerina.\n  C) Nimodipina. [GABARITO]\n  D) Sumatriptano.\n  E) Dipirona.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Na HSA, a nimodipina é usada para prevenir vasoespasmo e isquemia tardia.\n\n****Alternativa Correta** (C)**: Nimodipina é indicada após HSA.\n\n**Alternativas Incorretas**:\n- **Letra A**: Fenitoína é para convulsões, não profilática.\n- **Letra B**: Nitroglicerina é contraindicada.\n- **Letra D**: Sumatriptano é contraindicado em HSA.\n- **Letra E**: Dipirona é "
+  },
+  {
+    "id": 7478,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Exames de Imagem Insuficiência Pancreática Endócrina",
+    "stem": "Em relação à insuficiência pancreática exógena, podemos considerar possíveis os seguintes achados, EXCETO:",
+    "alternatives": "  A) Radiografia simples de abdome mostrando calcificações salpicadas e difusas no parênquima pancreático.\n  B) Ultrassonografia de abdome mostrando estenose do ducto pancreático principal abaixo de 0,4 cm, ou cistos ou calcificações parenquimatosas. [GABARITO]\n  C) Tomografia computadorizada de abdome mostrando dilatação ductal, cistos ou calcificações no parênquima.\n  D) Ressonância magnética de vias biliares mostrando dilatação, estenoses ou defeitos de enchimento no ducto pancreático principal associados a alterações em pelo menos três ramos colaterais.\n  E) Laudo cirúrgico descrevendo ressecção pancreática subtotal ou total. 4000215091",
+    "explanation": "**Pulo do Gato**: A questão aborda critérios diagnósticos de insuficiência pancreática exócrina e pancreatite crônica. O erro da alternativa B está na descrição do calibre do ducto pancreático. Na pancreatite crônica, observamos dilatação do ducto pancreático principal, e não estenose abaixo de 0,4 cm. A dilatação é um critério diagnóstico importante, sendo considerada dilatada quando o diâmetro é"
+  },
+  {
+    "id": 7479,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "HAS e Doença arterial coronariana",
+    "stem": "Um paciente hipertenso de 65 anos de idade, com pressão arterial de 160x100 mmHg, comparece ao consultório para consulta de rotina, após grande insistência da filha. Ele é fumante e apresenta histórico de doença arterial coronariana. Qual é a estratégia de tratamento antihipertensivo mais adequada para esse paciente, segundo a Diretriz Brasileira de Hipertensão Arterial Sistêmica?",
+    "alternatives": "  A) Monoterapia com um diurético tiazídico ou similar.\n  B) Monoterapia com um bloqueador do canal de cálcio.\n  C) Combinação de dois fármacos, um IECA ou BRA associado a um diurético tiazídico ou similar. [GABARITO]\n  D) Combinação de três fármacos, um IECA ou BRA associado a um diurético tiazídico ou similar e a um bloqueador do canal de cálcio.\n  E) Combinação de quatro fármacos, um IECA ou BRA associado a um diurético tiazídico ou similar, a um bloqueador do canal de cálcio e a um betabloqueador",
+    "explanation": "**Pulo do Gato**: A Diretriz Brasileira de Hipertensão preconiza o início do tratamento medicamentoso para pacientes com hipertensão estágio 1 e risco cardiovascular alto ou muito alto, ou hipertensão estágios 2 e 3. Nosso paciente tem 65 anos, é hipertenso (160x100 mmHg - Estágio 2), fumante e tem doença coronariana, configurando alto risco. A recomendação atual é iniciar com combinação de dois f"
+  },
+  {
+    "id": 7480,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Manifestações clínicas Ddímero Eletrocardiograma",
+    "stem": "Paciente do sexo feminino, 50 anos, admitida por dor torácica. Sinais vitais na admissão são: PA: 170x90 mmHg, FC: 110 bpm, FR: 32 irpm, SatO2 92%. O ECG encontra-se na imagem a seguir: Qual a alteração observada no ECG e qual a melhor conduta?",
+    "alternatives": "  A) Supra de ST; Solicitar troponina.\n  B) Alteração de repolarização ventricular; Solicitar Dímero D.\n  C) ECG Normal; Medicar com dipirona 1 g via IV.\n  D) S1Q3T3; Solicitar angiotomografia de tórax.\n  E) S1Q3T3; Solicitar Dímero D. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: A tríade S1Q3T3 (onda S em D1, onda Q em D3 e inversão da onda T em D3) é um sinal clássico, embora pouco sensível, de sobrecarga de ventrículo direito. Em paciente com dor torácica, taquipneia (FR 32) e dessaturação, devemos suspeitar fortemente de Tromboembolismo Pulmonar (TEP). O Dímero D é o exame inicial de rastreio em pacientes de probabilidade inter"
+  },
+  {
+    "id": 7481,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+    "topic": "Quadro Clínico Líquor",
+    "stem": "Paciente masculino, 50 anos, queixa-se de sensação de parestesias nas extremidades distais de seus membros inferiores que com o passar do tempo progrediu para membros superiores. Ao ser questionado, refere que há cerca de 3 semanas foi diagnosticado com influenza e que os sintomas respiratórios cessaram há cerca de 10 dias. Ao exame físico: hiporreflexia e arreflexia distal com graus variáveis de hiporreflexia proximal. Exame de LCR apresentando elevação da proteína acompanhada por poucas células mononucleares (< 10 células/mm3 ). Qual o provável diagnóstico?",
+    "alternatives": "  A) Sarcoidose.\n  B) Doença de Lyme.\n  C) Infecção por HIV.\n  D) Síndrome de Guillain-Barre. [GABARITO]\n  E) Miastenia gravis.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A combinação de fraqueza ascendente, hiporreflexia/arreflexia e dissociação proteico-citológica no LCR (proteína elevada com poucas células) é patognomônica da Síndrome de Guillain-Barré (SGB), especialmente após infecção viral.\n\n****Alternativa Correta** (D)**: O quadro clínico de parestesias distais progressivas, hiporreflexia, história de infecção prévi"
+  },
+  {
+    "id": 7482,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Eletrocardiograma",
+    "stem": "Paciente masculino, 70 anos, antecedente de HAS, diabetes melito tipo 2, dislipidemia e tabagismo. Admitido com quadro de dor torácica. Sinais vitais são: FC: 60 bpm PA: 150x90 mmHg, FR: 20 irpm, SatO2: 95%. ECG demonstrado na imagem a seguir: Qual a síndrome do paciente e o que ela significa?",
+    "alternatives": "  A) Síndrome de Wellens; Uso recente de cocaína.\n  B) Síndrome de Wellens; Oclusão crítica de descendente anterior. [GABARITO]\n  C) Síndrome de Brugada; Risco de taquicardia ventricular.\n  D) Síndrome de Brugada; Síncope cardiogênica.\n  E) Síndrome do pânico; Ataques de pânico repetidos sem desencadeante.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A inversão profunda e simétrica da onda T em V2-V3 é a Síndrome de Wellens, sinal de oclusão crítica da artéria descendente anterior (DA), mesmo na ausência de dor.\n\n****Alternativa Correta** (B)**: A Síndrome de Wellens é um marcador de alto risco de estenose crítica da DA, exigindo intervenção precoce (angioplastia) para prevenir IAM extenso.\n\n**Alternat"
+  },
+  {
+    "id": 7483,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Indicações de cateterismo de urgência",
+    "stem": "Paciente masculino, 70 anos, antecedente de HAS, diabetes melito tipo 2, dislipidemia e tabagismo. Admitido com quadro de dor torácica. Sinais vitais são: FC: 60 bpm PA: 150x90 mmHg, FR: 20 irpm, SatO2: 95%. ECG demonstrado na imagem a seguir: A conduta mais adequada para este paciente é:",
+    "alternatives": "  A) Cateterismo. [GABARITO]\n  B) Implante de marcapasso definitivo.\n  C) Teste de esforço.\n  D) Internação em enfermaria.\n  E) Alta hospitalar.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O ECG sugere Síndrome de Wellens, que indica estenose crítica da artéria descendente anterior, risco iminente de infarto extenso. A conduta é intervenção coronária percutânea imediata.\n\n****Alternativa Correta** (A)**: O cateterismo permite diagnóstico e tratamento da lesão obstrutiva, prevenindo infarto.\n\n**Alternativas Incorretas**:\n- **Letra B**: Marcap"
+  },
+  {
+    "id": 7484,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Sinais de Alarme Cefaleias Secundárias",
+    "stem": "Paciente do sexo feminino, 16 anos, com queixa de cefaleia nova hemicraniana direita, pulsátil, há 3 dias, progressiva atualmente de forte intensidade, com piora ao subir e descer escadas, associada a foto e fonofobia com náuseas sem vômitos. Nega quadros semelhantes prévios. Exame neurológico normal, exame físico com presença de coriza purulenta e discreta hiperemia na orofaringe. Assinale a melhor hipótese diagnóstica no momento.",
+    "alternatives": "  A) Enxaqueca sem aura.\n  B) Enxaqueca com aura.\n  C) Cefaleia tensional.\n  D) Cefaleia em salvas.\n  E) Cefaleia secundária. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Cefaleia nova associada a sinais de infecção respiratória indica cefaleia secundária até prova em contrário.\n\n****Alternativa Correta** (E)**: A presença de coriza purulenta e hiperemia faríngea sugere quadro infeccioso agudo, sendo a cefaleia secundária a essa condição.\n\n**Alternativas Incorretas**:\n- **Letra A**: Enxaqueca sem aura não explica os sinais "
+  },
+  {
+    "id": 7492,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Tratamento Geral",
+    "stem": "Paciente do sexo feminino, 68 anos, previamente portadora de HAS e diabetes melito. Procura o departamento de emergência com queixa de cefaleia súbita há 16 horas, associada a dificuldade de movimentar o hemicorpo direito e desvio de rima labial para a esquerda. Ao exame físico: PA: 150x100 mmHg, FC: 72 irpm, ritmo cardíaco irregular, hemiparesia completa proporcionada à direita, disartria, anomia e hemi-hipoestesia direita. Considere a anamnese e o exame de imagem demonstrado a seguir: Assinale o tratamento farmacológico indicado",
+    "alternatives": "  A) Aspirina. [GABARITO]\n  B) Heparina.\n  C) Alteplase.\n  D) Tirofiban.\n  E) Tenecteplase.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Janela de trombólise é de 4,5 horas; paciente está fora dela, então antiagregação plaquetária é indicada.\n\n****Alternativa Correta** (A)**: Aspirina é indicada na fase aguda de AVC isquêmico fora da janela de trombólise.\n\n**Alternativas Incorretas**:\n- **Letra B**: Heparina não é rotina no AVC isquêmico agudo.\n- **Letra C**: Alteplase é contraindicada após"
+  },
+  {
+    "id": 7493,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Investigação Etiológica Profilaxia Secundária",
+    "stem": "Paciente do sexo feminino, 68 anos, previamente portadora de HAS e diabetes melito. Procura o departamento de emergência com queixa de cefaleia súbita há 16 horas, associada a dificuldade de movimentar o hemicorpo direito e desvio de rima labial para a esquerda. Ao exame físico: PA: 150x100 mmHg, FC: 72 irpm, ritmo cardíaco irregular, hemiparesia completa proporcionada à direita, disartria, anomia e hemi-hipoestesia direita. Considere o ECG da paciente demonstrado a seguir: O diagnóstico e a profilaxia secundária do quadro deverão ser realizados com:",
+    "alternatives": "  A) Fibrilação atrial; Aspirina.\n  B) Fibrilação atrial; Propafenona.\n  C) Fibrilação atrial; Varfarina. [GABARITO]\n  D) Taquicardia por reentrada nodal; Varfarina.\n  E) Flutter atrial; Propafenona.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Ritmo cardíaco irregular + AVC isquêmico = Fibrilação Atrial (FA) até prova em contrário. A profilaxia secundária em FA deve ser feita com anticoagulação oral.\n\n****Alternativa Correta** (C)**: A paciente apresenta FA (ritmo irregular) e AVC isquêmico cardioembólico. A profilaxia secundária é anticoagulação oral com varfarina ou DOACs.\n\n**Alternativas Inco"
+  },
+  {
+    "id": 7494,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+    "topic": "Modos convencionais de Ventilação Mecânica Ventilação protetora",
+    "stem": "Paciente em tratamento domiciliar de pneumonia retorna ao departamento de emergência em insuficiência respiratória aguda após 3 dias. Optou-se por intubação orotraqueal por hipoxemia. A radiografia de tórax é apresentada a seguir: A gasometria arterial (PEEP: 5 cmH₂O e FiO₂100%) apresenta pH: 7,35; pO2: 90; pCO₂: 35; BIC: 20; SatO₂: 94%. Os parâmetros iniciais do ventilador devem ser:",
+    "alternatives": "  A) Volume corrente < 360 mL; Pressão de Plato < 30 cmH₂O, Driving pressure < 15. [GABARITO]\n  B) Volume corrente = 600 mL; Pressão de Plato > 30 cmH₂O, Driving pressure < 15.\n  C) Volume corrente > 600 mL; Pressão de Pico < 30 cmH₂O, Driving pressure > 15.\n  D) Volume corrente > 600 mL; Pressão de Pico > 30 cmH₂O, Driving pressure > 15.\n  E) Volume corrente > 600 mL; Pressão de Pico < 30 cmH₂O, Driving pressure > 10. 4000215051",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Ventilação protetora na SDRA: volume corrente 6 mL/kg de peso predito, pressão de platô < 30 cmH₂O, driving pressure < 15 cmH₂O.\n\n****Alternativa Correta** (A)**: O paciente tem SDRA (hipoxemia grave com PEEP 5 e FiO₂ 100%, pO₂/FiO₂ < 300). A ventilação protetora com volume corrente baixo (< 360 mL para peso predito ~60 kg) e pressões limitadas reduz morta"
+  },
+  {
+    "id": 7496,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Paliação da Icterícia",
+    "stem": "Homem de 42 anos recebe diagnóstico de neoplasia de pâncreas com múltiplos nódulos pulmonares e hepáticos. Retorna em consulta para resultado de anátomo-patológico que confirma adenocarcinoma, queixando-se de muito prurido e clinicamente ictérico, com colúria e acolia fecal. Diante do quadro exposto, a melhor proposta terapêutica a ser oferecida é:",
+    "alternatives": "  A) Anti-histamínico e opioide.\n  B) Radioterapia para a cabeça pancreática.\n  C) Duodenopancreatectomia (cirurgia de Whipple).\n  D) Passagem endoscópica de prótese biliar. [GABARITO]\n  E) Derivação bileo-digestiva. 4000215048",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Câncer de pâncreas metastático + icterícia obstrutiva = paliação com drenagem biliar endoscópica.\n\n****Alternativa Correta** (D)**: Doença metastática (nódulos pulmonares e hepáticos) é irressecável. Para aliviar a obstrução biliar e o prurido, a passagem endoscópica de prótese biliar é o tratamento paliativo de escolha.\n\n**Alternativas Incorretas**:\n- **L"
+  },
+  {
+    "id": 7513,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "topic": "Diagnóstico Tratamento",
+    "stem": "Paciente feminina, 48 anos, hipertensa e pré-diabética em controle com hidroclorotiazida e dieta. Procura o pronto-socorro com dor em joelho esquerdo há 2 dias. Relata que há 10 dias iniciou artralgia de punhos e mãos, de caráter migratório e que evoluiu para tornozelos e joelho esquerdo há 2 dias. Recebeu anti-inflamatório não hormonal há 10 dias por diagnóstico de tenossinovites em ultrassom de mãos. Nega traumas, infecções recentes e viagens. Relata abuso de álcool e cocaína nos últimos meses. Tem vida sexual ativa, sem uso regular de preservativos. Ao exame físico: bom estado geral, febril, estável hemodinamicamente. Joelho esquerdo: calor local, hiperemia da pele, sinal da tecla em recesso suprapatelar e dificuldade importante de flexo-extensão. Em pele de tornozelo, pé esquerdo e mãos há pequenas lesões pustulosas, com 0,7 mm em maior extensão, base eritematosa, que apareceram no dia do atendimento. Foi puncionado joelho com o líquido, conforme imagens a seguir: Assinale qual a hipótese mais provável e a conduta inicial adequada.",
+    "alternatives": "  A) Artrite séptica por estreptococo, iniciar oxacilina até resultado de Gram e cultura geral do líquido sinovial.\n  B) Artrite gonocócica, iniciar ceftriaxona e oxacilina ou vancomicina até resultado de Gram, cultura geral e em meio Thayer-Martin. [GABARITO]\n  C) Artrite gotosa, iniciar colchicina, anti-inflamatório, suspender hidroclorotiazida e prescrever ambulatoriamente alopurinol.\n  D) Artrite psoriásica forma pustulosa, iniciar metotrexato semanal e betametasona tópica.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Poliartralgia migratória + lesões pustulosas + comportamento de risco sexual é sugestivo de infecção gonocócica disseminada.\n\n****Alternativa Correta** (B)**: A cobertura antibiótica inicial deve incluir ceftriaxona para gonococo e oxacilina/vancomicina para estafilococo, até confirmação.\n\n**Alternativas Incorretas**:\n- **Letra A**: Ignora etiologia sexual"
+  },
+  {
+    "id": 7514,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Insulinoterapia no tratamento do diabetes mellitus tipo 2 Tratamento medicamentoso das dislipidemias Inibidores do sistema reninaangiotensinaaldosterona",
+    "stem": "Mulher de 60 anos segue ambulatoriamente por lúpus eritematoso sistêmico há 20 anos, diabetes melito tipo 2 e hipertensão arterial sistêmica há 10 anos. Há 1 ano em uso de hidroxicloroquina 400 mg/dia, prednisona 7,5 mg/dia, carbonato de cálcio 1250 mg/ dia, vitamina D3 7000 Ul/semana, metformina 850 mg três vezes ao dia, hidroclorotiazida 25 mg/dia, gliclazida 90 mg/dia e sinvastatina 20 mg/dia. Na consulta de rotina está assintomática, com pressão arterial 142x88 mmHg, IMC: 29 kg/m² e FC: 80 bpm. Traz os seguintes exames: ⦁ Hemoglobina glicada: 8,3% ⦁ Albuminúria/creatinina urinária: 120 mg/g ⦁ Creatinina: 1,2 mg/dL ⦁ Urina 1: normal ⦁ K ⁺ :4,2 mEg/L ⦁ HDL: 40 mg/dL ⦁ LDL: 114 mg/dL ⦁ Triglicérides: 210 mg/dL ⦁ C3e C4: normais ⦁ Anti-DNA DS: negativo ⦁ Densitometria com T-score em fêmur total de -2,8 e L1- L4 em -1,8 ⦁ Fundoscopia sem alterações ⦁ ECG com ritmo sinusal e sobrecarga de ventrículo esquerdo. Com base nessas informações, assinale o que deve ser feito para a paciente do ponto de vista medicamentoso.",
+    "alternatives": "  A) Associar enalapril, trocar sinvastatina por atorvastatina, iniciar insulina NPH bedtime 10 Ul e alendronato de sódio. [GABARITO]\n  B) Associar anlodipino, trocar por rosuvastatina, aumentar a dose de gliclazida e associar denosumabe.\n  C) Associar losartana, aumentar dose de sinvastatina, trocar metformina pela sua fórmula de liberação prolongada e associar alendronato de sódio.\n  D) Associar losartana, aumentar dose de sinvastatina, iniciar insulina NPH bedtime 10 Ul e prescrever ácido zoledrônico anual.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: A paciente tem microalbuminúria (necessitando de iECA ou BRA), dislipidemia de alto risco (necessitando de estatina potente) e osteoporose (T-score < -2,5, exigindo tratamento). Além disso, diabetes descompensado (HbA1c 8,3%) justifica iniciar insulina.\n\n****Alternativa Correta** (A)**: O enalapril é um iECA indicado na presença de albuminúria para nefropr"
+  },
+  {
+    "id": 7515,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+    "topic": "Inibidores da neprisilina e dos receptores da angiotensina II sacubitrilvalsartan Inibidores da SGLT2 ISGLT2",
+    "stem": "Mulher de 65 anos, diabética em uso de metformina 1.000 mg de 12/12 horas/dia, procura UBS por dispneia aos médios esforços, há 2 meses. Relata infarto agudo do miocárdio (IAM) há 4 anos e traz ECO com fração de ejeção de 33% e hipocinesia de parede lateral. Está em uso de AAS 100 mg/dia, atorvastatina 40 mg/dia, carvedilol 25 mg duas vezes/dia, enalapril 20 mg duas vezes/dia, espironolactona 25 mg uma vez/dia e furosemida 40 mg/dia. Ao exame físico, apresenta PA: 120x76 mmHg e FC: 68 bpm, ausculta pulmonar normal e sem edema de membros inferiores. Assinale o tratamento medicamentoso indicado para essa paciente.",
+    "alternatives": "  A) Introduzir ivabradina ou aumentar dose de espironolactona.\n  B) Substituir carvedilol por bisoprolol para melhor beta bloquear e aumentar furosemida.\n  C) Associar sacubitril-valsartana e diminuir dose de carvedilol.\n  D) ssociar iSGLT2 ou trocar enalapril por sacubitril-valsartana [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Em IC com FE reduzida, as diretrizes recomendam iniciar iSGLT2 (dapagliflozina/empagliflozina) em todos os pacientes, independente de diabetes, ou trocar iECA por sacubitril-valsartana para reduzir mortalidade.\n\n****Alternativa Correta** (D)**: Associar iSGLT2 (como dapagliflozina) ou trocar enalapril por sacubitril-valsartana são condutas baseadas em evid"
+  },
+  {
+    "id": 7516,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Endoscopia Digestiva Alta EDA",
+    "stem": "Paciente homem de 48 anos vai à consulta ambulatorial devido a quadro de queimação epigástrica diariamente, que piora após refeições e sem irradiação, vômitos ou sangramentos. Avaliado no pronto-socorro, recebeu prescrição de omeprazol 40 mg uma vez ao dia, em jejum, a qual faz uso há 4 semanas, com melhora parcial. Exames realizados no PS: Hb: 11,2 g/dl; VCM: 70 fl; HCM: 30 g/dL; Leucócitos: 7.000/mm³; Ureia: 40 mg/dL; Creatinina: 0,8 mg/dL; glicemia: 90 mg/dL. Apresenta dieta rica em produtos ultraprocessados. Pratica atividade física regular duas vezes por semana. Assinale a conduta mais adequada neste momento.",
+    "alternatives": "  A) Aumentar a dose de omeprazol para 80 mg ao dia.\n  B) Manter prescrição de omeprazol 40 mg por mais 04 semanas e explicar que a melhora ocorre após 8 semanas de tratamento.\n  C) Prosseguir a investigação com endoscopia digestiva alta. [GABARITO]\n  D) Prescrever amoxicilina e levofloxacino por 10 dias na detecção de Helicobacter pylori.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Sintomas dispépticos + anemia microcítica (Hb 11,2, VCM 70) = sinal de alarme, exigindo endoscopia digestiva alta.\n\n****Alternativa Correta** (C)**: Paciente com dispepsia e anemia ferropriva deve ser investigado com EDA para excluir malignidade ou úlcera. Não é seguro apenas aumentar IBP ou esperar.\n\n**Alternativas Incorretas**:\n- **Letra A**: Aumentar do"
+  },
+  {
+    "id": 7517,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+    "topic": "Classificação do Choque POCUS Parâmetros hemodinâmicos no choque",
+    "stem": "Três pacientes foram admitidos no PS com quadro de choque hemodinâmico, sendo submetidos ao protocolo RUSH ( Rapid Ultrasound in Shock ) para avaliar etiologia do choque. A tabela a seguir apresenta os achados na avaliação cardíaca, do tórax e da veia cava desses três pacientes, identificados pelos números 1,2 e 3. Assinale qual é a alternativa que correlaciona o achado do protocolo RUSH com o diagnóstico etiológico mais provável do choque.",
+    "alternatives": "  A) Exame 1: Sepse de foco pulmonar.\n  B) Exame 2: Paciente com tromboembolismo pulmonar instável. [GABARITO]\n  C) Exame 3: Infarto anterior extenso.\n  D) Exame 4: Aneurisma de aorta roto.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: No RUSH, a associação de VD dilatado com disfunção (sinal de McConnell) e VCI fixa sugere TEP maciço (choque obstrutivo).\n\n****Alternativa Correta** (B)**: O exame 2 mostra dilatação de VD e VCI fixa, indicando sobrecarga aguda de VD, característico de TEP.\n\n**Alternativas Incorretas**:\n- **Letra A**: Sepse costuma ter VCI colapsável e hiperdinamismo.\n- **"
+  },
+  {
+    "id": 7518,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+    "topic": "Manifestações clínicas Tratamento",
+    "stem": "Paciente masculino, 53 anos, portador de cirrose hepática por hepatite C, em uso de furosemida e aguardando transplante hepático. Há três dias apresentou temperatura de 38,4 ºC e aumento do volume abdominal. Posteriormente tornou-se confuso, desorientado, com flapping e sonolência. Os exames na sala de emergência mostraram: Hb: 11,7 g/dL; leucócitos: 5.670/mm³; plaquetas 120.000/mm³; ureia 72 mg/dl; creatinina 1,5 mg/dL; glicose 110 mg/dL; Na ⁺ 128 mEqg/L; K ⁺ 2,8 meqg/L, C l ⁻ 101 mEg/L. Assinale qual é a conduta mais adequada na admissão.",
+    "alternatives": "  A) Aumentar o diurético, repor K ⁺ por via parenteral e prescrever norfloxacino.\n  B) Corrigir a hipocalemia, investigar estado infeccioso e prescrever enema de lactulose. [GABARITO]\n  C) Orientar restrição de água livre, manter a furosemida e administrar lactulose.\n  D) Administrar soro fisiológico, repor K ⁺ por via parenteral e iniciar espironolactona.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Suspeita de PBE (febre + ascite) descompensando encefalopatia; também hipocalemia que piora amônia. Corrigir fatores precipitantes.\n\n****Alternativa Correta** (B)**: Corrigir hipocalemia, investigar infecção (paracentese) e usar lactulose para encefalopatia são as prioridades.\n\n**Alternativas Incorretas**:\n- **Letra A**: Aumentar diurético pode piorar funç"
+  },
+  {
+    "id": 7519,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Hipertensão Resistente Inibidores do sistema reninaangiotensinaaldosterona",
+    "stem": "Paciente feminino, 52 anos, portador de hipertensão arterial sistêmica há 10 anos com acompanhamento em ambulatório geral. Iniciou tratamento com enalapril 40 mg/dia e clortalidona 25 mg/dia (pressão de 162/94 mmHg inicial). Há 02 anos foi acrescentado anlodipino 10 mg/dia. Mesmo assim o controle de PA não está ideal, pressão hoje de 148x88 mmHg e FC: 92 bpm. Ecocardiograma com sobrecarga ventricular esquerda e fundo de olho grau 2. Urina 1 normal; Hb: 12,7 mg/dL; leucócitos 5.670/mm³; plaquetas: 235.000/mm³; ureia: 45 mg/dL; creatinina: 1,0 mg/dL; glicose: 98 mg/dL; Na ⁺ : 138 mEg/L, K ⁺ : 4,1 mEg/L. Assinale qual é a conduta mais adequada.",
+    "alternatives": "  A) Associar clonidina 0,1 mg/dia.\n  B) Introduzir espironalactona 25 mg/dia. [GABARITO]\n  C) Associar hidralazina 25 mg de 12/12 horas.\n  D) Trocar enalapril por losartana 100 mg dia.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Hipertensão resistente: 3 classes otimizadas incluindo diurético = adicionar espironolactona.\n\n****Alternativa Correta** (B)**: Espironolactona é a droga de escolha (evidência Classe I) para HAR, desde que função renal e potássio normais (K 4,1).\n\n**Alternativas Incorretas**:\n- **Letra A**: Clonidina é última linha devido a efeitos colaterais.\n- **Letra C*"
+  },
+  {
+    "id": 7520,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Quadro clínico",
+    "stem": "Paciente de 48 anos apresenta há 6 meses lesões na face (rash predominantemente em região periorbital e fronte, conforme imagem a seguir) e também em membros superiores. Relacionado ao quadro clínico, assinale qual dos sintomas é mais provável para essa paciente.",
+    "alternatives": "  A) Fraqueza da musculatura proximal de membros. [GABARITO]\n  B) Oligoartrite de grandes articulações.\n  C) Oligúria.\n  D) Edema de membros inferiores.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Rash periorbital (heliotropo) + lesões em áreas expostas = dermatomiosite, que cursa com fraqueza muscular proximal.\n\n****Alternativa Correta** (A)**: Fraqueza proximal de MMII e MMSS é a manifestação muscular cardinal.\n\n**Alternativas Incorretas**:\n- **Letra B**: Oligoartrite não é típica de dermatomiosite.\n- **Letra C**: Oligúria não é manifestação.\n- **"
+  },
+  {
+    "id": 7521,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "topic": "Hanseníase tuberculoide Baciloscopia",
+    "stem": "Mulher, 45 anos, apresenta há 2 anos lesão eritematosa, infiltrada, bem delimitada no antebraço esquerdo, conforme figura apresentada. Peso de 67 kg. Testes realizados demonstraram sensibilidades térmica, dolorosa e tátil diminuídas. Assinale qual o diagnóstico e qual achado laboratorial é esperado.",
+    "alternatives": "  A) Eritema nodoso hansênico e baciloscopia negativa.\n  B) Hanseníase tuberculoide e baciloscopia negativa. [GABARITO]\n  C) Hanseníase virchowiana e baciloscopia positiva.\n  D) Hanseníase dimorfa virchowiana e baciloscopia positiva.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Lesão única, bem delimitada, com perda de sensibilidade = hanseníase tuberculoide (paucibacilar), baciloscopia negativa.\n\n****Alternativa Correta** (B)**: Hanseníase tuberculoide, forma paucibacilar, baciloscopia negativa, pois poucos bacilos.\n\n**Alternativas Incorretas**:\n- **Letra A**: Eritema nodoso hansênico é reação, não diagnóstico.\n- **Letra C**: Vi"
+  },
+  {
+    "id": 7522,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "topic": "Avaliação e conduta dos contatos",
+    "stem": "Mulher, 45 anos, apresenta há 2 anos lesão eritematosa, infiltrada, bem delimitada no antebraço esquerdo, conforme figura apresentada. Peso de 67 kg. Testes realizados demonstraram sensibilidades térmica, dolorosa e tátil diminuídas. Considerando o achado mais provável, assinale qual a orientação em relação aos contactantes da paciente.",
+    "alternatives": "  A) Realização de baciloscopia, teste rápido e exame histopatológico nos contactantes.\n  B) Orientação de autoexame dos contactantes, moradores da mesma habitação há 2 anos.\n  C) Contato telefônico anual de contactantes por 3 anos.\n  D) Avaliação clínica dermatológica e neurológica dos contactantes, moradores da mesma habitação há 5 anos. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Contactantes domiciliares dos últimos 5 anos devem ser avaliados clinicamente.\n\n****Alternativa Correta** (D)**: Todos os moradores da mesma habitação nos últimos 5 anos devem passar por avaliação clínica dermatológica e neurológica.\n\n**Alternativas Incorretas**:\n- **Letra A**: Não é rotina realizar exames complementares em contactantes assintomáticos.\n- *"
+  },
+  {
+    "id": 7523,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Intertrigo por cândida",
+    "stem": "Paciente de 78 anos refere lesões localizadas na região suprapúbica há 3 meses. Fotos da lesão e da microscopia ótica do raspado da lesão são apresentadas a seguir: Assinale qual é o diagnóstico e o achado do raspado.",
+    "alternatives": "  A) Candidose; pseudo-hifas e esporos. [GABARITO]\n  B) Tínea do corpo; hifas artrosporadas.\n  C) Eritrasma; Corynebacterium minutissimum.\n  D) Pitiríase versicolor; Malassezia globose .",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Região suprapúbica úmida, achado de pseudo-hifas e esporos = candidíase.\n\n****Alternativa Correta** (A)**: Candidose, com visualização de pseudo-hifas e esporos no raspado.\n\n**Alternativas Incorretas**:\n- **Letra B**: Tínea do corpo tem hifas septadas (não artrosporadas) e lesão em borda ativa.\n- **Letra C**: Eritrasma é causado por bactéria, detectado pel"
+  },
+  {
+    "id": 7524,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Apresentação clínica Intertrigo por cândida",
+    "stem": "Paciente de 78 anos refere lesões localizadas na região suprapúbica há 3 meses. Fotos da lesão e da microscopia ótica do raspado da lesão são apresentadas a seguir: Assinale quais são os principais diagnósticos diferenciais para a afecção desse paciente.",
+    "alternatives": "  A) Dermatite atópica e erupção variceliforme de Kaposi.\n  B) Intertrigo e dermatite seborreica. [GABARITO]\n  C) Pênfigo vulgar e foliculite bacteriana.\n  D) Impetigo e erisipela.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Lesões em região suprapúbica há 3 meses, com microcopias mostrando candidose, exigem diagnóstico diferencial com intertrigo e dermatite seborreica.\n\n****Alternativa Correta** (B)**: O intertrigo é uma dermatose inflamatória comum em áreas de dobras, caracterizada por eritema e maceração, frequentemente complicada por infecção fúngica (Candida) ou bacterian"
+  },
+  {
+    "id": 7525,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Quadro clínico Tratamento",
+    "stem": "Paciente do sexo masculino, 59 anos, tabagista ativo (20 anos-maço), HAS e DM tipo Il em uso de hidroclorotiazida 25 mg/dia, losartana 50 mg/dia e metformina 850 mg 3x/dia. Procura pronto-socorro por dispneia progressiva há 7 dias com piora há 1 dia, além de dor torácica dependente da ventilação em hemitórax esquerdo e queda do estado geral. ECG normal. Realizado POCUS pulmonar com as imagens a seguir: Assinale qual é a melhor opção de tratamento para esse paciente.",
+    "alternatives": "  A) Antibioticoterapia. [GABARITO]\n  B) Diurético parenteral.\n  C) Ventilação não invasiva e vasodilatação com nitroglicerina.\n  D) Drenagem pleural fechada com cateter pigtail .",
+    "explanation": ""
+  },
+  {
+    "id": 7526,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+    "topic": "Manejo inicial e pacotes Choque séptico",
+    "stem": "Paciente do sexo feminino de 52 anos de idade, hipertensa, admitida na sala de emergências com hipótese diagnóstica de sepse de foco pulmonar. Encontra-se confusa, hipotensa com PA 80x42 mmHg (PAM: 55 mmHg), extremidades frias e tempo de enchimento capilar de 6. Iniciada antibioticoterapia empírica com ceftriaxone e claritromicina intravenosos. Realizada prova volêmica com 500 mL de Ringer Lactato, sem reversão do quadro. ⦁ POCUS Pulmonar: Lung sliding preservado + Linhas B bilaterais, sem outras alterações. ⦁ POCUS Cardíaco: VTI: 18 (VR > 17). ⦁ Exame de imagem de veia cava inferior a seguir: Assinale qual é a melhor conduta terapêutica no momento atual.",
+    "alternatives": "  A) Realizar nova prova volêmica até completar 30 mL/kg em 3 horas.\n  B) Realizar punção venosa central guiada por USG para iniciar noradrenalina.\n  C) Iniciar noradrenalina em acesso venoso periférico proximal. [GABARITO]\n  D) Iniciar dose de estresse de furosemida devido indícios de congestão sistêmica.",
+    "explanation": ""
+  },
+  {
+    "id": 7527,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+    "topic": "Ânion Gap Acidose metabólica com ânion gap aumentado",
+    "stem": "Paciente de 30 anos de idade é levado ao pronto-socorro por amigos após apresentar letargia e rebaixamento do nível de consciência. Não há relato de medicações de uso contínuo, comorbidades, uso de drogas ilícitas ou histórico de trauma. Ao exame físico, apresenta frequência respiratória de 29 ipm, SpO₂ 95% em ar ambiente, respiração ruidosa, escala de coma de Glasgow 10 (AO 3 RM 4 RV 3), pupilas isocóricas e fotorreagentes. PA: 98x68 mmHg, FC: 102 bpm, TEC: < 3s. Realizada TC de crânio que não demonstrou anormalidades. ECG normal. ⦁ Exames laboratoriais: Na ⁺ : 141 mEg/L K ⁺ : 3.5 mEg/L Cl: 101 mEg/L Ureia: 35 mg/dL Creatinina sérica: 0,7 mg/dL Glicemia: 89 mg/dL Gasometria arterial: pH 7,05 pO₂: 62 mmHg pCO₂: 24 mmHg Bicarbonato: 7 mEg/L Osmolaridade sérica mensurada: 340 mOsm/kg. Assinale qual das alternativas melhor descreve os achados dos exames laboratoriais.",
+    "alternatives": "  A) Acidose metabólica e acidose respiratória concomitante. [GABARITO]\n  B) Acidose metabólica compensada com ânion GAP aumentado e GAP osmolar.\n  C) Acidose metabólica compensada com ânion GAP normal e GAP osmolar.\n  D) Alcalose metabólica com acidose secundária.",
+    "explanation": ""
+  },
+  {
+    "id": 7528,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Tratamento da AESPassistolia",
+    "stem": "Paciente do sexo masculino de 32 anos, 70 kg, sofreu um acidente de motocicleta há quatro dias, evoluindo c o m tetraplegia. Na unidade de terapia intensiva, desenvolveu insuficiência respiratória, necessitando de intubação orotraqueal. O intensivista opta por intubação em sequência rápida utilizando fentanil 100 ug, etomidato 20 mg e succinilcolina 70 mg via venosa. Evolui com assistolia imediatamente após a administração das medicações. Assinale qual é a principal hipótese diagnóstica para essa parada.",
+    "alternatives": "  A) Hipóxia secundária ao uso de fentanil.\n  B) Tromboembolismo pulmonar.\n  C) Hiperpotassemia secundária a succinilcolina. [GABARITO]\n  D) Choque distributivo secundário ao etomidato.",
+    "explanation": ""
+  },
+  {
+    "id": 7529,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+    "topic": "Diagnóstico Topográfico",
+    "stem": "Paciente do sexo masculino, desconhecido, foi encontrado em coma em via pública e trazido por ambulância à sala de emergência. Foi submetido à intubação orotraqueal na cena do resgate. Na avaliação inicial, há a descrição do seguinte exame neurológico: resposta motora com extensão em membros inferiores e flexão em membros superiores aos estímulos dolorosos, pupilas médio-fixas. Encontra-se em ventilação mecânica através de tubo orotraqueal. Assinale qual é a topografia lesional atual para o caso conforme o exame neurológico descrito no caso apresentado.",
+    "alternatives": "  A) Bulbo.\n  B) Ponte.\n  C) Córtex difuso.\n  D) Mesencéfalo. [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 7530,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+    "topic": "Avaliação Clínica",
+    "stem": "Paciente do sexo masculino, desconhecido, foi encontrado em coma em via pública e trazido por ambulância à sala de emergência. Foi submetido à intubação orotraqueal na cena do resgate. Na avaliação inicial, há a descrição do seguinte exame neurológico: resposta motora com extensão em membros inferiores e flexão em membros superiores aos estímulos dolorosos, pupilas médio-fixas. Encontra-se em ventilação mecânica através de tubo orotraqueal. Realizada a prova calórica com água fria no vestíbulo direito do paciente, assinale qual a resposta esperada.",
+    "alternatives": "  A) Desvio do olhar conjugado tônico para a esquerda.\n  B) Desvio do olhar conjugado tônica para a direita. [GABARITO]\n  C) Desvio do olhar conjugado tônico para cima.\n  D) Ausência de resposta.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: A prova calórica com água fria em paciente com tronco íntegro desvia o olhar para o lado estimulado.\n\n****Alternativa Correta** (B)**: O paciente apresenta postura de decorticação, indicando lesão hemisférica poupando o tronco. A prova calórica fria à direita, em paciente com tronco íntegro, gera movimento dos olhos para o lado estimulado (direita). Isso o"
+  },
+  {
+    "id": 7531,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+    "topic": "Avaliação das Pupilas e Fundo de Olho Motricidade Ocular Extrínseca Exame Clínico",
+    "stem": "Paciente do sexo masculino, desconhecido, foi encontrado em coma em via pública e trazido por ambulância à sala de emergência. Foi submetido à intubação orotraqueal na cena do resgate. Na avaliação inicial, há a descrição do seguinte exame neurológico: resposta motora com extensão em membros inferiores e flexão em membros superiores aos estímulos dolorosos, pupilas médio-fixas. Encontra-se em ventilação mecânica através de tubo orotraqueal. Caso nenhuma intervenção seja realizada, assinale qual padrão de exame neurológico corresponde à evolução natural esperada.",
+    "alternatives": "  A) Ausência de resposta motora, pupilas médio-fixas, reflexo óculo-cefálico ausente. [GABARITO]\n  B) Ausência de resposta motora, pupilas puntiformes, reflexo óculo-cefálico desconjugado.\n  C) Extensão nos quatro membros, pupilas médio-fixas, reflexo óculo-cefálico ausente.\n  D) Extensão nos quatro membros, pupilas puntiformes, reflexo óculo-cefálico desconjugado.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Evolução natural da decorticação é a progressão para descerebração e finalmente para flacidez e arreflexia, com perda dos reflexos de tronco.\n\n****Alternativa Correta** (A)**: O paciente apresenta decorticação, indicando lesão acima do mesencéfalo. Sem intervenção, a lesão pode progredir caudalmente (herniação transtentorial central), levando a disfunção d"
+  },
+  {
+    "id": 7532,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Manifestações Não Motoras",
+    "stem": "Paciente do sexo masculino, 71 anos, diagnosticado com doença de Parkinson há 11 anos. No início desenvolveu somente tremor de extremidades, mas evolui com a tríade clássica de sintomas: tremor de repouso, rigidez muscular e bradicinesia, fechando o diagnóstico. Inicialmente, o paciente respondeu bem ao tratamento com levodopa e agonistas de dopamina, que ajudaram a controlar os sintomas motores, mas houve progressão da doença nos últimos 2 anos e o paciente começou a apresentar flutuações motoras, com períodos de bom controle motor alternados com períodos de piora dos sintomas. Nas últimas semanas, vem apresentando sintomas psicóticos (por exemplo, acredita que o vizinho o está vigiando, que mexe em sua lata de lixo, etc), mas são ideias pouco estruturadas. Assinale qual é a afirmativa correta relacionada a sintomas psicóticos na doença de Parkinson.",
+    "alternatives": "  A) Ocorre mais no início dos sintomas da doença, podendo ser exacerbado com o tratamento da levodopa.\n  B) Há relatos de sintomas psicóticos em pacientes com a doença, mas são raros (menos de 1% dos casos).\n  C) Ocorre em uma frequência semelhante à prevalência na população geral, ou seja, por volta de 2%.\n  D) Está associado com os estágios mais avançados da doença, podendo atingir 20% dos casos. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Psicose na DP é mais comum nas fases avançadas, podendo ocorrer em até 30% dos pacientes.\n\n****Alternativa Correta** (D)**: A psicose é uma complicação frequente da Doença de Parkinson avançada, associada ao uso prolongado de medicamentos dopaminérgicos. A prevalência aumenta com a idade, duração da doença e estágio avançado, podendo atingir 20-30% dos pac"
+  },
+  {
+    "id": 7533,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Quadro Clínico Critérios Diagnósticos",
+    "stem": "Familiares trazem ao médico um paciente de 81 anos, com história de declínio progressivo da memória e cognição há 5 anos, mas que era parcialmente independente para atividades diárias que o médico classificou como ECOG 3 (capaz de autocuidado apenas limitado; confinado à cama ou cadeira mais de 50% das horas de vigília). Segundo a família, há dois dias paciente não vem se alimentando, com aumento da sonolência e diminuição do contato verbal. O médico fez o diagnóstico de delirum e sugeriu internação para investigação do fator desencadeante. Dentre as funções cognitivas listadas a seguir, assinale qual é o distúrbio primário observado no delirium.",
+    "alternatives": "  A) Atenção. [GABARITO]\n  B) Função executiva.\n  C) Memória de curto prazo.\n  D) Função visuoespacial.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O delirium é definido como um distúrbio agudo da atenção e da consciência.\n\n****Alternativa Correta** (A)**: O delirium é uma síndrome confusional aguda caracterizada por perturbação da atenção (capacidade de focar, manter ou direcionar a atenção) e da consciência, com curso flutuante. A atenção é o domínio cognitivo primariamente afetado, sendo essencial "
+  },
+  {
+    "id": 7534,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "topic": "Tuberculose drogarresistente",
+    "stem": "TEXTO PARA A QUESTÃO Homem, 32 anos, residente em uma grande cidade brasileira e procedente de outro país latino-americano, procura a UBS com queixa de tosse produtiva há dois meses. Nas últimas semanas, os episódios de tosse se intensificaram e, em um deles, foram vistos “raios de sangue” no catarro. Foisolicitada 1a baciloscopia do escarro, o TRM-TB, a sorologia para HIV e iniciado o tratamento de tuberculose. Em seu retorno, duas semanas depois, refere discreta melhora da tosse, mas “continua tossindo muito”. O resultado da baciloscopia foi negativo para BAAR, enquanto resultado do TRM-TB apresentou MTB detectado e resistência à rifampicina. Assinale qual deve ser a conduta adotada para o caso.",
+    "alternatives": "  A) Solicitar novo TRM-TB, cultura e TS, e mantê-lo em seguimento na UBS até o resultado dos exames.\n  B) Solicitar novo TRM-TB, cultura e TS, e encaminhá-lo ao hospital especializado para isolamento.\n  C) Solicitar cultura e TS e iniciar esquema terapêutico para TB resistente, na própria UBS.\n  D) Solicitar novo TRM-TB, cultura e TS, e encaminhá-lo à referência terciária mantendo o acompanhamento na UBS. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Resistência à rifampicina no TRM-TB exige encaminhamento para referência terciária para tratar TB resistente.\n\n****Alternativa Correta** (D)**: O TRM-TB detectou MTB e resistência à rifampicina, indicando TB resistente (ou multirresistente). A conduta deve ser solicitar cultura e teste de sensibilidade e encaminhar o paciente a um serviço de referência ter"
+  },
+  {
+    "id": 7539,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Diabetes Mellitus tipo 2 DM 2 Tratamento Medicações que provocam glicosúria inibidores de SGLT2",
+    "stem": "Comparece à Unidade de Saúde da Família para seguimento, uma paciente de 65 anos, com diagnóstico confirmado de Diabetes Mellitus Tipo II e doença cardiovascular estabelecida. Faz uso de metformina 500mg 4 comprimidos ao dia, gliclazida 60mg 2 comprimidos ao dia e não atingiu as metas clínicas propostas na última consulta. Taxa de Filtração Glomerular (TFG): 80 ml/min/1.73m2; glicemia de jejum: 220mg/dl; glicemia pós-prandial: 300mg/dl e Hb glicada: 10%. A conduta mais indicada na consulta de hoje é:",
+    "alternatives": "  A) Suspender todas as medicações e iniciar insulina para a paciente.\n  B) Associar dapaglifozina 10mg ao tratamento. [GABARITO]\n  C) Encaminhar a paciente para endocrinologia, pois exames estão muito fora da meta.\n  D) Suspender a metformina e a gliclazida e prescrever dapaglifozina 10mg dia.",
+    "explanation": ""
+  },
+  {
+    "id": 7540,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Tratamento medicamentoso Hipertensão Resistente",
+    "stem": "Uma paciente de 57 anos é hipertensa, do lar e tem IMC de 28 Kg/m2. Faz uso de enalapril 20mg 12/12 horas, hidroclorotiazida 25mg/dia, anlodipino 5mg 12/12 horas. Hoje, procurou a Unidade de Saúde da Família (USF) próxima a sua casa porque sua pressão tem estado descontrolada. Apesar de não apresentar sintomas, refere que sua pressão tem ficado sempre com valores acima de 160 x 100 mmHg. A médica de família e comunidade verifica na consulta a pressão que estava 170 x 90 mmHg e a frequência cardíaca 82 bpm. De acordo com as Diretrizes Brasileiras de Hipertensão 2020 a médica deve:",
+    "alternatives": "  A) Associar losartana ao tratamento.\n  B) Liberar a paciente visto que está assintomática.\n  C) Prescrever um betabloqueador.\n  D) Associar espironolactona ao tratamento. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Hipertensão resistente: após esquema tríplice otimizado, adicionar espironolactona.\n\n****Alternativa Correta** (D)**: A paciente está em uso de três anti-hipertensivos (IECA, diurético e BCC) em doses adequadas, mas mantém PA elevada, caracterizando hipertensão resistente. Conforme as Diretrizes Brasileiras de Hipertensão (2020), o quarto fármaco de escolh"
+  },
+  {
+    "id": 7543,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+    "topic": "Metas terapêuticas",
+    "stem": "Você atende na Unidade de Saúde da Família um paciente de 49 anos, portador de hipertensão arterial há 5 anos e diabetes há 3 anos. Faz uso das seguintes medicações: Losartana 100 mg ao dia, Anlodipino 5 mg ao dia, Glifage XR 2.000 mg ao dia e Gliclazida MR 30 mg ao dia. Nega história prévia de infarto agudo do miocárdio e acidente vascular encefálico. Declara que sua mãe teve um infarto aos 58 anos de idade. Não conheceu o seu pai. É tabagista desde os 39 anos de idade, 10 cigarros diariamente. Ao exame físico: P: 94 Kg; E: 170 cm, IMC 32,5 Kg/m2. ACV: ritmo cardíaco regular, em dois tempos, bulhas normofonéticas. PA: 128/76 mmHg. Ap respiratório: murmurio vesicular presente bilateralmente, sem ruídos adventícios. Abdome plano, ruídos hidroaéreos presentes e normoativos, flácido, indolor à palpação, ausência de visceromegalias ou massas palpáveis. Exames laboratoriais: Colesterol total: 198 mg/dL; HDL colesterol: 45 mg/dL; Triglicerideos: 105 mg/dL; glicemia de jejum: 94 mg/dL; HbA1c: 6,8%; creatinina: 0,82 mg/dL. Considerando o caso clínico descrito, qual a meta de LDL colesterol para esse paciente?",
+    "alternatives": "  A) Abaixo de 100 mg/dL.\n  B) Abaixo de 130 mg/dL.\n  C) Abaixo de 70 mg/dL. [GABARITO]\n  D) Abaixo de 50 mg/dL.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Paciente com DM e HAS, alto risco CV, meta de LDL < 70 mg/dL.\n\n****Alternativa Correta** (C)**: Este paciente tem diabetes mellitus e hipertensão, além de tabagismo, classificando-o como alto risco cardiovascular (risco cardiovascular > 20% em 10 anos). Diretrizes de dislipidemia estabelecem meta de LDL < 70 mg/dL para pacientes de alto risco.\n\n**Alternati"
+  },
+  {
+    "id": 7545,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Semiologia Neurológica Quadro clínico diagnóstico e sinais de alarme",
+    "stem": "Homem, 34 anos de idade, relatou sintoma de dor lombar e irradiada para a perna direita, além de perda de força e \"formigamento\". O exame de ressonância magnética evidenciou uma hérnia de disco comprimindo o forame entre a quarta e a quinta vértebra lombar. Quais seriam os achados neurológicos esperados baseados no achado de exame de imagem?",
+    "alternatives": "  A) Redução da força para flexão plantar do pé e hipoestesia no primeiro interdigito do pé.\n  B) Redução da força para dorsiflexão do hálux e hipoestesia na borda lateral do pé.\n  C) Redução da força para extensão do joelho e hipoestesia na borda lateral da perna.\n  D) Redução da força para dorsiflexão do pé e hipoestesia na borda medial do pé. [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 7546,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Classificação dos Tumores do Sistema Nervoso Central Quadro Clínico Exames de Neuroimagem",
+    "stem": "Mulher de 58 anos, tabagista, apresentou há uma semana crise tônico-clônica generalizada inédita, sendo levada ao Pronto Atendimento onde recebeu diazepam endovenoso, que faz cessar a crise, e prescrição de fenitoína 100 mg de 12 em 12 horas, além de solicitação a realizar exame de ressonância magnética (RM) do encéfalo. Retorna ao ambulatório cor resultado do exame (em anexo), relatando ter tido nova crise semelhante no dia anterior. Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Ganglioglioma.\n  B) Neurocitoma central.\n  C) Glioblastoma. [GABARITO]\n  D) Ependimoma",
+    "explanation": ""
+  },
+  {
+    "id": 7547,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+    "topic": "Ventilação mecânica Modos convencionais de Ventilação Mecânica",
+    "stem": "Um paciente sob ventilação mecânica possui a seguinte gasometria (Figura). Quais fatores devem ser inicialmente verificados?",
+    "alternatives": "  A) Volume minuto e pressão de distensão. [GABARITO]\n  B) Pressão positiva expiratória final (PEEP: positive end expiratory pressure) e fração inspirada de oxigênio.\n  C) Complacência e espaço morto.\n  D) Resistência de vias aéreas e PEEP.",
+    "explanation": ""
+  },
+  {
+    "id": 7551,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Clínica Médica Ecocardiograma",
+    "stem": "Homem, 40 anos, sem comorbidades, é admitido na unidade de emergência com dor precordial há 2 dias de moderada intensidade, que piora com a inspiração e melhora com inclinação do tronco para frente, sem irradiação. Relata episódio de dengue sem complicações há 2 semanas. Ao exame físico: BEG FC:75 bm; PA:130 x 85 mmHg; FR:22 ipm, exame respiratório e abdominal normais, ictus cordis no 5° espaço intercostal esquerdo com 1 polpa digital de extensão, ritmo cardíaco regular em 2 tempos, sem sopros, extremidades quentes pulsos presentes e simétricos, sem edemas. Radiografia de tórax é normal. Eletrocardiograma abaixo. Considerando a principal hipótese diagnóstica, qual é o próximo passo na investigação?",
+    "alternatives": "  A) Cineangiocoronariografia.\n  B) Ecocardiograma transtorácico. [GABARITO]\n  C) Angiotomografia de coronárias.\n  D) Teste ergométrico.",
+    "explanation": ""
+  },
+  {
+    "id": 7552,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "topic": "Clínica Médica Exame físico",
+    "stem": "Mulher, 43 anos, branca, queixa-se de dispneia aos esforços, com piora progressiva há 4 meses, atualmente classe funcional IlI da NYHA, associadamente a ortopneia e edema de tornozelos. Há 1 semana procurou atendimento médico devido a piora dos sintomas. Exame físico, FC: 94 bpm; FR: 22 ipm; PA:145 x 60 mmHg, ausculta pulmonar com estertores bibasais, ictus cordis no 6º espaço intercostal na linha axilar anterior com duas polpas digitais e edema 2+/4+ ate joelhos bilateralmente, sopro cardíaco com epicentro em foco aórtico. Distensão abrupta e colapso rápido dos pulsos femorais e braquiais. Pulsações capilares observadas nos leitos ungueais. De acordo com a principal hipótese diagnóstica, qual fonograma melhor representa a ausculta cardíaca dessa paciente?",
+    "alternatives": "  A) Diagrama 1.\n  B) Diagrama 2.\n  C) Diagrama 3. [GABARITO]\n  D) Diagrama 4.",
+    "explanation": ""
+  },
+  {
+    "id": 7553,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Clínica Médica Diagnóstico",
+    "stem": "Mulher, 36 anos, previamente hígida e sem uso de medicamentos, apresentou exulcerações em mucosa jugal e gengiva há 4 meses e, há 1 mês, bolhas flácidas disseminadas pelo corpo, com dor e ardência intensa nas lesões. Exame físico: BEG; sinal de Nikolsky positivo perilesional; sem outros achados. Considerando a principal hipótese diagnóstica, qual achado histopatológico é mais provável de ser encontrado na biópsia de pele?",
+    "alternatives": "  A) Bolha intraepidérmica suprabasal. [GABARITO]\n  B) Bolha por degeneração vacuolar.\n  C) Bolha intraepidérmica subcórnea.\n  D) Bolha subepidérmica.",
+    "explanation": ""
+  },
+  {
+    "id": 7554,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Dermatologia Diagnóstico",
+    "stem": "Homem, 55 anos, apresenta lesões de pele (figura) há 4 meses. Nega dor ou sangramento no local. Tem hábito de pescar e relata que um colega de pescaria teve lesão semelhante há 1 ano. Traz biópsia de pele: infiltrado inflamatório linfo histiocitário com ocasionais células gigantes e rico em plasmócitos e visualizadas estruturas intracelulares nos macrófagos à coloração de Giemsa. Considerando o diagnóstico mais provável, qual exame está indicado?",
+    "alternatives": "  A) Teste de Kveim Siltzbach.\n  B) Teste de Montenegro. [GABARITO]\n  C) Teste de Mantoux.\n  D) Teste de Mitsuda.",
+    "explanation": ""
+  },
+  {
+    "id": 7555,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Clínica Médica Fatores precipitantes Apresentação clínica",
+    "stem": "Homem, 66 anos, portador de diabetes mellitus tipo 2 há 15 anos, em uso de metformina XR 2g/dia e empagliflozina 25 mg/dia. Nega complicações crônicas. Após uma viagem, queixa-se de náuseas e vômitos, associados a episódios diarreicos, cerca de 5x/dia, sem febre ou outros sinais de alarme. Exame físico: desidratado 2+/4+; FC: 106 bpm; FR: 22 irpm; PA: 112x68 mmHg; sem outros achados. Exames laboratoriais: Glicemia:145 mg/dL; pH:7,26; Bicarbonato sérico:12 mmol/L (VN: 21-28); Sódio:145 mmol/L (VN: 135,0-145,0) e Cloro:110 mmol/L (VR: 98,0-107,0) Em relação à principal hipótese diagnóstica, podemos afirmar que:",
+    "alternatives": "  A) A elevação de beta hidroxibutirato ocorre precocemente.\n  B) Há aumento da cetonúria e da cetonemia.\n  C) Está associada ao uso de gliflozinas. [GABARITO]\n  D) É uma cetoacidose diabética hiperglicêmica.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Cetoacidose euglicêmica é complicação de inibidores SGLT2.\n\n****Alternativa Correta** (C)**: O paciente em uso de empagliflozina (inibidora SGLT2) apresenta acidose metabólica com glicemia normal, consistente com cetoacidose euglicêmica (CAD-e). Essa condição está associada ao uso de gliflozinas, que aumentam a cetogênese mesmo com glicemia próxima do norm"
+  },
+  {
+    "id": 7556,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Indicações de Pesquisa e Tratamento",
+    "stem": "Mulher, 35 anos, queixa-se dor epigástrica associada a náuseas, 2 ou 3 x/semana, há 3 meses. A dor interfere nas suas atividades diárias. Nega perda de peso, vômitos, sangramentos ou disfagia. Evacua 1x/dia, fezes formadas. Sem outros antecedentes. Exame físico: sem alterações. Qual é a conduta mais adequada?",
+    "alternatives": "  A) Teste não invasivo para H. pylori. [GABARITO]\n  B) Tomografia de abdome com contraste.\n  C) Endoscopia digestiva alta.\n  D) Parasitológico de fezes.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Dispepsia sem sinais de alarme: testar H. pylori.\n\n****Alternativa Correta** (A)**: Paciente jovem com dispepsia sem sinais de alarme, a investigação inicial não invasiva para H. pylori é recomendada, pois a erradicação da infecção pode aliviar os sintomas em parte dos pacientes.\n\n**Alternativas Incorretas**:\n- **Letra B**: Tomografia de abdome não é utili"
+  },
+  {
+    "id": 7557,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Clínica Médica Manifestações Clínicas",
+    "stem": "Homem, 52 anos, há quatro meses apresenta dor localizada no epigástrio, associada a perda de apetite e perda de 10 kg nesse período. É acordado pela dor, com alivio parcial após uso de analgésico comum. Há duas semanas percebeu aumento do número de evacuações, com fezes pastosas, sem sangue ou muco. Nega outros antecedentes. Exame físico: dor à palpação profunda do epigástrio. Sem outras anormalidades. Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Dispepsia funcional.\n  B) Síndrome do intestino irritável.\n  C) Úlcera péptica duodenal.\n  D) Neoplasia de pâncreas. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Dor epigástrica + perda de peso + idade avançada: suspeitar de neoplasia de pâncreas.\n\n****Alternativa Correta** (D)**: Homem de 52 anos com dor epigástrica, perda de peso importante (10 kg em 4 meses) e alteração do hábito intestinal: esses são sinais de alarme. A associação com perda de apetite e sintomas sistêmicos aponta para neoplasia de pâncreas.\n\n**"
+  },
+  {
+    "id": 7558,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+    "topic": "Clínica Médica Complicações da DRC Doença Mineral e óssea",
+    "stem": "Homem, 78 anos, portador de doença renal crônica, HAS, dislipidemia, DM tipo 2 e gota. Usa enalapril, anlodipina, rosuvastatina, metformina, empagliflozina e alopurinol. Nega etilismo ou tabagismo. Exame físico: FR: 17 ipm, FC: 70 bpm e PA: 130 x 76 mmHg. Exames laboratoriais: Ur: 55 mg/dL; Hb:13,5 g/dL; Cr:1,6 mg/dL; Sódio:138 mEq/L; Potássio:4,9 mEq/ L; PTH:122 PG/mL (VR: 14,5-87,1); Cálcio total: 8 mg/dL (VR: 8,4-10,5); Fósforo:5,8 mg/dL (VR: 2,5-5,6); Albumina: 4,6 g/dL (VR: 3,5-4,8) e Hemoglobina glicada:7,8 % (VR:4,3-6,1). Qual é o mecanismo patogênico primário mais provável para as alterações laboratoriais encontradas?",
+    "alternatives": "  A) Diminuição da hidroxilação renal da vitamina D. [GABARITO]\n  B) Aumento da excreção renal de fosfato.\n  C) Mutação no gene do receptor de detecção do cálcio (CaSR).\n  D) Produção autônoma do paratormônio.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: DRC leva a deficiência de calcitriol, hipocalcemia e hiperparatireoidismo secundário.\n\n****Alternativa Correta** (A)**: O paciente tem DRC (Cr 1,6 mg/dL) com hipocalcemia, hiperfosfatemia e PTH elevado. Na DRC, há diminuição da atividade da 1-alfa-hidroxilase renal, diminuindo a produção de calcitriol, o que reduz a absorção intestinal de cálcio, levando à"
+  },
+  {
+    "id": 7559,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Clínica Médica Anemias hemolíticas Anemias hemolíticas autoimunes AHAI",
+    "stem": "Mulher, 26 anos, previamente hígida, queixa-se de dispneia e fadiga progressivas, de início há 10 dias. Exame físico: palidez cutâneo mucosa, icterícia 2+/4+; baço palpável a 1 cm do rebordo costal esquerdo. Restante sem alterações. Exames laboratoriais: Hb: 7,1 g/dL; VCM: 101 fL (VN:80,1 - 95,3), HCM: 32 pg (VN:27-32,9); Gb: 9.000/uL (VN:4.050-11.800) e Plaquetas: 89.000/uL(VN:203.000-445.000). Hematoscopia: policromasia, microesferócitos, plaquetas reduzidas no esfregaço de sangue periférico. Contagens de reticulócitos absoluta: 424.000/uL (VN:25.000-105.000) e relativa: 19% (VN:0,5-2,0). Bilirrubinas totais: 4,0 mg/dL (VN:0,3-1,2 mg); Bilirrubina direta: 0,29 mg/dL (VN: < 0,3); Bilirrubina indireta: 3,71 mg/dL (VN: < 0,9); LDH: 1089 U/L (VN:120 - 246) e Haptoglobina: 4,6 mg/dL (VN:40-280). Qual é o exame laboratorial mais adequado para a avaliação diagnóstica?",
+    "alternatives": "  A) Dosagem plasmática da ADAMTS13.\n  B) Teste de Coombs direto. [GABARITO]\n  C) Dosagem sérica de vitamina B12.\n  D) Curva da fragilidade osmótica.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Hemólise aguda + esferócitos + plaquetopenia = pensar em anemia hemolítica autoimune até prova em contrário. O Teste de Coombs Direto é o exame que diferencia causa imune de não imune.\n\n****Alternativa Correta** (B)**: O quadro clínico e laboratorial é compatível com anemia hemolítica adquirida, e a presença de microesferócitos no esfregaço, associada a in"
+  },
+  {
+    "id": 7560,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Clínica Médica Diagnóstico diferencial das anemias microcíticas Avaliação laboratorial do ferro",
+    "stem": "Homem, 65 anos, realizou hemograma completo para investigação de fraqueza generalizada. Hb: 7,6 g/dL (VN:13,9-17,7); VCM: 72 fL (VN:80,1- 95,3); HCM: 21 pg (VN:27,6- 33,2); RDW: 19% (VN:11,5-14,7); Gb: 5.300/uL (VN:3.800-10.300) e Plaquetas: 742.000/uL (VN:166.000-389.000). Qual é o exame mais indicado?",
+    "alternatives": "  A) Dosagem da ferritina. [GABARITO]\n  B) Avaliação da medula óssea.\n  C) Pesquisa da mutação JAK2V617F\n  D) Eletroforese de hemoglobina.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Anemia microcítica + RDW elevado + trombocitose = clássico de deficiência de ferro. Ferritina é o exame confirmatório.\n\n****Alternativa Correta** (A)**: O hemograma mostra anemia microcítica e hipocrômica (VCM e HCM baixos) com RDW elevado, padrão típico de anemia ferropriva. A trombocitose é uma alteração reacional frequente na deficiência de ferro. A dos"
+  },
+  {
+    "id": 7561,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Tratamento e profilaxia",
+    "stem": "Mulher, 30 anos, queixa se de tosse seca, febre diária (até 38,5C) e dispneia progressiva há 3 semanas, com piora acentuada nos últimos 2 dias. Tomou, sem orientação médica, amoxicilina+clavulanato (500/125 mg a cada 8 horas) por uma semana, sem melhora. Exame Físico: FR: 28 ipm e tiragens intercostais. Ausculta respiratória sem anormalidades. Ausência de lesões em pele e mucosa oral, sem adenomegalias. Exames complementares: PCR para SARS CoV 2 em secreção nasal: negativa; Teste rápido molecular para M. tuberculosis em escarro: negativo. Hb: 12,2 g/dL; Gb: 3000/uL (neutrófilos 65%; linfócitos: 30%); plaquetas: 233.000 /uL. Gasometria ar ambiente: pH: 7,44; PO2: 71 mmHg; PCO2: 38 mmHG; HCO3: 26 mmol/L BE. mmol/L ; Saturação O2 : 92%. LDH sérica: 5300 U/L (VN: 120-246). Teste rápido para HIV: positivo. Qual é a terapia mais adequada?",
+    "alternatives": "  A) Sulfametoxazol+trimetoprim [GABARITO]\n  B) Fluconazol\n  C) Ceftriaxona\n  D) Rifampicina+isoniazida+pirazinamida+etambutol",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: HIV + tosse seca + hipoxemia + LDH elevado = Pneumocistose até prova em contrário. Tratar com Bactrim.\n\n****Alternativa Correta** (A)**: O paciente é HIV positivo, apresenta tosse seca, hipoxemia (PaO2 71 mmHg) e LDH extremamente elevado (5300 U/L). Esses achados, com ausculta respiratória sem alterações, são altamente sugestivos de pneumonia por *Pneumocy"
+  },
+  {
+    "id": 7562,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Clínica Médica Síndrome de Lise Tumoral SLT Síndrome de lise tumoral SLT",
+    "stem": "Homem, 65 anos, admitido em pronto atendimento com queixa de dor lombar há 15 dias. Refere inchaço, falta de ar e redução do volume de urina nos últimos 7 dias. Exame físico: REG, ictérico; anasarca; linfonodomegalia inguinal e PA:170x100 mmHg. Exames admissionais: gasometria venosa pH:7,29; HCO3:10,4 mmol/L; PCO2: 22 mmHg; PO2: 54 mmHg; Cr: 9,2 mg/dL; Ur: 420 mg/dL; Potássio: 7,3 mmol/L; Cálcio: 5,9 mg/dL (VR: 8,5-10,5); Fósforo: 13,1 mg/dL (VR: 2,5-5,6); Albumina: 2,5 g/dL; Bilirrubina total: 18,1 mg/dL (VR: 0,1-1,2); Bilirrubina direta: 14,8 mg/dL (VR: 0-0,2) e Hemograma normal. Qual é a provável etiologia da lesão renal aguda?",
+    "alternatives": "  A) Síndrome hemolítico urêmica.\n  B) Nefrite intersticial aguda.\n  C) Hipertensão maligna.\n  D) Síndrome de lise tumoral. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Potássio 7,3 + fósforo 13,1 + cálcio 5,9 + IRA em paciente com linfonodomegalia = síndrome de lise tumoral até prova em contrário.\n\n****Alternativa Correta** (D)**: O paciente apresenta insuficiência renal aguda grave com hipercalemia, hiperfosfatemia e hipocalcemia, além de linfonodomegalia. Essas alterações são clássicas da síndrome de lise tumoral (SLT)"
+  },
+  {
+    "id": 7563,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+    "topic": "Clínica Médica Síndrome de veia cava superior",
+    "stem": "Homem, 25 anos, notou há 3 meses edema de face ao acordar pela manhã, com melhora durante o dia. Há 1 mês, há piora gradual do edema, com extensão para o pescoço, sem melhora ao longo do dia, associado à hiperemia dessa região. Há 15 dias, refere dispneia, inicialmente aos grandes esforços, com piora gradual. Nega febre. Exame Físico: REG; eupneico; Saturação O2 em ar ambiente: 92%; edema e hiperemia em face, em pescoço e em região superior de tronco; distensão venosa em região cervical e torácica superior e sem outras alterações. Qual o diagnóstico mais provável?",
+    "alternatives": "  A) Angioedema crônico.\n  B) Insuficiência renal crônica.\n  C) Síndrome de Veia Cava Superior. [GABARITO]\n  D) Insuficiência cardíaca direita.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Edema de face e pescoço com circulação colateral = síndrome de veia cava superior até prova em contrário.\n\n****Alternativa Correta** (C)**: O quadro clínico de edema facial e cervical, associado à distensão venosa torácica e dispneia, é clássico da Síndrome da Veia Cava Superior (SVCS). Essa síndrome ocorre por obstrução ao retorno venoso da parte superior"
+  },
+  {
+    "id": 7564,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "topic": "Clínica Médica Ecocardiograma",
+    "stem": "Mulher, 65 anos, com hipertensão de difícil controle, dislipidemia e obesidade. Queixa-se de dispneia aos esforços há 4 meses, edema de membros inferiores e despertares noturnos por falta de ar. Exame físico: BEG, corada e hidratada. Ritmo cardíaco regular em 3 tempos com presença de B3; Bulhas normofonéticas. FC: 76 bpm. PA: 172 x 100 mmHg. Som vesicular abolido em bases de hemitoráces, com estertores finos ao fim da inspiração em regiões infraescapulares. FR: 20 ipm. Edema de membros inferiores (2/4+). Radiografia de tórax: pequeno derrame pleural bilateral, trama broncovascular proeminente e cardiomegalia. Qual é a alteração mais provável?",
+    "alternatives": "  A) Pré-carga ventricular reduzida.\n  B) Pressão elevada na artéria pulmonar. [GABARITO]\n  C) Derrame pericárdico acentuado.\n  D) Derrame pleural exsudativo.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: IC esquerda descompensada → hipertensão pulmonar pós-capilar. O derrame pleural é transudato.\n\n****Alternativa Correta** (B)**: A paciente apresenta sinais de insuficiência cardíaca esquerda (dispneia, ortopneia, B3, estertores, edema). A cardiomegalia e o derrame pleural bilateral indicam congestão pulmonar e aumento das pressões de enchimento do ventrícu"
+  },
+  {
+    "id": 7565,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Clínica Médica Fisiopatologia",
+    "stem": "Homem, 72 anos, tabagista (85 anos-maço). Refere dispneia aos esforços e tosse seca ki 5 anos. Há alívio parcial e efêmero dos sintomas quando usa beta agonista inalado. Exame fisios BEG, corado, hidratado. FR: 18 ipm. Diâmetro ântero-posterior do tórax aumentado; som hipersonoro à percussão do tórax, com murmúrio vesicular reduzido globalmente; sem ruídos adventícios. Qual é a alteração fisiopatológica mais provável?",
+    "alternatives": "  A) Infiltração eosinofílica de brônquios.\n  B) Rigidez de caixa torácica.\n  C) Fibrose de septos alveolares.\n  D) Alta complacência pulmonar. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Tabagista, tórax em tonel, hipersonoridade = enfisema. Complacência aumenta.\n\n****Alternativa Correta** (D)**: O paciente apresenta quadro clínico de enfisema pulmonar (DPOC), com histórico de tabagismo intenso, aumento do diâmetro anteroposterior do tórax e hipersonoridade à percussão. No enfisema, há destruição das paredes alveolares e perda da elasticid"
+  },
+  {
+    "id": 7566,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+    "topic": "Manifestações articulares Diagnóstico",
+    "stem": "Mulher, 48 anos, queixa-se de dor e edema em punhos e dedos das mãos, com rigidez matinal maior que uma hora, há três meses. Nega tabagismo e etilismo. Faz tratamento para hipotireoidismo. Exame físico: BEG; edema, calor e dor à movimentação de punhos, segunda e terceira metacarpofalangeanas bilateralmente e segunda a quarta interfalangeanas proximais de ambas as mãos. Exames laboratoriais: Hemograma normal; Proteína C reativa: 3,8 mg/dL (VN<1,0); Fator reumatoide: negativo; anti CCP: negativo; ALT: 15 U/L; AST:12 U/L; Glicemia em jejum:82 mg/dL; Cr: 0,9 mg/dL; TSH: 1,9 uUl/mL (VN: 0,4-4,0). Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Espondiloartrite não axial.\n  B) Ostoartrite nodal erosiva.\n  C) Artrite reumatoide. [GABARITO]\n  D) Lúpus eritematoso sistêmico",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Poliartrite simétrica de pequenas articulações com rigidez > 1h = AR, mesmo com sorologia negativa.\n\n****Alternativa Correta** (C)**: O diagnóstico de artrite reumatoide (AR) é clínico. A paciente apresenta poliartrite simétrica envolvendo punhos, metacarpofalangeanas e interfalangeanas proximais, com rigidez matinal prolongada (>1 hora). Embora o fator re"
+  },
+  {
+    "id": 7567,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Quadro clínico Exames complementares Líquido Sinovial",
+    "stem": "Homem, 60 anos, refere dor em joelhos há cinco anos, desencadeada pelas atividades do dia a dia, com piora lenta (no início, a intensidade era 2/10, hoje, 8/10). Hipertenso, em uso de propranolol e hidroclortiazida. Exame físico: bom estado geral; IMC: 31 Kg/m2; valgismo de joelhos; edema e calor em joelho esquerdo, com sinal da tecla; sem outras alterações. Líquido do joelho esquerdo foi coletado e enviado para análise. Qual é o achado mais provável?",
+    "alternatives": "  A) Cristais em agulha com birrefringência negativa.\n  B) Cristais visualizados com vermelho alizarina.\n  C) Contagem global de leucócitos < 2.000/mm3, [GABARITO]\n  D) Contagem diferencial de neutrófilos > 95%.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Osteoartrite com derrame = líquido não inflamatório (< 2000 leucócitos).\n\n****Alternativa Correta** (C)**: O paciente tem osteoartrite (OA) de joelhos, com dor mecânica e derrame articular (sinal da tecla). Na OA, o líquido sinovial é classificado como não inflamatório (Grupo I), com contagem de leucócitos < 2.000/mm³, predominantemente mononucleares. Port"
+  },
+  {
+    "id": 7568,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Cefaleias Primárias (Enxaqueca, Tensional) e Secundárias de Alarme",
+    "topic": "Clínica Médica Cefaleia em Salvas Tratamento Sintomático",
+    "stem": "Homem, 38 anos, sem comorbidades. Há 2 dias queixa-se de cefaleia intensa, temporal à direita, com duração de 15 a 30 minutos, principalmente à noite. Concomitante, há hiperemia conjuntival, edema palpebral e sudorese facial. Hoje, acordou com ptose palpebral direita. Procurou o pronto atendimento, durante a crise de cefaleia. Exame neurológico: orientado em tempo e espaço, ptose palpebral à direita, pupilas isocóricas e fotorreagentes, musculatura ocular extrínseca preservada e sem déficits focais. Qual é a conduta mais adequada?",
+    "alternatives": "  A) Ressonância magnética de encéfalo.\n  B) Oxigênio 10 L/min + sumatriptano 6 mg SC. [GABARITO]\n  C) Tomografia de crânio sem contraste.\n  D) Dipirona 1 g EV + cetoprofeno 100 mg EV.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Cefaleia em salvas com sintomas autonômicos → tratamento agudo com O2 e sumatriptano.\n\n****Alternativa Correta** (B)**: O paciente apresenta cefaleia intensa unilateral temporal, com duração de 15-30 minutos, associada a sintomas autonômicos ipsilaterais (hiperemia conjuntival, edema palpebral, sudorese facial) e ptose. Esses são critérios diagnósticos de "
+  },
+  {
+    "id": 7569,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+    "topic": "Clínica Médica Disfunção sexual masculina Hipopituitarismo",
+    "stem": "Homem, 50 anos, casado, queixa-se de astenia, adinamia e redução de foça muscular nos últimos 4 meses, além de redução de libido e de ereção matinal espontânea. Exame físico: IMC: 26,2 kg/m², sem outros achados. Exames complementares: TSH:16,9 ulU/mL (VR: 0,4-4,5); T4 livre:0,45 ng/dL (VR: 0,9 - 1,8 ng/dL); testosterona total: 90,34 ng/dL (VR: 250-900 ng/dL); Hb:11,7 g/dL e Ht: 34 dL. Qual é a principal hipótese diagnóstica?",
+    "alternatives": "  A) Síndrome do eutireoideo doente.\n  B) Hipotireoidismo primário.\n  C) Hipopituitarismo anterior. [GABARITO]\n  D) Uso de esteróide anabolizante.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: TSH alto + T4 livre baixo + testosterona baixa + anemia = pan-hipopituitarismo.\n\n****Alternativa Correta** (C)**: O paciente apresenta disfunção de múltiplos eixos hormonais: tireoidiano (TSH alto, T4 livre baixo), gonadal (testosterona baixa) e anemia (Hb baixa). Isso é sugestivo de hipopituitarismo anterior, que compromete a produção de hormônios hipofis"
+  },
+  {
+    "id": 7652,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Conceitos Classificação",
+    "stem": "Antônio, 41 anos de idade, queixa-se de dificuldade para manter e iniciar a ereção há 8 meses. Refere que tem sentido menos vontade de ter relações sexuais e que não tem conseguido atingir o orgasmo. Antônio tem estado mais triste, desanimado, cansado com o trabalho, com dificuldade para manter o sono e se divertir. Nega desejo sexual por outras pessoas e também parou de se masturbar. Mantém ereção matinal. É tabagista (50 anos-maço), consome álcool (5 doses aos finais de semana). Vânia tem 47 anos, é esposa de Antônio. Refere que nunca teve interesse sexual por Antônio e nem por outras pessoas, teve poucas parcerias ao longo da vida. Sente-se saudável e satisfeita com sua vida sexual, corpo e relacionamento. Parou de menstruar há 2 anos, apresenta fogachos. Nega comorbidades, nega uso de álcool, tabaco ou situações de violência. Considerando o caso, indique qual a fase do ciclo da resposta sexual está alterada e uma possível explicação para sua escolha.",
+    "alternatives": "  A) Antônio: fase de excitação, alterações vasculares decorrentes do tabagismo; Vânia: nenhuma, possível orientação sexual assexual.\n  B) Antônio: fase da excitação, provável quadro depressão; Vânia: fase do desejo, poucas experiências sexuais.\n  C) Antônio: fase de desejo, fadiga decorrente de sobrecarga no trabalho; Vânia: fase do desejo, sintomas decorrentes de síndrome climatérica.\n  D) Antônio: fase de desejo, provável quadro de depressão; Vânia: nenhuma, possível orientação sexual assexual. [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 7726,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+    "topic": "valor p e intervalo de confiança Estudos de Coorte",
+    "stem": "Um estudo clínico (N Engl J Med 390;10: 900 910, 2024) investigou a presença de Micro e Nanoplásticos (MNPs) em placas de ateroma da artéria carótida de pacientes submetidos à endarterectomia. Posteriormente, acompanhou por 34 meses a incidência de eventos cardiovasculares comparativamente entre os que tinham MNPs nas placas da carótida e os que não tinham. Os resultados do desfecho primário do estudo estão sintetizados na figura abaixo. Considerando os resultados desse estudo, assinale a alternativa abaixo que melhor os interpretam.",
+    "alternatives": "  A) Nesse estudo de caso controle, a incidência de AVC, infarto cardíaco ou morte por qualquer causa esteve inversamente associada à presença de micro e nanoplásticos na carótida.\n  B) Nesse estudo de coorte retrospectivo, a incidência de AVC, infarto cardíaco ou morte por qualquer causa esteve diretamente associada à presença de micro e nanoplásticos na carótida.\n  C) Nesse estudo experimental, a incidência de AVC, infarto cardíaco ou morte por qualquer causa esteve inversamente associada à presença de micro e nanoplásticos na carótida.\n  D) Nesse estudo de coorte prospectivo, a incidência de AVC, infarto cardíaco ou morte por qualquer causa esteve diretamente associada à presença de micro e nanoplásticos na carótida. [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 7731,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "topic": "As grandes síndromes geriátricas gigantes geriátricos",
+    "stem": "Homem, 70 anos, apresenta-se com perda de peso significativa, fadiga e dispneia aos pequenos esforços. Relata dificuldade para se alimentar devido à falta de apetite e sensação de saciedade precoce. Antecedentes de doença pulmonar obstrutiva crônica grave e insuficiência cardíaca congestiva. Exame físico: perda de massa muscular e edema de membros inferiores. Exames laboratoriais: albumina sérica: 2,9 g/dL (VR: 3,4-5,0); hemoglobina: 12,0 g/dL; creatinina: 1,1 mg/dL; Proteína C Reativa (PCR): 0,8 mg/dL (VR: < 1,0); glicemia de jejum: 105 mg/dL. Qual intervenção nutricional é a mais apropriada para este paciente?",
+    "alternatives": "  A) Aumentar a ingestão de proteínas e calorias por refeições fracionadas. [GABARITO]\n  B) Reduzir a ingestão de carboidratos para melhorar a glicemia de jejum.\n  C) Implementar dieta hipossódica rigorosa para controlar o edema.\n  D) Introduzir nutrição enteral suplementar.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: O paciente tem desnutrição e sarcopenia (perda de massa muscular) sem inflamação aguda. Fracionar a dieta para aumentar a oferta de proteínas e calorias é essencial.\n\n****Alternativa Correta** (A)**: Aumentar a ingestão de proteínas e calorias por refeições fracionadas: indicado para pacientes com saciedade precoce, perda de peso e hipoalbuminemia, pois ot"
+  },
+  {
+    "id": 7756,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Vigilância Epidemiológica",
+    "stem": "Dengue, Chikungunya e Zika são arboviroses originadas por vírus, sendo majoritariamente transmitidas pela picada da fêmea do mosquito Aedes aegypti. Em todas as regiões tropicais e subtropicais globais, têm gerado preocupações tanto para a população quanto para as autoridades, devido aos efeitos significativos na saúde pública e na sociedade, decorrentes de epidemias frequentes e do crescimento de casos graves e óbitos. Sobre arboviroses, podemos afirmar que:",
+    "alternatives": "  A) A atuação dos agentes comunitários de saúde (ACS) e dos agentes de combate às endemias (ACE) é de suma importância nas ações de enfrentamento às arboviroses. Ambos devem atuar de maneira integrada e complementar, realizando visitas domiciliares e intervindo nos diversos espaços da comunidade. Essa abordagem fortalece o vínculo e a comunicação entre a população e os serviços de Atenção Primária, enquanto conduzem ações de vigilância e busca ativa de casos, alinhadas ao perfil epidemiológico do território. [GABARITO]\n  B) A vigilância e o controle das arboviroses estão relacionados a atividades articuladas entre áreas técnicas do setor saúde e dos setores parceiros (educação, meio ambiente, defesa civil, planejamento, assistência social etc.), sem a participação da sociedade civil.\n  C) A dengue, a Chikungunya e a Zika compartilham sinais clínicos semelhantes, o que facilita a suspeita inicial e o diagnóstico diferencial pelo profissional de saúde, predispondo manejo clínico adequado e à ocorrência de formas mais leves da doença, diminuindo o número de óbitos.\n  D) A proliferação do vetor não é afetada por fatores associados à infraestrutura urbana e social do país.\n  E) Situações como falta de saneamento básico e de abastecimento de água não são preponderantes para a existência do vetor em convívio íntimo com a população. 4000215010",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: A integração entre ACS e ACE é essencial para o enfrentamento das arboviroses, unindo vigilância e busca ativa no território.\n\n****Alternativa Correta** (A)**: Correta, pois descreve a atuação integrada e complementar dos ACS e ACE, com visitas domiciliares e ações comunitárias, fortalecendo a atenção primária.\n\n**Alternativas Incorretas**:\n- **Letra B**: "
+  },
+  {
+    "id": 7775,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Medicina de Família e Comunidade",
+    "stem": "Paciente foi internada em hospital terciário com quadro avançado de aids. Mulher jovem, 24 anos, usuária de drogas injetáveis. Apresentou diagnóstico da infecção pelo HIV por ocasião do parto de sua filha há 2 anos. Teve alta d a maternidade sem tratamento, mas com a recomendação de procurar um serviço especializado para realizar seguimento adequado, o qual ela não realizou. Em relação à situação apresentada, assinale a alternativa correta.",
+    "alternatives": "  A) A paciente é de grupo de risco, com maior probabilidade de desenvolver a doença.\n  B) O comportamento de risco da paciente foi determinante para o desfecho de sua infecção.\n  C) A vulnerabilidade social da paciente foi o único componente determinante de seu adoecimento.\n  D) O componente programático da vulnerabilidade da paciente fica evidente. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Vulnerabilidade programática refere-se a falhas do sistema de saúde em garantir acesso e continuidade do cuidado.\n\n****Alternativa Correta** (D)**: O caso mostra que a paciente teve diagnóstico no parto, mas não recebeu o seguimento adequado, evidenciando falha do componente programático (organização dos serviços, acesso, vínculo).\n\n**Alternativas Incorret"
+  },
+  {
+    "id": 7778,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+    "topic": "Prevenção Quaternária",
+    "stem": "Pedro, 43 anos de idade, pardo, hipertenso, em uso de losartana 50 mg/dia. Apresenta-se com cefaleia nucal há 2 h. Sintomas têm sido recorrentes há 1 ano, em aperto, de moderada intensidade, com duração de 2 horas a 4 dias, sem fatores de piora. Nega outros sintomas ou antecedentes pessoais. Pai faleceu de acidente vascular cerebral há 5 anos. Nega uso de álcool ou outras drogas. Não dormiu bem à noite, ansioso, pois está muito preocupado que esse sintoma seja causado por um derrame ou câncer. Gostaria que o médico solicitasse uma tomografia de crânio. Exame físico: Pressão arterial de 150x92 mmHg, IMC: 28 kg/m². Exame neurológico sem alterações. Considerando o quadro de campos para o relacionamento pessoa-médico apresentado, assinale qual conduta exemplificaria a prevenção quaternária nesse caso.",
+    "alternatives": "  A) Aumentar a dose do anti-hipertensivo a fim de reduzir o risco cardiovascular.\n  B) Prescrever amitriptilina a fim de prevenir novas crises.\n  C) Não solicitar exames de imagem, pois essa prática poderia sobrecarregar financeiramente o sistema de saúde.\n  D) Não solicitar tomografia, pois achados incidentais poderiam causar mais mal do que bem. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Prevenção quaternária é evitar danos por intervenções excessivas ou desnecessárias.\n\n****Alternativa Correta** (D)**: Não solicitar tomografia em cefaleia tensional sem sinais de alerta evita riscos de achados incidentais, exposição à radiação e ansiedade, alinhando-se à prevenção quaternária.\n\n**Alternativas Incorretas**:\n- **Letra A**: Aumentar anti-hipe"
+  },
+  {
+    "id": 7780,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Medicina de Família e Comunidade",
+    "stem": "Rafael, 17 anos, pardo, heterossexual, católico, vem à consulta médica referindo que está precisando de um antidepressivo ou de “ritalina” para sua falta de atenção ou que deve ser autista. Há 3 meses refere que tem estado mais triste, com sentimento de que não vai conseguir ser aprovado nas disciplinas da faculdade. Sente-se incompetente por não estar conseguindo estudar e não se concentrar. Não apresenta queixas anteriores durante a infância ou alterações no desenvolvimento. Tinha bom rendimento escolar até o Ensino Médio. Passou em quatro vestibulares e mudou-se de uma cidade pequena do interior de Goiás para iniciar a faculdade de Economia em São Paulo. Atualmente está morando na residência estudantil, dividindo quarto com outro estudante. Sua renda provém principalmente de uma bolsa de iniciação científica de 700 reais. Alimenta-se no Restaurante Universitário e recebe algum auxílio financeiro complementar da família de 500 reais. É o primeiro filho a cursar Ensino Superior. Considera desistir do curso que tanto desejou, acha que não é para ele, pois se percebe muito diferente dos seus colegas de turma, já que “eles costumam viajar para o exterior nas férias e frequentar determinados lugares em que sinto que não são para mim, na minha cidade não era assim com meus amigos”. Refere que em uma das aulas um professor comentou que “ele não está conseguindo acompanhar o curso porque deve ser cotista”. Rafael está muito preocupado, pois sua família tem feito todo o esforço financeiro para ele se manter em São Paulo. Considerando a história de vida de Rafael, assinale quais aspectos sociais podem auxiliar na compreensão de sua experiência de doença.",
+    "alternatives": "  A) Racismo, psicofobia, patologização da neurodiversidade.\n  B) Racismo, desigualdade econômica, medicalização da vida. [GABARITO]\n  C) Migração, psicofobia, medicalização da vida.\n  D) Migração, desigualdade econômica, patologização da neurodiversidade.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Sofrimento psíquico pode ser expressão de desigualdades sociais e discriminação.\n\n****Alternativa Correta** (B)**: Racismo (comentário do professor), desigualdade econômica (diferenças de renda e oportunidades) e medicalização da vida (busca por medicação para problemas sociais) são os aspectos sociais centrais.\n\n**Alternativas Incorretas**:\n- **Letra A**:"
+  },
+  {
+    "id": 7874,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+    "topic": "Epinefrina",
+    "stem": "Durante o acolhimento em uma Unidade de Saúde da Família (USF) rural, uma paciente do sexo feminino de 23 anos de idade, relata início súbito de coceira generalizada, sensação de garganta “fechando” e dificuldade para respirar, ocorridos cerca de 15 minutos após consumir castanha-do-pará, à qual já havia referido alergia leve em outras ocasiões. Na avaliação, apresenta urticária disseminada, edema facial, taquicardia (FC de 122 bpm), PA de 95×60 mmHg, FR de 26 irpm e SpO₂ de 91%. A unidade possui adrenalina, oxigênio, soro fisiológico e equipe de enfermagem treinada, mas o transporte de emergência levará cerca de 40 minutos. Diante desse cenário, qual deve ser a prioridade da equipe da USF?",
+    "alternatives": "  A) Administrar difenidramina e aguardar a chegada do transporte, monitorando sinais vitais.\n  B) Administrar adrenalina intramuscular imediatamente, repetir se necessário, e iniciar suporte clínico enquanto aguarda remoção. [GABARITO]\n  C) Monitorar a paciente em decúbito dorsal, aplicar corticoide intramuscular e encaminhar como urgência\n  D) Iniciar oxigenoterapia, observar evolução do quadro e fornecer líquidos por via oral.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Anafilaxia: a prioridade absoluta é a administração precoce de adrenalina intramuscular, antes de qualquer outra medicação, e repetir a cada 5-15 minutos se necessário.\n\n****Alternativa Correta** (B)**: Administrar adrenalina intramuscular imediatamente, repetir se necessário, e iniciar suporte clínico enquanto aguarda remoção. A adrenalina é o tratamento "
+  },
+  {
+    "id": 8005,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Quadro Clínico",
+    "stem": "Mulher, 30 anos, submetida a cirurgia bariátrica há 3 anos devido à obesidade mórbida. Peso pré-operatório de 135 kg e há 1 ano mantém 95 kg. No último ano, apresentou 4 infecções de via aérea superior e 1 episódio de herpes zoster em face, tratada com aciclovir, Há 2 meses. apresenta cansaço persistente, diminuição da acuidade visual, em especial noturna, e xerostomia. Nos últimos dias, notou lesão esbranquiçada na conjuntiva ocular esquerda Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Herpes zoster oftálmico.\n  B) Endoftalmite por Cândida albicans.\n  C) Deficiência de Vitamina A. [GABARITO]\n  D) Sindrome de Sjögren.",
+    "explanation": ""
+  },
+  {
+    "id": 8016,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+    "topic": "Fundação Carlos Chagas (FCC) Hospital Sírio-Libanês - HSL Diagnóstico e investigação adicional Aumento: homocisteína Redução: sódio Aumento: colesterol Redução: caroteno Aumento: sódio Redução: homocisteína Aumento: prolactina Redução: colesterol Aumento: hemoglobina Redução: prolactina",
+    "stem": "Em casos de hipotireoidismo, dos achados abaixo o mais provável de ser encontrado é",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) \n  E) ",
+    "explanation": ""
+  },
+  {
+    "id": 8017,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Neurologia Hipertensão Intracraniana Sódio Sérico (mEq/L): 163 pCO₂ (mmHg): 67 Sódio Sérico (mEq/L): 137 pCO₂ (mmHg): 42 Sódio Sérico (mEq/L): 113 pCO₂ (mmHg): 67 Sódio Sérico (mEq/L): 163 pCO₂ (mmHg): 23 Sódio Sérico (mEq/L): 113 pCO₂ (mmHg): 23",
+    "stem": "São avaliados cinco pacientes com rebaixamento de nível de consciência. Identicam-se disnatremias, alterações na gasometria e na ressonância magnética de crânio. O indivíduo com maior probabilidade de apresentar o edema cerebral mais intenso é o que apresenta",
+    "alternatives": "  A) \n  B) \n  C)  [GABARITO]\n  D) \n  E) ",
+    "explanation": ""
+  },
+  {
+    "id": 8018,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Nefrologia Exame de urina Cilindros Cilindros: hemáticos Cilindros: granulosos Cilindros: leucocitários Significado Clínico: síndrome nefrótica Cilindros: hialinos Significado Clínico: pielonefrite Cilindros: gordurosos Significado Clínico: síndrome nefrítica",
+    "stem": "Foram avaliados 5 pacientes com diferentes formas de nefropatia. A análise do exame de urina mostrou diferentes formas de cilindrúria, cujo significado clínico mais provável é",
+    "alternatives": "  A) Significado Clínico: nefrite intersticial aguda\n  B) Significado Clínico: necrose tubular aguda [GABARITO]\n  C) \n  D) \n  E) ",
+    "explanation": ""
+  },
+  {
+    "id": 8019,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Hospital Sírio-Libanês - HSL Fundação Carlos Chagas (FCC) Nefrologia Etiologia Prérenal Dado I: 0,5%; Dado II: 30%; Dado III: 45. Dado I: 2%; Dado II: 40%; Dado III: 15. Dado I: 0,5%; Dado II: 40%; Dado III: 15. Dado I: 2% ; Dado II: 30%; Dado III: 45. Dado I: 0,5%; Dado II: 30%; Dado III: 15.",
+    "stem": "Considere os seguintes dados laboratoriais: I. Fração de excreção de sódio. II. Fração de excreção de ureia. III. Relação ureia/creatinina no plasma. Em um paciente com quadro de insuficiência pré-renal os achados mais prováveis, dentre os abaixo, são:",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) \n  E) ",
+    "explanation": ""
+  },
+  {
+    "id": 8021,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Quadro Clínico e Indicações de Tomografia de Crânio",
+    "stem": "Mulher, 34a, vítima de atropelamento, com perda da consciência, chega a Unidade de Emergência. Exame físico: PA= 118x69 mmHg, FC= 87bpm, FR= 16 irpm, Oximetria de pulso (ar ambiente)= 99%, Escala de Coma Glasgow (ECG)= 15. Enquanto aguardava exames apresentou redução de 4 pontos na ECG e anisocoria. O ACHADO TOMOGRÁFICO ESPERADO É:",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8023,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "topic": "Úlcera péptica Perfurada",
+    "stem": "Mulher, 63 anos de idade, refere dor abdominal de forte intensidade, difusa e de início súbito há 2 horas. Nega vômitos. Última evacuação há 1 dia. Tem artrite reumatoide. Faz uso de um imunossupressor e corticoide. Na última semana, tomou cetoprofeno devido à dor nas mãos. Ao exame clínico, encontra-se em regular estado geral; FC 110 bpm; PA 100x60 mmHg; abdome plano, doloroso à palpação; e sinal de irritação peritoneal difusa. Exames laboratoriais: Hb 11,9 g/dL; Ht 32%; leucócitos 18.318/mm³; PCR 84 mg/L; amilase 251 U/L; lipase 101 U/L. Foi realizada tomografia de abdome. Assinale a alternativa que contém imagens que correspondem à principal hipótese diagnóstica?",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8024,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Cavidade Oral",
+    "stem": "O exame da cavidade oral tem por objetivo o diagnóstico precoce de tumores malignos. Considerando-se o tipo histológico mais comum, assinale o local mais frequentemente acometido.",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8028,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Apresentação Clínica e Classificação",
+    "stem": "Homem, 54 anos de idade, refere dor anal intensa durante as evacuações. As dores começaram, há 6 semanas, após episódio de diculdade para evacuar devido a fezes muito endurecidas. Desde então, durante toda evacuação apresenta dor intensa, que vai melhorando lentamente. Refere ainda ter notado a presença de laivos de sangue no papel higiênico. Identifique a imagem correspondente à principal hipótese diagnóstica:",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8030,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Hipertensão Intracraniana Complicações da cetoacidose diabética Tratamento nas crianças e adolescentes Caso 7",
+    "stem": "Paciente, 4 anos, com diagnóstico de Diabetes Mellitus tipo 1 há 5 meses, em uso irregular de insulina NPH, foi trazido ao departamento de emergência devido ao quadro de dor abdominal intensa há 3 dias, referindo vômitos, “cansaço” e diurese abundante. Ao exame clínico, paciente em regular estado geral, mucosas secas e olhos encovados, FC 145 bpm, FR 44 irpm, PA 96x50 mmHg, pulsos nos, extremidades frias com tempo de enchimento capilar de 6 segundos. Ausculta pulmonar e cardíaca sem alterações. Na 2ª hora após a admissão, o paciente apresentava melhora dos parâmetros hemodinâmicos, porém ainda mantinha náuseas e não conseguia se alimentar. Após 7 horas de tratamento, o paciente começou a apresentar sonolência excessiva e voltou a apresentar vômitos. Ao exame clínico, estava corado, hidratado, eupneico, com abertura ocular e retirada do membro ao estímulo doloroso, sem resposta verbal; ausculta cardíaca com 2 BRNF sem sopros, FC 62 bpm, PA: 146x92 mmHg; MV presente sem ruídos adventícios, FR 18 irpm; tempo de enchimento capilar de 2 segundos, pulsos presentes. Qual dos exames de imagem abaixo é compatível com a principal hipótese diagnóstica?",
+    "alternatives": "  A) \n  B) \n  C) \n  D)  [GABARITO]",
+    "explanation": ""
+  },
+  {
+    "id": 8031,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+    "topic": "Derrame Pleural POCUS Caso 8",
+    "stem": "Paciente de 5 anos, sexo masculino, com antecedente de dermatite atópica, rinite alérgica e internações prévias por crises de sibilância, foi admitido no setor de emergência, apresentando quadro de febre de até 39.5 ºC, tosse e diculdade para respirar há dois dias. Apresenta o seguinte exame clínico inicial: I. regular estado geral, corado, hidratado, alerta, orientado; II. 2 BRNF, sem sopros, FC: 152 bpm, PA: 88x46 mmHg; III. murmúrio vesicular presente, reduzido bilateralmente, com estertores crepitantes em base direita e sibilos difusos, tiragem subdiafragmática, intercostal e de fúrcula, com tempo expiratório prolongado, FR: 42 irpm; saturação de oxigênio de 92% em ar ambiente, 96% em máscara de Venturi 50%; tempo de enchimento capilar de 2 segundos, pulsos cheios; IV. peso 20 Kg. Realizou o exame radiológico apresentado. Quais as imagens de ultrassom pulmonar compatíveis com a radiografia previamente apresentada?",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8032,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hepatites Virais (A, B, C) e Icterícias Metabólicas",
+    "topic": "Nefrologia Tratamento da cirrose Diuréticos poupadores de potássio",
+    "stem": "Homem, 60 anos, portador do hepatite C diagnosticada há 20 anos, sem tratamento. Refere aumento progressivo do volume abdominal, edema nos membros inferiores e alteração do ciclo sono vigília. Exame físico: REG, descorado +/4+, hidratado. Abdome globoso, presença de macicez móvel e do sinal do piparote. Exames laboratoriais: Cr: 1,0 mg/dl. Na: 121 mEq/ L, K: 3,8 mEq/L. Qual é o local de ação do diurético mais indicado? A D B C C A D B",
+    "alternatives": "",
+    "explanation": ""
+  },
+  {
+    "id": 8033,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Dermatologia Tratamento e conduta",
+    "stem": "Mulher, 63 anos de idade, com antecedente de ressecção de melanoma no dorso, operado há 3 anos, com Breslow de 0,76mm. Em seguimento dermatológico de rotina, foi realizada dermatoscopia que evidenciou lesão no antebraço direito. Foi indicada a ressecção da lesão para diagnóstico. Qual é a alternativa que apresenta a linha de incisão na pele que deve ser realizada?",
+    "alternatives": "  A) \n  B)  [GABARITO]\n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8039,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Manejo da Via Aérea",
+    "stem": "Paciente de 2 meses, sexo masculino, foi admitido no pronto atendimento após mãe ter notado que ele estava com os lábios arroxeados. Na admissão, encontrava-se arresponsivo, com perda de tônus muscular e com respiração supercial e hipoxemia, tendo sido prontamente iniciadas ventilações assistidas. O paciente havia recebido as imunizações previstas no calendário vacinal há cerca de 5 horas e teve febre precedendo o quadro. Assinale a alternativa abaixo na qual está representada a escolha da máscara adequada, o posicionamento correto do coxim e o posicionamento correto da mão na máscara.",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8040,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Síndrome do Bebê Chacoalhado",
+    "stem": "Menino, 10 meses de idade, é trazido ao serviço de emergência pela mãe devido quadro de sonolência há um dia e crises convulsivas. Mãe refere que o menor caiu do berço há alguns dias (altura de cerca de 90 cm) e machucou o pescoço, as costas e a barriga (imagens 1, 2, 3, respectivamente). Fonte: http://medscape.com/ Questionada sobre antecedentes pessoais, mãe refere história de episódios prolongados de choro e irritabilidade desde o nascimento. Ainda não senta sem apoio e não balbucia. Não faz seguimento pediátrico. Após estabilização inicial, uma tomograa de crânio foi solicitada. Qual das imagens abaixo é a mais compatível com o quadro?",
+    "alternatives": "  A) \n  B)  [GABARITO]\n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8042,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Diagnóstico e Exames Complementares Conceitos",
+    "stem": "Mulher, 53 anos de idade, antecedentes desconhecidos. Trazida à sala de emergência com relato de tosse produtiva, febre e prostração nos últimos 3 dias. Durante atendimento, evoluiu com franco desconforto respiratório, foi submetida à intubação orotraqueal e foram realizados procedimentos para estabilização. Ao exame físico, após os procedimentos, apresentou PA de 102×74 mmHg, FC de 112 bpm, SpO2 de 92%, temperatura de 37,9 °C. Regular estado geral, corada, hidratada. Murmúrios vesiculares presentes à direita e globalmente reduzidos à esquerda. Ausculta cardíaca e exame abdominal sem alterações. Extremidades com perfusão periférica adequada. Assinale a alternativa que apresenta uma imagem de radiografia compatível com o quadro da paciente.",
+    "alternatives": "  A) \n  B)  [GABARITO]\n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8043,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Exames de Imagem Aderências Intestinais Bridas",
+    "stem": "Mulher, 64 anos de idade, procura o serviço de emergência com distensão e dor abdominal em cólica há 24 horas, acompanhada de vômitos em grande quantidade. Nega alteração do hábito intestinal antes do quadro agudo. Tem antecedente de retossigmoidectomia por diverticulite aguda complicada com peritonite. Ao exame físico, encontra-se em bom estado geral, ausculta torácica sem alterações, abdome com ruídos hidroaéreos aumentados, distendido, doloroso à palpação profunda e sem sinais de irritação peritoneal. Assinale a alternativa que apresenta a tomografia esperada para esta paciente.",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8044,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "topic": "Diagnóstico Manifestações Clínicas e Exame Físico",
+    "stem": "Mulher, 66 anos de idade, apresentou dor abdominal de início súbito e forte intensidade há 4 horas. Tem diabetes melito e tabagismo de 1 maço de cigarro por dia. Ao exame físico, encontra-se em regular estado geral, com FC de 100 bpm e PA de 100×70 mmHg, abdome tenso, doloroso difusamente à palpação, inclusive à percussão. • Exames laboratoriais: Hb: 14,9 g/dL Ht: 41% Leucócitos: 16.126/mm³ PCR: 12 mg/L Amilase: 281 U/L Lipase: 100 U/L Foi realizada a tomografia apresentada nas imagens a seguir: Assinale a alternativa que representa o achado operatório esperado nesta paciente.",
+    "alternatives": "  A) \n  B)  [GABARITO]\n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8045,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Tratamento Neoplasia Colorretal",
+    "stem": "Homem, 65 anos de idade, foi admitido no Serviço de Emergência com distensão abdominal e dor em cólica há 6 dias. Desde o início do quadro, está sem evacuar e há 2 dias, evoluiu com vômitos. Refere constipação há 3 meses com necessidade de uso de laxativos. Nega perda de peso. Ao exame físico, encontra-se em bom estado geral e desidratado; abdome distendido, ruídos hidroaéreos aumentados, doloroso à palpação profunda e sem sinais de irritação peritoneal; toque retal sem fezes na ampola e sem lesões; sem outras alterações. Exames laboratoriais: Hb: 12,1 g/dL Ht: 37% Leucograma: 10.413/mm³ PCR: 15 mg/L Creatinina: 1,7 mg/dL Ureia: 71 mg/dL A tomografia de abdome pode ser visualizada nas imagens a seguir: Foi indicado tratamento operatório e, diante dos achados, optou-se por realizar ressecção intestinal. Assinale a alternativa que apresenta o segmento intestinal que deve ser ressecado.",
+    "alternatives": "  A) \n  B) \n  C)  [GABARITO]\n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8047,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Pneumologia Capnografia",
+    "stem": "Mulher, 77 anos, com antecedente de hipertensão arterial, doença pulmonar obstrutiva crônica e hipotireoidismo, é admitida no PS trazida pelo SAMU com quadro de rebaixamento do nível de consciência nas últimas 48 horas. No momento da admissão: Glasgow 7 (AO 2, RV 1, RM 4), sem proteção de vias aéreas, PA: 132x88 mmHg, FC: 43 bpm, FR: 9 ipm, temperatura 36 ºC. Ausculta pulmonar normal, ausculta cardíaca reduzida, abdome sem alterações. Antes de receber qualquer medicação, foi realizada intubação orotraqueal em primeira tentativa, devido ao rebaixamento de nível de consciência. Imediatamente após a intubação, e antes de a paciente receber qualquer medicação, assinale qual imagem dentre as apresentadas a seguir, melhor representa a curva de capnografia obtida dessa paciente.",
+    "alternatives": "  A) \n  B) \n  C)  [GABARITO]\n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8048,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Ressonância Magnética Síndrome da Artéria Cerebral Média",
+    "stem": "Mulher, 74 anos de idade, tabagista, tem hipertensão e diabetes. Foi encontrada confusa em casa pela filha, que há 2 dias atrás havia a visto bem. Na admissão no pronto-socorro, encontrava-se afebril, eupneica, com PA de 170×110 mmHg, FC de 102 bpm, glicemia capilar de 145 mg/dL. Ao exame neurológico, apresentou-se vigil, alerta, irritada, afirmando “estou bem, quero ir para casa”. Tinha o olhar desviado para a direita quando distraída, mas conseguia olhar para a esquerda quando instruída pelo examinador. A paciente percebia o dedo do examinador em todos os quadrantes no exame de campos visuais por confrontação. Quando solicitada a ler um texto, começava a partir do meio da página e lia apenas o lado direito das frases repetidamente. Não apresentava fraqueza muscular. Assinale a alternativa que apresenta uma imagem de ressonância magnética compatível com o quadro da paciente descrita.",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8049,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "topic": "Quadro clínico",
+    "stem": "Paciente, sexo masculino, 57 anos de idade, possui antecedente de diabetes melito e gota. Comparece no pronto socorro com queixa de tosse produtiva com expectoração amarelada e febre aferida de 38,6 °C há 5 dias. Ao exame físico, apresentou PA de 132x84 mmHg, FC de 98 bpm, FR de 21 ipm, saturação de oxigênio 94% em ar ambiente; bom estado geral, corado, hidratado, eupneico; aparelho cardíaco sem alterações; murmúrios vesiculares presentes com estertores crepitantes na base esquerda; abdome e extremidades sem alterações relevantes. Assinale a alternativa que apresenta a radiografia compatível com o exame físico descrito e a principal hipótese diagnóstica.",
+    "alternatives": "  A)  [GABARITO]\n  B) \n  C) \n  D) ",
+    "explanation": ""
+  },
+  {
+    "id": 8050,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "topic": "Ultrassonografia de tórax POCUS",
+    "stem": "Paciente, sexo masculino, 57 anos de idade, possui antecedente de diabetes melito e gota. Comparece no pronto socorro com queixa de tosse produtiva com expectoração amarelada e febre aferida de 38,6 °C há 5 dias. Ao exame físico, apresentou PA de 132x84 mmHg, FC de 98 bpm, FR de 21 ipm, saturação de oxigênio 94% em ar ambiente; bom estado geral, corado, hidratado, eupneico; aparelho cardíaco sem alterações; murmúrios vesiculares presentes com estertores crepitantes na base esquerda; abdome e extremidades sem alterações relevantes. O paciente é medicado adequadamente, porém, após 3 dias do término do tratamento, retorna com febre persistente e o seguinte exame clínico: PA de 100x64 mmHg, FC de 121 bpm, FR de 25 ipm, saturação de oxigênio 93% em ar ambiente; regular estado geral, hipocorado, hidratado; aparelho cardíaco sem alterações; murmúrios vesiculares presentes com abolição da ausculta em base esquerda; abdome e extremidades sem alterações relevantes. Assinale a alternativa que apresenta o achado ultrassonográfico compatível com a complicação da paciente.",
+    "alternatives": "  A) \n  B) \n  C)  [GABARITO]\n  D) ",
+    "explanation": ""
+  }
+]

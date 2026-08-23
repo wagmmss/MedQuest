@@ -1,0 +1,702 @@
+[
+  {
+    "id": 3058,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico/radiológico e tratamento cirúrgico/endoscópico do abdome agudo obstrutivo (bridas, neoplasias e volvos)."
+  },
+  {
+    "id": 3059,
+    "target_area": "Cirurgia",
+    "target_subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco cirúrgico cardiovascular, escores de risco (ASA/Lee), profilaxia tromboembólica e manejo de medicações perioperatórias."
+  },
+  {
+    "id": 3060,
+    "target_area": "Cirurgia",
+    "target_subtema": "Tendinopatias, Bursites e Síndromes por Sobrecarga Musculoesquelética",
+    "confidence": 1.0,
+    "rationale": "Propedêutica clínica e manejo conservador/cirúrgico de tendinopatias, bursites e síndromes compressivas/sobrecarga musculoesquelética."
+  },
+  {
+    "id": 3061,
+    "target_area": "Cirurgia",
+    "target_subtema": "Cirurgia Bariátrica e Metabólica",
+    "confidence": 1.0,
+    "rationale": "Indicações, técnicas cirúrgicas restritivas/disabsortivas e manejo de complicações pós-operatórias na cirurgia bariátrica."
+  },
+  {
+    "id": 3063,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico/radiológico e tratamento cirúrgico/endoscópico do abdome agudo obstrutivo (bridas, neoplasias e volvos)."
+  },
+  {
+    "id": 3064,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "confidence": 1.0,
+    "rationale": "Manejo diagnóstico com FAST/TC e indicações cirúrgicas no trauma abdominal contuso e penetrante."
+  },
+  {
+    "id": 3065,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico, propedêutica e tratamento cirúrgico da apendicite aguda e diverticulite aguda com suas complicações (Hinchey)."
+  },
+  {
+    "id": 3066,
+    "target_area": "Cirurgia",
+    "target_subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+    "confidence": 1.0,
+    "rationale": "Anatomia do canal inguinal, classificação e técnicas cirúrgicas de correção das hérnias da parede abdominal."
+  },
+  {
+    "id": 3067,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "confidence": 1.0,
+    "rationale": "Manejo diagnóstico com FAST/TC e indicações cirúrgicas no trauma abdominal contuso e penetrante."
+  },
+  {
+    "id": 3068,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "confidence": 1.0,
+    "rationale": "Manejo diagnóstico com FAST/TC e indicações cirúrgicas no trauma abdominal contuso e penetrante."
+  },
+  {
+    "id": 3069,
+    "target_area": "Cirurgia",
+    "target_subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+    "confidence": 1.0,
+    "rationale": "Classificação (Gustilo-Anderson), princípios de fixação e manejo cirúrgico/ortopédico de fraturas ósseas do esqueleto apendicular e axial."
+  },
+  {
+    "id": 3070,
+    "target_area": "Cirurgia",
+    "target_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial e terapêutica da colelitíase, colecistite aguda, coledocolitíase e colangite bacteriana aguda."
+  },
+  {
+    "id": 3071,
+    "target_area": "Cirurgia",
+    "target_subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+    "confidence": 1.0,
+    "rationale": "Anatomia do canal inguinal, classificação e técnicas cirúrgicas de correção das hérnias da parede abdominal."
+  },
+  {
+    "id": 3072,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico, propedêutica e tratamento cirúrgico da apendicite aguda e diverticulite aguda com suas complicações (Hinchey)."
+  },
+  {
+    "id": 3073,
+    "target_area": "Cirurgia",
+    "target_subtema": "Aneurismas de Aorta Abdominal e Torácica",
+    "confidence": 1.0,
+    "rationale": "Critérios de indicação cirúrgica, técnicas aberta e endovascular (EVAR) e manejo do aneurisma de aorta roto."
+  },
+  {
+    "id": 3074,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Vascular e Isquemia Mesentérica",
+    "confidence": 1.0,
+    "rationale": "Reconhecimento precoce, diagnóstico angiográfico e abordagem cirúrgica/endovascular da isquemia mesentérica aguda e colite isquêmica."
+  },
+  {
+    "id": 3075,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico/radiológico e tratamento cirúrgico/endoscópico do abdome agudo obstrutivo (bridas, neoplasias e volvos)."
+  },
+  {
+    "id": 3095,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3096,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Ortopédico de Extremidades e Síndrome Compartimental",
+    "confidence": 1.0,
+    "rationale": "Abordagem do trauma ortopédico grave de extremidades, lesões por esmagamento e síndrome compartimental com indicação de fasciotomia."
+  },
+  {
+    "id": 3097,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3101,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3127,
+    "target_area": "Cirurgia",
+    "target_subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco cirúrgico cardiovascular, escores de risco (ASA/Lee), profilaxia tromboembólica e manejo de medicações perioperatórias."
+  },
+  {
+    "id": 3128,
+    "target_area": "Cirurgia",
+    "target_subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco cirúrgico cardiovascular, escores de risco (ASA/Lee), profilaxia tromboembólica e manejo de medicações perioperatórias."
+  },
+  {
+    "id": 3129,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta nas emergências torácicas traumáticas (pneumotórax hipertensivo/aberto, hemotórax maciço e tamponamento cardíaco)."
+  },
+  {
+    "id": 3131,
+    "target_area": "Cirurgia",
+    "target_subtema": "Doença do Refluxo Gastroesofágico (DRGE) e Úlcera Péptica",
+    "confidence": 1.0,
+    "rationale": "Indicações de tratamento cirúrgico (fundoplicatura), propedêutica com pHmetria/manometria e complicações da DRGE/úlcera péptica."
+  },
+  {
+    "id": 3136,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3148,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3149,
+    "target_area": "Cirurgia",
+    "target_subtema": "Tendinopatias, Bursites e Síndromes por Sobrecarga Musculoesquelética",
+    "confidence": 1.0,
+    "rationale": "Propedêutica clínica e manejo conservador/cirúrgico de tendinopatias, bursites e síndromes compressivas/sobrecarga musculoesquelética."
+  },
+  {
+    "id": 3150,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Vascular e Isquemia Mesentérica",
+    "confidence": 1.0,
+    "rationale": "Reconhecimento precoce, diagnóstico angiográfico e abordagem cirúrgica/endovascular da isquemia mesentérica aguda e colite isquêmica."
+  },
+  {
+    "id": 3151,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3178,
+    "target_area": "Cirurgia",
+    "target_subtema": "Luxações Articulares e Lesões Ligamentares / Meniscais",
+    "confidence": 1.0,
+    "rationale": "Manejo de luxações articulares agudas e diagnóstico/tratamento de lesões meniscais e ligamentares."
+  },
+  {
+    "id": 3215,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3220,
+    "target_area": "Cirurgia",
+    "target_subtema": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+    "confidence": 1.0,
+    "rationale": "Manejo emergencial, estabilização hemodinâmica e abordagem endoscópica/cirúrgica na hemorragia digestiva alta e baixa."
+  },
+  {
+    "id": 3230,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3235,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3236,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3323,
+    "target_area": "Cirurgia",
+    "target_subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento de gravidade (Ranson/Atlanta) e manejo cirúrgico/endoscópico de pancreatites e pseudocistos."
+  },
+  {
+    "id": 3325,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico, propedêutica e tratamento cirúrgico da apendicite aguda e diverticulite aguda com suas complicações (Hinchey)."
+  },
+  {
+    "id": 3327,
+    "target_area": "Cirurgia",
+    "target_subtema": "Neoplasias do Trato Gastrointestinal (Esôfago, Estômago, Pâncreas e Cólon)",
+    "confidence": 1.0,
+    "rationale": "Estadiamento oncológico e princípios de ressecção cirúrgica das neoplasias malignas do esôfago, estômago, pâncreas e colorretal."
+  },
+  {
+    "id": 3333,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3352,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3811,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma de Face e Pescoço (Trauma Cervical e Fraturas Maxilofaciais)",
+    "confidence": 1.0,
+    "rationale": "Atendimento e conduta no trauma facial, fraturas maxilofaciais e ferimentos/trauma cervical penetrante ou fechado."
+  },
+  {
+    "id": 3812,
+    "target_area": "Cirurgia",
+    "target_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial e terapêutica da colelitíase, colecistite aguda, coledocolitíase e colangite bacteriana aguda."
+  },
+  {
+    "id": 3813,
+    "target_area": "Cirurgia",
+    "target_subtema": "Luxações Articulares e Lesões Ligamentares / Meniscais",
+    "confidence": 1.0,
+    "rationale": "Manejo de luxações articulares agudas e diagnóstico/tratamento de lesões meniscais e ligamentares."
+  },
+  {
+    "id": 3814,
+    "target_area": "Cirurgia",
+    "target_subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco cirúrgico cardiovascular, escores de risco (ASA/Lee), profilaxia tromboembólica e manejo de medicações perioperatórias."
+  },
+  {
+    "id": 3815,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico/radiológico e tratamento cirúrgico/endoscópico do abdome agudo obstrutivo (bridas, neoplasias e volvos)."
+  },
+  {
+    "id": 3816,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta nas emergências torácicas traumáticas (pneumotórax hipertensivo/aberto, hemotórax maciço e tamponamento cardíaco)."
+  },
+  {
+    "id": 3817,
+    "target_area": "Cirurgia",
+    "target_subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+    "confidence": 1.0,
+    "rationale": "Classificação (Gustilo-Anderson), princípios de fixação e manejo cirúrgico/ortopédico de fraturas ósseas do esqueleto apendicular e axial."
+  },
+  {
+    "id": 3818,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta cirúrgica emergencial no abdome agudo perfurativo e úlcera péptica perfurada."
+  },
+  {
+    "id": 3819,
+    "target_area": "Cirurgia",
+    "target_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial e terapêutica da colelitíase, colecistite aguda, coledocolitíase e colangite bacteriana aguda."
+  },
+  {
+    "id": 3820,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta cirúrgica emergencial no abdome agudo perfurativo e úlcera péptica perfurada."
+  },
+  {
+    "id": 3821,
+    "target_area": "Cirurgia",
+    "target_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial e terapêutica da colelitíase, colecistite aguda, coledocolitíase e colangite bacteriana aguda."
+  },
+  {
+    "id": 3822,
+    "target_area": "Cirurgia",
+    "target_subtema": "Luxações Articulares e Lesões Ligamentares / Meniscais",
+    "confidence": 1.0,
+    "rationale": "Manejo de luxações articulares agudas e diagnóstico/tratamento de lesões meniscais e ligamentares."
+  },
+  {
+    "id": 3823,
+    "target_area": "Cirurgia",
+    "target_subtema": "Luxações Articulares e Lesões Ligamentares / Meniscais",
+    "confidence": 1.0,
+    "rationale": "Manejo de luxações articulares agudas e diagnóstico/tratamento de lesões meniscais e ligamentares."
+  },
+  {
+    "id": 3824,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "confidence": 1.0,
+    "rationale": "Manejo diagnóstico com FAST/TC e indicações cirúrgicas no trauma abdominal contuso e penetrante."
+  },
+  {
+    "id": 3825,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta nas emergências torácicas traumáticas (pneumotórax hipertensivo/aberto, hemotórax maciço e tamponamento cardíaco)."
+  },
+  {
+    "id": 3826,
+    "target_area": "Cirurgia",
+    "target_subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+    "confidence": 1.0,
+    "rationale": "Classificação (Gustilo-Anderson), princípios de fixação e manejo cirúrgico/ortopédico de fraturas ósseas do esqueleto apendicular e axial."
+  },
+  {
+    "id": 3827,
+    "target_area": "Cirurgia",
+    "target_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "confidence": 1.0,
+    "rationale": "Sistematização do atendimento inicial ao paciente politraumatizado segundo as diretrizes do protocolo xABCDE (ATLS)."
+  },
+  {
+    "id": 3828,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3829,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma de Face e Pescoço (Trauma Cervical e Fraturas Maxilofaciais)",
+    "confidence": 1.0,
+    "rationale": "Atendimento e conduta no trauma facial, fraturas maxilofaciais e ferimentos/trauma cervical penetrante ou fechado."
+  },
+  {
+    "id": 3830,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico/radiológico e tratamento cirúrgico/endoscópico do abdome agudo obstrutivo (bridas, neoplasias e volvos)."
+  },
+  {
+    "id": 3831,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta nas emergências torácicas traumáticas (pneumotórax hipertensivo/aberto, hemotórax maciço e tamponamento cardíaco)."
+  },
+  {
+    "id": 3832,
+    "target_area": "Cirurgia",
+    "target_subtema": "Aneurismas de Aorta Abdominal e Torácica",
+    "confidence": 1.0,
+    "rationale": "Critérios de indicação cirúrgica, técnicas aberta e endovascular (EVAR) e manejo do aneurisma de aorta roto."
+  },
+  {
+    "id": 3833,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta nas emergências torácicas traumáticas (pneumotórax hipertensivo/aberto, hemotórax maciço e tamponamento cardíaco)."
+  },
+  {
+    "id": 3834,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta cirúrgica emergencial no abdome agudo perfurativo e úlcera péptica perfurada."
+  },
+  {
+    "id": 3835,
+    "target_area": "Cirurgia",
+    "target_subtema": "Aneurismas de Aorta Abdominal e Torácica",
+    "confidence": 1.0,
+    "rationale": "Critérios de indicação cirúrgica, técnicas aberta e endovascular (EVAR) e manejo do aneurisma de aorta roto."
+  },
+  {
+    "id": 3836,
+    "target_area": "Cirurgia",
+    "target_subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+    "confidence": 1.0,
+    "rationale": "Anatomia do canal inguinal, classificação e técnicas cirúrgicas de correção das hérnias da parede abdominal."
+  },
+  {
+    "id": 3837,
+    "target_area": "Cirurgia",
+    "target_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial e terapêutica da colelitíase, colecistite aguda, coledocolitíase e colangite bacteriana aguda."
+  },
+  {
+    "id": 3838,
+    "target_area": "Cirurgia",
+    "target_subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+    "confidence": 1.0,
+    "rationale": "Anatomia do canal inguinal, classificação e técnicas cirúrgicas de correção das hérnias da parede abdominal."
+  },
+  {
+    "id": 3839,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3840,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta cirúrgica emergencial no abdome agudo perfurativo e úlcera péptica perfurada."
+  },
+  {
+    "id": 3841,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3842,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico, propedêutica e tratamento cirúrgico da apendicite aguda e diverticulite aguda com suas complicações (Hinchey)."
+  },
+  {
+    "id": 3843,
+    "target_area": "Cirurgia",
+    "target_subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento de gravidade (Ranson/Atlanta) e manejo cirúrgico/endoscópico de pancreatites e pseudocistos."
+  },
+  {
+    "id": 3844,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3845,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3846,
+    "target_area": "Cirurgia",
+    "target_subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco cirúrgico cardiovascular, escores de risco (ASA/Lee), profilaxia tromboembólica e manejo de medicações perioperatórias."
+  },
+  {
+    "id": 3847,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3848,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3849,
+    "target_area": "Cirurgia",
+    "target_subtema": "Atendimento ao Paciente Queimado e Reposição Volêmica",
+    "confidence": 1.0,
+    "rationale": "Avaliação da superfície corporal queimada (Regra dos Nove), conduta na via aérea e ressuscitação volêmica (fórmula de Parkland/ATLS)."
+  },
+  {
+    "id": 3850,
+    "target_area": "Cirurgia",
+    "target_subtema": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e condutas clínicas e cirúrgicas nas afecções anorretais benignas (hemorroidas, fissuras, fístulas e abscessos)."
+  },
+  {
+    "id": 3851,
+    "target_area": "Cirurgia",
+    "target_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial e terapêutica da colelitíase, colecistite aguda, coledocolitíase e colangite bacteriana aguda."
+  },
+  {
+    "id": 3852,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3855,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta nas emergências torácicas traumáticas (pneumotórax hipertensivo/aberto, hemotórax maciço e tamponamento cardíaco)."
+  },
+  {
+    "id": 3856,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico clínico/radiológico e tratamento cirúrgico/endoscópico do abdome agudo obstrutivo (bridas, neoplasias e volvos)."
+  },
+  {
+    "id": 3857,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3858,
+    "target_area": "Cirurgia",
+    "target_subtema": "Luxações Articulares e Lesões Ligamentares / Meniscais",
+    "confidence": 1.0,
+    "rationale": "Manejo de luxações articulares agudas e diagnóstico/tratamento de lesões meniscais e ligamentares."
+  },
+  {
+    "id": 3859,
+    "target_area": "Cirurgia",
+    "target_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "confidence": 1.0,
+    "rationale": "Identificação e tratamento das principais complicações pós-operatórias (febre, infecção de sítio cirúrgico, deiscências e fístulas)."
+  },
+  {
+    "id": 3860,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e conduta nas emergências torácicas traumáticas (pneumotórax hipertensivo/aberto, hemotórax maciço e tamponamento cardíaco)."
+  },
+  {
+    "id": 3861,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3862,
+    "target_area": "Cirurgia",
+    "target_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "confidence": 1.0,
+    "rationale": "Classificação, abordagem inicial, monitorização da PIC e manejo neurocirúrgico no trauma cranioencefálico (TCE)."
+  },
+  {
+    "id": 3863,
+    "target_area": "Cirurgia",
+    "target_subtema": "Luxações Articulares e Lesões Ligamentares / Meniscais",
+    "confidence": 1.0,
+    "rationale": "Manejo de luxações articulares agudas e diagnóstico/tratamento de lesões meniscais e ligamentares."
+  },
+  {
+    "id": 3864,
+    "target_area": "Cirurgia",
+    "target_subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+    "confidence": 1.0,
+    "rationale": "Classificação (Gustilo-Anderson), princípios de fixação e manejo cirúrgico/ortopédico de fraturas ósseas do esqueleto apendicular e axial."
+  },
+  {
+    "id": 3865,
+    "target_area": "Cirurgia",
+    "target_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial e terapêutica da colelitíase, colecistite aguda, coledocolitíase e colangite bacteriana aguda."
+  },
+  {
+    "id": 3866,
+    "target_area": "Cirurgia",
+    "target_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial e terapêutica da colelitíase, colecistite aguda, coledocolitíase e colangite bacteriana aguda."
+  },
+  {
+    "id": 3867,
+    "target_area": "Cirurgia",
+    "target_subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, estadiamento de gravidade (Ranson/Atlanta) e manejo cirúrgico/endoscópico de pancreatites e pseudocistos."
+  },
+  {
+    "id": 3868,
+    "target_area": "Cirurgia",
+    "target_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial e terapêutica da colelitíase, colecistite aguda, coledocolitíase e colangite bacteriana aguda."
+  },
+  {
+    "id": 3869,
+    "target_area": "Cirurgia",
+    "target_subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+    "confidence": 1.0,
+    "rationale": "Anatomia do canal inguinal, classificação e técnicas cirúrgicas de correção das hérnias da parede abdominal."
+  },
+  {
+    "id": 3870,
+    "target_area": "Cirurgia",
+    "target_subtema": "Abordagem Cirúrgica das Doenças Inflamatórias Intestinais (Crohn e RCU)",
+    "confidence": 1.0,
+    "rationale": "Questão sobre Abordagem Cirúrgica das Doenças Inflamatórias Intestinais (Crohn e RCU) avaliada e confirmada no subtema canônico de Cirurgia."
+  },
+  {
+    "id": 3872,
+    "target_area": "Cirurgia",
+    "target_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "confidence": 1.0,
+    "rationale": "Sistematização do atendimento inicial ao paciente politraumatizado segundo as diretrizes do protocolo xABCDE (ATLS)."
+  }
+]

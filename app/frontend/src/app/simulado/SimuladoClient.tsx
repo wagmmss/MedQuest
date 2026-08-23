@@ -12,6 +12,7 @@ import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 import { LEARNING_SESSION_VERSION, readLearningSession, writeLearningSession, removeLearningSession, deadlineFromNow } from "@/lib/sessionState";
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
+import { ExplanationViewer } from "@/components/ExplanationViewer";
 import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
 import { AutoSizer } from "react-virtualized-auto-sizer";
 import Image from "next/image";
@@ -1372,22 +1373,15 @@ export function SimuladoClient({
                 <div className="mt-8 animate-in slide-in-from-bottom-4 fade-in duration-300">
                   <div className="rounded-xl border shadow-1 overflow-hidden bg-card">
                     <div className="p-6 md:p-8">
-                      <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                      <h3 className="text-lg font-bold text-foreground mb-5 flex items-center gap-2">
                         <BookOpen size={20} className="text-primary" />
                         Comentário do Professor
                       </h3>
-                      <div className="text-foreground text-lg leading-relaxed whitespace-pre-wrap">
-                        {resultsMap[qDetail.id].explanation || "Nenhum comentário disponível para esta questão."}
-                      </div>
-                      
-                      {qDetail.medical_references && (
-                        <div className="mt-6 pt-5 border-t border-border">
-                          <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-2">Referências e Diretrizes</h4>
-                          <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 p-4 rounded-lg">
-                            {qDetail.medical_references}
-                          </div>
-                        </div>
-                      )}
+                      <ExplanationViewer 
+                        explanation={resultsMap[qDetail.id].explanation}
+                        medicalReferences={qDetail.medical_references}
+                        correctLetter={resultsMap[qDetail.id].correct_letter}
+                      />
 
                       {!questionFlashcardsMap[qDetail.id] && !draftFlashcardsMap[qDetail.id] && (
                         <div className="mt-6 pt-5 border-t border-border">

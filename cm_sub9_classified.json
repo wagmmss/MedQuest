@@ -1,0 +1,702 @@
+[
+  {
+    "id": 4125,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "confidence": 1.0,
+    "rationale": "Metas de HbA1c, terapias antidiabéticas orais/injetáveis e emergências hiperglicêmicas agudas."
+  },
+  {
+    "id": 4127,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+    "confidence": 1.0,
+    "rationale": "Investigação laboratorial, cinética do ferro, hemólise e manejo das hemoglobinopatias."
+  },
+  {
+    "id": 4128,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Vasculites Sistêmicas dos Grandes, Médios e Pequenos Vasos",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, classificação imunopatológica e tratamento das vasculites sistêmicas."
+  },
+  {
+    "id": 4129,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Vasculites Sistêmicas dos Grandes, Médios e Pequenos Vasos",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, classificação imunopatológica e tratamento das vasculites sistêmicas."
+  },
+  {
+    "id": 4130,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4131,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4132,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+    "confidence": 1.0,
+    "rationale": "Atendimento agudo do AVC, neuroimagem, critérios de trombólise e trombectomia mecânica."
+  },
+  {
+    "id": 4133,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+    "confidence": 1.0,
+    "rationale": "Interpretação da gasometria arterial, distúrbios hidroeletrolíticos e cálculo de ânion gap."
+  },
+  {
+    "id": 4134,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4136,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+    "confidence": 1.0,
+    "rationale": "Investigação radiológica de alta resolução e manejo das doenças pulmonares intersticiais."
+  },
+  {
+    "id": 4137,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "confidence": 1.0,
+    "rationale": "Quadro neuromuscular, testes eletrofisiológicos e imunoterapia nas doenças neuromusculares."
+  },
+  {
+    "id": 4138,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4139,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4140,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4141,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial de distúrbios da hemostasia primária/secundária e princípios de hemoterapia."
+  },
+  {
+    "id": 4142,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+    "confidence": 1.0,
+    "rationale": "Disfunções da tireoide, investigação de nódulos pela classificação de Bethesda e farmacoterapia."
+  },
+  {
+    "id": 4148,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4149,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+    "confidence": 1.0,
+    "rationale": "Estadiamento KDIGO, causas pré-renais/intrínsecas/pós-renais e manejo da DRC terminal."
+  },
+  {
+    "id": 4151,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial de distúrbios da hemostasia primária/secundária e princípios de hemoterapia."
+  },
+  {
+    "id": 4152,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4153,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4154,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+    "confidence": 1.0,
+    "rationale": "Classificação de controle, espirometria e estadiamento terapêutico da Asma e DPOC."
+  },
+  {
+    "id": 4155,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4156,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "confidence": 1.0,
+    "rationale": "Quadro articular, líquido sinovial e conduta nas artrites inflamatórias e microcristalinas."
+  },
+  {
+    "id": 4157,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+    "confidence": 1.0,
+    "rationale": "Interpretação da gasometria arterial, distúrbios hidroeletrolíticos e cálculo de ânion gap."
+  },
+  {
+    "id": 4158,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+    "confidence": 1.0,
+    "rationale": "Quadro clínico, antídotos e manejo de intoxicações exógenas e acidentes por animais peçonhentos."
+  },
+  {
+    "id": 4159,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4160,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4161,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+    "confidence": 1.0,
+    "rationale": "Investigação radiológica de alta resolução e manejo das doenças pulmonares intersticiais."
+  },
+  {
+    "id": 4162,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "confidence": 1.0,
+    "rationale": "Quadro articular, líquido sinovial e conduta nas artrites inflamatórias e microcristalinas."
+  },
+  {
+    "id": 4163,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+    "confidence": 1.0,
+    "rationale": "Princípios de suporte ventilatório invasivo, parâmetros protetores na SARA e IRA."
+  },
+  {
+    "id": 4164,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+    "confidence": 1.0,
+    "rationale": "Interpretação da gasometria arterial, distúrbios hidroeletrolíticos e cálculo de ânion gap."
+  },
+  {
+    "id": 4165,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "confidence": 1.0,
+    "rationale": "Quadro neuromuscular, testes eletrofisiológicos e imunoterapia nas doenças neuromusculares."
+  },
+  {
+    "id": 4168,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "confidence": 1.0,
+    "rationale": "Quadro articular, líquido sinovial e conduta nas artrites inflamatórias e microcristalinas."
+  },
+  {
+    "id": 4171,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+    "confidence": 1.0,
+    "rationale": "Classificação de controle, espirometria e estadiamento terapêutico da Asma e DPOC."
+  },
+  {
+    "id": 4172,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+    "confidence": 1.0,
+    "rationale": "Classificação de controle, espirometria e estadiamento terapêutico da Asma e DPOC."
+  },
+  {
+    "id": 4173,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco pré-teste, diagnóstico tomográfico e tratamento do TEP e hipertensão pulmonar."
+  },
+  {
+    "id": 4174,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4175,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4176,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Valvopatias Adquiridas e Miocardiopatias",
+    "confidence": 1.0,
+    "rationale": "Ausculta cardiovascular, ecocardiograma e indicações de intervenção nas valvopatias e cardiomiopatias."
+  },
+  {
+    "id": 4177,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Endocardite Infecciosa e Sepse de Foco Endovascular",
+    "confidence": 1.0,
+    "rationale": "Critérios de Duke, hemoculturas e antibioticoterapia empírica e direcionada na endocardite."
+  },
+  {
+    "id": 4178,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+    "confidence": 1.0,
+    "rationale": "Estratificação prognóstica e profilaxia/tratamento das complicações da cirrose e hipertensão portal."
+  },
+  {
+    "id": 4179,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4180,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Meningites, Encefalites e Infecções do SNC",
+    "confidence": 1.0,
+    "rationale": "Análise citoquímica do líquor e antibioticoterapia empírica imediata nas infecções do SNC."
+  },
+  {
+    "id": 4181,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Cefaleias Primárias (Enxaqueca, Tensional) e Secundárias de Alarme",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial entre cefaleias primárias e secundárias com sinais de alerta."
+  },
+  {
+    "id": 4182,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "confidence": 1.0,
+    "rationale": "Quadro articular, líquido sinovial e conduta nas artrites inflamatórias e microcristalinas."
+  },
+  {
+    "id": 4183,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4184,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+    "confidence": 1.0,
+    "rationale": "Estadiamento KDIGO, causas pré-renais/intrínsecas/pós-renais e manejo da DRC terminal."
+  },
+  {
+    "id": 4185,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Lúpus Eritematoso Sistêmico (LES), Esclerose Sistêmica e Miopatias Inflamatórias",
+    "confidence": 1.0,
+    "rationale": "Manifestações clínicas, autoanticorpos e terapêutica do LES, esclerose sistêmica e miopatias."
+  },
+  {
+    "id": 4186,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+    "confidence": 1.0,
+    "rationale": "Investigação radiológica de alta resolução e manejo das doenças pulmonares intersticiais."
+  },
+  {
+    "id": 4193,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+    "confidence": 1.0,
+    "rationale": "Reconhecimento precoce, pacote de medidas e ressuscitação hemodinâmica na sepse/choque séptico."
+  },
+  {
+    "id": 4199,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "confidence": 1.0,
+    "rationale": "Classificação, metas pressóricas e manejo das urgências/emergências hipertensivas."
+  },
+  {
+    "id": 4202,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4204,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+    "confidence": 1.0,
+    "rationale": "Investigação laboratorial, cinética do ferro, hemólise e manejo das hemoglobinopatias."
+  },
+  {
+    "id": 4205,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "confidence": 1.0,
+    "rationale": "Classificação, metas pressóricas e manejo das urgências/emergências hipertensivas."
+  },
+  {
+    "id": 4206,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "confidence": 1.0,
+    "rationale": "Metas de HbA1c, terapias antidiabéticas orais/injetáveis e emergências hiperglicêmicas agudas."
+  },
+  {
+    "id": 4207,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico laboratorial e condutas nos distúrbios do eixo adrenal e metabolismo fosfocálcico."
+  },
+  {
+    "id": 4209,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco cardiovascular global, metas de LDL e manejo das dislipidemias."
+  },
+  {
+    "id": 4210,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+    "confidence": 1.0,
+    "rationale": "Quadro clínico, antídotos e manejo de intoxicações exógenas e acidentes por animais peçonhentos."
+  },
+  {
+    "id": 4211,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico laboratorial e condutas nos distúrbios do eixo adrenal e metabolismo fosfocálcico."
+  },
+  {
+    "id": 4212,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4213,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+    "confidence": 1.0,
+    "rationale": "Classificação de controle, espirometria e estadiamento terapêutico da Asma e DPOC."
+  },
+  {
+    "id": 4214,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4215,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4216,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4225,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4357,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco cardiovascular global, metas de LDL e manejo das dislipidemias."
+  },
+  {
+    "id": 4385,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+    "confidence": 1.0,
+    "rationale": "Classificação de controle, espirometria e estadiamento terapêutico da Asma e DPOC."
+  },
+  {
+    "id": 4396,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico eletrocardiográfico, biomarcadores e conduta imediata nas síndromes coronarianas agudas."
+  },
+  {
+    "id": 4419,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4425,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco cardiovascular global, metas de LDL e manejo das dislipidemias."
+  },
+  {
+    "id": 4440,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "confidence": 1.0,
+    "rationale": "Metas de HbA1c, terapias antidiabéticas orais/injetáveis e emergências hiperglicêmicas agudas."
+  },
+  {
+    "id": 4478,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "confidence": 1.0,
+    "rationale": "Quadro neuromuscular, testes eletrofisiológicos e imunoterapia nas doenças neuromusculares."
+  },
+  {
+    "id": 4480,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4742,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco pré-teste, diagnóstico tomográfico e tratamento do TEP e hipertensão pulmonar."
+  },
+  {
+    "id": 4823,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico bacteriológico/molecular e esquema RIPE na tuberculose pulmonar e extrapulmonar."
+  },
+  {
+    "id": 4824,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4825,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4826,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "confidence": 1.0,
+    "rationale": "Metas de HbA1c, terapias antidiabéticas orais/injetáveis e emergências hiperglicêmicas agudas."
+  },
+  {
+    "id": 4827,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+    "confidence": 1.0,
+    "rationale": "Princípios de suporte ventilatório invasivo, parâmetros protetores na SARA e IRA."
+  },
+  {
+    "id": 4828,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+    "confidence": 1.0,
+    "rationale": "Estratificação de risco pré-teste, diagnóstico tomográfico e tratamento do TEP e hipertensão pulmonar."
+  },
+  {
+    "id": 4829,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico diferencial de distúrbios da hemostasia primária/secundária e princípios de hemoterapia."
+  },
+  {
+    "id": 4830,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4831,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "confidence": 1.0,
+    "rationale": "Quadro neuromuscular, testes eletrofisiológicos e imunoterapia nas doenças neuromusculares."
+  },
+  {
+    "id": 4832,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4833,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Hepatites Virais (A, B, C) e Icterícias Metabólicas",
+    "confidence": 1.0,
+    "rationale": "Sorologia das hepatites virais, indicação de antivirais de ação direta e distúrbios da bilirrubina."
+  },
+  {
+    "id": 4834,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4835,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+    "confidence": 1.0,
+    "rationale": "Interpretação da gasometria arterial, distúrbios hidroeletrolíticos e cálculo de ânion gap."
+  },
+  {
+    "id": 4836,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico laboratorial e condutas nos distúrbios do eixo adrenal e metabolismo fosfocálcico."
+  },
+  {
+    "id": 4837,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4838,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico bacteriológico/molecular e esquema RIPE na tuberculose pulmonar e extrapulmonar."
+  },
+  {
+    "id": 4839,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4840,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4841,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4842,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Vasculites Sistêmicas dos Grandes, Médios e Pequenos Vasos",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico, classificação imunopatológica e tratamento das vasculites sistêmicas."
+  },
+  {
+    "id": 4843,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  },
+  {
+    "id": 4844,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "confidence": 1.0,
+    "rationale": "Diagnóstico e manejo de abstinência, dependência química e intoxicação por drogas de abuso."
+  },
+  {
+    "id": 4845,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "confidence": 1.0,
+    "rationale": "Avaliação, diagnóstico e psicofarmacologia dos transtornos do humor, ansiedade e psicóticos."
+  },
+  {
+    "id": 4846,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+    "confidence": 1.0,
+    "rationale": "Investigação laboratorial, cinética do ferro, hemólise e manejo das hemoglobinopatias."
+  },
+  {
+    "id": 4847,
+    "target_area": "Clínica Médica",
+    "target_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "confidence": 1.0,
+    "rationale": "Classificação de risco, prova do laço, estadiamento e hidratação nas arboviroses e febres agudas."
+  }
+]

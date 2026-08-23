@@ -1,0 +1,902 @@
+[
+  {
+    "id": 841,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+    "topic": "Espirometria",
+    "stem": "Homem, 74 anos, refere tosse com expectoração clara matutina há 8 anos. Há 5 anos com dispneia aos esforços em progressão; atualmente tem dispneia para andar 100 metros em terreno plano. Por vezes o sintoma é acompanhado de chiado no peito. Tabagista de 1 maço de cigarros por dia há 60 anos. Exame físico sem alterações. Qual achado é suficiente para o diagnóstico da doença mais provável?",
+    "alternatives": "  A) Hipoxemia na gasometria arterial em ar ambiente.\n  B) Redução de capacidade de difusão de monóxido de carbono.\n  C) Enfisema centrolobular na tomografia de tórax.\n  D) Padrão obstrutivo na espirometria pós-broncodilatador. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Paciente tabagista inveterado com tosse crônica e dispneia progressiva tem DPOC; o diagnóstico de certeza é espirométrico (obstrução fixa).\n\n****Alternativa Correta** (D)**: O diagnóstico definitivo da Doença Pulmonar Obstrutiva Crônica (DPOC) exige a demonstração de limitação ao fluxo aéreo não totalmente reversível. Isso é obtido por meio da espirometria"
+  },
+  {
+    "id": 877,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Acidentes por lagartas Manifestações clínicas",
+    "stem": "Você atende um paciente de 20 anos que estava caminhando na beira do rio, quando encostou em um galho de árvore e sentiu uma ardência e dor em queimação no braço direito. A pele ficou com eritema e edema na região de contato, evoluindo com lesões puntiformes eritematosas nos pontos de inoculação das cerdas. O paciente apresentou apenas lesões locais e foi orientado a lavar o local com água corrente e colocar compressas geladas. Qual a principal complicação causada pelo envenenamento das cerdas das lagartas deste gênero?",
+    "alternatives": "  A) Agitação psicomotora.\n  B) Contraturas musculares intermitentes.\n  C) Arritmia cardíaca.\n  D) Manifestações hemorrágicas. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Contato com lagartas do gênero *Lonomia* (lonomismo) = veneno com forte ação pró-coagulante e fibrinolítica = risco de síndrome hemorrágica grave.\n\n****Alternativa Correta** (D)**: O envenenamento por *Lonomia* causa distúrbios da coagulação devido à liberação de ativadores do plasminogênio e do fator X, resultando em consumo de fatores e em uma grave sínd"
+  },
+  {
+    "id": 878,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+    "topic": "Pneumopatia Intersticial Usual PIU Fibrose Pulmonar Idiopática FPI",
+    "stem": "Mulher de 69 anos de idade, natural e procedente de São Paulo é dentista. Tabagista de 20 maços-ano, apresenta dispneia e tosse seca há 2 anos, sem outras queixas. No exame clínico apresenta saturação de oxigênio de 90% em ar ambiente e estertores em velcro bilaterais, sendo o restante do exame clínico normal. A radiografia e tomografia de tórax estão a seguir. A espirometria mostra VEF1 e CVF diminuídos com relação VEF1/CVF preservada. Qual é a principal hipótese diagnóstica?",
+    "alternatives": "  A) Fibrose intersticial pulmonar idiopática. [GABARITO]\n  B) Doença pulmonar obstrutiva crônica.\n  C) Pneumoconíose.\n  D) Tuberculose pulmonar.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Paciente idoso com tosse seca, dispneia progressiva, estertores 'velcro' e espirometria restritiva = pensar imediatamente em Fibrose Pulmonar Idiopática (FPI).\n\n****Alternativa Correta** (A)**: A Fibrose Pulmonar Idiopática (FPI) é uma doença fibrosante crônica de causa desconhecida que acomete idosos, manifestando-se clinicamente por dispneia insidiosa, t"
+  },
+  {
+    "id": 880,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Meningites, Encefalites e Infecções do SNC",
+    "topic": "Diagnóstico",
+    "stem": "Mulher, 52 anos de idade, veio trazida ao Pronto-Socorro por queixa de cefaleia e uma crise tônico-clônica generalizada que ocorreu dois dias antes da admissão. Em seguida evoluiu com sonolência. Ao exame de admissão tem temperatura de 38ºC, PA 100x60 mmHg, FC: 112bpm e restante do exame clínico geral sem alterações. No exame neurológico, encontrava-se sonolenta, com abertura ocular aos estímulos verbais vigorosos, retirada inespecífica dos membros à dor, falando palavras desconexas, reflexos profundos globalmente vivos e reflexo cutâneo plantar em flexão bilateral. Também foram observadas algumas clonias em hemiface direta. Tomografia computadorizada de crânio mostrou uma hipoatenuação em lobo temporal esquerdo. Exames laboratoriais revelaram uma leucocitose de 13500 sem desvios à esquerda e um aumento da proteína C reativa. Foi então submetida a ma punção lombar para coleta de líquor cujo resultado foi de 41 células (66% de linfócitos, 32% de monócitos e 2% de neutrófilos), 48 hemácias, proteína de 59 mg/dL, glicose de 64 mg/dL e lactato de 25 mg/dL. Qual é a principal hipótese diagnóstica?",
+    "alternatives": "  A) Meningoencefalite por tuberculose.\n  B) Meningoencefalite por HIV.\n  C) Meningoencefalite por herpes. [GABARITO]\n  D) Meningoencefalite por linfoma.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Febre + crise focal (clonias) + acometimento do lobo temporal na TC/RM = Encefalite por Herpes Simples (HSV-1) até prova contrária.\n\n****Alternativa Correta** (C)**: A meningoencefalite herpética é a causa mais comum de encefalite viral esporádica grave, caracterizando-se por febre, cefaleia, alterações de comportamento, crises focais e predileção marcante"
+  },
+  {
+    "id": 882,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Meningites, Encefalites e Infecções do SNC",
+    "topic": "Neurologia Escala de Coma de Glasgow",
+    "stem": "Mulher, 52 anos de idade, veio trazida ao Pronto-Socorro por queixa de cefaleia e uma crise tônico-clônica generalizada que ocorreu dois dias antes da admissão. Em seguida evoluiu com sonolência. Ao exame de admissão tem temperatura de 38ºC, PA 100x60 mmHg, FC: 112bpm e restante do exame clínico geral sem alterações. No exame neurológico, encontrava-se sonolenta, com abertura ocular aos estímulos verbais vigorosos, retirada inespecífica dos membros à dor, falando palavras desconexas, reflexos profundos globalmente vivos e reflexo cutâneo plantar em flexão bilateral. Também foram observadas algumas clonias em hemiface direta. Tomografia computadorizada de crânio mostrou uma hipoatenuação em lobo temporal esquerdo. Exames laboratoriais revelaram uma leucocitose de 13500 sem desvios à esquerda e um aumento da proteína C reativa. Foi então submetida a ma punção lombar para coleta de líquor cujo resultado foi de 41 células (66% de linfócitos, 32% de monócitos e 2% de neutrófilos), 48 hemácias, proteína de 59 mg/dL, glicose de 64 mg/dL e lactato de 25 mg/dL. Qual é a pontuação dessa paciente pela escala de coma de Glasgow?",
+    "alternatives": "  A) 8.\n  B) 10. [GABARITO]\n  C) 12.\n  D) 14.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Avalie sistematicamente cada item da Escala de Coma de Glasgow: Abertura Ocular (estímulo verbal = 3), Resposta Verbal (palavras desconexas = 3) e Resposta Motora (retirada inespecífica à dor = 4).\n\n****Alternativa Correta** (B)**: A Escala de Coma de Glasgow clássica é calculada somando os três parâmetros neurológicos descritos: 1) Abertura ocular aos est"
+  },
+  {
+    "id": 883,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Síndromes Sensitivas",
+    "stem": "Mulher, de 23 anos de idade, procurou o Pronto-Socorro com a queixa de \"\"sensação estranha de fraqueza nas pernas\"\", também relata \"\"uma sensação de aperto, como uma faixa apertada na altura do eu umbigo\"\". Diz quer percebeu os sintomas há três dias, que inicialmente eram muito leves mas que pioraram progressivamente. Quando indagada, acha que também notou algum tipo de dificuldade para controlar a micção. O exame clínico geral está normal. O exame neurológico mostra paresia crural direita (força muscular grau 4), perda da sensibilidade vibratória e aneurestésica no membro inferior direito, diminuição da percepção dolorosa e térmica em membro inferior esquerdo, sinal de Babinski á direita, os reflexos patelar a aquileu á direita estão exaltados. Qual a topografia responsável pelos achados do exame neurológico?",
+    "alternatives": "  A) Decussação das pirâmides.\n  B) Cauda equina.\n  C) Medula espinhal cervical à direita.\n  D) Medula torácica baixa à direita. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A combinação de hemiparesia ipsilateral com sinal de Babinski, perda proprioceptiva ipsilateral e perda da termoalgesia contralateral (dissociação sensitiva) define a Síndrome de Brown-Séquard.\n\n****Alternativa Correta** (D)**: O caso ilustra a clássica Síndrome de Brown-Séquard (hemisseção medular). A lesão do trato corticoespinhal lateral direito gera pa"
+  },
+  {
+    "id": 884,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Tratamento Sintomático Tratamento Profilático",
+    "stem": "Homem de 52 anos de idade, tabagista, apresenta há alguns anos crises de forte dor de cabeça que se concentram principalmente no olho esquerdo. A cefaleia aparece de 2 em 2 anos quase sempre nesta época do ano e permanece por cerca de 45 a 60 dias, a dor dura geralmente 1 hora e na maioria das vezes aparece durante a madrugada despertando-o: fica absolutamente \"\"desesperado\"\" quando sente a dor e tem vontade de \"\"bater a cabeça na parede\"\". Durante a dor apresenta vermelhidão no olho esquerdo e lacrimejamento intenso desse lado. As crises atuais começaram há 15 dias realizou uma tomografia durante um período de crises, que era normal. Considerando a principal hipótese diagnóstica, o que é correto afirmar?",
+    "alternatives": "  A) Devemos prescrever Prednisona via oral durante 2 a 3 semanas. [GABARITO]\n  B) Trata-se de uma cefaleia primária responsiva à Indomectacina.\n  C) As crises intensas devem ser tratadas com Morfina endovenosa.\n  D) Anti depressivo tricíclico deve melhorar esse tipo de dor de cabeça.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Cefaleia estritamente unilateral, em salvas, associada a agitação psicomotora e sintomas autonômicos responde agudamente à ponte com corticoide oral (Prednisona) e profilaxia com verapamil.\n\n****Alternativa Correta** (A)**: O paciente apresenta quadro clássico de Cefaleia em Salvas (Cluster Headache), cefaleia trigêmino-autonômica caracterizada por episódi"
+  },
+  {
+    "id": 886,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Artrite reativa Manifestações clínicas Diagnóstico",
+    "stem": "Homem de 27 anos de idade apresenta quadro de artropatia inflamatória de membros inferiores, associada às alterações de exame clínico mostradas a seguir. Considerando a principal hipótese diagnóstica, qual é a manifestação ocular mais comum?",
+    "alternatives": "  A) Conjuntivite. [GABARITO]\n  B) Irite.\n  C) Ceratite.\n  D) Neurite.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Tríade clássica da Artrite Reativa: artrite assimétrica de membros inferiores + uretrite + conjuntivite.\n\n****Alternativa Correta** (A)**: A artrite reativa é uma espondiloartropatia inflamatória sistêmica desencadeada por infecções entéricas ou geniturinárias (como *Chlamydia trachomatis*). A manifestação ocular mais precoce e frequente é a conjuntivite m"
+  },
+  {
+    "id": 887,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "topic": "Artrite gonocócica Tratamento",
+    "stem": "Homem de 35 anos de idade procurou serviço de emergência por dor em joelho esquerdo há 1 dia. Refere febre e dificuldade à deambulação pela dor. Refere episódios esporádicos de dor lombar, principalmente no fim da tarde. Nega tabagismo, etilismo, uso de drogas e tem vida sexual ativa. Sem outras queixas anteriores. Ao exame: bom estado geral, corado, hidratado, temperatura 38ºC, PA 120x80mmHg, FC 100bpm, FR 24ipm, pulsos radiais palpáveis e simétricos. Joelho esquerdo com calor, edema e limitação da amplitude de movimento, sem hiperemia. Sem outras alterações do restante do exame clínico. Considerando a principal hipótese diagnóstica, qual deve ser o tratamento inicial?",
+    "alternatives": "  A) Alopurinol.\n  B) Colchicina.\n  C) Prednisona.\n  D) Ceftriaxone. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Monoartrite aguda febril em adulto jovem sexualmente ativo é artrite séptica até prova em contrário.\n\n****Alternativa Correta** (D)**: O paciente apresenta quadro agudo com febre e monoartrite com sinais flogísticos intensos (calor, edema, dor e limitação funcional). Em jovens ativos, a infecção por *Neisseria gonorrhoeae* (artrite gonocócica) ou *Staphylo"
+  },
+  {
+    "id": 888,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Introdução Diagnóstico",
+    "stem": "Mulher de 21 anos de idade procura o ambulatório por queixa de astenia e sonolência. Refere que suas menstruações ocorrem em ciclos regulares a cada 30 dias, com duração média de 10 dias e fluxo abundante. Refere que este padrão se mantém desde a menarca, que ocorreu aos 13 anos de idade. Exame clínico normal, exceto por palidez 2+/4+. Exames laboratoriais: Quanto à alteração no coagulograma, qual é a principal hipótese diagnóstica?",
+    "alternatives": "  A) Deficiência do fator VIII.\n  B) Doença de Von Willebrand. [GABARITO]\n  C) Deficiência do fator XI.\n  D) Trombastenia de Glanzmann.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Menorragia desde a menarca em mulheres jovens com exames normais é a marca registrada da Doença de Von Willebrand.\n\n****Alternativa Correta** (B)**: A Doença de Von Willebrand é o distúrbio hemorrágico hereditário mais comum, decorrente da deficiência ou disfunção do fator de von Willebrand. Manifesta-se tipicamente com sintomas de hemostasia primária, com"
+  },
+  {
+    "id": 890,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "topic": "Hanseníase tuberculoide",
+    "stem": "Homem de 36 anos de idade apresenta há 9 meses placa eritêmato-infiltrada, com borda elevada, ovalada, de 6 cm, anestésica, no braço esquerdo. O exame histopatológico da lesão mostrou dermatite granulomatosa não-caseosa, com células gigantes tipo Langhans e infiltrado linfo-plasmocitário perivascular, perianexial e ao redor de filetes nervosos, pesquisa de BAAR negativa. O teste de Mitsuda foi positivo. Qual o diagnóstico?",
+    "alternatives": "  A) Hanseníase indeterminada.\n  B) Hanseníase wirchowiana.\n  C) Micobacteriose atípica.\n  D) Hanseníase tuberculoide. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Placa anestésica com granulomas e células de Langhans, BAAR negativo e Mitsuda positivo = Hanseníase Tuberculoide.\n\n****Alternativa Correta** (D)**: A hanseníase tuberculoide representa o polo paucibacilar da doença. Clinicamente caracteriza-se por lesão única ou poucas lesões bem delimitadas com perda de sensibilidade (anestésicas). Histologicamente exibe"
+  },
+  {
+    "id": 891,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+    "topic": "Psoríase Diagnóstico e avaliação de gravidade Artrite psoriásica",
+    "stem": "Mulher, 45 anos de idade, apresenta há 8 anos lesões eritematosas e descamativas, bem delimitadas, com eritema vermelho vivo e escamas branco prateadas aderentes e esparsas no couro cabeludo, região sacral, cotovelos e joelhos. Sinal da vela e do orvalho sangrento estão presentes. Apresenta história de monoartrite de articulação interfalangeana proximal no 3° quirodáctilo direito. Qual é o diagnóstico?",
+    "alternatives": "  A) Lúpus eritematoso cutâneo crônico.\n  B) Psoríase. [GABARITO]\n  C) Artrite reumatoide.\n  D) Dermatite seborreica.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Lesões descamativas prateadas com os sinais de Brocq (vela e Auspitz) somadas a uma monoartrite assimétrica definem a psoríase e sua forma articular.\n\n****Alternativa Correta** (B)**: O quadro dermatológico de placas eritematodescamativas bem delimitadas com escamas branco-prateadas e presença dos sinais clássicos de Brocq (sinal da vela e sinal do orvalho"
+  },
+  {
+    "id": 892,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+    "topic": "Diagnóstico eletrocardiografico do IAMCSST",
+    "stem": "Homem de 68 anos de idade, fumante 30 maços-ano, tem doença renal crônica em programação de diálise. Chega em Pronto-Socorro com história de mal-estar e náuseas há 40 minutos. Apresenta PA 150x100 mmHg, sem outras alterações do exame clínico. Feito o eletrocardiograma a seguir. Qual é o diagnóstico?",
+    "alternatives": "  A) Infarto agudo do miocárdio. [GABARITO]\n  B) Hipercalemia.\n  C) Hipercalcemia.\n  D) Bloqueio de ramo esquerdo.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Dor ou equivalente anginoso associado a supradesnivelamento do segmento ST no ECG fecha o diagnóstico de Infarto Agudo do Miocárdio com Supra de ST (IAMCSST), independentemente das comorbidades.\n\n****Alternativa Correta** (A)**: Paciente idoso, tabagista e renal crônico apresentando quadro clínico agudo de mal-estar e náuseas (equivalente anginoso), cujo e"
+  },
+  {
+    "id": 893,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Cardiologia Distúrbios da condução atrioventricular",
+    "stem": "Homem de 55 anos de idade, hipertenso e com antecedente de angina estável, em uso de anlodipina, AAS, carvedilol e enalapril. Hoje queixa-se de fraqueza e tontura. Exame clínico bradicárdico sem outras alterações. Feito o eletrocardiograma a seguir. Qual é o diagnóstico?",
+    "alternatives": "  A) BAV total.\n  B) Bradicardia sinusal.\n  C) BAV de segundo grau. [GABARITO]\n  D) BAV de primeiro grau.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Ondas P que falham em conduzir para os ventrículos de forma intermitente definem o Bloqueio Atrioventricular (BAV) de segundo grau.\n\n****Alternativa Correta** (C)**: O eletrocardiograma mostra a presença de ondas P que não são conduzidas (bloqueadas) de forma intermitente, caracterizando o Bloqueio Atrioventricular (BAV) de segundo grau. O uso de carvedilo"
+  },
+  {
+    "id": 894,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Peritonite bacteriana espontânea PBE Tratamento",
+    "stem": "Homem, 46 anos de idade, etilista há mais de 20 anos, em tratamento irregular para hipertensão arterial e cirrose hepática de etiologia alcoólica, procura o Pronto-Socorro queixando-se de desconforto, aumento do volume abdominal e inapetência há cerca de 1 semana. Nega febre, nega trauma ou sangramentos. Está evacuando 2x ao dia, com uso regular de laxativos. Ao exame clínico: Regular estado geral, desidratado +2/+4, vigil, calmo e colaborativo. PA=100x60mmHg; FC=108 bpm; FR=20rpm; abdome distendido, com maciez móvel presente, indolor à palpação profunda ou à descompressão brusca. Semiologias pulmonar e cardíaca sem alterações. Membros inferiores com edema +2/+4. Optou-se pela realização de uma paracentese diagnóstica, que encontrou a albumina de 0,5g/dL e 460 células/mm³ (80% de polimorfonucleares e 20% de mononucleares). O resultado da bacterioscopia com coloração de Gram foi ausente e a cultura do líquido ascítico está em análise. Exames laboratoriais séricos demonstram: Albumina = 2,5 g/dL; U=120 mg/dl; Cr=1,8 mg/dl; Na+ 128 mEq/l; K+ 3,2 mEq/L; Cálcio iônico= 1,20 mmol/l; Fósforo = 2,9mg/dL; urina tipo 1 normal; Hemograma com Hb=11,1 g/dl com VCM= 105 fl, Leucócitos=10.850/mm³ (diferencial normal); plaquetas=98.000/mm³. Qual das alternativas a seguir traz elementos que devem ser incluídos na prescrição deste paciente?",
+    "alternatives": "  A) Furosemida e suplementação de potássio.\n  B) Furosemida e lactulose.\n  C) Expansão volêmica e vancomicina.\n  D) Expansão volêmica e ceftriaxone. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Ascite com PMN >= 250/mm³ é Peritonite Bacteriana Espontânea (PBE): trate com Ceftriaxone e proteja o rim com Albumina.\n\n****Alternativa Correta** (D)**: O paciente cirrótico apresenta contagem de Polimorfonucleares (PMN) no líquido ascítico de 368/mm³ (460 células x 80%), firmando o diagnóstico de Peritonite Bacteriana Espontânea (PBE). O tratamento de es"
+  },
+  {
+    "id": 896,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Hiperaldosteronismo",
+    "stem": "Homem, 29 anos, refere ganho de peso progressivo e diagnósticos de hipertensão arterial sistêmica e apneia obstrutiva do sono há 6 meses. Em uso de hidroclorotiazida, anlodipina e enalapril. Exame físico: peso = 79 Kg; estatura = 162 cm; IMC = 30kg/m²; PA = 160 x 100 mmHg; FC = 72 bpm. Demais sem alterações. Exames laboratoriais: Na = 141 mmol/L; K = 2,9 mmol/L; creatinina = 0,9 mg/dL; urina rotina normal; cortisol pós 1 mg de dexametasona = 1,8 mcg/dL (VR < 2); IGF-1 = 150 ng/mL (VR 83-259). Qual é a investigação diagnóstica mais indicada?",
+    "alternatives": "  A) Metanefrinas urinárias fracionadas.\n  B) Aldosterona e renina plasmáticas. [GABARITO]\n  C) GH no teste de tolerância à glicose.\n  D) Cortisol livre urinário em 24 horas",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Hipertensão de início precoce associada a hipocalemia espontânea é a pista clássica de hiperaldosteronismo primário (HAP); o rastreio inicial é a razão aldosterona/renina (RAR).\n\n****Alternativa Correta** (B)**: O paciente apresenta hipertensão arterial sistêmica de difícil controle (PA 160x100 mmHg com três anti-hipertensivos) e hipocalemia espontânea (K="
+  },
+  {
+    "id": 971,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Conceitos Classificação",
+    "stem": "Antônio, 41 anos de idade, queixa-se de diflculdade para manter e iniciar a ereção há 8 meses. Refere que tem sentido menos vontade de ter relações sexuais e que não tem conseguido atingir o orgasmo. Antônio tem estado mais triste, desanimado, cansado com o trabalho, com diflculdade para manter o sono e se divertir. Nega desejo sexual por outras pessoas e também parou de se masturbar. Mantém ereção matinal. É tabagista (50 anos-maço), consome álcool (5 doses aos flnais de semana). Vânia tem 47 anos, é esposa de Antônio. Refere que nunca teve interesse sexual por Antônio e nem por outras pessoas, teve poucas parcerias ao longo da vida. Sente-se saudável e satisfeita com sua vida sexual, corpo e relacionamento. Parou de menstruar há 2 anos, apresenta fogachos. Nega comorbidades, nega uso de álcool, tabaco ou situações de violência. Considerando o caso, indique qual a fase do ciclo da resposta sexual está alterada e uma possível explicação para sua escolha.",
+    "alternatives": "  A) Antônio: fase de excitação, alterações vasculares decorrentes do tabagismo; Vânia: nenhuma, possível orientação sexual assexual.\n  B) Antônio: fase da excitação, provável quadro depressão; Vânia: fase do desejo, poucas experiências sexuais.\n  C) Antônio: fase de desejo, fadiga decorrente de sobrecarga no trabalho; Vânia: fase do desejo, sintomas decorrentes de síndrome climatérica.\n  D) Antônio: fase de desejo, provável quadro de depressão; Vânia: nenhuma, possível orientação sexual assexual. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Ereção matinal preservada afasta causa orgânica vascular (excitação) e aponta para disfunção da fase de desejo; a ausência de sofrimento em Vânia descarta patologia sexual.\n\n****Alternativa Correta** (D)**: Antônio apresenta um quadro sugestivo de transtorno depressivo (tristeza, anedonia, insônia), que impacta diretamente a fase de desejo do ciclo de resp"
+  },
+  {
+    "id": 1130,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "As grandes síndromes geriátricas gigantes geriátricos",
+    "stem": "Homem, 70 anos, apresenta-se com perda de peso signiflcativa, fadiga e dispneia aos pequenos esforços. Relata diflculdade para se alimentar devido à falta de apetite e sensação de saciedade precoce. Antecedentes de doença pulmonar obstrutiva crônica grave e insuflciência cardíaca congestiva. Exame físico: perda de massa muscular e edema de membros inferiores. Exames laboratoriais: albumina sérica: 2,9 g/dL (VR: 3,4-5,0); hemoglobina: 12,0 g/dL; creatinina: 1,1 mg/dL; Proteína C Reativa (PCR): 0,8 mg/dL (VR: < 1,0); glicemia de jejum: 105 mg/dL. Qual intervenção nutricional é a mais apropriada para este paciente?",
+    "alternatives": "  A) Aumentar a ingestão de proteínas e calorias por refeições fracionadas. [GABARITO]\n  B) Reduzir a ingestão de carboidratos para melhorar a glicemia de jejum.\n  C) Implementar dieta hipossódica rigorosa para controlar o edema.\n  D) Introduzir nutrição enteral suplementar.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Priorize sempre a otimização da via oral (fracionamento e aumento da densidade calórico-proteica) antes de escalar para o suporte nutricional artificial em pacientes idosos com desnutrição relacionada a doenças crônicas.\n\n****Alternativa Correta** (A)**: O paciente apresenta quadro de desnutrição e perda de peso significativa associada a doenças crônicas a"
+  },
+  {
+    "id": 1174,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Medicina de Família e Comunidade",
+    "stem": "Paciente foi internada em hospital terciário com quadro avançado de aids. Mulher jovem, 24 anos, usuária de drogas injetáveis. Apresentou diagnóstico da infecção pelo HIV por ocasião do parto de sua fllha há 2 anos. Teve alta d a maternidade sem tratamento, mas com a recomendação de procurar um serviço especializado para realizar seguimento adequado, o qual ela não realizou. Em relação à situação apresentada, assinale a alternativa correta.",
+    "alternatives": "  A) A paciente é de grupo de risco, com maior probabilidade de desenvolver a doença.\n  B) O comportamento de risco da paciente foi determinante para o desfecho de sua infecção.\n  C) A vulnerabilidade social da paciente foi o único componente determinante de seu adoecimento.\n  D) O componente programático da vulnerabilidade da paciente fica evidente. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Quando a questão relata falhas do sistema de saúde em garantir o seguimento e a vinculação do paciente após o diagnóstico, estamos diante do **componente programático** da vulnerabilidade.\n\n****Alternativa Correta** (D)**: O conceito de vulnerabilidade é dividido em três eixos: individual, social e programático. O componente programático refere-se justamen"
+  },
+  {
+    "id": 1177,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+    "topic": "Prevenção Quaternária",
+    "stem": "Pedro, 43 anos de idade, pardo, hipertenso, em uso de losartana 50 mg/dia. Apresenta-se com cefaleia nucal há 2 h. Sintomas têm sido recorrentes há 1 ano, em aperto, de moderada intensidade, com duração de 2 horas a 4 dias, sem fatores de piora. Nega outros sintomas ou antecedentes pessoais. Pai faleceu de acidente vascular cerebral há 5 anos. Nega uso de álcool ou outras drogas. Não dormiu bem à noite, ansioso, pois está muito preocupado que esse sintoma seja causado por um derrame ou câncer. Gostaria que o médico solicitasse uma tomografla de crânio. Exame físico: Pressão arterial de 150x92 mmHg, IMC: 28 kg/m². Exame neurológico sem alterações. Considerando o quadro de campos para o relacionamento pessoa-médico apresentado, assinale qual conduta exemplificaria a prevenção quaternária nesse caso.",
+    "alternatives": "  A) Aumentar a dose do anti-hipertensivo a fim de reduzir o risco cardiovascular.\n  B) Prescrever amitriptilina a fim de prevenir novas crises.\n  C) Não solicitar exames de imagem, pois essa prática poderia sobrecarregar financeiramente o sistema de saúde.\n  D) Não solicitar tomografia, pois achados incidentais poderiam causar mais mal do que bem. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: **Prevenção quaternária** consiste em evitar intervenções iatrogênicas desnecessárias, protegendo o paciente do sobrediagnóstico e de exames em cascata que causam mais mal do que bem.\n\n****Alternativa Correta** (D)**: Diante de uma cefaleia crônica sem sinais de alarme (sinais neurológicos focais, início súbito, edema de papila), solicitar exames de imagem"
+  },
+  {
+    "id": 1179,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Medicina de Família e Comunidade",
+    "stem": "Rafael, 17 anos, pardo, heterossexual, católico, vem à consulta médica referindo que está precisando de um antidepressivo ou de “ritalina” para sua falta de atenção ou que deve ser autista. Há 3 meses refere que tem estado mais triste, com sentimento de que não vai conseguir ser aprovado nas disciplinas da faculdade. Sente-se incompetente por não estar conseguindo estudar e não se concentrar. Não apresenta queixas anteriores durante a infância ou alterações no desenvolvimento. Tinha bom rendimento escolar até o Ensino Médio. Passou em quatro vestibulares e mudou-se de uma cidade pequena do interior de Goiás para iniciar a faculdade de Economia em São Paulo. Atualmente está morando na residência estudantil, dividindo quarto com outro estudante. Sua renda provém principalmente de uma bolsa de iniciação científlca de 700 reais. Alimenta-se no Restaurante Universitário e recebe algum auxílio flnanceiro complementar da família de 500 reais. É o primeiro filho a cursar Ensino Superior. Considera desistir do curso que tanto desejou, acha que não é para ele, pois se percebe muito diferente dos seus colegas de turma, já que “eles costumam viajar para o exterior nas férias e frequentar determinados lugares em que sinto que não são para mim, na minha cidade não era assim com meus amigos”. Refere que em uma das aulas um professor comentou que “ele não está conseguindo acompanhar o curso porque deve ser cotista”. Rafael está muito preocupado, pois sua família tem feito todo o esforço flnanceiro para ele se manter em São Paulo. Considerando a história de vida de Rafael, assinale quais aspectos sociais podem auxiliar na compreensão de sua experiência de doença.",
+    "alternatives": "  A) Racismo, psicofobia, patologização da neurodiversidade.\n  B) Racismo, desigualdade econômica, medicalização da vida. [GABARITO]\n  C) Migração, psicofobia, medicalização da vida.\n  D) Migração, desigualdade econômica, patologização da neurodiversidade.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Identifique no texto as pistas de determinantes sociais: o comentário infeliz do professor aponta para o racismo institucional e interpessoal, a disparidade financeira evidencia a desigualdade econômica, e a busca por drogas lícitas para desempenho define a medicalização da vida.\n\n****Alternativa Correta** (B)**: A alternativa B sintetiza com precisão os t"
+  },
+  {
+    "id": 1190,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Método Clínico Centrado na Pessoa Relação MédicoPaciente",
+    "stem": "Mulher, 63 anos, está em acompanhamento ambulatorial por adenocarcinoma de pâncreas com metástases hepáticas e ósseas. Há 6 meses, iniciou segunda linha de quimioterapia não curativa. A despeito do tratamento, sua doença teve rápida progressão durante esse período. Adicionalmente, sua funcionalidade teve uma mudança importante: era totalmente ativa (ECOG 0) e agora, embora consiga manter o autocuidado e a deambulação, está incapaz de realizar suas atividades laborais (ECOG 2). No atual retorno, a paciente questiona sobre as possibilidades de tratamento e a sua inclusão em um estudo clínico para novos medicamentos. Quais ações devem ser adotadas no caso?",
+    "alternatives": "  A) postergar as informações sobre a progressão da doença, pois a perda de funcionalidade da paciente é recente e influencia sua compreensão da gravidade.\n  B) questionar as expectativas da paciente e a sua percepção da doença, para verificar seu grau de entendimento e alinhamento com a expectativa da equipe médica. [GABARITO]\n  C) informar que não há eficácia comprovada para outros tratamentos e que, a partir deste momento, há indicação de acompanhamento com a equipe de cuidados paliativos.\n  D) convocar a família para explicar a ausência de resposta aos tratamentos convencionais e ponderar os riscos e benefícios das alternativas experimentais.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Diante de progressão rápida de neoplasia incurável e alteração funcional (ECOG), a prioridade é escutar o paciente por meio do Método Clínico Centrado na Pessoa para alinhar expectativas antes de propor novas condutas.\n\n****Alternativa Correta** (B)**: Questionar as expectativas da paciente e a sua percepção da doença é a conduta ideal conforme o Método Cl"
+  },
+  {
+    "id": 1201,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+    "topic": "Método Clínico Centrado na Pessoa",
+    "stem": "Homem, 35 anos, previamente hígido. Iniciou com queixa de episódios de palpitações, associadas à sensação de falta de ar, perda de apetite e desconforto no peito. Nega tristeza, desânimo, fadiga, irritabilidade ou nervosismo. Não associa o quadro a nenhum evento recente em sua vida. Diz estar tranquilo, menos estressado, agora que saiu do emprego. Tem preocupação de ser algum problema no coração, pois seu tio morreu de infarto aos 75 anos. Recentemente passou em consulta médica, tendo recebido a orientação de que não era nada grave. Fez eletrocardiograma, holter e dosagem de TSH. Todos os resultados foram normais, mas Carlos continua com a queixa. A esposa diz que ele costuma apresentar esses sintomas quando se senta para fazer as contas da família ou quando recebe alguma conta para pagar. Ele não tem história pessoal nem familiar de transtorno mental. Assinale a alternativa que apresenta o registro adequado para o item de avaliação do SOAP desta consulta – de acordo com o Registro Orientado por Problemas –, assim como uma intervenção no atendimento.",
+    "alternatives": "  A) Distúrbio ansioso/estado de ansiedade; intervenção: – Posso prescrever propranolol, um remédio para diminuir a batedeira, você concorda?\n  B) Transtorno do pânico; intervenção: – Como excluímos problemas do coração, você acha que poderia ser algo psicológico?\n  C) Sensação de ansiedade/nervosismo/tensão; intervenção: – Não me parece ser nada grave, concordo com o cardiologista, seus exames estão normais.\n  D) Palpitações; intervenção: – Você acha que seus sintomas podem ter relação com o que sua esposa relatou? [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Diante de sintomas físicos sem causa orgânica definida e sem diagnóstico psiquiátrico fechado, o SOAP deve registrar a queixa principal, e a intervenção deve buscar vínculos psicossociais sem confrontar o paciente.\n\n****Alternativa Correta** (D)**: No formato SOAP (Registro Orientado por Problemas), a Avaliação (A) deve registrar o problema clínico ainda n"
+  },
+  {
+    "id": 1231,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Saúde do Idoso geriatria Cuidados paliativos Ortotanásia",
+    "stem": "Homem, 82 anos de idade, acamado há 10 anos por demência vascular após episódio de AVC isquêmico extenso. É totalmente dependente para as atividades básicas da vida diária e não contactua com as pessoas há cerca de 1 ano. É cuidado pela fllha. Há 2 anos apresenta disfagia para sólidos e há 6 meses para líquidos. Comparece ao Pronto-Socorro com história de queda do estado geral e recusa da alimentação via oral há 3 dias. No atendimento inicial, apresentava-se em mau estado geral, descorado ++/4+, desidratado +++/+4, com roncos de transmissão, FR 30 irpm, oximetria sem captura, com respiração ruidosa, extremidades frias e mal perfundidas, FC 130 bpm e PA 72 x 40 mmHg. A equipe da sala de emergência aborda a fllha sobre a compreensão do quadro atual e ela entende que o pai está próximo ao flnal da vida e não deseja que ele sofra, mas está muito preocupada por ele não estar conseguindo comer. Qual é a conduta com relação à alimentação nesta fase?",
+    "alternatives": "  A) Passar sonda nasoenteral para alimentação enteral.\n  B) Introduzir soro de expansão e manutenção.\n  C) Introduzir dieta assistida por via oral.\n  D) Manter o paciente de jejum e sem soro. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Em pacientes na fase terminal (processo ativo de morte), a suspensão de hidratação artificial e dieta por sonda evita sofrimento desnecessário (distanásia).\n\n****Alternativa Correta** (D)**: O paciente encontra-se em fase final de vida (processo ativo de morte por demência vascular avançada). Nessa etapa, a falência orgânica multissistêmica impede o metabo"
+  },
+  {
+    "id": 1290,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Método SOAP",
+    "stem": "Josefa é uma mulher negra de 62 anos de idade que frequenta a unidade básica de saúde há muitos anos. Ela era acompanhada por diabetes e hipertensão arterial, ambas as condições com bom controle clínico. Há cerca de 10 dias, Josefa foi ao Pronto-Socorro devido um desmaio seguido de perda de força em braço e perna esquerdos. Foi encaminhada a hospital terciário, com hipótese de acidente vascular, encefálico (AVE). Esta hipótese diagnóstica foi conflrmada com tomografia. Ela recebeu cuidados adequados e teve alta hospitalar, ainda com alguma perda de força em perna esquerda. Hoje ela vêm em consulta e traz os documentos que recebeu na alta hospitalar, além da prescrição medicamentosa: Encaminhamento ao endocrinologista, por diabetes mellitus; Encaminhamento ao cardiologista, por hipertensão arterial sistêmica; Encaminhamento ao fisioterapeuta, para reabilitação pós-AVE; Retorno no neurologista do hospital em um mês; Durante a consulta, Josefa mostra-se preocupada com o custo dos remédios prescritos no hospital e diflculdade de ir às consultas. Chora ao falar das suas diflculdades. Ela mora com uma fllha e três netos. No momento, sua fllha está desempregada e era Josefa quem trabalhava como diarista para pagar as contas. Um de seus netos está envolvido com drogas e álcool e isso preocupa muito Josefa. Tem irmãos que moram em cidades vizinhas, porém sem tanta proximidade, Josefa mora em uma viela no morro, e para chegar na sua casa é preciso subir uma escada estreita e íngreme. Hoje ela teve muita dificuldade de descer os degraus para ir a UBS. O médico escuta Josefa, realiza exame clínico que constata hemiparesia desproporcionada à esquerda, com força muscular grau V em membro superior e grau III em membro inferior. O restante do exame clínico é normal. Conversa com Josefa e propõe seguir o tratamento da diabetes e hipertensão na própria UBS. Troca alguns medicamentos de sua prescrição por outros de mesmas classes disponíveis na UBS. escreve contra-referência para o hospital informando a troca de medicação e seguimento da hipertensão e diabetes na UBS, cancelando estes encaminhamentos. Planeja discutir o caso com equipe multidisciplinar para acionar o flsioterapeuta pensando na reabilitação de Josefa e assistente social para discutir indicação de benefícios aplicáveis. Por flm, combina retorno precoce com Josefa na UBS para conversar sobre a adaptação dela e da sua família a este novo ciclo de vida. De acordo com a sistematização do registro clínico orientado a problemas (modelo SOAP), qual das opções abaixo apresenta em todos os campos itens corretamente registrados para esta consulta?",
+    "alternatives": "  A) S: Preocupada com custo dos medicamentos / O: Hemiparesia / A: Acidente vascular encefálico / P: Discussão com equipe multidisciplinar. [GABARITO]\n  B) S: Medo de doença / O: Diabetes e hipertensão / A: Acidente vascular encefálico / P: Retorno precoce para reavaliação.\n  C) S: Medo de doença / O: Hemiparesia / A: Divergência com especialista / P: Discussão com equipe multidisciplinar.\n  D) S: Preocupada com custo dos medicamentos / O: Diabetes e hipertensão / A: Divergência com especialista / P: Retorno precoce para reavaliação.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Decore a regra do SOAP: **S**ubjetivo é o que o paciente *sente* e relata; **O**bjetivo é o que o médico *vê* no exame físico ou exames; **A**valiação é o *diagnóstico*; **P**lano é o que vai ser *feito* (condutas).\n\n****Alternativa Correta** (A)**: A preocupação com os custos é dado subjetivo relatado pela paciente (S); a hemiparesia constatada ao exame f"
+  },
+  {
+    "id": 1293,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Método Clínico Centrado na Pessoa",
+    "stem": "Josefa é uma mulher negra de 62 anos de idade que frequenta a unidade básica de saúde há muitos anos. Ela era acompanhada por diabetes e hipertensão arterial, ambas as condições com bom controle clínico. Há cerca de 10 dias, Josefa foi ao Pronto-Socorro devido um desmaio seguido de perda de força em braço e perna esquerdos. Foi encaminhada a hospital terciário, com hipótese de acidente vascular, encefálico (AVE). Esta hipótese diagnóstica foi conflrmada com tomografia. Ela recebeu cuidados adequados e teve alta hospitalar, ainda com alguma perda de força em perna esquerda. Hoje ela vêm em consulta e traz os documentos que recebeu na alta hospitalar, além da prescrição medicamentosa: Encaminhamento ao endocrinologista, por diabetes mellitus; Encaminhamento ao cardiologista, por hipertensão arterial sistêmica; Encaminhamento ao fisioterapeuta, para reabilitação pós-AVE; Retorno no neurologista do hospital em um mês; Durante a consulta, Josefa mostra-se preocupada com o custo dos remédios prescritos no hospital e diflculdade de ir às consultas. Chora ao falar das suas diflculdades. Ela mora com uma fllha e três netos. No momento, sua fllha está desempregada e era Josefa quem trabalhava como diarista para pagar as contas. Um de seus netos está envolvido com drogas e álcool e isso preocupa muito Josefa. Tem irmãos que moram em cidades vizinhas, porém sem tanta proximidade, Josefa mora em uma viela no morro, e para chegar na sua casa é preciso subir uma escada estreita e íngreme. Hoje ela teve muita dificuldade de descer os degraus para ir a UBS. O médico escuta Josefa, realiza exame clínico que constata hemiparesia desproporcionada à esquerda, com força muscular grau V em membro superior e grau III em membro inferior. O restante do exame clínico é normal. Conversa com Josefa e propõe seguir o tratamento da diabetes e hipertensão na própria UBS. Troca alguns medicamentos de sua prescrição por outros de mesmas classes disponíveis na UBS. escreve contra-referência para o hospital informando a troca de medicação e seguimento da hipertensão e diabetes na UBS, cancelando estes encaminhamentos. Planeja discutir o caso com equipe multidisciplinar para acionar o flsioterapeuta pensando na reabilitação de Josefa e assistente social para discutir indicação de benefícios aplicáveis. Por flm, combina retorno precoce com Josefa na UBS para conversar sobre a adaptação dela e da sua família a este novo ciclo de vida. Qual dos componentes do método clínico centrado na pessoa foi mais acionado para abordar as diflculdades da Josefa com o uso da medicação?",
+    "alternatives": "  A) Acolhimento e escuta qualificada.\n  B) Fortalecendo a relação entre a pessoa e o médico.\n  C) Elaborando um plano conjunto de manejo dos problemas.\n  D) Entendendo a pessoa como um todo. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: O Método Clínico Centrado na Pessoa (MCCP) utiliza o componente \"Entendendo a pessoa como um todo\" para integrar o problema médico ao contexto biopsicossocial do paciente (família, finanças, moradia e barreiras físicas).\n\n****Alternativa Correta** (D)**: Ao adaptar os medicamentos para os disponíveis gratuitamente na UBS, considerando a dificuldade finance"
+  },
+  {
+    "id": 1350,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Diagnóstico e datação da gestação Diagnóstico laboratorial",
+    "stem": "Paciente feminina, 28 anos, com queixa de disúria e polaciúria há 1 dia. Não tem comorbidades. Está em bom estado geral e pode ser reavaliada em caso de piora clínica. Para esse contexto, assinale a alternativa que apresenta o exame laboratorial indicado.",
+    "alternatives": "  A) Teste de gravidez, se gestação não puder ser excluída. [GABARITO]\n  B) Tomografia computadorizada de abdome para excluir pielonefrite complicada.\n  C) Urina 1 e urinocultura para confirmação diagnóstica.\n  D) Ultrassonografia de abdome e pelve para afastar suspeita de abscesso renal.\n  E) Nenhuma das alternativas anteriores está correta.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Na cistite aguda não complicada em mulheres jovens e saudáveis, o diagnóstico é eminentemente clínico e o único exame laboratorial mandatório a ser considerado é o teste de gravidez.\n\n****Alternativa Correta** (A)**: Pacientes jovens, hígidas, com sintomas típicos de infecção do trato urinário inferior (disúria e polaciúria) e sem critérios de gravidade ou"
+  },
+  {
+    "id": 1458,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+    "topic": "Epinefrina",
+    "stem": "Durante o acolhimento em uma Unidade de Saúde da Família (USF) rural, uma paciente do sexo feminino de 23 anos de idade, relata início súbito de coceira generalizada, sensação de garganta “fechando” e diflculdade para respirar, ocorridos cerca de 15 minutos após consumir castanha-do-pará, à qual já havia referido alergia leve em outras ocasiões. Na avaliação, apresenta urticária disseminada, edema facial, taquicardia (FC de 122 bpm), PA de 95×60 mmHg, FR de 26 irpm e SpO₂ de 91%. A unidade possui adrenalina, oxigênio, soro flsiológico e equipe de enfermagem treinada, mas o transporte de emergência levará cerca de 40 minutos. Diante desse cenário, qual deve ser a prioridade da equipe da USF?",
+    "alternatives": "  A) Administrar difenidramina e aguardar a chegada do transporte, monitorando sinais vitais.\n  B) Administrar adrenalina intramuscular imediatamente, repetir se necessário, e iniciar suporte clínico enquanto aguarda remoção. [GABARITO]\n  C) Monitorar a paciente em decúbito dorsal, aplicar corticoide intramuscular e encaminhar como urgência\n  D) Iniciar oxigenoterapia, observar evolução do quadro e fornecer líquidos por via oral.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Anafilaxia é uma emergência médica absoluta cujo tratamento de primeira linha salvador de vida é a adrenalina intramuscular imediata, sem contraindicações relativas.\n\n****Alternativa Correta** (B)**: A administração imediata de adrenalina intramuscular (na face anterolateral da coxa) é mandatória na anafilaxia para reverter a broncoconstrição, o edema de v"
+  },
+  {
+    "id": 1477,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Cefaleias Primárias (Enxaqueca, Tensional) e Secundárias de Alarme",
+    "topic": "Diagnóstico Manifestação Clínica Diagnóstico Diferencial",
+    "stem": "Mulher, 23 anos de idade, faz acompanhamento médico por rinite alérgica, dismenorreia e cefaleia tensional, com uso recorrente de anti-inflamatórios e analgésicos. A paciente comparece em consulta ambulatorial de rotina e refere que, nos últimos 8 meses, procurou o pronto-atendimento quatro vezes por edema em pálpebras e lábios. Um dos episódios foi acompanhado de edema de língua. Outro episódio foi acompanhado de lesões de pele eritematosas, edematosas e pruriginosas. Em um dos casos havia ingerido amendoim. Em duas ocasiões, recebeu adrenalina intramuscular com melhora do quadro. Nega que tenha ocorrido hipotensão, dispneia, diarreia ou dor abdominal nos quatro atendimentos. Qual é a causa mais provável do quadro clínico desta paciente?",
+    "alternatives": "  A) Urticária aguda. [GABARITO]\n  B) Alergia alimentar.\n  C) Anafilaxia recorrente.\n  D) Angioedema hereditário.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Para fechar o diagnóstico de anafilaxia, é obrigatório o comprometimento multissistêmico (dois ou mais sistemas) ou hipotensão após exposição a alérgeno; se restrito à pele/mucosas, trata-se de urticária/angioedema.\n\n****Alternativa Correta** (A)**: A paciente apresenta episódios recorrentes de edema em pálpebras, lábios e língua, associados a lesões cutân"
+  },
+  {
+    "id": 1589,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Quadro Clínico",
+    "stem": "Mulher, 30 anos, submetida a cirurgia bariátrica há 3 anos devido à obesidade mórbida. Peso pré-operatório de 135 kg e há 1 ano mantém 95 kg. No último ano, apresentou 4 infecções de via aérea superior e 1 episódio de herpes zoster em face, tratada com aciclovir, Há 2 meses. apresenta cansaço persistente, diminuição da acuidade visual, em especial noturna, e xerostomia. Nos últimos dias, notou lesão esbranquiçada na conjuntiva ocular esquerda Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Herpes zoster oftálmico.\n  B) Endoftalmite por Cândida albicans.\n  C) Deficiência de Vitamina A. [GABARITO]\n  D) Sindrome de Sjögren.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A combinação de nictalopia (cegueira noturna), xerose conjuntival com mancha de Bitot e infecções de repetição após cirurgia bariátrica aponta diretamente para a deficiência de vitaminas lipossolúveis, especificamente a Vitamina A.\n\n****Alternativa Correta** (C)**: A deficiência de vitamina A é uma complicação bem conhecida de cirurgias bariátricas (especi"
+  },
+  {
+    "id": 1711,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Oftalmologia",
+    "stem": "Homem, 74 anos, relata que há dois anos vem notando faixa esbranquiçada no olho. Ao exame: presença de arco opaco esbranquiçado na junção esclerocorneal, na periferia da íris bilateral (Figura). Qual a conduta mais adequada em relação à alteração ocular mostrada?",
+    "alternatives": "  A) Não prosseguir com investigação. [GABARITO]\n  B) Avaliação com lâmpada de fenda.\n  C) Realização de topografia corneana.\n  D) Prescrição de lágrima artificial.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Arco senil em idosos é um achado fisiológico e benigno; se o paciente for assintomático, não há necessidade de exames complementares ou investigação adicional.\n\n****Alternativa Correta** (A)**: O arco opaco, esbranquiçado ou cinzento na periferia da córnea (arco senil ou gerontóxono) em pacientes idosos decorre do depósito extracelular de lipoproteínas no "
+  },
+  {
+    "id": 1712,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Oftalmologia Retinopatia Diabética Retinopatia Hipertensiva",
+    "stem": "Homem de 66 anos de idade chega à consulta referindo perda visual progressiva e indolor de olho há 06 meses. É hipertenso, diabético e dislipidêmico de longa data, com controle irregular das comorbidades. Realiza o seguinte exame. Selecione a alternativa com os achados deste exame:",
+    "alternatives": "  A) Microhemorragias e exsudatos duros. [GABARITO]\n  B) Edema de papila e descolamento de retina regmatogênico\n  C) Microcalcificações e mácula em cereja.\n  D) Palidez de papila e exsudatos algodonosos.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Paciente diabético de longa data com perda visual crônica e indolor apresenta clássicos sinais de retinopatia diabética, como microhemorragias e exsudatos duros.\n\n****Alternativa Correta** (A)**: Os achados fundoscópicos da retinopatia diabética não proliferativa incluem microhemorragias retinianas (pontiformes ou em chama de vela) e exsudatos duros, que c"
+  },
+  {
+    "id": 1715,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Retinopatia Diabética",
+    "stem": "Dentre as alternativas abaixo, quais são as alterações mais precoces encontrados na retinopatia diabética?",
+    "alternatives": "  A) Ingurgitamento venoso.\n  B) Exsudatos duros.\n  C) Micro-hemorragias.\n  D) Microaneurismas. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: A lesão inaugural e clinicamente mais precoce da retinopatia diabética é o microaneurisma.\n\n****Alternativa Correta** (D)**: A retinopatia diabética é uma microangiopatia decorrente da perda de pericitos capilares e enfraquecimento vascular. Os microaneurismas representam a primeira alteração estrutural visível ao exame de fundo de olho, manifestando-se co"
+  },
+  {
+    "id": 1718,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "topic": "Quadro clínico diagnóstico e sinais de alarme",
+    "stem": "Mulher, 40 anos de idade, procura o serviço de emergência com dor lombar há 3 dias e aumento da intensidade nas últimas 12h. No momento relata dor 10 em 10 e incapacidade de trabalhar. Relata múltiplos episódios prévios semelhantes em momentos de aumento da carga de trabalho. Tem obesidade (IMC de 41 kg/m²), insônia e tabagismo de 20 anos-maço. Faz uso de benzodiazepínico para dormir. Nega outras comorbidades. Ao exame físico, após analgesia, apresenta dor localizada na região lombar, com irradiação para o membro inferior direito, força motora e sensibilidade dos membros inferiores sem alterações. Qual das características apresentadas pela paciente representa fator de risco para croniflcação do episódio de dor lombar?",
+    "alternatives": "  A) Dor intensa gerando incapacidade funcional. [GABARITO]\n  B) Índice de massa corpórea maior que 35 kg/m² .\n  C) Tabagismo com elevada carga tabágica.\n  D) Insônia com uso de benzodiazepínico.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: No modelo biopsicossocial da dor lombar, a percepção de alta incapacidade funcional e o comportamento de medo-evitação pesam mais no risco de cronificação do que fatores puramente biomédicos isolados.\n\n****Alternativa Correta** (A)**: A intensidade elevada da dor associada a forte incapacidade funcional (dificuldade de trabalhar e realizar atividades) faz "
+  },
+  {
+    "id": 1725,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+    "topic": "Bursites",
+    "stem": "Mulher de 62 anos trabalha cuidando da casa e de dois netos. Há 12 horas notou aumento de volume em região anterior de joelho direito, com dor e calor. Relata febre baixa não aferida. Nega dor em outras articulações ou diflculdade para deambular, mas relata diflculdade para fletir o joelho. Fez atividade doméstica mais intensa nos últimos dias. Nega uso de qualquer tipo de medicamentos ou comorbidades prévias relevantes. Foto do exame clínico articular apresentada. Qual a principal hipótese diagnóstica?",
+    "alternatives": "  A) Fratura patelar.\n  B) Subluxação patelar.\n  C) Artrite.\n  D) Bursite pré-patelar. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Edema localizado na região anterior do joelho após atividade com ajoelhamento, sem derrame articular, é típico de bursite pré-patelar.\n\n****Alternativa Correta** (D)**: A bursite pré-patelar é a inflamação da bolsa sinovial localizada entre a patela e a pele. Ocorre por pressão ou atrito crônico, como ao ajoelhar para limpar. O quadro é de edema bem locali"
+  },
+  {
+    "id": 1726,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Lombalgia",
+    "stem": "Paciente de 34 anos de idade, sexo masculino, trabalha como pedreiro, sem doenças prévias, não faz uso de medicamentos de rotina. Chega à unidade de saúde da família com queixa de dor lombar de forte intensidade há 21 dias. A dor surgiu após esforço físico intenso em seu serviço. A dor está incomodando-o muito, impedindo de trabalhar normalmente nos últimos dias. Está fazendo uso de analgésicos comuns e anti-inflamatórios orais diariamente desde o início do quadro, com pouca melhora. A dor piora aos esforços e melhora com o repouso. A dor não irradia para os membros inferiores, nega perda de força ou formigamentos nos MMII, nega febre, dores noturnas. Sem queixas urinárias, gastrintestinais. EF: realizado exame físico completo, tendo como alteração apenas a dor lombar à mobilidade da coluna, dores à palpação da musculatura paravertebral lombar, sem déficit neurológico nos membros, sem outras alterações dignas de nota. Qual a abordagem mais adequada para diagnóstico do paciente neste momento?",
+    "alternatives": "  A) Não há indicação de exames de imagem neste momento. [GABARITO]\n  B) Solicitar radiografia simples da coluna lombar.\n  C) Solicitar tomografia computadorizada coluna lombar.\n  D) Solicitar ressonância nuclear magnética da coluna lombar.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Lombalgia aguda sem sinais de alarme (*red flags*) é de tratamento sintomático; exames de imagem na fase inicial são desnecessários e geram iatrogenia.\n\n****Alternativa Correta** (A)**: O caso clínico descreve um paciente jovem com lombalgia aguda de padrão mecânico (início há 21 dias após esforço físico, com piora aos movimentos e alívio com o repouso). A"
+  },
+  {
+    "id": 1739,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Diagnósticos diferenciais",
+    "stem": "Homem de 42 anos de idade com antecedente de hipertensão arterial, apresenta dor lombar crônica há cinco anos, após levantar peso no ambiente de trabalho. No episódio inicial apresentou dor intensa e súbita associada à limitação de movimentos que levou a afastamento do trabalho por um período de 10 dias. Voltou a trabalhar, porém, manteve dor lombar contínua, de intensidade leve a moderada com irradiação para ambas as coxas de forma difusa e piora com esforços. Vários períodos de afastamento laboral desde então, sempre com manutenção das queixas. Há 6 meses refere dor moderada a intensa com irradiação para ambos os membros inferiores e grande limitação para atividades diárias sem qualquer melhora com uso de anti-inflamatórios ou analgésicos. Faz uso eventual de tramadol, porém nega melhora signiflcativa. Nega febre ou perda de peso. O exame clínico é normal exceto por dor à flexão e extensão lombar. O exame neurológico é normal. Paciente traz exame de ressonância magnética realizado há 2 meses com desidratação discal L4-L5 e L5-S1. Discretas protrusões discais nestes níveis sem conflito radicular. Qual é a principal hipótese diagnóstica?",
+    "alternatives": "  A) Lombalgia mecânica comum. [GABARITO]\n  B) Estenose do canal lombar.\n  C) Espondilite anquilosante.\n  D) Hérnia discal.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Dor lombar crônica com exame neurológico limpo e ressonância magnética sem compressão radicular (conflito)? Diagnóstico é lombalgia mecânica comum.\n\n****Alternativa Correta** (A)**: A lombalgia mecânica comum (ou inespecífica) é caracterizada por dor musculoesquelética relacionada a esforço ou postura, sem sinais de alerta (red flags), com exame neurológic"
+  },
+  {
+    "id": 1742,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Diferenças Clínicas entre vertigem de origem central e periférica",
+    "stem": "Mulher de 66 anos procurou a Unidade de Saúde da Família (USF) com queixas de que há 2 dias vinha apresentando quadro de tontura vertiginosa que durava o tempo todo, com intensidade variável no decorrer do dia, mas sem identiflcar fatores desencadeadores, nem fatores de melhora ou de piora do sintoma. Relatava, ainda, leve cefaleia, náuseas e apresentou três episódios de vômitos desde o dia anterior à consulta. Negava febre, queixas cardiorrespiratórias, urinárias ou alterações do hábito intestinal. Nunca havia tido quadro semelhante antes. Negava queixas otológicas. Paciente com obesidade grau 2, hipertensão arterial controlada com Hidroclorotiazida e Enalapril. Não usava outros medicamentos e negava outros problemas de saúde. Exame físico geral e sinais vitais sem alterações. Exame neurológico: Escala de Glasgow de 15 pontos, com orientação preservada para o espaço, tempo e pessoa. Os sinais meníngeos eram negativos. No teste de Romberg, a paciente apresentava desequilíbrio com tendência de queda para trás. Na investigação HINTS, paciente apresentava nistagmo espontâneo bidirecional persistente sem sofrer alterações ao movimento ocular para os lados. O teste de impulso da cabeça era negativo e o teste de Skew era positivo. Diante deste quadro clínico, qual a melhor conduta imediata a ser tomada?",
+    "alternatives": "  A) Encaminhar a paciente para um serviço de urgência para avaliação de um neurologista. [GABARITO]\n  B) Realizar as manobras de Dix Hallpike e Epley.\n  C) Administrar medicamentos para alívio dos sintomas na USF como benzodiazepínicos ou antieméticos.\n  D) Orientar repouso e prescrever antieméticos, bloqueadores de canal de cálcio ou anti-histamínicos.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Cuidado com o falso seguro: teste de impulso cefálico NORMAL (negativo) na vertigem é bandeira vermelha para AVC de fossa posterior!\n\n****Alternativa Correta** (A)**: O conjunto de achados do HINTS nesta paciente (nistagmo espontâneo bidirecional, teste de impulso cefálico negativo e teste de Skew positivo) compõe a sigla INFARCT, indicando com alta probab"
+  },
+  {
+    "id": 1743,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Diferenças Clínicas entre vertigem de origem central e periférica Síndromes Vestibulares Centrais",
+    "stem": "Mulher, 66 anos de idade, relata tonturas há 12 horas, de início súbito, caracterizada como contínua e de leve intensidade. Nega perda auditiva, zumbido ou plenitude auricular. É tabagista e tem hipertensão arterial, diabetes melito e dislipidemia. O teste do impulso cefálico é normal e a manobra de Dix-Hallpike exacerba a tontura, apesar de não apresentar nistagmo. Em relação ao caso apresentado, qual é a próxima conduta mais apropriada na abordagem da paciente?",
+    "alternatives": "  A) Realizar a manobra de Epley.\n  B) Realizar ressonância magnética cerebral. [GABARITO]\n  C) Prescrever restrição salina + diurético.\n  D) Prescrever supressor da função vestibular.\n  E) Prescrever prednisona.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Em vertigem aguda contínua com fatores de risco vascular, um teste do impulso cefálico (Head Impulse Test) normal NÃO tranquiliza; pelo contrário, alerta para uma causa central (AVC de fossa posterior).\n\n****Alternativa Correta** (B)**: A paciente idosa, tabagista, hipertensa, diabética e com dislipidemia apresenta um quadro de síndrome vestibular aguda (v"
+  },
+  {
+    "id": 1746,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Diagnóstico Tratamento",
+    "stem": "Paciente do sexo feminino, 16 anos, com queixa de cefaleia nova hemicraniana direita, pulsátil, há 3 dias, progressiva atualmente de forte intensidade, com piora ao subir e descer escadas, associada a foto e fonofobia com náuseas sem vômitos. Nega quadros semelhantes prévios. Exame neurológico normal, exame físico com presença de coriza purulenta e discreta hiperemia na orofaringe. A paciente foi submedita a TC de crânio, com resultado demonstrado nas imagens a seguir: Assinale qual a melhor conduta neste momento.",
+    "alternatives": "  A) Amoxicilina e budesonida. [GABARITO]\n  B) Sumatriptano e metoclopramida.\n  C) Dipirona e ciclobenzaprida.\n  D) Oxigênio e verapamil.\n  E) Alteplase e AAS.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Associe cefaleia com piora postural (como subir/descer escadas) e sinais de infecção de vias aéreas superiores (coriza purulenta) à rinossinusite aguda complicada.\n\n****Alternativa Correta** (A)**: A paciente apresenta um quadro de cefaleia secundária a rinossinusite bacteriana aguda, evidenciada pela dor hemicraniana com piora aos movimentos, associada a "
+  },
+  {
+    "id": 1747,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Diferenças Clínicas entre vertigem de origem central e periférica",
+    "stem": "Paciente, 43 anos, comparece ao ambulatório com queixa de tontura rotatória recorrente com duração de minutos a horas, associada à plenitude auricular e zumbido pior à direita. As crises não são desencadeadas por movimentos da cabeça. Nega náuseas, vômitos, escurecimento visual ou perda de consciência. A paciente conta ainda que, apesar do quadro se arrastar há 10 anos, no último ano notou que a sua audição vem flutuando, com períodos de melhora e piora, e que nota hipoacusia pior no ouvido direito. Nega tontura na consulta atual. Exame físico: BEG, corado, hidratado, acianótico, eupneico. Head-impulse test : sem sacada corretiva. Pesquisa de nistagmo: sem nistagmo espontâneo ou evocado pelo olhar. Pesquisa de desvio skew: sem desvio skew. Assinale a alternativa correta.",
+    "alternatives": "  A) Vertigem postural paroxística benigna pelos episódios de tontura em crises, com queixa ausente no momento da consulta.\n  B) Tontura de origem central pelo head-impulse test normal.\n  C) Tontura psicogênica inespecífica em decorrência de sua longa duração.\n  D) Síndrome de Méniêre com necessidade de realizar audiometria pelas queixas otológicas. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Sintomas cocleares (zumbido, plenitude auricular e perda auditiva flutuante) associados a vertigem episódica de longa duração apontam diretamente para a Doença de Ménière.\n\n****Alternativa Correta** (D)**: A tríade clássica de vertigem episódica recorrente (minutos a horas), plenitude auricular e zumbido, somada à hipoacusia neurossensorial flutuante progr"
+  },
+  {
+    "id": 1750,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Anatomia Embriologia e Radiologia dos Seios Panarasais",
+    "stem": "Mulher de 35 anos de idade deu entrada no Pronto-Socorro com cefaleia e febre não medida há 5 dias. Tentou utilizar vários analgésicos sem melhora. No exame clínico apresenta T 38ºC, FC 100 bpm, sem outras alterações. Foi realizada a tomografia computadorizada mostrada a seguir. Qual é o diagnóstico?",
+    "alternatives": "  A) Meningoencefalite.\n  B) Sinusite. [GABARITO]\n  C) Normal para a idade.\n  D) Osteomielite.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Cefaleia, febre e velamento mucoso difuso dos seios paranasais na TC fecham o diagnóstico de rinossinusitis aguda.\n\n****Alternativa Correta** (B)**: O quadro clínico de cefaleia progressiva, febre e sintomas locais associados ao achado tomográfico de espessamento mucoso e opacificação/velamento dos seios da face caracteriza a rinossinusite aguda. A tomogra"
+  },
+  {
+    "id": 1753,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+    "topic": "Intoxicação por Metanol",
+    "stem": "No dia 1º de janeiro, um homem previamente hígido, 35 anos de idade, procura UPA com quadro de sonolência, tontura, dor abdominal, náuseas, vômitos, cefaleia e visão embaçada há 12 horas. Ao chegar à UPA, apresenta crise convulsiva, que foi controlada, mas necessitou de intubação por rebaixamento do nível de consciência. Ao exame físico, apresenta regular estado geral, corado, desidratado, midríase. FC de 120 bpm e PA de 100×50 mmHg, sem outras alterações. Gasometria: pH: 7,18 pCO₂: 22 mmHg HCO₃ ⁻ : 8 mEq/L BE: -17 mEq/L Na ⁺ : 140 mEq/L K ⁺ : 4,0 mEq/L Cℓ –: 102 mEq/L Considerando a hipótese diagnóstica mais provável, assinale a alternativa que apresenta a conduta imediata mais adequada para o paciente.",
+    "alternatives": "  A) Etanol. [GABARITO]\n  B) Carvão ativado.\n  C) Diálise peritoneal.\n  D) Midazolam.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: História de ingestão de bebida alcoólica adulterada associada a distúrbios visuais e acidose metabólica com ânion gap elevado define intoxicação por metanol, cujo antídoto é o etanol.\n\n****Alternativa Correta** (A)**: O quadro clínico é patognomônico de intoxicação aguda por metanol (álcool metílico): período de latência seguido por náuseas, vômitos, dor a"
+  },
+  {
+    "id": 1754,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Estimulantes Maconha",
+    "stem": "Um adolescente comparece à unidade de saúde onde você atua e, na consulta, você constata que habitualmente ele frequenta festas de música eletrônica e ingere grande quantidade de álcool. Durante as orientações preventivas, o jovem pergunta a você sobre maconha e ecstasy. Diante do interesse do jovem, você poderia afirmar que:",
+    "alternatives": "  A) A metilenodioximetanfetamina (MDMA) é uma anfetamina e há fortes evidências de que ela possa causar síndrome de tolerância, mas não de dependência.\n  B) O MDMA possui efeitos deletérios agudos como a hepatite, a insuflciência renal e cardíaca, o acidente vascular encefálico e a hipertermia. [GABARITO]\n  C) O uso crônico da maconha ( Cannabis sativa ) não está associado a nenhum tipo de efeito adverso, mas existem casos confirmados de morte por intoxicação aguda por maconha.\n  D) Nenhuma das alternativas anteriores está correta.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: MDMA (ecstasy) causa hipertermia maligna e falência múltipla de órgãos (incluindo insuficiência renal e hepática) devido aos seus potentes efeitos simpaticomiméticos.\n\n****Alternativa Correta** (B)**: A metilenodioximetanfetamina (MDMA), conhecida como ecstasy, é uma droga sintética com potentes efeitos anfetamínicos e serotoninérgicos. Em uso agudo, pode "
+  },
+  {
+    "id": 1757,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Diagnóstico da Agorafobia",
+    "stem": "Homem, 45 anos de idade, busca atendimento ambulatorial. Refere ter procurado o pronto-socorro 3 vezes nos últimos 4 meses, com crises de dor precordial, taquicardia, falta de ar, formigamento nas mãos e tontura. Durante as crises, que ocorriam quando ele estava em casa, flcava muito assustado achando que iria morrer. Nos atendimentos de urgência, realizou eletrocardiogramas, radiograflas de tórax e exames de sangue de urgência que apresentaram resultados normais. Devido às crises, passou a evitar andar de elevador por ter medo de ter uma crise e não poder sair ou receber ajuda. Não há queixas descritas entre as crises. Além do transtorno de pânico, qual é o diagnóstico mais apropriado a partir dos sintomas descritos?",
+    "alternatives": "  A) Agorafobia. [GABARITO]\n  B) Claustrofobia.\n  C) Ansiedade generalizada.\n  D) Fobia específica.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Agorafobia não é apenas medo de espaços abertos, mas sim a ansiedade e evitação de locais (como elevadores, transportes ou multidões) onde seria difícil escapar ou obter socorro caso ocorresse uma crise de pânico.\n\n****Alternativa Correta** (A)**: O paciente apresenta Transtorno de Pânico associado a comportamentos de evitação marcantes (deixar de andar de"
+  },
+  {
+    "id": 1758,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "topic": "Tratamento da Depressão",
+    "stem": "Mulher, 35 anos de idade, em acompanhamento ambulatorial por artrite reumatoide e depressão. Faz uso de metotrexato 10 mg semanal, ácido fólico 5 mg semanal e fluoxetina 20 mg à noite. Procura ambulatório por insônia há 2 meses. Exame físico geral sem alterações e articulações sem sinais de flogismo. Assinale a alternativa que apresenta a conduta adequada para a queixa da paciente.",
+    "alternatives": "  A) Trocar fluoxetina por clonazepam.\n  B) Associar fluoxetina com clonazepam.\n  C) Aumentar dose da fluoxetina.\n  D) Orientar uso da fluoxetina pela manhã. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Antidepressivos inibidores seletivos da recaptação de serotonina (ISRS) com perfil ativador, como a fluoxetina, devem ser administrados pela manhã para evitar insônia secundária.\n\n****Alternativa Correta** (D)**: A fluoxetina possui propriedades farmacológicas estimulantes/ativadoras e, quando administrada à noite, frequentemente induz ou piora a insônia. "
+  },
+  {
+    "id": 1761,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Tratamento da Depressão",
+    "stem": "Homem, 45 anos de idade, em consulta em uma unidade básica de saúde, refere indisposição de início gradativo, redução do ânimo e da energia há 4 meses. Nesse período tem comido mais, principalmente carboidratos. Tem estado um pouco mais irritado e tem sentido menos prazer no bate-papo com os amigos. A investigação clínica não identiflcou outros sintomas físicos ou mentais. Não apresenta alterações ao exame físico. O paciente acredita que seu caso seja falta de exercício e que, se voltar a correr com seus amigos 4 vezes por semana, como fazia até há um ano, vai melhorar. Comparece à consulta porque seu chefe disse que ele deveria procurar tratamento. Diz não acreditar em psicoterapia e não gosta da ideia de tomar antidepressivos. Além de agendar uma consulta para 4 a 6 semanas, a conduta imediata seria:",
+    "alternatives": "  A) Encaminhar para psicoterapia cognitivo-comportamental.\n  B) Prescrever inibidor seletivo de recaptura de serotonina.\n  C) Orientar e reforçar a necessidade de atividade física. [GABARITO]\n  D) Indicar fitoterápico Hipericum perforatum.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: O paciente apresenta sintomas depressivos leves a moderados, mas recusa psicoterapia e antidepressivos. A atividade física é uma intervenção baseada em evidências e respeita a autonomia do paciente, com reavaliação em 4-6 semanas.\n\n****Alternativa Correta** (C)**: O paciente tem sintomas depressivos leves a moderados (anedonia, irritabilidade, hiperfagia p"
+  },
+  {
+    "id": 1762,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "topic": "Tratamento do Transtorno de Ansiedade Generalizada TAG",
+    "stem": "Homem, 58 anos de idade, em atendimento em unidade básica de saúde, refere estar “mais ou menos”. Queixa-se de intestino “um pouco preso” e boca seca. Durante a consulta diz estar se sentindo mais tenso, com pouca paciência, preocupando-se demais com pequenos problemas. Refere, ainda, tontura quando se levanta e bebe mais água para a boca seca. Fazia tratamento para pressão alta há 1 ano com captopril irregularmente. Há 2 meses, seu médico anterior disse que ele teria transtorno de ansiedade e prescreveu nortriptilina e, para hipertensão, foi substituído o captopril por enalapril, pois a pressão não baixava. No flnal da consulta, diz não se dar bem com remédios para a pressão. Reconhece que com frequência não toma os medicamentos para pressão, pois tem preguiça e também, eventualmente, não se lembra. Ao exame físico, apresentou PA de 150×95 mmHg, FC de 74 bpm. Além de abordar aspectos relativos a hábitos e à adesão ao tratamento, a conduta indicada seria substituir",
+    "alternatives": "  A) nortriptilina por fluoxetina. [GABARITO]\n  B) nortriptilina por diazepam.\n  C) enalapril por anlodipino.\n  D) enalapril por losartana.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Os sintomas de boca seca, constipação e hipotensão ortostática são efeitos anticolinérgicos clássicos de antidepressivos tricíclicos. A troca por um ISRS como fluoxetina é segura e preserva o tratamento da ansiedade/depressão.\n\n****Alternativa Correta** (A)**: O paciente em uso de nortriptilina (tricíclico) apresenta efeitos colaterais anticolinérgicos típ"
+  },
+  {
+    "id": 1763,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Introdução",
+    "stem": "Mulher, 23 anos de idade, com 26,7 kg/m² de IMC, refere estar preocupada com suas “gordurinhas a mais”. Relata que, nos últimos meses, apresenta um a dois episódios por mês em que, em meia hora, come muito doce, principalmente chocolate. Está com medo de engordar mais. Uma amiga está tomando lisdexanfetamina e perdeu 2 kg em um mês. Não apresenta alterações no exame físico. Ao exame psíquico, não apresentou alterações. Refere ser uma pessoa pragmática, mas não se adapta bem a rotinas; já tentou fazer atividade física algumas vezes, sem muito sucesso na continuidade. Nega problemas de saúde e gostaria de poder tomar lisdexanfetamina para controlar seu peso e apetite. Qual a conduta adequada?",
+    "alternatives": "  A) Discutir riscos da lisdexantetamina e prescrever fluoxetina.\n  B) Indicar semaglutida se exames hepáticos e pancreáticos normais.\n  C) Encaminhar para avaliação psiquiátrica de distúrbios alimentares.\n  D) Orientar sobre hábitos alimentares sem indicação de exames ou medicamentos. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Os episódios de compulsão ocorrem apenas 1-2 vezes por mês, não preenchendo os critérios DSM-5 para transtorno de compulsão alimentar periódica (TCAP), que exige pelo menos 1x/semana por 3 meses. A conduta é orientar hábitos alimentares sem medicação ou encaminhamento.\n\n****Alternativa Correta** (D)**: A paciente apresenta episódios esporádicos de ingestão"
+  },
+  {
+    "id": 1765,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "topic": "Dependência de Tabaco",
+    "stem": "Homem, 45 anos, procura a sua Unidade de Saúde da Família relatando diflculdade para parar de fumar. Ele fuma 20 cigarros por dia há 25 anos e já tentou cessar o tabagismo duas vezes sem sucesso, usando apenas força de vontade. É portador de epilepsia controlada, sem outras comorbidades. Durante a consulta, manifesta motivação para parar de fumar, mas teme as diflculdades da abstinência. O exame físico revela frequência respiratória de 18 ipm, saturação de oxigênio de 96% em ar ambiente e ausculta pulmonar normal. O escore de Fagerström para dependência de nicotina é 7, indicando alta dependência. De acordo com o Protocolo Clínico e Diretrizes Terapêuticas do Tabagismo do Ministério da Saúde, qual é a conduta mais adequada para este paciente?",
+    "alternatives": "  A) Prescrição de nicotina associada ao aconselhamento terapêutico estruturado e seguimento por 12 meses. [GABARITO]\n  B) Encaminhamento para pneumologista para avaliação de DPOC, sem iniciar tratamento para tabagismo.\n  C) Aconselhamento terapêutico estruturado/abordagem intensiva com seguimento por 3 meses.\n  D) Prescrição de bupropiona associada ao aconselhamento terapêutico estruturado e seguimento por 12 meses.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: A bupropiona reduz o limiar convulsivo e é contraindicada em pacientes com epilepsia; nesses casos, a terapia de reposição de nicotina é a escolha farmacológica mais segura para auxiliar na cessação do tabagismo.\n\n****Alternativa Correta** (A)**: O paciente apresenta alta dependência à nicotina (escore de Fagerström igual a 7) e histórico de tentativas fru"
+  },
+  {
+    "id": 1766,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Tratamento da Depressão",
+    "stem": "Homem, 36 anos de idade, em tratamento para o primeiro episódio depressivo com fluoxetina 20 mg de manhã. Após 12 semanas de tratamento nesta dose, refere melhora signiflcativa dos sintomas, mas continua acordando mais cedo do que o habitual e ainda não tem energia para retomar as atividades físicas que praticava antes do início do quadro. Assinale a alternativa que apresenta a conduta mais adequada para a continuidade do tratamento.",
+    "alternatives": "  A) Manter a dose da fluoxetina.\n  B) Trocar fluoxetina por sertralina.\n  C) Aumentar a dose da fluoxetina. [GABARITO]\n  D) Associar clonazepam para insônia.\n  E) Trocar o horário da fluoxetina para a noite",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Diante de uma resposta parcial a um antidepressivo após tempo adequado de tratamento na dose inicial, a conduta correta é otimizar (aumentar) a dose antes de pensar em trocar de medicação.\n\n****Alternativa Correta** (C)**: O paciente faz uso de fluoxetina 20 mg há 12 semanas e apresenta resposta parcial (melhora significativa, mas ainda com sintomas residu"
+  },
+  {
+    "id": 1767,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Fobias Específicas",
+    "stem": "Mulher, 23 anos de idade, relata medo intenso de barata e que evita qualquer ambiente no qual suspeite, minimamente, existir uma. Sabe que seu medo é irracional, mas não consegue se controlar. Já chegou a ter uma crise de ansiedade intensa, de curta duração e com sensação de morte iminente quando se viu acuada pelo inseto dentro de uma sala. Sua mãe conta que, quando ela era pequena, flcou muito assustada quando ergueu uma pedra e de baixo saíram várias baratas. Em relação ao quadro descrito, assinale a alternativa que apresenta o mais provável transtorno mental da paciente.",
+    "alternatives": "  A) Agorafobia.\n  B) Fobia social.\n  C) Fobia específica. [GABARITO]\n  D) Transtorno de pânico.\n  E) Transtorno de estresse pós-traumático.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Medo irracional, intenso e persistente restrito a um objeto ou situação bem definida (como animais ou altura), com esquiva ativa e crítica preservada, define fobia específica.\n\n****Alternativa Correta** (C)**: A paciente apresenta um medo acentuado, persistente e desproporcional a um objeto específico (baratas), que desencadeia ansiedade imediata e leva a "
+  },
+  {
+    "id": 1768,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "topic": "Delirium Tremens",
+    "stem": "Homem, 54 anos de idade, está no segundo dia de pósoperatório de cirurgia ortopédica e queixa-se de ansiedade e náuseas. Dois dias depois, apresenta tremores de extremidades, sudorese e agitação psicomotora intensa, dizendo que seu quarto foi invadido por aranhas e escorpiões e que os enfermeiros tentaram matá-lo de madrugada. Em relação ao quadro descrito, assinale a alternativa que apresenta o diagnóstico mais provável e qual a conduta farmacológica mais adequada.",
+    "alternatives": "  A) Esquizofrenia; risperidona.\n  B) Delirium tremens ; diazepam. [GABARITO]\n  C) Reação aguda ao estresse; clonazepam.\n  D) Transtorno delirante subtipo somático; pregabalina.\n  E) Transtorno psicótico agudo e transitório; haloperidol.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Paciente internado há alguns dias que desenvolve tremores, sudorese, agitação e alucinações visuais (insetos/animais) está cursando com abstinência alcoólica grave: pense imediatamente em delirium tremens e trate com benzodiazepínicos.\n\n****Alternativa Correta** (B)**: O quadro clínico descrito (início 48 a 72 horas após a interrupção do consumo de álcool "
+  },
+  {
+    "id": 1771,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Abordagem ao paciente em crise",
+    "stem": "Homem, 35 anos de idade, solteiro, policial militar, comparece para a primeira consulta médica. Refere que, há 2 meses, tem sentido ansiedade, irritabilidade, falta de energia e de prazer, além de cansaço excessivo que o tem levado a diminuir suas atividades habituais. Nesse período aumentou o consumo de alcoólicos porque o ajuda a dormir melhor e perdeu peso porque seu apetite está muito irregular. Conta, com certa relutância, que tem pensado que a vida perdeu o sentido e que não faria falta se deixasse de existir. Em relação ao risco de suicídio no paciente apresentado, assinale a alternativa correta.",
+    "alternatives": "  A) O risco é alto, pois o paciente tem depressão e muitos fatores de risco para suicídio e deve ser encaminhado para internação psiquiátrica, mesmo que involuntária.\n  B) O risco é moderado, pois, embora o diagnóstico de depressão possa ser feito nesse paciente, os fatores de risco para suicídio que apresenta são pouco significativos.\n  C) O risco é baixo pois, como ele revela a ideação suicida, isso signiflca que ele não tem intenção de cometer suicídio.\n  D) O paciente tem depressão e, nesse momento, investigar planejamento de suicídio é desnecessário, pois pode sugestionar o paciente cometer o autoextermínio.\n  E) Deve-se investigar se há planejamento de suicídio, pois o paciente apresenta quadro de depressão e fatores de risco significativos. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Nunca evite perguntar sobre ideação ou plano suicida com o medo infundado de \"sugerir\" o ato; a investigação ativa é obrigatória e salva vidas em pacientes deprimidos.\n\n****Alternativa Correta** (E)**: O paciente preenche critérios para um episódio depressivo e apresenta fatores de risco importantes (sexo masculino, aumento do consumo alcoólico, isolamento"
+  },
+  {
+    "id": 1772,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Transtorno de Personalidade Borderline",
+    "stem": "Homem, 27 anos de idade, relata que desde a adolescência apresenta quadro de oscilações rápidas do humor desencadeadas por eventos externos. Quando as coisas vão bem, flca muito feliz, eufórico, chegando a se colocar em situações de risco, como beber excessivamente, para agradar os amigos. Mas se, no mesmo dia, algum amigo faz algo de que ele não gosta, sente-se rejeitado, abandonado, flca muito triste e desanimado e chega a se cortar superflcialmente nos antebraços com objeto aflado. Conta que a dor física, provocada pelos cortes, ajuda a aliviar a angústia e a sensação de vazio intensas que sente. Qual o diagnóstico mais provável e a conduta mais adequada para o caso apresentado?",
+    "alternatives": "  A) Transtorno bipolar; lítio.\n  B) Transtorno depressivo recorrente; sertralina.\n  C) Transtorno de ansiedade generalizada; buspirona.\n  D) Transtorno de personalidade borderline ; psicoterapia. [GABARITO]\n  E) Transtorno dissociativo de identidade; clorpromazina.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Instabilidade afetiva reativa a eventos externos, medo crônico de abandono e episódios de automutilação para aliviar a sensação de vazio formam o quadro clássico do transtorno de personalidade borderline, cujo tratamento principal é a psicoterapia.\n\n****Alternativa Correta** (D)**: O quadro clínico descrito de instabilidade emocional rápida desencadeada po"
+  },
+  {
+    "id": 1773,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "topic": "Síndrome Adrenérgica",
+    "stem": "Homem, 45 anos de idade, é trazido com agitação psicomotora após o uso de cocaína. Ao exame físico, apresenta-se diaforético e agitado, com FC de 125 bpm, PA de 180x110 mmHg. Exames laboratoriais: creatinina 2 mg/dL e urina tipo 1 com coloração vermelha, sem hematúria. Qual é o tratamento inicial indicado para o paciente no momento?",
+    "alternatives": "  A) Diálise.\n  B) Fomepizol.\n  C) Hemoperfusão.\n  D) Infusão de bicarbonato.\n  E) Ressuscitação volêmica intravenosa agressiva. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Cocaína + agitação + urina escura sem hemácias na fita = rabdomiólise induzida por estimulante. A prioridade imediata é a hidratação venosa agressiva para proteger os rins.\n\n****Alternativa Correta** (E)**: A combinação de uso de cocaína, hiperatividade, taquicardia, injúria renal aguda e urina vermelha sem hematúria microscópica aponta para mioglobinúria "
+  },
+  {
+    "id": 1777,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+    "topic": "Intoxicação por Carbamatos e Organofosforados",
+    "stem": "Homem, 45 anos, trabalhador rural, é levado ao pronto-socorro após exposição acidental a um produto químico. Apresenta-se com sudorese excessiva, lacrimejamento, sialorreia e diflculdade para respirar. Apresentou 3 episódios de vômitos em 3 horas. Exame físico: FC= 60 bpm, PA= 90/60 mmHg, FR= 25 irpm, SpO₂= 94% em ar ambiente, consciente, mas confuso; pupilas mióticas e fotorreagentes; ausculta pulmonar: murmúrio vesicular presente bilateralmente, com sibilos e roncos úmidos difusos, expectoração de escarro incolor. Demais sistemas sem alterações. Qual é a conduta inicial mais adequada para o manejo desse paciente?",
+    "alternatives": "  A) Atropina via endovenosa. [GABARITO]\n  B) Lavagem gástrica com solução isotônica.\n  C) Carvão ativado via enteral.\n  D) Adrenalina via intramuscular",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Exposição a agrotóxico com miose, sudorese, sialorreia e broncorreia aponta para intoxicação colinérgica por organofosforados, cujo antídoto salvador de vidas é a atropina.\n\n****Alternativa Correta** (A)**: O quadro clínico descrito (trabalhador rural, bradicardia, miose, sudorese, lacrimejamento, sialorreia e broncorreia com sibilos e roncos) é clássico d"
+  },
+  {
+    "id": 1778,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Síndrome Extrapiraminal SEP",
+    "stem": "Mulher, 25 anos de idade, com diagnóstico prévio de esquizofrenia, chega no pronto-socorro queixando-se de sensação de inquietude e ansiedade. Recentemente, houve um aumento na dosagem de seu antipsicótico para melhor manejo dos sintomas alucinatórios. No pronto-socorro, a paciente está andando de um lado para o outro, inquieta, mas amistosa à abordagem verbal. Ela relata que não consegue flcar parada. Não há sinais de alterações sensoperceptivas. Segundo seus familiares, não houve episódios de heteroagressividade antes da vinda ao pronto-socorro. Qual é o quadro clínico da paciente neste momento?",
+    "alternatives": "  A) Discinesia tardia.\n  B) Distonia aguda.\n  C) Acatisia. [GABARITO]\n  D) Catatonia hipercinética.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A sensação subjetiva de angústia associada à incapacidade de ficar parado (\"walking and pacing\") após ajuste de antipsicótico é o marco da acatisia.\n\n****Alternativa Correta** (C)**: A acatisia é um efeito colateral extrapiramidal dose-dependente muito comum dos antipsicóticos (especialmente os de primeira geração, mas também presentes nos de segunda). Car"
+  },
+  {
+    "id": 1781,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Introdução",
+    "stem": "Os transtornos de ansiedade são as doenças psiquiátricas mais prevalentes e fatores de risco biológicos, sociais e ambientais, tem sido implicados na sua etiologia. É um fator de risco dos transtornos de ansiedade:",
+    "alternatives": "  A) Ser do sexo masculino.\n  B) Possuir baixo nível socioeconômico.\n  C) Apresentar comportamento exploratório/busca por novidades.\n  D) Ter inibição comportamental. [GABARITO]\n  E) Nenhuma das alternativas anteriores está correta.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Lembre-se de que a inibição comportamental na infância (timidez extrema e medo do novo) é o marcador temperamental mais fortemente associado ao desenvolvimento posterior de transtornos de ansiedade.\n\n****Alternativa Correta** (D)**: A inibição comportamental é um traço de temperamento caracterizado por retraimento, timidez e evitação diante de situações, p"
+  },
+  {
+    "id": 1782,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "topic": "Abstinência de Álcool",
+    "stem": "Considere os itens a seguir: I. Hipotensão. II. Tremor nas mãos. III. Sonolência. IV. Alucinações visuais, auditivas ou táteis. V. Convulsões tônico-clônicas generalizadas. São achados da síndrome de abstinência alcoólica somente o que se afirma em:",
+    "alternatives": "  A) I, II e III, apenas.\n  B) I, III e IV, apenas.\n  C) II, IV e V, apenas. [GABARITO]\n  D) I, II, III, IV e V.\n  E) Nenhuma das alternativas anteriores está correta.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Abstinência alcoólica é um estado de **hiperatividade** do sistema nervoso central (taquicardia, hipertensão, tremores, convulsões, alucinações). Nunca marque hipotensão ou sonolência para abstinência isolada.\n\n****Alternativa Correta** (C)**: Os itens II (tremor nas mãos), IV (alucinações visuais, auditivas ou táteis) e V (convulsões tônico-clônicas gener"
+  },
+  {
+    "id": 1783,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "topic": "Tabaco Dependência de Tabaco",
+    "stem": "A nicotina, presente no tabaco, é uma substância psicoativa que atua no sistema nervoso central, estimulando áreas ligadas à motivação, prazer e recompensa. A dependência está relacionada a rapidez do efeito, levando a liberação de dopamina, resultando em sensações de prazer e redução da ansiedade. O bloqueio do sistema GABA intensiflca essas sensações, levando a tolerância e dependência. A meia-vida curta da nicotina causa sintomas de abstinência, como irritação e ansiedade. Essas características levaram a Organização Mundial da Saúde (OMS) a incluir o tabagismo como transtorno mental decorrente do uso de substâncias psicoativas. Qual dos seguintes critérios NÃO é considerado como diagnóstico de dependência?",
+    "alternatives": "  A) Desejo forte e compulsivo para consumir a substância (fissura ou craving) e dificuldade para controlar o uso (início, termino e níveis de consumo).\n  B) Estado de abstinência fisiológica diante da suspensão ou redução, caracterizado por síndrome de abstinência e consumo da mesma substância ou similar, com a intenção de aliviar ou evitar sintomas de abstinência (reforço negativo).\n  C) Evidência de tolerância, ou seja, necessidade de doses crescentes da substância para obter os efeitos produzidos anteriormente com doses menores.\n  D) Abandono progressivo de outros prazeres em detrimentos do uso de substâncias psicoativas e aumento do tempo empregado para conseguir ou consumir a substância ou recuperar-se de seus efeitos.\n  E) Interrupção no uso somente após evidentes consequências, como câncer pelo uso do tabaco, humor deprimido ou perturbações das funções cognitivas relacionada com a substância. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Na dependência química, o paciente continua usando a substância **apesar** das consequências negativas evidentes. A alternativa E inverte essa lógica ao afirmar que a interrupção ocorre *somente após* os danos.\n\n****Alternativa Correta** (E)**: Esta alternativa NÃO constitui um critério diagnóstico de dependência. O uso nocivo ou a dependência caracterizam"
+  },
+  {
+    "id": 1784,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Abstinência de Álcool",
+    "stem": "Qual a medicação padrão-ouro para tratamento da síndrome de abstinência alcóolica?",
+    "alternatives": "  A) Lorazepam.\n  B) Haloperidol.\n  C) Tiamina.\n  D) Midazolam.\n  E) Diazepam. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Para tratar a abstinência alcoólica com segurança e eficácia, o benzodiazepínico de escolha clássico nas diretrizes médicas é o **diazepam** (longa ação).\n\n****Alternativa Correta** (E)**: O diazepam é considerado o medicamento padrão-ouro para o manejo da síndrome de abstinência alcoólica. Por possuir longa meia-vida e início de ação rápido, ele previne d"
+  },
+  {
+    "id": 1785,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Transtornos de Personalidade Introdução Transtorno de Personalidade Dependente",
+    "stem": "Assinale a alternativa que mostra a correlação correta entre o transtorno de personalidade e o seu respectivo grupo, segundo a classificação do DSM-5.",
+    "alternatives": "  A) Grupo A; Transtorno de personalidade borderline.\n  B) Grupo A; Transtorno de personalidade histriônica.\n  C) Grupo B; Transtorno de personalidade paranoide.\n  D) Grupo C; Transtorno de personalidade dependente. [GABARITO]\n  E) Grupo C; Transtorno de personalidade narcisista.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Lembre-se da divisão dos Transtornos de Personalidade do DSM-5 pelo mnemônico: Grupo A é o dos \"esquisitos\" (excêntricos), Grupo B é o dos \"dramáticos\" (emocionais/erráticos) e Grupo C é o dos \"ansiosos\" (temerosos).\n\n****Alternativa Correta** (D)**: O Transtorno de Personalidade Dependente faz parte do Grupo C, que engloba os transtornos caracterizados po"
+  },
+  {
+    "id": 1786,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Depressão Diagnóstico da Depressão",
+    "stem": "Mulher, 40 anos, procura atendimento após morte de sua mãe. Relata que a mãe recebeu o diagnóstico de câncer de pâncreas e que faleceu após dois meses do diagnóstico, há 3 meses. Desde então, tem apresentado anedonia, humor deprimido, pensamento letárgico, sentimento de menosvalia, alterações em sono e em apetite. Assinale o diagnóstico mais provável.",
+    "alternatives": "  A) Transtorno de adaptação.\n  B) Transtorno de ansiedade generalizada.\n  C) Transtorno de estresse agudo.\n  D) Transtorno dissociativo.\n  E) Transtorno depressivo maior. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Sintomas depressivos plenos e incapacitantes no contexto de luto não devem ser automaticamente rotulados como \"luto normal\"; se preencherem critérios temporais e sintomatológicos, o diagnóstico é de Transtorno Depressivo Maior.\n\n****Alternativa Correta** (E)**: A paciente apresenta um quadro clínico clássico de Transtorno Depressivo Maior (anedonia, humor "
+  },
+  {
+    "id": 1787,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Antidepressivos",
+    "stem": "Os inibidores seletivos da recaptação da serotonina fazem parte de uma classe medicamentosa utilizada para tratamento de várias condições médicas. Pertencem à essa classe medicamentosa as seguintes medicações:",
+    "alternatives": "  A) Sertralina, paroxetina, amitriptilina.\n  B) Venlafaxina, fluoxetina, fluvoxamina.\n  C) Duloxetina, sertralina, clomipramina.\n  D) Fluoxetina, desvenlafaxina, escitalopram.\n  E) Citalopram, paroxetina, fluvoxamina. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Decore os ISRS clássicos: Fluoxetina, Sertralina, Paroxetina, Citalopram, Escitalopram e Fluvoxamina. Qualquer outra coisa (como tricíclicos ou duais) derruba a questão.\n\n****Alternativa Correta** (E)**: Citalopram, paroxetina e fluvoxamina são, sem exceção, Inibidores Seletivos da Recaptação de Serotonina (ISRS), sendo a única alternativa que agrupa exclu"
+  },
+  {
+    "id": 1788,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Transtorno do Humor Bipolar THB Transtorno do Humor Bipolar Tipo 1",
+    "stem": "Mulher, 35 anos, desde a adolescência fez seguimento psiquiátrico para sintomas depressivos na unidade básica de saúde. A medicação de uso contínuo era sertralina 50 mg/dia, mas devido queixas de ansiedade exacerbada, a médica da saúde da família optou pela troca por fluoxetina 40 mg/dia. Evoluiu com quadro de irritabilidade, aumento de fala, agitação, dificuldade de conciliar o sono, realizando lives nas redes sociais. Também começou a brigar com seu esposo por dizer que ele estava muito ciumento, e que havia sido convidada para ser a atriz principal de uma nova novela de uma emissora de televisão. Como recusava veementemente retornar em sua médica, foi necessária uma internação psiquiátrica. Ficou 60 dias internada. Qual o diagnóstico no relatório de alta do hospital?",
+    "alternatives": "  A) Transtorno depressivo maior com sintomas psicóticos.\n  B) Transtorno esquizofreniforme.\n  C) Esquizofrenia.\n  D) Transtorno afetivo bipolar tipo 1. [GABARITO]\n  E) Transtorno afetivo bipolar tipo 2.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Mania plena (com prejuízo grave ou internação) após uso de antidepressivo define Transtorno Bipolar Tipo 1, pois revela a diátese bipolar latente do paciente.\n\n****Alternativa Correta** (D)**: A paciente desenvolveu um quadro franco de mania (irritabilidade, aumento da fala, agitação, redução do sono, delírios de grandiosidade sobre ser atriz de novela) gr"
+  },
+  {
+    "id": 1789,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Suicídio",
+    "stem": "Assinale a alternativa que apresenta os dois principais fatores de risco para o suicídio.",
+    "alternatives": "  A) Sexo masculino e idade acima de 60 anos.\n  B) Desemprego e ser divorciado.\n  C) Depressão e uso de substâncias psicoativas.\n  D) Migração e ausência de religião.\n  E) Presença de transtorno mental e tentativa de suicídio prévia. [GABARITO]",
+    "explanation": "**Gabarito**: Letra E.\n\n**Pulo do Gato**: Nunca esqueça na prática clínica e nas provas: o maior preditor de suicídio futuro é a história de tentativa prévia, de mãos dadas com a presença de transtorno mental.\n\n****Alternativa Correta** (E)**: A literatura psiquiátrica e epidemiológica mundial é categórica ao apontar que a presença de um transtorno psiquiátrico subjacente e a história de tentativa"
+  },
+  {
+    "id": 1790,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "topic": "Psicopatologia e Exame do Estado Mental EEM",
+    "stem": "Homem, 21 anos, é portador de esquizofrenia, com bom controle dos sintomas em uso de risperidona 2 mg/dia. Entretanto, há dois meses decidiu parar com o tratamento, passando a acreditar que haviam colocado um chip no seu cérebro. Qual o termo mais adequado para descrever esta alteração psicopatológica no exame do estado mental?",
+    "alternatives": "  A) Alterações na sensopercepção.\n  B) Juízo crítico da realidade preservado.\n  C) Desorientação autopsíquica.\n  D) Discurso ilógico. [GABARITO]\n  E) Afeto embotado.",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Delírios são alterações do *conteúdo* do pensamento, enquanto alucinações pertencem à *sensopercepção* e o TDAH ou esquizofrenia podem se manifestar com desorganização do pensamento refletida no discurso.\n\n****Alternativa Correta** (D)**: A crença fixa, inabalável e impermeável à lógica de que há um chip implantado no cérebro é um delírio (alteração do con"
+  },
+  {
+    "id": 1791,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+    "topic": "Intoxicação por Álcool",
+    "stem": "Homem, 47 anos, é atendido na unidade de pronto atendimento após crise convulsiva em via pública e sinais de embriaguez. Relata uso de álcool diário nos últimos anos com consumo médio de 1 L de cachaça por dia. Nega uso de outras substâncias psicoativas. Na admissão, apresenta confusão mental. Não são identiflcados sinais deataxia de mancha ou alterações oculomotoras. Assinale a hipótese diagnóstica mais provável para a confusão mental do paciente.",
+    "alternatives": "  A) Esquizofrenia.\n  B) Síndrome de Wernicke.\n  C) Intoxicação alcóolica. [GABARITO]\n  D) Delirium tremens.\n  E) Síndrome de Korsakoff",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Confusão mental aguda em usuário crônico de álcool logo após a embriaguez, na ausência de déficits oculomotores ou ataxia, aponta para a intoxicação aguda e não para a Encefalopatia de Wernicke.\n\n****Alternativa Correta** (C)**: O paciente apresenta um quadro de embriaguez aguda decorrente do consumo pesado e recente de álcool, manifestando-se com rebaixam"
+  },
+  {
+    "id": 1792,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Transtorno do Humor Bipolar Tipo 1 Tratamento do Transtorno do Humor Bipolar THB",
+    "stem": "Mulher, 20 anos, possui diagnóstico desde os 18 anos de transtorno afetivo bipolar tipo 1. Há um mês, após a morte do seu gato, evoluiu com humor deprimido, anedonia, pensamentos de morte, redução de energia, hipersonia e hiperfagia. A prescrição atual é de carbonato de lítio 900 mg/dia (litemia de 0,8 mEq/L). A paciente não faz uso de substâncias psicoativas e nega comorbidades. Qual a conduta medicamentosa mais adequada para o caso apresentado?",
+    "alternatives": "  A) Trocar lítio por quetiapina. [GABARITO]\n  B) Trocar carbonato de lítio por ácido valproico.\n  C) Associar inibidor seletivo de recaptação de serotonina.\n  D) Trocar lítio por inibidor seletivo de recaptação de serotonina.\n  E) Aumentar carbonato de lítio.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Depressão em paciente com Transtorno Afetivo Bipolar (TAB) com estabilizador em faixa terapêutica deve ser manejada com medicações específicas para depressão bipolar (como quetiapina, lamotrigina ou lurasidona), evitando-se monoterapia com antidepressivos.\n\n****Alternativa Correta** (A)**: A paciente apresenta um episódio depressivo no curso do TAB tipo 1,"
+  },
+  {
+    "id": 1795,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+    "topic": "Intoxicações Exógenas Intoxicação por Salicilatos",
+    "stem": "Adolescente de 16 anos chega à sala de emergência com história de ter sido encontrada desacordada em seu quarto ha 1 hora. Ao exame físico: sonolenta (Escala de Coma de Glasgow 11), frequência respiratória de 30 ipm, frequência cardíaca de 100 bpm, pressão arterial de 100/70 mmHg, pulsos amplos e simétricos, tempo de enchimento capilar de 2 segundos. A acompanhante relata ter encontrado uma cartela de comprimidos vazia ao lado da cama da paciente. A gasometria arterial mostra: pH: 7,52 PO2:100 mmHg; PCOz:22 mmHg: Bicarbonato: 14 mEq/L; Base Excess: 11; sódio plasmático: 140 mEq/L; potássio plasmático: 4,0 mEq/L; cloro plasmático: 103 mEq/L. Qual é o provável agente causador da intoxicação?",
+    "alternatives": "  A) Benzodiazepinico.\n  B) Antidepressivo triciclico.\n  C) Acido acetil salicilico. [GABARITO]\n  D) Opioide.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A associação de alcalose respiratória (taquipneia) com acidose metabólica (ânion-gap aumentado) em um paciente com rebaixamento do sensório grita intoxicação por salicilatos.\n\n****Alternativa Correta** (C)**: A gasometria arterial demonstra alcalemia (pH 7,52) com hipocapnia importante (PaCO₂ 22 mmHg) e bicarbonato reduzido (14 mEq/L), configurando um dist"
+  },
+  {
+    "id": 1796,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Intoxicações Exógenas Síndrome Colinérgica",
+    "stem": "Homem, 55 anos, é trazido ao pronto-socorro após ingerir grande quantidade de uma substância que causou quadro de sudorese profusa, bradicardia, miose, hipotensão e broncorreia. Qual é a substância que apresentaria efeito similar quando ingerida em grande quantidade?",
+    "alternatives": "  A) Loperamida.\n  B) Rivastigmina. [GABARITO]\n  C) Escopolamina.\n  D) Imipramina.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Sudorese, bradicardia, miose e broncorreia formam o arquétipo da toxíndrome colinérgica, reproduzida por inibidores da acetilcolinesterase.\n\n****Alternativa Correta** (B)**: A **rivastigmina** é um medicamento inibidor reversível da acetilcolinesterase, muito utilizado no tratamento da Doença de Alzheimer. Em doses elevadas ou intoxicação aguda, ela impede"
+  },
+  {
+    "id": 1797,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Transtorno do Humor Bipolar THB",
+    "stem": "Paciente masculino, 20 anos, estudante do 2º ano do curso de economia, é levado ao pronto-socorro psiquiátrico após uma mudança de comportamento nos últimos sete dias. De acordo com os familiares, começou a flcar progressivamente mais agitado, querendo fazer várias coisas ao mesmo tempo; houve aumento na velocidade da fala, por vezes elaborando frases sem nexo; houve diminuição do sono; e estava alimentando-se muito mal e em pouca quantidade. Relatam também que, há uns quatro meses, o paciente flcou muito triste com o falecimento da avó, pois eram muito próximos. Chorou muito e, por semanas, não queria sair do quarto, tendo emagrecido 6 kg. O paciente sempre teve boa saúde e é responsável, bom aluno e sociável. Não tem história prévia de transtorno mental. Antecedentes familiares: mãe, 44 anos, teve depressão depois do nascimento do último fllho – que durou mais de um ano, mas “foi passando aos poucos, sem tratamento”; tio materno bebia bastante e cometeu suicídio aos 40 anos de idade. Qual a hipótese diagnóstica provável para o caso descrito acima?",
+    "alternatives": "  A) Transtorno de personalidade borderline .\n  B) Transtorno depressivo reativo.\n  C) Transtorno bipolar. [GABARITO]\n  D) Intoxicação por estimulantes.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A alternância entre episódios de depressão maior no passado e um quadro atual de mania (irritabilidade/expansividade, logorreia e redução drástica da necessidade de sono) sela o diagnóstico de Transtorno Bipolar.\n\n****Alternativa Correta** (C)**: O paciente preenche perfeitamente os critérios para um episódio maníaco atual (agitação, logorreia, diminuição "
+  },
+  {
+    "id": 1798,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+    "topic": "Depressão Diagnóstico da Depressão",
+    "stem": "Mulher de 75 anos vem à consulta de saúde acompanhada da fllha que refere que sua mãe está apresentando muitos esquecimentos, há aproximadamente 6 meses. Paciente é hipertensa, diabética e faz uso de losartana 50 mg 1 comprimido ao dia e glifage XR 500 mg 2 comprimidos ao dia. Paciente estudou até a 8° série do ensino médio. Ao exame clínico: PA: 120 x 80 mmHg, FC: 71 bpm, FR:16 ipm Peso: 60 Kg, Alt: 1.65 m, IMC: 22, saturação de O₂: 98% dextro: 110 mg/dl. Exames laboratoriais: vitamina B12: 400 (VR: 210-980 pg/ml), TSH: 2.80 (VR: 0.3-4.8), MEEM: 28 pontos. GDS (Escala de Depressão Geriátrica) 8. De acordo com o quadro descrito acima, qual o diagnóstico mais provável?",
+    "alternatives": "  A) Hipotireoidismo.\n  B) Síndrome demencial.\n  C) Transtorno depressivo. [GABARITO]\n  D) Hipovitaminose de B12.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Idoso com forte queixa subjetiva de memória, mas com Mini-Exame do Estado Mental (MEEM) perfeitamente normal e Escala de Depressão Geriátrica (GDS) elevada, sofre de pseudodemência depressiva.\n\n****Alternativa Correta** (C)**: A paciente apresenta queixas subjetivas de esquecimento, porém o seu desempenho cognitivo global está preservado (MEEM de 28 pontos"
+  },
+  {
+    "id": 1802,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Transtornos do Humor Transtorno do Humor Bipolar THB Transtorno do Humor Bipolar Tipo 1",
+    "stem": "Mulher de 20 anos de idade chega ao serviço de emergência informando ter sido agredida por pessoa no ônibus. O contato inicial é difícil, pois a paciente está agitada, preocupada e falando rapidamente. Ela informa que o agressor a estava perseguindo desde o ponto de embarque. A paciente recebeu notícia sobre uma herança há quatro dias, e desde então não consegue dormir. Há três dias, pediu demissão do emprego de faxineira por achar que sua “patroa estava roubando seu dinheiro para pagar contas da casa”. Nos últimos dois dias, com a expectativa de receber o dinheiro, gastou cerca de 2 mil reais em vários pares de sapatos de 3 lojas diferentes. Qual é a principal hipótese diagnóstica para o caso?",
+    "alternatives": "  A) Transtorno de personalidade borderline.\n  B) Reação aguda ao estresse.\n  C) Síndrome do pânico.\n  D) Mania com sintomas psicóticos. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Redução drástica da necessidade de sono, impulsividade financeira severa (gastos excessivos), sintomas psicóticos e logorreia após um evento estressor ou herança formam o quadro clássico de mania.\n\n****Alternativa Correta** (D)**: A paciente exibe um quadro clássico de episódio maníaco com sintomas psicóticos. Os critérios preenchidos incluem humor eufóric"
+  },
+  {
+    "id": 1803,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+    "topic": "Transtornos Ansiosos Transtorno de Pânico",
+    "stem": "Homem de 48 anos de idade, casado, comparece em retorno de consulta ambulatorial com queixa de episódios em que seu “coração passa a bater para fora da boca, com batidas fora de hora e com a sensação que pode parar a qualquer momento”. Já procurou serviços de urgência e emergência. Porém ao chegar ao Pronto-Socorro de cardiologia a crise já passou e os médicos não acham nada alterado nos exames complementares. Refere que quando faz atividade física o coração começa a bater mais rápido. Nesse processo por vezes lhe falta ar e sente medo muito grande de que possa infartar cedo como seu pai, que faleceu aos 52 anos de idade. Está dormindo mal, fica pensando no que fazer se tiver novas crises e como pode chegar rápido no hospital para poder descobrir o que é. É ex-fumante 1 maço/dia por 15 anos (parou há 12 anos). O exame clínico está normal. Os exames complementares solicitados na primeira consulta mostram glicemia de jejum e colesterol total e frações normais. O eletrocardiograma atual é apresentado abaixo. O registro de Holter durante uma das crises referidas está representado abaixo. Traçado do eletrocardiograma de hoje: Traçado do Holter: Qual é o diagnóstico provável e a conduta inicial?",
+    "alternatives": "  A) Depressão ansiosa; introdução de ansiolítico não benzodiazepínico.\n  B) Angina estável; introdução de AAS, atorvastatina e nitrato.\n  C) Síndrome do pânico; antidepressivo serotoninérgico. [GABARITO]\n  D) Taquicardia por reentrada nodal; ablação cardíaca.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Palpitações súbitas, medo intenso de morte/infarto com exames cardiológicos normais (ECG e Holter), seguidas de ansiedade antecipatória e comportamentos de esquiva, definem o Transtorno do Pânico.\n\n****Alternativa Correta** (C)**: O paciente apresenta um quadro típico de Síndrome do Pânico, caracterizado por ataques paroxísticos recorrentes de ansiedade ag"
+  },
+  {
+    "id": 1804,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Dependência de Tabaco",
+    "stem": "Paciente de 46 anos procura seu médico de família e comunidade (MFC). O paciente tem antecedentes pessoais de hipertensão arterial sistêmica (controlada com medicamentos) e de gota. Apresentou quadro de epilepsia dos 2 aos 15 anos de idade, com a última crise convulsiva aos 12 anos. Está em tratamento de úlcera gástrica, diagnosticada há 1 semana. Faz uso crônico de losartana (100 mg ao dia), alopurinol (300 mg ao dia) e em uso recente de claritromicina, amoxicilina e omeprazol. É tabagista desde os 18 anos de idade. Fuma cerca de 20 cigarros ao dia. Fuma o primeiro cigarro 20 minutos após acordar, pela manhã. Tem sintomas de flssura quando flca mais de 2 horas sem fumar. Não tem queixas respiratórias. Nega uso de bebidas alcoólicas. O paciente informa que, devido à crise gerada pela pandemia de Covid-19, foi demitido há 6 meses e não conseguiu outro emprego, até o momento. Também está passando por diflculdades no relacionamento com a esposa. Há cerca de 2 meses vem apresentando sintomas de tristeza, anedonia, diflculdades de sono e ganho de peso. Durante a entrevista o MFC diagnosticou um episódio depressivo maior e a pontuação de Fagerstrom foi 8. Também relata que deseja cessar o tabagismo. O exame físico do paciente não mostrou qualquer alteração importante. Diante do quadro, o MFC decide iniciar intervenção psicoterapêutica e tratamento farmacológico com mais de uma droga. A prescrição mais indicada para este quadro seria:",
+    "alternatives": "  A) Adesivo de nicotina e nortriptilina. [GABARITO]\n  B) Adesivo de nicotina e goma de nicotina.\n  C) Goma de nicotina e bupropiona.\n  D) Adesivo de nicotina e bupropiona.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Paciente com episódio depressivo e tabagismo pesado necessita de tratamento combinado. A bupropiona seria ótima, mas é contraindicada por antecedente de epilepsia na infância; logo, a nortriptilina entra como escolha segura.\n\n****Alternativa Correta** (A)**: O paciente apresenta coocorrência de episódio depressivo maior e dependência grave de nicotina (Fag"
+  },
+  {
+    "id": 1811,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Antipsicóticos",
+    "stem": "Paciente jovem apresentando quadro psicótico de início agudo, há dois dias foi levado ao Pronto-Socorro em estado de agitação psicomotora. Recebeu uma dose de haloperidol IM e saiu com prescrição de haloperidol 10 mg/dia por via oral. Atualmente está com piora da agitação. Não consegue se manter sentado durante a entrevista, flca em pé balançando o corpo de um lado para o outro e esfrega as mãos com uma fisionomia angustiada. Qual é a conduta?",
+    "alternatives": "  A) Aumentar a dose do antipsicótico.\n  B) Ministrar benzodiazepínico e substituir antipsicótico. [GABARITO]\n  C) Associar medicação anticolinérgica.\n  D) Suspender antipsicótico e fazer eletroconvulsoterapia.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Agitação motora com incapacidade de ficar sentado e angústia após iniciar antipsicótico é acatisia; aumentar a dose do remédio agrava o quadro, sendo necessário associar um benzodiazepínico ou betabloqueador e trocar o antipsicótico.\n\n****Alternativa Correta** (B)**: A acatisia é um efeito extrapiramidal comum dos bloqueadores dopaminérgicos de alta potênc"
+  },
+  {
+    "id": 1812,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Transtornos de Personalidade Transtorno de Personalidade Obsessivacompulsiva Anancástica",
+    "stem": "Um estudante de direito de 28 anos é admitido no hospital por acidente automobilístico sem traumatismo craniano. Ele se mostra obstinado e rígido, exigindo que a equipe faça as coisas à sua maneira, mantendo suas tarefas acadêmicas no computador. Fala que sua namorada ameaçou deixá-lo caso ele continue com sua forma inflexível de ser e não jogue fora coisas inúteis que costuma armazenar. Qual a principal hipótese diagnóstica quanto ao tipo de transtorno de personalidade?",
+    "alternatives": "  A) Antissocial.\n  B) Evitador.\n  C) Histriônico.\n  D) Obsessivo-compulsivo. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Rigidez cognitiva, obstinação, necessidade de controle extremo e acumulação de objetos inúteis definem o transtorno de personalidade obsessivo-compulsivo.\n\n****Alternativa Correta** (D)**: O quadro clínico descrito apresenta traços marcantes de inflexibilidade, rigidez, perfeccionismo, necessidade de controle rígido sobre os outros e comportamento de acumu"
+  },
+  {
+    "id": 1876,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Avaliação inicial do paciente em choque Abordagem inicial do choque hemorrágico",
+    "stem": "Homem, 27 anos de idade, previamente hígido, foi vítima de acidente automobilístico com sangramentos. Apresenta, à avaliação, PA = 94/52 mmHg, oligúria, creatinina = 1,9 mg/dL (VR 0,7 a 1,3 mg;dL), ureia = 96 mg/dL (VR 20 a 50 mg/dL), K = 6,1 mEq/L (VR 3,5 a 5,1 mEq/L), densidade urinária = 1036 (VR 1005 a 1030), fração de excreção de ureia = 27% e urina I com presença de cilindros hialinos abundantes. Qual é o tratamento mais adequado neste momento?",
+    "alternatives": "  A) Diálise de urgência.\n  B) Reposição de volume. [GABARITO]\n  C) Droga inotrópica.\n  D) Furosemida intravenosa.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Diante de um paciente vítima de trauma com hipotensão, oligúria e sinais de hipoperfusão, a prioridade absoluta é restaurar a volemia para reverter o choque e a lesão renal aguda pré-renal.\n\n****Alternativa Correta** (B)**: O paciente apresenta um quadro clássico de choque hemorrágico pós-trauma, evoluindo com lesão renal aguda de etiologia eminentemente p"
+  },
+  {
+    "id": 1907,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Clínica Médica Deficiência de Vitamina B12 e Ácido Fólico",
+    "stem": "Homem, 62 anos de idade, refere certo desânimo envolvendo aspectos físicos e mentais, perda de memória e formigamento simétrico em extremidades. Faz uso de losartana, metformina, insulina NPH, sinvastatina e omeprazol. Qual é a hipótese diagnóstica mais provável?",
+    "alternatives": "  A) Hipotiroidismo.\n  B) Deficiência de vitamina B12. [GABARITO]\n  C) Episódios de hipoglicemia.\n  D) Depressão.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Idoso com neuropatia periférica (parestesia simétrica) e declínio cognitivo em uso crônico de metformina e inibidor de bomba de prótons (omeprazol) grita deficiência de vitamina B12.\n\n****Alternativa Correta** (B)**: A deficiência de vitamina B12 (cobalamina) causa o clássico acometimento hematológico (anemia megaloblástica com desânimo e fadiga) e neuroló"
+  },
+  {
+    "id": 1908,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Clínica Médica Quadro Clínico Tomografia Computadorizada de Tórax",
+    "stem": "Mulher, 25 anos de idade, apresenta fraqueza muscular ao subir escadas e ao m do dia, há dois meses. Percebeu visão dupla quando trabalha em frente ao computador por longos períodos. Considerando o diagnóstico mais provável quais exames complementares devem ser solicitados?",
+    "alternatives": "  A) Ressonância magnética de crânio e pesquisa do anticorpo anti-glicoproteina.\n  B) Tomografia de tórax e pesquisa de anticorpo anti-receptor de acetilcolina. [GABARITO]\n  C) Ressonância de pelve e pesquisa do anticorpo anti-NMDAR.\n  D) Biópsia muscular e pesquisa do anticorpo antiMUSK.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Fraqueza muscular flutuante que piora com o esforço e ao longo do dia, associada a sintomas bulbares/oculares (diplopia), é Miastenia Gravis; o rastreio exige anticorpo anti-AChR e tomografia de tórax para avaliar o timo.\n\n****Alternativa Correta** (B)**: O quadro clínico de fraqueza muscular fatigável (pior a fim do dia) e oftalmoparesia (visão dupla) é p"
+  },
+  {
+    "id": 1909,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Clínica Médica Esclerose Lateral Amiotrófica",
+    "stem": "Homem, 50 anos de idade, apresenta fraqueza e espasmo muscular progressivo nos membros inferiores. Exame neurológico com hiperreexia e eletroneuromiograa sugere acometimento de segundo neurônio motor. Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Síndrome de Guillain-Barré.\n  B) Esclerose múltipla.\n  C) Esclerose lateral amiotrófica (ELA). [GABARITO]\n  D) Doença de Parkinson.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A associação de sinais de neurônio motor superior (hiper-reflexia, espasmos) com sinais de neurônio motor inferior (fraqueza progressiva, eletroneuromiografia alterada) em um adulto de meia-idade define a Esclerose Lateral Amiotrófica.\n\n****Alternativa Correta** (C)**: A Esclerose Lateral Amiotrófica (ELA) é a principal doença neurodegenerativa que afeta c"
+  },
+  {
+    "id": 1910,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+    "topic": "Clínica Médica Conceitos Modos convencionais de Ventilação Mecânica",
+    "stem": "Homem, 72 anos de idade, apresenta tosse produtiva, febre não aferida e sensação de cansaço há 5 dias. Exame físico: FR = 38 irpm, SpO2 = 82% e fala entrecortada. Após 30 minutos de ventilação mecânica não invasiva, a SpO2 = 87%, sem melhora do padrão respiratório, e opta-se por realizar intubação orotraqueal. Considerando o peso estimado do paciente de 70 kg, qual é o melhor ajuste inicial da ventilação mecânica?",
+    "alternatives": "  A) Ventilação controlada a volume, volume corrente = 420 ml, PEEP = 5 cmH2O, FR = 30 irpm, relação I:E = 1:2, sensibilidade = 2 L/min, FiO2 = 100%. [GABARITO]\n  B) Ventilação controlada a volume, volume corrente = 630 ml, PEEP = 5 cmH2O, FR = 12 irpm, relação I:E = 1:2, sensibilidade = 2 L/min, FiO2 = 40%.\n  C) Ventilação por pressão de suporte, pressão de suporte = 8 cm H2O, PEEP = 5 cm H2O, sensibilidade = 2 L/min, FiO2 = 100%.\n  D) Ventilação por pressão de suporte, pressão de suporte = 12 cm H2O, PEEP = 5 cm H2O, relação I:E = 1:2, sensibilidade = 2 L/min, FiO2 = 40%.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Paciente com hipoxemia refratária e insuficiência respiratória grave pós-intubação exige ventilação invasiva controlada a volume, volume corrente protetor baseado no peso previsto (6 mL/kg) e FiO2 inicial de 100%.\n\n****Alternativa Correta** (A)**: Diante de um quadro de insuficiência respiratória grave com falha de ventilação não invasiva e necessidade de "
+  },
+  {
+    "id": 1911,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Clínica Médica Tiazolidinedionas pioglitazona",
+    "stem": "Homem, 64 anos de idade, é avaliado por diabetes mellitus tipo 2. Antecedentes pessoais: HAS, insuciência cardíaca. Qual medicação é contraindicada neste caso?",
+    "alternatives": "  A) Insulina NPH.\n  B) Glicazida.\n  C) Acarbose.\n  D) Pioglitazona. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Insuficiência cardíaca é contraindicação absoluta para tiazolidinedionas (pioglitazona) devido ao risco grave de retenção hidrossalina e piora da congestão.\n\n****Alternativa Correta** (D)**: A pioglitazona pertence à classe das tiazolidinedionas (glitazonas), que atuam como agonistas dos receptores PPAR-gama. Um dos seus principais efeitos adversos é a ret"
+  },
+  {
+    "id": 1912,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "topic": "Clínica Médica Medicações que provocam glicosúria inibidores de SGLT2",
+    "stem": "Mulher, 62 anos de idade, está em tratamento para diabetes mellitus tipo 2 com metformina e um inibidor de SGLT2. Os efeitos colaterais que podem ocorrer com uso destas medicações são, respectivamente:",
+    "alternatives": "  A) redução dos níveis de vitamina B12 e cetoacidose euglicêmica. [GABARITO]\n  B) hipoglicemia e esteatose hepática.\n  C) cetoacidose euglicêmica e insuficiência cardíaca.\n  D) ganho de peso e hipertensão arterial.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: A metformina reduz a absorção ileal de vitamina B12 a longo prazo, enquanto os inibidores de SGLT2 promovem glicosúria e predispõem à cetoacidose euglicêmica sob estresse ou jejum.\n\n****Alternativa Correta** (A)**: A metformina interfere na absorção da vitamina B12 no íleo terminal, podendo causar deficiência subclínica ou anemia megaloblástica após uso pr"
+  },
+  {
+    "id": 1913,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "topic": "Clínica Médica Apresentação clínica Diagnóstico e investigação adicional",
+    "stem": "Mulher, 41 anos de idade, apresenta constipação intestinal há 3 semanas e fadiga há 2 semanas. Ela arma que há 3 meses apresentou palpitações e diarreia por algumas semanas, com melhora espontânea. Antecedente pessoal: diabetes mellitus tipo 1 desde os 20 anos. Exame físico: afebril; FC = 48 bpm; PA = 124/88 mmHg; IMC = 22 kg/m2; tireoide indolor à palpação, com volume normal, sem outras alterações; pele fria e seca e cabelos ralos no couro cabeludo; edema não depressível +/4+ em ambas as extremidades inferiores. Considerando a hipótese diagnóstica mais provável, qual é a alteração de exame a ser encontrada?",
+    "alternatives": "  A) Diminuição dos níveis do hormônio tiroestimulante.\n  B) Captação difusa de iodo radioativo na cintilografia da tiroide.\n  C) Anticorpos anti-tiroperoxidase positivos. [GABARITO]\n  D) Padrão homogêneo do parênquima na ultrassonografia da tiroide.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: A história de hipertiroidismo transitório seguido de hipotireoidismo em uma paciente com DM1 sugere fortemente Tireoidite de Hashimoto na fase inicial de falência glandular.\n\n****Alternativa Correta** (C)**: A tireoidite de Hashimoto é uma doença autoimune caracterizada pela presença de anticorpos antitireoidianos, sendo o anticorpo anti-tiroperoxidase (an"
+  },
+  {
+    "id": 1914,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Clínica Médica Métodos de avaliação da filtração glomerular Cálculo da taxa de filtração glomerular",
+    "stem": "Você está na UBS atendendo um paciente que tem história de diabetes mellitus e hipertensão arterial. Nos exames atuais, ele apresenta creatinina = 1,8 mg/dl. Qual é a maneira recomendada para a avaliação da função renal deste paciente?",
+    "alternatives": "  A) Estimar a taxa de filtração glomerular através da equação CKD-EPI. [GABARITO]\n  B) Estimar a taxa de filtração glomerular através da equação MDRD.\n  C) Medir o clearance de creatinina na urina de 24 horas.\n  D) Medir a filtração glomerular através da depuração de EDTA.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Diante de comorbidades como DM e HAS, a diretriz recomenda estimar a TFG por equações validadas baseadas na creatinina sérica, sendo a CKD-EPI superior à MDRD.\n\n****Alternativa Correta** (A)**: A equação CKD-EPI (Chronic Kidney Disease Epidemiology Collaboration) é atualmente o método preferencial recomendado pelas diretrizes internacionais (como KDIGO) pa"
+  },
+  {
+    "id": 1915,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "topic": "Clínica Médica Tratamento farmacológico da insuficiência cardíaca com fração de ejeção reduzida Inibidores da enzima conversora de angiotensina e bloqueadores dos receptores AT1 da angiotensina II",
+    "stem": "Mulher, 54 anos de idade, apresenta queixa de dispneia aos moderados esforços há 3 meses. Nega doenças prévias e uso de medicações. Exame físico: PA = 100/70 mmHg, FC = 84 bpm; ausculta cardíaca com bulhas rítmicas com sopro sistólico 3+/6+ em foco mitral, irradiado para axila esquerda; ausculta pulmonar sem ruídos adventícios. Exames laboratoriais: creatinina = 1,0 mg/dL; K = 4,8 mEq/L. Ecocardiograma: evidenciou hipocinesia difusa, fração de ejeção de 38% e insuciência mitral moderada. Qual é o tratamento mais adequado?",
+    "alternatives": "  A) Bisoprolol, enalapril, dapagliflozina e espironolactona. [GABARITO]\n  B) Carvedilol, furosemida, amiodarona e dapagliflozina.\n  C) Metoprolol, digoxina, hidroclorotiazida e enalapril.\n  D) Atenolol, enalapril, furosemida e anlodipino.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Insuficiência cardíaca com fração de ejeção reduzida (ICFEr) exige terapia quádrupla baseada em IECA/BRA/ARNI, betabloqueador, iSGLT2 e antagonista mineralocorticoide.\n\n****Alternativa Correta** (A)**: Esta alternativa contempla o pilar do tratamento farmacológico contemporâneo para a ICFEr (FEVE < 40%): um betabloqueador com evidência de mortalidade (biso"
+  },
+  {
+    "id": 1916,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Clínica Médica Hipertensão do avental branco",
+    "stem": "Homem, 50 anos de idade, apresenta-se para consulta de exame admissional, assintomático. Não tem doenças prévias e nem faz uso de medicações. Exame físico: PA = 145/95 mmHg, sem outras alterações. Em segunda consulta, apresentou medida de PA = 140/90 mmHg. Realizou Monitorização Ambulatorial de Pressão Arterial (MAPA) que mostra média pressórica de 24 horas de 125/75 mmHg e descenso noturno de 12%. Qual é o diagnóstico mais adequado?",
+    "alternatives": "  A) Hipertensão do avental branco. [GABARITO]\n  B) Hipertensão mascarada.\n  C) Hipertensão sustentada com efeito do avental branco.\n  D) Hipertensão sustentada.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: PA elevada no consultório associada a pressões médias normais na MAPA de 24 horas definem a hipertensão do avental branco.\n\n****Alternativa Correta** (A)**: A hipertensão do avental branco ocorre quando o paciente apresenta níveis pressóricos persistentemente elevados no consultório médico, mas valores normais de pressão arterial fora do ambiente ambulator"
+  },
+  {
+    "id": 1918,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Clínica Médica Infecção de pele e partes moles Piodermites",
+    "stem": "Homem, 65 anos de idade, agricultor, apresenta lesões nodulares, dolorosas, na sua mão direita, que surgiram duas semanas após ter se arranhado com um graveto enquanto trabalhava. Exame físico: presença de nódulos firmes e dolorosos à palpação no dorso da mão direita, com eritema ao redor e linfadenopatia axilar direita. Cultura do aspirado: bacilos gram-positivos, filamentosos, álcool ácidoresistentes. Qual é o agente etiológico mais provável?",
+    "alternatives": "  A) Erysipelothrix rhusiopathiae.\n  B) Nocardia brasiliensis. [GABARITO]\n  C) Mycobacterium tuberculosis.\n  D) Raoultella terrígena.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Histórico de trauma com material vegetal (graveto/espinho) associado a lesões nodulares em cadeia (esporotricóide) e bacilos gram-positivos filamentosos e ácido-álcool resistentes parciais aponta diretamente para o gênero *Nocardia*.\n\n****Alternativa Correta** (B)**: A *Nocardia brasiliensis* é uma bactéria filamentosa (actinomiceto) aeróbica, parcialmente"
+  },
+  {
+    "id": 1919,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Clínica Médica Dermatite de contato",
+    "stem": "Mulher, 30 anos de idade, fototipo III, auxiliar de escritório, apresenta lesões no dorso da mão direita há 5 dias, com ardor. Exame dermatológico: vesículas no antebraço direito com 1 mm de diâmetro em base eritematoedematosa que se estendem até o terço médio do braço e vesículas dispersas no V. do decote. As lesões conuíam formando algumas bolhas na região distal do antebraço e intensicaram-se no dorso da mão direita próximo ao primeiro e segundo quirodáctilos. Qual é o diagnóstico mais provável?",
+    "alternatives": "  A) Lúpus bolhoso.\n  B) Dermatite atópica.\n  C) Herpes Zoster.\n  D) Eczema de contato fototóxico [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Lesões vesiculosas/bolhosas em áreas expostas ao sol associadas a ardor e distribuição linear (fotocontato) denunciam uma fitofotodermatite (eczema de contato fototóxico).\n\n****Alternativa Correta** (D)**: O eczema de contato fototóxico ocorre pela ação conjunta de substâncias fotossensibilizantes (como furocumarinas presentes em plantas, frutas cítricas) "
+  },
+  {
+    "id": 1920,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Clínica Médica Disfunção erétil Tratamento",
+    "stem": "Homem, 65 anos de idade, diabético, tabagista, apresenta disfunção erétil há um ano. Qual é o tratamento mais indicado?",
+    "alternatives": "  A) Alfa bloqueador.\n  B) Inibidor da 5-alfa-redutase.\n  C) Inibidor da fosfodiesterase tipo 5. [GABARITO]\n  D) Lepidium meyenii.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Primeira linha para disfunção erétil, independentemente de comorbidades como diabetes e tabagismo, são os inibidores da fosfodiesterase tipo 5.\n\n****Alternativa Correta** (C)**: Os inibidores da fosfodiesterase tipo 5 (como sildenafila, tadalafila) atuam impedindo a degradação do GMPc, promovendo o relaxamento da musculatura lisa dos corpos cavernosos e o "
+  },
+  {
+    "id": 1921,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Clínica Médica Hematologia Síndrome de veia cava superior",
+    "stem": "Homem, 28 anos de idade, apresenta edema cervicofacial matinal, tontura e cefaleia de início recente há 10 dias. Exame físico: corado, hidratado eupneico, PA = 120/70 mmHg, telangiectasias na parede torácica anterior, murmúrio vesicular presente e simétrico bilateral, sem ruídos adventícios. Fundo de olho: edema de papila. Exame neurológico normal. Qual é o diagnóstico sindrômico, possível causa e tratamento?",
+    "alternatives": "  A) Síndrome de hipertensão intracraniana – câncer de pulmão – radioterapia.\n  B) Síndrome da veia cava superior – linfoma mediastinal – quimioterapia. [GABARITO]\n  C) Síndrome de Cushing – linfoma – cirurgia descompressiva.\n  D) Pericardite restritiva – tuberculose – cirurgia.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Edema em esclavina (face e pescoço), circulação colateral torácica e edema de papila em jovem com alargamento mediastinal apontam para a Síndrome da Veia Cava Superior (SVCS) secundária a linfoma.\n\n****Alternativa Correta** (B)**: A Síndrome da Veia Cava Superior (SVCS) é caracterizada por edema cervicofacial, tontura, cefaleia (agravada ao deitar devido a"
+  },
+  {
+    "id": 1923,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+    "topic": "Cardiologia Indicações de revascularização",
+    "stem": "Mulher, 64 anos de idade, hipertensa e diabética, apresenta angina estável há 3 anos, em tratamento medicamentoso irregular, não otimizado. Ecocardiograma: função biventricular preservada, sem alteração valvar. Coronariograa: lesão triarterial com 40% de obstrução nas artérias descendente anterior, circunflexa e coronária direita distal. Qual é o tratamento mais adequado?",
+    "alternatives": "  A) Intervenção coronária percutânea com stent farmacológico.\n  B) Tratamento conservador. [GABARITO]\n  C) Cirurgia de revascularização miocárdica.\n  D) Intervenção coronária percutânea com stent de primeira geração.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Angina estável com lesões não obstrutivas ou intermediárias (como 40%) na coronariografia não tem indicação de revascularização anatômica (ICP ou CIRM); a conduta é estritamente clínica (conservadora).\n\n****Alternativa Correta** (B)**: O tratamento conservador é a conduta de escolha para pacientes com angina estável e lesões obstrutivas não significativas "
+  },
+  {
+    "id": 1924,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+    "topic": "Cardiologia Intervenção coronariana percutânea no tratamento do IAMCSST",
+    "stem": "Paciente com infarto agudo do miocárdio é atendido em PS de hospital que não dispõe de serviço de hemodinâmica. A conduta imediata mais adequada é",
+    "alternatives": "  A) trombólise farmacológica e transferência para hospital com serviço de hemodinâmica se não houver sinais de reperfusão.\n  B) remoção para hospital com serviço de hemodinâmica desde que seja possível chegar ao local em até 120 minutos [GABARITO]\n  C) trombólise farmacológica e transferência programada para realização de cateterismo após 48 horas.\n  D) remoção para hospital com serviço de hemodinâmica com início de trombólise farmacológica durante o transporte.",
+    "explanation": "**Gabarito**: Letra B.\n\n**Pulo do Gato**: Na vigência de IAM com supra de ST, se o hospital não tem hemodinâmica, a prioridade absoluta é a transferência para angioplastia primária, desde que o tempo porta-balão estimado seja inferior a 120 minutos.\n\n****Alternativa Correta** (B)**: A angioplastia primária é a estratégia de reperfusão preferencial no Infarto Agudo do Miocárdio com Supra de Segment"
+  },
+  {
+    "id": 1925,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "topic": "Cardiologia Tratamento geral da crise hipertensiva",
+    "stem": "Mulher, 25 anos de idade, é atendida no PS com PA = 180/100 mmHg após ter utilizado cocaína. Nega comorbidades e não apresenta disfunções orgânicas. Qual é a droga de escolha para tratar essa urgência hipertensiva?",
+    "alternatives": "  A) Captopril.\n  B) Nitroprussiato de sódio.\n  C) Propranolol.\n  D) Diazepam. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Hipertensão aguda induzida por cocaína com sintomas adrenérgicos deve ser combatida primeiramente com benzodiazepínicos (como o diazepam) para sedação e controle do tônus simpático central.\n\n****Alternativa Correta** (D)**: O uso de cocaína bloqueia a recaptação de noradrenalina, gerando um estado de hiperestimulação simpática maciça com taquicardia e hipe"
+  },
+  {
+    "id": 1926,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+    "topic": "Cardiologia Diagnóstico Feocromocitoma",
+    "stem": "Homem, 50a, procura atendimento em Unidade de Emergência por dor torácica associada a palpitações, tremores e sudorese. Refere episódios prévios semelhantes. Exame físico: PA= 222x124 mmHg; FC= 122 bpm; sudoreico; tremor de extremidades. Fundo de olho: cruzamentos patológicos e papila nítida. ECG: sobrecarga de ventrículo esquerdo. Troponina: normal. A HIPÓTESE DIAGNÓSTICA É:",
+    "alternatives": "  A) Dissecção aguda de aorta.\n  B) Doença de Addison.\n  C) Hipertensão maligna.\n  D) Feocromocitoma. [GABARITO]",
+    "explanation": "**Gabarito**: Letra D.\n\n**Pulo do Gato**: Tríade clássica de pico hipertensivo grave associado a palpitações, sudorese profusa e tremores em paciente jovem ou de meia-idade aponta diretamente para feocromocitoma.\n\n****Alternativa Correta** (D)**: O feocromocitoma é um tumor neuroendócrino produtor de catecolaminas (adrenalina e noradrenalina). A liberação paroxística desses hormônios desencadeia c"
+  },
+  {
+    "id": 1927,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "topic": "Cardiologia Diagnóstico",
+    "stem": "Homem, 57a, é trazido ao serviço médico após episódio de desmaio ao realizar grande esforço no trabalho. Conta que subitamente perdeu a consciência, sem referir qualquer outro sintoma, e que ao acordar não apresentava décits. Nas últimas semanas sentiu aperto no peito ao realizar os esforços que desaparecia ao repouso. Exame físico: PA= 110x85 mmHg; FC= 92 bpm; FR= 16 irpm; Oximetria de pulso (ar ambiente)= 97%, corado, hidratado. Pulso carotídeo diminuído e tardio; Coração: ictus no 5o espaço intercostal esquerdo desviado 2 cm para a esquerda da linha hemiclavicular ipsilateral, bulhas rítmicas com sopro mesossistólico ejetivo, rude, audível em focos aórtico, aórtico acessório e mitral, irradiado para o pescoço com B4 presente; extremidades: pulsos de baixa amplitude. O DIAGNÓSTICO É:",
+    "alternatives": "  A) Insuficiência aórtica.\n  B) Insuficiência mitral.\n  C) Estenose aórtica. [GABARITO]\n  D) Estenose mitral.",
+    "explanation": "**Gabarito**: Letra C.\n\n**Pulo do Gato**: Síncope aos esforços + pulso parvus et tardus + sopro mesossistólico irradiado para o pescoço = Estenose Aórtica grave.\n\n****Alternativa Correta** (C)**: A estenose aórtica é uma valvopatia obstrutiva caracterizada classicamente pela tríade clínica: dispneia, angina e síncope aos esforços. O exame físico revela o característico pulso carotídeo de baixa amp"
+  },
+  {
+    "id": 1928,
+    "current_area": "Clínica Médica",
+    "current_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+    "topic": "Cardiologia Infarto Agudo do miocárdio com supra de ST IAMCSST SOBRE A IMAGEM, É CORRETO AFIRMAR QUE:",
+    "stem": "Homem, 67a, no início da manhã apresentou fortes dores na região central do tórax, que irradiavam para o pescoço, mandíbula e braço esquerdo, e diculdade para respirar. Foi imediatamente conduzido a uma Unidade de Emergência, chegando com sudorese acentuada e muito ansioso. Exame físico: PA=60x35mmHg; FC=120bpm; cianose de extremidades, pulsos fracos. Eletrocardiograma: sinais de extenso infarto do miocárdio anterolateral. Foram realizadas medidas iniciais de suporte de vida e indicado cateterismo cardíaco, mas antes disto evoluiu à óbito. Submetido à necropsia. A Figura mostra uma secção do coração.",
+    "alternatives": "  A) Há uma área de infarto do miocárdio antigo e o novo infarto é muito recente para ser identificado à histologia convencional. [GABARITO]\n  B) Há uma área de necrose coagulativa do miocárdio, compatível com o infarto recente.\n  C) Existe uma hipertrofia dos cardiomiócitos decorrente de hipertensão arterial crônica.\n  D) O infarto do miocárdio produziu redução súbita da pressão arterial, com trombose vascular e sinais de recanalização.",
+    "explanation": "**Gabarito**: Letra A.\n\n**Pulo do Gato**: Morte muito rápida após oclusão coronariana (minutos) não dá tempo hábil para o desenvolvimento de necrose coagulativa ou infiltrado neutrofílico visíveis à microscopia óptica convencional (H&E).\n\n****Alternativa Correta** (A)**: A cronologia histológica do infarto agudo do miocárdio (IAM) é didática e rigorosa: alterações microscópicas confiáveis (como ne"
+  }
+]

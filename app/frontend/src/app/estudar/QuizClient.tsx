@@ -13,6 +13,7 @@ import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 
 import { SubjectTreeSelector } from "@/components/SubjectTreeSelector";
 import { ImageViewer } from "@/components/ImageViewer";
+import { ExplanationViewer } from "@/components/ExplanationViewer";
 import { useZenMode } from "@/hooks/useZenMode";
 import Image from "next/image";
 import {
@@ -1270,22 +1271,15 @@ export function QuizClient({
                 </div>
                 
                 <div className="p-6 md:p-8">
-                  <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-foreground mb-5 flex items-center gap-2">
                     <BookOpen size={20} className="text-primary" />
                     Comentário do Professor
                   </h3>
-                  <div className="text-foreground text-base md:text-lg leading-relaxed whitespace-pre-wrap">
-                    {attemptResult.explanation || "Nenhum comentário disponível para esta questão."}
-                  </div>
-
-                  {currentDetail?.medical_references && (
-                    <div className="mt-6 pt-5 border-t border-border">
-                      <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-2">Referências e Diretrizes</h4>
-                      <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 p-4 rounded-lg">
-                        {currentDetail.medical_references}
-                      </div>
-                    </div>
-                  )}
+                  <ExplanationViewer 
+                    explanation={attemptResult.explanation} 
+                    medicalReferences={currentDetail?.medical_references}
+                    correctLetter={attemptResult.correct_letter}
+                  />
 
                   {currentDetail?.times_wrong && currentDetail.times_wrong > 0 ? (
                     <div className="mt-4 flex items-center gap-2 text-sm text-destructive font-semibold bg-destructive/10 px-3 py-1.5 rounded-full w-fit">
