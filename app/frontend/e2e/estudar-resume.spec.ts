@@ -122,7 +122,18 @@ test('remove botão de IA e permite gerar flashcard após erro', async ({ page, 
         body: JSON.stringify({ is_correct: false, correct_letter: 'B', explanation: 'Tratamento individualizado.', next_review_date: null }),
       });
     }
-    if (path.endsWith('/api/flashcards/generate')) {
+    if (path.endsWith('/api/flashcards/preview')) {
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          front: 'Neste caso clínico, a conduta indicada é {{c1::Mudança de estilo de vida}}.',
+          back: 'Tratamento individualizado.',
+          context: 'HAS'
+        })
+      });
+    }
+    if (path.endsWith('/api/flashcards/save') || path.endsWith('/api/flashcards/generate')) {
       flashcardGenerated = true;
       return route.fulfill({
         status: 200,
@@ -131,7 +142,8 @@ test('remove botão de IA e permite gerar flashcard após erro', async ({ page, 
           id: 42,
           question_id: 1,
           front: 'Neste caso clínico, a conduta indicada é {{c1::Mudança de estilo de vida}}.',
-          back: 'Tratamento individualizado.'
+          back: 'Tratamento individualizado.',
+          context: 'HAS'
         })
       });
     }
@@ -153,9 +165,14 @@ test('remove botão de IA e permite gerar flashcard após erro', async ({ page, 
   await expect(page.getByRole('button', { name: /Explicar com IA/i })).not.toBeVisible();
 
   // Verifica e clica no botão de gerar flashcard
-  const flashcardBtn = page.getByRole('button', { name: /Gerar Flashcard/i });
+  const flashcardBtn = page.getByRole('button', { name: /Gerar Flashcard|Criar Flashcard/i });
   await expect(flashcardBtn).toBeVisible();
   await flashcardBtn.click();
+
+  // Salva o flashcard editável
+  const saveBtn = page.getByRole('button', { name: /Salvar Flashcard/i });
+  await expect(saveBtn).toBeVisible();
+  await saveBtn.click();
 
   // Verifica que o flashcard foi gerado e exibido
   await expect(page.getByText('Flashcard Salvo na Revisão Ativa!')).toBeVisible();

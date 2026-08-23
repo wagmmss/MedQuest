@@ -391,6 +391,7 @@ def question_detail(qid):
         
     if not q:
         return jsonify({"error": "not found"}), 404
+    q = dict(q)
         
     cc = None
     if q.get("clinical_case_id"):

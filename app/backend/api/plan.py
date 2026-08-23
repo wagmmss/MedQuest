@@ -168,8 +168,8 @@ def generate_plan():
         rows = res[0].fetchall()
         answered = res[1].fetchall()
     else:
-        rows = db.execute(q_query).fetchall()
-        answered = db.execute(a_query, (g.user_id,)).fetchall()
+        rows = [dict(r) for r in db.execute(q_query).fetchall()]
+        answered = [dict(r) for r in db.execute(a_query, (g.user_id,)).fetchall()]
     
     answered_map = {r["subtema"]: r for r in answered}
     

@@ -87,7 +87,7 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
                         if course_match
                         else fallback_theory_hours
                     ),
-                    "theory_source": "katomart" if course_match else "pedagogical_estimate",
+                    "theory_source": "curriculum" if course_match else "pedagogical_estimate",
                     "course_module": course_match.get("module") if course_match else None,
                 }
 

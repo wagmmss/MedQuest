@@ -57,7 +57,7 @@ async function mockSimuladoApi(page: Page, onBatchSubmit?: () => void | Promise<
         }),
       });
     }
-    if (url.pathname.includes('/simulado/usp') || url.pathname.endsWith('/api/questions')) {
+    if (url.pathname.includes('/simulado/usp') || url.pathname.includes('/simulado/custom') || url.pathname.endsWith('/api/questions')) {
       return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_SIMULADO_QUESTIONS) });
     }
     if (url.pathname.endsWith('/api/questions/batch')) {
@@ -110,7 +110,7 @@ test.describe('Fluxo Completo de Simulado', () => {
           }),
         });
       }
-      if (url.pathname.includes('/simulado/usp') || url.pathname.endsWith('/api/questions')) {
+      if (url.pathname.includes('/simulado/usp') || url.pathname.includes('/simulado/custom') || url.pathname.endsWith('/api/questions')) {
         return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_SIMULADO_QUESTIONS) });
       }
       if (url.pathname.endsWith('/api/questions/batch')) {

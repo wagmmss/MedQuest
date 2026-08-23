@@ -1,4 +1,5 @@
-"""Blueprint: desempenho, recomendações e mapa de cobertura."""
+import os
+import json
 import time
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urlencode
@@ -555,66 +556,154 @@ def reset_stats():
 @bp.route("/coverage")
 def coverage():
     db = get_db()
-    rows = db.execute("""
-        WITH user_agg AS (
-            SELECT q.area, q.subtema,
-                   COUNT(DISTINCT a.question_id) AS answered,
-                   COUNT(a.id) AS attempts,
-                   COALESCE(SUM(a.is_correct), 0) AS correct
-            FROM attempts a
-            JOIN questions q ON q.id = a.question_id
-            WHERE a.user_id = ? AND q.missing_alts = 0 AND q.area IS NOT NULL AND q.area != '' AND q.subtema IS NOT NULL AND q.subtema != ''
-            GROUP BY q.area, q.subtema
-        ),
-        q_totals AS (
-            SELECT area, subtema, COUNT(*) AS n_questions
-            FROM questions
-            WHERE missing_alts = 0 AND area IS NOT NULL AND area != '' AND subtema IS NOT NULL AND subtema != ''
-            GROUP BY area, subtema
-        )
-        SELECT q.area, q.subtema, q.n_questions,
-               COALESCE(u.answered, 0) AS answered,
-               COALESCE(u.attempts, 0) AS attempts,
-               COALESCE(u.correct, 0) AS correct
-        FROM q_totals q
-        LEFT JOIN user_agg u ON q.area = u.area AND q.subtema = u.subtema
-        ORDER BY q.area, q.n_questions DESC
+    
+    # Carrega plannerData.json
+    planner_data_path = os.path.join(os.path.dirname(__file__), "..", "scripts", "plannerData.json")
+    try:
+        with open(planner_data_path, "r", encoding="utf-8") as f:
+            planner_meta = json.load(f)
+    except Exception:
+        planner_meta = []
+
+    # Carrega katomartCourseDurations.json
+    kat_path = os.path.join(os.path.dirname(__file__), "..", "scripts", "katomartCourseDurations.json")
+    try:
+        with open(kat_path, "r", encoding="utf-8") as f:
+            kat = json.load(f)
+    except Exception:
+        kat = {}
+    kat_subs = kat.get("subtemas", {})
+
+    # 1. Total de questões por área e subtema
+    q_totals_rows = db.execute("""
+        SELECT area, subtema, COUNT(*) AS n_questions
+        FROM questions
+        WHERE missing_alts = 0 AND area IS NOT NULL AND area != '' AND subtema IS NOT NULL AND subtema != ''
+        GROUP BY area, subtema
+    """).fetchall()
+    
+    q_map = {}
+    for r in q_totals_rows:
+        norm_a = get_normalized_area(r["area"])
+        sub = r["subtema"]
+        q_map[(norm_a, sub)] = r["n_questions"]
+
+    # 2. Resoluções do usuário
+    user_rows = db.execute("""
+        SELECT q.area, q.subtema,
+               COUNT(DISTINCT a.question_id) AS answered,
+               COUNT(a.id) AS attempts,
+               COALESCE(SUM(a.is_correct), 0) AS correct
+        FROM attempts a
+        JOIN questions q ON q.id = a.question_id
+        WHERE a.user_id = ? AND q.missing_alts = 0 AND q.area IS NOT NULL AND q.area != '' AND q.subtema IS NOT NULL AND q.subtema != ''
+        GROUP BY q.area, q.subtema
     """, (g.user_id,)).fetchall()
+    
+    u_map = {}
+    for r in user_rows:
+        norm_a = get_normalized_area(r["area"])
+        sub = r["subtema"]
+        u_map[(norm_a, sub)] = {
+            "answered": r["answered"],
+            "attempts": r["attempts"],
+            "correct": r["correct"]
+        }
 
-    areas = {}
-    for r in rows:
-        attempts = r["attempts"]
-        accuracy = (r["correct"] / attempts) if attempts else None
-        coverage_pct = (r["answered"] / r["n_questions"]) if r["n_questions"] else 0
-        if r["answered"] == 0:
-            status = "not_started"
-        elif attempts >= 2 and accuracy is not None and accuracy >= 0.7 and coverage_pct >= 0.5:
-            status = "mastered"
-        elif attempts >= 2 and accuracy is not None and accuracy >= 0.7:
-            status = "proficient"
-        else:
-            status = "in_progress"
-        sub = {"subtema": r["subtema"], "n_questions": r["n_questions"], "answered": r["answered"],
-               "attempts": attempts, "correct": r["correct"], "accuracy": accuracy,
-               "coverage_pct": coverage_pct, "status": status}
-        a = areas.setdefault(r["area"], {
-            "area": r["area"], "n_questions": 0, "n_subtemas": 0, "answered_questions": 0,
-            "attempts": 0, "correct": 0, "mastered": 0, "proficient": 0,
-            "in_progress": 0, "not_started": 0, "subtemas": [],
+    # 3. Monta estrutura baseada no catálogo canônico
+    areas_dict = {}
+    for area_group in planner_meta:
+        raw_area_name = area_group.get("area", "")
+        area_name = get_normalized_area(raw_area_name)
+        if area_name == "Outros":
+            area_name = raw_area_name
+            
+        area_obj = areas_dict.setdefault(area_name, {
+            "area": area_name,
+            "n_questions": 0,
+            "n_subtemas": 0,
+            "answered_questions": 0,
+            "attempts": 0,
+            "correct": 0,
+            "mastered": 0,
+            "proficient": 0,
+            "in_progress": 0,
+            "not_started": 0,
+            "subtemas": [],
+            "high_yield_count": 0,
+            "high_yield_mastered": 0
         })
-        a["n_questions"] += r["n_questions"]
-        a["n_subtemas"] += 1
-        a["answered_questions"] += r["answered"]
-        a["attempts"] += attempts
-        a["correct"] += r["correct"]
-        a[status] += 1
-        a["subtemas"].append(sub)
 
+        for macro in area_group.get("macroThemes", []):
+            theme = macro.get("theme", "")
+            is_high_yield = macro.get("highYield", False)
+            db_subs = macro.get("dbSubtemas", [theme])
+            
+            theme_theory = 0.0
+            for s in db_subs:
+                k = kat_subs.get(s, {})
+                theme_theory += k.get("theory_hours", 1.5)
+            theory_hours = round(theme_theory, 2)
+            
+            total_n_q = sum(q_map.get((area_name, s), 0) for s in db_subs)
+            total_ans = sum(u_map.get((area_name, s), {}).get("answered", 0) for s in db_subs)
+            total_att = sum(u_map.get((area_name, s), {}).get("attempts", 0) for s in db_subs)
+            total_cor = sum(u_map.get((area_name, s), {}).get("correct", 0) for s in db_subs)
+
+            accuracy = (total_cor / total_att) if total_att > 0 else None
+            coverage_pct = (total_ans / total_n_q) if total_n_q > 0 else 0.0
+
+            if total_ans == 0:
+                status = "not_started"
+            elif total_att >= 2 and accuracy is not None and accuracy >= 0.7 and coverage_pct >= 0.5:
+                status = "mastered"
+            elif total_att >= 2 and accuracy is not None and accuracy >= 0.7:
+                status = "proficient"
+            else:
+                status = "in_progress"
+
+            sub_item = {
+                "subtema": theme,
+                "area": area_name,
+                "n_questions": total_n_q,
+                "answered": total_ans,
+                "attempts": total_att,
+                "correct": total_cor,
+                "accuracy": accuracy,
+                "coverage_pct": round(coverage_pct, 4),
+                "status": status,
+                "highYield": is_high_yield,
+                "theory_hours": theory_hours
+            }
+
+            area_obj["n_questions"] += total_n_q
+            area_obj["n_subtemas"] += 1
+            area_obj["answered_questions"] += total_ans
+            area_obj["attempts"] += total_att
+            area_obj["correct"] += total_cor
+            area_obj[status] += 1
+            if is_high_yield:
+                area_obj["high_yield_count"] += 1
+                if status == "mastered":
+                    area_obj["high_yield_mastered"] += 1
+
+            area_obj["subtemas"].append(sub_item)
+
+    area_order = ["Clínica Médica", "Cirurgia", "Ginecologia e Obstetrícia", "Pediatria", "Medicina Preventiva"]
     out = []
-    for a in areas.values():
-        a["accuracy"] = (a["correct"] / a["attempts"]) if a["attempts"] else None
-        out.append(a)
-    out.sort(key=lambda x: x["n_questions"], reverse=True)
+    for name in area_order:
+        if name in areas_dict:
+            a = areas_dict[name]
+            a["accuracy"] = (a["correct"] / a["attempts"]) if a["attempts"] > 0 else None
+            a["subtemas"].sort(key=lambda s: (not s["highYield"], -s["n_questions"]))
+            out.append(a)
+
+    for k, a in areas_dict.items():
+        if k not in area_order:
+            a["accuracy"] = (a["correct"] / a["attempts"]) if a["attempts"] > 0 else None
+            a["subtemas"].sort(key=lambda s: (not s["highYield"], -s["n_questions"]))
+            out.append(a)
+
     return jsonify({"areas": out})
 
 

@@ -68,6 +68,7 @@ export function SimuladoClient({
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [resultsMap, setResultsMap] = useState<Record<number, BatchAttemptResultItem>>({});
   const [queueId, setQueueId] = useState<string | undefined>(undefined);
+  const [isSyncingOffline, setIsSyncingOffline] = useState(false);
   
   // Flashcards
   const [generatingBatchFlashcards, setGeneratingBatchFlashcards] = useState(false);
@@ -392,35 +393,131 @@ export function SimuladoClient({
     };
   }, [state]);
 
-  // Polling offline queue status
+  const handleManualSyncSimulado = useCallback(async () => {
+    if (isSyncingOffline) return;
+    setIsSyncingOffline(true);
+    try {
+      const attempts: BatchAttemptItem[] = Object.keys(answers).map(qIdStr => {
+        const qId = parseInt(qIdStr, 10);
+        return {
+          question_id: qId,
+          selected_letter: answers[qId],
+          confidence: "duvida"
+        };
+      });
+
+      if (attempts.length === 0) {
+        removeLearningSession("simulado");
+        setHasSavedState(false);
+        setState("START");
+        return;
+      }
+
+      if (navigator.onLine) {
+        const res = await api.questions.submitAttemptBatch(attempts);
+        if (res && res.results) {
+          const rMap: Record<number, BatchAttemptResultItem> = {};
+          res.results.forEach(r => {
+            rMap[r.question_id] = r;
+          });
+          setResultsMap(rMap);
+          removeLearningSession("simulado");
+          setHasSavedState(false);
+          setState("RESULTS");
+          setCurrentIndex(0);
+          toast.success("Simulado corrigido com sucesso!");
+          return;
+        }
+      }
+
+      const { syncManager } = await import("@/lib/sync");
+      await syncManager.sync(true);
+      toast.success("Tentativa de sincronização enviada.");
+    } catch (err) {
+      if (err instanceof OfflineQueuedError) {
+        toast("Ainda sem conexão com a internet. Suas respostas permanecem salvas com segurança.", { icon: "💾" });
+      } else {
+        toast.error("Erro ao sincronizar. Verifique sua conexão e tente novamente.");
+      }
+    } finally {
+      setIsSyncingOffline(false);
+    }
+  }, [answers, isSyncingOffline]);
+
+  // Sincronização offline e ouvinte de sucesso
   useEffect(() => {
-    if (state === "OFFLINE_SUBMITTED" && queueId) {
-      const interval = setInterval(async () => {
-        try {
-          const { syncManager } = await import('@/lib/sync');
+    if (state !== "OFFLINE_SUBMITTED") return;
+
+    const handleSyncSuccess = (e: Event) => {
+      const customEvent = e as CustomEvent<{
+        id: string;
+        endpoint: string;
+        method: string;
+        data: unknown;
+      }>;
+      const detail = customEvent.detail;
+      if (detail && detail.endpoint.includes("/api/attempt/batch")) {
+        const res = detail.data as { results?: BatchAttemptResultItem[] } | null;
+        if (res && Array.isArray(res.results) && res.results.length > 0) {
+          const rMap: Record<number, BatchAttemptResultItem> = {};
+          res.results.forEach(r => {
+            rMap[r.question_id] = r;
+          });
+          setResultsMap(rMap);
+          removeLearningSession("simulado");
+          setHasSavedState(false);
+          setState("RESULTS");
+          setCurrentIndex(0);
+          toast.success("Simulado sincronizado e corrigido com sucesso!");
+        } else {
+          removeLearningSession("simulado");
+          setHasSavedState(false);
+          setState("START");
+          toast.success("Simulado sincronizado!");
+        }
+      }
+    };
+
+    window.addEventListener("sync-item-success", handleSyncSuccess);
+
+    const checkAndSync = async () => {
+      try {
+        const { syncManager } = await import('@/lib/sync');
+        if (navigator.onLine) {
+          await syncManager.sync();
+        }
+        if (queueId) {
           const failed = await syncManager.getFailedItems();
           if (failed.find(i => i.id === queueId)) {
-            toast.error("A sincronização falhou permanentemente. Você pode tentar reenviar as respostas salvas.");
-            setState("PLAYING"); // Retorna para que o usuário tente novamente
+            toast.error("A sincronização encontrou uma falha. Você pode tentar reenviar as respostas salvas.");
+            setState("PLAYING");
             setQueueId(undefined);
-            clearInterval(interval);
             return;
           }
           const pending = await syncManager.getQueue();
           if (!pending.find(i => i.id === queueId)) {
-            // Não está pendente nem falhou -> completou!
-            toast.success("Simulado sincronizado com sucesso!");
-            // Remove o estado local pois já sincronizou, o backend processou
+            // Foi sincronizado
             removeLearningSession("simulado");
+            setHasSavedState(false);
             setState("START");
-            clearInterval(interval);
           }
-        } catch (e) {
-          console.error(e);
         }
-      }, 5000);
-      return () => clearInterval(interval);
-    }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    const handleOnline = () => {
+      void checkAndSync();
+    };
+    window.addEventListener("online", handleOnline);
+    const interval = setInterval(checkAndSync, 5000);
+
+    return () => {
+      window.removeEventListener("sync-item-success", handleSyncSuccess);
+      window.removeEventListener("online", handleOnline);
+      clearInterval(interval);
+    };
   }, [state, queueId]);
 
   const handleSelect = useCallback((letter: string) => {
@@ -690,6 +787,7 @@ export function SimuladoClient({
             <button 
               onClick={resumeSimulado}
               disabled={!clientReady}
+              aria-label="Continuar Simulado em Andamento"
               className="flex-1 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold py-3.5 px-6 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow-md disabled:opacity-60"
             >
               <RotateCcw size={20} />
@@ -704,7 +802,7 @@ export function SimuladoClient({
             <Play size={20} fill="currentColor" />
             {hasSavedState
               ? (hasCustomFilters ? "Novo Personalizado" : "Novo Simulado")
-              : "Iniciar Agora"}
+              : "Iniciar Simulado"}
           </button>
         </div>
       </div>
@@ -737,15 +835,35 @@ export function SimuladoClient({
             A correção oficial, gabarito e atualização do seu algoritmo de repetição espaçada (FSRS) serão processados automaticamente assim que sua conexão com a internet for restabelecida.
           </p>
         </div>
-        <button
-          onClick={() => {
-            setHasSavedState(true);
-            setState("START");
-          }}
-          className="bg-primary text-primary-foreground font-bold px-8 py-3.5 rounded-xl hover:bg-primary/90 transition-colors shadow-md text-sm mt-2"
-        >
-          Voltar ao Início
-        </button>
+        <div className="flex flex-col sm:flex-row gap-3 w-full max-w-md mt-2">
+          <button
+            onClick={handleManualSyncSimulado}
+            disabled={isSyncingOffline}
+            className="flex-1 bg-primary text-primary-foreground font-bold px-6 py-3.5 rounded-xl hover:bg-primary/90 disabled:opacity-50 transition-colors shadow-md text-sm flex items-center justify-center gap-2 cursor-pointer"
+          >
+            {isSyncingOffline ? (
+              <>
+                <RotateCcw className="animate-spin" size={18} />
+                Sincronizando...
+              </>
+            ) : (
+              <>
+                <RotateCcw size={18} />
+                Sincronizar e Ver Gabarito
+              </>
+            )}
+          </button>
+          <button
+            onClick={() => {
+              removeLearningSession("simulado");
+              setHasSavedState(false);
+              setState("START");
+            }}
+            className="flex-1 bg-muted hover:bg-muted/80 text-foreground font-semibold px-6 py-3.5 rounded-xl transition-colors text-sm cursor-pointer"
+          >
+            Concluir e Voltar ao Início
+          </button>
+        </div>
       </div>
     );
   }

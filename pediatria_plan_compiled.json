@@ -1,0 +1,254 @@
+[
+  {
+    "name": "Desordens do Sistema Imune",
+    "id": 68050,
+    "theory_hours": 1.5,
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "name": "Cardiopatias Congênitas",
+    "id": 68040,
+    "theory_hours": 1.6,
+    "foco_sp": true,
+    "foco_rp": false,
+    "high_yield": true,
+    "total_estimated_hours": 3.6
+  },
+  {
+    "name": "Arritmias, Síncope e PCR",
+    "id": 68051,
+    "theory_hours": 2.0,
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "name": "Constipação Intestinal",
+    "id": 68052,
+    "theory_hours": 1.0,
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "total_estimated_hours": 3.0
+  },
+  {
+    "name": "Síndromes Diarreicas e Disabsortivas",
+    "id": 68053,
+    "theory_hours": 2.0,
+    "foco_sp": true,
+    "foco_rp": false,
+    "high_yield": true,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "name": "Desordens Genéticas e Erros Inatos do Metabolismo",
+    "id": 68038,
+    "theory_hours": 1.5,
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "name": "Infecção do Trato Urinário (ITU)",
+    "id": 68046,
+    "theory_hours": 1.2,
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "total_estimated_hours": 3.2
+  },
+  {
+    "name": "Doenças Exantemáticas",
+    "id": 68048,
+    "theory_hours": 1.54,
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 3.54
+  },
+  {
+    "name": "Imunizações",
+    "id": 68044,
+    "theory_hours": 2.5,
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 4.5
+  },
+  {
+    "name": "Parasitoses",
+    "id": 68042,
+    "theory_hours": 1.0,
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "total_estimated_hours": 3.0
+  },
+  {
+    "name": "Período Neonatal: Doenças Hematológicas",
+    "id": 68035,
+    "theory_hours": 1.29,
+    "foco_sp": false,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 3.29
+  },
+  {
+    "name": "Período Neonatal: Doenças Infecciosas",
+    "id": 68036,
+    "theory_hours": 1.77,
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 3.77
+  },
+  {
+    "name": "Período Neonatal: Doenças do Metabolismo",
+    "id": 68027,
+    "theory_hours": 0.54,
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "total_estimated_hours": 2.54
+  },
+  {
+    "name": "Período Neonatal: Doenças Respiratórias",
+    "id": 68026,
+    "theory_hours": 0.88,
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "total_estimated_hours": 2.88
+  },
+  {
+    "name": "Período Neonatal: Doenças Neurológicas e Sensoriais",
+    "id": 68045,
+    "theory_hours": 1.29,
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "total_estimated_hours": 3.29
+  },
+  {
+    "name": "Sala de Parto",
+    "id": 68039,
+    "theory_hours": 2.26,
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 4.26
+  },
+  {
+    "name": "Alojamento Conjunto e Testes de Triagem Neonatal",
+    "id": 68041,
+    "theory_hours": 1.5,
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "name": "Epilepsia e Síndromes Convulsivas",
+    "id": 68049,
+    "theory_hours": 1.5,
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "name": "Distúrbios Carenciais",
+    "id": 68054,
+    "theory_hours": 1.5,
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "name": "Nutrição na Pediatria",
+    "id": 68047,
+    "theory_hours": 1.5,
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "name": "Nariz, Ouvido e Laringe",
+    "id": 68030,
+    "theory_hours": 1.5,
+    "foco_sp": false,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "name": "Distúrbios Obstrutivos",
+    "id": 68028,
+    "theory_hours": 2.5,
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 4.5
+  },
+  {
+    "name": "Segurança e Violência na Infância",
+    "id": 68029,
+    "theory_hours": 1.0,
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "total_estimated_hours": 3.0
+  },
+  {
+    "name": "Avaliação e Transtornos do Comportamento na Infância e Adolescência",
+    "id": 68032,
+    "theory_hours": 1.5,
+    "foco_sp": true,
+    "foco_rp": false,
+    "high_yield": true,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "name": "Distúrbios Estaturais e Puberais",
+    "id": 68033,
+    "theory_hours": 1.5,
+    "foco_sp": true,
+    "foco_rp": false,
+    "high_yield": true,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "name": "Crescimento e Desenvolvimento na Infância e Adolescência",
+    "id": 68034,
+    "theory_hours": 1.26,
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 3.26
+  },
+  {
+    "name": "Sepse, Choque Séptico e Outros tipos de Choque",
+    "id": 68031,
+    "theory_hours": 2.0,
+    "foco_sp": false,
+    "foco_rp": true,
+    "high_yield": true,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "name": "Vasculites",
+    "id": 82794,
+    "theory_hours": 2.0,
+    "foco_sp": true,
+    "foco_rp": false,
+    "high_yield": true,
+    "total_estimated_hours": 4.0
+  }
+]

@@ -1,361 +1,745 @@
 [
   {
-    "area": "Medicina Preventiva",
+    "area": "Cirurgia",
     "macroThemes": [
       {
-        "theme": "Epidemiologia e Bioestatística",
+        "theme": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
         "highYield": true,
         "dbSubtemas": [
-          "Bioestatística e Testes de Hipótese",
-          "Estudos Observacionais (Coorte, Caso-Controle, Transversal, Ecológico)"
+          "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)"
         ],
-        "details": [
-          "Dominar cálculo e interpretação de medidas de associação (RR, OR) e impacto (RA, RRR, RRA, NNT).",
-          "Revisar testes de hipótese (t, qui-quadrado, ANOVA) e conceitos de significância estatística (p, IC).",
-          "Diferenciar tipos de estudos observacionais e seus vieses, com foco em aplicação prática em questões.",
-          "Entender validade interna/externa, confundimento e interação em estudos epidemiológicos."
-        ]
+        "details": []
       },
       {
-        "theme": "SUS e Políticas de Saúde",
-        "highYield": true,
-        "dbSubtemas": [
-          "Legislação e Financiamento do SUS",
-          "Modelos de Atenção e Reforma Sanitária",
-          "Princípios e Diretrizes do SUS",
-          "Redes de Atenção à Saúde"
-        ],
-        "details": [
-          "Revisar princípios doutrinários (universalidade, equidade, integralidade) e organizativos (descentralização, regionalização, hierarquização, participação social).",
-          "Estudar a Lei 8080/90 e a NOB/NOAS, com ênfase em financiamento (teto federal, PAB, MAC) e blocos de custeio.",
-          "Compreender a Reforma Sanitária e a evolução dos modelos de atenção (sanitarista, médico-assistencial, vigilância em saúde).",
-          "Analisar as Redes de Atenção à Saúde (RAS) e seus pontos de atenção, com foco na APS como ordenadora."
-        ]
-      },
-      {
-        "theme": "Prevenção e Vigilância em Saúde",
-        "highYield": true,
-        "dbSubtemas": [
-          "Níveis de Prevenção e Prevenção Quaternária",
-          "Vigilância em Saúde e Notificação Compulsória"
-        ],
-        "details": [
-          "Diferenciar prevenção primária, secundária, terciária e quaternária, com exemplos práticos.",
-          "Conhecer a lista de doenças de notificação compulsória e os fluxos do SINAN.",
-          "Entender os conceitos de vigilância epidemiológica, sanitária, ambiental e em saúde do trabalhador.",
-          "Aplicar os níveis de prevenção em situações clínicas e de saúde coletiva."
-        ]
-      },
-      {
-        "theme": "Saúde do Trabalhador e Transição Demográfica",
+        "theme": "Abdome Agudo Vascular e Isquemia Mesentérica",
         "highYield": false,
         "dbSubtemas": [
-          "Saúde Ocupacional e do Trabalhador",
-          "Transição Demográfica e Epidemiológica"
+          "Abdome Agudo Vascular e Isquemia Mesentérica"
         ],
-        "details": [
-          "Revisar principais doenças ocupacionais, acidentes de trabalho e a Política Nacional de Saúde do Trabalhador.",
-          "Estudar a transição demográfica (envelhecimento populacional) e epidemiológica (carga de doenças crônicas).",
-          "Relacionar os modelos de vigilância em saúde do trabalhador com a atenção primária.",
-          "Analisar indicadores de saúde e sua relação com as transições."
-        ]
+        "details": []
       },
       {
-        "theme": "Ética e Bioética em Medicina",
+        "theme": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
         "highYield": true,
         "dbSubtemas": [
-          "Ética Médica e Bioética"
+          "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)"
         ],
-        "details": [
-          "Revisar princípios bioéticos (autonomia, beneficência, não maleficência, justiça) e sua aplicação em dilemas.",
-          "Estudar o Código de Ética Médica, com foco em sigilo, consentimento e documentação.",
-          "Abordar temas como terminalidade, distanásia, eutanásia e cuidados paliativos.",
-          "Conhecer os aspectos éticos da pesquisa com seres humanos (Resolução 466/12)."
-        ]
+        "details": []
+      },
+      {
+        "theme": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+        "highYield": false,
+        "dbSubtemas": [
+          "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+        "highYield": true,
+        "dbSubtemas": [
+          "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+        "highYield": true,
+        "dbSubtemas": [
+          "Litíase Biliar, Colecistite, Coledocolitíase e Colangite"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Hiperplasia Prostática Benigna (HPB) e Litíase Urinária",
+        "highYield": false,
+        "dbSubtemas": [
+          "Hiperplasia Prostática Benigna (HPB) e Litíase Urinária"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Fundamentos da Anestesiologia, Farmacologia e Bloqueios",
+        "highYield": false,
+        "dbSubtemas": [
+          "Fundamentos da Anestesiologia, Farmacologia e Bloqueios"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Aneurismas de Aorta Abdominal e Torácica",
+        "highYield": false,
+        "dbSubtemas": [
+          "Aneurismas de Aorta Abdominal e Torácica"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Cirurgia Bariátrica e Metabólica",
+        "highYield": true,
+        "dbSubtemas": [
+          "Cirurgia Bariátrica e Metabólica"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Cirurgia Pediátrica e Malformações Digestivas Neonatais",
+        "highYield": true,
+        "dbSubtemas": [
+          "Cirurgia Pediátrica e Malformações Digestivas Neonatais"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Cirurgia Torácica Geral e Doenças Pleurais",
+        "highYield": false,
+        "dbSubtemas": [
+          "Cirurgia Torácica Geral e Doenças Pleurais"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+        "highYield": true,
+        "dbSubtemas": [
+          "Coloproctologia: Doenças Orificiais e Afecções Colorretais"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+        "highYield": true,
+        "dbSubtemas": [
+          "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Abordagem Cirúrgica das Doenças Inflamatórias Intestinais (Crohn e RCU)",
+        "highYield": false,
+        "dbSubtemas": [
+          "Abordagem Cirúrgica das Doenças Inflamatórias Intestinais (Crohn e RCU)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+        "highYield": true,
+        "dbSubtemas": [
+          "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Doença Arterial Obstrutiva Periférica e Oclusões Arteriais Agudas",
+        "highYield": false,
+        "dbSubtemas": [
+          "Doença Arterial Obstrutiva Periférica e Oclusões Arteriais Agudas"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Insuficiência Venosa Crônica e Trombose Venosa Profunda (TVP)",
+        "highYield": false,
+        "dbSubtemas": [
+          "Insuficiência Venosa Crônica e Trombose Venosa Profunda (TVP)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Cicatrização, Tratamento de Feridas, Enxertos e Retalhos",
+        "highYield": true,
+        "dbSubtemas": [
+          "Cicatrização, Tratamento de Feridas, Enxertos e Retalhos"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Técnica Operatória, Diérese, Hemostasia e Síntese (Fios Cirúrgicos)",
+        "highYield": false,
+        "dbSubtemas": [
+          "Técnica Operatória, Diérese, Hemostasia e Síntese (Fios Cirúrgicos)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+        "highYield": true,
+        "dbSubtemas": [
+          "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+        "highYield": true,
+        "dbSubtemas": [
+          "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Atendimento ao Paciente Queimado e Reposição Volêmica",
+        "highYield": false,
+        "dbSubtemas": [
+          "Atendimento ao Paciente Queimado e Reposição Volêmica"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Particularidades das Queimaduras na Faixa Etária Pediátrica",
+        "highYield": false,
+        "dbSubtemas": [
+          "Particularidades das Queimaduras na Faixa Etária Pediátrica"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Distúrbios Motores do Esôfago, Megaesôfago e Síndrome Disfágica",
+        "highYield": false,
+        "dbSubtemas": [
+          "Distúrbios Motores do Esôfago, Megaesôfago e Síndrome Disfágica"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Doença do Refluxo Gastroesofágico (DRGE) e Úlcera Péptica",
+        "highYield": false,
+        "dbSubtemas": [
+          "Doença do Refluxo Gastroesofágico (DRGE) e Úlcera Péptica"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+        "highYield": true,
+        "dbSubtemas": [
+          "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+        "highYield": false,
+        "dbSubtemas": [
+          "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Trauma de Face e Pescoço (Trauma Cervical e Fraturas Maxilofaciais)",
+        "highYield": false,
+        "dbSubtemas": [
+          "Trauma de Face e Pescoço (Trauma Cervical e Fraturas Maxilofaciais)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+        "highYield": true,
+        "dbSubtemas": [
+          "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Oncologia Cutânea: Melanoma, CBC e CEC",
+        "highYield": true,
+        "dbSubtemas": [
+          "Oncologia Cutânea: Melanoma, CBC e CEC"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Neoplasias do Trato Gastrointestinal (Esôfago, Estômago, Pâncreas e Cólon)",
+        "highYield": true,
+        "dbSubtemas": [
+          "Neoplasias do Trato Gastrointestinal (Esôfago, Estômago, Pâncreas e Cólon)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Uro-Oncologia: Câncer de Próstata, Rim, Bexiga e Testículo",
+        "highYield": false,
+        "dbSubtemas": [
+          "Uro-Oncologia: Câncer de Próstata, Rim, Bexiga e Testículo"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+        "highYield": false,
+        "dbSubtemas": [
+          "Fraturas Ósseas e Princípios Gerais de Osteossíntese"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Ortopedia Pediátrica: Displasia do Quadril, Pé Torto e Epifisiólise",
+        "highYield": false,
+        "dbSubtemas": [
+          "Ortopedia Pediátrica: Displasia do Quadril, Pé Torto e Epifisiólise"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Luxações Articulares e Lesões Ligamentares / Meniscais",
+        "highYield": false,
+        "dbSubtemas": [
+          "Luxações Articulares e Lesões Ligamentares / Meniscais"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Tendinopatias, Bursites e Síndromes por Sobrecarga Musculoesquelética",
+        "highYield": false,
+        "dbSubtemas": [
+          "Tendinopatias, Bursites e Síndromes por Sobrecarga Musculoesquelética"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Neoplasias Ósseas Benignas e Sarcomas Ósseos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Neoplasias Ósseas Benignas e Sarcomas Ósseos"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Câncer de Pulmão, Nódulo Pulmonar Solitário e Tumores do Mediastino",
+        "highYield": false,
+        "dbSubtemas": [
+          "Câncer de Pulmão, Nódulo Pulmonar Solitário e Tumores do Mediastino"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Cirurgia Cardíaca: Revascularização Miocárdica e Cirurgia Valvar",
+        "highYield": false,
+        "dbSubtemas": [
+          "Cirurgia Cardíaca: Revascularização Miocárdica e Cirurgia Valvar"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Cirurgia de Cabeça e Pescoço: Afecções Cervicais Benignas e Cistos Congênitos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Cirurgia de Cabeça e Pescoço: Afecções Cervicais Benignas e Cistos Congênitos"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Sarcomas de Partes Moles",
+        "highYield": false,
+        "dbSubtemas": [
+          "Sarcomas de Partes Moles"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Emergências Oftalmológicas e Patologias Oculares Frequentes",
+        "highYield": false,
+        "dbSubtemas": [
+          "Emergências Oftalmológicas e Patologias Oculares Frequentes"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Polipose Adenomatosa Familiar (PAF) e Síndromes Hereditárias",
+        "highYield": false,
+        "dbSubtemas": [
+          "Polipose Adenomatosa Familiar (PAF) e Síndromes Hereditárias"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Trauma Raquimedular (TRM) e Lesões Vertebrais",
+        "highYield": false,
+        "dbSubtemas": [
+          "Trauma Raquimedular (TRM) e Lesões Vertebrais"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Trauma Ortopédico de Extremidades e Síndrome Compartimental",
+        "highYield": false,
+        "dbSubtemas": [
+          "Trauma Ortopédico de Extremidades e Síndrome Compartimental"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Neoplasias de Cabeça e Pescoço e Nódulos Tireoidianos Cirúrgicos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Neoplasias de Cabeça e Pescoço e Nódulos Tireoidianos Cirúrgicos"
+        ],
+        "details": []
       }
     ]
   },
   {
-    "area": "Pediatria",
+    "area": "Clínica Médica",
     "macroThemes": [
       {
-        "theme": "Crescimento e Desenvolvimento na Infância e Adolescência",
-        "highYield": true,
-        "dbSubtemas": [
-          "Curvas de crescimento da OMS (escore Z e percentil para peso, estatura e perímetro cefálico)",
-          "Marcos do desenvolvimento neuropsicomotor (motor, cognitivo, linguagem, social)",
-          "Causas de baixa estatura (familiar, atraso constitucional, patológicas)",
-          "Obesidade infantil: diagnóstico (IMC/idade), comorbidades e abordagem",
-          "Estágios de Tanner e sequência normal da puberdade em meninos e meninas",
-          "Puberdade precoce e atraso puberal",
-          "Sinais de alerta para transtorno do espectro autista e atraso global do desenvolvimento",
-          "Confidencialidade, sexualidade e saúde do adolescente"
-        ],
-        "details": [
-          "Dominar curvas da OMS e interpretação de escore Z/percentis para diagnóstico de baixa estatura, sobrepeso e obesidade.",
-          "Conhecer os marcos do DNPM por faixa etária e os sinais de alerta para atraso e TEA.",
-          "Diferenciar causas de baixa estatura (familiar, constitucional, patológica) e abordar puberdade precoce/atrasada.",
-          "Aplicar os estágios de Tanner na avaliação puberal e abordar saúde do adolescente com confidencialidade."
-        ]
-      },
-      {
-        "theme": "Aleitamento Materno e Introdução Alimentar",
-        "highYield": true,
-        "dbSubtemas": [
-          "Composição do leite (colostro, transição, maduro) e tipos de amamentação",
-          "Vantagens do aleitamento; contraindicações formais (HIV, HTLV) e temporárias",
-          "Manejo de intercorrências: fissuras, ingurgitamento, mastite, baixa produção",
-          "Introdução alimentar (a partir dos 6 meses) e suplementação de ferro e vitamina D"
-        ],
-        "details": [
-          "Conhecer a composição do leite humano e as contraindicações formais (HIV, HTLV) e temporárias ao aleitamento.",
-          "Saber manejar intercorrências comuns da amamentação (fissura, ingurgitamento, mastite).",
-          "Dominar as recomendações de introdução alimentar a partir dos 6 meses e suplementação de ferro e vitamina D.",
-          "Reconhecer vantagens do aleitamento materno exclusivo até 6 meses e complementar até 2 anos."
-        ]
-      },
-      {
-        "theme": "Neonatologia: Sala de Parto e Reanimação",
-        "highYield": true,
-        "dbSubtemas": [
-          "Avaliação da idade gestacional (Capurro, New Ballard) e classificação do RN (PIG/AIG/GIG)",
-          "Cuidados de rotina na sala de parto e alojamento conjunto",
-          "Fluxograma de reanimação neonatal da SBP (RN ≥34 sem e <34 sem)",
-          "Rastreamento por oximetria e conduta inicial no RN cianótico"
-        ],
-        "details": [
-          "Saber avaliar idade gestacional (Capurro, New Ballard) e classificar o RN em PIG/AIG/GIG.",
-          "Dominar o fluxograma de reanimação neonatal da SBP para RN ≥34 e <34 semanas.",
-          "Conhecer os cuidados de rotina na sala de parto e no alojamento conjunto.",
-          "Realizar rastreamento por oximetria e conduta inicial no RN cianótico."
-        ]
-      },
-      {
-        "theme": "Neonatologia: Doenças Respiratórias",
-        "highYield": true,
-        "dbSubtemas": [
-          "Síndrome do desconforto respiratório (doença da membrana hialina) e uso de surfactante",
-          "Taquipneia transitória do RN e síndrome de aspiração meconial"
-        ],
-        "details": [
-          "Diferenciar as principais causas de desconforto respiratório no RN (SDR, TTN, SAM).",
-          "Conhecer o uso de surfactante na doença da membrana hialina.",
-          "Abordar a taquipneia transitória do RN e a síndrome de aspiração meconial.",
-          "Reconhecer critérios de gravidade e indicações de suporte ventilatório."
-        ]
-      },
-      {
-        "theme": "Neonatologia: Doenças Infecciosas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Sepse neonatal precoce e tardia: fatores de risco, clínica e conduta",
-          "Infecções congênitas (STORCH): sífilis, toxoplasmose, rubéola, CMV, Zika",
-          "Rastreamento, achados clínicos e conduta na sífilis congênita"
-        ],
-        "details": [
-          "Diferenciar sepse neonatal precoce e tardia, com fatores de risco e conduta.",
-          "Conhecer as infecções do grupo STORCH e suas manifestações congênitas.",
-          "Saber rastrear e tratar sífilis congênita.",
-          "Reconhecer a importância do pré-natal na prevenção das infecções congênitas."
-        ]
-      },
-      {
-        "theme": "Neonatologia: Doenças Hematológicas e Metabólicas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Icterícia fisiológica vs patológica; incompatibilidade ABO e Rh",
-          "Indicações de fototerapia e exsanguineotransfusão; kernicterus",
-          "Doenças triadas no teste do pezinho (hipotireoidismo congênito, fenilcetonúria, anemia falciforme e outras)",
-          "Testes de triagem: pezinho (biológico), orelhinha (auditivo), olhinho (reflexo vermelho), coraçãozinho (oximetria)"
-        ],
-        "details": [
-          "Diferenciar icterícia fisiológica de patológica e conhecer as indicações de fototerapia e exsanguineotransfusão.",
-          "Conhecer as doenças triadas no teste do pezinho e a conduta diante de alterações.",
-          "Saber os testes de triagem neonatal (pezinho, orelhinha, olhinho, coraçãozinho).",
-          "Reconhecer kernicterus e suas sequelas."
-        ]
-      },
-      {
-        "theme": "Cardiopatias Congênitas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Cardiopatias acianóticas (CIV, CIA, PCA, coarctação de aorta)",
-          "Cardiopatias cianóticas (Tetralogia de Fallot, transposição de grandes vasos)",
-          "Sopro inocente vs patológico; sinais de alerta"
-        ],
-        "details": [
-          "Diferenciar cardiopatias acianóticas (CIV, CIA, PCA, coarctação) e cianóticas (Tetralogia de Fallot, TGV).",
-          "Reconhecer sopros inocentes e sinais de alerta para cardiopatia estrutural.",
-          "Conhecer a apresentação clínica e os exames complementares (ECG, Rx tórax, ECO).",
-          "Abordar complicações e indicações cirúrgicas."
-        ]
-      },
-      {
-        "theme": "Doenças Exantemáticas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Sarampo, rubéola, eritema infeccioso, exantema súbito, escarlatina e varicela",
-          "Período de incubação, pródromo e progressão do exantema de cada doença"
-        ],
-        "details": [
-          "Conhecer as características clínicas de cada doença exantemática (sarampo, rubéola, eritema infeccioso, exantema súbito, escarlatina, varicela).",
-          "Diferenciar os períodos de incubação, pródromos e progressão do exantema.",
-          "Saber diagnosticar e manejar complicações.",
-          "Conhecer as medidas de prevenção e notificação."
-        ]
-      },
-      {
-        "theme": "Doenças Respiratórias na Infância",
-        "highYield": true,
-        "dbSubtemas": [
-          "Bronquiolite viral aguda (VSR): diagnóstico clínico e manejo de suporte",
-          "Crupe viral, epiglotite e laringites; otite média aguda e sinusite",
-          "Diagnóstico e tratamento de manutenção e crise da asma na criança",
-          "Pneumonias por faixa etária (etiologia, clínica, critérios de internação, antibiótico)"
-        ],
-        "details": [
-          "Diagnosticar e manejar bronquiolite viral aguda (suporte, indicações de internação).",
-          "Diferenciar crupe viral, epiglotite e laringites, e tratar otite média aguda e sinusite.",
-          "Dominar o tratamento de manutenção e crise de asma na criança.",
-          "Conhecer a etiologia das pneumonias por faixa etária e os critérios de internação e escolha de antibiótico."
-        ]
-      },
-      {
-        "theme": "Doenças Infecciosas e Parasitárias",
-        "highYield": true,
-        "dbSubtemas": [
-          "Principais helmintíases (ascaridíase, ancilostomíase, enterobíase, teníase) e protozooses (giardíase, amebíase)",
-          "Larva migrans, estrongiloidíase e esquistossomose",
-          "Ciclos, clínica e tratamento antiparasitário"
-        ],
-        "details": [
-          "Conhecer os ciclos, manifestações clínicas e tratamento das principais helmintíases e protozooses.",
-          "Abordar larva migrans, estrongiloidíase e esquistossomose.",
-          "Saber indicar antiparasitários corretamente.",
-          "Reconhecer complicações e medidas preventivas."
-        ]
-      },
-      {
-        "theme": "Gastroenterologia Pediátrica",
-        "highYield": true,
-        "dbSubtemas": [
-          "Fisiopatologia da diarreia (osmótica, secretora, invasiva) e principais agentes",
-          "Avaliação do estado de hidratação e Planos A, B e C do Ministério da Saúde",
-          "Distúrbios do sódio na desidratação; hidratação parenteral (Holliday-Segar)",
-          "Uso de zinco, probióticos e indicações de antibiótico na diarreia infantil"
-        ],
-        "details": [
-          "Diferenciar os tipos de diarreia (osmótica, secretora, invasiva) e seus agentes.",
-          "Avaliar o estado de hidratação e aplicar os Planos A, B e C do Ministério da Saúde.",
-          "Corrigir distúrbios do sódio na desidratação e calcular hidratação parenteral (Holliday-Segar).",
-          "Conhecer o uso de zinco, probióticos e antibióticos na diarreia."
-        ]
-      },
-      {
-        "theme": "Nefrologia Pediátrica",
-        "highYield": true,
-        "dbSubtemas": [
-          "Infecção do trato urinário na criança: diagnóstico, tratamento e investigação de imagem",
-          "Glomerulonefrite difusa aguda pós-estreptocócica: clínica e evolução",
-          "Síndrome nefrótica (lesões mínimas) vs síndrome nefrítica (GNPE)"
-        ],
-        "details": [
-          "Diagnosticar e tratar ITU na criança, com indicação de investigação de imagem.",
-          "Reconhecer a clínica e evolução da glomerulonefrite difusa aguda pós-estreptocócica.",
-          "Diferenciar síndrome nefrótica (lesões mínimas) de síndrome nefrítica.",
-          "Conhecer complicações e tratamento (corticoides, diuréticos)."
-        ]
-      },
-      {
-        "theme": "Hematologia Pediátrica",
-        "highYield": true,
-        "dbSubtemas": [
-          "Anemia ferropriva: rastreamento, profilaxia e tratamento; anemias hemolíticas na criança"
-        ],
-        "details": [
-          "Rastrear, prevenir e tratar anemia ferropriva na infância.",
-          "Conhecer as principais anemias hemolíticas na criança (ex: anemia falciforme, esferocitose).",
-          "Interpretar exames laboratoriais (hemograma, ferritina, eletroforese de Hb).",
-          "Abordar complicações e seguimento."
-        ]
-      },
-      {
-        "theme": "Endocrinologia Pediátrica",
-        "highYield": true,
-        "dbSubtemas": [
-          "Cetoacidose diabética, anafilaxia e intoxicações na criança",
-          "Deficiências de micronutrientes (vitamina A, D, ferro, zinco, iodo)",
-          "Desnutrição energético-proteica: marasmo, kwashiorkor e manejo das complicações"
-        ],
-        "details": [
-          "Manejar cetoacidose diabética na criança (hidratação, insulina, eletrólitos).",
-          "Reconhecer e tratar deficiências de micronutrientes (vitamina A, D, ferro, zinco, iodo).",
-          "Diagnosticar e tratar desnutrição energético-proteica (marasmo, kwashiorkor).",
-          "Conhecer as complicações da desnutrição e o manejo inicial."
-        ]
-      },
-      {
-        "theme": "Imunizações",
-        "highYield": true,
-        "dbSubtemas": [
-          "Esquema do primeiro ano de vida (BCG, hepatite B, penta, VIP/VOP, pneumo, rota, meningo)",
-          "Eventos adversos pós-vacinais e conduta",
-          "Vacinas de vírus vivos vs inativados e contraindicações específicas",
-          "Situações especiais: prematuros, imunodeprimidos, gestantes e comunicantes"
-        ],
-        "details": [
-          "Conhecer o calendário vacinal do primeiro ano de vida.",
-          "Identificar eventos adversos pós-vacinais e conduta.",
-          "Diferenciar vacinas de vírus vivos e inativados e contraindicações.",
-          "Saber vacinar em situações especiais (prematuros, imunodeprimidos, gestantes)."
-        ]
-      },
-      {
-        "theme": "Emergências Pediátricas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Suporte básico e avançado de vida em pediatria (PALS) e reconhecimento de choque",
-          "Crise convulsiva febril simples vs complexa: conduta e investigação",
-          "Traumatismo cranioencefálico (regras do PECARN para TC)"
-        ],
-        "details": [
-          "Dominar o suporte básico e avançado de vida em pediatria (PALS).",
-          "Reconhecer e tratar choque na criança.",
-          "Diferenciar crise convulsiva febril simples de complexa e conduzir investigação.",
-          "Aplicar as regras do PECARN para indicação de TC no TCE."
-        ]
-      },
-      {
-        "theme": "Reumatologia Pediátrica",
-        "highYield": true,
-        "dbSubtemas": [
-          "Doença de Kawasaki: critérios diagnósticos, risco de aneurisma coronariano e tratamento (IVIG + AAS)"
-        ],
-        "details": [
-          "Conhecer os critérios diagnósticos da Doença de Kawasaki.",
-          "Avaliar o risco de aneurisma coronariano.",
-          "Tratar com IVIG e AAS.",
-          "Reconhecer complicações e seguimento."
-        ]
-      },
-      {
-        "theme": "Violência e Maus-Tratos na Infância",
-        "highYield": true,
-        "dbSubtemas": [
-          "Identificação de maus-tratos (físico, sexual, negligência) e notificação/Conselho Tutelar"
-        ],
-        "details": [
-          "Identificar sinais de maus-tratos físicos, sexuais e negligência.",
-          "Conhecer o fluxo de notificação ao Conselho Tutelar.",
-          "Abordar a criança e a família de forma ética e acolhedora.",
-          "Conhecer os aspectos legais e a importância da denúncia."
-        ]
-      },
-      {
-        "theme": "Outros Tópicos",
+        "theme": "Políticas de Saúde Mental e Atenção Psicossocial (CAPS)",
         "highYield": false,
         "dbSubtemas": [
-          "Complicações e profilaxia pós-exposição"
+          "Políticas de Saúde Mental e Atenção Psicossocial (CAPS)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+        "highYield": true,
+        "dbSubtemas": [
+          "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Valvopatias Adquiridas e Miocardiopatias",
+        "highYield": false,
+        "dbSubtemas": [
+          "Valvopatias Adquiridas e Miocardiopatias"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+        "highYield": true,
+        "dbSubtemas": [
+          "Hipertensão Arterial Sistêmica e Crises Hipertensivas"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+        "highYield": true,
+        "dbSubtemas": [
+          "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+        "highYield": true,
+        "dbSubtemas": [
+          "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+        "highYield": true,
+        "dbSubtemas": [
+          "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Dermatoses Infecciosas, Hanseníase e Leishmanioses",
+        "highYield": true,
+        "dbSubtemas": [
+          "Dermatoses Infecciosas, Hanseníase e Leishmanioses"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+        "highYield": true,
+        "dbSubtemas": [
+          "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+        "highYield": true,
+        "dbSubtemas": [
+          "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+        "highYield": false,
+        "dbSubtemas": [
+          "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+        "highYield": true,
+        "dbSubtemas": [
+          "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+        "highYield": true,
+        "dbSubtemas": [
+          "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Hepatites Virais (A, B, C) e Icterícias Metabólicas",
+        "highYield": false,
+        "dbSubtemas": [
+          "Hepatites Virais (A, B, C) e Icterícias Metabólicas"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Meningites, Encefalites e Infecções do SNC",
+        "highYield": false,
+        "dbSubtemas": [
+          "Meningites, Encefalites e Infecções do SNC"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+        "highYield": false,
+        "dbSubtemas": [
+          "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+        "highYield": true,
+        "dbSubtemas": [
+          "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Infecções Sexualmente Transmissíveis (ISTs) no Adulto",
+        "highYield": false,
+        "dbSubtemas": [
+          "Infecções Sexualmente Transmissíveis (ISTs) no Adulto"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Celulite, Erisipela, Osteomielite e Infecções de Partes Moles",
+        "highYield": false,
+        "dbSubtemas": [
+          "Celulite, Erisipela, Osteomielite e Infecções de Partes Moles"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Endocardite Infecciosa e Sepse de Foco Endovascular",
+        "highYield": false,
+        "dbSubtemas": [
+          "Endocardite Infecciosa e Sepse de Foco Endovascular"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+        "highYield": false,
+        "dbSubtemas": [
+          "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+        "highYield": false,
+        "dbSubtemas": [
+          "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+        "highYield": false,
+        "dbSubtemas": [
+          "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+        "highYield": true,
+        "dbSubtemas": [
+          "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+        "highYield": false,
+        "dbSubtemas": [
+          "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Cefaleias Primárias (Enxaqueca, Tensional) e Secundárias de Alarme",
+        "highYield": false,
+        "dbSubtemas": [
+          "Cefaleias Primárias (Enxaqueca, Tensional) e Secundárias de Alarme"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+        "highYield": true,
+        "dbSubtemas": [
+          "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Neurointensivismo, Morte Encefálica e Cuidados Críticos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Neurointensivismo, Morte Encefálica e Cuidados Críticos"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+        "highYield": false,
+        "dbSubtemas": [
+          "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+        "highYield": true,
+        "dbSubtemas": [
+          "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Leucemias, Linfomas e Mieloma Múltiplo",
+        "highYield": true,
+        "dbSubtemas": [
+          "Leucemias, Linfomas e Mieloma Múltiplo"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+        "highYield": true,
+        "dbSubtemas": [
+          "Diagnóstico Diferencial das Anemias e Hemoglobinopatias"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+        "highYield": false,
+        "dbSubtemas": [
+          "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+        "highYield": true,
+        "dbSubtemas": [
+          "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+        "highYield": false,
+        "dbSubtemas": [
+          "Doenças Pulmonares Intersticiais e Fibrose Pulmonar"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+        "highYield": true,
+        "dbSubtemas": [
+          "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+        "highYield": false,
+        "dbSubtemas": [
+          "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+        "highYield": true,
+        "dbSubtemas": [
+          "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Lúpus Eritematoso Sistêmico (LES), Esclerose Sistêmica e Miopatias Inflamatórias",
+        "highYield": false,
+        "dbSubtemas": [
+          "Lúpus Eritematoso Sistêmico (LES), Esclerose Sistêmica e Miopatias Inflamatórias"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Vasculites Sistêmicas dos Grandes, Médios e Pequenos Vasos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Vasculites Sistêmicas dos Grandes, Médios e Pequenos Vasos"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+        "highYield": true,
+        "dbSubtemas": [
+          "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+        "highYield": false,
+        "dbSubtemas": [
+          "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+        "highYield": false,
+        "dbSubtemas": [
+          "Toxicologia Clínica e Acidentes por Animais Peçonhentos"
         ],
         "details": []
       }
@@ -365,1659 +749,636 @@
     "area": "Ginecologia e Obstetrícia",
     "macroThemes": [
       {
-        "theme": "Pré-Natal",
-        "highYield": true,
+        "theme": "Câncer de Colo Uterino e Lesões Precursoras",
+        "highYield": false,
         "dbSubtemas": [
-          "Exames de rotina por trimestre e cálculo da idade gestacional/DPP",
-          "Suplementação de ácido fólico e ferro; ganho de peso na gestação",
-          "Vacinação na gestação (dTpa, hepatite B, influenza) e contraindicadas",
-          "Rastreamento de Streptococcus do grupo B e profilaxia intraparto"
+          "Câncer de Colo Uterino e Lesões Precursoras"
         ],
-        "details": [
-          "Dominar o calendário de consultas e exames de rotina por trimestre, incluindo ultrassonografias e testes laboratoriais.",
-          "Conhecer as doses e indicações de suplementação de ácido fólico e ferro, além das metas de ganho de peso por IMC.",
-          "Saber quais vacinas são recomendadas, contraindicadas e os esquemas de cada uma na gestação.",
-          "Entender o rastreamento de Streptococcus do grupo B (idade gestacional, coleta e profilaxia intraparto)."
-        ]
+        "details": []
       },
       {
-        "theme": "Síndromes Hipertensivas da Gestação",
+        "theme": "Assistência Pré-Natal de Baixo e Alto Risco",
         "highYield": true,
         "dbSubtemas": [
-          "Classificação: HAS crônica, pré-eclâmpsia, eclâmpsia e sobreposta",
-          "Critérios de gravidade e iminência de eclâmpsia",
-          "Síndrome HELLP: diagnóstico laboratorial e conduta"
+          "Assistência Pré-Natal de Baixo e Alto Risco"
         ],
-        "details": [
-          "Diferenciar os tipos de síndromes hipertensivas e seus critérios diagnósticos.",
-          "Identificar os critérios de gravidade e os sinais de iminência de eclâmpsia.",
-          "Reconhecer o diagnóstico laboratorial da síndrome HELLP e a conduta imediata.",
-          "Conhecer o tratamento anti-hipertensivo e a profilaxia da eclâmpsia (sulfato de magnésio)."
-        ]
+        "details": []
       },
       {
-        "theme": "Diabetes na Gestação",
+        "theme": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
         "highYield": true,
         "dbSubtemas": [
-          "Diabetes gestacional: rastreamento, TOTG 75g e metas de controle",
-          "Diabetes pré-gestacional e repercussões fetais"
+          "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)"
         ],
-        "details": [
-          "Saber o rastreamento universal com glicemia de jejum e o TOTG 75g com critérios diagnósticos.",
-          "Conhecer as metas glicêmicas e o manejo não farmacológico e farmacológico (insulina).",
-          "Compreender as repercussões fetais do diabetes pré-gestacional (malformações, macrossomia).",
-          "Diferenciar o acompanhamento pré-natal e o momento do parto em cada tipo de diabetes."
-        ]
+        "details": []
       },
       {
-        "theme": "Sangramento da Primeira Metade da Gestação",
-        "highYield": true,
+        "theme": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+        "highYield": false,
         "dbSubtemas": [
-          "Abortamento (ameaça, completo, incompleto, retido, infectado): clínica e conduta",
-          "Gravidez ectópica: diagnóstico e critérios para metotrexato vs cirurgia",
-          "Diagnóstico diferencial por ultrassom e dosagens de beta-hCG",
-          "Doença trofoblástica gestacional (mola completa vs parcial) e seguimento com beta-hCG"
+          "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa"
         ],
-        "details": [
-          "Classificar os tipos de abortamento e definir conduta expectante, medicamentosa ou cirúrgica.",
-          "Diagnosticar gravidez ectópica com beta-hCG e USG, e indicar metotrexato ou cirurgia.",
-          "Interpretar os padrões de beta-hCG e achados ultrassonográficos para diferenciar as causas.",
-          "Reconhecer a mola hidatiforme e o seguimento com beta-hCG para prevenir neoplasia trofoblástica."
-        ]
+        "details": []
       },
       {
-        "theme": "Sangramento da Segunda Metade da Gestação",
+        "theme": "Diabetes Gestacional e Pré-Gestacional",
         "highYield": true,
         "dbSubtemas": [
-          "Descolamento prematuro de placenta vs placenta prévia: quadro e conduta",
-          "Rotura uterina e rotura de vasa prévia"
+          "Diabetes Gestacional e Pré-Gestacional"
         ],
-        "details": [
-          "Diferenciar clinicamente DPP e placenta prévia (dor, sangramento, tônus uterino).",
-          "Conhecer os fatores de risco e o manejo obstétrico de cada condição.",
-          "Identificar rotura uterina e vasa prévia como emergências com alta mortalidade fetal.",
-          "Saber a via de parto e as medidas de ressuscitação materno-fetal."
-        ]
+        "details": []
       },
       {
-        "theme": "Trabalho de parto prematuro",
-        "highYield": true,
+        "theme": "Condições Clínicas Intercorrentes na Gravidez",
+        "highYield": false,
         "dbSubtemas": [
-          "Trabalho de parto prematuro: tocólise e corticoterapia antenatal",
-          "Amniorrexe prematura: diagnóstico, riscos e conduta conforme idade gestacional"
+          "Condições Clínicas Intercorrentes na Gravidez"
         ],
-        "details": [
-          "Diagnosticar trabalho de parto prematuro e indicar tocólise (nifedipino, atosiban).",
-          "Conhecer o esquema de corticoterapia antenatal (betametasona) e suas indicações.",
-          "Avaliar a amniorrexe prematura com exame especular e testes (nitrazina, cristalização).",
-          "Definir conduta expectante vs resolução conforme idade gestacional e sinais de infecção."
-        ]
+        "details": []
       },
       {
-        "theme": "Estática fetal, Pelve e Mecanismo de Parto + Assistência ao Parto",
-        "highYield": true,
+        "theme": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+        "highYield": false,
         "dbSubtemas": [
-          "Tempos do mecanismo de parto (insinuação, descida, rotação, desprendimento)",
-          "Fases clínicas do parto e uso/interpretação do partograma",
-          "Analgesia de parto e assistência ao período expulsivo",
-          "Distocias funcionais, de trajeto e de apresentação; indicações de cesárea e fórceps"
+          "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)"
         ],
-        "details": [
-          "Descrever os tempos do mecanismo de parto e as posições fetais.",
-          "Interpretar o partograma (dilatação, descida, batimentos cardíacos fetais) e identificar distócias.",
-          "Conhecer as opções de analgesia (peridural, raqui) e a assistência no período expulsivo.",
-          "Indicar cesárea ou fórceps conforme as distócias funcionais, de trajeto ou de apresentação."
-        ]
+        "details": []
       },
       {
-        "theme": "Avaliação da Vitalidade Fetal",
-        "highYield": true,
+        "theme": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+        "highYield": false,
         "dbSubtemas": [
-          "Avaliação da vitalidade fetal: cardiotocografia, perfil biofísico e Doppler",
-          "Restrição de crescimento fetal: classificação e dopplerfluxometria"
+          "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)"
         ],
-        "details": [
-          "Interpretar cardiotocografia basal e com contrações (categorias I, II, III).",
-          "Conhecer os componentes do perfil biofísico fetal e sua pontuação.",
-          "Aplicar a dopplerfluxometria (artéria umbilical, cerebral média) na avaliação fetal.",
-          "Classificar a restrição de crescimento fetal (simétrica vs assimétrica) e conduzir conforme a vitalidade."
-        ]
+        "details": []
       },
       {
-        "theme": "Puerpério",
-        "highYield": true,
+        "theme": "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário",
+        "highYield": false,
         "dbSubtemas": [
-          "Puerpério fisiológico e patológico; hemorragia pós-parto (4 T) e atonia uterina",
-          "Infecção puerperal e mastite puerperal"
+          "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário"
         ],
-        "details": [
-          "Reconhecer as alterações fisiológicas do puerpério e os sinais de alarme.",
-          "Diagnosticar e tratar hemorragia pós-parto com a abordagem dos 4 T (tônus, trauma, tecido, trombina).",
-          "Identificar infecção puerperal (endometrite) e mastite, com antibióticos adequados.",
-          "Saber a prevenção da hemorragia (ocitocina) e o manejo da atonia uterina."
-        ]
+        "details": []
       },
       {
-        "theme": "Ciclo Menstrual",
+        "theme": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
         "highYield": true,
         "dbSubtemas": [
-          "Eixo hipotálamo-hipófise-ovário e fases folicular, ovulatória e lútea",
-          "Ações de FSH, LH, estrogênio e progesterona ao longo do ciclo",
-          "Puberdade feminina, telarca, pubarca e menarca"
+          "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos"
         ],
-        "details": [
-          "Descrever a fisiologia do eixo HHO e as fases do ciclo menstrual.",
-          "Relacionar as ações hormonais em cada fase (proliferação, secreção, menstruação).",
-          "Conhecer os marcos da puberdade feminina e suas variantes normais.",
-          "Entender os mecanismos de feedback positivo e negativo."
-        ]
+        "details": []
       },
       {
-        "theme": "Amenorreias e Síndrome dos Ovários Policísticos",
+        "theme": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
         "highYield": true,
         "dbSubtemas": [
-          "Amenorreia primária e secundária: investigação por compartimentos",
-          "Síndrome dos ovários policísticos: critérios de Rotterdam e manejo",
-          "Hiperprolactinemia e insuficiência ovariana prematura"
+          "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)"
         ],
-        "details": [
-          "Investigar amenorreia por compartimentos (útero, ovário, hipófise, hipotálamo).",
-          "Aplicar os critérios de Rotterdam para SOP e manejar com anticoncepcionais, metformina.",
-          "Diagnosticar hiperprolactinemia (prolactina, RNM) e insuficiência ovariana prematura (FSH).",
-          "Diferenciar as causas de amenorreia e indicar exames complementares."
-        ]
+        "details": []
       },
       {
-        "theme": "Climatério",
-        "highYield": true,
+        "theme": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+        "highYield": false,
         "dbSubtemas": [
-          "Transição menopáusica e diagnóstico da menopausa",
-          "Esquemas de TRH (estrogênio isolado vs combinado) e riscos",
-          "Indicações e contraindicações da terapia de reposição hormonal",
-          "Manejo não hormonal dos sintomas e rastreamento de osteoporose"
+          "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)"
         ],
-        "details": [
-          "Definir menopausa e transição menopáusica (critérios STRAW).",
-          "Conhecer os esquemas de TRH (isolado vs combinado) e seus riscos (mama, trombose).",
-          "Indicar TRH conforme sintomas, idade e contraindicações.",
-          "Manejar sintomas sem hormônios e rastrear osteoporose (DEXA)."
-        ]
+        "details": []
       },
       {
-        "theme": "Sangramento Uterino Anormal",
-        "highYield": true,
+        "theme": "Anatomia Cirúrgica e Estruturas Pélvicas Femininas",
+        "highYield": false,
         "dbSubtemas": [
-          "Classificação PALM-COEIN do sangramento uterino anormal",
-          "Adenomiose e pólipos endometriais",
-          "Leiomioma uterino: classificação FIGO, clínica e tratamento"
+          "Anatomia Cirúrgica e Estruturas Pélvicas Femininas"
         ],
-        "details": [
-          "Classificar o sangramento uterino anormal pela classificação PALM-COEIN.",
-          "Diagnosticar adenomiose e pólipos por USG e histeroscopia.",
-          "Classificar miomas pela FIGO e indicar tratamento clínico ou cirúrgico.",
-          "Diferenciar as causas estruturais e não estruturais."
-        ]
+        "details": []
       },
       {
-        "theme": "Endometriose e Dor Pélvica Crônica",
-        "highYield": true,
+        "theme": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+        "highYield": false,
         "dbSubtemas": [
-          "Endometriose: fisiopatologia, dor pélvica, infertilidade e tratamento"
+          "Endometriose, Adenomiose e Dor Pélvica Crônica"
         ],
-        "details": [
-          "Entender a fisiopatologia da endometriose e seus locais de implantação.",
-          "Diagnosticar por clínica, USG com preparo intestinal e RNM.",
-          "Tratar com AINEs, hormônios (ACO, DIU-LNG) e cirurgia.",
-          "Abordar a dor pélvica crônica com diagnóstico diferencial amplo."
-        ]
+        "details": []
       },
       {
-        "theme": "Doença Inflamatória Pélvica e Violência Sexual",
-        "highYield": true,
+        "theme": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+        "highYield": false,
         "dbSubtemas": [
-          "Doença inflamatória pélvica: critérios diagnósticos, tratamento e complicações",
-          "Cervicites por clamídia e gonococo; abordagem sindrômica das IST"
+          "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual"
         ],
-        "details": [
-          "Diagnosticar DIP com critérios clínicos e laboratoriais.",
-          "Tratar DIP com esquema antibiótico (ceftriaxona + doxiciclina + metronidazol).",
-          "Reconhecer complicações (abscesso tubo-ovariano, infertilidade).",
-          "Abordar cervicites por clamídia e gonococo com tratamento sindrômico."
-        ]
+        "details": []
       },
       {
-        "theme": "Vulvovaginites",
-        "highYield": true,
+        "theme": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+        "highYield": false,
         "dbSubtemas": [
-          "Vaginose bacteriana, candidíase e tricomoníase (critérios de Amsel, pH, microscopia)",
-          "Sífilis, herpes genital, cancro mole, HPV e donovanose"
+          "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais"
         ],
-        "details": [
-          "Diferenciar as vulvovaginites por pH, microscopia e critérios de Amsel.",
-          "Tratar vaginose bacteriana (metronidazol), candidíase (fluconazol) e tricomoníase (tinidazol).",
-          "Reconhecer as úlceras genitais (sífilis, herpes, cancro mole) e tratar.",
-          "Conhecer as verrugas por HPV e a prevenção com vacina."
-        ]
+        "details": []
       },
       {
-        "theme": "Rastreamento do Câncer de Colo Uterino",
-        "highYield": true,
+        "theme": "Investigação e Propêdêutica da Infertilidade Conjugal",
+        "highYield": false,
         "dbSubtemas": [
-          "Rastreamento com citologia (Papanicolau): idade de início e periodicidade",
-          "Conduta nas alterações citológicas (ASC-US, LSIL, ASC-H, HSIL, AGC)",
-          "Colposcopia, biópsia e tratamento das lesões precursoras (NIC)",
-          "Papel do HPV, vacinação e estadiamento do câncer de colo"
+          "Investigação e Propêdêutica da Infertilidade Conjugal"
         ],
-        "details": [
-          "Conhecer as diretrizes de rastreamento (início aos 25 anos, periodicidade).",
-          "Manejar resultados citológicos conforme o risco (repete, colposcopia).",
-          "Indicar colposcopia e biópsia, e tratar NIC conforme grau.",
-          "Entender o papel do HPV na carcinogênese e a vacinação."
-        ]
+        "details": []
       },
       {
-        "theme": "Câncer de Mama",
+        "theme": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
         "highYield": true,
         "dbSubtemas": [
-          "Fatores de risco, tipos histológicos e princípios do tratamento do câncer de mama",
-          "Investigação do nódulo (tríade diagnóstica) e derrame papilar",
-          "Nódulos benignos (fibroadenoma, cisto) vs sinais de malignidade",
-          "Rastreamento mamográfico: idade, periodicidade e classificação BI-RADS"
+          "Mastologia Benigna: Fibroadenomas, Cistos e Mastites"
         ],
-        "details": [
-          "Identificar fatores de risco e tipos histológicos (ductal, lobular).",
-          "Investigar nódulo mamário com tríade (mamografia, USG, biópsia).",
-          "Diferenciar nódulos benignos de malignos por imagem e citologia.",
-          "Conhecer o rastreamento mamográfico e a classificação BI-RADS."
-        ]
+        "details": []
       },
       {
-        "theme": "Câncer de Endométrio e Ovário",
-        "highYield": true,
+        "theme": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+        "highYield": false,
         "dbSubtemas": [
-          "Câncer de endométrio: fatores de risco, sangramento pós-menopausa e investigação",
-          "Câncer de ovário: tipos, marcadores e apresentação tardia"
+          "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento"
         ],
-        "details": [
-          "Reconhecer o sangramento pós-menopausa como principal sintoma do câncer de endométrio.",
-          "Investigar com USG transvaginal e biópsia de endométrio.",
-          "Conhecer os tipos de câncer de ovário (epitelial, germinativo) e marcadores (CA-125).",
-          "Entender a apresentação tardia e o estadiamento cirúrgico."
-        ]
+        "details": []
       },
       {
-        "theme": "Incontinência Urinária e Prolapsos de Órgãos Pélvicos",
-        "highYield": true,
+        "theme": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+        "highYield": false,
         "dbSubtemas": [
-          "Incontinência urinária de esforço vs de urgência: diagnóstico e tratamento",
-          "Distopias genitais (prolapsos): classificação POP-Q e conduta"
+          "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade"
         ],
-        "details": [
-          "Diferenciar incontinência de esforço e de urgência por história e exame.",
-          "Tratar com medidas comportamentais, fisioterapia e cirurgia (slings).",
-          "Classificar prolapsos pela POP-Q e indicar tratamento conservador ou cirúrgico.",
-          "Conhecer as complicações dos prolapsos (bexiga, reto)."
-        ]
+        "details": []
       },
       {
-        "theme": "Contracepção",
-        "highYield": true,
+        "theme": "Massas Anexiais e Neoplasias Ovarianas",
+        "highYield": false,
         "dbSubtemas": [
-          "Métodos combinados e de progestagênio isolado: indicações e efeitos adversos",
-          "LARC: DIU de cobre, DIU de levonorgestrel e implante",
-          "Contracepção de emergência e métodos definitivos",
-          "Critérios de Elegibilidade da OMS (categorias 1 a 4)"
+          "Massas Anexiais e Neoplasias Ovarianas"
         ],
-        "details": [
-          "Conhecer os métodos hormonais combinados e de progestagênio isolado.",
-          "Indicar LARC (DIU, implante) como primeira linha para adolescentes.",
-          "Prescrever contracepção de emergência (levonorgestrel, DIU de cobre).",
-          "Aplicar os critérios de elegibilidade da OMS para cada método."
-        ]
+        "details": []
       },
       {
-        "theme": "Infecções na Gestação",
-        "highYield": true,
+        "theme": "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto",
+        "highYield": false,
         "dbSubtemas": [
-          "Transmissão vertical do HIV, hepatites e sífilis",
-          "Infecção urinária, bacteriúria assintomática e pielonefrite na gestação"
+          "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto"
         ],
-        "details": [
-          "Prevenir a transmissão vertical do HIV com TARV e conduta no parto.",
-          "Rastrear e tratar sífilis na gestação (penicilina benzatina).",
-          "Diagnosticar e tratar bacteriúria assintomática e pielonefrite.",
-          "Conhecer as hepatites virais e a profilaxia da transmissão vertical."
-        ]
+        "details": []
       },
       {
-        "theme": "Hirsutismo e Hiperandrogenismo",
+        "theme": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
         "highYield": true,
         "dbSubtemas": [
-          "Hirsutismo e diagnóstico diferencial do hiperandrogenismo"
+          "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias"
         ],
-        "details": [
-          "Avaliar hirsutismo com escala de Ferriman-Gallwey.",
-          "Diferenciar causas ovarianas, adrenais e iatrogênicas.",
-          "Solicitar dosagens de testosterona, DHEA-S e 17-OH-progesterona.",
-          "Tratar conforme a causa (ACO, antiandrogênicos)."
-        ]
+        "details": []
       },
       {
-        "theme": "Doença Trofoblástica Gestacional",
-        "highYield": true,
+        "theme": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+        "highYield": false,
         "dbSubtemas": [
-          "Doença trofoblástica gestacional (mola completa vs parcial) e seguimento com beta-hCG"
+          "Amniorrexe Prematura (RPMO) e Corioamnionite"
         ],
-        "details": [
-          "Diferenciar mola completa e parcial por cariótipo e histologia.",
-          "Diagnosticar por USG (aspecto em cachos de uva) e beta-hCG elevado.",
-          "Realizar esvaziamento uterino e seguimento com beta-hCG semanal.",
-          "Reconhecer a neoplasia trofoblástica gestacional e indicar quimioterapia."
-        ]
+        "details": []
       },
       {
-        "theme": "Síndromes Hipertensivas da Gestação",
+        "theme": "Trabalho de Parto Prematuro e Tocólise",
+        "highYield": false,
+        "dbSubtemas": [
+          "Trabalho de Parto Prematuro e Tocólise"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
         "highYield": true,
         "dbSubtemas": [
-          "Classificação: HAS crônica, pré-eclâmpsia, eclâmpsia e sobreposta",
-          "Critérios de gravidade e iminência de eclâmpsia",
-          "Síndrome HELLP: diagnóstico laboratorial e conduta"
+          "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto"
         ],
-        "details": [
-          "Diferenciar os tipos de síndromes hipertensivas e seus critérios diagnósticos.",
-          "Identificar os critérios de gravidade e os sinais de iminência de eclâmpsia.",
-          "Reconhecer o diagnóstico laboratorial da síndrome HELLP e a conduta imediata.",
-          "Conhecer o tratamento anti-hipertensivo e a profilaxia da eclâmpsia (sulfato de magnésio)."
-        ]
+        "details": []
+      },
+      {
+        "theme": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+        "highYield": true,
+        "dbSubtemas": [
+          "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+        "highYield": false,
+        "dbSubtemas": [
+          "Hemorragias da Segunda Metade: Placenta Prévia e DPP"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+        "highYield": true,
+        "dbSubtemas": [
+          "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+        "highYield": true,
+        "dbSubtemas": [
+          "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Úlceras Genitais e Infecções Sexualmente Transmissíveis na Mulher",
+        "highYield": false,
+        "dbSubtemas": [
+          "Úlceras Genitais e Infecções Sexualmente Transmissíveis na Mulher"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+        "highYield": true,
+        "dbSubtemas": [
+          "Uroginecologia: Incontinência Urinária e Prolapso Genital"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Patologias Benignas e Neoplásicas da Vulva e Vagina",
+        "highYield": false,
+        "dbSubtemas": [
+          "Patologias Benignas e Neoplásicas da Vulva e Vagina"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Fundamentos em Sexualidade Humana e Saúde Reprodutiva",
+        "highYield": false,
+        "dbSubtemas": [
+          "Fundamentos em Sexualidade Humana e Saúde Reprodutiva"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Disfunções Sexuais Femininas e Dispareunia",
+        "highYield": false,
+        "dbSubtemas": [
+          "Disfunções Sexuais Femininas e Dispareunia"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Fístulas Urogenitais e Retovaginais",
+        "highYield": false,
+        "dbSubtemas": [
+          "Fístulas Urogenitais e Retovaginais"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Causas de Mortalidade Materna e Estratégias de Redução",
+        "highYield": false,
+        "dbSubtemas": [
+          "Causas de Mortalidade Materna e Estratégias de Redução"
+        ],
+        "details": []
       }
     ]
   },
   {
-    "area": "Cirurgia Geral",
+    "area": "Pediatria",
     "macroThemes": [
       {
-        "theme": "Abdome Agudo Obstrutivo e Perfurativo",
+        "theme": "Imunodeficiências, Alergias e Anafilaxia na Infância",
         "highYield": true,
         "dbSubtemas": [
-          "Abdome Agudo Obstrutivo",
-          "Abdome Agudo Perfurativo"
+          "Imunodeficiências, Alergias e Anafilaxia na Infância"
         ],
-        "details": [
-          "Causas mais comuns: aderências, hérnias, neoplasias; diagnóstico por clínica e exames de imagem (TC, radiografia).",
-          "Tratamento: suporte clínico inicial, descompressão nasogástrica, correção cirúrgica conforme etiologia e gravidade.",
-          "Perfurações: úlcera péptica, diverticulite, neoplasias; sinais de peritonite e pneumoperitônio ao exame.",
-          "Complicações: sepse, choque, isquemia intestinal; indicação de laparotomia de urgência."
-        ]
+        "details": []
       },
       {
-        "theme": "Anestesiologia e Técnica Operatória",
+        "theme": "Cardiopatias Congênitas Cianogênicas e Acianogênicas",
+        "highYield": true,
+        "dbSubtemas": [
+          "Cardiopatias Congênitas Cianogênicas e Acianogênicas"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+        "highYield": true,
+        "dbSubtemas": [
+          "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Constipação Intestinal Funcional e Orgânica",
         "highYield": false,
         "dbSubtemas": [
-          "Anestesiologia e Técnica Operatória"
+          "Constipação Intestinal Funcional e Orgânica"
         ],
-        "details": [
-          "Tipos de anestesia: geral, regional, local; indicações e contraindicações.",
-          "Monitorização intraoperatória: sinais vitais, capnografia, oximetria.",
-          "Complicações anestésicas: hipotensão, hipoxemia, reações alérgicas, hipertermia maligna.",
-          "Técnica operatória: assepsia, antissepsia, diérese, hemostasia, síntese."
-        ]
+        "details": []
       },
       {
-        "theme": "Aneurismas e Dissecção de Aorta",
+        "theme": "Diarreia Aguda, Reidratação Oral e Doenças Disabsortivas",
         "highYield": true,
         "dbSubtemas": [
-          "Aneurismas e Dissecção de Aorta"
+          "Diarreia Aguda, Reidratação Oral e Doenças Disabsortivas"
         ],
-        "details": [
-          "Aneurisma de aorta abdominal: rastreamento, indicação cirúrgica (diâmetro >5,5cm), reparo aberto vs endovascular.",
-          "Dissecção aórtica: classificação de Stanford, apresentação clínica (dor torácica em rasgadura), diagnóstico por angioTC.",
-          "Tratamento: controle de pressão arterial, cirurgia de emergência para tipo A, manejo clínico para tipo B não complicado.",
-          "Complicações: ruptura, tamponamento cardíaco, isquemia de órgãos-alvo."
-        ]
+        "details": []
       },
       {
-        "theme": "Apendicite Aguda",
-        "highYield": true,
-        "dbSubtemas": [
-          "Apendicite Aguda"
-        ],
-        "details": [
-          "Quadro clínico: dor migratória para fossa ilíaca direita, anorexia, náuseas, febre.",
-          "Diagnóstico: exame físico (Blumberg, Rovsing), laboratório (leucocitose), imagem (USG, TC).",
-          "Tratamento: apendicectomia (aberta ou laparoscópica), antibióticos.",
-          "Complicações: perfuração, abscesso, peritonite; manejo de abscesso com drenagem e antibióticos."
-        ]
-      },
-      {
-        "theme": "Atendimento Inicial ao Trauma (ATLS)",
-        "highYield": true,
-        "dbSubtemas": [
-          "Atendimento Inicial ao Trauma (ATLS)"
-        ],
-        "details": [
-          "ABCDE: vias aéreas com proteção cervical, respiração, circulação com controle de hemorragia, déficit neurológico, exposição.",
-          "Avaliação primária e secundária, reanimação volêmica com cristaloides e hemocomponentes.",
-          "Indicações de intubação, acesso vascular, sondagem vesical e gástrica.",
-          "Transferência para centro de trauma, documentação e prevenção de complicações."
-        ]
-      },
-      {
-        "theme": "Avaliação Pré-operatória e Risco Cirúrgico",
-        "highYield": true,
-        "dbSubtemas": [
-          "Avaliação Pré-operatória e Risco Cirúrgico"
-        ],
-        "details": [
-          "Classificação ASA, avaliação cardiovascular (índice de Lee), pulmonar e renal.",
-          "Manejo de medicações crônicas (antiagregantes, anticoagulantes, hipoglicemiantes).",
-          "Risco cirúrgico em pacientes idosos, obesos, diabéticos, cardiopatas.",
-          "Prevenção de complicações: profilaxia antibiótica, tromboprofilaxia, otimização clínica."
-        ]
-      },
-      {
-        "theme": "Choque e Transfusão no Trauma",
-        "highYield": true,
-        "dbSubtemas": [
-          "Choque e Transfusão no Trauma"
-        ],
-        "details": [
-          "Tipos de choque: hipovolêmico, distributivo, cardiogênico, obstrutivo; reconhecimento no trauma.",
-          "Ressuscitação volêmica: cristaloides, sangue e derivados, protocolo de transfusão maciça.",
-          "Complicações da transfusão: TRALI, TACO, reações hemolíticas, hipocalcemia.",
-          "Manejo da coagulopatia no trauma: ácido tranexâmico, plasma, plaquetas."
-        ]
-      },
-      {
-        "theme": "Cirurgia Bariátrica e Complicações",
+        "theme": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
         "highYield": false,
         "dbSubtemas": [
-          "Cirurgia Bariátrica e Complicações"
+          "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo"
         ],
-        "details": [
-          "Indicações: IMC ≥40 ou ≥35 com comorbidades, falha de tratamento clínico.",
-          "Técnicas: bypass gástrico em Y-de-Roux, sleeve gastrectomy, banda ajustável.",
-          "Complicações precoces: fístula, hemorragia, obstrução; tardias: deficiências nutricionais, dumping.",
-          "Acompanhamento pós-operatório: suplementação vitamínica, mudança de estilo de vida."
-        ]
+        "details": []
       },
       {
-        "theme": "Cirurgia Pediátrica",
-        "highYield": true,
-        "dbSubtemas": [
-          "Cirurgia Pediátrica"
-        ],
-        "details": [
-          "Principais condições: hérnia inguinal, criptorquidia, estenose hipertrófica do piloro, intussuscepção.",
-          "Anomalias congênitas: atresia de esôfago, ânus imperfurado, doença de Hirschsprung.",
-          "Avaliação pré-operatória e cuidados específicos em crianças.",
-          "Emergências cirúrgicas neonatais: volvo, enterocolite necrosante."
-        ]
-      },
-      {
-        "theme": "Cirurgia Torácica e Mediastino",
+        "theme": "Infecção do Trato Urinário (ITU) e Refluxo Vesicoureteral na Infância",
         "highYield": false,
         "dbSubtemas": [
-          "Cirurgia Torácica e Mediastino"
+          "Infecção do Trato Urinário (ITU) e Refluxo Vesicoureteral na Infância"
         ],
-        "details": [
-          "Indicações de toracotomia, videotoracoscopia (VATS).",
-          "Tumores de mediastino: timoma, linfoma, teratoma; síndromes paraneoplásicas.",
-          "Doenças pleurais: derrame pleural, empiema, pneumotórax.",
-          "Câncer de pulmão: estadiamento, ressecção cirúrgica, complicações."
-        ]
+        "details": []
       },
       {
-        "theme": "Cirurgia Vascular Periférica",
+        "theme": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
         "highYield": true,
         "dbSubtemas": [
-          "Cirurgia Vascular Periférica (Isquemia Arterial, Varizes, TVP)"
+          "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas"
         ],
-        "details": [
-          "Isquemia arterial aguda: 6 Ps, diagnóstico, embolectomia, revascularização.",
-          "Doença arterial obstrutiva periférica: claudicação, isquemia crítica, tratamento endovascular e aberto.",
-          "Varizes: indicação cirúrgica, técnicas (safenectomia, laser, espuma).",
-          "TVP: diagnóstico (D-dímero, USG), anticoagulação, prevenção de TEP."
-        ]
+        "details": []
       },
       {
-        "theme": "Colecistite e Colelitíase",
+        "theme": "Calendário Vacinal do PNI e Imunizações Especiais",
         "highYield": true,
         "dbSubtemas": [
-          "Colecistite e Colelitíase"
+          "Calendário Vacinal do PNI e Imunizações Especiais"
         ],
-        "details": [
-          "Colelitíase: fatores de risco, diagnóstico por USG, indicação de colecistectomia.",
-          "Colecistite aguda: clínica (dor, febre, sinal de Murphy), tratamento com antibióticos e colecistectomia precoce.",
-          "Complicações: coledocolitíase, colangite, pancreatite biliar.",
-          "Colecistite alitiásica, enfisematosa, em pacientes críticos."
-        ]
+        "details": []
       },
       {
-        "theme": "Coledocolitíase e Colangite",
-        "highYield": true,
-        "dbSubtemas": [
-          "Coledocolitíase e Colangite"
-        ],
-        "details": [
-          "Coledocolitíase: diagnóstico por USG, colangioRM, CPRE.",
-          "Colangite aguda: tríade de Charcot, pentade de Reynolds, sepse biliar.",
-          "Tratamento: antibióticos, drenagem biliar (CPRE, cirúrgica).",
-          "Complicações: abscesso hepático, sepse, pancreatite."
-        ]
-      },
-      {
-        "theme": "Câncer Colorretal",
-        "highYield": true,
-        "dbSubtemas": [
-          "Câncer Colorretal"
-        ],
-        "details": [
-          "Rastreamento: colonoscopia, pesquisa de sangue oculto, fatores de risco.",
-          "Estadiamento: TNM, exames de imagem (TC, RM), CEA.",
-          "Tratamento: ressecção cirúrgica, quimioterapia adjuvante, radioterapia para reto.",
-          "Síndromes hereditárias: FAP, Lynch; vigilância."
-        ]
-      },
-      {
-        "theme": "Diverticulite Aguda",
+        "theme": "Parasitoses Intestinais: Helmintíases e Protozooses",
         "highYield": false,
         "dbSubtemas": [
-          "Diverticulite Aguda"
+          "Parasitoses Intestinais: Helmintíases e Protozooses"
         ],
-        "details": [
-          "Quadro clínico: dor em fossa ilíaca esquerda, febre, alteração do hábito intestinal.",
-          "Diagnóstico: TC com contraste, classificação de Hinchey.",
-          "Tratamento: casos leves com antibióticos ambulatoriais, casos graves com internação e cirurgia.",
-          "Complicações: abscesso, perfuração, fístula, obstrução."
-        ]
+        "details": []
       },
       {
-        "theme": "Doenças Orificiais",
+        "theme": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
         "highYield": true,
         "dbSubtemas": [
-          "Doenças Orificiais (Hemorroida, Fissura, Fístula)"
+          "Neonatologia: Icterícia Neonatal e Doenças Hematológicas"
         ],
-        "details": [
-          "Hemorroidas: classificação, tratamento clínico (fibras, banhos de assento), procedimentos (ligadura elástica, hemorroidectomia).",
-          "Fissura anal: dor intensa, sangramento, tratamento com pomadas, toxina botulínica, esfincterotomia.",
-          "Fístula anal: secreção purulenta, tratamento cirúrgico (seton, fistulotomia).",
-          "Diagnóstico diferencial: abscesso perianal, doença inflamatória intestinal."
-        ]
+        "details": []
       },
       {
-        "theme": "Doenças do Esôfago",
+        "theme": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
         "highYield": true,
         "dbSubtemas": [
-          "Doenças do Esôfago (DRGE, Acalasia, Câncer)"
+          "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal"
         ],
-        "details": [
-          "DRGE: clínica, diagnóstico (EDA, pHmetria), tratamento clínico e cirúrgico (fundoplicatura).",
-          "Acalasia: disfagia, esofagograma, manometria, tratamento (dilatação, miotomia).",
-          "Câncer de esôfago: fatores de risco, estadiamento, tratamento multimodal.",
-          "Complicações: estenose péptica, esôfago de Barrett."
-        ]
+        "details": []
       },
       {
-        "theme": "Estômago (Úlcera, HDA, Câncer Gástrico)",
-        "highYield": true,
-        "dbSubtemas": [
-          "Estômago (Úlcera, HDA, Câncer Gástrico)"
-        ],
-        "details": [
-          "Úlcera péptica: H. pylori, AINEs, tratamento com IBP e erradicação.",
-          "Hemorragia digestiva alta: estabilização, EDA, tratamento endoscópico, cirurgia se refratário.",
-          "Câncer gástrico: fatores de risco, diagnóstico, estadiamento, gastrectomia.",
-          "Complicações: perfuração, obstrução, anemia."
-        ]
-      },
-      {
-        "theme": "Hérnias da Parede Abdominal",
-        "highYield": true,
-        "dbSubtemas": [
-          "Hérnias da Parede Abdominal"
-        ],
-        "details": [
-          "Tipos: inguinal, femoral, umbilical, incisional; anatomia e classificação.",
-          "Diagnóstico: exame físico, USG, TC.",
-          "Tratamento: herniorrafia, hernioplastia com tela, laparoscopia.",
-          "Complicações: encarceramento, estrangulamento, recorrência."
-        ]
-      },
-      {
-        "theme": "Infecção de Sítio Cirúrgico e Cicatrização",
-        "highYield": true,
-        "dbSubtemas": [
-          "Infecção de Sítio Cirúrgico e Cicatrização"
-        ],
-        "details": [
-          "Classificação de feridas: limpa, contaminada, infectada; profilaxia antibiótica.",
-          "Fatores de risco: diabetes, obesidade, imunossupressão, desnutrição.",
-          "Cicatrização: fases (inflamatória, proliferativa, remodelação), tipos (primeira e segunda intenção).",
-          "Manejo de infecção: drenagem, antibióticos, cuidados locais."
-        ]
-      },
-      {
-        "theme": "Isquemia Mesentérica",
+        "theme": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
         "highYield": false,
         "dbSubtemas": [
-          "Isquemia Mesentérica"
+          "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido"
         ],
-        "details": [
-          "Tipos: aguda (embólica, trombótica) e crônica; causas.",
-          "Quadro clínico: dor abdominal desproporcional ao exame, náuseas, distensão.",
-          "Diagnóstico: angioTC, laboratório (lactato, D-dímero).",
-          "Tratamento: revascularização, ressecção intestinal, cuidados pós-operatórios."
-        ]
+        "details": []
       },
       {
-        "theme": "Neurocirurgia",
+        "theme": "Neonatologia: Desconforto Respiratório e Doença da Membrana Hialina",
         "highYield": false,
         "dbSubtemas": [
-          "Neurocirurgia (Hemorragia, Hidrocefalia, Tumor)"
+          "Neonatologia: Desconforto Respiratório e Doença da Membrana Hialina"
         ],
-        "details": [
-          "Hemorragia intracraniana: epidural, subdural, subaracnóidea; indicação cirúrgica.",
-          "Hidrocefalia: tipos, derivação ventriculoperitoneal.",
-          "Tumores cerebrais: meningioma, glioblastoma, metástases; abordagem cirúrgica.",
-          "Trauma cranioencefálico: monitorização da PIC, craniotomia."
-        ]
+        "details": []
       },
       {
-        "theme": "Oftalmologia Cirúrgica",
+        "theme": "Neonatologia: Asfixia Perinatal, Encefalopatia e Doenças Neurológicas",
         "highYield": false,
         "dbSubtemas": [
-          "Oftalmologia Cirúrgica"
+          "Neonatologia: Asfixia Perinatal, Encefalopatia e Doenças Neurológicas"
         ],
-        "details": [
-          "Principais procedimentos: catarata (facoemulsificação), pterígio, descolamento de retina.",
-          "Indicações e complicações cirúrgicas.",
-          "Avaliação pré-operatória e cuidados pós-operatórios.",
-          "Urgências oftalmológicas: trauma, glaucoma agudo."
-        ]
+        "details": []
       },
       {
-        "theme": "Ortopedia e Fraturas",
+        "theme": "Reanimação Neonatal e Assistência em Sala de Parto",
         "highYield": true,
         "dbSubtemas": [
-          "Ortopedia e Fraturas"
+          "Reanimação Neonatal e Assistência em Sala de Parto"
         ],
-        "details": [
-          "Classificação de fraturas, consolidação, complicações (pseudoartrose, infecção).",
-          "Tratamento: conservador (imobilização) vs cirúrgico (fixação interna/externa).",
-          "Fraturas comuns: fêmur, tíbia, punho, quadril; manejo no trauma.",
-          "Síndrome compartimental: diagnóstico e tratamento (fasciotomia)."
-        ]
+        "details": []
       },
       {
-        "theme": "Otorrinolaringologia Cirúrgica",
+        "theme": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+        "highYield": true,
+        "dbSubtemas": [
+          "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Convulsão Febril, Epilepsias e Síndromes Convulsivas na Infância",
         "highYield": false,
         "dbSubtemas": [
-          "Otorrinolaringologia Cirúrgica"
+          "Convulsão Febril, Epilepsias e Síndromes Convulsivas na Infância"
         ],
-        "details": [
-          "Procedimentos: amigdalectomia, septoplastia, sinusectomia, timpanotomia.",
-          "Indicações e complicações.",
-          "Urgências: epistaxe, abscesso peritonsilar, corpo estranho.",
-          "Avaliação pré-operatória e cuidados pós-operatórios."
-        ]
+        "details": []
       },
       {
-        "theme": "Pancreatite Aguda",
-        "highYield": true,
-        "dbSubtemas": [
-          "Pancreatite Aguda"
-        ],
-        "details": [
-          "Etiologias: biliar, alcoólica, hipertrigliceridemia; diagnóstico (clínica, amilase/lipase, TC).",
-          "Classificação de gravidade: Ranson, APACHE II, BISAP.",
-          "Tratamento: suporte, analgesia, nutrição, antibióticos se infecção.",
-          "Complicações: necrose infectada, pseudocisto, abscesso; indicação cirúrgica."
-        ]
-      },
-      {
-        "theme": "Queimaduras",
-        "highYield": true,
-        "dbSubtemas": [
-          "Queimaduras"
-        ],
-        "details": [
-          "Avaliação da superfície corporal queimada (regra dos 9), profundidade (1º, 2º, 3º graus).",
-          "Ressuscitação volêmica: fórmula de Parkland, monitorização de diurese.",
-          "Tratamento local: curativos, desbridamento, enxertia.",
-          "Complicações: infecção, sepse, insuficiência renal, síndrome compartimental."
-        ]
-      },
-      {
-        "theme": "Resposta Metabólica ao Trauma e Pós-operatório",
-        "highYield": true,
-        "dbSubtemas": [
-          "Resposta Metabólica ao Trauma e Pós-operatório"
-        ],
-        "details": [
-          "Fases: ebb (hipometabolismo) e flow (hipermetabolismo); hormônios envolvidos.",
-          "Manejo nutricional: suporte precoce, via enteral vs parenteral.",
-          "Complicações pós-operatórias: febre, íleo, deiscência, infecção.",
-          "Cuidados com ferida operatória, drenos, analgesia."
-        ]
-      },
-      {
-        "theme": "Tireoide e Paratireoide",
-        "highYield": true,
-        "dbSubtemas": [
-          "Tireoide e Paratireoide"
-        ],
-        "details": [
-          "Nódulos tireoidianos: avaliação (USG, PAAF), indicação cirúrgica.",
-          "Câncer de tireoide: tipos, tireoidectomia, linfonodos.",
-          "Hipertireoidismo e hipotireoidismo: tratamento cirúrgico.",
-          "Hiperparatireoidismo: diagnóstico, paratireoidectomia, complicações (hipocalcemia)."
-        ]
-      },
-      {
-        "theme": "Trauma Abdominal",
-        "highYield": true,
-        "dbSubtemas": [
-          "Trauma Abdominal"
-        ],
-        "details": [
-          "Avaliação inicial: FAST, TC, lavado peritoneal; indicações de laparotomia.",
-          "Trauma contuso vs penetrante; manejo não operatório.",
-          "Lesões de órgãos: fígado, baço, intestino, pâncreas; tratamento.",
-          "Complicações: hemorragia, peritonite, abscesso."
-        ]
-      },
-      {
-        "theme": "Trauma Cervical e Vascular",
+        "theme": "Anemias Carenciais e Distúrbios de Micronutrientes (Ferro, Vitamina D)",
         "highYield": false,
         "dbSubtemas": [
-          "Trauma Cervical e Vascular"
+          "Anemias Carenciais e Distúrbios de Micronutrientes (Ferro, Vitamina D)"
         ],
-        "details": [
-          "Zonas do pescoço, avaliação de vias aéreas, lesões vasculares.",
-          "Indicações de exploração cirúrgica vs manejo conservador.",
-          "Lesões de artéria carótida, veia jugular; controle de hemorragia.",
-          "Complicações: hematoma, fístula, pseudoaneurisma."
-        ]
+        "details": []
       },
       {
-        "theme": "Trauma Cranioencefálico e Raquimedular",
+        "theme": "Aleitamento Materno, Alimentação Complementar e Desnutrição Infantil",
         "highYield": true,
         "dbSubtemas": [
-          "Trauma Cranioencefálico e Raquimedular"
+          "Aleitamento Materno, Alimentação Complementar e Desnutrição Infantil"
         ],
-        "details": [
-          "Escala de coma de Glasgow, classificação (leve, moderado, grave).",
-          "Monitorização da PIC, indicação de craniotomia.",
-          "Trauma raquimedular: avaliação neurológica, imobilização, uso de corticoide.",
-          "Complicações: herniação, hidrocefalia, infecção."
-        ]
+        "details": []
       },
       {
-        "theme": "Trauma Pélvico e Urológico",
+        "theme": "Afecções de Vias Aéreas Superiores: OMA, Sinusite e Faringoamigdalite",
+        "highYield": true,
+        "dbSubtemas": [
+          "Afecções de Vias Aéreas Superiores: OMA, Sinusite e Faringoamigdalite"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+        "highYield": true,
+        "dbSubtemas": [
+          "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Segurança Infantil, Prevenção de Acidentes e Maus-Tratos",
         "highYield": false,
         "dbSubtemas": [
-          "Trauma Pélvico e Urológico"
+          "Segurança Infantil, Prevenção de Acidentes e Maus-Tratos"
         ],
-        "details": [
-          "Fratura de pelve: instabilidade hemodinâmica, contenção pélvica, angioembolização.",
-          "Lesões de uretra, bexiga, rim; diagnóstico (uretrografia, TC).",
-          "Tratamento: sondagem, reparo cirúrgico, nefrectomia se necessário.",
-          "Complicações: incontinência, estenose, disfunção erétil."
-        ]
+        "details": []
       },
       {
-        "theme": "Trauma Torácico",
+        "theme": "Transtornos do Neurodesenvolvimento (TEA, TDAH) e Saúde Mental na Infância",
         "highYield": true,
         "dbSubtemas": [
-          "Trauma Torácico"
+          "Transtornos do Neurodesenvolvimento (TEA, TDAH) e Saúde Mental na Infância"
         ],
-        "details": [
-          "Lesões imediatamente fatais: pneumotórax hipertensivo, hemotórax maciço, tamponamento cardíaco.",
-          "Diagnóstico: exame físico, radiografia, FAST, TC.",
-          "Tratamento: drenagem torácica, toracotomia de emergência.",
-          "Outras lesões: contusão pulmonar, fraturas de costelas, lesão de grandes vasos."
-        ]
+        "details": []
       },
       {
-        "theme": "Tumores de Pele e Partes Moles",
+        "theme": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
         "highYield": true,
         "dbSubtemas": [
-          "Tumores de Pele e Partes Moles",
-          "Tumores de Pele e Partes Moles (Melanoma, CBC, CEC)"
+          "Baixa Estatura, Puberdade Precoce e Atraso Puberal"
         ],
-        "details": [
-          "Câncer de pele não melanoma: CBC, CEC; fatores de risco, tratamento cirúrgico.",
-          "Melanoma: regra ABCDE, biópsia, margens, linfonodo sentinela.",
-          "Sarcomas de partes moles: diagnóstico, ressecção, radioterapia.",
-          "Prevenção e rastreamento."
-        ]
+        "details": []
       },
       {
-        "theme": "Urologia",
+        "theme": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
         "highYield": true,
         "dbSubtemas": [
-          "Urologia (Litíase, HPB, Neoplasia Renal, Escroto Agudo)"
+          "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento"
         ],
-        "details": [
-          "Litíase urinária: cólica renal, diagnóstico (TC), tratamento (clínico, litotripsia, ureteroscopia).",
-          "HPB: sintomas, avaliação (PSA, toque retal), tratamento clínico e cirúrgico.",
-          "Neoplasia renal: carcinoma de células renais, nefrectomia.",
-          "Escroto agudo: torção testicular, orquite, epididimite; emergência."
-        ]
+        "details": []
+      },
+      {
+        "theme": "Sepse Pediátrica, Choque e Ressuscitação Hemodinâmica",
+        "highYield": true,
+        "dbSubtemas": [
+          "Sepse Pediátrica, Choque e Ressuscitação Hemodinâmica"
+        ],
+        "details": []
+      },
+      {
+        "theme": "Vasculites na Infância (Henoch-Schönlein e Kawasaki)",
+        "highYield": true,
+        "dbSubtemas": [
+          "Vasculites na Infância (Henoch-Schönlein e Kawasaki)"
+        ],
+        "details": []
       }
     ]
   },
   {
-    "area": "Clínica Médica",
+    "area": "Medicina Preventiva",
     "macroThemes": [
       {
-        "theme": "Acidente Vascular Cerebral (AVC)",
+        "theme": "Ética Médica, Bioética e Prontuários / Documentos",
         "highYield": true,
         "dbSubtemas": [
-          "AVC isquêmico: janela de trombólise e trombectomia; AVC hemorrágico e HSA"
+          "Ética Médica, Bioética e Prontuários / Documentos"
         ],
-        "details": [
-          "Dominar janela terapêutica para trombólise (até 4,5h) e trombectomia mecânica (até 24h em casos selecionados).",
-          "Diferenciar AVC isquêmico de hemorrágico e HSA por clínica e neuroimagem (TC sem contraste).",
-          "Reconhecer indicações e contraindicações de alteplase e tenecteplase.",
-          "Manejo da pressão arterial no AVC agudo e prevenção secundária."
-        ]
+        "details": []
       },
       {
-        "theme": "Paciente Grave e Choque",
+        "theme": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
         "highYield": true,
         "dbSubtemas": [
-          "Abordagem do paciente grave e sinais de deterioração",
-          "Choque (hipovolêmico, cardiogênico, distributivo, obstrutivo) e anafilaxia"
+          "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística"
         ],
-        "details": [
-          "Reconhecer sinais de deterioração clínica (escore NEWS, lactato, perfusão).",
-          "Classificar choque em hipovolêmico, cardiogênico, distributivo e obstrutivo.",
-          "Manejo inicial com reposição volêmica, vasopressores e suporte hemodinâmico.",
-          "Identificar e tratar anafilaxia com adrenalina intramuscular."
-        ]
+        "details": []
       },
       {
-        "theme": "Distúrbios Hidroeletrolíticos e Acidobásicos",
+        "theme": "Delineamentos e Classificação dos Estudos Epidemiológicos",
         "highYield": true,
         "dbSubtemas": [
-          "Acidose metabólica: ânion gap e diagnóstico diferencial"
+          "Delineamentos e Classificação dos Estudos Epidemiológicos"
         ],
-        "details": [
-          "Calcular e interpretar ânion gap (AG = Na - Cl - HCO3).",
-          "Diferenciar acidose com AG elevado (cetoacidose, láctica, urêmica, tóxicos) de AG normal (perdas de bicarbonato).",
-          "Usar fórmula de Winter para compensação respiratória esperada.",
-          "Correlacionar com distúrbios mistos e manejo da causa base."
-        ]
+        "details": []
       },
       {
-        "theme": "Anemias e Hemoglobinopatias",
+        "theme": "Indicadores de Saúde e Coeficientes de Morbimortalidade",
         "highYield": true,
         "dbSubtemas": [
-          "Anemias hemolíticas e falciforme"
+          "Indicadores de Saúde e Coeficientes de Morbimortalidade"
         ],
-        "details": [
-          "Diferenciar anemias hemolíticas hereditárias (esferocitose, deficiência de G6PD) de adquiridas (autoimune, microangiopática).",
-          "Diagnóstico de anemia falciforme por eletroforese de hemoglobina.",
-          "Manejo de crises vaso-oclusivas, sequestro esplênico e síndrome torácica aguda.",
-          "Indicações de hidroxiureia, transfusão e vacinação."
-        ]
+        "details": []
       },
       {
-        "theme": "Anticoagulação e Terapia Antitrombótica",
-        "highYield": true,
-        "dbSubtemas": [
-          "Anticoagulação (heparinas, DOACs) e tempo de tratamento"
-        ],
-        "details": [
-          "Comparar heparina não fracionada, heparina de baixo peso molecular e DOACs.",
-          "Indicações de anticoagulação em TVP, TEP, FA e próteses valvares.",
-          "Monitorização laboratorial (TTPa, anti-Xa) e reversão de anticoagulantes.",
-          "Definir tempo de tratamento conforme etiologia e risco de recorrência."
-        ]
-      },
-      {
-        "theme": "Doenças Reumáticas Autoimunes",
-        "highYield": true,
-        "dbSubtemas": [
-          "Artrite reumatoide: critérios, autoanticorpos e tratamento"
-        ],
-        "details": [
-          "Aplicar critérios ACR/EULAR 2010 para artrite reumatoide.",
-          "Interpretar FR, anti-CCP e marcadores inflamatórios.",
-          "Estratégia de tratamento com DMARDs (metotrexato) e biológicos.",
-          "Reconhecer manifestações extra-articulares e complicações."
-        ]
-      },
-      {
-        "theme": "Avaliação Geriátrica e Síndromes",
-        "highYield": true,
-        "dbSubtemas": [
-          "Avaliação geriátrica ampla e polifarmácia (critérios de Beers)",
-          "Grandes síndromes geriátricas (quedas, imobilidade, incontinência, delirium)"
-        ],
-        "details": [
-          "Realizar avaliação funcional (AVDs, mobilidade, cognição, humor).",
-          "Aplicar critérios de Beers para evitar medicamentos inapropriados.",
-          "Abordar quedas, imobilidade, incontinência urinária e delirium.",
-          "Planejar cuidados centrados no paciente idoso e prevenção de iatrogenia."
-        ]
-      },
-      {
-        "theme": "Arritmias Cardíacas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Bradiarritmias e bloqueios atrioventriculares; indicação de marca-passo"
-        ],
-        "details": [
-          "Classificar bradiarritmias (sinusal, bloqueios AV de 1º, 2º e 3º graus).",
-          "Reconhecer indicações de marca-passo temporário e definitivo.",
-          "Manejo de bradicardia sintomática com atropina e marcapasso transcutâneo.",
-          "Diferenciar bloqueios fasciculares e hemibloqueios."
-        ]
-      },
-      {
-        "theme": "Cefaleias",
-        "highYield": true,
-        "dbSubtemas": [
-          "Cefaleias primárias (enxaqueca, tensional, em salvas) e sinais de alarme"
-        ],
-        "details": [
-          "Diagnosticar enxaqueca, cefaleia tensional e cefaleia em salvas pela clínica.",
-          "Identificar sinais de alarme (red flags) para causas secundárias.",
-          "Tratamento agudo da enxaqueca (triptanos, AINEs) e profilaxia.",
-          "Manejo da cefaleia em salvas com oxigenioterapia e sumatriptano."
-        ]
-      },
-      {
-        "theme": "Diabetes Mellitus e Complicações Agudas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Cetoacidose diabética e estado hiperosmolar: manejo de insulina, volume e potássio",
-          "Critérios diagnósticos (glicemia, TOTG, HbA1c) e pré-diabetes"
-        ],
-        "details": [
-          "Diagnosticar DM por glicemia de jejum, TOTG ou HbA1c.",
-          "Manejo de CAD com hidratação, insulina regular e reposição de potássio.",
-          "Tratar EHH com reposição volêmica agressiva e insulina.",
-          "Monitorar complicações (hipocalemia, edema cerebral, trombose)."
-        ]
-      },
-      {
-        "theme": "Cirrose e Complicações",
-        "highYield": true,
-        "dbSubtemas": [
-          "Cirrose e suas complicações (ascite, PBE, encefalopatia, síndrome hepatorrenal)"
-        ],
-        "details": [
-          "Estadiar cirrose por Child-Pugh e MELD.",
-          "Diagnosticar e tratar ascite (paracentese, albumina, diuréticos).",
-          "Profilaxia e tratamento de peritonite bacteriana espontânea.",
-          "Manejo de encefalopatia hepática e síndrome hepatorrenal."
-        ]
-      },
-      {
-        "theme": "Síndromes Coronarianas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Complicações mecânicas e elétricas do infarto"
-        ],
-        "details": [
-          "Reconhecer complicações mecânicas (ruptura de parede livre, CIV, insuficiência mitral).",
-          "Identificar arritmias pós-IAM (FA, TV, fibrilação ventricular).",
-          "Manejo de choque cardiogênico e suporte hemodinâmico.",
-          "Indicações de cirurgia cardíaca de emergência."
-        ]
-      },
-      {
-        "theme": "Tireoide e Disfunções",
-        "highYield": true,
-        "dbSubtemas": [
-          "Crise tireotóxica e coma mixedematoso"
-        ],
-        "details": [
-          "Diagnosticar tempestade tireoidiana por escore de Burch-Wartofsky.",
-          "Tratar crise tireotóxica com tionamidas, betabloqueadores e iodo.",
-          "Reconhecer coma mixedematoso e iniciar levotiroxina e hidrocortisona.",
-          "Monitorar complicações cardiovasculares e metabólicas."
-        ]
-      },
-      {
-        "theme": "Cuidados Paliativos",
-        "highYield": true,
-        "dbSubtemas": [
-          "Cuidados paliativos: controle de sintomas e comunicação de más notícias"
-        ],
-        "details": [
-          "Aplicar protocolo SPIKES para comunicação de más notícias.",
-          "Controlar dor, dispneia, náuseas e delirium em fim de vida.",
-          "Planejar alta e cuidados domiciliares com equipe multidisciplinar.",
-          "Discutir diretivas antecipadas de vontade e luto."
-        ]
-      },
-      {
-        "theme": "Transtornos Neuropsiquiátricos Agudos",
-        "highYield": true,
-        "dbSubtemas": [
-          "Delirium vs demência; síndrome serotoninérgica e neuroléptica maligna"
-        ],
-        "details": [
-          "Diferenciar delirium de demência por início, flutuação e atenção.",
-          "Identificar fatores de risco e causas de delirium (DIMS).",
-          "Reconhecer síndrome serotoninérgica e neuroléptica maligna.",
-          "Tratar com suspensão de agentes causais e suporte."
-        ]
-      },
-      {
-        "theme": "Demências e Síndromes Parkinsonianas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Demências (Alzheimer, vascular) e síndromes parkinsonianas"
-        ],
-        "details": [
-          "Diagnosticar Alzheimer por critérios clínicos e biomarcadores.",
-          "Diferenciar demência vascular e demência com corpos de Lewy.",
-          "Manejo farmacológico (donepezila, memantina) e não farmacológico.",
-          "Reconhecer parkinsonismo e tratar doença de Parkinson."
-        ]
-      },
-      {
-        "theme": "Arboviroses",
-        "highYield": true,
-        "dbSubtemas": [
-          "Dengue, zika e chikungunya: classificação de risco e manejo"
-        ],
-        "details": [
-          "Classificar dengue em grupos A, B, C e D conforme gravidade.",
-          "Manejo de hidratação e sinais de alarme (dor abdominal, vômitos, sangramento).",
-          "Diagnosticar zika e chikungunya por clínica e sorologia.",
-          "Prevenir complicações e orientar sinais de alerta."
-        ]
-      },
-      {
-        "theme": "Doenças Pleurais",
-        "highYield": true,
-        "dbSubtemas": [
-          "Derrame pleural: critérios de Light (transudato vs exsudato) e toracocentese"
-        ],
-        "details": [
-          "Aplicar critérios de Light para diferenciar transudato de exsudato.",
-          "Indicar toracocentese diagnóstica e terapêutica.",
-          "Investigar etiologias (pneumonia, TB, neoplasia, ICC).",
-          "Manejo de empiema e derrame parapneumônico."
-        ]
-      },
-      {
-        "theme": "Insuficiência Cardíaca",
-        "highYield": true,
-        "dbSubtemas": [
-          "Diagnóstico (critérios de Framingham) e classificação por fração de ejeção"
-        ],
-        "details": [
-          "Usar critérios de Framingham para diagnóstico clínico de ICC.",
-          "Classificar em IC-FER, IC-FEi e IC-FEc por ecocardiograma.",
-          "Tratar com IECA/BRA, betabloqueadores, antagonistas de aldosterona e SGLT2i.",
-          "Manejo de descompensação aguda com diuréticos e vasodilatadores."
-        ]
-      },
-      {
-        "theme": "Doença Pulmonar Obstrutiva Crônica (DPOC)",
-        "highYield": true,
-        "dbSubtemas": [
-          "Diagnóstico diferencial pela espirometria (reversibilidade)"
-        ],
-        "details": [
-          "Interpretar espirometria com VEF1/CVF < 0,7 para obstrução.",
-          "Teste de reversibilidade com broncodilatador para diferenciar asma.",
-          "Classificar gravidade pela VEF1 e sintomas (GOLD).",
-          "Tratar com broncodilatadores de longa duração e corticoides inalatórios."
-        ]
-      },
-      {
-        "theme": "Prevenção Cardiovascular",
-        "highYield": true,
-        "dbSubtemas": [
-          "Diagnóstico e estratificação de risco cardiovascular"
-        ],
-        "details": [
-          "Calcular risco cardiovascular global (Framingham, ESC).",
-          "Definir metas de LDL conforme risco (primário vs secundário).",
-          "Indicar estatinas e ezetimiba conforme diretrizes.",
-          "Orientar mudanças de estilo de vida e controle de fatores de risco."
-        ]
-      },
-      {
-        "theme": "Doenças Gastrointestinais Crônicas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Diarreia crônica, síndromes disabsortivas e doença celíaca"
-        ],
-        "details": [
-          "Investigar diarreia crônica por etiologia (inflamatória, osmótica, secretora).",
-          "Diagnosticar doença celíaca com sorologia e biópsia duodenal.",
-          "Manejo de síndromes disabsortivas (pancreatite crônica, supercrescimento bacteriano).",
-          "Tratar com dieta e reposição de nutrientes."
-        ]
-      },
-      {
-        "theme": "Doenças Esofagogástricas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Dispepsia, DRGE e H. pylori: diagnóstico e tratamento"
-        ],
-        "details": [
-          "Diferenciar dispepsia funcional de orgânica.",
-          "Diagnosticar DRGE por clínica e endoscopia.",
-          "Testar e tratar H. pylori com erradicação (terapia tripla).",
-          "Indicar IBP e procinéticos conforme gravidade."
-        ]
-      },
-      {
-        "theme": "Insuficiência Cardíaca Avançada",
+        "theme": "Transição Demográfica e Perfis Populacionais",
         "highYield": false,
         "dbSubtemas": [
-          "Dispositivos, ressincronização e manejo das descompensações"
+          "Transição Demográfica e Perfis Populacionais"
         ],
-        "details": [
-          "Indicar CDI e terapia de ressincronização cardíaca (TRC).",
-          "Manejar descompensação aguda com suporte inotrópico.",
-          "Avaliar candidatos a transplante cardíaco.",
-          "Otimizar terapia medicamentosa em IC avançada."
-        ]
+        "details": []
       },
       {
-        "theme": "Doença Renal Crônica",
+        "theme": "História Natural da Doença e Níveis de Prevenção",
         "highYield": true,
         "dbSubtemas": [
-          "Distúrbio mineral e ósseo, anemia da DRC",
-          "Doença renal crônica: estadiamento (TFG e albuminúria) e complicações"
+          "História Natural da Doença e Níveis de Prevenção"
         ],
-        "details": [
-          "Estadiar DRC por TFG e albuminúria (KDIGO).",
-          "Tratar anemia com eritropoetina e ferro.",
-          "Manejar distúrbio mineral e ósseo com fósforo, cálcio e PTH.",
-          "Prevenir progressão com controle de PA e uso de IECA/BRA."
-        ]
+        "details": []
       },
       {
-        "theme": "Distúrbios da Hemostasia",
+        "theme": "História das Políticas de Saúde e Origens do SUS",
         "highYield": true,
         "dbSubtemas": [
-          "Distúrbios da hemostasia, plaquetopenias (PTI) e coagulopatias"
+          "História das Políticas de Saúde e Origens do SUS"
         ],
-        "details": [
-          "Diferenciar distúrbios de hemostasia primária e secundária.",
-          "Diagnosticar PTI por plaquetopenia isolada e tratar com corticoides.",
-          "Reconhecer hemofilias e doença de von Willebrand.",
-          "Manejo de coagulação intravascular disseminada (CIVD)."
-        ]
+        "details": []
       },
       {
-        "theme": "Doença Inflamatória Intestinal",
+        "theme": "Legislação, Diretrizes e Evolução do SUS",
         "highYield": true,
         "dbSubtemas": [
-          "Doença inflamatória intestinal (Crohn vs retocolite ulcerativa)"
+          "Legislação, Diretrizes e Evolução do SUS"
         ],
-        "details": [
-          "Diferenciar Crohn de retocolite ulcerativa por clínica e endoscopia.",
-          "Tratar com mesalazina, imunossupressores e biológicos.",
-          "Reconhecer complicações (fístulas, estenoses, megacólon tóxico).",
-          "Monitorar atividade inflamatória e risco de neoplasia."
-        ]
+        "details": []
       },
       {
-        "theme": "Síndromes Coronarianas Agudas",
+        "theme": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
         "highYield": true,
         "dbSubtemas": [
-          "Dupla antiagregação, anticoagulação e terapia adjuvante"
+          "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)"
         ],
-        "details": [
-          "Iniciar DAPT (AAS + clopidogrel/ticagrelor) em SCA.",
-          "Usar anticoagulação (heparina) durante intervenção.",
-          "Adicionar estatinas em alta intensidade.",
-          "Planejar tempo de DAPT conforme risco de isquemia e sangramento."
-        ]
+        "details": []
       },
       {
-        "theme": "Emergências Psiquiátricas",
+        "theme": "Avaliação de Testes Diagnósticos e Curva ROC",
         "highYield": true,
         "dbSubtemas": [
-          "Emergências psiquiátricas: risco de suicídio, agitação e síndromes por substâncias"
+          "Avaliação de Testes Diagnósticos e Curva ROC"
         ],
-        "details": [
-          "Avaliar risco de suicídio com entrevista estruturada.",
-          "Manejar agitação psicomotora com contenção e medicação.",
-          "Reconhecer intoxicação e abstinência por substâncias.",
-          "Encaminhar para tratamento psiquiátrico especializado."
-        ]
+        "details": []
       },
       {
-        "theme": "Endocardite e Sepse",
+        "theme": "Vigilância Epidemiológica: Endemias, Epidemias e Surtos",
         "highYield": true,
         "dbSubtemas": [
-          "Endocardite infecciosa (critérios de Duke) e sepse/choque séptico (bundle da 1ª hora)"
+          "Vigilância Epidemiológica: Endemias, Epidemias e Surtos"
         ],
-        "details": [
-          "Aplicar critérios de Duke para endocardite infecciosa.",
-          "Coletar hemoculturas e iniciar antibioticoterapia empírica.",
-          "Executar bundle de sepse na 1ª hora (lactato, culturas, antibiótico, volume).",
-          "Manejar choque séptico com vasopressores e metas de perfusão."
-        ]
+        "details": []
       },
       {
-        "theme": "Epilepsia e Estado de Mal",
-        "highYield": true,
-        "dbSubtemas": [
-          "Epilepsia e estado de mal epiléptico"
-        ],
-        "details": [
-          "Classificar crises epilépticas e síndromes epilépticas.",
-          "Iniciar tratamento com anticonvulsivantes de primeira linha.",
-          "Manejar estado de mal epiléptico com benzodiazepínicos e segunda linha.",
-          "Investigar causas secundárias e orientar segurança."
-        ]
-      },
-      {
-        "theme": "Vasculites e Espondiloartrites",
-        "highYield": true,
-        "dbSubtemas": [
-          "Espondiloartrites e vasculites sistêmicas"
-        ],
-        "details": [
-          "Diagnosticar espondiloartrite axial e periférica.",
-          "Reconhecer vasculites por tamanho de vaso (ANCA, crioglobulinas).",
-          "Tratar com imunossupressores e biológicos.",
-          "Monitorar danos orgânicos e complicações."
-        ]
-      },
-      {
-        "theme": "Dislipidemias",
-        "highYield": true,
-        "dbSubtemas": [
-          "Estatinas, ezetimiba e inibidores de PCSK9"
-        ],
-        "details": [
-          "Indicar estatinas conforme risco cardiovascular.",
-          "Adicionar ezetimiba se meta não atingida.",
-          "Usar inibidores de PCSK9 em hipercolesterolemia familiar ou alto risco.",
-          "Monitorar efeitos adversos e interações."
-        ]
-      },
-      {
-        "theme": "Tromboembolismo Pulmonar",
-        "highYield": true,
-        "dbSubtemas": [
-          "Estratificação de gravidade do TEP e indicação de trombólise"
-        ],
-        "details": [
-          "Estratificar TEP em alto, intermediário e baixo risco (PESI, sPESI).",
-          "Indicar trombólise em TEP de alto risco com instabilidade.",
-          "Anticoagular com heparina ou DOACs.",
-          "Considerar embolectomia em casos selecionados."
-        ]
-      },
-      {
-        "theme": "Prevenção Cardiovascular Primária e Secundária",
-        "highYield": true,
-        "dbSubtemas": [
-          "Estratificação de risco (escores) e prevenção primária vs secundária"
-        ],
-        "details": [
-          "Usar escores de risco (Framingham, ASCVD) para decisão.",
-          "Diferenciar prevenção primária e secundária.",
-          "Definir metas de LDL e PA conforme risco.",
-          "Orientar estilo de vida e terapia farmacológica."
-        ]
-      },
-      {
-        "theme": "Fibrilação Atrial",
-        "highYield": true,
-        "dbSubtemas": [
-          "Fibrilação atrial: controle de ritmo vs frequência e anticoagulação (CHA2DS2-VASc, HAS-BLED)"
-        ],
-        "details": [
-          "Calcular CHA2DS2-VASc para risco de AVC.",
-          "Avaliar risco de sangramento com HAS-BLED.",
-          "Escolher entre controle de ritmo e frequência.",
-          "Anticoagular com DOACs ou varfarina conforme indicação."
-        ]
-      },
-      {
-        "theme": "Artrite Gotosa e Cristais",
-        "highYield": true,
-        "dbSubtemas": [
-          "Gota e artrites por cristais; abordagem da monoartrite aguda"
-        ],
-        "details": [
-          "Diagnosticar gota por artrocentese com cristais de urato.",
-          "Tratar crise aguda com AINEs, colchicina ou corticoides.",
-          "Iniciar terapia hipouricemiante após crise.",
-          "Diferenciar de pseudogota (pirofosfato de cálcio)."
-        ]
-      },
-      {
-        "theme": "HIV/AIDS",
-        "highYield": true,
-        "dbSubtemas": [
-          "HIV/AIDS: diagnóstico, TARV, infecções oportunistas e profilaxias"
-        ],
-        "details": [
-          "Diagnosticar HIV com teste rápido e confirmatório.",
-          "Iniciar TARV com esquema de primeira linha.",
-          "Profilaxia e tratamento de infecções oportunistas (PCP, toxoplasmose, TB).",
-          "Monitorar CD4, carga viral e efeitos adversos."
-        ]
-      },
-      {
-        "theme": "Síndromes Coronarianas",
-        "highYield": true,
-        "dbSubtemas": [
-          "IAM com supra de ST: ECG por parede e indicação de reperfusão (trombólise vs angioplastia)",
-          "SCA sem supra e angina instável: estratificação (GRACE/TIMI)"
-        ],
-        "details": [
-          "Reconhecer padrões eletrocardiográficos por parede e correlacionar com artéria culpada.",
-          "Indicar reperfusão (trombólise vs angioplastia) conforme tempo e disponibilidade.",
-          "Estratificar risco com escores GRACE/TIMI para decisão de intervenção."
-        ]
-      },
-      {
-        "theme": "Insuficiência Cardíaca",
-        "highYield": true,
-        "dbSubtemas": [
-          "IC aguda: perfis hemodinâmicos e tratamento no pronto-socorro",
-          "Terapia que reduz mortalidade na ICFEr (IECA/BRA/ARNI, betabloqueador, antagonista de aldosterona, iSGLT2)"
-        ],
-        "details": [
-          "Classificar IC aguda em perfis quente/frio e seco/úmido para guiar terapia.",
-          "Iniciar diuréticos, vasodilatadores e inotrópicos conforme perfil hemodinâmico.",
-          "Implementar terapia modificadora de mortalidade na ICFEr com quatro pilares."
-        ]
-      },
-      {
-        "theme": "Hipertensão Arterial Sistêmica",
-        "highYield": true,
-        "dbSubtemas": [
-          "Hipertensão resistente e secundária (renovascular, hiperaldosteronismo, feocromocitoma)",
-          "Tratamento não medicamentoso e classes de primeira linha (IECA, BRA, BCC, tiazídicos)",
-          "Urgência vs emergência hipertensiva e lesão de órgão-alvo"
-        ],
-        "details": [
-          "Investigar causas secundárias em hipertensão resistente ou de difícil controle.",
-          "Prescrever tratamento inicial com IECA/BRA, BCC ou tiazídicos conforme comorbidades.",
-          "Diferenciar urgência de emergência hipertensiva e manejar lesão de órgão-alvo."
-        ]
-      },
-      {
-        "theme": "Diabetes Mellitus",
-        "highYield": true,
-        "dbSubtemas": [
-          "Insulinoterapia no DM1 (basal-bolus)",
-          "Tratamento do DM2 (metformina, iSGLT2, análogos de GLP-1, sulfonilureias)"
-        ],
-        "details": [
-          "Estruturar insulinoterapia basal-bolus no DM1 com ajuste conforme glicemia.",
-          "Escolher antidiabéticos orais e injetáveis no DM2 com base em comorbidades e risco cardiovascular.",
-          "Monitorar complicações e metas glicêmicas individualizadas."
-        ]
-      },
-      {
-        "theme": "Distúrbios Hidroeletrolíticos e Acidobásicos",
-        "highYield": true,
-        "dbSubtemas": [
-          "Hipernatremia e distúrbios do potássio (ECG e estabilização de membrana)",
-          "Hiponatremia (por volemia e osmolaridade) e risco de mielinólise por correção rápida",
-          "Interpretação da gasometria (distúrbios respiratórios e compensações)"
-        ],
-        "details": [
-          "Corrigir hiponatremia lentamente para evitar mielinólise pontina.",
-          "Reconhecer alterações eletrocardiográficas na hipercalemia e estabilizar membrana.",
-          "Interpretar gasometria identificando distúrbios primários e compensações."
-        ]
-      },
-      {
-        "theme": "Tireoide",
-        "highYield": true,
-        "dbSubtemas": [
-          "Hipotireoidismo e hipertireoidismo (Graves, bócio, tireoidites)",
-          "Interpretação de TSH, T4 livre e autoanticorpos"
-        ],
-        "details": [
-          "Diagnosticar hipo e hipertireoidismo com TSH e T4 livre.",
-          "Diferenciar causas de tireotoxicose (Graves, tireoidite, bócio).",
-          "Iniciar tratamento com levotiroxina ou tionamidas conforme etiologia."
-        ]
-      },
-      {
-        "theme": "Doenças Infecciosas Comunitárias",
-        "highYield": true,
-        "dbSubtemas": [
-          "Meningites, ITU/pielonefrite, celulite e leptospirose",
-          "Pneumonia adquirida na comunidade: CURB-65, local de tratamento e antibiótico empírico",
-          "Pneumonia hospitalar e associada à ventilação"
-        ],
-        "details": [
-          "Aplicar CURB-65 para decidir local de tratamento da PAC.",
-          "Escolher antibiótico empírico conforme gravidade e local de aquisição.",
-          "Reconhecer sinais de meningite e iniciar antibioticoterapia precoce."
-        ]
-      },
-      {
-        "theme": "Sepse e Choque",
-        "highYield": true,
-        "dbSubtemas": [
-          "Parada cardiorrespiratória e ACLS; cuidados pós-parada",
-          "Parada cardiorrespiratória: ritmos chocáveis e não chocáveis"
-        ],
-        "details": [
-          "Executar ACLS com desfibrilação precoce em ritmos chocáveis.",
-          "Administrar adrenalina e amiodarona conforme protocolo.",
-          "Implementar cuidados pós-parada com controle de temperatura e metas hemodinâmicas."
-        ]
-      },
-      {
-        "theme": "Doenças Pulmonares Obstrutivas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Tratamento de manutenção da asma (GINA) e da crise",
-          "Tratamento do DPOC (GOLD) e exacerbação (antibiótico, corticoide, VNI)"
-        ],
-        "details": [
-          "Ajustar tratamento de manutenção da asma conforme controle e risco.",
-          "Manejar crise asmática com broncodilatadores e corticoide sistêmico.",
-          "Tratar exacerbação de DPOC com antibiótico, corticoide e VNI se indicado."
-        ]
-      },
-      {
-        "theme": "Tuberculose",
-        "highYield": true,
-        "dbSubtemas": [
-          "Tuberculose: diagnóstico, esquema RIPE e tratamento da ILTB"
-        ],
-        "details": [
-          "Diagnosticar TB com baciloscopia, cultura e testes moleculares.",
-          "Prescrever esquema RIPE com duração e doses adequadas.",
-          "Indicar tratamento da infecção latente conforme risco."
-        ]
-      },
-      {
-        "theme": "Anemias",
-        "highYield": true,
-        "dbSubtemas": [
-          "Investigação das anemias (micro, normo e macrocíticas); ferropriva, doença crônica e megaloblástica"
-        ],
-        "details": [
-          "Classificar anemia pelo VCM e iniciar investigação direcionada.",
-          "Diferenciar anemia ferropriva, doença crônica e megaloblástica.",
-          "Tratar causa de base e repor deficiências específicas."
-        ]
-      },
-      {
-        "theme": "Lesão Renal Aguda",
-        "highYield": true,
-        "dbSubtemas": [
-          "Lesão renal aguda: classificação KDIGO e diferenciação pré-renal/renal/pós-renal",
-          "Indicações de diálise de urgência (hipercalemia, acidose, volemia, uremia)"
-        ],
-        "details": [
-          "Aplicar critérios KDIGO para estadiar LRA.",
-          "Diferenciar causas pré-renal, renal e pós-renal com exames complementares.",
-          "Reconhecer indicações de diálise de urgência."
-        ]
-      },
-      {
-        "theme": "Hepatopatias",
-        "highYield": true,
-        "dbSubtemas": [
-          "Hemorragia por varizes esofágicas: profilaxia e tratamento",
-          "Hepatites virais A, B, C, D e E: sorologias e história natural",
-          "Insuficiência hepática aguda e rastreamento de carcinoma hepatocelular"
-        ],
-        "details": [
-          "Profilaxia primária e secundária de varizes esofágicas com betabloqueador ou ligadura.",
-          "Interpretar sorologias de hepatites virais e conhecer história natural.",
-          "Rastrear carcinoma hepatocelular em cirróticos com ultrassom e alfafetoproteína."
-        ]
-      },
-      {
-        "theme": "Doenças Reumatológicas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Lúpus eritematoso sistêmico: critérios diagnósticos e nefrite lúpica"
-        ],
-        "details": [
-          "Aplicar critérios diagnósticos de LES (ACR/EULAR).",
-          "Rastrear nefrite lúpica com urina e função renal.",
-          "Tratar com imunossupressores conforme gravidade."
-        ]
-      },
-      {
-        "theme": "Hematologia Oncológica",
-        "highYield": true,
-        "dbSubtemas": [
-          "Leucemias e linfomas: apresentação e diagnóstico inicial"
-        ],
-        "details": [
-          "Reconhecer apresentações clínicas de leucemias agudas e crônicas.",
-          "Identificar linfomas por linfonodomegalia e sintomas B.",
-          "Solicitar exames iniciais como hemograma, eletroforese e biópsia."
-        ]
-      },
-      {
-        "theme": "Tromboembolismo Venoso",
-        "highYield": true,
-        "dbSubtemas": [
-          "TVP e TEP: escores de probabilidade (Wells), D-dímero e angio-TC"
-        ],
-        "details": [
-          "Aplicar escore de Wells para TVP e TEP.",
-          "Usar D-dímero para excluir em baixa probabilidade.",
-          "Confirmar com angio-TC ou ultrassom Doppler."
-        ]
-      },
-      {
-        "theme": "Arritmias",
-        "highYield": true,
-        "dbSubtemas": [
-          "Taquiarritmias de QRS estreito e largo: conduta na instabilidade vs estabilidade"
-        ],
-        "details": [
-          "Diferenciar taquiarritmias de QRS estreito e largo.",
-          "Cardioverter em instabilidade hemodinâmica.",
-          "Usar adenosina, betabloqueador ou amiodarona conforme ritmo."
-        ]
-      },
-      {
-        "theme": "Intoxicações e Emergências Neurológicas",
-        "highYield": true,
-        "dbSubtemas": [
-          "Intoxicações comuns e antídotos; distúrbios do nível de consciência"
-        ],
-        "details": [
-          "Reconhecer síndromes tóxicas comuns (colinérgica, anticolinérgica, opioide).",
-          "Administrar antídotos específicos (naloxona, flumazenil, atropina).",
-          "Avaliar nível de consciência com escalas e investigar causas."
-        ]
-      },
-      {
-        "theme": "Doenças Pulmonares Infecciosas",
+        "theme": "Vigilância em Saúde e Notificação Compulsória (SINAN)",
         "highYield": false,
         "dbSubtemas": [
-          "Micoses pulmonares e abscesso pulmonar"
+          "Vigilância em Saúde e Notificação Compulsória (SINAN)"
         ],
-        "details": [
-          "Diagnosticar micoses pulmonares com cultura e sorologia.",
-          "Tratar abscesso pulmonar com antibiótico prolongado.",
-          "Diferenciar de tuberculose e neoplasia."
-        ]
+        "details": []
       },
       {
-        "theme": "Doenças Gastrointestinais",
-        "highYield": false,
+        "theme": "Saúde do Trabalhador e Doenças Ocupacionais",
+        "highYield": true,
         "dbSubtemas": [
-          "Síndrome do intestino irritável e hemorragia digestiva baixa"
-        ],
-        "details": [
-          "Diagnosticar SII por critérios de Roma IV.",
-          "Avaliar hemorragia digestiva baixa com colonoscopia.",
-          "Tratar sintomas e estabilizar paciente."
-        ]
-      },
-      {
-        "theme": "Insuficiência Adrenal",
-        "highYield": false,
-        "dbSubtemas": [
-          "Insuficiência adrenal e crise addisoniana; síndrome de Cushing"
-        ],
-        "details": [
-          "Diagnosticar insuficiência adrenal com teste de estímulo com ACTH.",
-          "Tratar crise addisoniana com hidrocortisona e soro.",
-          "Investigar síndrome de Cushing com cortisol livre urinário e teste de supressão."
-        ]
-      },
-      {
-        "theme": "Oxigenoterapia e Cuidados Paliativos",
-        "highYield": false,
-        "dbSubtemas": [
-          "Oxigenoterapia domiciliar prolongada: critérios e benefício"
-        ],
-        "details": [
-          "Indicar oxigenoterapia domiciliar com PaO2 < 55 mmHg ou SpO2 < 88%.",
-          "Discutir terminalidade e ortotanásia com ética.",
-          "Manejar dor com escada analgésica da OMS."
-        ]
-      },
-      {
-        "theme": "Saúde Mental",
-        "highYield": false,
-        "dbSubtemas": [
-          "Transtorno bipolar e espectro da esquizofrenia",
-          "Transtornos depressivos e de ansiedade: diagnóstico e tratamento"
-        ],
-        "details": [
-          "Diagnosticar transtorno bipolar com episódios maníacos e depressivos.",
-          "Tratar esquizofrenia com antipsicóticos.",
-          "Iniciar tratamento de depressão e ansiedade com ISRS e psicoterapia."
-        ]
-      },
-      {
-        "theme": "Revisão Geral",
-        "highYield": false,
-        "dbSubtemas": [
-          "Revisão dos temas de alto rendimento das 5 áreas"
-        ],
-        "details": [
-          "Revisar tópicos de clínica médica, cirurgia, pediatria, ginecologia e saúde coletiva.",
-          "Focar em temas mais cobrados em provas de residência.",
-          "Realizar questões e simulados para fixação."
-        ]
-      },
-      {
-        "theme": "Outros Tópicos",
-        "highYield": false,
-        "dbSubtemas": [
-          "Metas de LDL conforme risco cardiovascular",
-          "Terminalidade, ortotanásia e manejo da dor"
+          "Saúde do Trabalhador e Doenças Ocupacionais"
         ],
         "details": []
       }

@@ -1,0 +1,242 @@
+Bioestatística e Testes de Hipótese
+Estudos Observacionais (Coorte, Caso-Controle, Transversal, Ecológico)
+Legislação e Financiamento do SUS
+Modelos de Atenção e Reforma Sanitária
+Princípios e Diretrizes do SUS
+Redes de Atenção à Saúde
+Transição Demográfica e Epidemiológica
+Curvas de crescimento da OMS (escore Z e percentil para peso, estatura e perímetro cefálico)
+Marcos do desenvolvimento neuropsicomotor (motor, cognitivo, linguagem, social)
+Causas de baixa estatura (familiar, atraso constitucional, patológicas)
+Obesidade infantil: diagnóstico (IMC/idade), comorbidades e abordagem
+Estágios de Tanner e sequência normal da puberdade em meninos e meninas
+Puberdade precoce e atraso puberal
+Sinais de alerta para transtorno do espectro autista e atraso global do desenvolvimento
+Confidencialidade, sexualidade e saúde do adolescente
+Composição do leite (colostro, transição, maduro) e tipos de amamentação
+Vantagens do aleitamento; contraindicações formais (HIV, HTLV) e temporárias
+Manejo de intercorrências: fissuras, ingurgitamento, mastite, baixa produção
+Introdução alimentar (a partir dos 6 meses) e suplementação de ferro e vitamina D
+Avaliação da idade gestacional (Capurro, New Ballard) e classificação do RN (PIG/AIG/GIG)
+Cuidados de rotina na sala de parto e alojamento conjunto
+Fluxograma de reanimação neonatal da SBP (RN ≥34 sem e <34 sem)
+Rastreamento por oximetria e conduta inicial no RN cianótico
+Síndrome do desconforto respiratório (doença da membrana hialina) e uso de surfactante
+Taquipneia transitória do RN e síndrome de aspiração meconial
+Sepse neonatal precoce e tardia: fatores de risco, clínica e conduta
+Infecções congênitas (STORCH): sífilis, toxoplasmose, rubéola, CMV, Zika
+Rastreamento, achados clínicos e conduta na sífilis congênita
+Icterícia fisiológica vs patológica; incompatibilidade ABO e Rh
+Indicações de fototerapia e exsanguineotransfusão; kernicterus
+Doenças triadas no teste do pezinho (hipotireoidismo congênito, fenilcetonúria, anemia falciforme e outras)
+Testes de triagem: pezinho (biológico), orelhinha (auditivo), olhinho (reflexo vermelho), coraçãozinho (oximetria)
+Cardiopatias acianóticas (CIV, CIA, PCA, coarctação de aorta)
+Cardiopatias cianóticas (Tetralogia de Fallot, transposição de grandes vasos)
+Sopro inocente vs patológico; sinais de alerta
+Sarampo, rubéola, eritema infeccioso, exantema súbito, escarlatina e varicela
+Período de incubação, pródromo e progressão do exantema de cada doença
+Bronquiolite viral aguda (VSR): diagnóstico clínico e manejo de suporte
+Crupe viral, epiglotite e laringites; otite média aguda e sinusite
+Diagnóstico e tratamento de manutenção e crise da asma na criança
+Pneumonias por faixa etária (etiologia, clínica, critérios de internação, antibiótico)
+Principais helmintíases (ascaridíase, ancilostomíase, enterobíase, teníase) e protozooses (giardíase, amebíase)
+Larva migrans, estrongiloidíase e esquistossomose
+Ciclos, clínica e tratamento antiparasitário
+Fisiopatologia da diarreia (osmótica, secretora, invasiva) e principais agentes
+Avaliação do estado de hidratação e Planos A, B e C do Ministério da Saúde
+Distúrbios do sódio na desidratação; hidratação parenteral (Holliday-Segar)
+Uso de zinco, probióticos e indicações de antibiótico na diarreia infantil
+Infecção do trato urinário na criança: diagnóstico, tratamento e investigação de imagem
+Glomerulonefrite difusa aguda pós-estreptocócica: clínica e evolução
+Síndrome nefrótica (lesões mínimas) vs síndrome nefrítica (GNPE)
+Anemia ferropriva: rastreamento, profilaxia e tratamento; anemias hemolíticas na criança
+Cetoacidose diabética, anafilaxia e intoxicações na criança
+Deficiências de micronutrientes (vitamina A, D, ferro, zinco, iodo)
+Desnutrição energético-proteica: marasmo, kwashiorkor e manejo das complicações
+Esquema do primeiro ano de vida (BCG, hepatite B, penta, VIP/VOP, pneumo, rota, meningo)
+Eventos adversos pós-vacinais e conduta
+Vacinas de vírus vivos vs inativados e contraindicações específicas
+Situações especiais: prematuros, imunodeprimidos, gestantes e comunicantes
+Suporte básico e avançado de vida em pediatria (PALS) e reconhecimento de choque
+Crise convulsiva febril simples vs complexa: conduta e investigação
+Traumatismo cranioencefálico (regras do PECARN para TC)
+Doença de Kawasaki: critérios diagnósticos, risco de aneurisma coronariano e tratamento (IVIG + AAS)
+Identificação de maus-tratos (físico, sexual, negligência) e notificação/Conselho Tutelar
+Complicações e profilaxia pós-exposição
+Exames de rotina por trimestre e cálculo da idade gestacional/DPP
+Suplementação de ácido fólico e ferro; ganho de peso na gestação
+Vacinação na gestação (dTpa, hepatite B, influenza) e contraindicadas
+Rastreamento de Streptococcus do grupo B e profilaxia intraparto
+Classificação: HAS crônica, pré-eclâmpsia, eclâmpsia e sobreposta
+Critérios de gravidade e iminência de eclâmpsia
+Síndrome HELLP: diagnóstico laboratorial e conduta
+Diabetes gestacional: rastreamento, TOTG 75g e metas de controle
+Diabetes pré-gestacional e repercussões fetais
+Abortamento (ameaça, completo, incompleto, retido, infectado): clínica e conduta
+Gravidez ectópica: diagnóstico e critérios para metotrexato vs cirurgia
+Diagnóstico diferencial por ultrassom e dosagens de beta-hCG
+Doença trofoblástica gestacional (mola completa vs parcial) e seguimento com beta-hCG
+Descolamento prematuro de placenta vs placenta prévia: quadro e conduta
+Rotura uterina e rotura de vasa prévia
+Trabalho de parto prematuro: tocólise e corticoterapia antenatal
+Amniorrexe prematura: diagnóstico, riscos e conduta conforme idade gestacional
+Tempos do mecanismo de parto (insinuação, descida, rotação, desprendimento)
+Fases clínicas do parto e uso/interpretação do partograma
+Analgesia de parto e assistência ao período expulsivo
+Distocias funcionais, de trajeto e de apresentação; indicações de cesárea e fórceps
+Avaliação da vitalidade fetal: cardiotocografia, perfil biofísico e Doppler
+Restrição de crescimento fetal: classificação e dopplerfluxometria
+Puerpério fisiológico e patológico; hemorragia pós-parto (4 T) e atonia uterina
+Infecção puerperal e mastite puerperal
+Eixo hipotálamo-hipófise-ovário e fases folicular, ovulatória e lútea
+Ações de FSH, LH, estrogênio e progesterona ao longo do ciclo
+Puberdade feminina, telarca, pubarca e menarca
+Amenorreia primária e secundária: investigação por compartimentos
+Síndrome dos ovários policísticos: critérios de Rotterdam e manejo
+Hiperprolactinemia e insuficiência ovariana prematura
+Transição menopáusica e diagnóstico da menopausa
+Esquemas de TRH (estrogênio isolado vs combinado) e riscos
+Indicações e contraindicações da terapia de reposição hormonal
+Manejo não hormonal dos sintomas e rastreamento de osteoporose
+Classificação PALM-COEIN do sangramento uterino anormal
+Adenomiose e pólipos endometriais
+Leiomioma uterino: classificação FIGO, clínica e tratamento
+Endometriose: fisiopatologia, dor pélvica, infertilidade e tratamento
+Doença inflamatória pélvica: critérios diagnósticos, tratamento e complicações
+Cervicites por clamídia e gonococo; abordagem sindrômica das IST
+Vaginose bacteriana, candidíase e tricomoníase (critérios de Amsel, pH, microscopia)
+Sífilis, herpes genital, cancro mole, HPV e donovanose
+Rastreamento com citologia (Papanicolau): idade de início e periodicidade
+Conduta nas alterações citológicas (ASC-US, LSIL, ASC-H, HSIL, AGC)
+Colposcopia, biópsia e tratamento das lesões precursoras (NIC)
+Papel do HPV, vacinação e estadiamento do câncer de colo
+Fatores de risco, tipos histológicos e princípios do tratamento do câncer de mama
+Investigação do nódulo (tríade diagnóstica) e derrame papilar
+Nódulos benignos (fibroadenoma, cisto) vs sinais de malignidade
+Rastreamento mamográfico: idade, periodicidade e classificação BI-RADS
+Câncer de endométrio: fatores de risco, sangramento pós-menopausa e investigação
+Câncer de ovário: tipos, marcadores e apresentação tardia
+Incontinência urinária de esforço vs de urgência: diagnóstico e tratamento
+Distopias genitais (prolapsos): classificação POP-Q e conduta
+Métodos combinados e de progestagênio isolado: indicações e efeitos adversos
+LARC: DIU de cobre, DIU de levonorgestrel e implante
+Contracepção de emergência e métodos definitivos
+Critérios de Elegibilidade da OMS (categorias 1 a 4)
+Transmissão vertical do HIV, hepatites e sífilis
+Infecção urinária, bacteriúria assintomática e pielonefrite na gestação
+Hirsutismo e diagnóstico diferencial do hiperandrogenismo
+Doença trofoblástica gestacional (mola completa vs parcial) e seguimento com beta-hCG
+Classificação: HAS crônica, pré-eclâmpsia, eclâmpsia e sobreposta
+Critérios de gravidade e iminência de eclâmpsia
+Síndrome HELLP: diagnóstico laboratorial e conduta
+Apendicite Aguda
+Atendimento Inicial ao Trauma (ATLS)
+Avaliação Pré-operatória e Risco Cirúrgico
+Choque e Transfusão no Trauma
+Cirurgia Bariátrica e Complicações
+Cirurgia Vascular Periférica (Isquemia Arterial, Varizes, TVP)
+Colecistite e Colelitíase
+Coledocolitíase e Colangite
+Câncer Colorretal
+Diverticulite Aguda
+Doenças Orificiais (Hemorroida, Fissura, Fístula)
+Doenças do Esôfago (DRGE, Acalasia, Câncer)
+Estômago (Úlcera, HDA, Câncer Gástrico)
+Infecção de Sítio Cirúrgico e Cicatrização
+Isquemia Mesentérica
+Neurocirurgia (Hemorragia, Hidrocefalia, Tumor)
+Oftalmologia Cirúrgica
+Ortopedia e Fraturas
+Otorrinolaringologia Cirúrgica
+Pancreatite Aguda
+Resposta Metabólica ao Trauma e Pós-operatório
+Tireoide e Paratireoide
+Trauma Cervical e Vascular
+Trauma Pélvico e Urológico
+Tumores de Pele e Partes Moles
+Tumores de Pele e Partes Moles (Melanoma, CBC, CEC)
+Urologia (Litíase, HPB, Neoplasia Renal, Escroto Agudo)
+AVC isquêmico: janela de trombólise e trombectomia; AVC hemorrágico e HSA
+Abordagem do paciente grave e sinais de deterioração
+Choque (hipovolêmico, cardiogênico, distributivo, obstrutivo) e anafilaxia
+Acidose metabólica: ânion gap e diagnóstico diferencial
+Anemias hemolíticas e falciforme
+Anticoagulação (heparinas, DOACs) e tempo de tratamento
+Artrite reumatoide: critérios, autoanticorpos e tratamento
+Avaliação geriátrica ampla e polifarmácia (critérios de Beers)
+Grandes síndromes geriátricas (quedas, imobilidade, incontinência, delirium)
+Bradiarritmias e bloqueios atrioventriculares; indicação de marca-passo
+Cefaleias primárias (enxaqueca, tensional, em salvas) e sinais de alarme
+Cetoacidose diabética e estado hiperosmolar: manejo de insulina, volume e potássio
+Critérios diagnósticos (glicemia, TOTG, HbA1c) e pré-diabetes
+Cirrose e suas complicações (ascite, PBE, encefalopatia, síndrome hepatorrenal)
+Complicações mecânicas e elétricas do infarto
+Crise tireotóxica e coma mixedematoso
+Cuidados paliativos: controle de sintomas e comunicação de más notícias
+Delirium vs demência; síndrome serotoninérgica e neuroléptica maligna
+Demências (Alzheimer, vascular) e síndromes parkinsonianas
+Dengue, zika e chikungunya: classificação de risco e manejo
+Derrame pleural: critérios de Light (transudato vs exsudato) e toracocentese
+Diagnóstico (critérios de Framingham) e classificação por fração de ejeção
+Diagnóstico diferencial pela espirometria (reversibilidade)
+Diagnóstico e estratificação de risco cardiovascular
+Diarreia crônica, síndromes disabsortivas e doença celíaca
+Dispepsia, DRGE e H. pylori: diagnóstico e tratamento
+Dispositivos, ressincronização e manejo das descompensações
+Distúrbio mineral e ósseo, anemia da DRC
+Doença renal crônica: estadiamento (TFG e albuminúria) e complicações
+Distúrbios da hemostasia, plaquetopenias (PTI) e coagulopatias
+Doença inflamatória intestinal (Crohn vs retocolite ulcerativa)
+Dupla antiagregação, anticoagulação e terapia adjuvante
+Emergências psiquiátricas: risco de suicídio, agitação e síndromes por substâncias
+Endocardite infecciosa (critérios de Duke) e sepse/choque séptico (bundle da 1ª hora)
+Epilepsia e estado de mal epiléptico
+Espondiloartrites e vasculites sistêmicas
+Estatinas, ezetimiba e inibidores de PCSK9
+Estratificação de gravidade do TEP e indicação de trombólise
+Estratificação de risco (escores) e prevenção primária vs secundária
+Fibrilação atrial: controle de ritmo vs frequência e anticoagulação (CHA2DS2-VASc, HAS-BLED)
+Gota e artrites por cristais; abordagem da monoartrite aguda
+HIV/AIDS: diagnóstico, TARV, infecções oportunistas e profilaxias
+IAM com supra de ST: ECG por parede e indicação de reperfusão (trombólise vs angioplastia)
+SCA sem supra e angina instável: estratificação (GRACE/TIMI)
+IC aguda: perfis hemodinâmicos e tratamento no pronto-socorro
+Terapia que reduz mortalidade na ICFEr (IECA/BRA/ARNI, betabloqueador, antagonista de aldosterona, iSGLT2)
+Hipertensão resistente e secundária (renovascular, hiperaldosteronismo, feocromocitoma)
+Tratamento não medicamentoso e classes de primeira linha (IECA, BRA, BCC, tiazídicos)
+Urgência vs emergência hipertensiva e lesão de órgão-alvo
+Insulinoterapia no DM1 (basal-bolus)
+Tratamento do DM2 (metformina, iSGLT2, análogos de GLP-1, sulfonilureias)
+Hipernatremia e distúrbios do potássio (ECG e estabilização de membrana)
+Hiponatremia (por volemia e osmolaridade) e risco de mielinólise por correção rápida
+Interpretação da gasometria (distúrbios respiratórios e compensações)
+Hipotireoidismo e hipertireoidismo (Graves, bócio, tireoidites)
+Interpretação de TSH, T4 livre e autoanticorpos
+Meningites, ITU/pielonefrite, celulite e leptospirose
+Pneumonia adquirida na comunidade: CURB-65, local de tratamento e antibiótico empírico
+Pneumonia hospitalar e associada à ventilação
+Parada cardiorrespiratória e ACLS; cuidados pós-parada
+Parada cardiorrespiratória: ritmos chocáveis e não chocáveis
+Tratamento de manutenção da asma (GINA) e da crise
+Tratamento do DPOC (GOLD) e exacerbação (antibiótico, corticoide, VNI)
+Tuberculose: diagnóstico, esquema RIPE e tratamento da ILTB
+Investigação das anemias (micro, normo e macrocíticas); ferropriva, doença crônica e megaloblástica
+Lesão renal aguda: classificação KDIGO e diferenciação pré-renal/renal/pós-renal
+Indicações de diálise de urgência (hipercalemia, acidose, volemia, uremia)
+Hemorragia por varizes esofágicas: profilaxia e tratamento
+Hepatites virais A, B, C, D e E: sorologias e história natural
+Insuficiência hepática aguda e rastreamento de carcinoma hepatocelular
+Lúpus eritematoso sistêmico: critérios diagnósticos e nefrite lúpica
+Leucemias e linfomas: apresentação e diagnóstico inicial
+TVP e TEP: escores de probabilidade (Wells), D-dímero e angio-TC
+Taquiarritmias de QRS estreito e largo: conduta na instabilidade vs estabilidade
+Intoxicações comuns e antídotos; distúrbios do nível de consciência
+Micoses pulmonares e abscesso pulmonar
+Síndrome do intestino irritável e hemorragia digestiva baixa
+Insuficiência adrenal e crise addisoniana; síndrome de Cushing
+Oxigenoterapia domiciliar prolongada: critérios e benefício
+Transtorno bipolar e espectro da esquizofrenia
+Transtornos depressivos e de ansiedade: diagnóstico e tratamento
+Revisão dos temas de alto rendimento das 5 áreas
+Metas de LDL conforme risco cardiovascular
+Terminalidade, ortotanásia e manejo da dor

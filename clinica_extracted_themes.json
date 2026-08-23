@@ -1,0 +1,272 @@
+{
+  "Saúde Mental no Brasil": {
+    "lesson_hours": 4.884444444444444,
+    "practice_hours": 2.0,
+    "total_hours": 7.217777777777778,
+    "highYield": false
+  },
+  "Arritmias, Síncope e PCR": {
+    "lesson_hours": 4.0,
+    "practice_hours": 0.0,
+    "total_hours": 4.0,
+    "highYield": false
+  },
+  "Valvopatias e Cardiomiopatias": {
+    "lesson_hours": 4.0,
+    "practice_hours": 0.0,
+    "total_hours": 4.0,
+    "highYield": false
+  },
+  "Hipertensão Arterial Sistêmica": {
+    "lesson_hours": 6.872222222222222,
+    "practice_hours": 0.0,
+    "total_hours": 6.872222222222222,
+    "highYield": false
+  },
+  "Insuficiência Cardíaca": {
+    "lesson_hours": 4.121944444444445,
+    "practice_hours": 0.0,
+    "total_hours": 4.121944444444445,
+    "highYield": false
+  },
+  "Síndrome Coronariana e Diagnósticos Diferenciais": {
+    "lesson_hours": 4.0,
+    "practice_hours": 1.9333333333333333,
+    "total_hours": 6.2666666666666675,
+    "highYield": false
+  },
+  "Farmacodermias e Dermatoses": {
+    "lesson_hours": 4.0,
+    "practice_hours": 2.0,
+    "total_hours": 6.333333333333334,
+    "highYield": false
+  },
+  "Doenças Infectoparasitárias com Acometimento Dermatológico": {
+    "lesson_hours": 2.0,
+    "practice_hours": 2.0,
+    "total_hours": 4.333333333333334,
+    "highYield": false
+  },
+  "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas": {
+    "lesson_hours": 2.0,
+    "practice_hours": 0.0,
+    "total_hours": 2.0,
+    "highYield": false
+  },
+  "Tireoide": {
+    "lesson_hours": 8.664444444444445,
+    "practice_hours": 2.0,
+    "total_hours": 10.997777777777777,
+    "highYield": false
+  },
+  "Diabetes": {
+    "lesson_hours": 7.536111111111111,
+    "practice_hours": 2.0,
+    "total_hours": 9.536111111111111,
+    "highYield": false
+  },
+  "Síndrome Metabólica e Dislipidemia": {
+    "lesson_hours": 7.267222222222222,
+    "practice_hours": 0.0,
+    "total_hours": 7.267222222222222,
+    "highYield": false
+  },
+  "Geriatria e Demências": {
+    "lesson_hours": 6.282222222222222,
+    "practice_hours": 0.0,
+    "total_hours": 6.282222222222222,
+    "highYield": false
+  },
+  "Cirrose, Insuficiência Hepática e Complicações": {
+    "lesson_hours": 4.0,
+    "practice_hours": 0.0,
+    "total_hours": 4.0,
+    "highYield": false
+  },
+  "Hepatites e Doenças do Metabolismo da Bilirrubina": {
+    "lesson_hours": 4.0,
+    "practice_hours": 2.0,
+    "total_hours": 6.0,
+    "highYield": false
+  },
+  "Infecções do Sistema Nervoso Central": {
+    "lesson_hours": 4.976111111111111,
+    "practice_hours": 4.0,
+    "total_hours": 9.642777777777779,
+    "highYield": false
+  },
+  "Tuberculose": {
+    "lesson_hours": 4.963333333333333,
+    "practice_hours": 2.0,
+    "total_hours": 7.296666666666667,
+    "highYield": false
+  },
+  "Pneumonias e Síndromes Gripais": {
+    "lesson_hours": 9.068055555555556,
+    "practice_hours": 3.9333333333333336,
+    "total_hours": 13.668055555555554,
+    "highYield": false
+  },
+  "Doenças Sexualmente Transmissíveis": {
+    "lesson_hours": 2.0,
+    "practice_hours": 2.0,
+    "total_hours": 4.333333333333334,
+    "highYield": false
+  },
+  "Infecções de Pele, Ossos e Partes Moles": {
+    "lesson_hours": 4.716944444444445,
+    "practice_hours": 2.0,
+    "total_hours": 7.050277777777778,
+    "highYield": false
+  },
+  "Endocardite e Infecção de Corrente Sanguínea": {
+    "lesson_hours": 4.0,
+    "practice_hours": 0.0,
+    "total_hours": 4.0,
+    "highYield": false
+  },
+  "HIV e AIDS no Adulto Não Gestante": {
+    "lesson_hours": 4.5600000000000005,
+    "practice_hours": 1.9333333333333333,
+    "total_hours": 6.826666666666666,
+    "highYield": false
+  },
+  "Síndromes Febris": {
+    "lesson_hours": 7.064444444444444,
+    "practice_hours": 2.0,
+    "total_hours": 9.397777777777778,
+    "highYield": false
+  },
+  "Glomerulopatias e Tubulopatias": {
+    "lesson_hours": 9.124444444444444,
+    "practice_hours": 2.0,
+    "total_hours": 11.457777777777778,
+    "highYield": false
+  },
+  "Distúrbios Hidroeletrolíticos e Acidobásicos": {
+    "lesson_hours": 4.0,
+    "practice_hours": 0.0,
+    "total_hours": 4.0,
+    "highYield": false
+  },
+  "Insuficiência Renal": {
+    "lesson_hours": 4.178888888888888,
+    "practice_hours": 2.0,
+    "total_hours": 6.178888888888888,
+    "highYield": false
+  },
+  "Cefaleias": {
+    "lesson_hours": 2.0,
+    "practice_hours": 2.0,
+    "total_hours": 4.333333333333334,
+    "highYield": false
+  },
+  "Síndromes Neurológicas e Fraqueza Muscular": {
+    "lesson_hours": 4.0,
+    "practice_hours": 2.0,
+    "total_hours": 6.0,
+    "highYield": false
+  },
+  "Neurointensivismo e Ética Médica": {
+    "lesson_hours": 4.0,
+    "practice_hours": 1.9333333333333333,
+    "total_hours": 6.266666666666667,
+    "highYield": false
+  },
+  "AVC": {
+    "lesson_hours": 4.0,
+    "practice_hours": 2.0,
+    "total_hours": 6.333333333333334,
+    "highYield": false
+  },
+  "Distúrbios da Hemostasia, Desordens Trombóticas e Transfusão de Hemocomponentes": {
+    "lesson_hours": 2.0,
+    "practice_hours": 0.0,
+    "total_hours": 2.0,
+    "highYield": false
+  },
+  "Distúrbios da Hemostasia, Desordens Trombóticas": {
+    "lesson_hours": 0.43527777777777776,
+    "practice_hours": 0.0,
+    "total_hours": 0.43527777777777776,
+    "highYield": false
+  },
+  "Onco-Hematologia": {
+    "lesson_hours": 6.900277777777777,
+    "practice_hours": 4.0,
+    "total_hours": 11.233611111111111,
+    "highYield": false
+  },
+  "Anemias e Hemoglobinopatias": {
+    "lesson_hours": 8.0,
+    "practice_hours": 0.0,
+    "total_hours": 8.0,
+    "highYield": false
+  },
+  "Embolia Pulmonar e Hipertensão Pulmonar": {
+    "lesson_hours": 6.147777777777778,
+    "practice_hours": 2.0,
+    "total_hours": 8.481111111111112,
+    "highYield": false
+  },
+  "Distúrbios Obstrutivos": {
+    "lesson_hours": 5.795833333333333,
+    "practice_hours": 1.9333333333333333,
+    "total_hours": 8.0625,
+    "highYield": false
+  },
+  "Doenças pulmonares intersticiais": {
+    "lesson_hours": 2.107222222222222,
+    "practice_hours": 0.0,
+    "total_hours": 2.107222222222222,
+    "highYield": false
+  },
+  "Transtornos Mentais": {
+    "lesson_hours": 4.0,
+    "practice_hours": 2.0,
+    "total_hours": 6.333333333333334,
+    "highYield": false
+  },
+  "Abuso de Álcool, Tabaco e Outras Substâncias": {
+    "lesson_hours": 4.0,
+    "practice_hours": 2.0,
+    "total_hours": 6.333333333333334,
+    "highYield": false
+  },
+  "Artrites e Diagnósticos Diferenciais": {
+    "lesson_hours": 5.790277777777778,
+    "practice_hours": 2.0,
+    "total_hours": 8.123611111111112,
+    "highYield": false
+  },
+  "Colagenoses e Miopatias": {
+    "lesson_hours": 4.0,
+    "practice_hours": 2.0,
+    "total_hours": 6.333333333333334,
+    "highYield": false
+  },
+  "Vasculites": {
+    "lesson_hours": 4.0,
+    "practice_hours": 2.0,
+    "total_hours": 6.0,
+    "highYield": false
+  },
+  "Sepse, Choque Séptico e Outros tipos de Choque": {
+    "lesson_hours": 2.0,
+    "practice_hours": 0.0,
+    "total_hours": 2.0,
+    "highYield": false
+  },
+  "Pneumointensivismo": {
+    "lesson_hours": 4.0,
+    "practice_hours": 2.0,
+    "total_hours": 6.0,
+    "highYield": false
+  },
+  "Intoxicações Exógenas e Acidentes por Animais Peçonhentos": {
+    "lesson_hours": 2.0,
+    "practice_hours": 3.9333333333333336,
+    "total_hours": 6.6,
+    "highYield": false
+  }
+}

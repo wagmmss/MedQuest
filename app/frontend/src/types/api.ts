@@ -21,6 +21,7 @@ export interface OverviewStats {
 
 export interface CoverageSubtema {
   subtema: string;
+  area?: string;
   n_questions: number;
   answered: number;
   attempts: number;
@@ -28,6 +29,8 @@ export interface CoverageSubtema {
   accuracy: number | null;
   coverage_pct: number;
   status: "mastered" | "proficient" | "in_progress" | "not_started";
+  highYield?: boolean;
+  theory_hours?: number;
 }
 
 export interface CoverageArea {
@@ -41,6 +44,8 @@ export interface CoverageArea {
   proficient: number;
   in_progress: number;
   not_started: number;
+  high_yield_count?: number;
+  high_yield_mastered?: number;
   accuracy: number | null;
   subtemas: CoverageSubtema[];
 }
@@ -168,7 +173,7 @@ export interface PlannerTopic {
   estimated_theory_hours: number;
   estimated_practice_hours: number;
   estimated_hours: number;
-  theory_source: "katomart" | "pedagogical_estimate";
+  theory_source: "curriculum" | "pedagogical_estimate";
   course_module: string | null;
 }
 

@@ -218,6 +218,38 @@ export function QuizClient({
     }
   }, [currentDetail, sessionAnswers]);
 
+  useEffect(() => {
+    const handleSyncSuccess = (e: Event) => {
+      const customEvent = e as CustomEvent<{
+        id: string;
+        endpoint: string;
+        method: string;
+        data: unknown;
+      }>;
+      const detail = customEvent.detail;
+      if (detail && detail.endpoint.includes("/api/questions/") && detail.endpoint.includes("/attempt")) {
+        const attemptRes = detail.data as AttemptResult | null;
+        if (attemptRes && typeof attemptRes.is_correct === "boolean") {
+          const match = detail.endpoint.match(/\/api\/questions\/(\d+)\/attempt/);
+          if (match && currentDetail && Number(match[1]) === currentDetail.id) {
+            setAttemptResult(attemptRes);
+            setIsOfflineSaved(false);
+            setSessionAnswers(prev => ({
+              ...prev,
+              [currentDetail.id]: { letter: selectedLetter || attemptRes.correct_letter || "", result: attemptRes }
+            }));
+            toast.success("Resposta sincronizada com sucesso!");
+          }
+        }
+      }
+    };
+
+    window.addEventListener("sync-item-success", handleSyncSuccess);
+    return () => {
+      window.removeEventListener("sync-item-success", handleSyncSuccess);
+    };
+  }, [currentDetail, selectedLetter]);
+
   const hasRestored = useRef(false);
   const [storageReady, setStorageReady] = useState(false);
 
@@ -780,23 +812,6 @@ export function QuizClient({
             {studyMode === "TUTOR" ? "Iniciar Sessão de Estudos" : "Iniciar Simulado Personalizado"}
           </button>
         </form>
-
-        <div className="mt-10 pt-8 border-t border-border">
-          <h3 className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
-            <Sparkles size={16} className="text-primary" /> Sugestões Rápidas
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            <button type="button" onClick={() => { setLocalLimit("20"); setFilters({ ...filters, area: "Clínica Médica", limit: "20" }); }} className="bg-muted/50 hover:bg-muted px-4 py-2 rounded-full text-xs font-medium text-foreground border border-border transition-colors">
-              Revisar Clínica Médica (20 Qs)
-            </button>
-            <button type="button" onClick={() => { setLocalLimit("15"); setFilters({ ...filters, status: "wrong", limit: "15" }); }} className="bg-destructive/5 hover:bg-destructive/10 px-4 py-2 rounded-full text-xs font-medium text-destructive border border-destructive/20 transition-colors">
-              Refazer Erros Recentes (15 Qs)
-            </button>
-            <button type="button" onClick={() => { setLocalLimit("30"); setFilters({ ...filters, status: "srs_due", limit: "30" }); }} className="bg-warning/5 hover:bg-warning/10 px-4 py-2 rounded-full text-xs font-medium text-warning border border-warning/20 transition-colors">
-              Revisão Espaçada Diária (30 Qs)
-            </button>
-          </div>
-        </div>
       </div>
     );
   }
@@ -1182,7 +1197,39 @@ export function QuizClient({
                   <p className="text-sm text-muted-foreground">Sua resposta foi salva neste dispositivo e será sincronizada automaticamente assim que a conexão for restabelecida.</p>
                 </div>
               </div>
-              <div className="flex justify-end">
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-primary/20">
+                <button
+                  type="button"
+                  onClick={async () => {
+                    if (!navigator.onLine) {
+                      toast("Ainda sem conexão com a internet. Sua resposta segue gravada localmente.", { icon: "💾" });
+                      return;
+                    }
+                    try {
+                      const { syncManager } = await import("@/lib/sync");
+                      await syncManager.sync(true);
+                      if (currentDetail && selectedLetter) {
+                        const res = await api.questions.submitAttempt(currentDetail.id, selectedLetter, timeSpent * 1000, "defer");
+                        setAttemptResult(res);
+                        setIsOfflineSaved(false);
+                        setSessionAnswers(prev => ({
+                          ...prev,
+                          [currentDetail.id]: { letter: selectedLetter, result: res }
+                        }));
+                        toast.success("Resposta sincronizada com sucesso!");
+                      }
+                    } catch (e) {
+                      if (e instanceof OfflineQueuedError) {
+                        toast("Sem conexão com a internet no momento.", { icon: "💾" });
+                      } else {
+                        toast.error("Erro ao sincronizar.");
+                      }
+                    }
+                  }}
+                  className="flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary/80 transition-colors bg-card border border-border px-3 py-2 rounded-lg"
+                >
+                  <RotateCcw size={14} /> Sincronizar Gabarito Agora
+                </button>
                 <button
                   onClick={nextQuestion}
                   disabled={currentIndex === queue.length - 1}

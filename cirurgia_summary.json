@@ -1,0 +1,461 @@
+[
+  {
+    "name": "Abdome Agudo Inflamatório",
+    "lesson_hours": 2.63,
+    "total_theme_hours": 4.82,
+    "question_hours": 2.0,
+    "total_with_questions": 6.82,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Como cai na PED: Abdome Agudo Inflamatório",
+    "lesson_hours": 0.18,
+    "total_theme_hours": 2.38,
+    "question_hours": 2.0,
+    "total_with_questions": 4.38,
+    "priority": "l",
+    "source": "schedule"
+  },
+  {
+    "name": "Abdome Agudo Isquêmico",
+    "lesson_hours": 1.32,
+    "total_theme_hours": 3.44,
+    "question_hours": 2.0,
+    "total_with_questions": 5.44,
+    "priority": "h",
+    "source": "schedule"
+  },
+  {
+    "name": "Abdome Agudo Obstrutivo",
+    "lesson_hours": 1.09,
+    "total_theme_hours": 3.32,
+    "question_hours": 2.0,
+    "total_with_questions": 5.32,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Abdome Agudo Perfurativo",
+    "lesson_hours": 1.4,
+    "total_theme_hours": 3.57,
+    "question_hours": 2.0,
+    "total_with_questions": 5.57,
+    "priority": "h",
+    "source": "schedule"
+  },
+  {
+    "name": "Abordagem Inicial (xABCDE)",
+    "lesson_hours": 2.89,
+    "total_theme_hours": 4.15,
+    "question_hours": 2.0,
+    "total_with_questions": 6.15,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Afecções Benignas das Vias Biliares",
+    "lesson_hours": 3.04,
+    "total_theme_hours": 4.25,
+    "question_hours": 2.0,
+    "total_with_questions": 6.25,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Afecções Pancreáticas",
+    "lesson_hours": 2.34,
+    "total_theme_hours": 3.93,
+    "question_hours": 2.0,
+    "total_with_questions": 5.93,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Afecções Urológicas Benignas",
+    "lesson_hours": 2.0,
+    "total_theme_hours": 3.64,
+    "question_hours": 2.0,
+    "total_with_questions": 5.64,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Anestesia",
+    "lesson_hours": 2.04,
+    "total_theme_hours": 3.52,
+    "question_hours": 2.0,
+    "total_with_questions": 5.52,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Aneurismas",
+    "lesson_hours": 0.65,
+    "total_theme_hours": 2.79,
+    "question_hours": 2.0,
+    "total_with_questions": 4.79,
+    "priority": "h",
+    "source": "schedule"
+  },
+  {
+    "name": "Cirurgia da Obesidade",
+    "lesson_hours": 1.32,
+    "total_theme_hours": 3.27,
+    "question_hours": 2.0,
+    "total_with_questions": 5.27,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Cirurgia Pediátrica",
+    "lesson_hours": 2.13,
+    "total_theme_hours": 3.77,
+    "question_hours": 2.0,
+    "total_with_questions": 5.77,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Como cai na PED: Cirurgia Pediátrica",
+    "lesson_hours": 0.98,
+    "total_theme_hours": 3.17,
+    "question_hours": 2.0,
+    "total_with_questions": 5.17,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Cirurgia Torácica",
+    "lesson_hours": 1.09,
+    "total_theme_hours": 3.16,
+    "question_hours": 2.0,
+    "total_with_questions": 5.16,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Cólon e Reto na cirurgia",
+    "lesson_hours": 1.51,
+    "total_theme_hours": 3.67,
+    "question_hours": 2.0,
+    "total_with_questions": 5.67,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Cuidados e Complicações Pós-Operatórias",
+    "lesson_hours": 3.91,
+    "total_theme_hours": 5.1,
+    "question_hours": 2.0,
+    "total_with_questions": 7.1,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Doença Inflamatória Intestinal",
+    "lesson_hours": 2.23,
+    "total_theme_hours": 3.54,
+    "question_hours": 2.0,
+    "total_with_questions": 5.54,
+    "priority": "h",
+    "source": "schedule"
+  },
+  {
+    "name": "Cuidados Pré-operatórios",
+    "lesson_hours": 3.76,
+    "total_theme_hours": 4.52,
+    "question_hours": 2.0,
+    "total_with_questions": 6.52,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Doença arterial periférica",
+    "lesson_hours": 1.57,
+    "total_theme_hours": 3.19,
+    "question_hours": 2.0,
+    "total_with_questions": 5.19,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Doenças Venosas",
+    "lesson_hours": 2.04,
+    "total_theme_hours": 3.6,
+    "question_hours": 2.0,
+    "total_with_questions": 5.6,
+    "priority": "h",
+    "source": "schedule"
+  },
+  {
+    "name": "Feridas, Enxertos e Retalhos",
+    "lesson_hours": 2.53,
+    "total_theme_hours": 4.13,
+    "question_hours": 2.0,
+    "total_with_questions": 6.13,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Técnica Operatória",
+    "lesson_hours": 1.96,
+    "total_theme_hours": 3.2,
+    "question_hours": 2.0,
+    "total_with_questions": 5.2,
+    "priority": "l",
+    "source": "schedule"
+  },
+  {
+    "name": "Hemorragia Digestiva",
+    "lesson_hours": 2.64,
+    "total_theme_hours": 2.56,
+    "question_hours": 2.0,
+    "total_with_questions": 4.56,
+    "priority": "l",
+    "source": "schedule"
+  },
+  {
+    "name": "Hérnias",
+    "lesson_hours": 3.3,
+    "total_theme_hours": 4.68,
+    "question_hours": 2.0,
+    "total_with_questions": 6.68,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Queimaduras",
+    "lesson_hours": 1.07,
+    "total_theme_hours": 2.84,
+    "question_hours": 2.0,
+    "total_with_questions": 4.84,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Como caí na PED: Queimaduras",
+    "lesson_hours": 0.72,
+    "total_theme_hours": 2.4,
+    "question_hours": 2.0,
+    "total_with_questions": 4.4,
+    "priority": "l",
+    "source": "schedule"
+  },
+  {
+    "name": "Síndrome Disfágica",
+    "lesson_hours": 2.69,
+    "total_theme_hours": 3.87,
+    "question_hours": 2.0,
+    "total_with_questions": 5.87,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Como cai na CM: Síndrome Disfágica",
+    "lesson_hours": 0.87,
+    "total_theme_hours": 2.49,
+    "question_hours": 2.0,
+    "total_with_questions": 4.49,
+    "priority": "m",
+    "source": "schedule"
+  },
+  {
+    "name": "Síndrome Dispéptica",
+    "lesson_hours": 1.57,
+    "total_theme_hours": 2.91,
+    "question_hours": 2.0,
+    "total_with_questions": 4.91,
+    "priority": "h",
+    "source": "schedule"
+  },
+  {
+    "name": "Trauma Abdominal",
+    "lesson_hours": 1.28,
+    "total_theme_hours": 3.44,
+    "question_hours": 2.0,
+    "total_with_questions": 5.44,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Trauma Cranioencefálico (TCE)",
+    "lesson_hours": 1.08,
+    "total_theme_hours": 3.31,
+    "question_hours": 2.0,
+    "total_with_questions": 5.31,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Trauma de Face e Pescoço",
+    "lesson_hours": 1.32,
+    "total_theme_hours": 2.72,
+    "question_hours": 2.0,
+    "total_with_questions": 4.72,
+    "priority": "h",
+    "source": "schedule"
+  },
+  {
+    "name": "Trauma Torácico",
+    "lesson_hours": 1.24,
+    "total_theme_hours": 3.38,
+    "question_hours": 2.0,
+    "total_with_questions": 5.38,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Tumores Dermatológicos",
+    "lesson_hours": 1.36,
+    "total_theme_hours": 3.18,
+    "question_hours": 2.0,
+    "total_with_questions": 5.18,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Tumores do Aparelho Digestivo",
+    "lesson_hours": 2.13,
+    "total_theme_hours": 4.29,
+    "question_hours": 2.0,
+    "total_with_questions": 6.29,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Tumores Urológicos",
+    "lesson_hours": 1.84,
+    "total_theme_hours": 2.94,
+    "question_hours": 2.0,
+    "total_with_questions": 4.94,
+    "priority": "p",
+    "source": "schedule"
+  },
+  {
+    "name": "Fraturas ósseas",
+    "lesson_hours": 1.31,
+    "total_theme_hours": 3.42,
+    "question_hours": 2.0,
+    "total_with_questions": 5.42,
+    "priority": "h",
+    "source": "schedule"
+  },
+  {
+    "name": "Ortopedia Pediátrica",
+    "lesson_hours": 1.16,
+    "total_theme_hours": 2.51,
+    "question_hours": 2.0,
+    "total_with_questions": 4.51,
+    "priority": "m",
+    "source": "schedule"
+  },
+  {
+    "name": "Luxações/ Lesões Ligamentares",
+    "lesson_hours": 0.91,
+    "total_theme_hours": 2.55,
+    "question_hours": 2.0,
+    "total_with_questions": 4.55,
+    "priority": "m",
+    "source": "schedule"
+  },
+  {
+    "name": "Tendinites/ Tenossinovites/ Fasceítes e Bursites",
+    "lesson_hours": 0.79,
+    "total_theme_hours": 2.5,
+    "question_hours": 2.0,
+    "total_with_questions": 4.5,
+    "priority": "m",
+    "source": "schedule"
+  },
+  {
+    "name": "Tumores Ortopédicos",
+    "lesson_hours": 1.25,
+    "total_theme_hours": 2.75,
+    "question_hours": 2.0,
+    "total_with_questions": 4.75,
+    "priority": "m",
+    "source": "schedule"
+  },
+  {
+    "name": "Tumores Pulmonares e Do Mediastino",
+    "lesson_hours": 0.5,
+    "total_theme_hours": 0.5,
+    "question_hours": 2.0,
+    "total_with_questions": 2.5,
+    "priority": "h",
+    "source": "module"
+  },
+  {
+    "name": "Cirurgia Cardíaca",
+    "lesson_hours": 0.5,
+    "total_theme_hours": 0.5,
+    "question_hours": 2.0,
+    "total_with_questions": 2.5,
+    "priority": "h",
+    "source": "module"
+  },
+  {
+    "name": "Outras Afecções Cirurgicas de Cabeça e Pescoço",
+    "lesson_hours": 0.5,
+    "total_theme_hours": 0.5,
+    "question_hours": 2.0,
+    "total_with_questions": 2.5,
+    "priority": "m",
+    "source": "module"
+  },
+  {
+    "name": "Tumores de partes moles",
+    "lesson_hours": 0.5,
+    "total_theme_hours": 0.5,
+    "question_hours": 2.0,
+    "total_with_questions": 2.5,
+    "priority": "m",
+    "source": "module"
+  },
+  {
+    "name": "Oftalmologia",
+    "lesson_hours": 1.0,
+    "total_theme_hours": 1.0,
+    "question_hours": 2.0,
+    "total_with_questions": 3.0,
+    "priority": "m",
+    "source": "module"
+  },
+  {
+    "name": "Polipose intestinal",
+    "lesson_hours": 0.5,
+    "total_theme_hours": 0.5,
+    "question_hours": 2.0,
+    "total_with_questions": 2.5,
+    "priority": "l",
+    "source": "module"
+  },
+  {
+    "name": "Trauma da Coluna Vertebral (TRM)",
+    "lesson_hours": 0.5,
+    "total_theme_hours": 0.5,
+    "question_hours": 2.0,
+    "total_with_questions": 2.5,
+    "priority": "h",
+    "source": "module"
+  },
+  {
+    "name": "Trauma de membros e extremidades",
+    "lesson_hours": 0.5,
+    "total_theme_hours": 0.5,
+    "question_hours": 2.0,
+    "total_with_questions": 2.5,
+    "priority": "h",
+    "source": "module"
+  },
+  {
+    "name": "Tumores de Cabeça e Pescoço",
+    "lesson_hours": 0.5,
+    "total_theme_hours": 0.5,
+    "question_hours": 2.0,
+    "total_with_questions": 2.5,
+    "priority": "p",
+    "source": "module"
+  }
+]

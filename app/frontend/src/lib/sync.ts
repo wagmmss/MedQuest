@@ -213,7 +213,25 @@ export const syncManager = {
         });
 
         if (response.ok) {
+          let responseData: unknown = null;
+          try {
+            const text = await response.text();
+            if (text) {
+              responseData = JSON.parse(text);
+            }
+          } catch {
+            // ignore parse error if response is not JSON
+          }
           await localDb.syncQueue.delete(item.id);
+          window.dispatchEvent(new CustomEvent("sync-item-success", {
+            detail: {
+              id: item.id,
+              endpoint: item.endpoint,
+              method: item.method,
+              data: responseData,
+              idempotencyKey: item.idempotency_key,
+            }
+          }));
           continue;
         }
 

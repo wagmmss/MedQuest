@@ -1,0 +1,335 @@
+[
+  {
+    "id": 68021,
+    "name": "Tumores do colo uterino",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.78,
+    "total_estimated_hours": 3.78
+  },
+  {
+    "id": 67998,
+    "name": "Pré-Natal",
+    "high_yield": true,
+    "foco_sp": false,
+    "foco_rp": true,
+    "theory_hours": 2.55,
+    "total_estimated_hours": 4.55
+  },
+  {
+    "id": 68024,
+    "name": "Rastreamento do Câncer de Colo Uterino",
+    "high_yield": true,
+    "foco_sp": true,
+    "foco_rp": true,
+    "theory_hours": 1.78,
+    "total_estimated_hours": 3.78
+  },
+  {
+    "id": 67997,
+    "name": "Doenças do Corpo Uterino e Endométrio",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 2.0,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "id": 68023,
+    "name": "Diabetes mellitus na gravidez",
+    "high_yield": true,
+    "foco_sp": true,
+    "foco_rp": true,
+    "theory_hours": 2.0,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "id": 67999,
+    "name": "Outras doenças na gestação",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.5,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "id": 67993,
+    "name": "Síndromes Hipertensivas da Gestação",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.31,
+    "total_estimated_hours": 3.31
+  },
+  {
+    "id": 68013,
+    "name": "Hepatites virais, HIV/AIDS e outras infecções na gestação",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 2.0,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "id": 68004,
+    "name": "Ciclo Menstrual",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.24,
+    "total_estimated_hours": 3.24
+  },
+  {
+    "id": 67994,
+    "name": "Contracepção",
+    "high_yield": true,
+    "foco_sp": true,
+    "foco_rp": true,
+    "theory_hours": 2.0,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "id": 68014,
+    "name": "Climatério",
+    "high_yield": true,
+    "foco_sp": true,
+    "foco_rp": true,
+    "theory_hours": 1.81,
+    "total_estimated_hours": 3.81
+  },
+  {
+    "id": 68003,
+    "name": "Amenorreias e Síndrome dos Ovários Policísticos",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 2.37,
+    "total_estimated_hours": 4.37
+  },
+  {
+    "id": 68016,
+    "name": "Anatomia Pélvica",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.0,
+    "total_estimated_hours": 3.0
+  },
+  {
+    "id": 68012,
+    "name": "Dor pélvica crônica",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.83,
+    "total_estimated_hours": 3.83
+  },
+  {
+    "id": 68007,
+    "name": "Doença Inflamatória Pélvica e Violência Sexual",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.69,
+    "total_estimated_hours": 3.69
+  },
+  {
+    "id": 68008,
+    "name": "Vulvovaginites",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 0.93,
+    "total_estimated_hours": 2.93
+  },
+  {
+    "id": 67992,
+    "name": "Infertilidade conjugal",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.41,
+    "total_estimated_hours": 3.41
+  },
+  {
+    "id": 68006,
+    "name": "Doenças Benignas da Mama",
+    "high_yield": true,
+    "foco_sp": false,
+    "foco_rp": true,
+    "theory_hours": 1.5,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "id": 67990,
+    "name": "Tumores Malignos da Mama",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 2.0,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "id": 68015,
+    "name": "Medicina Fetal",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.5,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "id": 67991,
+    "name": "Tumores dos Ovários",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.5,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "id": 68018,
+    "name": "Estática fetal, Pelve e Mecanismo de Parto",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.8,
+    "total_estimated_hours": 3.8
+  },
+  {
+    "id": 68000,
+    "name": "Assistência ao Parto",
+    "high_yield": true,
+    "foco_sp": true,
+    "foco_rp": true,
+    "theory_hours": 1.84,
+    "total_estimated_hours": 3.84
+  },
+  {
+    "id": 68005,
+    "name": "Rotura Prematura de Membranas Ovulares e Infecção Ovular",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.0,
+    "total_estimated_hours": 3.0
+  },
+  {
+    "id": 68019,
+    "name": "Trabalho de parto prematuro",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.04,
+    "total_estimated_hours": 3.04
+  },
+  {
+    "id": 68017,
+    "name": "Puerpério",
+    "high_yield": true,
+    "foco_sp": true,
+    "foco_rp": false,
+    "theory_hours": 1.88,
+    "total_estimated_hours": 3.88
+  },
+  {
+    "id": 68009,
+    "name": "Sangramento da Primeira Metade da Gestação",
+    "high_yield": true,
+    "foco_sp": true,
+    "foco_rp": false,
+    "theory_hours": 1.83,
+    "total_estimated_hours": 3.83
+  },
+  {
+    "id": 68020,
+    "name": "Sangramento da Segunda Metade da Gestação",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.31,
+    "total_estimated_hours": 3.31
+  },
+  {
+    "id": 68002,
+    "name": "PALM-COEIN",
+    "high_yield": true,
+    "foco_sp": true,
+    "foco_rp": false,
+    "theory_hours": 1.5,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "id": 67995,
+    "name": "Sofrimento Fetal",
+    "high_yield": true,
+    "foco_sp": true,
+    "foco_rp": true,
+    "theory_hours": 1.5,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "id": 68022,
+    "name": "Úlceras genitais",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.0,
+    "total_estimated_hours": 3.0
+  },
+  {
+    "id": 68025,
+    "name": "Incontinência Urinária e Prolapsos de Órgãos Pélvicos",
+    "high_yield": true,
+    "foco_sp": true,
+    "foco_rp": true,
+    "theory_hours": 1.77,
+    "total_estimated_hours": 3.77
+  },
+  {
+    "id": 67996,
+    "name": "Patologias da Vulva e Vagina",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 1.0,
+    "total_estimated_hours": 3.0
+  },
+  {
+    "id": 68001,
+    "name": "Conceitos em sexualidade",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 0.5,
+    "total_estimated_hours": 2.5
+  },
+  {
+    "id": 68010,
+    "name": "Disfunções sexuais",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 0.5,
+    "total_estimated_hours": 2.5
+  },
+  {
+    "id": 68011,
+    "name": "Fístulas",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 0.5,
+    "total_estimated_hours": 2.5
+  },
+  {
+    "id": 85632,
+    "name": "Morte materna",
+    "high_yield": false,
+    "foco_sp": false,
+    "foco_rp": false,
+    "theory_hours": 0.5,
+    "total_estimated_hours": 2.5
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": 68063,
+    "name": "Ética médica, Bioética e Documentação",
+    "foco_sp": true,
+    "foco_rp": false,
+    "high_yield": true,
+    "theory_hours": 1.67,
+    "total_estimated_hours": 3.67
+  },
+  {
+    "id": 68065,
+    "name": "Estudos Epidemiológicos (Análise Estatística e Aplicação)",
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "theory_hours": 2.0,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "id": 68060,
+    "name": "Estudos Epidemiológicos (Classificação)",
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "theory_hours": 1.6,
+    "total_estimated_hours": 3.6
+  },
+  {
+    "id": 68061,
+    "name": "Indicadores de Morbimortalidade",
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "theory_hours": 1.5,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "id": 68058,
+    "name": "Perfis e Indicadores demográficos",
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "theory_hours": 1.5,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "id": 68055,
+    "name": "Níveis de Prevenção",
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "theory_hours": 1.9,
+    "total_estimated_hours": 3.9
+  },
+  {
+    "id": 68066,
+    "name": "Aspectos Históricos do SUS",
+    "foco_sp": true,
+    "foco_rp": false,
+    "high_yield": true,
+    "theory_hours": 1.5,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "id": 68062,
+    "name": "A Evolução do SUS",
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "theory_hours": 2.0,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "id": 68064,
+    "name": "Atenção Primária à Saúde",
+    "foco_sp": true,
+    "foco_rp": true,
+    "high_yield": true,
+    "theory_hours": 2.23,
+    "total_estimated_hours": 4.23
+  },
+  {
+    "id": 68067,
+    "name": "Estatística de Testes Diagnósticos",
+    "foco_sp": true,
+    "foco_rp": false,
+    "high_yield": true,
+    "theory_hours": 2.0,
+    "total_estimated_hours": 4.0
+  },
+  {
+    "id": 68057,
+    "name": "Epidemias, Endemias e Pandemias",
+    "foco_sp": true,
+    "foco_rp": false,
+    "high_yield": true,
+    "theory_hours": 1.5,
+    "total_estimated_hours": 3.5
+  },
+  {
+    "id": 68056,
+    "name": "Notificação",
+    "foco_sp": false,
+    "foco_rp": false,
+    "high_yield": false,
+    "theory_hours": 1.85,
+    "total_estimated_hours": 3.85
+  },
+  {
+    "id": 68059,
+    "name": "Vigilância em Saúde do Trabalhador",
+    "foco_sp": true,
+    "foco_rp": false,
+    "high_yield": true,
+    "theory_hours": 1.82,
+    "total_estimated_hours": 3.82
+  }
+]

@@ -29,14 +29,31 @@ export function SyncProvider() {
     };
   }, []);
 
+  const [isManualSyncing, setIsManualSyncing] = useState(false);
+
+  const handleTriggerSync = async () => {
+    if (isManualSyncing) return;
+    setIsManualSyncing(true);
+    try {
+      await syncManager.sync(true);
+    } finally {
+      setIsManualSyncing(false);
+    }
+  };
+
   if (queueCount === 0) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 bg-warning text-warning-foreground px-4 py-2 rounded-full shadow-lg flex items-center gap-2 z-50 animate-in fade-in slide-in-from-bottom-4">
-      <CloudOff size={18} className="animate-pulse" />
+    <button
+      onClick={handleTriggerSync}
+      disabled={isManualSyncing}
+      title="Clique para forçar a sincronização de dados"
+      className="fixed bottom-4 right-4 bg-warning text-warning-foreground hover:bg-warning/90 px-4 py-2 rounded-full shadow-lg flex items-center gap-2 z-50 animate-in fade-in slide-in-from-bottom-4 cursor-pointer transition-all active:scale-95 disabled:opacity-75"
+    >
+      <CloudOff size={18} className={isManualSyncing ? "animate-spin" : "animate-pulse"} />
       <span className="text-sm font-semibold">
-        {queueCount} {queueCount === 1 ? 'item offline' : 'itens offline'}
+        {isManualSyncing ? "Sincronizando..." : `${queueCount} ${queueCount === 1 ? 'item offline' : 'itens offline'}`}
       </span>
-    </div>
+    </button>
   );
 }

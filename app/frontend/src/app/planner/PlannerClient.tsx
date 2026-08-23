@@ -6,7 +6,7 @@ import Link from "next/link";
 import { PlannerWeek, PlannerProgressMap, PlannerTopic } from "@/types/api";
 import { api } from "@/lib/api";
 import { getSubtemaDetails } from "@/lib/plannerData";
-import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play } from "lucide-react";
+import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play, Flame } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/nextjs";
@@ -35,74 +35,63 @@ const TopicRow = memo(function TopicRow({
   toggleTopicCheck: (key: string) => void;
 }) {
   const info = getSubtemaDetails(t.subtema);
-  return (
-    <div className="flex items-start gap-3">
-      <div className={clsx("w-1.5 h-1.5 mt-2 rounded-full shrink-0", getAreaColorClass(t.area).split(" ")[0])} />
-      <div className="w-full">
-        <details className="group">
-          <summary className="font-semibold text-foreground leading-tight cursor-pointer list-none flex items-center gap-1.5 hover:text-primary transition-colors">
-            {t.subtema}
-            {info?.highYield && <span title="Tema de Alto Rendimento na USP" className="text-lg leading-none">🔥</span>}
-          </summary>
-          
-          {info?.details && info.details.length > 0 && (
-            <div className="mt-2 mb-2 flex flex-col gap-2 pl-1">
-              {info.details.map((d: string, i: number) => {
-                const key = `planner-${t.subtema}-${i}`;
-                const isChecked = !!checkedTopics[key];
-                return (
-                  <label key={i} className="flex items-start gap-2 cursor-pointer group/item">
-                    <div className="relative flex items-center mt-0.5">
-                      <input 
-                        type="checkbox"
-                        className="peer sr-only"
-                        checked={isChecked}
-                        onChange={() => toggleTopicCheck(key)}
-                      />
-                      <div className="w-4 h-4 border border-muted-foreground/50 rounded transition-colors peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center group-hover/item:border-primary/50">
-                        <Check size={10} className={clsx("text-primary-foreground transition-opacity", isChecked ? "opacity-100" : "opacity-0")} strokeWidth={4} />
-                      </div>
-                    </div>
-                    <span className={clsx("text-sm transition-colors", isChecked ? "text-muted-foreground line-through opacity-70" : "text-foreground/90")}>
-                      {d}
-                    </span>
-                  </label>
-                );
-              })}
-            </div>
-          )}
-          
-          <div className="text-xs text-muted-foreground flex items-center flex-wrap gap-1 mt-1">
-            <span className={clsx(getAreaColorClass(t.area).split(" ")[1])}>{t.area}</span>
-            {info?.macroThemeName && (
-              <>
-                <span>•</span>
-                <span>Módulo: {info.macroThemeName}</span>
-              </>
-            )}
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <Clock size={10} /> {formatHours(t.estimated_theory_hours)}h de aulas regulares + {formatHours(t.estimated_practice_hours)}h de questões = {formatHours(t.estimated_hours)}h
-            </span>
-            {t.theory_source === "katomart" && (
-              <>
-                <span>•</span>
-                <span title={t.course_module || undefined}>Baseado no Katomart</span>
-              </>
-            )}
-            <span>•</span>
-            <span>{t.questions_available} questões disponíveis</span>
-          </div>
+  const key = `planner-topic-${t.subtema}`;
+  const isChecked = !!checkedTopics[key];
 
-          <div className="mt-3 mb-1">
-            <Link 
-              href={`/estudar?area=${encodeURIComponent(t.area)}&subtema=${encodeURIComponent(t.subtema)}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold rounded-lg transition-colors border border-primary/20"
-            >
-              <Play size={12} className="fill-primary" /> Praticar Questões deste Tópico
-            </Link>
-          </div>
-        </details>
+  return (
+    <div className="flex items-start gap-3 py-2.5 px-3 rounded-xl border border-transparent hover:border-border/50 hover:bg-muted/20 transition-all group">
+      <div className="relative flex items-center mt-0.5 shrink-0">
+        <input 
+          type="checkbox"
+          id={key}
+          className="peer sr-only"
+          checked={isChecked}
+          onChange={() => toggleTopicCheck(key)}
+        />
+        <label 
+          htmlFor={key}
+          className="w-4 h-4 border border-muted-foreground/40 rounded transition-colors peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center cursor-pointer hover:border-primary/60"
+        >
+          <Check size={10} className={clsx("text-primary-foreground transition-opacity", isChecked ? "opacity-100" : "opacity-0")} strokeWidth={4} />
+        </label>
+      </div>
+
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap">
+          <label 
+            htmlFor={key}
+            className={clsx(
+              "font-semibold text-sm leading-snug cursor-pointer transition-colors", 
+              isChecked ? "text-muted-foreground line-through opacity-70" : "text-foreground group-hover:text-primary"
+            )}
+          >
+            {t.subtema}
+          </label>
+          {info?.highYield && (
+            <span title="Tema de Alto Rendimento na USP" className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[11px] font-bold bg-orange-500/10 text-orange-600 dark:text-orange-400 border border-orange-500/20">
+              <Flame size={12} className="fill-current text-orange-500" /> Foco USP
+            </span>
+          )}
+        </div>
+
+        <div className="text-xs text-muted-foreground flex items-center flex-wrap gap-1.5 mt-1.5">
+          <span className={clsx("font-medium", getAreaColorClass(t.area).split(" ")[1])}>{t.area}</span>
+          <span>•</span>
+          <span className="flex items-center gap-1">
+            <Clock size={11} /> {formatHours(t.estimated_theory_hours)}h teóricas + {formatHours(t.estimated_practice_hours)}h questões = {formatHours(t.estimated_hours)}h
+          </span>
+          <span>•</span>
+          <span>{t.questions_available} questões disponíveis</span>
+        </div>
+
+        <div className="mt-2.5">
+          <Link 
+            href={`/estudar?area=${encodeURIComponent(t.area)}&subtema=${encodeURIComponent(t.subtema)}`}
+            className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold rounded-lg transition-colors border border-primary/20"
+          >
+            <Play size={11} className="fill-primary" /> Praticar Questões deste Tópico
+          </Link>
+        </div>
       </div>
     </div>
   );
