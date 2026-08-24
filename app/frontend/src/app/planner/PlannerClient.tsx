@@ -29,15 +29,42 @@ const formatHours = (hours: number) => hours.toLocaleString("pt-BR", {
 const TopicRow = memo(function TopicRow({ 
   t, 
   checkedTopics, 
-  toggleTopicCheck 
+  toggleTopicCheck,
+  weekDate,
+  topicIndex,
+  daysPerWeek
 }: { 
   t: PlannerTopic; 
   checkedTopics: Record<string, boolean>; 
   toggleTopicCheck: (key: string) => void;
+  weekDate?: Date;
+  topicIndex?: number;
+  daysPerWeek?: number;
 }) {
   const info = getSubtemaDetails(t.subtema);
   const key = `planner-topic-${t.subtema}`;
   const isChecked = !!checkedTopics[key];
+
+  // Cálculo de Link 1-Clique para o Google Agenda
+  const gcalUrl = (() => {
+    if (!weekDate) return null;
+    const studyDays = Math.max(1, Math.min(7, daysPerWeek || 6));
+    const dayOffset = (topicIndex || 0) % studyDays;
+    const topicDt = new Date(weekDate.getTime() + dayOffset * 86400000);
+    const dtStart = new Date(topicDt);
+    dtStart.setHours(8, 0, 0, 0);
+    const durationMinutes = Math.max(30, Math.round(t.estimated_hours * 60));
+    const dtEnd = new Date(dtStart.getTime() + durationMinutes * 60000);
+
+    const formatGCalDate = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    const startStr = formatGCalDate(dtStart);
+    const endStr = formatGCalDate(dtEnd);
+
+    const title = `[MedQuest] 📖 ${t.subtema} (${t.area})`;
+    const details = `Carga Real: ${t.estimated_hours}h (Teoria: ${t.estimated_theory_hours}h + Questões: ${t.estimated_practice_hours}h)\n\nÁrea: ${t.area}\n\n🔗 Praticar Questões: https://medquest.app/estudar?area=${encodeURIComponent(t.area)}&subtema=${encodeURIComponent(t.subtema)}`;
+
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startStr}/${endStr}&details=${encodeURIComponent(details)}&location=MedQuest`;
+  })();
 
   return (
     <div className="flex items-start gap-3 py-2.5 px-3 rounded-xl border border-transparent hover:border-border/50 hover:bg-muted/20 transition-all group">
@@ -85,13 +112,25 @@ const TopicRow = memo(function TopicRow({
           <span>{t.questions_available} questões disponíveis</span>
         </div>
 
-        <div className="mt-2.5">
+        <div className="mt-2.5 flex items-center gap-2 flex-wrap">
           <Link 
             href={`/estudar?area=${encodeURIComponent(t.area)}&subtema=${encodeURIComponent(t.subtema)}`}
             className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold rounded-lg transition-colors border border-primary/20"
           >
-            <Play size={11} className="fill-primary" /> Praticar Questões deste Tópico
+            <Play size={11} className="fill-primary" /> Praticar Questões
           </Link>
+          {gcalUrl && (
+            <a
+              href={gcalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 px-2.5 py-1 bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground text-xs font-medium rounded-lg transition-colors border border-border"
+              title="Adicionar esta aula à sua agenda pessoal do Google (100% editável e móvel)"
+            >
+              <CalendarDays size={12} className="text-primary" />
+              + Google Agenda
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -409,7 +448,15 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
 
                 <div className="flex flex-col gap-3">
                   {week.topics.map((t, idx) => (
-                    <TopicRow key={idx} t={t} checkedTopics={checkedTopics} toggleTopicCheck={toggleTopicCheck} />
+                    <TopicRow 
+                      key={idx} 
+                      t={t} 
+                      checkedTopics={checkedTopics} 
+                      toggleTopicCheck={toggleTopicCheck}
+                      weekDate={weekDate}
+                      topicIndex={idx}
+                      daysPerWeek={config?.days_per_week || 6}
+                    />
                   ))}
                   {week.topics.length === 0 && (
                     <div className="text-sm text-muted-foreground italic">Semana de revisão geral ou descanso.</div>
@@ -551,73 +598,80 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
             </div>
 
             <div className="space-y-4">
-              {/* Opção 1: Google Agenda Direto */}
-              <div className="border border-border bg-muted/30 rounded-xl p-4 space-y-3">
+              {/* Opção 1: Agenda 100% Editável no Google Agenda */}
+              <div className="border border-primary/30 bg-primary/5 rounded-xl p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-md bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold text-xs">
-                      G
+                    <div className="w-6 h-6 rounded-md bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">
+                      1
                     </div>
-                    <span className="font-bold text-sm text-foreground">Google Agenda (Direto & Sem Download)</span>
+                    <span className="font-bold text-sm text-foreground">Como Mover e Editar Horários no Google</span>
                   </div>
                   <span className="text-[10px] uppercase font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-full">
-                    Recomendado
+                    100% Editável
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Sincronização em nuvem: todas as aulas e revisões de 24h, 7d e 30d entram direto na sua conta Google e se atualizam automaticamente.
+                  Para poder <strong>arrastar aulas, mudar horários e personalizar eventos livremente</strong>, o Google Agenda exige que os eventos sejam importados para a sua agenda principal (em vez de assinatura somente leitura):
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                  <button
+                    onClick={handleExportIcs}
+                    disabled={exportingIcs}
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-xs shadow-sm disabled:opacity-50"
+                  >
+                    {exportingIcs ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
+                    1. Baixar Arquivo (.ics)
+                  </button>
+                  <a
+                    href="https://calendar.google.com/calendar/r/settings/export"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-card hover:bg-muted text-foreground border border-border font-semibold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-xs text-center"
+                  >
+                    <ExternalLink size={14} />
+                    2. Abrir Importador Google
+                  </a>
+                </div>
+                <div className="text-[11px] text-muted-foreground bg-background/60 p-2 rounded-lg border border-border/60">
+                  ✨ <strong>Instrução Rápida:</strong> Baixe o arquivo no Passo 1, abra o Importador no Passo 2, selecione o arquivo baixado e clique em <em>Importar</em>. Todos os eventos ficam <strong>totalmente livres para você mover e editar</strong>!
+                </div>
+              </div>
+
+              {/* Opção 2: Assinatura Automática em Nuvem (Somente Leitura) */}
+              <div className="border border-border bg-muted/30 rounded-xl p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Globe size={18} className="text-muted-foreground" />
+                    <span className="font-bold text-sm text-foreground">Assinatura em Nuvem (Automática / Somente Leitura)</span>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Adiciona como agenda externa do MedQuest. O Google atualiza automaticamente, mas os horários ficam fixos/bloqueados para edição pelo próprio Google.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 pt-1">
                   <a
                     href={googleCalendarDirectUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-2 text-xs shadow-sm"
+                    className="flex-1 bg-muted hover:bg-muted/80 text-foreground font-semibold py-2.5 px-3 rounded-xl border border-border transition-all flex items-center justify-center gap-1.5 text-xs"
                   >
                     <ExternalLink size={14} />
-                    Adicionar ao Google Agenda
+                    Assinar no Google Agenda
                   </a>
                   <button
                     onClick={handleCopyFeed}
                     className="bg-card hover:bg-muted text-foreground border border-border font-medium py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-xs"
                   >
                     {copiedFeed ? <Check size={14} className="text-success" /> : <Copy size={14} />}
-                    {copiedFeed ? "Copiado!" : "Copiar URL do Feed"}
-                  </button>
-                </div>
-              </div>
-
-              {/* Opção 2: Apple Calendar / Outros Aplicativos */}
-              <div className="border border-border bg-muted/30 rounded-xl p-4 space-y-3">
-                <div className="flex items-center gap-2">
-                  <Globe size={18} className="text-primary" />
-                  <span className="font-bold text-sm text-foreground">Apple Calendar / Outlook / Celular</span>
-                </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Abra a assinatura direta via WebCal ou baixe o arquivo <code>.ics</code> completo para importar offline.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-2 pt-1">
-                  <a
-                    href={webcalUrl}
-                    className="flex-1 bg-muted hover:bg-muted/80 text-foreground font-semibold py-2.5 px-3 rounded-xl border border-border transition-all flex items-center justify-center gap-1.5 text-xs"
-                  >
-                    <CalendarDays size={14} />
-                    Abrir no App de Calendário
-                  </a>
-                  <button
-                    onClick={handleExportIcs}
-                    disabled={exportingIcs}
-                    className="bg-muted hover:bg-muted/80 text-foreground font-medium py-2.5 px-3 rounded-xl border border-border transition-all flex items-center justify-center gap-1.5 text-xs disabled:opacity-50"
-                  >
-                    {exportingIcs ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
-                    Baixar Arquivo (.ics)
+                    {copiedFeed ? "Copiado!" : "Copiar Link WebCal"}
                   </button>
                 </div>
               </div>
             </div>
 
             <div className="mt-5 text-[11px] text-muted-foreground text-center bg-muted/20 p-2.5 rounded-lg border border-border/50">
-              💡 <strong>Dica:</strong> Seus eventos são distribuídos nos dias que você escolheu estudar, com horários de aula e revisões de 24h, 7d e 30d agendadas às 19:00.
+              💡 <strong>Dica:</strong> Você também pode clicar no botão <strong>+ Google Agenda</strong> ao lado de qualquer aula individual no Planner para adicioná-la diretamente à sua agenda pessoal com horário 100% editável.
             </div>
           </div>
         </div>
