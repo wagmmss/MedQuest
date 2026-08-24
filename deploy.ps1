@@ -1,43 +1,45 @@
 <#
 .SYNOPSIS
-    Deploy automatizado do MedQuest para o servidor online (VPS).
+    Deploy automatizado e de alta performance do MedQuest para o servidor online (VPS).
 
 .DESCRIPTION
-    Realiza o fluxo completo de deploy:
-    1. Verifica alteracoes locais no Git
-    2. Realiza git add e git commit (com mensagem informada ou gerada automaticamente)
-    3. Realiza git push para origin main
-    4. Conecta via SSH a VPS (136.248.114.130) usando sua-chave.key
+    Realiza o fluxo completo e otimizado de deploy:
+    1. Detecta quais componentes foram alterados (Backend, Frontend ou ambos)
+    2. Realiza git add e git commit com mensagem informativa
+    3. Realiza git push para origin main (acionando build ultrarrapido no GitHub Actions)
+    4. Conecta via SSH a VPS (136.248.114.130)
     5. Executa git pull origin main no servidor
-    6. Reconstroi e reinicia os containers Docker (sudo docker-compose up -d --build)
+    6. Atualiza os containers de forma inteligente:
+       - Tenta baixar as imagens prontas do GitHub Container Registry (5 a 10 segundos)
+       - Fallback: se compilar localmente, executa build seletivo e otimizado sem travar a VPS
     7. Limpa imagens Docker nao utilizadas (prune)
     8. Exibe o status final dos servicos
 
 .PARAMETER Message
-    Mensagem do commit. Se nao fornecida e houver alteracoes, sera solicitada ou gerada com timestamp.
+    Mensagem do commit. Se nao fornecida, sera solicitada ou gerada com timestamp.
 
 .PARAMETER HostName
-    IP ou dominio do servidor VPS (Padrao: 136.248.114.130).
+    IP ou dominio da VPS (Padrao: 136.248.114.130).
 
 .PARAMETER User
-    Usuario SSH do servidor (Padrao: ubuntu).
+    Usuario SSH (Padrao: ubuntu).
 
 .PARAMETER KeyFile
-    Caminho para o arquivo de chave SSH (.key/.pem/id_rsa). Padrao: sua-chave.key no diretorio do projeto.
-
-.PARAMETER RemoteDir
-    Diretorio do projeto no servidor remoto (Padrao: ~/MedQuest).
+    Caminho da chave SSH (Padrao: sua-chave.key no diretorio do projeto).
 
 .PARAMETER SkipGit
-    Pula o commit e push local, executando apenas o deploy remoto.
+    Pula o commit e push local, executando apenas o deploy remoto na VPS.
 
 .PARAMETER SkipRemote
-    Pula a execucao remota na VPS, realizando apenas o commit e push local.
+    Pula o deploy remoto, realizando apenas o commit e push local.
+
+.PARAMETER ForceBuild
+    Forca o build local na VPS em vez de tentar baixar do GHCR.
 
 .EXAMPLE
-    .\deploy.ps1
-    .\deploy.ps1 "Correcao de layout no dashboard"
-    .\deploy.ps1 -SkipGit
+    deploy
+    deploy "Ajustes no planner"
+    deploy -SkipGit
 #>
 
 [CmdletBinding()]
@@ -50,7 +52,8 @@ param(
     [string]$KeyFile = "",
     [string]$RemoteDir = "~/MedQuest",
     [switch]$SkipGit,
-    [switch]$SkipRemote
+    [switch]$SkipRemote,
+    [switch]$ForceBuild
 )
 
 $ErrorActionPreference = "Stop"
@@ -59,7 +62,7 @@ $StartTime = Get-Date
 function Print-Header {
     Write-Host ""
     Write-Host "============================================================" -ForegroundColor Cyan
-    Write-Host "             MEDQUEST - DEPLOY AUTOMATIZADO                 " -ForegroundColor Cyan
+    Write-Host "         MEDQUEST - DEPLOY AUTOMATIZADO DE ALTA VELOCIDADE   " -ForegroundColor Cyan
     Write-Host "============================================================" -ForegroundColor Cyan
     Write-Host ""
 }
@@ -115,11 +118,15 @@ if (-not $SshCmd) {
     exit 1
 }
 
+# Variaveis para rastreio de escopo
+$BackendChanged = $true
+$FrontendChanged = $true
+
 # ==============================================================================
 # ETAPA 1: GIT LOCAL (Add, Commit, Push)
 # ==============================================================================
 if (-not $SkipGit) {
-    Print-Step "1/3" "Processando alteracoes no repositorio local (Git)"
+    Print-Step "1/3" "Processando alteracoes locais no Git"
 
     $GitCmd = Get-Command "git" -ErrorAction SilentlyContinue
     if (-not $GitCmd) {
@@ -127,14 +134,24 @@ if (-not $SkipGit) {
         exit 1
     }
 
-    # Verificar status do repositorio
-    $GitStatus = git status --porcelain
-    $HasChanges = [bool]($GitStatus -and $GitStatus.Trim().Length -gt 0)
+    # Analisar arquivos alterados
+    $ChangedFiles = git status --porcelain
+    $HasChanges = [bool]($ChangedFiles -and $ChangedFiles.Trim().Length -gt 0)
 
     if ($HasChanges) {
-        Print-Info "Alteracoes detectadas no codigo local."
+        # Analise de escopo de mudanca
+        $BackendChanged = [bool]($ChangedFiles | Select-String "app/backend")
+        $FrontendChanged = [bool]($ChangedFiles | Select-String "app/frontend")
 
-        # Definir mensagem de commit se nao foi informada via parametro
+        if ($BackendChanged -and -not $FrontendChanged) {
+            Print-Info "Escopo detectado: Apenas Backend (Python/Flask)"
+        } elseif ($FrontendChanged -and -not $BackendChanged) {
+            Print-Info "Escopo detectado: Apenas Frontend (Next.js/React)"
+        } else {
+            Print-Info "Escopo detectado: Completo (Backend + Frontend)"
+        }
+
+        # Definir mensagem de commit se nao fornecida
         if (-not $Message) {
             $Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
             if ([Environment]::UserInteractive -and -not [Console]::IsInputRedirected) {
@@ -152,15 +169,12 @@ if (-not $SkipGit) {
 
         Print-Info "Mensagem de commit: '$Message'"
         
-        # Git Add
         git add -A
         if ($LASTEXITCODE -ne 0) {
             Print-Error "Falha ao adicionar arquivos com 'git add -A'."
             exit $LASTEXITCODE
         }
-        Print-Success "Arquivos adicionados para commit."
 
-        # Git Commit
         git commit -m "$Message"
         if ($LASTEXITCODE -ne 0) {
             Print-Error "Falha ao realizar 'git commit'."
@@ -172,11 +186,10 @@ if (-not $SkipGit) {
     }
 
     # Git Push
-    Print-Info "Enviando commits para o repositorio remoto (origin main)..."
+    Print-Info "Enviando alteracoes para o GitHub (origin main)..."
     git push origin main
     if ($LASTEXITCODE -ne 0) {
         Print-Error "Falha ao enviar alteracoes para o GitHub ('git push origin main')."
-        Print-Info "Verifique se ha conflitos ou se sua conexao com a internet esta ativa."
         exit $LASTEXITCODE
     }
     Print-Success "Codigo enviado com sucesso para o GitHub."
@@ -185,10 +198,10 @@ if (-not $SkipGit) {
 }
 
 # ==============================================================================
-# ETAPA 2: DEPLOY REMOTO VIA SSH
+# ETAPA 2: DEPLOY REMOTO OTIMIZADO NA VPS
 # ==============================================================================
 if (-not $SkipRemote) {
-    Print-Step "2/3" "Conectando ao servidor e atualizando servicos ($User@$HostName)"
+    Print-Step "2/3" "Atualizando servicos na VPS ($User@$HostName)"
 
     $SshArgs = @()
     $SshArgs += "-o"
@@ -207,32 +220,56 @@ if (-not $SkipRemote) {
     $Target = "$User@$HostName"
     $SshArgs += "$Target"
 
-    $RemoteBashScript = @'
+    $ForceFlag = if ($ForceBuild) { "true" } else { "false" }
+    $OnlyBackend = if ($BackendChanged -and -not $FrontendChanged) { "true" } else { "false" }
+    $OnlyFrontend = if ($FrontendChanged -and -not $BackendChanged) { "true" } else { "false" }
+
+    # Script bash que executa na VPS com estrategia de pull rapido ou build seletivo
+    $RemoteBashScript = @"
 set -e
-echo "  [VPS 1/4] Atualizando codigo do MedQuest via Git..."
+echo "  [VPS 1/3] Atualizando repositorio..."
 cd ~/MedQuest
 git pull origin main
 
-echo "  [VPS 2/4] Reconstruindo e subindo containers Docker..."
-sudo docker-compose up -d --build --force-recreate
+echo "  [VPS 2/3] Atualizando containers Docker..."
+FORCE_BUILD="$ForceFlag"
+ONLY_BACKEND="$OnlyBackend"
+ONLY_FRONTEND="$OnlyFrontend"
 
-echo "  [VPS 3/4] Limpando imagens Docker antigas..."
+if [ "\$FORCE_BUILD" != "true" ] && sudo docker-compose pull 2>/dev/null; then
+    echo "  -> Imagens pre-compiladas baixadas com sucesso do GitHub Packages!"
+    sudo docker-compose up -d --force-recreate
+else
+    if [ "\$ONLY_BACKEND" = "true" ]; then
+        echo "  -> Build rapido seletivo: Backend apenas (~5s)..."
+        sudo docker-compose up -d --build --force-recreate backend
+    elif [ "\$ONLY_FRONTEND" = "true" ]; then
+        echo "  -> Build rapido seletivo: Frontend apenas..."
+        sudo docker-compose up -d --build --force-recreate frontend
+    else
+        echo "  -> Build completo com otimizacoes..."
+        sudo docker-compose up -d --build --force-recreate
+    fi
+fi
+
+echo "  [VPS 3/3] Limpando imagens antigas..."
 sudo docker image prune -f > /dev/null 2>&1 || true
 
-echo "  [VPS 4/4] Status atual dos servicos:"
+echo ""
+echo "  Status atual dos servicos:"
 sudo docker-compose ps
-'@
+"@
 
     $SshArgs += "$RemoteBashScript"
 
-    Print-Info "Executando rebuild e deploy na VPS..."
+    Print-Info "Executando atualizacao dos servicos na VPS..."
     & ssh @SshArgs
 
     if ($LASTEXITCODE -ne 0) {
         Print-Error "Ocorreu um erro durante a execucao do deploy remoto via SSH (Exit code: $LASTEXITCODE)."
         exit $LASTEXITCODE
     }
-    Print-Success "Deploy remoto concluido no servidor!"
+    Print-Success "Servicos atualizados com sucesso na VPS!"
 } else {
     Print-Info "Etapa de deploy remoto pulada conforme solicitado (-SkipRemote)."
 }

@@ -2,6 +2,7 @@ version: '3.3'
 
 services:
   backend:
+    image: ghcr.io/wagmmss/medquest-backend:latest
     build: 
       context: ./app/backend
     restart: always
@@ -18,6 +19,7 @@ services:
       - "8000:8000"
 
   frontend:
+    image: ghcr.io/wagmmss/medquest-frontend:latest
     build:
       context: ./app/frontend
     restart: always
