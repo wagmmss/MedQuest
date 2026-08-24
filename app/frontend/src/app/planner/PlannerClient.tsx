@@ -189,7 +189,11 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
       // Revert on error
       setProgress(prev => ({
         ...prev,
-        [week.toString()]: { ...prev[week.toString()], studied: currentStatus }
+        [week.toString()]: {
+          ...prev[week.toString()],
+          studied: currentStatus,
+          studied_at: currentStatus ? prev[week.toString()]?.studied_at ?? null : null,
+        }
       }));
     } finally {
       setLoadingAction(null);

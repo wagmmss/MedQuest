@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
 import { ClerkProvider, SignIn } from '@clerk/nextjs';
 import { ptBR } from '@clerk/localizations';
 import { auth } from '@clerk/nextjs/server';
@@ -14,11 +13,6 @@ import { DemoBanner } from "@/components/DemoBanner";
 import { SyncProvider } from "@/components/SyncProvider";
 import { OnboardingTour } from "@/components/OnboardingTour";
 import { WebVitals } from "@/components/WebVitals";
-
-const geist = Geist({
-  variable: "--font-geist",
-  subsets: ["latin"],
-});
 
 export const viewport: Viewport = {
   themeColor: "#0ea5e9",
@@ -62,7 +56,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <ClerkProvider localization={ptBR}>
       <html
         lang="pt-BR"
-        className={`${geist.variable} font-sans h-full antialiased`}
+        className="font-sans h-full antialiased"
         suppressHydrationWarning
       >
         <head>

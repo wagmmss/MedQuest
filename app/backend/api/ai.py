@@ -5,13 +5,14 @@ import re
 import time
 import urllib.error
 import urllib.request
+from api.gemini_pool import gemini_pool
 
 logger = logging.getLogger(__name__)
 
 # In-memory TTL cache for semantic search expansions (avoids redundant AI calls)
 _search_cache = {}  # key: normalized query -> (timestamp, result)
 _SEARCH_CACHE_TTL = 300  # 5 minutes
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.7-flash")
 
 def _clean_option_text(text: str) -> str:
     """Remove prefixos de alternativas como 'A) ', 'B - ', etc."""
@@ -236,34 +237,25 @@ Responda EXCLUSIVAMENTE em JSON válido:
         card["back"] = back
         return card
 
-    gemini_key = os.environ.get("GEMINI_API_KEY")
-    if gemini_key and not gemini_key.lower().startswith(("dummy", "test", "gsk_test")) and len(gemini_key) > 15:
+    # Tenta gerar via Gemini Pool (multi-chaves)
+    if gemini_pool.total_keys > 0:
         try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={gemini_key}"
-            payload = {
-                "contents": [{"parts": [{"text": prompt}]}],
-                "generationConfig": {
-                    "responseMimeType": "application/json"
-                },
-                "systemInstruction": {
-                    "parts": [{"text": "Você responde apenas em JSON válido com as chaves front, back e context."}]
-                }
-            }
-            body = json.dumps(payload).encode("utf-8")
-            req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=5) as response:
-                res_data = response.read().decode("utf-8")
-                res_json = json.loads(res_data)
-                result_str = res_json["candidates"][0]["content"]["parts"][0]["text"].strip()
-                result_str = result_str.replace("```json", "").replace("```", "").strip()
-                parsed = json.loads(result_str)
-                if isinstance(parsed, dict) and "front" in parsed and "{{c1::" in parsed.get("front", ""):
-                    if _is_low_quality(parsed):
-                        logger.info("Gemini retornou card de baixa qualidade, usando fallback determinístico.")
-                    else:
-                        return _sanitize_ai_card(parsed)
+            resp = gemini_pool.generate_content(
+                prompt=prompt,
+                system_instruction="Você responde apenas em JSON válido com as chaves front, back e context.",
+                json_mode=True,
+                model=GEMINI_MODEL,
+                timeout=8
+            )
+            result_str = resp.get("text", "").replace("```json", "").replace("```", "").strip()
+            parsed = json.loads(result_str)
+            if isinstance(parsed, dict) and "front" in parsed and "{{c1::" in parsed.get("front", ""):
+                if _is_low_quality(parsed):
+                    logger.info("Gemini retornou card de baixa qualidade, usando fallback determinístico.")
+                else:
+                    return _sanitize_ai_card(parsed)
         except Exception as e:
-            logger.warning(f"Fallback para gerador local após falha no Gemini: {e}")
+            logger.warning(f"Fallback para Groq/Local após falha no Gemini Pool: {e}")
 
     groq_key = os.environ.get("GROQ_API_KEY")
     if groq_key and not groq_key.lower().startswith(("dummy", "test", "gsk_test")) and len(groq_key) > 15:
@@ -339,32 +331,22 @@ Exemplo para "infarto": ["infarto", "iam", "isquemia miocardica", "sindrome coro
 Responda APENAS com o JSON. Exemplo: {{ "terms": ["...", "..."] }}
 """
 
-    gemini_key = os.environ.get("GEMINI_API_KEY")
-    if gemini_key:
+    if gemini_pool.total_keys > 0:
         try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={gemini_key}"
-            payload = {
-                "contents": [{"parts": [{"text": prompt}]}],
-                "generationConfig": {
-                    "responseMimeType": "application/json"
-                },
-                "systemInstruction": {
-                    "parts": [{"text": "Você responde apenas em JSON válido."}]
-                }
-            }
-            body = json.dumps(payload).encode("utf-8")
-            req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=5) as response:
-                res_data = response.read().decode("utf-8")
-                res_json = json.loads(res_data)
-                result_str = res_json["candidates"][0]["content"]["parts"][0]["text"].strip()
-                result_str = result_str.replace("```json", "").replace("```", "").strip()
-                data = json.loads(result_str)
-                terms = data.get("terms", [])
-                if terms and isinstance(terms, list):
-                    return _cache_and_return(terms)
+            resp = gemini_pool.generate_content(
+                prompt=prompt,
+                system_instruction="Você responde apenas em JSON válido.",
+                json_mode=True,
+                model=GEMINI_MODEL,
+                timeout=6
+            )
+            result_str = resp.get("text", "").replace("```json", "").replace("```", "").strip()
+            data = json.loads(result_str)
+            terms = data.get("terms", [])
+            if terms and isinstance(terms, list):
+                return _cache_and_return(terms)
         except Exception as e:
-            logger.error(f"Erro na expansão via Gemini: {e}")
+            logger.error(f"Erro na expansão via Gemini Pool: {e}")
 
     groq_key = os.environ.get("GROQ_API_KEY")
     if groq_key:

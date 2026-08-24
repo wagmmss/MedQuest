@@ -11,31 +11,38 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
   const [semantic, setSemantic] = useState(true);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!query.trim()) {
       const timer = setTimeout(() => {
         setResults([]);
+        setError(null);
       }, 0);
       return () => clearTimeout(timer);
     }
 
-    let isMounted = true;
+    const controller = new AbortController();
     const timer = setTimeout(async () => {
-      if (isMounted) setLoading(true);
+      setLoading(true);
+      setError(null);
       try {
-        const res = await api.questions.search(query, semantic);
-        if (isMounted) setResults(res);
-      } catch (e) {
-        console.error(e);
+        const res = await api.questions.search(query, semantic, controller.signal);
+        if (!controller.signal.aborted) setResults(res);
+      } catch (caughtError) {
+        if (!controller.signal.aborted) {
+          console.error("Failed to search questions", caughtError);
+          setResults([]);
+          setError("Não foi possível realizar a busca. Verifique sua conexão e tente novamente.");
+        }
       } finally {
-        if (isMounted) setLoading(false);
+        if (!controller.signal.aborted) setLoading(false);
       }
     }, semantic ? 1000 : 400);
 
     return () => {
-      isMounted = false;
       clearTimeout(timer);
+      controller.abort();
     };
   }, [query, semantic]);
 
@@ -130,7 +137,11 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
               </Link>
             ))}
             
-            {!loading && results.length === 0 && (
+            {error && !loading ? (
+              <div className="bg-destructive/10 border border-destructive/30 rounded-xl p-6 text-center text-destructive">
+                <p>{error}</p>
+              </div>
+            ) : !loading && results.length === 0 && (
               <div className="bg-card border border-border border-dashed shadow-sm rounded-xl p-16 text-center flex flex-col items-center justify-center gap-4 animate-in fade-in zoom-in-95 duration-500">
                 <div className="w-20 h-20 bg-muted/50 rounded-full flex items-center justify-center mb-2">
                   <Search size={32} className="text-muted-foreground/50" />

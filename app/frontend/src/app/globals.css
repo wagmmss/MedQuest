@@ -23,6 +23,11 @@
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
+.material-symbols-filled,
+.material-symbols-outlined.material-symbols-filled {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
 /* Dark mode por classe .dark no <html> (padrão shadcn/Tailwind v4) */
 @variant dark (&:where(.dark, .dark *));
 

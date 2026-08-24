@@ -58,8 +58,17 @@ async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> 
 
     return await response.json();
   } catch (error) {
+    // An aborted request is an intentional lifecycle event, not an offline
+    // failure. In particular, some browser implementations report it as a
+    // TypeError, which must never be added to the retry queue.
+    if (options?.signal?.aborted) {
+      throw error;
+    }
     if (typeof window !== "undefined" && isIdempotentEndpoint) {
-      const isNetworkError = error instanceof TypeError && error.message.includes("Failed to fetch");
+      // Browsers use different messages for fetch failures (for example,
+      // "NetworkError" in Firefox). A TypeError produced by fetch is the
+      // portable signal that the request did not reach the server.
+      const isNetworkError = error instanceof TypeError;
       if (isNetworkError || !navigator.onLine) {
         console.warn("[API] Network error detected, adding to offline queue:", endpoint);
         const localId = await syncManager.enqueue(url, { ...options, headers }, idempotencyKey!);
@@ -77,7 +86,8 @@ export const api = {
   stats: {
     getOverview: () => apiFetch<OverviewStats>("/api/stats/overview", { cache: 'no-store' }),
     getCoverage: () => apiFetch<CoverageResponse>("/api/coverage", { cache: 'no-store' }),
-    getTimeline: (days: number = 14) => apiFetch<TimelineStat[]>(`/api/stats/timeline?days=${days}`, { cache: 'no-store' }),
+    getTimeline: (days: number = 14, signal?: AbortSignal) =>
+      apiFetch<TimelineStat[]>(`/api/stats/timeline?days=${days}`, { cache: 'no-store', signal }),
     getWeakTopics: () => apiFetch<WeakTopic[]>("/api/stats/weak-topics", { cache: 'no-store' }),
     getRecommendations: () => apiFetch<Recommendation[]>("/api/stats/recommendations", { cache: 'no-store' }),
     getDistractors: () => apiFetch<DistractorStat[]>("/api/stats/distractors", { cache: 'no-store' }),
@@ -232,7 +242,8 @@ export const api = {
     toggleFavorite: (id: number) => apiFetch<{is_favorite: boolean}>(`/api/questions/${id}/favorite`, {
       method: "POST"
     }),
-    search: (q: string, semantic: boolean = false) => apiFetch<SearchResult[]>(`/api/search?q=${encodeURIComponent(q)}&semantic=${semantic}`, { cache: 'no-store' }),
+    search: (q: string, semantic: boolean = false, signal?: AbortSignal) =>
+      apiFetch<SearchResult[]>(`/api/search?q=${encodeURIComponent(q)}&semantic=${semantic}`, { cache: 'no-store', signal }),
     getSimuladoUSP: async () => {
       const getLocalFallback = async () => {
         if (typeof window !== "undefined" && localDb) {
@@ -316,7 +327,9 @@ export const api = {
           try {
             const uid = getLocalOwnerId();
             const cached = await localDb.questions.where('_owner_id').equals(uid).filter(q => ids.includes(q.id)).toArray();
-            if (cached.length > 0) {
+            // A partial batch would make a resumed simulado render questions
+            // without their alternatives. Fall back to the network instead.
+            if (cached.length === ids.length) {
               return { questions: cached } as unknown as BatchDetailResponse;
             }
           } catch (e) {
@@ -625,7 +638,7 @@ export const api = {
         throw err;
       }
     },
-    getDue: async (includeAll: boolean = false) => {
+    getDue: async (includeAll: boolean = false, signal?: AbortSignal) => {
       const getLocalFallback = async () => {
         if (typeof window !== "undefined" && localDb) {
           try {
@@ -645,8 +658,9 @@ export const api = {
       }
 
       try {
-        return await apiFetch<Flashcard[]>(`/api/flashcards/review${includeAll ? "?all=true" : ""}`, { cache: 'no-store' });
+        return await apiFetch<Flashcard[]>(`/api/flashcards/review${includeAll ? "?all=true" : ""}`, { cache: 'no-store', signal });
       } catch (err) {
+        if (signal?.aborted) throw err;
         const local = await getLocalFallback();
         if (local) return local;
         throw err;

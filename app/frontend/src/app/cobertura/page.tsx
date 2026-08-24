@@ -15,8 +15,6 @@ export default async function CoberturaPage() {
   const totalSubtemas = data.areas.reduce((acc, a) => acc + a.n_subtemas, 0);
   const totalHighYield = data.areas.reduce((acc, a) => acc + (a.high_yield_count || 0), 0);
   const highYieldMastered = data.areas.reduce((acc, a) => acc + (a.high_yield_mastered || 0), 0);
-  const totalMastered = data.areas.reduce((acc, a) => acc + a.mastered + a.proficient, 0);
-
   return (
     <div className="flex flex-col gap-8 animate-in fade-in duration-500 max-w-7xl mx-auto w-full">
       

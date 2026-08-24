@@ -42,21 +42,21 @@ export function AnalysisClient({
       return;
     }
     
-    let isCancelled = false;
+    const controller = new AbortController();
     setLoadingTimeline(true);
-    api.stats.getTimeline(days)
+    api.stats.getTimeline(days, controller.signal)
       .then(data => {
-        if (!isCancelled) setLocalTimeline(data);
+        if (!controller.signal.aborted) setLocalTimeline(data);
       })
       .catch(error => {
-        console.error("Failed to fetch timeline:", error);
+        if (!controller.signal.aborted) console.error("Failed to fetch timeline:", error);
       })
       .finally(() => {
-        if (!isCancelled) setLoadingTimeline(false);
+        if (!controller.signal.aborted) setLoadingTimeline(false);
       });
 
     return () => {
-      isCancelled = true;
+      controller.abort();
     };
   }, [days]);
 

@@ -13,6 +13,7 @@ export function ImageViewer({ src, alt, isOpen, onClose }: ImageViewerProps) {
 
   // Fecha o visualizador ao pressionar Esc
   useEffect(() => {
+    if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
         onClose();
@@ -25,7 +26,8 @@ export function ImageViewer({ src, alt, isOpen, onClose }: ImageViewerProps) {
   // Reseta o scale ao fechar
   useEffect(() => {
     if (!isOpen) {
-      setTimeout(() => setScale(1), 300);
+      const timer = window.setTimeout(() => setScale(1), 300);
+      return () => window.clearTimeout(timer);
     }
   }, [isOpen]);
 

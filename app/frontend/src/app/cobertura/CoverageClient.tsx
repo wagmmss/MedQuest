@@ -2,10 +2,10 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { CoverageArea, CoverageSubtema } from "@/types/api";
+import { CoverageArea } from "@/types/api";
 import { 
   ChevronDown, ChevronRight, CheckCircle2, CircleDashed, PlayCircle, 
-  Flame, Search, BookOpen, Layers, CheckSquare, Award, Clock
+  Flame, Search, Clock
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -205,9 +205,9 @@ export function CoverageClient({ areas }: { areas: CoverageArea[] }) {
                       <span className="text-foreground">{progressPct.toFixed(1)}%</span>
                     </div>
                     <div className="h-2.5 w-full bg-muted rounded-full overflow-hidden flex ring-1 ring-inset ring-black/5 dark:ring-white/5">
-                      <div className="h-full bg-success shadow-inner" style={{ width: `${(area.mastered / area.n_subtemas) * 100}%` }} title="Dominado" />
-                      <div className="h-full bg-primary shadow-inner" style={{ width: `${(area.proficient / area.n_subtemas) * 100}%` }} title="Proficiente" />
-                      <div className="h-full bg-warning shadow-inner" style={{ width: `${(area.in_progress / area.n_subtemas) * 100}%` }} title="Em Revisão" />
+                      <div className="h-full bg-success shadow-inner" style={{ width: `${area.n_subtemas > 0 ? (area.mastered / area.n_subtemas) * 100 : 0}%` }} title="Dominado" />
+                      <div className="h-full bg-primary shadow-inner" style={{ width: `${area.n_subtemas > 0 ? (area.proficient / area.n_subtemas) * 100 : 0}%` }} title="Proficiente" />
+                      <div className="h-full bg-warning shadow-inner" style={{ width: `${area.n_subtemas > 0 ? (area.in_progress / area.n_subtemas) * 100 : 0}%` }} title="Em Revisão" />
                     </div>
                   </div>
                   

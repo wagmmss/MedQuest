@@ -16,10 +16,11 @@ export function FlashcardClient() {
   const [flipped, setFlipped] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const fetchDue = useCallback(async () => {
+  const fetchDue = useCallback(async (signal?: AbortSignal) => {
     setLoading(true);
     try {
-      const cards = await api.flashcards.getDue(true);
+      const cards = await api.flashcards.getDue(true, signal);
+      if (signal?.aborted) return;
       const normalizedCards = cards.map(normalizeFlashcard);
       setQueue(normalizedCards);
 
@@ -37,10 +38,10 @@ export function FlashcardClient() {
             .catch(() => {});
         }
       }
-    } catch (e) {
-      console.error("Erro ao buscar flashcards", e);
+    } catch (error) {
+      if (!signal?.aborted) console.error("Erro ao buscar flashcards", error);
     } finally {
-      setLoading(false);
+      if (!signal?.aborted) setLoading(false);
     }
   }, []);
 
@@ -83,10 +84,14 @@ export function FlashcardClient() {
   }, [queue, submitting]);
 
   useEffect(() => {
+    const controller = new AbortController();
     const timer = setTimeout(() => {
-      fetchDue();
+      void fetchDue(controller.signal);
     }, 0);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
   }, [fetchDue]);
 
   useEffect(() => {

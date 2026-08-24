@@ -9,6 +9,7 @@ export function SyncProvider() {
   const [queueCount, setQueueCount] = useState(0);
 
   useEffect(() => {
+    let isActive = true;
     (window as unknown as { syncManager: typeof syncManager }).syncManager = syncManager;
     (window as unknown as { localDb: typeof localDb }).localDb = localDb;
     syncManager.init();
@@ -21,9 +22,12 @@ export function SyncProvider() {
 
     window.addEventListener('sync-queue-updated', handleUpdate);
     // Setup initial count
-    syncManager.getPendingCount().then(count => setQueueCount(count));
+    void syncManager.getPendingCount().then(count => {
+      if (isActive) setQueueCount(count);
+    });
 
     return () => {
+      isActive = false;
       window.removeEventListener('sync-queue-updated', handleUpdate);
       syncManager.cleanup();
     };

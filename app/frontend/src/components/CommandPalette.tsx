@@ -71,30 +71,32 @@ export function CommandPalette() {
     if (!query.trim()) {
       const timer = setTimeout(() => {
         setResults([]);
+        setError(false);
       }, 0);
       return () => clearTimeout(timer);
     }
 
-    let isMounted = true;
+    const controller = new AbortController();
     const timer = setTimeout(async () => {
-      if (isMounted) {
-        setLoading(true);
-        setError(false);
-      }
+      setLoading(true);
+      setError(false);
       try {
-        const res = await api.questions.search(query, false);
-        if (isMounted) setResults(res.slice(0, 5));
-      } catch (e) {
-        console.error(e);
-        if (isMounted) setError(true);
+        const res = await api.questions.search(query, false, controller.signal);
+        if (!controller.signal.aborted) setResults(res.slice(0, 5));
+      } catch (caughtError) {
+        if (!controller.signal.aborted) {
+          console.error("Failed to search questions", caughtError);
+          setResults([]);
+          setError(true);
+        }
       } finally {
-        if (isMounted) setLoading(false);
+        if (!controller.signal.aborted) setLoading(false);
       }
     }, 300);
 
     return () => {
-      isMounted = false;
       clearTimeout(timer);
+      controller.abort();
     };
   }, [query]);
 
