@@ -61,8 +61,9 @@ const TopicRow = memo(function TopicRow({
     const startStr = formatGCalDate(dtStart);
     const endStr = formatGCalDate(dtEnd);
 
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
     const title = `[MedQuest] 📖 ${t.subtema} (${t.area})`;
-    const details = `Carga Real: ${t.estimated_hours}h (Teoria: ${t.estimated_theory_hours}h + Questões: ${t.estimated_practice_hours}h)\n\nÁrea: ${t.area}\n\n🔗 Praticar Questões: https://medquest.app/estudar?area=${encodeURIComponent(t.area)}&subtema=${encodeURIComponent(t.subtema)}`;
+    const details = `📚 Carga: ${t.estimated_hours}h (Teoria: ${t.estimated_theory_hours}h + Questões: ${t.estimated_practice_hours}h)\nSemana ${weekDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })} • ${t.area}${origin ? `\n\n🔗 Questões: ${origin}/estudar?area=${encodeURIComponent(t.area)}&subtema=${encodeURIComponent(t.subtema)}` : ""}`;
 
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startStr}/${endStr}&details=${encodeURIComponent(details)}&location=MedQuest`;
   })();

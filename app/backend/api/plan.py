@@ -256,6 +256,19 @@ def _generate_calendar_ics_content(db, user_id):
 
     study_days_count = max(1, min(7, days))
 
+    base_url = ""
+    try:
+        req_origin = request.headers.get("Origin") or request.headers.get("Referer")
+        if req_origin:
+            parsed = urllib.parse.urlparse(req_origin)
+            base_url = f"{parsed.scheme}://{parsed.netloc}"
+        elif request.host_url:
+            base_url = request.host_url.rstrip("/")
+            if ":5050" in base_url:
+                base_url = "http://localhost:3000"
+    except Exception:
+        base_url = ""
+
     for w in plan_weeks:
         w_num = w.get("week")
         w_date_str = w.get("date", "")[:10]
@@ -271,7 +284,7 @@ def _generate_calendar_ics_content(db, user_id):
         if not topics:
             start_str = week_start_dt.strftime("%Y%m%dT080000Z")
             end_str = (week_start_dt + timedelta(hours=3)).strftime("%Y%m%dT110000Z")
-            uid = f"medquest-week-consolidation-{w_num}-{user_id}-{w_date_str}@medquest.app"
+            uid = f"medquest-week-consolidation-{w_num}-{user_id}-{w_date_str}@medquest"
             ics_lines.extend([
                 "BEGIN:VEVENT",
                 f"UID:{uid}",
@@ -279,7 +292,7 @@ def _generate_calendar_ics_content(db, user_id):
                 f"DTSTART:{start_str}",
                 f"DTEND:{end_str}",
                 f"SUMMARY:[MedQuest] Semana {w_num}: Revisão Geral & Consolidação",
-                f"DESCRIPTION:Semana reservada para consolidação de metas e simulados.\\n\\n🔗 https://medquest.app/planner",
+                f"DESCRIPTION:Semana reservada para consolidação de metas e simulados.{f'\\n\\n🔗 {base_url}/planner' if base_url else ''}",
                 "STATUS:CONFIRMED",
                 "END:VEVENT",
             ])
@@ -304,11 +317,11 @@ def _generate_calendar_ics_content(db, user_id):
 
             start_str = dt_start.strftime("%Y%m%dT%H%M%SZ")
             end_str = dt_end.strftime("%Y%m%dT%H%M%SZ")
-            uid_lecture = f"medquest-lec-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest.app"
+            uid_lecture = f"medquest-lec-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
 
             encoded_area = urllib.parse.quote(area)
             encoded_sub = urllib.parse.quote(subtema)
-            study_url = f"https://medquest.app/estudar?area={encoded_area}&subtema={encoded_sub}"
+            study_url_text = f"\\n\\n🔗 Questões: {base_url}/estudar?area={encoded_area}&subtema={encoded_sub}" if base_url else ""
 
             ics_lines.extend([
                 "BEGIN:VEVENT",
@@ -317,7 +330,7 @@ def _generate_calendar_ics_content(db, user_id):
                 f"DTSTART:{start_str}",
                 f"DTEND:{end_str}",
                 f"SUMMARY:[MedQuest] 📖 {subtema} ({area})",
-                f"DESCRIPTION:Carga Real: {total_h}h (Teoria: {theory_h}h + Questões: {practice_h}h)\\n\\nSemana {w_num} • {area}\\n\\n🔗 Praticar Questões: {study_url}",
+                f"DESCRIPTION:📚 Carga: {total_h}h (Teoria: {theory_h}h + Questões: {practice_h}h)\\nSemana {w_num} • {area}{study_url_text}",
                 "STATUS:CONFIRMED",
                 "END:VEVENT",
             ])
@@ -326,7 +339,8 @@ def _generate_calendar_ics_content(db, user_id):
             rev24_dt = topic_date + timedelta(days=1)
             rev24_start = rev24_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%SZ")
             rev24_end = rev24_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%SZ")
-            uid_rev24 = f"medquest-rev24-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest.app"
+            uid_rev24 = f"medquest-rev24-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
+            rev24_url_text = f"\\n\\n🔗 Revisar: {base_url}/revisao-ativa" if base_url else ""
 
             ics_lines.extend([
                 "BEGIN:VEVENT",
@@ -335,7 +349,7 @@ def _generate_calendar_ics_content(db, user_id):
                 f"DTSTART:{rev24_start}",
                 f"DTEND:{rev24_end}",
                 f"SUMMARY:[MedQuest] 🔄 Revisão 24h: {subtema}",
-                f"DESCRIPTION:Revisão de fixação de 24h dos conceitos de {subtema}.\\n\\n🔗 Revisar no MedQuest: https://medquest.app/revisao-ativa",
+                f"DESCRIPTION:🔄 Revisão Ativa de 24h: {subtema}.{rev24_url_text}",
                 "STATUS:CONFIRMED",
                 "END:VEVENT",
             ])
@@ -344,7 +358,8 @@ def _generate_calendar_ics_content(db, user_id):
             rev7_dt = topic_date + timedelta(days=7)
             rev7_start = rev7_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%SZ")
             rev7_end = rev7_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%SZ")
-            uid_rev7 = f"medquest-rev7-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest.app"
+            uid_rev7 = f"medquest-rev7-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
+            rev7_url_text = f"\\n\\n🔗 Revisar: {base_url}/revisao-ativa" if base_url else ""
 
             ics_lines.extend([
                 "BEGIN:VEVENT",
@@ -353,7 +368,7 @@ def _generate_calendar_ics_content(db, user_id):
                 f"DTSTART:{rev7_start}",
                 f"DTEND:{rev7_end}",
                 f"SUMMARY:[MedQuest] 🔄 Revisão 7d: {subtema}",
-                f"DESCRIPTION:Revisão ativa de 7 dias do tema: {subtema}.\\n\\n🔗 Revisar no MedQuest: https://medquest.app/revisao-ativa",
+                f"DESCRIPTION:🔄 Revisão Ativa de 7 dias: {subtema}.{rev7_url_text}",
                 "STATUS:CONFIRMED",
                 "END:VEVENT",
             ])
@@ -362,7 +377,8 @@ def _generate_calendar_ics_content(db, user_id):
             rev30_dt = topic_date + timedelta(days=30)
             rev30_start = rev30_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%SZ")
             rev30_end = rev30_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%SZ")
-            uid_rev30 = f"medquest-rev30-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest.app"
+            uid_rev30 = f"medquest-rev30-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
+            rev30_url_text = f"\\n\\n🔗 Revisar: {base_url}/revisao-ativa" if base_url else ""
 
             ics_lines.extend([
                 "BEGIN:VEVENT",
@@ -371,7 +387,7 @@ def _generate_calendar_ics_content(db, user_id):
                 f"DTSTART:{rev30_start}",
                 f"DTEND:{rev30_end}",
                 f"SUMMARY:[MedQuest] 🔄 Revisão 30d: {subtema}",
-                f"DESCRIPTION:Consolidação de 30 dias do tema: {subtema}.\\n\\n🔗 Revisar no MedQuest: https://medquest.app/revisao-ativa",
+                f"DESCRIPTION:🔄 Revisão Ativa de 30 dias: {subtema}.{rev30_url_text}",
                 "STATUS:CONFIRMED",
                 "END:VEVENT",
             ])

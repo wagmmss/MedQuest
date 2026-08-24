@@ -35,6 +35,23 @@ def _connect_turso(turso_url, turso_token):
         logger.info("Connected to remote Turso database directly for worker thread")
     return client
 
+
+def _is_stale_turso_stream(error):
+    """Whether Turso rejected a request before it could run on an expired stream."""
+    return "stream not found" in str(error).lower()
+
+
+def _reconnect_turso(turso_url, turso_token, failed_client):
+    """Discard only the current worker's invalid client and open a fresh stream."""
+    if getattr(_turso_clients, "client", None) is failed_client:
+        delattr(_turso_clients, "client")
+    try:
+        failed_client.close()
+    except Exception:
+        # The stream is already invalid; closing it is best-effort cleanup.
+        pass
+    return _connect_turso(turso_url, turso_token)
+
 class TursoCursor:
     """Expose DB-API cursor rows as mappings, matching sqlite3.Row usage."""
 
@@ -75,22 +92,37 @@ class TursoCursor:
         return getattr(self.cursor, "rowcount", 0)
 
 class TursoConnection:
-    def __init__(self, client, persistent=False):
+    def __init__(self, client, persistent=False, reconnect=None):
         self.client = client
         self.tx = False
         self.persistent = persistent
+        self._reconnect = reconnect
+
+    def _execute_with_reconnect(self, sql, args, retry_stale_stream):
+        try:
+            return self.client.execute(sql, args)
+        except Exception as error:
+            # A 404 "stream not found" is produced by Turso before the SQL is
+            # evaluated. It is therefore safe to recreate the client and replay
+            # a single statement, but never while a transaction is in progress:
+            # replaying part of a transaction could duplicate a mutation.
+            if not (retry_stale_stream and self.persistent and self._reconnect and _is_stale_turso_stream(error)):
+                raise
+            logger.warning("Turso stream expired; reconnecting and retrying one statement")
+            self.client = self._reconnect(self.client)
+            return self.client.execute(sql, args)
         
     def begin(self, immediate=False):
         if self.tx:
             raise RuntimeError("A Turso transaction is already active")
-        self.client.execute("BEGIN IMMEDIATE" if immediate else "BEGIN")
+        self._execute_with_reconnect("BEGIN IMMEDIATE" if immediate else "BEGIN", (), retry_stale_stream=True)
         self.tx = True
 
     def execute(self, sql, parameters=()):
         args = list(parameters)
         clean_args = [x if not isinstance(x, bytes) else x.decode('utf-8', 'ignore') for x in args]
         try:
-            cursor = self.client.execute(sql, clean_args)
+            cursor = self._execute_with_reconnect(sql, clean_args, retry_stale_stream=not self.tx)
             return TursoCursor(cursor)
         except Exception as e:
             logger.error("Turso query failed: %s", e)
@@ -150,7 +182,11 @@ def get_db():
             if not turso_url.lower().startswith(("libsql://", "wss://")):
                 raise ValueError("TURSO_DATABASE_URL must use libsql:// or wss:// for transaction support")
             client = _connect_turso(turso_url, turso_token)
-            g.db = TursoConnection(client, persistent=True)
+            g.db = TursoConnection(
+                client,
+                persistent=True,
+                reconnect=lambda failed_client: _reconnect_turso(turso_url, turso_token, failed_client),
+            )
         else:
             db_path = os.environ.get("MEDQUEST_DB", os.path.join(BACKEND_DIR, "medquest.db"))
             g.db = sqlite3.connect(db_path, timeout=10)

@@ -1,4 +1,4 @@
-﻿import { PlannerWeek, PlannerTopic } from "@/types/api";
+import { PlannerWeek, PlannerTopic } from "@/types/api";
 
 declare global {
   interface Window {
@@ -106,6 +106,7 @@ export async function syncPlanToGoogleCalendarDirectly(
               end: { dateTime: string; timeZone: string };
             }> = [];
 
+            const origin = typeof window !== "undefined" ? window.location.origin : "";
             const studyDaysCount = Math.max(1, Math.min(7, daysPerWeek));
 
             for (const week of plan) {
@@ -123,7 +124,7 @@ export async function syncPlanToGoogleCalendarDirectly(
                 // Evento de Aula
                 eventsToInsert.push({
                   summary: `[MedQuest] 📖 ${topic.subtema} (${topic.area})`,
-                  description: `Carga Real: ${topic.estimated_hours}h (Teoria: ${topic.estimated_theory_hours}h + Questões: ${topic.estimated_practice_hours}h)\n\nSemana ${week.week} • ${topic.area}\n\n🔗 Praticar: https://medquest.app/estudar?area=${encodeURIComponent(topic.area)}&subtema=${encodeURIComponent(topic.subtema)}`,
+                  description: `📚 Carga: ${topic.estimated_hours}h (Teoria: ${topic.estimated_theory_hours}h + Questões: ${topic.estimated_practice_hours}h)\nSemana ${week.week} • ${topic.area}${origin ? `\n\n🔗 Questões: ${origin}/estudar?area=${encodeURIComponent(topic.area)}&subtema=${encodeURIComponent(topic.subtema)}` : ""}`,
                   start: { dateTime: dtStart.toISOString(), timeZone: "America/Sao_Paulo" },
                   end: { dateTime: dtEnd.toISOString(), timeZone: "America/Sao_Paulo" },
                 });
@@ -135,7 +136,7 @@ export async function syncPlanToGoogleCalendarDirectly(
                 rev24End.setHours(19, 30, 0, 0);
                 eventsToInsert.push({
                   summary: `[MedQuest] 🔄 Revisão 24h: ${topic.subtema}`,
-                  description: `Revisão de 24h do tema estudado: ${topic.subtema}.\n\n🔗 Revisar: https://medquest.app/revisao-ativa`,
+                  description: `🔄 Revisão Ativa de 24h: ${topic.subtema}.${origin ? `\n\n🔗 Revisar: ${origin}/revisao-ativa` : ""}`,
                   start: { dateTime: rev24Start.toISOString(), timeZone: "America/Sao_Paulo" },
                   end: { dateTime: rev24End.toISOString(), timeZone: "America/Sao_Paulo" },
                 });
@@ -147,7 +148,7 @@ export async function syncPlanToGoogleCalendarDirectly(
                 rev7End.setHours(19, 30, 0, 0);
                 eventsToInsert.push({
                   summary: `[MedQuest] 🔄 Revisão 7d: ${topic.subtema}`,
-                  description: `Revisão ativa de 7 dias do tema: ${topic.subtema}.\n\n🔗 Revisar: https://medquest.app/revisao-ativa`,
+                  description: `🔄 Revisão Ativa de 7 dias: ${topic.subtema}.${origin ? `\n\n🔗 Revisar: ${origin}/revisao-ativa` : ""}`,
                   start: { dateTime: rev7Start.toISOString(), timeZone: "America/Sao_Paulo" },
                   end: { dateTime: rev7End.toISOString(), timeZone: "America/Sao_Paulo" },
                 });

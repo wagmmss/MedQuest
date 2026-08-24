@@ -42,6 +42,19 @@ class FakeClient:
         pass
 
 
+class StaleStreamClient(FakeClient):
+    def __init__(self):
+        super().__init__()
+        self.closed = False
+
+    def execute(self, sql, args=()):
+        self.statements.append((sql, list(args)))
+        raise ValueError('Hrana: api error: status=404 Not Found, body={"error":"stream not found"}')
+
+    def close(self):
+        self.closed = True
+
+
 def test_turso_transaction_commits_all_statements_together():
     client = FakeClient()
     db = TursoConnection(client)
@@ -81,6 +94,39 @@ def test_turso_cursor_closes_underlying_cursor():
     cursor.close()
 
     assert client.last_cursor.closed is True
+
+
+def test_turso_reconnects_and_retries_one_statement_after_stale_stream():
+    stale_client = StaleStreamClient()
+    fresh_client = FakeClient()
+    reconnect_calls = []
+    db = TursoConnection(
+        stale_client,
+        persistent=True,
+        reconnect=lambda failed: reconnect_calls.append(failed) or fresh_client,
+    )
+
+    db.execute("SELECT 1")
+
+    assert reconnect_calls == [stale_client]
+    assert stale_client.statements == [("SELECT 1", [])]
+    assert fresh_client.statements == [("SELECT 1", [])]
+
+
+def test_turso_does_not_retry_stale_stream_inside_a_transaction():
+    client = FakeClient()
+    db = TursoConnection(
+        client,
+        persistent=True,
+        reconnect=lambda _: pytest.fail("a transaction statement must not be replayed"),
+    )
+    db.begin()
+    client.execute = StaleStreamClient().execute
+
+    with pytest.raises(ValueError, match="stream not found"):
+        db.execute("INSERT INTO attempts VALUES (?)", (1,))
+
+    db.rollback()
 
 
 def test_http_turso_url_is_rejected_before_startup(monkeypatch):
