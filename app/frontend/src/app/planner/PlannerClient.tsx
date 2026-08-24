@@ -11,6 +11,7 @@ import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/nextjs";
 import { PlannerWizard } from "./PlannerWizard";
+import { syncPlanToGoogleCalendarDirectly, SyncProgress } from "@/lib/googleCalendar";
 
 const getAreaColorClass = (areaName: string) => {
   const name = areaName.toLowerCase();
@@ -158,6 +159,8 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
   const [showCalendarModal, setShowCalendarModal] = useState(false);
   const [copiedFeed, setCopiedFeed] = useState(false);
   const [exportingIcs, setExportingIcs] = useState(false);
+  const [googleSyncing, setGoogleSyncing] = useState(false);
+  const [googleSyncProgress, setGoogleSyncProgress] = useState<SyncProgress | null>(null);
 
   const feedUrl = api.planner.getCalendarFeedUrl(userId || 'guest');
   const webcalUrl = feedUrl.replace(/^https?:\/\//, "webcal://");
@@ -184,6 +187,40 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
     } finally {
       setExportingIcs(false);
     }
+  };
+
+  const handleDirectGoogleSync = async () => {
+    setGoogleSyncing(true);
+    setGoogleSyncProgress({ current: 0, total: 100, status: "Iniciando conexão com sua conta Google..." });
+    try {
+      const res = await syncPlanToGoogleCalendarDirectly(
+        plan,
+        config?.days_per_week || 6,
+        (p) => setGoogleSyncProgress(p)
+      );
+      if (res.success) {
+        toast.success("Agenda MedQuest criada e eventos exportados com sucesso no seu Google Agenda!");
+      }
+    } catch (err: unknown) {
+      const errMsg = err instanceof Error ? err.message : String(err);
+      if (errMsg === "GOOGLE_CLIENT_ID_MISSING") {
+        // Fallback rápido: baixa o .ics e abre o Google Calendar Import em 1 clique
+        toast("Baixando arquivo e abrindo o importador do Google Agenda...", { icon: "📅" });
+        await handleExportIcs();
+        window.open("https://calendar.google.com/calendar/r/settings/export", "_blank");
+      } else {
+        toast.error("Erro na sincronização: " + errMsg);
+      }
+    } finally {
+      setGoogleSyncing(false);
+      setGoogleSyncProgress(null);
+    }
+  };
+
+  const handleQuickImportFlow = async () => {
+    toast.success("Baixando arquivo e abrindo o importador do Google Agenda...");
+    await handleExportIcs();
+    window.open("https://calendar.google.com/calendar/r/settings/export", "_blank");
   };
 
   useEffect(() => {
@@ -603,38 +640,51 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-6 h-6 rounded-md bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">
-                      1
+                      G
                     </div>
-                    <span className="font-bold text-sm text-foreground">Como Mover e Editar Horários no Google</span>
+                    <span className="font-bold text-sm text-foreground">Copiar para Minha Agenda do Google (100% Editável)</span>
                   </div>
                   <span className="text-[10px] uppercase font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-full">
-                    100% Editável
+                    Móvel & Editável
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Para poder <strong>arrastar aulas, mudar horários e personalizar eventos livremente</strong>, o Google Agenda exige que os eventos sejam importados para a sua agenda principal (em vez de assinatura somente leitura):
+                  Cria uma cópia direta na sua conta Google. Você poderá <strong>arrastar aulas para outros horários, mudar dias, editar descrições e personalizar livremente</strong>.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+
+                {googleSyncProgress && (
+                  <div className="space-y-1.5 bg-background/80 p-3 rounded-xl border border-border animate-in fade-in duration-200">
+                    <div className="flex justify-between text-xs font-semibold text-foreground">
+                      <span className="truncate pr-2">{googleSyncProgress.status}</span>
+                      <span>{Math.round((googleSyncProgress.current / Math.max(1, googleSyncProgress.total)) * 100)}%</span>
+                    </div>
+                    <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-primary transition-all duration-300"
+                        style={{ width: `${(googleSyncProgress.current / Math.max(1, googleSyncProgress.total)) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex flex-col sm:flex-row gap-2 pt-1">
                   <button
-                    onClick={handleExportIcs}
-                    disabled={exportingIcs}
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-xs shadow-sm disabled:opacity-50"
+                    onClick={handleDirectGoogleSync}
+                    disabled={googleSyncing || exportingIcs}
+                    className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-xs shadow-sm disabled:opacity-50"
                   >
-                    {exportingIcs ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
-                    1. Baixar Arquivo (.ics)
+                    {googleSyncing ? <Loader2 size={14} className="animate-spin" /> : <ExternalLink size={14} />}
+                    {googleSyncing ? "Exportando para o Google..." : "1-Clique: Criar Cópia no Google Agenda"}
                   </button>
-                  <a
-                    href="https://calendar.google.com/calendar/r/settings/export"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-card hover:bg-muted text-foreground border border-border font-semibold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-xs text-center"
+                  <button
+                    onClick={handleQuickImportFlow}
+                    disabled={exportingIcs}
+                    className="bg-card hover:bg-muted text-foreground border border-border font-medium py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-xs"
+                    title="Baixa o arquivo .ics e abre o importador oficial do Google Agenda"
                   >
-                    <ExternalLink size={14} />
-                    2. Abrir Importador Google
-                  </a>
-                </div>
-                <div className="text-[11px] text-muted-foreground bg-background/60 p-2 rounded-lg border border-border/60">
-                  ✨ <strong>Instrução Rápida:</strong> Baixe o arquivo no Passo 1, abra o Importador no Passo 2, selecione o arquivo baixado e clique em <em>Importar</em>. Todos os eventos ficam <strong>totalmente livres para você mover e editar</strong>!
+                    <Download size={14} />
+                    Importar Arquivo (.ics)
+                  </button>
                 </div>
               </div>
 
