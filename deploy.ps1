@@ -30,6 +30,10 @@
 .PARAMETER RemoteDir
     Diretorio do projeto no servidor remoto (Padrao: /home/ubuntu/MedQuest).
 
+.PARAMETER ImageWaitSeconds
+    Tempo maximo, em segundos, para aguardar as imagens do commit serem publicadas
+    pelo GitHub Actions (Padrao: 600).
+
 .PARAMETER SkipGit
     Pula o commit e push local, executando apenas o deploy remoto na VPS.
 
@@ -51,6 +55,8 @@ param(
     [string]$User = "ubuntu",
     [string]$KeyFile = "",
     [string]$RemoteDir = "/home/ubuntu/MedQuest",
+    [ValidateRange(15, 3600)]
+    [int]$ImageWaitSeconds = 600,
     [switch]$SkipGit,
     [switch]$SkipRemote
 )
@@ -203,37 +209,79 @@ if (-not $SkipRemote) {
     $Target = "$User@$HostName"
     $SshArgs += "$Target"
 
-    # Script bash seguro e limpo para execucao remota
+    # Envia o script pela entrada padrao para o bash remoto. Passar um bloco
+    # multilinha como argumento do ssh deixa o quoting a cargo de dois shells
+    # (PowerShell e sh) e pode fazer o docker-compose receber argumentos errados.
+    #
     # Estrategia: baixar imagens prontas do GHCR (compiladas pelo GitHub Actions)
     # e so recriar containers, sem compilar nada localmente na VPS.
     $RemoteBashScript = @'
-set -e
-PROJ=/home/ubuntu/MedQuest
-COMPOSE="sudo docker-compose -f $PROJ/docker-compose.yml"
+set -euo pipefail
+
+PROJ="${1:?Diretorio remoto nao informado}"
+IMAGE_WAIT_SECONDS="${2:?Tempo de espera nao informado}"
+COMPOSE_FILE="$PROJ/docker-compose.yml"
+
+if ! command -v docker-compose >/dev/null 2>&1; then
+    echo "[ERRO] docker-compose nao foi encontrado na VPS." >&2
+    exit 1
+fi
+
+compose() {
+    sudo docker-compose -f "$COMPOSE_FILE" "$@"
+}
+
+pull_commit_image() {
+    local image="$1"
+    local deadline=$((SECONDS + IMAGE_WAIT_SECONDS))
+
+    while ! sudo docker pull "$image" >/dev/null 2>&1; do
+        if (( SECONDS >= deadline )); then
+            echo "[ERRO] A imagem $image nao foi publicada em ${IMAGE_WAIT_SECONDS}s." >&2
+            exit 1
+        fi
+
+        echo "    Imagem ainda nao disponivel; aguardando o GitHub Actions..."
+        sleep 15
+    done
+}
 
 echo "  [VPS 1/4] Atualizando repositorio..."
 cd $PROJ
-git pull origin main
+git pull --ff-only origin main
+DEPLOY_SHA=$(git rev-parse HEAD)
+BACKEND_IMAGE="ghcr.io/wagmmss/medquest-backend:sha-$DEPLOY_SHA"
+FRONTEND_IMAGE="ghcr.io/wagmmss/medquest-frontend:sha-$DEPLOY_SHA"
 
-echo "  [VPS 2/4] Baixando imagens pre-compiladas do GHCR..."
-sudo docker pull ghcr.io/wagmmss/medquest-backend:latest
-sudo docker pull ghcr.io/wagmmss/medquest-frontend:latest
+echo "  [VPS 2/4] Aguardando e baixando imagens do commit $DEPLOY_SHA..."
+pull_commit_image "$BACKEND_IMAGE"
+pull_commit_image "$FRONTEND_IMAGE"
+
+# O arquivo Compose referencia :latest. Atualizamos essa tag local somente apos
+# baixar as imagens imutaveis deste commit, para o Compose recriar com a versao certa.
+sudo docker tag "$BACKEND_IMAGE" ghcr.io/wagmmss/medquest-backend:latest
+sudo docker tag "$FRONTEND_IMAGE" ghcr.io/wagmmss/medquest-frontend:latest
 
 echo "  [VPS 3/4] Recriando containers com as novas imagens..."
-$COMPOSE up -d --force-recreate --no-build
+compose up -d --force-recreate --no-build
+
+# Mantem somente a tag :latest local. As tags sha-* sao usadas para garantir que
+# a imagem correta foi baixada e, em seguida, removidas para o prune liberar as
+# imagens de versoes antigas em deploys futuros.
+sudo docker image rm "$BACKEND_IMAGE" "$FRONTEND_IMAGE" >/dev/null
 
 echo "  [VPS 4/4] Limpando imagens antigas..."
 sudo docker image prune -f > /dev/null 2>&1 || true
 
 echo ""
 echo "  Status atual dos servicos:"
-$COMPOSE ps
+compose ps
 '@
 
-    $SshArgs += "$RemoteBashScript"
-
     Print-Info "Executando atualizacao dos servicos na VPS..."
-    & ssh @SshArgs
+    # 'bash -s -- <diretorio> <tempo>' recebe o script por stdin e preserva seu
+    # conteudo. Os argumentos sao enviados separadamente da logica do script.
+    $RemoteBashScript | & ssh @SshArgs "bash -s -- '$RemoteDir' $ImageWaitSeconds"
 
     if ($LASTEXITCODE -ne 0) {
         Print-Error "Ocorreu um erro durante a execucao do deploy remoto via SSH (Exit code: $LASTEXITCODE)."
