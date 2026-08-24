@@ -371,3 +371,315 @@ Responda APENAS com o JSON. Exemplo: {{ "terms": ["...", "..."] }}
             logger.error(f"Erro na expansão via Groq: {e}")
 
     return _cache_and_return([query])
+
+
+def ask_preceptor_ai(
+    stem: str,
+    alternatives: list,
+    correct_letter: str,
+    correct_text: str,
+    user_letter: str = "",
+    user_question: str = "",
+    explanation: str = "",
+    area: str = "",
+    subtema: str = ""
+) -> dict:
+    """
+    Atua como um Preceptor Médico Socrático especialista em provas de residência (USP, ENARE, SUS-SP).
+    Responde às dúvidas do aluno com clareza, rigor científico e foco nas armadilhas da banca usando Gemini 3.7 Flash.
+    """
+    alts_formatted = "\n".join([
+        f"{a.get('letter', '')}) {a.get('text', '')}"
+        for a in alternatives
+        if isinstance(a, dict)
+    ])
+    
+    prompt = f"""Você é o Preceptor Clínico Virtual do MedQuest, especialista em preparação para residência médica de alto nível (USP, ENARE, SUS-SP).
+
+ÁREA / TEMA: {area} - {subtema}
+ENUNCIADO DA QUESTÃO:
+{stem}
+
+ALTERNATIVAS:
+{alts_formatted}
+
+GABARITO OFICIAL: Letra {correct_letter} ({correct_text})
+RESPOSTA MARCADA PELO ALUNO: {f'Letra {user_letter}' if user_letter else 'Ainda não respondeu ou acertou'}
+COMENTÁRIO BASE:
+{explanation or 'Nenhum comentário adicional.'}
+
+DÚVIDA / PEDIDO DO ALUNO:
+{user_question or 'Por favor, explique o raciocínio clínico da questão, por que a correta é o padrão-ouro e onde está a armadilha do distrator.'}
+
+INSTRUÇÕES DO PRECEPTOR:
+1. Responda em tom encorajador, clínico, didático e direto ao ponto.
+2. Foque no raciocínio fisiopatológico e na conduta padrão-ouro recomendada pelas diretrizes médicas.
+3. Se o aluno marcou uma alternativa incorreta, aponte a pegadinha com precisão.
+4. Finalize com uma '💡 Regra de Ouro' (1 frase memorável para a prova).
+5. Formate a resposta em Markdown claro com tópicos destacados.
+"""
+
+    if gemini_pool.total_keys > 0:
+        try:
+            resp = gemini_pool.generate_content(
+                prompt=prompt,
+                system_instruction="Você é um preceptor médico de excelência que ensina raciocínio clínico para residência médica.",
+                model=GEMINI_MODEL,
+                timeout=12
+            )
+            text = resp.get("text", "").strip()
+            if text:
+                return {
+                    "answer": text,
+                    "model": resp.get("model", GEMINI_MODEL),
+                    "source": "gemini"
+                }
+        except Exception as e:
+            logger.error(f"Erro no preceptor IA via Gemini Pool: {e}")
+
+    groq_key = os.environ.get("GROQ_API_KEY")
+    if groq_key and not groq_key.lower().startswith(("dummy", "test", "gsk_test")) and len(groq_key) > 15:
+        try:
+            from groq import Groq
+            client = Groq(api_key=groq_key, timeout=12.0, max_retries=1)
+            completion = client.chat.completions.create(
+                messages=[
+                    {"role": "system", "content": "Você é um preceptor médico de excelência que ensina raciocínio clínico para residência médica."},
+                    {"role": "user", "content": prompt}
+                ],
+                model="llama-3.3-70b-versatile",
+                temperature=0.3,
+                max_tokens=600
+            )
+            text = completion.choices[0].message.content.strip()
+            if text:
+                return {
+                    "answer": text,
+                    "model": "llama-3.3-70b-versatile",
+                    "source": "groq"
+                }
+        except Exception as e:
+            logger.error(f"Erro no preceptor IA via Groq: {e}")
+
+    fallback_response = f"**Raciocínio Clínico Resumido**:\nO gabarito oficial é a Letra **{correct_letter}** ({correct_text}).\n\n"
+    if explanation:
+        fallback_response += f"**Comentário da Questão**:\n{explanation}\n\n"
+    fallback_response += f"💡 **Regra de Ouro**: Em {subtema or area or 'questões clínicas'}, atente-se sempre aos critérios diagnósticos e às contraindicações específicas antes de definir a conduta."
+    
+    return {
+        "answer": fallback_response,
+        "model": "deterministic_fallback",
+        "source": "fallback"
+    }
+
+
+def _extract_json_block(text: str) -> dict | None:
+    """Extrai e faz parsing resiliente de JSON mesmo com markdown ou texto envolvente."""
+    if not text:
+        return None
+    cleaned = text.replace("```json", "").replace("```", "").strip()
+    try:
+        parsed = json.loads(cleaned)
+        if isinstance(parsed, dict):
+            return parsed
+    except Exception:
+        pass
+    
+    match = re.search(r'(\{[\s\S]*\})', cleaned)
+    if match:
+        try:
+            parsed = json.loads(match.group(1))
+            if isinstance(parsed, dict):
+                return parsed
+        except Exception:
+            pass
+    return None
+
+
+def generate_study_prescription(
+    weak_topics: list | None = None,
+    distractors: list | None = None,
+    at_risk_topics: list | None = None,
+    target_institution: str | None = None
+) -> dict:
+    """
+    Gera uma Prescrição Clínica de Estudo personalizada de alto rendimento usando Gemini 3.7 Flash.
+    Analisa os tópicos de menor acurácia, as pegadinhas em que o aluno mais cai e os cards em risco de esquecimento.
+    """
+    institution_context = f"Instituição Alvo: {target_institution}\n" if target_institution else "Foco: Residência Médica Geral (USP, ENARE, SUS-SP)\n"
+    
+    weak_str = "\n".join([
+        f"- {wt.get('topic') or wt.get('subtema')}: {wt.get('correct', 0)} acertos em {wt.get('attempts', 0)} questões ({round((wt.get('accuracy', 0))*100)}% acurácia)"
+        for wt in (weak_topics or [])[:6]
+    ]) or "Nenhum tópico crítico identificado."
+
+    distractors_str = "\n".join([
+        f"- Subtema '{d.get('subtema')}': Costuma marcar alternativa incorreta {d.get('wrong_choices', [{}])[0].get('letter', '?')} ({d.get('wrong_choices', [{}])[0].get('count', 0)}x)"
+        for d in (distractors or [])[:4]
+        if d.get('wrong_choices')
+    ]) or "Nenhum distrator recorrente mapeado."
+
+    at_risk_str = "\n".join([
+        f"- {r.get('subtema')}: {r.get('items_count', 1)} cartões FSRS próximos do esquecimento"
+        for r in (at_risk_topics or [])[:4]
+    ]) or "Memória em dia para as revisões ativas."
+
+    prompt = f"""Você é o Diretor Pedagógico e Preceptor Médico Chefe do MedQuest.
+Gere uma "Prescrição Clínica de Estudo" personalizada para este médico residente.
+
+{institution_context}
+DIAGNÓSTICO DO ALUNO:
+1. Tópicos de Baixo Rendimento:
+{weak_str}
+
+2. Padrões de Armadilhas / Distratores:
+{distractors_str}
+
+3. Tópicos com Risco de Esquecimento (FSRS):
+{at_risk_str}
+
+DIRETRIZES:
+1. Faça um diagnóstico clínico e encorajador em 2-3 frases.
+2. Defina o "Plano Tático em 3 Passos" com conceitos de alto rendimento para reverter os tópicos fracos.
+3. Aponte a "Vacina contra Distratores" alertando sobre as pegadinhas mapeadas.
+4. Conclua com a "Regra de Ouro Semanal".
+5. Formate a resposta em Markdown limpo com ícones e bullet points.
+
+Responda em formato estruturado.
+"""
+
+    if gemini_pool.total_keys > 0:
+        try:
+            resp = gemini_pool.generate_content(
+                prompt=prompt,
+                system_instruction="Você é o diretor pedagógico do MedQuest especialista em aprovação de residência médica.",
+                model=GEMINI_MODEL,
+                timeout=15
+            )
+            text = resp.get("text", "").strip()
+            if text:
+                return {
+                    "prescription_markdown": text,
+                    "model": resp.get("model", GEMINI_MODEL),
+                    "source": "gemini"
+                }
+        except Exception as e:
+            logger.error(f"Erro na prescrição de estudos via Gemini Pool: {e}")
+
+    fallback_md = f"""### 🩺 Prescrição de Estudo Personalizada
+
+**Diagnóstico Geral**:
+Identificamos pontos de atenção imediatos em tópicos-chave. Com foco nos conceitos fisiopatológicos e diferenciação de condutas, sua pontuação terá um salto rápido.
+
+**Plano Tático Imediato**:
+- **Revisão Ativa**: Priorize realizar blocos de 15 questões dos seus temas com menor acurácia.
+- **Atenção aos Distratores**: Redobre o cuidado com as alternativas que você mais assinala por impulso. Identifique palavras excludentes (*sempre*, *nunca*, *apenas*).
+- **Consolidação FSRS**: Conclua as revisões ativas pendentes antes de iniciar questões inéditas.
+
+💡 **Regra de Ouro**: A aprovação na residência médica é construída na correção minuciosa de cada erro. Entenda o porquê de cada distrator.
+"""
+    return {
+        "prescription_markdown": fallback_md,
+        "model": "deterministic_fallback",
+        "source": "fallback"
+    }
+
+
+def synthesize_question_explanation(
+    stem: str,
+    alternatives: list,
+    correct_letter: str,
+    correct_text: str,
+    area: str = "",
+    subtema: str = ""
+) -> dict:
+    """
+    Sintetiza um comentário médico estruturado e completo (Pulo do Gato, Raciocínio Clínico,
+    Alternativa Correta, Distratores e Referências) para uma questão utilizando Gemini 3.7 Flash.
+    """
+    alts_formatted = "\n".join([
+        f"{a.get('letter', '')}) {a.get('text', '')}"
+        for a in alternatives
+        if isinstance(a, dict)
+    ])
+
+    prompt = f"""Você é um professor especialista em provas de residência médica (USP, ENARE, SUS-SP).
+Crie o comentário oficial perfeito para a seguinte questão de residência médica:
+
+ÁREA: {area} | SUBTEMA: {subtema}
+ENUNCIADO:
+{stem}
+
+ALTERNATIVAS:
+{alts_formatted}
+
+GABARITO: Letra {correct_letter} ({correct_text})
+
+ESTRUTURA OBRIGATÓRIA DA RESPOSTA (JSON):
+{{
+  "pulo_do_gato": "1-2 frases com a regra de ouro/macete prático para acertar esta questão em 30 segundos.",
+  "raciocinio_clinico": "Explicação clínica e fisiopatológica detalhada do quadro e critérios de diagnóstico/conduta.",
+  "alternativa_correta": "Por que a alternativa {correct_letter} é a única correta de acordo com as diretrizes.",
+  "distratores": [
+    {{"letter": "Letra", "explanation": "Por que está errada e qual a pegadinha"}}
+  ],
+  "medical_references": "Diretrizes e consensos médicos de referência (ex: Diretriz SBC, Manual MS, FEBRASGO, etc.)"
+}}
+"""
+
+    if gemini_pool.total_keys > 0:
+        try:
+            resp = gemini_pool.generate_content(
+                prompt=prompt,
+                system_instruction="Você responde exclusivamente em JSON válido.",
+                json_mode=True,
+                model=GEMINI_MODEL,
+                timeout=15
+            )
+            parsed = _extract_json_block(resp.get("text", ""))
+            if parsed and "pulo_do_gato" in parsed and "raciocinio_clinico" in parsed:
+                # Monta a string estruturada em markdown
+                distratores_md = "\n".join([
+                    f"- **Alternativa ({d.get('letter')})**: {d.get('explanation')}"
+                    for d in parsed.get("distratores", [])
+                ])
+                full_explanation = f"""**Gabarito Oficial**: Letra {correct_letter}
+
+**Pulo do Gato**: {parsed.get('pulo_do_gato')}
+
+**Raciocínio Clínico**:
+{parsed.get('raciocinio_clinico')}
+
+**Alternativa Correta ({correct_letter})**:
+{parsed.get('alternativa_correta')}
+
+**Análise dos Distratores**:
+{distratores_md}
+"""
+                return {
+                    "explanation_text": full_explanation.strip(),
+                    "pulo_do_gato": parsed.get("pulo_do_gato"),
+                    "medical_references": parsed.get("medical_references", "Diretrizes Médicas Brasileiras"),
+                    "source": "gemini",
+                    "model": resp.get("model", GEMINI_MODEL)
+                }
+        except Exception as e:
+            logger.error(f"Erro na síntese de comentário via Gemini Pool: {e}")
+
+    # Fallback estruturado
+    fallback_text = f"""**Gabarito Oficial**: Letra {correct_letter}
+
+**Pulo do Gato**: O padrão-ouro em {subtema or area or 'quadros semelhantes'} baseia-se na identificação precoce dos critérios clínicos e conduta conforme diretrizes vigentes.
+
+**Alternativa Correta ({correct_letter})**:
+A alternativa ({correct_letter}) apresenta a abordagem preconizada para o caso apresentado.
+"""
+    return {
+        "explanation_text": fallback_text.strip(),
+        "pulo_do_gato": f"Foco nos critérios de {subtema or area}.",
+        "medical_references": "Consensos e Diretrizes das Sociedades Brasileiras de Especialidades.",
+        "source": "fallback",
+        "model": "deterministic_fallback"
+    }
+
+

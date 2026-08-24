@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { TimelineStat, WeakTopic, BreakdownStat, DistractorStat, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness } from "@/types/api";
@@ -61,19 +61,20 @@ export function AnalysisClient({
   }, [days]);
 
   const chartBreakdown = useMemo(() => {
+    if (!Array.isArray(breakdown)) return [];
     return breakdown.slice(0, 8).map(b => ({
       ...b,
-      accPct: parseFloat((b.accuracy * 100).toFixed(1)),
-      // Truncate long labels for Y-axis display
+      accPct: parseFloat(((b.accuracy || 0) * 100).toFixed(1)),
       shortLabel: b.label.length > 35 ? b.label.substring(0, 32) + "..." : b.label
     }));
   }, [breakdown]);
 
   const chartTimeline = useMemo(() => {
+    if (!Array.isArray(localTimeline)) return [];
     return localTimeline.map(t => ({
       ...t,
       dateShort: t.day.split("-").slice(1).reverse().join("/"),
-      accPct: parseFloat((t.accuracy * 100).toFixed(1))
+      accPct: parseFloat(((t.accuracy || 0) * 100).toFixed(1))
     }));
   }, [localTimeline]);
 
@@ -82,6 +83,7 @@ export function AnalysisClient({
       {/* Left Column (2/3 on xl screens) */}
       <div className="xl:col-span-2 flex flex-col gap-8 min-w-0">
 
+        {/* Adaptive Goal Banner */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,13 +106,14 @@ export function AnalysisClient({
             </div>
             <Link
               href={`/estudar?mode=adaptive&limit=${learningProfile.goal.questions_today}`}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer"
             >
               Iniciar sessão personalizada <ChevronRight size={18} />
             </Link>
           </div>
         </motion.section>
 
+        {/* Exam Readiness by Institution */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -173,7 +176,7 @@ export function AnalysisClient({
                 <div className="text-5xl font-black text-primary">
                   {predictiveScore.projected_score}<span className="text-2xl text-muted-foreground font-medium">/100</span>
                 </div>
-                {predictiveScore.target_score !== null && (
+                {predictiveScore.target_score != null && (
                   <div className="flex flex-col pb-1">
                     <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Alvo</span>
                     <span className="text-lg font-bold text-foreground">{predictiveScore.target_score}</span>
@@ -181,7 +184,7 @@ export function AnalysisClient({
                 )}
               </div>
               
-              {predictiveScore.target_score !== null && (
+              {predictiveScore.target_score != null && predictiveScore.target_score > 0 && (
                 <div className="mt-6 w-full bg-secondary/20 h-3 rounded-full overflow-hidden relative">
                   <div 
                     className={clsx("h-full rounded-full transition-all duration-1000", predictiveScore.projected_score >= predictiveScore.target_score ? "bg-success" : "bg-primary")}
@@ -206,7 +209,7 @@ export function AnalysisClient({
               </p>
               
               <div className="flex-1 overflow-y-auto space-y-3 pr-2 custom-scrollbar">
-                {atRiskTopics.length > 0 ? (
+                {atRiskTopics && atRiskTopics.length > 0 ? (
                   atRiskTopics.map((topic, idx) => (
                     <div key={idx} className="flex items-center justify-between p-3 bg-background rounded-lg border border-border">
                       <div className="flex flex-col">
@@ -274,7 +277,7 @@ export function AnalysisClient({
                     type="category" 
                     axisLine={false} 
                     tickLine={false} 
-                    width={220}
+                    width={220} 
                     tick={{ fill: 'var(--muted-foreground)', fontSize: 13, fontWeight: 500 }} 
                   />
                   <Tooltip 
@@ -308,7 +311,7 @@ export function AnalysisClient({
                   />
                   <Bar dataKey="accPct" radius={[0, 6, 6, 0]} barSize={20}>
                     {chartBreakdown.map((entry, index) => {
-                      const acc = entry.accuracy * 100;
+                      const acc = (entry.accuracy || 0) * 100;
                       const fillId = acc >= 70 ? 'url(#colorSuccess)' : acc >= 50 ? 'url(#colorWarning)' : 'url(#colorDestructive)';
                       return <Cell key={`cell-${index}`} fill={fillId} />;
                     })}
@@ -339,7 +342,7 @@ export function AnalysisClient({
                   onClick={() => setDays(d)}
                   disabled={loadingTimeline}
                   className={clsx(
-                    "px-3 py-1 text-sm font-medium rounded-md transition-colors",
+                    "px-3 py-1 text-sm font-medium rounded-md transition-colors cursor-pointer",
                     days === d 
                       ? "bg-background text-foreground shadow-sm" 
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/80",
@@ -463,9 +466,9 @@ export function AnalysisClient({
               </p>
             </div>
             <div className="divide-y divide-border/50">
-              {weakTopics.length > 0 ? (
+              {weakTopics && weakTopics.length > 0 ? (
                 weakTopics.slice(0, 8).map((wt) => {
-                  const distractor = distractors.find(d => d.subtema === wt.topic);
+                  const distractor = Array.isArray(distractors) ? distractors.find(d => d.subtema === wt.topic) : undefined;
                   const worstChoice = distractor?.wrong_choices?.[0];
                   
                   return (
@@ -486,8 +489,8 @@ export function AnalysisClient({
                         )}
                       </div>
                       <div className="flex flex-col items-end gap-1 shrink-0">
-                        <span className={clsx("font-bold text-lg", wt.accuracy < 0.5 ? "text-destructive" : "text-warning")}>
-                          {(wt.accuracy * 100).toFixed(0)}%
+                        <span className={clsx("font-bold text-lg", (wt.accuracy || 0) < 0.5 ? "text-destructive" : "text-warning")}>
+                          {((wt.accuracy || 0) * 100).toFixed(0)}%
                         </span>
                         <ChevronRight size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>

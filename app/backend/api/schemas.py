@@ -18,9 +18,11 @@ __all__ = [
     "PlannerConfigIn",
     "PlannerRevisionIn",
     "PlannerStudyIn",
+    "PrescribeStudyIn",
     "QuestionBatchIn",
     "ReviewIn",
     "SimuladoCustomIn",
+    "SynthesizeExplanationIn",
     "ValidationError",
     "validation_errors",
 ]
@@ -111,7 +113,7 @@ class FavoriteIn(APIInput):
 
 class FlashcardGenerateIn(APIInput):
     question_id: int = Field(gt=0)
-    wrong_letter: str = Field(pattern=r"^[A-Ea-e]$")
+    wrong_letter: str = Field(default="", pattern=r"^(?:[A-Ea-e])?$")
 
 
 class FlashcardPreviewIn(APIInput):
@@ -143,3 +145,15 @@ class FlashcardReviewIn(APIInput):
 
 class FlashcardReportIn(APIInput):
     reason: str = Field(min_length=1, max_length=1_000)
+
+
+class PrescribeStudyIn(APIInput):
+    target_institution: str | None = Field(default=None, max_length=100)
+    weak_topics: list[dict] | None = Field(default=None, max_length=20)
+    distractors: list[dict] | None = Field(default=None, max_length=20)
+    at_risk_topics: list[dict] | None = Field(default=None, max_length=20)
+
+
+class SynthesizeExplanationIn(APIInput):
+    force_regenerate: bool = False
+

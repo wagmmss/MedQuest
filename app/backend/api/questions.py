@@ -17,9 +17,11 @@ from .schemas import (
     AttemptIn,
     BatchAttemptIn,
     FavoriteIn,
+    PrescribeStudyIn,
     QuestionBatchIn,
     ReviewIn,
     SimuladoCustomIn,
+    SynthesizeExplanationIn,
     ValidationError,
     validation_errors,
 )
@@ -824,6 +826,150 @@ def question_batch_detail():
         })
 
     return jsonify({"questions": out})
+
+
+@bp.route("/questions/<int:question_id>/ask_ai", methods=["POST"])
+def ask_question_ai(question_id):
+    db = get_db()
+    q = db.execute("""
+        SELECT q.id, q.stem, q.area, q.subtema, q.topic,
+               e.explanation_text
+        FROM questions q
+        LEFT JOIN explanations e ON q.id = e.question_id
+        WHERE q.id = ?
+    """, (question_id,)).fetchone()
+    
+    if not q:
+        return jsonify({"error": "Questão não encontrada"}), 404
+        
+    alts = db.execute("""
+        SELECT letter, text, is_correct
+        FROM alternatives
+        WHERE question_id = ?
+        ORDER BY letter
+    """, (question_id,)).fetchall()
+    
+    alts_list = [{"letter": a["letter"], "text": a["text"], "is_correct": bool(a["is_correct"])} for a in alts]
+    correct_alt = next((a for a in alts_list if a["is_correct"]), None)
+    correct_letter = correct_alt["letter"] if correct_alt else ""
+    correct_text = correct_alt["text"] if correct_alt else ""
+    
+    body = request.get_json(silent=True) or {}
+    user_question = body.get("user_question", "")
+    user_letter = body.get("user_letter", "")
+    
+    from .ai import ask_preceptor_ai
+    result = ask_preceptor_ai(
+        stem=q["stem"],
+        alternatives=alts_list,
+        correct_letter=correct_letter,
+        correct_text=correct_text,
+        user_letter=user_letter,
+        user_question=user_question,
+        explanation=q["explanation_text"] or "",
+        area=q["area"] or "",
+        subtema=q["subtema"] or q["topic"] or ""
+    )
+    
+    return jsonify(result)
+
+
+@bp.route("/ai/health", methods=["GET"])
+def ai_health():
+    from .gemini_pool import gemini_pool
+    return jsonify(gemini_pool.health_check())
+
+
+@bp.route("/ai/prescribe_study", methods=["POST"])
+def prescribe_study():
+    try:
+        data = PrescribeStudyIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+
+    from .ai import generate_study_prescription
+    result = generate_study_prescription(
+        weak_topics=data.weak_topics,
+        distractors=data.distractors,
+        at_risk_topics=data.at_risk_topics,
+        target_institution=data.target_institution
+    )
+    return jsonify(result)
+
+
+@bp.route("/questions/<int:question_id>/synthesize_explanation", methods=["POST"])
+def synthesize_explanation(question_id):
+    try:
+        data = SynthesizeExplanationIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+
+    db = get_db()
+    q = db.execute("""
+        SELECT q.id, q.stem, q.area, q.subtema, q.topic,
+               e.explanation_text
+        FROM questions q
+        LEFT JOIN explanations e ON q.id = e.question_id
+        WHERE q.id = ?
+    """, (question_id,)).fetchone()
+
+    if not q:
+        return jsonify({"error": "Questão não encontrada"}), 404
+
+    # Se já possui explicação e não é para forçar regeneração, retorna a existente
+    if q["explanation_text"] and not data.force_regenerate:
+        return jsonify({
+            "question_id": question_id,
+            "explanation_text": q["explanation_text"],
+            "source": "cached_db"
+        })
+
+    alts = db.execute("""
+        SELECT letter, text, is_correct
+        FROM alternatives
+        WHERE question_id = ?
+        ORDER BY letter
+    """, (question_id,)).fetchall()
+
+    alts_list = [{"letter": a["letter"], "text": a["text"], "is_correct": bool(a["is_correct"])} for a in alts]
+    correct_alt = next((a for a in alts_list if a["is_correct"]), None)
+    correct_letter = correct_alt["letter"] if correct_alt else ""
+    correct_text = correct_alt["text"] if correct_alt else ""
+
+    from .ai import synthesize_question_explanation
+    result = synthesize_question_explanation(
+        stem=q["stem"],
+        alternatives=alts_list,
+        correct_letter=correct_letter,
+        correct_text=correct_text,
+        area=q["area"] or "",
+        subtema=q["subtema"] or q["topic"] or ""
+    )
+
+    # Persiste na tabela explanations se sintetizado com sucesso
+    with db_transaction(db, immediate=True):
+        existing_exp = db.execute("SELECT question_id FROM explanations WHERE question_id = ?", (question_id,)).fetchone()
+        if existing_exp:
+            db.execute("""
+                UPDATE explanations
+                SET explanation_text = ?
+                WHERE question_id = ?
+            """, (result.get("explanation_text", ""), question_id))
+        else:
+            db.execute("""
+                INSERT INTO explanations (question_id, explanation_text)
+                VALUES (?, ?)
+            """, (question_id, result.get("explanation_text", "")))
+
+    invalidate_user_caches(g.user_id)
+
+    return jsonify({
+        "question_id": question_id,
+        "explanation_text": result.get("explanation_text"),
+        "medical_references": result.get("medical_references"),
+        "source": result.get("source"),
+        "model": result.get("model")
+    })
 
 
 @bp.route("/images/<path:filename>")

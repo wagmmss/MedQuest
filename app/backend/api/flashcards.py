@@ -38,16 +38,18 @@ def generate():
         return jsonify({"error": "Questao nao encontrada."}), 404
         
     correct_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (question_id, q["correct_letter"])).fetchone()
-    wrong_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (question_id, wrong_letter)).fetchone()
+    wrong_alt = None
+    if wrong_letter:
+        wrong_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (question_id, wrong_letter)).fetchone()
     exp = db.execute("SELECT explanation_text FROM explanations WHERE question_id = ?", (question_id,)).fetchone()
     
-    if not correct_alt or not wrong_alt:
-        return jsonify({"error": "Alternativas nao encontradas."}), 404
+    if not correct_alt:
+        return jsonify({"error": "Alternativa correta nao encontrada."}), 404
 
     card_data = generate_cloze_flashcard(
         stem=q["stem"], 
         correct_text=correct_alt["text"], 
-        wrong_text=wrong_alt["text"], 
+        wrong_text=wrong_alt["text"] if wrong_alt else "", 
         explanation=exp["explanation_text"] if exp else "",
         area=q["area"] or "",
         subtema=q["subtema"] or "",

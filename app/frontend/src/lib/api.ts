@@ -244,6 +244,11 @@ export const api = {
     }),
     search: (q: string, semantic: boolean = false, signal?: AbortSignal) =>
       apiFetch<SearchResult[]>(`/api/search?q=${encodeURIComponent(q)}&semantic=${semantic}`, { cache: 'no-store', signal }),
+    askAI: (id: number, user_question?: string, user_letter?: string) =>
+      apiFetch<{ answer: string; model: string; source: string }>(`/api/questions/${id}/ask_ai`, {
+        method: "POST",
+        body: JSON.stringify({ user_question, user_letter })
+      }),
     getSimuladoUSP: async () => {
       const getLocalFallback = async () => {
         if (typeof window !== "undefined" && localDb) {

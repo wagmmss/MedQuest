@@ -1381,6 +1381,8 @@ export function SimuladoClient({
                         explanation={resultsMap[qDetail.id].explanation}
                         medicalReferences={qDetail.medical_references}
                         correctLetter={resultsMap[qDetail.id].correct_letter}
+                        questionId={qDetail.id}
+                        userLetter={answers[qDetail.id] || undefined}
                       />
 
                       {!questionFlashcardsMap[qDetail.id] && !draftFlashcardsMap[qDetail.id] && (

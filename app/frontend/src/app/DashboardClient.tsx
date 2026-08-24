@@ -122,7 +122,7 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName, timeline
     // Format data for Recharts (Top 5 areas)
     const data = breakdownStats.slice(0, 5).map(stat => ({
       subject: stat.label.substring(0, 15) + (stat.label.length > 15 ? '...' : ''),
-      A: Math.round(stat.accuracy * 100),
+      A: Math.round((stat.accuracy || 0) * 100),
       fullMark: 100,
     }));
 
@@ -232,12 +232,12 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName, timeline
             <div className="mt-8 relative z-10 flex gap-3 flex-col sm:flex-row">
               {pendentes > 0 ? (
                 <>
-                  {stats.flashcards_due_count! > 0 && (
+                  {(stats.flashcards_due_count || 0) > 0 && (
                     <Link href="/revisao-ativa" className="flex-1 w-full py-2.5 bg-purple-100 hover:bg-purple-200 text-purple-700 dark:bg-purple-500/10 dark:hover:bg-purple-500/20 dark:text-purple-300 font-semibold rounded-xl transition-colors text-sm flex items-center justify-center gap-2 ring-1 ring-purple-500/20">
                       <span className="material-symbols-outlined text-[18px]" data-icon="auto_awesome">auto_awesome</span> ({stats.flashcards_due_count})
                     </Link>
                   )}
-                  {stats.srs_due_count! > 0 && (
+                  {(stats.srs_due_count || 0) > 0 && (
                     <Link href="/estudar?status=srs_due&limit=100" className="flex-1 w-full py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-colors text-sm flex items-center justify-center gap-2 shadow-sm">
                       <span className="material-symbols-outlined text-[18px]" data-icon="psychology">psychology</span> ({stats.srs_due_count})
                     </Link>
