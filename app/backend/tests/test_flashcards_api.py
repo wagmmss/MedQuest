@@ -67,6 +67,14 @@ def test_flashcards_validation_errors(client):
     r = client.post("/api/flashcards/1/report", json={})
     assert r.status_code == 400
 
+    # Campos desconhecidos não podem atravessar a whitelist do schema.
+    r = client.post("/api/flashcards/save", json={
+        "question_id": 1,
+        "front": "card",
+        "user_id": "another-user",
+    })
+    assert r.status_code == 400
+
 
 def test_flashcards_duplicate_prevention(client):
     # Gera primeira vez
@@ -102,3 +110,49 @@ def test_flashcards_generate_batch(client):
     assert data["success"] is True
     assert data["count"] >= 1
     assert len(data["flashcards"]) >= 1
+
+
+def test_flashcards_batch_rejects_duplicates_and_avoids_n_plus_one(client, monkeypatch):
+    duplicate = client.post("/api/flashcards/generate-batch", json={
+        "items": [
+            {"question_id": 1, "wrong_letter": "A"},
+            {"question_id": 1, "wrong_letter": "A"},
+        ]
+    })
+    assert duplicate.status_code == 400
+
+    from api import db as db_module
+    from api import flashcards as flashcards_module
+
+    select_count = 0
+
+    class CountingConnection:
+        def __init__(self, connection):
+            self.connection = connection
+
+        def execute(self, sql, parameters=()):
+            nonlocal select_count
+            if sql.lstrip().upper().startswith("SELECT"):
+                select_count += 1
+            return self.connection.execute(sql, parameters)
+
+        def commit(self):
+            self.connection.commit()
+
+        def rollback(self):
+            self.connection.rollback()
+
+    monkeypatch.setattr(
+        flashcards_module,
+        "get_db",
+        lambda: CountingConnection(db_module.get_db()),
+    )
+    response = client.post("/api/flashcards/generate-batch", json={
+        "items": [
+            {"question_id": 1, "wrong_letter": "A"},
+            {"question_id": 2, "wrong_letter": "B"},
+        ]
+    })
+    assert response.status_code == 200
+    assert response.get_json()["count"] == 2
+    assert select_count == 3

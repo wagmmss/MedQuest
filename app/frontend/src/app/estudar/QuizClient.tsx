@@ -114,7 +114,6 @@ export function QuizClient({
   // Image Modal
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
 
-  const [, setDetailsCache] = useState<Record<number, QuestionDetail>>({});
   const detailsCacheRef = useRef<Record<number, QuestionDetail>>({});
   const prefetchingRef = useRef<Set<number>>(new Set());
 
@@ -147,7 +146,6 @@ export function QuizClient({
     try {
       const detail = await api.questions.getDetail(id);
       detailsCacheRef.current[id] = detail;
-      setDetailsCache(prev => ({ ...prev, [id]: detail }));
       if (detailRequestRef.current === requestId) {
         setCurrentDetail(detail);
       }
@@ -176,7 +174,6 @@ export function QuizClient({
       api.questions.getDetail(nextId)
         .then((detail) => {
           detailsCacheRef.current[nextId] = detail;
-          setDetailsCache(prev => ({ ...prev, [nextId]: detail }));
         })
         .catch(() => {
           // Ignora falhas de prefetch em segundo plano
@@ -271,7 +268,6 @@ export function QuizClient({
         setState(saved.state);
         if (saved.currentDetail) {
           detailsCacheRef.current[saved.currentDetail.id] = saved.currentDetail;
-          setDetailsCache(prev => ({ ...prev, [saved.currentDetail!.id]: saved.currentDetail! }));
         } else {
           loadQuestionDetail(saved.queue[saved.currentIndex].id);
         }
@@ -512,13 +508,11 @@ export function QuizClient({
     const updated = { ...currentDetail, is_favorite: !currentDetail.is_favorite };
     setCurrentDetail(updated);
     detailsCacheRef.current[updated.id] = updated;
-    setDetailsCache(prev => ({ ...prev, [updated.id]: updated }));
     try {
       await api.questions.toggleFavorite(currentDetail.id);
     } catch {
       setCurrentDetail(currentDetail);
       detailsCacheRef.current[currentDetail.id] = currentDetail;
-      setDetailsCache(prev => ({ ...prev, [currentDetail.id]: currentDetail }));
     } finally {
       favoriteLockRef.current = false;
       setTogglingFavorite(false);

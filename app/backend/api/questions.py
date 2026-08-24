@@ -6,14 +6,23 @@ import time
 from datetime import datetime, timezone
 from threading import Lock
 
-from flask import Blueprint, Response, g, jsonify, request, stream_with_context
+from flask import Blueprint, g, jsonify, request
 
-from . import ai, srs
+from . import srs
 from .adaptive import rank_adaptive_candidates
 from .db import db_transaction, get_db
 from .filters import question_filter_clauses
 from .idempotency import complete_idempotency, fail_idempotency, reserve_idempotency
-from .schemas import AttemptIn, BatchAttemptIn, ReviewIn, ValidationError
+from .schemas import (
+    AttemptIn,
+    BatchAttemptIn,
+    FavoriteIn,
+    QuestionBatchIn,
+    ReviewIn,
+    SimuladoCustomIn,
+    ValidationError,
+    validation_errors,
+)
 
 
 class SimpleTTLCache:
@@ -137,12 +146,13 @@ def simulado_usp():
 @bp.route("/simulado/custom", methods=["POST"])
 def simulado_custom():
     db = get_db()
-    data = request.get_json(force=True) or {}
-    institutions = data.get("institutions", [])
-    years = data.get("years", [])
-    institutions = [str(value)[:64] for value in institutions[:20]] if isinstance(institutions, list) else []
-    years = [str(value)[:4] for value in years[:20]] if isinstance(years, list) else []
-    q_per_area = _bounded_int(data.get("questions_per_area"), 20, 1, 100)
+    try:
+        data = SimuladoCustomIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+    institutions = [value[:64] for value in data.institutions]
+    years = [value[:4] for value in data.years]
+    q_per_area = data.questions_per_area
     
     areas = ["Cirurgia", "Clínica Médica", "Pediatria", "Ginecologia e Obstetrícia", "Medicina Preventiva e Social"]
     all_ids = []
@@ -439,7 +449,7 @@ def submit_attempt(qid):
         except ValidationError as e:
             if lease_token:
                 fail_idempotency(db, g.user_id, lease_token)
-            return jsonify({"error": "invalid input", "details": e.errors()}), 400
+            return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
 
         q = db.execute("SELECT correct_letter FROM questions WHERE id = ?", (qid,)).fetchone()
         if not q:
@@ -506,7 +516,7 @@ def review_fsrs(qid):
         except ValidationError as e:
             if lease_token:
                 fail_idempotency(db, g.user_id, lease_token)
-            return jsonify({"error": "invalid input", "details": e.errors()}), 400
+            return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
         confidence = data.confidence
 
         with db_transaction(db, immediate=True):
@@ -569,7 +579,7 @@ def submit_attempt_batch():
         except ValidationError as e:
             if lease_token:
                 fail_idempotency(db, g.user_id, lease_token)
-            return jsonify({"error": "invalid input", "details": e.errors()}), 400
+            return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
 
         results = []
         answered_at = datetime.now(timezone.utc).isoformat()
@@ -670,8 +680,13 @@ def toggle_favorite(qid):
         return err_resp
 
     try:
-        data = request.get_json(silent=True) or {}
-        target_fav = data.get("is_favorite")
+        try:
+            data = FavoriteIn.model_validate(request.get_json(silent=True) or {})
+        except ValidationError as e:
+            if lease_token:
+                fail_idempotency(db, g.user_id, lease_token)
+            return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+        target_fav = data.is_favorite
 
         with db_transaction(db, immediate=True):
             if target_fav is not None:
@@ -709,12 +724,12 @@ def question_batch_detail():
     Aceita {"ids": [1, 2, ...]} com no máximo 200 IDs.
     Substitui até 120 chamadas individuais GET /questions/:id no simulado.
     """
-    data = request.get_json(force=True) or {}
-    ids = data.get("ids", [])
-    force_4_options = data.get("force_4_options", False)
-    if not ids or not isinstance(ids, list):
-        return jsonify({"error": "ids is required and must be a list"}), 400
-    ids = ids[:200]  # Cap at 200
+    try:
+        data = QuestionBatchIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+    ids = data.ids
+    force_4_options = data.force_4_options
 
     db = get_db()
     CHUNK = 500

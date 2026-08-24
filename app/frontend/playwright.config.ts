@@ -1,4 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
+import { loadEnvConfig } from '@next/env';
+
+loadEnvConfig(process.cwd());
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:3100';
 
 export default defineConfig({
   testDir: './e2e',
@@ -9,7 +13,7 @@ export default defineConfig({
   reporter: 'html',
   timeout: 60000,
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL,
     trace: 'on-first-retry',
   },
   projects: [
@@ -19,8 +23,14 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm start',
-    url: 'http://localhost:3000',
+    command: 'node .next/standalone/server.js',
+    env: {
+      PORT: '3100',
+      HOSTNAME: '127.0.0.1',
+    },
+    // The app shell may depend on an external API, so use a static asset as
+    // the readiness probe. Browser requests are mocked by the E2E suite.
+    url: `${baseURL}/favicon.ico`,
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },

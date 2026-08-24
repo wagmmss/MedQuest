@@ -7,7 +7,9 @@ python-dotenv
 # api/db.py uses the synchronous `libsql` driver for Turso connections.
 # `libsql-client` exposes a different module name and does not provide it.
 libsql==0.1.11
-PyJWT
+PyJWT>=2.8
 cryptography
 requests
 gunicorn
+pytest
+pytest-cov

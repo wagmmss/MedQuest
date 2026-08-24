@@ -1,28 +1,35 @@
 import base64
 import hmac
+import logging
 import os
 import uuid
-from functools import lru_cache, wraps
+from functools import wraps
 
 import jwt
-import requests
 from flask import g, jsonify, request
 
-CLERK_SECRET = os.getenv("CLERK_SECRET_KEY")
+logger = logging.getLogger(__name__)
 
 # Extract domain from the publishable key
-pk = os.getenv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "pk_test_bWFueS1sb3VzZS04Ny5jbGVyay5hY2NvdW50cy5kZXYk")
-if pk.startswith("pk_test_") or pk.startswith("pk_live_"):
+pk = os.getenv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "")
+configured_issuer = os.getenv("CLERK_ISSUER", "").rstrip("/") or None
+if pk.startswith(("pk_test_", "pk_live_")):
     try:
-        domain_b64 = pk.split("_")[-1].strip("$")
+        domain_b64 = pk.removeprefix("pk_test_").removeprefix("pk_live_").strip("$")
         domain_b64 += "=" * ((4 - len(domain_b64) % 4) % 4)
         domain = base64.b64decode(domain_b64).decode("utf-8")
         domain = domain.removesuffix("$")
-        JWKS_URL = f"https://{domain}/.well-known/jwks.json"
+        CLERK_ISSUER = configured_issuer or f"https://{domain}"
     except Exception:
-        JWKS_URL = None
+        CLERK_ISSUER = configured_issuer
 else:
-    JWKS_URL = None
+    CLERK_ISSUER = configured_issuer
+
+JWKS_URL = os.getenv(
+    "CLERK_JWKS_URL",
+    f"{CLERK_ISSUER}/.well-known/jwks.json" if CLERK_ISSUER else "",
+) or None
+CLERK_AUDIENCE = os.getenv("CLERK_JWT_AUDIENCE") or None
 
 
 def is_valid_uuid_v4(val: str | None) -> bool:
@@ -40,17 +47,8 @@ def is_valid_uuid_v4(val: str | None) -> bool:
         return False
 
 
-@lru_cache(maxsize=1)
-def get_jwks():
-    if not JWKS_URL:
-        return None
-    r = requests.get(JWKS_URL, timeout=5)
-    r.raise_for_status()
-    return r.json()
-
-
 # Global PyJWKClient instance to cache keys and avoid rate limits/timeouts
-jwks_client = jwt.PyJWKClient(JWKS_URL, cache_keys=True) if JWKS_URL else None
+jwks_client = jwt.PyJWKClient(JWKS_URL, cache_keys=True, timeout=5) if JWKS_URL else None
 
 def require_auth(f):
     @wraps(f)
@@ -81,22 +79,30 @@ def require_auth(f):
             g.user_id = f"guest:{guest_id.lower()}"
             return f(*args, **kwargs)
 
-        token = auth_header.split(" ")[1]
+        token = auth_header.removeprefix("Bearer ").strip()
+        if not token:
+            return jsonify({"error": "Unauthorized"}), 401
         try:
-            if not jwks_client:
+            if not jwks_client or not CLERK_ISSUER:
                 return jsonify({"error": "Unauthorized"}), 401
             signing_key = jwks_client.get_signing_key_from_jwt(token)
-            data = jwt.decode(
-                token,
-                signing_key.key,
-                algorithms=["RS256"],
-                options={"verify_aud": False}
-            )
+            decode_options = {
+                "algorithms": ["RS256"],
+                "issuer": CLERK_ISSUER,
+                "options": {
+                    "require": ["exp", "iss", "sub"],
+                    "verify_aud": CLERK_AUDIENCE is not None,
+                },
+            }
+            if CLERK_AUDIENCE:
+                decode_options["audience"] = CLERK_AUDIENCE
+            data = jwt.decode(token, signing_key.key, **decode_options)
             sub = data.get("sub")
             if not isinstance(sub, str) or not sub.strip():
                 return jsonify({"error": "Unauthorized"}), 401
             g.user_id = sub.strip()
-        except Exception:
+        except Exception as exc:
+            logger.info("JWT validation failed: %s", type(exc).__name__)
             return jsonify({"error": "Unauthorized"}), 401
 
         return f(*args, **kwargs)

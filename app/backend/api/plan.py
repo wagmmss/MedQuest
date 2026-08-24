@@ -6,7 +6,7 @@ from flask import Blueprint, g, jsonify, request
 # planner.py (raiz do backend) — geração do plano anual por pesos históricos USP
 from scripts.planner import generate_annual_plan
 
-from .db import get_db, db_transaction
+from .db import db_transaction, get_db
 from .questions import invalidate_user_caches
 from .schemas import (
     GeneratePlanIn,
@@ -14,6 +14,7 @@ from .schemas import (
     PlannerRevisionIn,
     PlannerStudyIn,
     ValidationError,
+    validation_errors,
 )
 
 bp = Blueprint("plan", __name__)
@@ -35,7 +36,7 @@ def planner_config():
         try:
             cfg = PlannerConfigIn.model_validate(request.get_json(force=True) or {})
         except ValidationError as e:
-            return jsonify({"error": "invalid input", "details": e.errors()}), 400
+            return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
         with db_transaction(db, immediate=True):
             try:
                 db.execute("""
@@ -93,7 +94,7 @@ def planner_study(week):
     try:
         data = PlannerStudyIn.model_validate(request.get_json(force=True) or {})
     except ValidationError as e:
-        return jsonify({"error": "invalid input", "details": e.errors()}), 400
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
     studied = 1 if data.studied else 0
     if studied:
         studied_at = datetime.now(timezone.utc).isoformat()
@@ -121,7 +122,7 @@ def planner_revision(week):
     try:
         data = PlannerRevisionIn.model_validate(request.get_json(force=True) or {})
     except ValidationError as e:
-        return jsonify({"error": "invalid input", "details": e.errors()}), 400
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
         
     allowed_columns = {'rev24h', 'rev7d', 'rev30d'}
     if data.type not in allowed_columns:
@@ -142,7 +143,7 @@ def generate_plan():
     try:
         data = GeneratePlanIn.model_validate(request.get_json(force=True) or {})
     except ValidationError as e:
-        return jsonify({"error": "invalid input", "details": e.errors()}), 400
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
     start_date = data.start_date or datetime.now(timezone.utc).isoformat()
     
     db = get_db()

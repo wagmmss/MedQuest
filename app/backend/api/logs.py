@@ -1,9 +1,11 @@
 """Authenticated, bounded telemetry ingestion and performance diagnostics."""
 
+import hmac
 import logging
+import os
 from urllib.parse import urlsplit
 
-from flask import Blueprint, g, jsonify, request
+from flask import Blueprint, current_app, g, jsonify, request
 
 from .observability import emit, performance_snapshot
 
@@ -66,4 +68,11 @@ def web_vital():
 
 @bp.route("/metrics/performance")
 def metrics_performance():
+    if not current_app.config.get("TESTING"):
+        expected = os.environ.get("METRICS_API_TOKEN", "")
+        provided = request.headers.get("X-Metrics-Token", "")
+        if not expected:
+            return jsonify({"error": "Not Found"}), 404
+        if not provided or not hmac.compare_digest(expected, provided):
+            return jsonify({"error": "Unauthorized"}), 401
     return jsonify(performance_snapshot())

@@ -126,7 +126,7 @@ export const syncManager = {
   },
 
   async scheduleNextSync(): Promise<void> {
-    if (typeof window === "undefined" || !localDb) return;
+    if (typeof window === "undefined" || !localDb || !isInitialized) return;
     
     if (syncTimer) {
       clearTimeout(syncTimer);
@@ -139,6 +139,10 @@ export const syncManager = {
         .where({ owner_id: uid })
         .filter((item) => item.status === "pending")
         .toArray();
+
+      // The provider may have unmounted while IndexedDB was resolving.
+      // Do not leave a background timer behind in that case.
+      if (!isInitialized) return;
 
       if (items.length === 0) return;
 
@@ -174,7 +178,7 @@ export const syncManager = {
 
     syncPromise = this._doSync(force).finally(() => {
       syncPromise = null;
-      this.scheduleNextSync();
+      if (isInitialized) void this.scheduleNextSync();
     });
 
     return syncPromise;

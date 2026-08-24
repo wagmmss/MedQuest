@@ -1,5 +1,6 @@
 """Application factory do MedQuest (Flask + blueprints)."""
 import logging
+import os
 import platform
 
 from dotenv import load_dotenv
@@ -25,9 +26,15 @@ def create_app(testing=False):
     if testing:
         app.config["TESTING"] = True
     configure_logging(app)
-    import os
-    frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
-    CORS(app, origins=[frontend_url, "http://localhost:3000", "http://127.0.0.1:3000"])
+    configured_origins = os.environ.get("FRONTEND_URL")
+    origins = (
+        [origin.strip() for origin in configured_origins.split(",") if origin.strip()]
+        if configured_origins
+        else ["http://localhost:3000", "http://127.0.0.1:3000"]
+    )
+    if not origins or "*" in origins:
+        raise ValueError("FRONTEND_URL must contain explicit origins; wildcard CORS is forbidden")
+    CORS(app, origins=origins, supports_credentials=False)
 
     app.before_request(start_request)
     app.after_request(finish_request)
@@ -46,7 +53,8 @@ def create_app(testing=False):
     @app.before_request
     @require_auth
     def authenticate_request():
-        if request.path == "/" or request.method == "OPTIONS" or "/images/" in request.path:
+        public_image = request.path.startswith(("/api/images/", "/api/v1/images/"))
+        if request.path == "/" or request.method == "OPTIONS" or public_image:
             return
 
     from werkzeug.exceptions import HTTPException

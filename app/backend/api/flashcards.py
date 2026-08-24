@@ -1,3 +1,4 @@
+import logging
 import re
 from datetime import datetime, timezone
 
@@ -7,17 +8,28 @@ from . import srs
 from .ai import generate_cloze_flashcard
 from .db import db_transaction, get_db
 from .questions import invalidate_user_caches
+from .schemas import (
+    FlashcardBatchIn,
+    FlashcardGenerateIn,
+    FlashcardPreviewIn,
+    FlashcardReportIn,
+    FlashcardReviewIn,
+    FlashcardSaveIn,
+    ValidationError,
+    validation_errors,
+)
 
 bp = Blueprint("flashcards", __name__)
+logger = logging.getLogger(__name__)
 
 @bp.route("/flashcards/generate", methods=["POST"])
 def generate():
-    data = request.get_json() or {}
-    question_id = data.get("question_id")
-    wrong_letter = data.get("wrong_letter", "").upper()
-
-    if not question_id or not wrong_letter:
-        return jsonify({"error": "question_id e wrong_letter sao obrigatorios."}), 400
+    try:
+        data = FlashcardGenerateIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+    question_id = data.question_id
+    wrong_letter = data.wrong_letter.upper()
 
     db = get_db()
     
@@ -73,12 +85,12 @@ def generate():
 
 @bp.route("/flashcards/preview", methods=["POST"])
 def preview():
-    data = request.get_json() or {}
-    question_id = data.get("question_id")
-    wrong_letter = data.get("wrong_letter", "").upper()
-
-    if not question_id:
-        return jsonify({"error": "question_id e obrigatorio."}), 400
+    try:
+        data = FlashcardPreviewIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+    question_id = data.question_id
+    wrong_letter = data.wrong_letter.upper()
 
     db = get_db()
     
@@ -119,14 +131,14 @@ def preview():
 
 @bp.route("/flashcards/save", methods=["POST"])
 def save():
-    data = request.get_json() or {}
-    question_id = data.get("question_id")
-    front = data.get("front", "")
-    back = data.get("back", "")
-    context = data.get("context", "")
-
-    if not question_id or not front:
-        return jsonify({"error": "question_id e front sao obrigatorios."}), 400
+    try:
+        data = FlashcardSaveIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+    question_id = data.question_id
+    front = data.front
+    back = data.back
+    context = data.context
 
     db = get_db()
     now = datetime.now(timezone.utc).isoformat()
@@ -159,54 +171,75 @@ def save():
 
 @bp.route("/flashcards/generate-batch", methods=["POST"])
 def generate_batch():
-    data = request.get_json() or {}
-    items = data.get("items", [])
-    if not isinstance(items, list) or len(items) == 0:
-        return jsonify({"error": "Lista de itens obrigatoria."}), 400
+    try:
+        payload = FlashcardBatchIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
 
-    items = items[:50]
     db = get_db()
     now = datetime.now(timezone.utc).isoformat()
     created_or_updated = []
+    question_ids = [item.question_id for item in payload.items]
+    placeholders = ",".join("?" * len(question_ids))
+    question_rows = db.execute(
+        f"""SELECT q.id, q.stem, q.correct_letter, q.area, q.subtema, q.topic,
+                   e.explanation_text
+            FROM questions q
+            LEFT JOIN explanations e ON e.question_id = q.id
+            WHERE q.id IN ({placeholders})""",
+        question_ids,
+    ).fetchall()
+    question_map = {row["id"]: row for row in question_rows}
+    alternative_rows = db.execute(
+        f"SELECT question_id, letter, text FROM alternatives WHERE question_id IN ({placeholders})",
+        question_ids,
+    ).fetchall()
+    alternative_map = {
+        (row["question_id"], row["letter"].upper()): row["text"]
+        for row in alternative_rows
+    }
+
+    # Do not hold a write transaction while waiting for an AI provider.
+    prepared = []
+    for item in payload.items:
+        qid = item.question_id
+        wrong_letter = item.wrong_letter.upper()
+        q = question_map.get(qid)
+        if not q:
+            continue
+        correct_text = alternative_map.get((qid, q["correct_letter"].upper()))
+        wrong_text = alternative_map.get((qid, wrong_letter))
+        if not correct_text or not wrong_text:
+            continue
+        prepared.append((qid, generate_cloze_flashcard(
+            stem=q["stem"],
+            correct_text=correct_text,
+            wrong_text=wrong_text,
+            explanation=q["explanation_text"] or "",
+            area=q["area"] or "",
+            subtema=q["subtema"] or "",
+            topic=q["topic"] or "",
+            correct_letter=q["correct_letter"],
+            wrong_letter=wrong_letter,
+        )))
 
     with db_transaction(db, immediate=True):
-        for item in items:
-            qid = item.get("question_id")
-            wrong_letter = str(item.get("wrong_letter", "")).upper()
-            if not qid or not wrong_letter:
-                continue
+        existing_rows = db.execute(
+            f"SELECT id, question_id FROM flashcards WHERE question_id IN ({placeholders}) AND user_id = ?",
+            [*question_ids, g.user_id],
+        ).fetchall()
+        existing_map = {row["question_id"]: row["id"] for row in existing_rows}
 
-            q = db.execute("SELECT stem, correct_letter, area, subtema, topic FROM questions WHERE id = ?", (qid,)).fetchone()
-            if not q:
-                continue
-
-            correct_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (qid, q["correct_letter"])).fetchone()
-            wrong_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (qid, wrong_letter)).fetchone()
-            exp = db.execute("SELECT explanation_text FROM explanations WHERE question_id = ?", (qid,)).fetchone()
-            if not correct_alt or not wrong_alt:
-                continue
-
-            card_data = generate_cloze_flashcard(
-                stem=q["stem"],
-                correct_text=correct_alt["text"],
-                wrong_text=wrong_alt["text"],
-                explanation=exp["explanation_text"] if exp else "",
-                area=q["area"] or "",
-                subtema=q["subtema"] or "",
-                topic=q["topic"] or "",
-                correct_letter=q["correct_letter"],
-                wrong_letter=wrong_letter
-            )
-
-            existing = db.execute("SELECT id FROM flashcards WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
-            if existing:
+        for qid, card_data in prepared:
+            existing_id = existing_map.get(qid)
+            if existing_id is not None:
                 db.execute("""
                     UPDATE flashcards
                     SET front = ?, back = ?, source_context = ?, next_review_date = ?
                     WHERE id = ? AND user_id = ?
-                """, (card_data.get("front", ""), card_data.get("back", ""), card_data.get("context", ""), now, existing["id"], g.user_id))
+                """, (card_data.get("front", ""), card_data.get("back", ""), card_data.get("context", ""), now, existing_id, g.user_id))
                 created_or_updated.append({
-                    "id": existing["id"],
+                    "id": existing_id,
                     "question_id": qid,
                     "front": card_data.get("front", ""),
                     "back": card_data.get("back", "")
@@ -272,8 +305,7 @@ def get_due_flashcards():
 
         if (
             "A alternativa correta era" in front
-            or front.startswith("Neste caso clínico, em vez de")
-            or front.startswith("Para este quadro clínico,")
+            or front.startswith(("Neste caso clínico, em vez de", "Para este quadro clínico,"))
         ):
             cloze_match = re.search(r'{{c1::(.*?)}}', front)
             term = cloze_match.group(1) if cloze_match else ""
@@ -302,7 +334,7 @@ def get_due_flashcards():
                 if scenario and len(scenario) > 20
                 else f"{tag}\n\n👉 Diagnóstico / Conduta indicada: {{{{c1::{term}}}}}"
             )
-            if back.startswith("Você marcou") or back.startswith("Alternativa correta:"):
+            if back.startswith(("Você marcou", "Alternativa correta:")):
                 item["back"] = (
                     f"💡 Gabarito Oficial:\n{term}\n\n⚠️ Atenção ao distrator:\nA opção '{wrong_term}' é incorreta para este quadro clínico."
                     if wrong_term
@@ -318,22 +350,20 @@ def get_due_flashcards():
 
 @bp.route("/flashcards/<int:fid>/review", methods=["POST"])
 def review_flashcard(fid):
-    data = request.get_json() or {}
-    confidence = data.get("confidence") # "errei", "duvida", "certeza"
-    
-    if confidence not in ["errei", "duvida", "certeza"]:
-        return jsonify({"error": "confidence deve ser 'errei', 'duvida' ou 'certeza'."}), 400
+    try:
+        data = FlashcardReviewIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+    confidence = data.confidence
         
     is_correct = 0 if confidence == "errei" else 1
 
     db = get_db()
-    card = db.execute("SELECT fsrs_card FROM flashcards WHERE id = ? AND user_id = ?", (fid, g.user_id)).fetchone()
-    if not card:
-        return jsonify({"error": "Flashcard nao encontrado."}), 404
-
-    card_json, next_review = srs.review(card["fsrs_card"], is_correct, confidence if is_correct else "chutei")
-    
     with db_transaction(db, immediate=True):
+        card = db.execute("SELECT fsrs_card FROM flashcards WHERE id = ? AND user_id = ?", (fid, g.user_id)).fetchone()
+        if not card:
+            return jsonify({"error": "Flashcard nao encontrado."}), 404
+        card_json, next_review = srs.review(card["fsrs_card"], is_correct, confidence if is_correct else "chutei")
         db.execute("""
             UPDATE flashcards 
             SET next_review_date = ?, fsrs_card = ? 
@@ -350,11 +380,11 @@ def review_flashcard(fid):
 
 @bp.route("/flashcards/<int:fid>/report", methods=["POST"])
 def report_flashcard(fid):
-    data = request.get_json() or {}
-    reason = data.get("reason")
-    
-    if not reason:
-        return jsonify({"error": "reason e obrigatorio."}), 400
+    try:
+        data = FlashcardReportIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+    reason = data.reason
 
     db = get_db()
     # Verifica se o card existe e pertence ao user
@@ -369,7 +399,8 @@ def report_flashcard(fid):
                 SET report_status = ? 
                 WHERE id = ? AND user_id = ?
             """, (reason, fid, g.user_id))
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        logger.exception("Failed to report flashcard id=%s user_id=%s", fid, g.user_id)
+        return jsonify({"error": "Internal Server Error"}), 500
 
     return jsonify({"success": True})

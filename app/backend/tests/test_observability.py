@@ -12,6 +12,21 @@ def test_request_correlation_and_security_headers(client):
     assert response.headers["X-Content-Type-Options"] == "nosniff"
     assert response.headers["X-Frame-Options"] == "DENY"
 
+    secure_response = client.get("/api/meta", base_url="https://medquest.test")
+    assert secure_response.headers["Strict-Transport-Security"].startswith("max-age=31536000")
+
+
+def test_wildcard_cors_configuration_is_rejected(client, monkeypatch):
+    from api import create_app
+
+    monkeypatch.setenv("FRONTEND_URL", "*")
+    try:
+        create_app(testing=True)
+    except ValueError as exc:
+        assert "wildcard CORS" in str(exc)
+    else:
+        raise AssertionError("wildcard CORS must fail closed")
+
 
 def test_invalid_request_id_is_replaced(client):
     response = client.get("/api/meta", headers={"X-Request-ID": "spoofed"})

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { CloudOff, Download, RefreshCw, Database, AlertCircle, Trash2, CheckCircle2, Play, BookOpen, Layers } from "lucide-react";
 import { localDb, getLocalOwnerId, SyncItem } from "@/lib/db";
@@ -18,6 +18,11 @@ export function OfflinePanel() {
   const [questionCount, setQuestionCount] = useState<number>(50);
   const [lastDownloadDate, setLastDownloadDate] = useState<string | null>(null);
   const [isSyncing, setIsSyncing] = useState(false);
+  const downloadResetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (downloadResetTimerRef.current) clearTimeout(downloadResetTimerRef.current);
+  }, []);
 
   const updateStats = useCallback(async () => {
     if (!localDb) return;
@@ -143,7 +148,7 @@ export function OfflinePanel() {
       console.error("Erro ao baixar dados para o plantão:", e);
       toast.error("Erro ao baixar pacote. Verifique sua conexão e tente novamente.");
     } finally {
-      setTimeout(() => {
+      downloadResetTimerRef.current = setTimeout(() => {
         setIsDownloading(false);
         setDownloadProgress(0);
         setDownloadStatus("");

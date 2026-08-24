@@ -3,8 +3,7 @@ import logging
 import os
 import re
 import time
-import urllib.error
-import urllib.request
+
 from api.gemini_pool import gemini_pool
 
 logger = logging.getLogger(__name__)
@@ -261,7 +260,7 @@ Responda EXCLUSIVAMENTE em JSON válido:
     if groq_key and not groq_key.lower().startswith(("dummy", "test", "gsk_test")) and len(groq_key) > 15:
         try:
             from groq import Groq
-            client = Groq(api_key=groq_key)
+            client = Groq(api_key=groq_key, timeout=10.0, max_retries=1)
             chat_completion = client.chat.completions.create(
                 messages=[
                     {"role": "system", "content": "Você responde apenas em JSON válido com as chaves front, back e context."},
@@ -352,7 +351,7 @@ Responda APENAS com o JSON. Exemplo: {{ "terms": ["...", "..."] }}
     if groq_key:
         try:
             from groq import Groq
-            client = Groq(api_key=groq_key)
+            client = Groq(api_key=groq_key, timeout=8.0, max_retries=1)
             completion = client.chat.completions.create(
                 messages=[
                     {"role": "system", "content": "Você responde apenas em JSON válido."},
@@ -372,5 +371,3 @@ Responda APENAS com o JSON. Exemplo: {{ "terms": ["...", "..."] }}
             logger.error(f"Erro na expansão via Groq: {e}")
 
     return _cache_and_return([query])
-
-

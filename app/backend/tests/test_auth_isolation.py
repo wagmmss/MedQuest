@@ -1,5 +1,6 @@
 import sqlite3
 import uuid
+from types import SimpleNamespace
 
 import pytest
 
@@ -154,3 +155,58 @@ def test_auth_guest_data_isolation(auth_client):
     stats_b = auth_client.get("/api/stats/overview", headers=headers_b)
     assert stats_b.status_code == 200
     assert stats_b.get_json()["total_attempts"] == 0
+
+
+def test_auth_does_not_bypass_unknown_routes_containing_images(auth_client):
+    response = auth_client.get("/api/private/images/not-a-public-route")
+    assert response.status_code == 401
+
+
+def test_jwt_requires_issuer_expiration_and_subject(auth_client, monkeypatch):
+    from api import auth
+
+    captured = {}
+
+    class FakeJwksClient:
+        def get_signing_key_from_jwt(self, token):
+            assert token == "signed-token"
+            return SimpleNamespace(key="public-key")
+
+    def fake_decode(token, key, **kwargs):
+        captured.update(kwargs)
+        return {"sub": "user-123"}
+
+    monkeypatch.setattr(auth, "jwks_client", FakeJwksClient())
+    monkeypatch.setattr(auth, "CLERK_ISSUER", "https://issuer.example")
+    monkeypatch.setattr(auth, "CLERK_AUDIENCE", None)
+    monkeypatch.setattr(auth.jwt, "decode", fake_decode)
+
+    response = auth_client.get(
+        "/api/meta",
+        headers={"Authorization": "Bearer signed-token"},
+    )
+    assert response.status_code == 200
+    assert captured["issuer"] == "https://issuer.example"
+    assert captured["algorithms"] == ["RS256"]
+    assert captured["options"]["require"] == ["exp", "iss", "sub"]
+    assert captured["options"]["verify_aud"] is False
+
+
+def test_performance_metrics_require_separate_operational_token(auth_client, monkeypatch):
+    auth_headers = {
+        "X-Internal-Proxy-Token": PROXY_SECRET,
+        "X-Guest-ID": str(uuid.uuid4()),
+    }
+    disabled = auth_client.get("/api/metrics/performance", headers=auth_headers)
+    assert disabled.status_code == 404
+
+    monkeypatch.setenv("METRICS_API_TOKEN", "metrics-secret")
+    unauthorized = auth_client.get("/api/metrics/performance", headers=auth_headers)
+    assert unauthorized.status_code == 401
+
+    allowed = auth_client.get(
+        "/api/metrics/performance",
+        headers={**auth_headers, "X-Metrics-Token": "metrics-secret"},
+    )
+    assert allowed.status_code == 200
+    assert "routes" in allowed.get_json()

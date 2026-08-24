@@ -11,7 +11,9 @@ from scripts.content_repair import apply_repair_plan, build_repair_plan
 from scripts.taxonomy_sync import (
     SUBTEMA_MAP_PATH,
     build_subtema_map,
+    catalog_subtemas,
     compile_artifacts,
+    load_taxonomy,
     render_planner_ts,
 )
 
@@ -73,7 +75,8 @@ def test_repository_taxonomy_artifacts_are_in_sync() -> None:
     artifacts = compile_artifacts()
     assert all(path.read_text(encoding="utf-8") == content for path, content in artifacts.items())
     compiled_map = json.loads(artifacts[SUBTEMA_MAP_PATH])
-    assert len(compiled_map) == len(set(compiled_map.values())) == 275
+    expected_count = len(catalog_subtemas(load_taxonomy()))
+    assert len(compiled_map) == len(set(compiled_map.values())) == expected_count
 
 
 def test_dry_run_does_not_mutate_database(tmp_path: Path) -> None:

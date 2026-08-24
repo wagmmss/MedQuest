@@ -48,7 +48,10 @@ def test_overview_conta_tentativa(client):
 
 def test_coverage(client):
     cov = client.get("/api/coverage").get_json()
-    assert len(cov["areas"]) == 2
+    # Coverage is catalog-driven and must expose the five canonical study areas,
+    # including areas for which the current database has no questions yet.
+    assert len(cov["areas"]) == 5
+    assert {area["area"] for area in cov["areas"]} >= {"Clínica Médica", "Cirurgia", "Pediatria"}
 
 
 def test_planner_config_roundtrip(client):
@@ -86,9 +89,32 @@ def test_weak_topics_aceita_min_attempts_invalido(client):
     assert r.status_code == 200
 
 
-def test_simulado_custom_limita_quantidade_invalida(client):
+def test_simulado_custom_rejeita_quantidade_invalida(client):
     r = client.post("/api/simulado/custom", json={"questions_per_area": "abc"})
-    assert r.status_code == 200
+    assert r.status_code == 400
+
+
+def test_request_bodies_reject_unknown_fields(client):
+    attempt = client.post(
+        "/api/questions/1/attempt",
+        json={"selected_letter": "B", "user_id": "another-user"},
+    )
+    assert attempt.status_code == 400
+
+    simulado = client.post(
+        "/api/simulado/custom",
+        json={"questions_per_area": 10, "unexpected": True},
+    )
+    assert simulado.status_code == 400
+
+
+def test_question_batch_validates_and_deduplicates_ids(client):
+    invalid = client.post("/api/questions/batch", json={"ids": [1, -2]})
+    assert invalid.status_code == 400
+
+    response = client.post("/api/questions/batch", json={"ids": [1, 1]})
+    assert response.status_code == 200
+    assert [question["id"] for question in response.get_json()["questions"]] == [1]
 
 
 def test_filters_status_new_e_unanswered(client):
@@ -108,4 +134,3 @@ def test_filters_status_new_e_unanswered(client):
     assert r_unanswered_after.get_json()[0]["id"] == 2
     assert len(r_new_after.get_json()) == 1
     assert r_new_after.get_json()[0]["id"] == 2
-

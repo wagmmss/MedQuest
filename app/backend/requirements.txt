@@ -6,9 +6,10 @@ pymupdf
 groq
 python-dotenv
 libsql==0.1.11
-PyJWT
+PyJWT>=2.8
 cryptography
 requests
 gunicorn
 fsrs
 pytest
+pytest-cov
