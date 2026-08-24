@@ -69,10 +69,6 @@ const nextConfig: NextConfig = {
     // Typecheck is run during CI and IDE; skipping during container build saves memory and 2+ minutes
     ignoreBuildErrors: true,
   },
-  eslint: {
-    // Lint is run during CI; skipping during container build saves build time
-    ignoreDuringBuilds: true,
-  },
   experimental: {
     optimizePackageImports: ["lucide-react", "date-fns", "framer-motion", "recharts"],
   },

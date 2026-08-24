@@ -1,0 +1,5499 @@
+[
+  {
+    "area": "Cirurgia",
+    "theme": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+    "medway_name": "Abdome Agudo Inflamatório",
+    "curr_hours": 2.81,
+    "final_hours": 2.49,
+    "reg_hours": 2.49,
+    "flash_hours": 0.32,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Apendicite",
+        1.22
+      ],
+      [
+        "Colecistite",
+        0.72
+      ],
+      [
+        "Diverticulite",
+        0.55
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Abdome Agudo Inflamatório",
+        0.14
+      ],
+      [
+        "Como cai na PED: Abdome Agudo Inflamatório",
+        0.18
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Abdome Agudo Vascular e Isquemia Mesentérica",
+    "medway_name": "Abdome Agudo Isquêmico",
+    "curr_hours": 1.32,
+    "final_hours": 1.1,
+    "reg_hours": 1.1,
+    "flash_hours": 0.22,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Abdome Agudo Isquêmico",
+        1.1
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Abdome Agudo Isquêmico",
+        0.22
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+    "medway_name": "Abdome Agudo Obstrutivo",
+    "curr_hours": 1.09,
+    "final_hours": 0.99,
+    "reg_hours": 0.99,
+    "flash_hours": 0.1,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Abdome Agudo Obstrutivo",
+        0.99
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Abdome Agudo Obstrutivo",
+        0.1
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+    "medway_name": "Abdome Agudo Perfurativo",
+    "curr_hours": 1.4,
+    "final_hours": 1.23,
+    "reg_hours": 1.23,
+    "flash_hours": 0.16,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Sintomas e Diagnóstico",
+        0.81
+      ],
+      [
+        "Tratamento",
+        0.42
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Abdome Agudo Perfurativo",
+        0.16
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+    "medway_name": "Abordagem Inicial (xABCDE)",
+    "curr_hours": 2.89,
+    "final_hours": 1.82,
+    "reg_hours": 1.82,
+    "flash_hours": 1.07,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Conceitos Iniciais e (x) Lesões Exsanguinantes",
+        0.48
+      ],
+      [
+        "Via Aérea e Respiração",
+        0.59
+      ],
+      [
+        "Circulação, Neurológico, Exposição e Cuidados Secundários",
+        0.75
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Conceitos Iniciais e (x) Lesões Exsanguinantes",
+        0.29
+      ],
+      [
+        "Aula flash - Via Aérea e Respiração",
+        0.38
+      ],
+      [
+        "Aula flash - Circulação, Neurológico, Exposição e Cuidados Secundários",
+        0.4
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+    "medway_name": "Afecções Benignas das Vias Biliares",
+    "curr_hours": 0.0,
+    "final_hours": 1.91,
+    "reg_hours": 1.91,
+    "flash_hours": 1.12,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Anatomia das vias biliares",
+        0.34
+      ],
+      [
+        "Colelitíase",
+        0.62
+      ],
+      [
+        "Coledocolitíase",
+        0.59
+      ],
+      [
+        "Colangite e Mirizzi",
+        0.36
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Coledocolitíase",
+        0.3
+      ],
+      [
+        "Aula flash - Colelitíase",
+        0.37
+      ],
+      [
+        "Aula flash - Colangite",
+        0.21
+      ],
+      [
+        "Aula flash - Lesão Iatrogênica das Vias Biliares",
+        0.24
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+    "medway_name": "Afecções Pancreáticas",
+    "curr_hours": 2.34,
+    "final_hours": 1.59,
+    "reg_hours": 1.59,
+    "flash_hours": 0.75,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Anatomia e fisiologia",
+        0.28
+      ],
+      [
+        "Pancreatite aguda",
+        0.79
+      ],
+      [
+        "Complicações da pancreatite aguda",
+        0.53
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Afecções Pancreáticas parte 1",
+        0.15
+      ],
+      [
+        "Aula flash - Afecções Pancreáticas parte 2",
+        0.31
+      ],
+      [
+        "Aula flash - Afecções Pancreáticas parte 3",
+        0.29
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Hiperplasia Prostática Benigna (HPB) e Litíase Urinária",
+    "medway_name": "Afecções Urológicas Benignas",
+    "curr_hours": 2.0,
+    "final_hours": 1.31,
+    "reg_hours": 1.31,
+    "flash_hours": 0.7,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Afecções Urológicas Benignas",
+        1.31
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - HPB",
+        0.28
+      ],
+      [
+        "Aula flash - Escroto Agudo",
+        0.23
+      ],
+      [
+        "Aula flash - Priapismo",
+        0.19
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Fundamentos da Anestesiologia, Farmacologia e Bloqueios",
+    "medway_name": "Anestesia",
+    "curr_hours": 2.04,
+    "final_hours": 0.86,
+    "reg_hours": 0,
+    "flash_hours": 0.86,
+    "source": "FLASH_ONLY",
+    "reg_videos": [],
+    "flash_videos": [
+      [
+        "Aula flash - Parte I: Noções Gerais de Anestesia",
+        0.31
+      ],
+      [
+        "Aula flash - Parte II: Drogas Usadas na Anestesia Geral",
+        0.29
+      ],
+      [
+        "Aula flash - Parte III: Anestesia Local",
+        0.26
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Aneurismas de Aorta Abdominal e Torácica",
+    "medway_name": "Aneurismas",
+    "curr_hours": 0.65,
+    "final_hours": 0.53,
+    "reg_hours": 0.53,
+    "flash_hours": 0.12,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Aneurismas",
+        0.53
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aneurismas",
+        0.12
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Cirurgia Bariátrica e Metabólica",
+    "medway_name": "Cirurgia da Obesidade",
+    "curr_hours": 1.32,
+    "final_hours": 1.14,
+    "reg_hours": 1.14,
+    "flash_hours": 0.18,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Indicações e Técnicas cirúrgicas",
+        0.69
+      ],
+      [
+        "Complicações",
+        0.45
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Cirurgia da Obesidade",
+        0.18
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Cirurgia Pediátrica e Malformações Digestivas Neonatais",
+    "medway_name": "Cirurgia Pediátrica",
+    "curr_hours": 3.11,
+    "final_hours": 2.28,
+    "reg_hours": 2.28,
+    "flash_hours": 0.84,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Malformações de esôfago, estômago e duodeno",
+        0.56
+      ],
+      [
+        "Intussuscepção e Hirschsprung",
+        0.5
+      ],
+      [
+        "Outras Malformações",
+        0.38
+      ],
+      [
+        "Como cai na PED: Cirurgia Pediátrica",
+        0.84
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Afecções cirúrgicas do trato digestivo alto",
+        0.18
+      ],
+      [
+        "Aula flash - Outras afecções cirúrgicas pediátricas - Onfalocele",
+        0.3
+      ],
+      [
+        "Aula flash - Afecções cirúrgicas do trato digestivo baixo",
+        0.21
+      ],
+      [
+        "Aula flash - Como cai na PED: Cirurgia Pediátrica",
+        0.14
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Cirurgia Torácica Geral e Doenças Pleurais",
+    "medway_name": "Cirurgia Torácica",
+    "curr_hours": 1.09,
+    "final_hours": 0.9,
+    "reg_hours": 0.9,
+    "flash_hours": 0.2,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Derrames Pleuras e Quilotórax",
+        0.55
+      ],
+      [
+        "Pneumotórax espontâneo, hemoptise e outras complicações de vias aéreas",
+        0.34
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Cirurgia Torácica",
+        0.2
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+    "medway_name": "Cólon e Reto na cirurgia",
+    "curr_hours": 1.51,
+    "final_hours": 1.33,
+    "reg_hours": 1.33,
+    "flash_hours": 0.18,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Doença hemorroidária e fissura anal",
+        0.7
+      ],
+      [
+        "Abscesso e fístula perianal",
+        0.33
+      ],
+      [
+        "Outras doenças orificiais",
+        0.3
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Cólon e Reto na Cirurgia",
+        0.18
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+    "medway_name": "Cuidados e Complicações Pós-Operatórias",
+    "curr_hours": 3.91,
+    "final_hours": 3.22,
+    "reg_hours": 3.22,
+    "flash_hours": 1.14,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Complicações",
+        0.45
+      ],
+      [
+        "Cuidados e Complicações Pós Operatórias - REMIT e Complicações Gerais",
+        0.9
+      ],
+      [
+        "Cuidados e Complicações Pós-Operatórias - Complicações Específicas e Drenos",
+        1.18
+      ],
+      [
+        "Cuidados e Complicações Pós-Operatórias - Nutrição Perioperatória e Protocolo ACERTO",
+        0.69
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - REMIT e complicações gerais",
+        0.37
+      ],
+      [
+        "Aula Flash - Complicações Específicas",
+        0.31
+      ],
+      [
+        "Aula Flash -  Drenos",
+        0.09
+      ],
+      [
+        "Aula Flash -  Nutrição Perioperatória",
+        0.37
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Abordagem Cirúrgica das Doenças Inflamatórias Intestinais (Crohn e RCU)",
+    "medway_name": "Doença Inflamatória Intestinal",
+    "curr_hours": 2.23,
+    "final_hours": 1.21,
+    "reg_hours": 1.21,
+    "flash_hours": 1.02,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Doença Inflamatória Intestinal: Fisiopatologia, Clínica e Diagnóstico",
+        0.69
+      ],
+      [
+        "Doença Inflamatória Intestinal: Tratamento",
+        0.52
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash -  Manifestações clínicas",
+        0.32
+      ],
+      [
+        "Aula Flash - Diagnóstico",
+        0.21
+      ],
+      [
+        "Aula Flash - Tratamento clínico",
+        0.29
+      ],
+      [
+        "Aula Flash - Tratamento cirúrgico",
+        0.2
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+    "medway_name": "Cuidados Pré-operatórios",
+    "curr_hours": 3.76,
+    "final_hours": 2.18,
+    "reg_hours": 2.18,
+    "flash_hours": 1.58,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Exames e jejum pré-operatórios",
+        0.4
+      ],
+      [
+        "Riscos pré operatórios",
+        0.61
+      ],
+      [
+        "Medicamentos e profilaxias pré-operatórios",
+        0.77
+      ],
+      [
+        "Nutrição e Protocolo de cirurgia segura",
+        0.4
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Exames e jejum",
+        0.3
+      ],
+      [
+        "Aula Flash - Risco anestésico e cardíaco",
+        0.29
+      ],
+      [
+        "Aula Flash - Medicamentos",
+        0.3
+      ],
+      [
+        "Aula Flash  - Profilaxias",
+        0.27
+      ],
+      [
+        "Aula Flash - Nutrição",
+        0.21
+      ],
+      [
+        "Aula Flash - Projeto ERAS e cirurgia segura",
+        0.21
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Doença Arterial Obstrutiva Periférica e Oclusões Arteriais Agudas",
+    "medway_name": "Doença arterial periférica",
+    "curr_hours": 1.57,
+    "final_hours": 0.92,
+    "reg_hours": 0.92,
+    "flash_hours": 0.65,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "DAOP crônica",
+        0.42
+      ],
+      [
+        "Obstrução Arterial Aguda e pé diabético",
+        0.49
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Doença Arterial Obstrutiva Periférica Crônica",
+        0.25
+      ],
+      [
+        "Aula flash - Obstrução Arterial Aguda",
+        0.24
+      ],
+      [
+        "Aula flash - Pé Diabético",
+        0.17
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Insuficiência Venosa Crônica e Trombose Venosa Profunda (TVP)",
+    "medway_name": "Doenças Venosas",
+    "curr_hours": 2.04,
+    "final_hours": 1.27,
+    "reg_hours": 1.27,
+    "flash_hours": 0.78,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Insuficiência venosa crônica",
+        0.67
+      ],
+      [
+        "Trombose venosa e linfedema",
+        0.6
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Varizes",
+        0.29
+      ],
+      [
+        "Aula flash - Síndromes (Doenças Venosas)",
+        0.08
+      ],
+      [
+        "Aula flash - TVP",
+        0.3
+      ],
+      [
+        "Aula flash - Linfedema",
+        0.11
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Cicatrização, Tratamento de Feridas, Enxertos e Retalhos",
+    "medway_name": "Feridas, Enxertos e Retalhos",
+    "curr_hours": 2.53,
+    "final_hours": 1.8,
+    "reg_hours": 1.8,
+    "flash_hours": 0.74,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Feridas, Enxertos e Retalhos - PARTE 01",
+        1.02
+      ],
+      [
+        "Feridas, Enxertos e Retalhos - PARTE 02",
+        0.78
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Cicatrização",
+        0.25
+      ],
+      [
+        "Aula Flash - Feridas e Curativos",
+        0.16
+      ],
+      [
+        "Aula Flash - Cirurgia Reconstrutiva",
+        0.32
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Técnica Operatória, Diérese, Hemostasia e Síntese (Fios Cirúrgicos)",
+    "medway_name": "Técnica Operatória",
+    "curr_hours": 1.96,
+    "final_hours": 1.09,
+    "reg_hours": 1.09,
+    "flash_hours": 0.87,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Mesa cirúrgica e Instrumentais",
+        0.43
+      ],
+      [
+        "Sutura e Videolaparoscopia",
+        0.66
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Mesa Cirúrgica e Instrumentais",
+        0.32
+      ],
+      [
+        "Aula flash - Fios, Nós e Suturas",
+        0.31
+      ],
+      [
+        "Aula flash - Laparoscopia e Cirurgia Robótica",
+        0.24
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+    "medway_name": "Hemorragia Digestiva",
+    "curr_hours": 2.64,
+    "final_hours": 2.42,
+    "reg_hours": 2.42,
+    "flash_hours": 0.22,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Hemorragia Digestiva Alta",
+        1.75
+      ],
+      [
+        "Hemorragia Digestiva Baixa",
+        0.66
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Hemorragia Digestiva",
+        0.22
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+    "medway_name": "Hérnias",
+    "curr_hours": 3.3,
+    "final_hours": 2.34,
+    "reg_hours": 2.34,
+    "flash_hours": 0.96,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Conceitos Iniciais e Anatomia das Hérnias",
+        0.65
+      ],
+      [
+        "Hérnias inguinocrurais",
+        1.04
+      ],
+      [
+        "Hérnias Especiais e Urgências Herniárias",
+        0.65
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Conceitos Iniciais e Anatomia Das Hérnias",
+        0.29
+      ],
+      [
+        "Aula flash - Hérnias Inguino Crurais",
+        0.37
+      ],
+      [
+        "Aula flash - Hérnias Especiais e Urgências Herniárias",
+        0.29
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Atendimento ao Paciente Queimado e Reposição Volêmica",
+    "medway_name": "Queimaduras",
+    "curr_hours": 1.07,
+    "final_hours": 1.5,
+    "reg_hours": 1.5,
+    "flash_hours": 0.29,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Queimaduras",
+        0.91
+      ],
+      [
+        "Como caí na PED: Queimaduras",
+        0.59
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Queimaduras",
+        0.16
+      ],
+      [
+        "Como caí na PED: Queimaduras",
+        0.13
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Particularidades das Queimaduras na Faixa Etária Pediátrica",
+    "medway_name": "Como cai na PED: Queimaduras",
+    "curr_hours": null,
+    "final_hours": 1.5,
+    "reg_hours": 1.5,
+    "flash_hours": 0.29,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Queimaduras",
+        0.91
+      ],
+      [
+        "Como caí na PED: Queimaduras",
+        0.59
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Queimaduras",
+        0.16
+      ],
+      [
+        "Como caí na PED: Queimaduras",
+        0.13
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Distúrbios Motores do Esôfago, Megaesôfago e Síndrome Disfágica",
+    "medway_name": "Síndrome Disfágica",
+    "curr_hours": 3.56,
+    "final_hours": 2.26,
+    "reg_hours": 2.26,
+    "flash_hours": 1.3,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Acalasia",
+        0.58
+      ],
+      [
+        "Doença do Refluxo Gastroesofágico, Esôfago de Barrett e Hérnia de Hiato",
+        0.62
+      ],
+      [
+        "Divertículo de Zenker, Esofagite Eosinofílica e Ingestão de corpo estranho",
+        0.33
+      ],
+      [
+        "Como cai na CM: Síndrome Disfágica",
+        0.72
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Acalasia",
+        0.31
+      ],
+      [
+        "Aula Flash -  Doença do Refluxo Gastroesofágico",
+        0.29
+      ],
+      [
+        "Aula Flash - Barrett e Hérnia de Hiato",
+        0.25
+      ],
+      [
+        "Aula Flash - Esofagite Eosinofílica e Zenker",
+        0.3
+      ],
+      [
+        "Como cai na CM: Síndrome Disfágica",
+        0.15
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Doença do Refluxo Gastroesofágico (DRGE) e Úlcera Péptica",
+    "medway_name": "Síndrome Dispéptica",
+    "curr_hours": 1.57,
+    "final_hours": 0.59,
+    "reg_hours": 0,
+    "flash_hours": 0.59,
+    "source": "FLASH_ONLY",
+    "reg_videos": [],
+    "flash_videos": [
+      [
+        "Aula Flash - Doença Ulcerosa Péptica e H. pylori",
+        0.17
+      ],
+      [
+        "Aula Flash - Classificações",
+        0.14
+      ],
+      [
+        "Aula Flash  - Complicações",
+        0.27
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+    "medway_name": "Trauma Abdominal",
+    "curr_hours": 1.28,
+    "final_hours": 1.11,
+    "reg_hours": 1.11,
+    "flash_hours": 0.17,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Exames, FAB e FAF",
+        0.59
+      ],
+      [
+        "Trauma contuso, trauma de pelve e cirurgia de controle de danos",
+        0.52
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Trauma Abdominal",
+        0.17
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+    "medway_name": "Trauma Cranioencefálico (TCE)",
+    "curr_hours": 1.08,
+    "final_hours": 0.98,
+    "reg_hours": 0.98,
+    "flash_hours": 0.1,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Trauma Cranioencefálico (TCE)",
+        0.98
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Trauma Cranioencefálico (TCE)",
+        0.1
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Trauma de Face e Pescoço (Trauma Cervical e Fraturas Maxilofaciais)",
+    "medway_name": "Trauma de Face e Pescoço (Trauma Cervical e Fraturas Maxilofaciais)",
+    "curr_hours": null,
+    "final_hours": 0.72,
+    "reg_hours": 0.72,
+    "flash_hours": 0,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Trauma de Face e Pescoço",
+        0.72
+      ]
+    ],
+    "flash_videos": []
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+    "medway_name": "Trauma Torácico",
+    "curr_hours": 1.24,
+    "final_hours": 1.12,
+    "reg_hours": 1.12,
+    "flash_hours": 0.13,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Trauma Torácico",
+        1.12
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Trauma Torácico",
+        0.13
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Oncologia Cutânea: Melanoma, CBC e CEC",
+    "medway_name": "Tumores Dermatológicos",
+    "curr_hours": 1.36,
+    "final_hours": 0.92,
+    "reg_hours": 0.92,
+    "flash_hours": 0.44,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Melanoma",
+        0.55
+      ],
+      [
+        "Tumores não melanoma",
+        0.37
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Melanoma",
+        0.23
+      ],
+      [
+        "Aula flash - Câncer de pele não melanoma",
+        0.21
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Neoplasias do Trato Gastrointestinal (Esôfago, Estômago, Pâncreas e Cólon)",
+    "medway_name": "Tumores do Aparelho Digestivo",
+    "curr_hours": 2.13,
+    "final_hours": 1.95,
+    "reg_hours": 1.95,
+    "flash_hours": 0.17,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Tumores do esôfago e estômago",
+        0.77
+      ],
+      [
+        "Neoplasias Hepáticas e Pancreáticas",
+        0.87
+      ],
+      [
+        "Neoplasias colorretais",
+        0.32
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Tumores do Aparelho Digestivo",
+        0.17
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Uro-Oncologia: Câncer de Próstata, Rim, Bexiga e Testículo",
+    "medway_name": "Tumores Urológicos",
+    "curr_hours": 0.0,
+    "final_hours": 0.94,
+    "reg_hours": 0.94,
+    "flash_hours": 0.89,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Neoplasia de próstata e bexiga",
+        0.54
+      ],
+      [
+        "Tumor de testículo, cistos e neoplasias renais",
+        0.41
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Tumor de Próstata",
+        0.27
+      ],
+      [
+        "Aula flash - Tumor de Bexiga",
+        0.24
+      ],
+      [
+        "Aula flash - Tumor de Testículo",
+        0.17
+      ],
+      [
+        "Aula flash - Tumor renal e cistos",
+        0.21
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+    "medway_name": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+    "curr_hours": null,
+    "final_hours": 1.08,
+    "reg_hours": 1.08,
+    "flash_hours": 0.23,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Fraturas ósseas",
+        1.08
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Fraturas Ósseas",
+        0.23
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Ortopedia Pediátrica: Displasia do Quadril, Pé Torto e Epifisiólise",
+    "medway_name": "Ortopedia Pediátrica",
+    "curr_hours": 1.16,
+    "final_hours": 0.98,
+    "reg_hours": 0.98,
+    "flash_hours": 0.18,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Ortopedia Pediátrica",
+        0.98
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Ortopedia Pediátrica",
+        0.18
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Luxações Articulares e Lesões Ligamentares / Meniscais",
+    "medway_name": "Luxações/ Lesões Ligamentares",
+    "curr_hours": 0.91,
+    "final_hours": 0.7,
+    "reg_hours": 0.7,
+    "flash_hours": 0.21,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Luxações/ Lesões Ligamentares",
+        0.7
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Luxações/ Lesões Ligamentares",
+        0.21
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Tendinopatias, Bursites e Síndromes por Sobrecarga Musculoesquelética",
+    "medway_name": "Tendinites/ Tenossinovites/ Fasceítes e Bursites",
+    "curr_hours": 0.79,
+    "final_hours": 0.62,
+    "reg_hours": 0.62,
+    "flash_hours": 0.17,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Tendinites / Tenossinovites / Fasceítes e Bursites",
+        0.62
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Tendinites/ Tenossinovites/ Fasceítes e Bursites",
+        0.17
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Neoplasias Ósseas Benignas e Sarcomas Ósseos",
+    "medway_name": "Tumores Ortopédicos",
+    "curr_hours": 1.25,
+    "final_hours": 0.87,
+    "reg_hours": 0.87,
+    "flash_hours": 0.38,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Tumores Ortopédicos",
+        0.87
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Anamnese e Exame Físico",
+        0.17
+      ],
+      [
+        "Aula flash - Tumores Malignos",
+        0.21
+      ]
+    ]
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Câncer de Pulmão, Nódulo Pulmonar Solitário e Tumores do Mediastino",
+    "medway_name": "Tumores Pulmonares e Do Mediastino",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Cirurgia Cardíaca: Revascularização Miocárdica e Cirurgia Valvar",
+    "medway_name": "Cirurgia Cardíaca",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Cirurgia de Cabeça e Pescoço: Afecções Cervicais Benignas e Cistos Congênitos",
+    "medway_name": "Outras Afecções Cirurgicas de Cabeça e Pescoço",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Sarcomas de Partes Moles",
+    "medway_name": "Tumores de partes moles",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Emergências Oftalmológicas e Patologias Oculares Frequentes",
+    "medway_name": "Oftalmologia",
+    "curr_hours": 1.0,
+    "final_hours": 1.0,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Polipose Adenomatosa Familiar (PAF) e Síndromes Hereditárias",
+    "medway_name": "Polipose intestinal",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Trauma Raquimedular (TRM) e Lesões Vertebrais",
+    "medway_name": "Trauma da Coluna Vertebral (TRM)",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Trauma Ortopédico de Extremidades e Síndrome Compartimental",
+    "medway_name": "Trauma de membros e extremidades",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Cirurgia",
+    "theme": "Neoplasias de Cabeça e Pescoço e Nódulos Tireoidianos Cirúrgicos",
+    "medway_name": "Tumores de Cabeça e Pescoço",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Políticas de Saúde Mental e Atenção Psicossocial (CAPS)",
+    "medway_name": "Saúde Mental no Brasil",
+    "curr_hours": 4.88,
+    "final_hours": 0.68,
+    "reg_hours": 0.68,
+    "flash_hours": 0.21,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Saúde Mental no Brasil",
+        0.68
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Saúde Mental no Brasil",
+        0.21
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+    "medway_name": "Arritmias, Síncope e PCR",
+    "curr_hours": 2.0,
+    "final_hours": 3.27,
+    "reg_hours": 3.27,
+    "flash_hours": 1.74,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Taquiarritmias",
+        1.25
+      ],
+      [
+        "Bradiarritmias",
+        0.21
+      ],
+      [
+        "Síncope",
+        0.16
+      ],
+      [
+        "Parada Cardiorrespiratória",
+        0.44
+      ],
+      [
+        "Arritmias, Síncope e PCR",
+        1.2
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Diagnóstico e Manejo de Taquiarritmias e Bradiarritmias (ACLS)",
+        0.34
+      ],
+      [
+        "Aula flash - Fibrilação Atrial",
+        0.42
+      ],
+      [
+        "Aula flash - Outras Taquiarritmias",
+        0.18
+      ],
+      [
+        "Aula flash - Síncope",
+        0.17
+      ],
+      [
+        "Aula flash - Parada Cardiorrespiatória",
+        0.42
+      ],
+      [
+        "Arritmias, Síncope e PCR",
+        0.2
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Valvopatias Adquiridas e Miocardiopatias",
+    "medway_name": "Valvopatias e Cardiomiopatias",
+    "curr_hours": 4.0,
+    "final_hours": 0.84,
+    "reg_hours": 0,
+    "flash_hours": 0.84,
+    "source": "FLASH_ONLY",
+    "reg_videos": [],
+    "flash_videos": [
+      [
+        "Aula flash - Valvopatias",
+        0.42
+      ],
+      [
+        "Aula flash - Febre reumática",
+        0.14
+      ],
+      [
+        "Aula flash - Cardiomipatias",
+        0.28
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+    "medway_name": "Hipertensão Arterial Sistêmica",
+    "curr_hours": 6.87,
+    "final_hours": 2.81,
+    "reg_hours": 2.81,
+    "flash_hours": 1.26,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Definição, classificação e estratificação de risco",
+        0.72
+      ],
+      [
+        "Tratamento",
+        0.5
+      ],
+      [
+        "Hipertensão resistente e refratária",
+        0.29
+      ],
+      [
+        "Hipertensão secundária e crises hipertensivas",
+        0.72
+      ],
+      [
+        "Como cai na PED: Hipertensão Arterial Sistêmica",
+        0.56
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Definição, classificação e estratificação de risco",
+        0.22
+      ],
+      [
+        "Aula flash - Tratamento",
+        0.42
+      ],
+      [
+        "Aula flash - HAS resistente/refratária, HAS secundária e crises hipertensivas",
+        0.32
+      ],
+      [
+        "Como cai na PED: Hipertensão Arterial Sistêmica",
+        0.31
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+    "medway_name": "Insuficiência Cardíaca",
+    "curr_hours": 4.12,
+    "final_hours": 2.24,
+    "reg_hours": 2.24,
+    "flash_hours": 1.29,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Definição e etiologias IC",
+        0.55
+      ],
+      [
+        "Etiologia que merece destaque: amiloidose cardíaca",
+        0.23
+      ],
+      [
+        "Fisiopatologia e classificação",
+        0.45
+      ],
+      [
+        "Tratamento ambulatorial IC",
+        0.59
+      ],
+      [
+        "IC descompensada",
+        0.42
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Insuficiência Cardíaca",
+        0.12
+      ],
+      [
+        "Aula flash - Definição e diagnóstico IC",
+        0.32
+      ],
+      [
+        "Aula flash - Tratamento ICFER",
+        0.3
+      ],
+      [
+        "Aula flash - Tratamento ICFEP",
+        0.24
+      ],
+      [
+        "Aula flash - Diagnóstico e tratamento IC aguda",
+        0.31
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+    "medway_name": "Síndrome Coronariana e Diagnósticos Diferenciais",
+    "curr_hours": 4.0,
+    "final_hours": 2.34,
+    "reg_hours": 2.34,
+    "flash_hours": 1.21,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Síndrome coronariana crônica parte I",
+        0.74
+      ],
+      [
+        "Diagnóstico SCA",
+        0.51
+      ],
+      [
+        "Tratamento SCA",
+        0.59
+      ],
+      [
+        "Diagnósticos diferenciais de dor torácica",
+        0.5
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Síndrome coronariana crônica",
+        0.42
+      ],
+      [
+        "Aula flash - Diagnóstico SCA",
+        0.26
+      ],
+      [
+        "Aula flash - Tratamento SCA",
+        0.3
+      ],
+      [
+        "Aula flash - Diagnóstico diferencial de dor torácica",
+        0.23
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+    "medway_name": "Farmacodermias e Dermatoses",
+    "curr_hours": 4.0,
+    "final_hours": 1.3,
+    "reg_hours": 1.3,
+    "flash_hours": 0.39,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Farmacodermias",
+        0.67
+      ],
+      [
+        "Buloses",
+        0.25
+      ],
+      [
+        "Psoríase",
+        0.16
+      ],
+      [
+        "Acne, Eczema e Revisão Final",
+        0.21
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Farmacodermias",
+        0.17
+      ],
+      [
+        "Aula flash - Dermatoses (focando nas Buloses)",
+        0.22
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Dermatoses Infecciosas, Hanseníase e Leishmanioses",
+    "medway_name": "Doenças Infectoparasitárias com Acometimento Dermatológico",
+    "curr_hours": 2.0,
+    "final_hours": 2.29,
+    "reg_hours": 2.29,
+    "flash_hours": 0.17,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Doenças Infectoparasitárias com Acometimento Dermatológico - Hanseníase",
+        1.27
+      ],
+      [
+        "Doenças Infectoparasitárias com Acometimento Dermatológico - PARTE 02",
+        1.02
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Hanseniase + reações hansênicas",
+        0.17
+      ],
+      [
+        "Aula flash - PLECT + Herpes",
+        0.0
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+    "medway_name": "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas",
+    "curr_hours": 2.0,
+    "final_hours": 5.1,
+    "reg_hours": 5.1,
+    "flash_hours": 1.14,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Suprarrenal",
+        1.28
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Paratireoides",
+        1.04
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Osteoporose",
+        0.34
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Eixo Hipotálamo-Hipofisário",
+        0.39
+      ],
+      [
+        "Tireoide",
+        2.04
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Adrenal",
+        0.25
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Paratireoides",
+        0.23
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Osteoporose",
+        0.26
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Eixo Hipotálamo-Hipofisário",
+        0.21
+      ],
+      [
+        "Tireoide",
+        0.2
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+    "medway_name": "Tireoide",
+    "curr_hours": 8.66,
+    "final_hours": 5.46,
+    "reg_hours": 5.46,
+    "flash_hours": 1.21,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Suprarrenal",
+        1.28
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Paratireoides",
+        1.04
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Osteoporose",
+        0.34
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Eixo Hipotálamo-Hipofisário",
+        0.39
+      ],
+      [
+        "Tireoide",
+        2.04
+      ],
+      [
+        "Como cai na CIR: Tireoide",
+        0.36
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Adrenal",
+        0.25
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Paratireoides",
+        0.23
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Osteoporose",
+        0.26
+      ],
+      [
+        "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas - Eixo Hipotálamo-Hipofisário",
+        0.21
+      ],
+      [
+        "Tireoide",
+        0.2
+      ],
+      [
+        "Como cai na CIR: Tireoide",
+        0.07
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+    "medway_name": "Diabetes",
+    "curr_hours": 7.54,
+    "final_hours": 4.09,
+    "reg_hours": 4.09,
+    "flash_hours": 0.44,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Classificação, diagnóstico e Rastreio do DM",
+        0.49
+      ],
+      [
+        "Tratamento do DM1",
+        0.33
+      ],
+      [
+        "Tratamento do DM2",
+        0.32
+      ],
+      [
+        "Complicações Agudas de DM",
+        0.37
+      ],
+      [
+        "Complicações Crônicas de DM",
+        0.2
+      ],
+      [
+        "Como cai na PED: Diabetes",
+        1.2
+      ],
+      [
+        "Diabetes mellitus na gravidez",
+        1.19
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Diabetes",
+        0.18
+      ],
+      [
+        "Como cai na PED: Diabetes",
+        0.16
+      ],
+      [
+        "Diabetes mellitus na Gravidez",
+        0.1
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+    "medway_name": "Síndrome Metabólica e Dislipidemia",
+    "curr_hours": 7.27,
+    "final_hours": 2.87,
+    "reg_hours": 2.87,
+    "flash_hours": 0.4,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Síndrome Metabólica e Dislipidemia",
+        1.91
+      ],
+      [
+        "Como cai na PED: Síndrome Metabólica e Dislipidemia",
+        0.96
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Síndrome Metabólica e Dislipidemia",
+        0.27
+      ],
+      [
+        "Como cai na PED: Síndrome Metabólica e Dislipidemia",
+        0.12
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+    "medway_name": "Geriatria e Demências",
+    "curr_hours": 6.28,
+    "final_hours": 2.28,
+    "reg_hours": 2.28,
+    "flash_hours": 1.23,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Geriatria e Demências",
+        2.28
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Geriatria",
+        0.23
+      ],
+      [
+        "Aula flash - Demências",
+        0.29
+      ],
+      [
+        "Aula Flash - Grandes síndromes geriátricas",
+        0.34
+      ],
+      [
+        "Aula Flash - Parkinson e Parkinson-Plus",
+        0.36
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+    "medway_name": "Cirrose, Insuficiência Hepática e Complicações",
+    "curr_hours": 4.0,
+    "final_hours": 0.45,
+    "reg_hours": 0.45,
+    "flash_hours": 0.78,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Complicações",
+        0.45
+      ],
+      [
+        "Cirrose, Insuficiência Hepática e Complicações",
+        0.0
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Fisiopatologia e estratificação",
+        0.22
+      ],
+      [
+        "Aula flash - Complicações de Cirrose",
+        0.3
+      ],
+      [
+        "Aula flash - Causas de cirrose",
+        0.25
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Hepatites Virais (A, B, C) e Icterícias Metabólicas",
+    "medway_name": "Hepatites e Doenças do Metabolismo da Bilirrubina",
+    "curr_hours": 4.0,
+    "final_hours": 2.12,
+    "reg_hours": 2.12,
+    "flash_hours": 0.58,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Hepatites e Doenças do Metabolismo da Bilirrubina - Icterícia e Hepatites Virais",
+        1.61
+      ],
+      [
+        "Hepatites e Doenças do Metabolismo da Bilirrubina - Hepatites Medicamentosa, Alcoólica e Autoimune",
+        0.51
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Diagnóstico Diferencial Icterícia por BD",
+        0.24
+      ],
+      [
+        "Aula flash - Hepatites Virais",
+        0.33
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Meningites, Encefalites e Infecções do SNC",
+    "medway_name": "Infecções do Sistema Nervoso Central",
+    "curr_hours": 4.98,
+    "final_hours": 2.34,
+    "reg_hours": 2.34,
+    "flash_hours": 0.46,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Conceitos gerais e análise de LCR",
+        0.39
+      ],
+      [
+        "Meningite Bacteriana",
+        0.69
+      ],
+      [
+        "Meningoencefalites virais e resumo final",
+        0.28
+      ],
+      [
+        "Como cai na PED: Infecções do Sistema Nervoso Central",
+        0.98
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Meningite bacteriana",
+        0.3
+      ],
+      [
+        "Aula flash - Meningoencefalite viral",
+        0.16
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+    "medway_name": "Tuberculose",
+    "curr_hours": 4.96,
+    "final_hours": 2.36,
+    "reg_hours": 2.36,
+    "flash_hours": 1.01,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Fisiopatologia e Quadro clínico",
+        0.53
+      ],
+      [
+        "Diagnóstico e ILTB",
+        0.71
+      ],
+      [
+        "Tratamento e efeitos adversos",
+        0.23
+      ],
+      [
+        "Como cai na PED: Tuberculose",
+        0.88
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Tuberculose Geral",
+        0.29
+      ],
+      [
+        "Aula Flash - Tuberculose extrapulmonar",
+        0.33
+      ],
+      [
+        "Aula Flash - ILTB",
+        0.3
+      ],
+      [
+        "Como cai na PED: Tuberculose",
+        0.09
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+    "medway_name": "Pneumonias e Síndromes Gripais",
+    "curr_hours": 9.07,
+    "final_hours": 3.0,
+    "reg_hours": 3.0,
+    "flash_hours": 0.25,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Pneumonias e Síndromes Gripais - PARTE 01",
+        1.35
+      ],
+      [
+        "Pneumonias e Síndromes Gripais - PARTE 02",
+        0.44
+      ],
+      [
+        "Pneumonias e Síndromes Gripais - PARTE 03",
+        0.4
+      ],
+      [
+        "Como cai na PED: Pneumonias e Síndromes Gripais",
+        0.82
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Pneumonias e Síndromes Gripais",
+        0.12
+      ],
+      [
+        "Como cai na PED: Pneumonias e Síndromes Gripais",
+        0.13
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Infecções Sexualmente Transmissíveis (ISTs) no Adulto",
+    "medway_name": "Doenças Sexualmente Transmissíveis",
+    "curr_hours": 2.0,
+    "final_hours": 0.77,
+    "reg_hours": 0.77,
+    "flash_hours": 0,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Doenças Sexualmente Transmissíveis",
+        0.77
+      ]
+    ],
+    "flash_videos": []
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Celulite, Erisipela, Osteomielite e Infecções de Partes Moles",
+    "medway_name": "Infecções de Pele, Ossos e Partes Moles",
+    "curr_hours": 4.72,
+    "final_hours": 0.72,
+    "reg_hours": 0.72,
+    "flash_hours": 0.8,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Infecções de Pele, Ossos e Partes Moles",
+        0.72
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Infeções superficiais",
+        0.27
+      ],
+      [
+        "Aula Flash - Infeções de profundidade média",
+        0.23
+      ],
+      [
+        "Aula Flash - Infeções profundas",
+        0.29
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Endocardite Infecciosa e Sepse de Foco Endovascular",
+    "medway_name": "Endocardite e Infecção de Corrente Sanguínea",
+    "curr_hours": 4.0,
+    "final_hours": 1.76,
+    "reg_hours": 1.76,
+    "flash_hours": 0.6,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Fisiopatologia, agentes etiológicos e quadro clínico",
+        0.5
+      ],
+      [
+        "Critérios de Duke, tratamento e profilaxia",
+        0.71
+      ],
+      [
+        "Infecção de corrente sanguínea",
+        0.55
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Endocardite geral",
+        0.3
+      ],
+      [
+        "Aula flash - Infecção de corrente sanguínea",
+        0.3
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+    "medway_name": "HIV e AIDS no Adulto Não Gestante",
+    "curr_hours": 4.56,
+    "final_hours": 2.37,
+    "reg_hours": 2.37,
+    "flash_hours": 1.09,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "HIV e AIDS no Adulto Não Gestante - Conceitos gerais, fisiopatologia, quadro clínico e diagnóstico",
+        0.66
+      ],
+      [
+        "HIV e AIDS no Adulto Não Gestante - Tratamento, PEP e PReP",
+        0.47
+      ],
+      [
+        "HIV e AIDS no Adulto Não Gestante - PneumoHIV",
+        0.3
+      ],
+      [
+        "HIV e AIDS no Adulto Não Gestante - NeuroHIV e outras doenças oportunistas",
+        0.38
+      ],
+      [
+        "Como cai na PREV: HIV e AIDS no Adulto Não Gestante",
+        0.56
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - HIV Geral",
+        0.33
+      ],
+      [
+        "Aula flash - Profilaxias no HIV",
+        0.25
+      ],
+      [
+        "Aula flash - Doenças oportunistas",
+        0.32
+      ],
+      [
+        "Como cai na PREV: HIV e AIDS no Adulto não Gestante",
+        0.19
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+    "medway_name": "Síndromes Febris",
+    "curr_hours": 7.06,
+    "final_hours": 3.14,
+    "reg_hours": 3.14,
+    "flash_hours": 1.07,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Dengue - Fisiopatologia e Quadro clínico",
+        0.54
+      ],
+      [
+        "Tratamento de dengue e diferencial com outras arboviroses",
+        0.51
+      ],
+      [
+        "Febre amarela, leptospirose e malária",
+        0.65
+      ],
+      [
+        "Leishmaniose visceral, febre maculosa e miscelânia febril",
+        0.48
+      ],
+      [
+        "Como cai na PED: Síndromes Febris",
+        0.95
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Leptospirose e Malária",
+        0.3
+      ],
+      [
+        "Aula Flash- Febre Maculosa e Leishmaniose Visceral",
+        0.33
+      ],
+      [
+        "Aula flash - Dengue",
+        0.33
+      ],
+      [
+        "Como cai na PED: Síndromes Febris",
+        0.11
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+    "medway_name": "Glomerulopatias e Tubulopatias",
+    "curr_hours": 9.12,
+    "final_hours": 2.84,
+    "reg_hours": 2.84,
+    "flash_hours": 0.29,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Glomerulopatias e Tubulopatias",
+        1.9
+      ],
+      [
+        "Como cai na PED: Glomerulopatias e Tubulopatias",
+        0.94
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Glomerulopatias e Tubulopatias",
+        0.17
+      ],
+      [
+        "Como cai na PED: Glomerulopatias e Tubulopatias",
+        0.12
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+    "medway_name": "Distúrbios Hidroeletrolíticos e Acidobásicos",
+    "curr_hours": 4.0,
+    "final_hours": 2.43,
+    "reg_hours": 2.43,
+    "flash_hours": 0.36,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Distúrbios Hidroeletrolíticos e Acidobásicos - Distúrbios Hidroeletrolíticos",
+        1.46
+      ],
+      [
+        "Distúrbios Hidroeletrolíticos e Acidobásicos - Distúrbios Acidobásicos",
+        0.96
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Distúrbios Hidroeletrolíticos e Acidobásicos - Hiponatremia",
+        0.17
+      ],
+      [
+        "Distúrbios Hidroeletrolíticos e Acidobásicos - Gasometria e Acidose Metabólica",
+        0.18
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+    "medway_name": "Insuficiência Renal",
+    "curr_hours": 4.18,
+    "final_hours": 2.68,
+    "reg_hours": 2.68,
+    "flash_hours": 0.18,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Insuficiência Renal - parte 1",
+        0.8
+      ],
+      [
+        "Insuficiência Renal - parte 2",
+        0.45
+      ],
+      [
+        "Insuficiência Renal - parte 3",
+        1.28
+      ],
+      [
+        "Insuficiência Renal - parte 4",
+        0.16
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Insuficiência Renal",
+        0.18
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Cefaleias Primárias (Enxaqueca, Tensional) e Secundárias de Alarme",
+    "medway_name": "Cefaleias",
+    "curr_hours": 2.0,
+    "final_hours": 1.0,
+    "reg_hours": 1.0,
+    "flash_hours": 0.63,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Introdução",
+        0.16
+      ],
+      [
+        "Enxaqueca e Cefaleia Tensional",
+        0.34
+      ],
+      [
+        "Cefaleia em salvas",
+        0.13
+      ],
+      [
+        "Outras cefaleias",
+        0.37
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Cefaleias primárias",
+        0.31
+      ],
+      [
+        "Aula flash - Outras cefaleias",
+        0.33
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+    "medway_name": "Síndromes Neurológicas e Fraqueza Muscular",
+    "curr_hours": 4.0,
+    "final_hours": 1.69,
+    "reg_hours": 1.69,
+    "flash_hours": 0.63,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Entendendo a Fraqueza Muscular",
+        0.21
+      ],
+      [
+        "Fraqueza Muscular",
+        1.02
+      ],
+      [
+        "Tremores",
+        0.12
+      ],
+      [
+        "Outras Síndromes Neurológicas",
+        0.34
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Síndrome de Guillain Barre",
+        0.14
+      ],
+      [
+        "Aula flash - Outras Fraquezas Musculares",
+        0.33
+      ],
+      [
+        "Aula flash - Síndromes Neurológicas",
+        0.16
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Neurointensivismo, Morte Encefálica e Cuidados Críticos",
+    "medway_name": "Neurointensivismo e Ética Médica",
+    "curr_hours": 4.0,
+    "final_hours": 1.78,
+    "reg_hours": 1.78,
+    "flash_hours": 0.56,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Morte Encefálica",
+        0.72
+      ],
+      [
+        "Hipertensão Intracraniana",
+        0.34
+      ],
+      [
+        "Cuidados de fim de vida",
+        0.72
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Morte Encefálica e Hipertensão intracraniana",
+        0.26
+      ],
+      [
+        "Aula flash - Cuidados Paliativos",
+        0.3
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+    "medway_name": "AVC",
+    "curr_hours": 4.0,
+    "final_hours": 2.0,
+    "reg_hours": 2.0,
+    "flash_hours": 0.15,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Vascularização e Fossa Posterior",
+        0.75
+      ],
+      [
+        "AVCi",
+        0.74
+      ],
+      [
+        "AVCh",
+        0.51
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Reperfusão (trombólise + trombectomia) no AVCi",
+        0.15
+      ],
+      [
+        "Aula flash - AVCh (HIP e HSA)",
+        0.0
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+    "medway_name": "Distúrbios da Hemostasia, Desordens Trombóticas e Transfusão de Hemocomponentes",
+    "curr_hours": 2.0,
+    "final_hours": 1.3,
+    "reg_hours": 1.3,
+    "flash_hours": 0.76,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Entendendo a hemostasia",
+        0.29
+      ],
+      [
+        "Distúrbios da Hemostasia Primária",
+        0.4
+      ],
+      [
+        "Distúrbios da Hemostasia Secundária e Acidentes com Anticoagulantes",
+        0.32
+      ],
+      [
+        "Hemotrasnfusão: indicações e complicações",
+        0.29
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Plaquetopenias e Von Willebrand",
+        0.27
+      ],
+      [
+        "Aula flash - Distúrbios da Coagulação e Anticoagulantes",
+        0.25
+      ],
+      [
+        "Aula flash - Transfusão de Hemocomponentes",
+        0.24
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Leucemias, Linfomas e Mieloma Múltiplo",
+    "medway_name": "Onco-Hematologia",
+    "curr_hours": 6.9,
+    "final_hours": 2.66,
+    "reg_hours": 2.66,
+    "flash_hours": 1.26,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Leucemias",
+        1.04
+      ],
+      [
+        "Linfomas",
+        0.28
+      ],
+      [
+        "Mieloma Múltiplo",
+        0.27
+      ],
+      [
+        "Urgências e Emergências Oncológicas",
+        0.29
+      ],
+      [
+        "Como cai na PED: Onco-Hematologia",
+        0.78
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Leucemias Crônicas",
+        0.5
+      ],
+      [
+        "Aula Flash - Leucemias Agudas",
+        0.0
+      ],
+      [
+        "Aula Flash - Linfomas",
+        0.16
+      ],
+      [
+        "Aula Flash - Gamopatias Monoclonais",
+        0.28
+      ],
+      [
+        "Aula Flash - Urgência e Emergência Onco-hematológica",
+        0.2
+      ],
+      [
+        "Como cai na PED: Onco-Hematologia",
+        0.12
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+    "medway_name": "Anemias e Hemoglobinopatias",
+    "curr_hours": 8.0,
+    "final_hours": 3.98,
+    "reg_hours": 3.98,
+    "flash_hours": 1.78,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Anemias e Hemoglobinopatias - Hemograma e Anemias Carenciais",
+        1.52
+      ],
+      [
+        "Anemias e Hemoglobinopatias - Anemias Hemolíticas",
+        0.69
+      ],
+      [
+        "Anemias e Hemoglobinopatias - Hemoglobinopatias",
+        0.74
+      ],
+      [
+        "Como cai na PED: Anemias e Hemoglobinopatias - 01",
+        0.53
+      ],
+      [
+        "Como cai na PED: Anemias e Hemoglobinopatias - 02",
+        0.51
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Anemia ferropriva",
+        0.31
+      ],
+      [
+        "Aula Flash - Anemia megaloblástica",
+        0.32
+      ],
+      [
+        "Aula Flash - Anemias hemolíticas",
+        0.28
+      ],
+      [
+        "Aula Flash - Anemia falciforme e talassemia",
+        0.36
+      ],
+      [
+        "Como cai na PED: Anemias e Hemoglobinopatias - Parte 1",
+        0.26
+      ],
+      [
+        "Como cai na PED: Anemias e Hemoglobinopatias - Parte 2",
+        0.24
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+    "medway_name": "Embolia Pulmonar e Hipertensão Pulmonar",
+    "curr_hours": 6.15,
+    "final_hours": 1.84,
+    "reg_hours": 1.84,
+    "flash_hours": 0.15,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Embolia Pulmonar e Hipertensão Pulmonar - Tromboembolismo Venoso",
+        0.6
+      ],
+      [
+        "Embolia Pulmonar e Hipertensão Pulmonar - Embolia Pulmonar e Embolia Gordurosa",
+        1.03
+      ],
+      [
+        "Embolia Pulmonar e Hipertensão Pulmonar - Hipertensão Pulmonar",
+        0.21
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Embolia Pulmonar e Hipertensão Pulmonar",
+        0.15
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+    "medway_name": "Distúrbios Obstrutivos",
+    "curr_hours": 2.5,
+    "final_hours": 2.99,
+    "reg_hours": 2.99,
+    "flash_hours": 0.89,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Distúrbios Obstrutivos",
+        1.65
+      ],
+      [
+        "Distúrbios Obstrutivos - Diagnóstico e Asma Ambulatorial",
+        0.63
+      ],
+      [
+        "Distúrbios Obstrutivos - Crise de asma",
+        0.3
+      ],
+      [
+        "Distúrbios Obstrutivos - Bronquiolite viral aguda",
+        0.2
+      ],
+      [
+        "Distúrbios Obstrutivos - Fibrose Cística",
+        0.21
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Distúrbios Obstrutivos",
+        0.15
+      ],
+      [
+        "Aula Flash -  Asma Diagnóstico e Tratamento ambulatorial",
+        0.29
+      ],
+      [
+        "Aula Flash  - Crise de asma e tratamento",
+        0.18
+      ],
+      [
+        "Aula Flash  -  Bronquiolite viral aguda e Fibrose cística",
+        0.27
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+    "medway_name": "Doenças pulmonares intersticiais",
+    "curr_hours": 2.11,
+    "final_hours": 1.76,
+    "reg_hours": 1.76,
+    "flash_hours": 0.11,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Definição, classificação e principais exames complementares nas doenças pulmonares intersticiais",
+        0.73
+      ],
+      [
+        "Sarcoidose e pneumonite por hipersensibilidade",
+        0.47
+      ],
+      [
+        "Fibrose pulmonar idiopática, pneumonia em organização, pneumoconioses e síndromes eosinofílicas",
+        0.56
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Doenças pulmonares intersticiais",
+        0.11
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+    "medway_name": "Transtornos Mentais",
+    "curr_hours": 4.0,
+    "final_hours": 1.96,
+    "reg_hours": 1.96,
+    "flash_hours": 1.16,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Introdução, Depressão e Risco de Suicídio",
+        0.79
+      ],
+      [
+        "Transtorno Bipolar e Transtornos Psicóticos",
+        0.57
+      ],
+      [
+        "Transtornos de Ansiedade, TOC, Transtornos de Personalidade e Miscelânea",
+        0.59
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Transtorno Depressivo",
+        0.2
+      ],
+      [
+        "Aula flash - Transtornos Bipolar e Psicótico",
+        0.33
+      ],
+      [
+        "Aula flash - Transtornos Ansiosos, TOC e de Personalidade",
+        0.3
+      ],
+      [
+        "Aula flash - Transtornos Psicossomáticos, Alimentares e Luto",
+        0.33
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+    "medway_name": "Abuso de Álcool, Tabaco e Outras Substâncias",
+    "curr_hours": 4.0,
+    "final_hours": 1.83,
+    "reg_hours": 1.83,
+    "flash_hours": 1.08,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Abordagem ao Problema e Abuso de Álcool",
+        0.95
+      ],
+      [
+        "Tabaco e Dispostivos Eletrônicos de Fumar",
+        0.64
+      ],
+      [
+        "Outras Drogas",
+        0.23
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Modelo transteórico e conceitos",
+        0.25
+      ],
+      [
+        "Aula flash - Álcool",
+        0.3
+      ],
+      [
+        "Aula flash - Tabaco",
+        0.31
+      ],
+      [
+        "Aula flash - Dispositivos Eletrônicos de Fumar e  Outras Drogas",
+        0.23
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+    "medway_name": "Artrites e Diagnósticos Diferenciais",
+    "curr_hours": 5.79,
+    "final_hours": 1.79,
+    "reg_hours": 1.79,
+    "flash_hours": 0.85,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Artrites e Diagnósticos Diferenciais",
+        1.79
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Artrite Reumatoide",
+        0.22
+      ],
+      [
+        "Aula flash - Espondiloartropatias",
+        0.21
+      ],
+      [
+        "Aula flash - Monoartrites",
+        0.26
+      ],
+      [
+        "Aula flash - Osteoartrite",
+        0.07
+      ],
+      [
+        "Aula flash - Outras Artropatias",
+        0.09
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Lúpus Eritematoso Sistêmico (LES), Esclerose Sistêmica e Miopatias Inflamatórias",
+    "medway_name": "Colagenoses e Miopatias",
+    "curr_hours": 4.0,
+    "final_hours": 1.47,
+    "reg_hours": 1.47,
+    "flash_hours": 0.49,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Lúpus Eritematoso Sistêmico",
+        0.86
+      ],
+      [
+        "Esclerose Sistêmica e Síndrome de Sjogren",
+        0.34
+      ],
+      [
+        "Miopatias Autoimunes Sistêmicas",
+        0.19
+      ],
+      [
+        "Doença Mista do Tecido Conjuntivo",
+        0.08
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash -  LES + nefrite lúpica",
+        0.29
+      ],
+      [
+        "Aula Flash - Miopatias",
+        0.2
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Vasculites Sistêmicas dos Grandes, Médios e Pequenos Vasos",
+    "medway_name": "Vasculites",
+    "curr_hours": 2.0,
+    "final_hours": 1.49,
+    "reg_hours": 1.49,
+    "flash_hours": 0.84,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Conceitos gerais em vasculites",
+        0.44
+      ],
+      [
+        "Vasculites de grandes vasos",
+        0.32
+      ],
+      [
+        "Vasculites de médios vasos",
+        0.17
+      ],
+      [
+        "Vasculites de pequenos vasos e doença de Behçet",
+        0.56
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Vasculites de médios vasos",
+        0.27
+      ],
+      [
+        "Aula flash - Vasculites de grandes vasos",
+        0.24
+      ],
+      [
+        "Aula flash - Vasculites de pequenos vasos e Behçet",
+        0.33
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+    "medway_name": "Sepse, Choque Séptico e Outros tipos de Choque",
+    "curr_hours": 2.0,
+    "final_hours": 4.76,
+    "reg_hours": 4.76,
+    "flash_hours": 1.53,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Sepse, Choque Séptico e Outros tipos de Choque - 01",
+        0.56
+      ],
+      [
+        "Sepse, Choque Séptico e Outros tipos de Choque - 02",
+        0.58
+      ],
+      [
+        "Sepse, Choque Séptico e Outros tipos de Choque - 03",
+        0.39
+      ],
+      [
+        "Sepse, Choque Séptico e Outros tipos de Choque - 04",
+        0.72
+      ],
+      [
+        "Sepse, Choque Séptico e Outros tipos de Choque - 05",
+        0.28
+      ],
+      [
+        "Sepse, Choque Séptico e Outros tipos de Choque",
+        1.76
+      ],
+      [
+        "Sepse, Choque Séptico e Outros tipos de Choque (atualização)",
+        0.47
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Fisiologia e Tipos de Choque",
+        0.3
+      ],
+      [
+        "Avaliação ecocardiográfica no Choque",
+        0.3
+      ],
+      [
+        "Manejo dos Choques",
+        0.33
+      ],
+      [
+        "Sepse e Choque Séptico",
+        0.33
+      ],
+      [
+        "Sepse, Choque Séptico e Outros tipos de Choque",
+        0.27
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+    "medway_name": "Pneumointensivismo",
+    "curr_hours": 4.0,
+    "final_hours": 2.53,
+    "reg_hours": 2.53,
+    "flash_hours": 1.2,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Pneumointensivismo - Insuficiência Respiratória - Classificação, Diagnóstico e Tratamento",
+        1.26
+      ],
+      [
+        "Pneumointensivismo - Ventilação Mecânica e SDRA",
+        1.26
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - USG pulmonar",
+        0.24
+      ],
+      [
+        "Aula flash - VNI x VM",
+        0.31
+      ],
+      [
+        "Aula flash - Parâmetros básicos VM",
+        0.33
+      ],
+      [
+        "Aula flash - SDRA e Ventilação Protetora",
+        0.32
+      ]
+    ]
+  },
+  {
+    "area": "Clínica Médica",
+    "theme": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+    "medway_name": "Intoxicações Exógenas e Acidentes por Animais Peçonhentos",
+    "curr_hours": 2.0,
+    "final_hours": 2.52,
+    "reg_hours": 2.52,
+    "flash_hours": 0.22,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Intoxicações Exógenas e Acidentes por Animais Peçonhentos - Parte 1",
+        1.36
+      ],
+      [
+        "Intoxicações Exógenas e Acidentes por Animais Peçonhentos - Parte 2",
+        0.68
+      ],
+      [
+        "Como cai na PED: Intoxicações Exógenas e Acidentes por Animais Peçonhentos - Intoxicações Exógenas",
+        0.48
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Toxíndromes e antídotos",
+        0.22
+      ],
+      [
+        "Aula flash - Intoxicações por tóxicos específicos",
+        0.0
+      ],
+      [
+        "Aula flash - Acidentes com animais peçonhentos",
+        0.0
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Câncer de Colo Uterino e Lesões Precursoras",
+    "medway_name": "Tumores do colo uterino",
+    "curr_hours": 1.78,
+    "final_hours": 0.69,
+    "reg_hours": 0.69,
+    "flash_hours": 0.42,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Câncer de Colo: Fatores de Risco, Diagnóstico e Estadiamento",
+        0.45
+      ],
+      [
+        "Câncer de Colo: Tratamento",
+        0.17
+      ],
+      [
+        "Extras: Câncer de Colo e Gestação e Conceitos de Radioterapia Pélvica",
+        0.07
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Câncer de Colo do Útero",
+        0.19
+      ],
+      [
+        "Aula flash - Estadiamento e Tratamento",
+        0.23
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Assistência Pré-Natal de Baixo e Alto Risco",
+    "medway_name": "Pré-Natal",
+    "curr_hours": 2.55,
+    "final_hours": 2.55,
+    "reg_hours": 2.55,
+    "flash_hours": 0.32,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Pré-Natal - Diagnóstico e modificações fisiológicas da gestação",
+        1.37
+      ],
+      [
+        "Pré-Natal - Assistência ao pré-natal",
+        1.17
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Pré-Natal - Diagnóstico e modificações fisiológicas da gestação",
+        0.16
+      ],
+      [
+        "Pré-Natal - Assistência ao pré-natal",
+        0.15
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+    "medway_name": "Rastreamento do Câncer de Colo Uterino",
+    "curr_hours": 1.78,
+    "final_hours": 1.78,
+    "reg_hours": 1.78,
+    "flash_hours": 0.29,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Rastreamento do Câncer de Colo Uterino",
+        1.78
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Rastreamento do Câncer de Colo Uterino",
+        0.29
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+    "medway_name": "Doenças do Corpo Uterino e Endométrio",
+    "curr_hours": 2.0,
+    "final_hours": 1.19,
+    "reg_hours": 1.19,
+    "flash_hours": 0.36,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Fatores de Risco e Sangramento Pós-Menopausa",
+        0.39
+      ],
+      [
+        "Hiperplasia Endometrial",
+        0.21
+      ],
+      [
+        "Câncer de Endométrio",
+        0.59
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Sangramento Pós-Menopausa",
+        0.11
+      ],
+      [
+        "Aula flash - Câncer de Endométrio",
+        0.25
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Diabetes Gestacional e Pré-Gestacional",
+    "medway_name": "Diabetes mellitus na gravidez",
+    "curr_hours": 2.0,
+    "final_hours": 1.19,
+    "reg_hours": 1.19,
+    "flash_hours": 0.28,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Diabetes mellitus na gravidez",
+        1.19
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Diabetes",
+        0.18
+      ],
+      [
+        "Diabetes mellitus na Gravidez",
+        0.1
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Condições Clínicas Intercorrentes na Gravidez",
+    "medway_name": "Outras doenças na gestação",
+    "curr_hours": 1.5,
+    "final_hours": 1.09,
+    "reg_hours": 1.09,
+    "flash_hours": 0.82,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Anemias e Trombofilias",
+        0.49
+      ],
+      [
+        "Doenças do Tecido Conjuntivo e Tireoidopatias",
+        0.35
+      ],
+      [
+        "Cardiopatias e Infecções do Trato Urinário",
+        0.26
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Outras doenças na gestação",
+        0.11
+      ],
+      [
+        "Aula flash - Hepatites Virais",
+        0.18
+      ],
+      [
+        "Aula flash - HIV geral",
+        0.22
+      ],
+      [
+        "Aula flash - Sífilis",
+        0.16
+      ],
+      [
+        "Aula flash - Toxoplasmose",
+        0.15
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+    "medway_name": "Síndromes Hipertensivas da Gestação",
+    "curr_hours": 1.31,
+    "final_hours": 1.31,
+    "reg_hours": 1.31,
+    "flash_hours": 0.18,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Fisiopatologia e Repercussões Clínicas",
+        0.25
+      ],
+      [
+        "Definições e Diagnóstico de Síndromes Hipertensivas",
+        0.46
+      ],
+      [
+        "Fatores de Risco e Prevenção de Síndromes Hipertensivas",
+        0.22
+      ],
+      [
+        "Condutas Gerais e Específicas nas Síndromes Hipertensivas",
+        0.38
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Síndromes Hipertensivas da Gestação",
+        0.18
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+    "medway_name": "Hepatites virais, HIV/AIDS e outras infecções na gestação",
+    "curr_hours": 2.0,
+    "final_hours": 1.18,
+    "reg_hours": 1.18,
+    "flash_hours": 0.11,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Hepatites Virais",
+        0.33
+      ],
+      [
+        "Sífilis",
+        0.27
+      ],
+      [
+        "Toxoplasmose e outras STORCH",
+        0.29
+      ],
+      [
+        "HIV e Herpes",
+        0.3
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Hepatites virais, HIV/AIDS e outras infecções na gestação",
+        0.11
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário",
+    "medway_name": "Ciclo Menstrual",
+    "curr_hours": 1.24,
+    "final_hours": 1.24,
+    "reg_hours": 1.24,
+    "flash_hours": 0.72,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Ciclo Menstrual",
+        1.24
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Eixo hipotálamo-hipófise-ovariano",
+        0.27
+      ],
+      [
+        "Aula flash - Esteroidogênese",
+        0.19
+      ],
+      [
+        "Aula flash - Fisiologia e correlações ciclo ovariano e ciclo endometrial",
+        0.26
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+    "medway_name": "Contracepção",
+    "curr_hours": 2.0,
+    "final_hours": 1.64,
+    "reg_hours": 1.64,
+    "flash_hours": 1.32,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Métodos comportamentais, de barreira e cirúrgico",
+        0.55
+      ],
+      [
+        "Métodos hormonais",
+        0.58
+      ],
+      [
+        "LARCs e casos especiais de contracepção",
+        0.52
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Contracepção",
+        0.1
+      ],
+      [
+        "Aula flash - Índice de Pearl e métodos de progesterona isolado",
+        0.31
+      ],
+      [
+        "Aula flash - Métodos hormonais combinados",
+        0.31
+      ],
+      [
+        "Aula flash - LARCs e contracepção de emergência",
+        0.3
+      ],
+      [
+        "Aula flash - Métodos comportamentais, de barreira e cirúrgico",
+        0.3
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+    "medway_name": "Climatério",
+    "curr_hours": 1.81,
+    "final_hours": 1.81,
+    "reg_hours": 1.81,
+    "flash_hours": 0.2,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Fisiologia do Climatério",
+        0.65
+      ],
+      [
+        "Seguimento clínico na pós-menopausa",
+        0.25
+      ],
+      [
+        "Terapia de Reposição Hormonal",
+        0.91
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Climatério",
+        0.2
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+    "medway_name": "Amenorreias e Síndrome dos Ovários Policísticos",
+    "curr_hours": 2.37,
+    "final_hours": 2.37,
+    "reg_hours": 2.37,
+    "flash_hours": 0.09,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Introdução às Amenorreias",
+        0.4
+      ],
+      [
+        "Amenorreias Primárias",
+        0.85
+      ],
+      [
+        "Amenorreias Secundárias",
+        0.53
+      ],
+      [
+        "Síndrome Ovariana Metabólica Poliendócrina (SOMP) - Síndrome dos Ovários Policísticos",
+        0.58
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Amenorréias",
+        0.09
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Anatomia Cirúrgica e Estruturas Pélvicas Femininas",
+    "medway_name": "Anatomia Pélvica",
+    "curr_hours": 1.0,
+    "final_hours": 1.05,
+    "reg_hours": 1.05,
+    "flash_hours": 0.3,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Órgãos da Pelve Feminina",
+        0.28
+      ],
+      [
+        "Vascularização da Pelve",
+        0.18
+      ],
+      [
+        "Diafragmas Pélvicos e Inervação",
+        0.35
+      ],
+      [
+        "Aplicação Prática: Espaços da Pelve e Histerectomia",
+        0.24
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Anatomia Pélvica",
+        0.3
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+    "medway_name": "Dor pélvica crônica",
+    "curr_hours": 1.83,
+    "final_hours": 1.83,
+    "reg_hours": 1.83,
+    "flash_hours": 0.78,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Investigação da Dor Pélvica Crônica e Dismenorreia primária",
+        0.43
+      ],
+      [
+        "Fisiopatologia da Endometriose",
+        0.46
+      ],
+      [
+        "Quadro Clínico e Diagnóstico da Endometriose",
+        0.34
+      ],
+      [
+        "Tratamento da Endometriose",
+        0.6
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Investigação inicial da Dor Pélvica Crônica, Dismenorreia Primária e Outras causas",
+        0.28
+      ],
+      [
+        "Aula flash - Endometriose: Definição e Fisiopatologia",
+        0.23
+      ],
+      [
+        "Aula flash - Endometriose: Diagnóstico e Tratamento",
+        0.27
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+    "medway_name": "Doença Inflamatória Pélvica e Violência Sexual",
+    "curr_hours": 1.69,
+    "final_hours": 1.69,
+    "reg_hours": 1.69,
+    "flash_hours": 0.59,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Doença Inflamatória Pélvica",
+        0.95
+      ],
+      [
+        "Doença Inflamatória Pélvica e Violência Sexual - Violência Sexual",
+        0.74
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Doença Inflamatória Pélvica e Violência Sexual - Parte I",
+        0.31
+      ],
+      [
+        "Aula Flash - Doença Inflamatória Pélvica e Violência Sexual - Parte II",
+        0.28
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+    "medway_name": "Vulvovaginites",
+    "curr_hours": 0.93,
+    "final_hours": 0.93,
+    "reg_hours": 0.93,
+    "flash_hours": 0.82,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Flora Vaginal e Abordagem Inicial de Vulvovaginites",
+        0.22
+      ],
+      [
+        "Infecciosas",
+        0.47
+      ],
+      [
+        "Não-Infecciosas",
+        0.23
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Vulvovaginites",
+        0.1
+      ],
+      [
+        "Aula flash - Microbiota Vaginal Normal",
+        0.24
+      ],
+      [
+        "Aula flash - Vulvovaginites Infecciosas",
+        0.26
+      ],
+      [
+        "Aula flash - Vulvovaginites Não-Infecciosas",
+        0.22
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Investigação e Propêdêutica da Infertilidade Conjugal",
+    "medway_name": "Infertilidade conjugal",
+    "curr_hours": 1.41,
+    "final_hours": 1.41,
+    "reg_hours": 1.41,
+    "flash_hours": 0.78,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Introdução a infertilidade",
+        0.37
+      ],
+      [
+        "Fator feminino e masculino",
+        0.58
+      ],
+      [
+        "Tratamento",
+        0.46
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Investigação da Infertilidade Conjugal",
+        0.29
+      ],
+      [
+        "Aula flash - Tratamento da Infertilidade Conjugal",
+        0.28
+      ],
+      [
+        "Aula flash - Legislação em Reprodução Assistida",
+        0.21
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+    "medway_name": "Doenças Benignas da Mama",
+    "curr_hours": 1.5,
+    "final_hours": 1.44,
+    "reg_hours": 1.44,
+    "flash_hours": 0.87,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Propedêutica Mamária",
+        0.37
+      ],
+      [
+        "Mastalgia, Fluxos Papilares e Cistos Mamários",
+        0.54
+      ],
+      [
+        "Nódulos Mamários, Processos Inflamatórios e Doenças Proliferativas com Atipias",
+        0.54
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Propedêutica Mamária",
+        0.24
+      ],
+      [
+        "Aula Flash - Mastalgia, derrame papilar e cistos mamários",
+        0.29
+      ],
+      [
+        "Aula Flash - Nódulos Mamarios",
+        0.33
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+    "medway_name": "Tumores Malignos da Mama",
+    "curr_hours": 2.0,
+    "final_hours": 2.07,
+    "reg_hours": 2.07,
+    "flash_hours": 0.82,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Rastreamento CA de mama",
+        0.94
+      ],
+      [
+        "Histologia e estadiamento",
+        0.51
+      ],
+      [
+        "Tratamento",
+        0.63
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Rastreamento do Câncer de Mama",
+        0.28
+      ],
+      [
+        "Aula flash - Diagnóstico e Tipos Histológicos",
+        0.24
+      ],
+      [
+        "Aula flash - Tratamento do Câncer de mama",
+        0.3
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+    "medway_name": "Medicina Fetal",
+    "curr_hours": 1.5,
+    "final_hours": 1.15,
+    "reg_hours": 1.15,
+    "flash_hours": 0.9,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Gestação múltipla",
+        0.72
+      ],
+      [
+        "Doença hemolítica perinatal",
+        0.43
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Doença hemolítica perinatal",
+        0.29
+      ],
+      [
+        "Aula flash - Gemelaridade",
+        0.28
+      ],
+      [
+        "Aula flash - Complicações da gemelaridade e parto",
+        0.33
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Massas Anexiais e Neoplasias Ovarianas",
+    "medway_name": "Tumores dos Ovários",
+    "curr_hours": 1.5,
+    "final_hours": 0.76,
+    "reg_hours": 0,
+    "flash_hours": 0.76,
+    "source": "FLASH_ONLY",
+    "reg_videos": [],
+    "flash_videos": [
+      [
+        "Aula flash - Investigação",
+        0.18
+      ],
+      [
+        "Aula flash - Tumores Benignos",
+        0.28
+      ],
+      [
+        "Aula flash - Tumores Malignos",
+        0.3
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto",
+    "medway_name": "Estática fetal, Pelve e Mecanismo de Parto",
+    "curr_hours": 1.8,
+    "final_hours": 1.58,
+    "reg_hours": 1.58,
+    "flash_hours": 0.16,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Estática fetal, Pelve e Mecanismo de Parto",
+        1.58
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Estática fetal, pelve e mecanismo de parto",
+        0.16
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+    "medway_name": "Assistência ao Parto",
+    "curr_hours": 1.84,
+    "final_hours": 2.06,
+    "reg_hours": 2.06,
+    "flash_hours": 0.32,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Assistência ao Parto - Indução e fases do trabalho de parto",
+        1.23
+      ],
+      [
+        "Assistência ao Parto - Partograma e parto operatório",
+        0.83
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Assistência ao Parto - Indução e fases do trabalho de parto",
+        0.16
+      ],
+      [
+        "Assistência ao Parto - Partograma e parto operatório",
+        0.16
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+    "medway_name": "Rotura Prematura de Membranas Ovulares e Infecção Ovular",
+    "curr_hours": 1.0,
+    "final_hours": 0.81,
+    "reg_hours": 0.81,
+    "flash_hours": 0.2,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Rotura Prematura de Membranas Ovulares",
+        0.26
+      ],
+      [
+        "Diagnóstico e Condutas na RPMO",
+        0.34
+      ],
+      [
+        "Corioamnionite",
+        0.21
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Definição e diagnóstico",
+        0.11
+      ],
+      [
+        "Aula flash - Condutas e particularidades da corioamnionite",
+        0.09
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Trabalho de Parto Prematuro e Tocólise",
+    "medway_name": "Trabalho de parto prematuro",
+    "curr_hours": 1.04,
+    "final_hours": 1.05,
+    "reg_hours": 1.05,
+    "flash_hours": 0.28,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Prematuridade: Fatores de Risco e Etiologias",
+        0.37
+      ],
+      [
+        "Incompetência Istmo-Cervical",
+        0.19
+      ],
+      [
+        "Trabalho de Parto Prematuro",
+        0.34
+      ],
+      [
+        "Profilaxia para GBS",
+        0.14
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Definição, etiologias e prevenção",
+        0.14
+      ],
+      [
+        "Aula flash - Condutas terapêuticas",
+        0.14
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+    "medway_name": "Puerpério",
+    "curr_hours": 1.88,
+    "final_hours": 1.88,
+    "reg_hours": 1.88,
+    "flash_hours": 0.16,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Puerpério",
+        1.88
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Puerpério",
+        0.16
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+    "medway_name": "Sangramento da Primeira Metade da Gestação",
+    "curr_hours": 1.83,
+    "final_hours": 1.83,
+    "reg_hours": 1.83,
+    "flash_hours": 0.29,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Abortamento",
+        0.92
+      ],
+      [
+        "Gestação ectópica",
+        0.6
+      ],
+      [
+        "Doença trofoblástica gestacional",
+        0.31
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Sangramento da Primeira Metade da Gestação",
+        0.29
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+    "medway_name": "Sangramento da Segunda Metade da Gestação",
+    "curr_hours": 1.31,
+    "final_hours": 1.31,
+    "reg_hours": 1.31,
+    "flash_hours": 0.09,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Descolamento prematuro de placenta",
+        0.46
+      ],
+      [
+        "Placenta prévia",
+        0.52
+      ],
+      [
+        "Roturas",
+        0.33
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Sangramento da Segunda Metade da Gestação",
+        0.09
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+    "medway_name": "PALM-COEIN",
+    "curr_hours": 1.5,
+    "final_hours": 1.83,
+    "reg_hours": 1.83,
+    "flash_hours": 0.13,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Sangramento uterino anormal",
+        0.54
+      ],
+      [
+        "Causas estruturais",
+        0.8
+      ],
+      [
+        "Causas não estruturais",
+        0.49
+      ]
+    ],
+    "flash_videos": [
+      [
+        "PALM-COEIN",
+        0.13
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+    "medway_name": "Sofrimento Fetal",
+    "curr_hours": 1.5,
+    "final_hours": 2.24,
+    "reg_hours": 2.24,
+    "flash_hours": 1.19,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Sofrimento Fetal Agudo",
+        1.14
+      ],
+      [
+        "Sofrimento Fetal Crônico",
+        1.11
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Parâmetros da cardiotocografia",
+        0.32
+      ],
+      [
+        "Aula flash - Análise de cardiotocografia",
+        0.3
+      ],
+      [
+        "Aula flash - PBF e alterações do líquido amniótico",
+        0.26
+      ],
+      [
+        "Aula flash - Doppler fetal e RCIU",
+        0.31
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Úlceras Genitais e Infecções Sexualmente Transmissíveis na Mulher",
+    "medway_name": "Úlceras genitais",
+    "curr_hours": 1.0,
+    "final_hours": 1.29,
+    "reg_hours": 1.29,
+    "flash_hours": 0.64,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Diagnósticos Diferenciais das Úlceras Genitais",
+        0.25
+      ],
+      [
+        "Sífilis",
+        0.64
+      ],
+      [
+        "Herpes Genital e outras úlceras",
+        0.4
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Diagnóstico Diferencial das Úlceras Genitais e Herpes Genital",
+        0.22
+      ],
+      [
+        "Aula Flash - Sífilis",
+        0.27
+      ],
+      [
+        "Aula Flash - Outras Úlceras Genitais",
+        0.15
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+    "medway_name": "Incontinência Urinária e Prolapsos de Órgãos Pélvicos",
+    "curr_hours": 1.77,
+    "final_hours": 1.77,
+    "reg_hours": 1.77,
+    "flash_hours": 0.58,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Incontinência Urinária e Prolapsos de Órgãos Pélvicos - Incontinência Urinária",
+        1.2
+      ],
+      [
+        "Incontinência Urinária e Prolapsos de Órgãos Pélvicos - Prolapsos de Órgãos Pélvicos",
+        0.57
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Incontinência Urinária",
+        0.29
+      ],
+      [
+        "Aula flash - Prolapsos de Órgãos Pélvicos",
+        0.3
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Patologias Benignas e Neoplásicas da Vulva e Vagina",
+    "medway_name": "Patologias da Vulva e Vagina",
+    "curr_hours": 1.0,
+    "final_hours": 1.11,
+    "reg_hours": 1.11,
+    "flash_hours": 0.17,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Líquen Escleroso e Líquen Plano",
+        0.27
+      ],
+      [
+        "Úlceras Não-Infecciosas e Condilomatose Vulvar",
+        0.18
+      ],
+      [
+        "NIVs e Câncer de Vulva",
+        0.49
+      ],
+      [
+        "Alterações Glandulares da Vulva",
+        0.17
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Patologias da vulva e vagina",
+        0.17
+      ]
+    ]
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Fundamentos em Sexualidade Humana e Saúde Reprodutiva",
+    "medway_name": "Conceitos em sexualidade",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Disfunções Sexuais Femininas e Dispareunia",
+    "medway_name": "Disfunções sexuais",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Fístulas Urogenitais e Retovaginais",
+    "medway_name": "Fístulas",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Ginecologia e Obstetrícia",
+    "theme": "Causas de Mortalidade Materna e Estratégias de Redução",
+    "medway_name": "Morte materna",
+    "curr_hours": 0.5,
+    "final_hours": 0.5,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Imunodeficiências, Alergias e Anafilaxia na Infância",
+    "medway_name": "Desordens do Sistema Imune",
+    "curr_hours": 1.5,
+    "final_hours": 1.95,
+    "reg_hours": 1.95,
+    "flash_hours": 0.59,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Anafilaxia e emergência alérgica",
+        0.55
+      ],
+      [
+        "Doenças alérgicas da pele e vias aéreas",
+        0.72
+      ],
+      [
+        "Alergia alimentar e erros inatos da imunidade",
+        0.68
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Anafilaxia e doenças alérgicas da pele e vias aéreas",
+        0.32
+      ],
+      [
+        "Aula flash - Alergia alimentar e erros inatos da imunidade",
+        0.27
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Cardiopatias Congênitas Cianogênicas e Acianogênicas",
+    "medway_name": "Cardiopatias Congênitas",
+    "curr_hours": 1.6,
+    "final_hours": 1.6,
+    "reg_hours": 1.6,
+    "flash_hours": 0.88,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Fundamentos das Cardiopatias Congênitas",
+        0.74
+      ],
+      [
+        "Cardiopatias Acianóticas e Cianóticas",
+        0.86
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash -  Circulação fetal",
+        0.28
+      ],
+      [
+        "Aula Flash - Cardiopatias acianóticas",
+        0.31
+      ],
+      [
+        "Aula Flash - Cardiopatias cianóticas",
+        0.29
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+    "medway_name": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+    "curr_hours": null,
+    "final_hours": 0.6,
+    "reg_hours": 0.6,
+    "flash_hours": 0,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Síncope",
+        0.16
+      ],
+      [
+        "Parada Cardiorrespiratória",
+        0.44
+      ]
+    ],
+    "flash_videos": []
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Constipação Intestinal Funcional e Orgânica",
+    "medway_name": "Constipação Intestinal",
+    "curr_hours": 1.0,
+    "final_hours": 0.58,
+    "reg_hours": 0.58,
+    "flash_hours": 0.27,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Constipação Intestinal",
+        0.58
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Constipação Intestinal",
+        0.27
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Diarreia Aguda, Reidratação Oral e Doenças Disabsortivas",
+    "medway_name": "Síndromes Diarreicas e Disabsortivas",
+    "curr_hours": 2.0,
+    "final_hours": 3.27,
+    "reg_hours": 3.27,
+    "flash_hours": 1.2,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Diarreia aguda e manejo da desidratação",
+        1.03
+      ],
+      [
+        "Diarreia persistente e síndromes disabsortivas",
+        0.9
+      ],
+      [
+        "Síndromes Diarreicas e Disabsortivas - Mecanismos Diarreicos e Diarreia Aguda",
+        0.56
+      ],
+      [
+        "Síndromes Diarreicas e Disabsortivas - Intolerância à lactose e SIBO",
+        0.24
+      ],
+      [
+        "Síndromes Diarreicas e Disabsortivas - Doença Celíaca, Pseudomembranosa, SII e Doença de Whipple",
+        0.55
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Conceitos gerais e classificação da desidratação",
+        0.28
+      ],
+      [
+        "Aula Flash - Manejo da desidratação",
+        0.29
+      ],
+      [
+        "Aula Flash - Doença celíaca",
+        0.23
+      ],
+      [
+        "Aula Flash - Demais diarreias crônicas",
+        0.26
+      ],
+      [
+        "Síndromes Diarreicas e Disabsortivas",
+        0.14
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+    "medway_name": "Desordens Genéticas e Erros Inatos do Metabolismo",
+    "curr_hours": 1.5,
+    "final_hours": 1.74,
+    "reg_hours": 1.74,
+    "flash_hours": 0.77,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Fundamentos da genética médica e doenças monogênicas",
+        0.61
+      ],
+      [
+        "Síndrome de Down: diagnóstico, comorbidades e seguimento",
+        0.49
+      ],
+      [
+        "Outras síndromes genéticas e erros inatos do metabolismo",
+        0.64
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Síndrome de Down",
+        0.26
+      ],
+      [
+        "Aula flash - Outras síndromes genéticas",
+        0.26
+      ],
+      [
+        "Aula flash - Erros inatos do metabolismo",
+        0.26
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Infecção do Trato Urinário (ITU) e Refluxo Vesicoureteral na Infância",
+    "medway_name": "Infecção do Trato Urinário (ITU)",
+    "curr_hours": 1.2,
+    "final_hours": 0.56,
+    "reg_hours": 0.56,
+    "flash_hours": 0.3,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Infecção do Trato Urinário (ITU)",
+        0.56
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Infecção do Trato Urinário Geral",
+        0.18
+      ],
+      [
+        "Aula flash - Investigação complementar e Quimioprofilaxia",
+        0.12
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
+    "medway_name": "Doenças Exantemáticas",
+    "curr_hours": 1.54,
+    "final_hours": 1.54,
+    "reg_hours": 1.54,
+    "flash_hours": 0.7,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Doença de Kawasaki x SIMP",
+        0.53
+      ],
+      [
+        "Exantemas Virais",
+        0.42
+      ],
+      [
+        "Outros Exantemas virais e Exantemas bacterianos",
+        0.59
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Exantemas bacterianos",
+        0.17
+      ],
+      [
+        "Aula flash - Kawasaki x SIMP",
+        0.26
+      ],
+      [
+        "Aula flash - Exantemas virais",
+        0.27
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Calendário Vacinal do PNI e Imunizações Especiais",
+    "medway_name": "Imunizações",
+    "curr_hours": 2.5,
+    "final_hours": 2.11,
+    "reg_hours": 2.11,
+    "flash_hours": 0.39,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Imunizações - Parte I",
+        0.63
+      ],
+      [
+        "Imunizações - Parte II",
+        0.73
+      ],
+      [
+        "Como cai na PREV: Imunizações",
+        0.74
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Imunizações",
+        0.18
+      ],
+      [
+        "Como cai na PREV: Imunizações",
+        0.2
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Parasitoses Intestinais: Helmintíases e Protozooses",
+    "medway_name": "Parasitoses",
+    "curr_hours": 1.0,
+    "final_hours": 0.99,
+    "reg_hours": 0.99,
+    "flash_hours": 0.21,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Protozooses intestinais e introdução às helmintíases",
+        0.55
+      ],
+      [
+        "Helmintíases intestinais por nematódeos",
+        0.44
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Tratamento das parasitoses e as menos prevalentes.",
+        0.11
+      ],
+      [
+        "Aula flash - Principais parasitoses",
+        0.11
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+    "medway_name": "Período Neonatal: Doenças Hematológicas",
+    "curr_hours": 1.29,
+    "final_hours": 1.29,
+    "reg_hours": 1.29,
+    "flash_hours": 0.06,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Período Neonatal: Doenças Hematológicas",
+        1.29
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Período Neonatal: Doenças Hematológicas",
+        0.06
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+    "medway_name": "Período Neonatal: Doenças Infecciosas",
+    "curr_hours": 1.77,
+    "final_hours": 2.24,
+    "reg_hours": 2.24,
+    "flash_hours": 0.94,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Infecciosas",
+        0.47
+      ],
+      [
+        "Sepse Neonatal",
+        0.57
+      ],
+      [
+        "Sífilis Congênita",
+        0.53
+      ],
+      [
+        "Transmissão Vertical HIV e Hepatite B",
+        0.29
+      ],
+      [
+        "Toxoplasmose e CMV Congênitos",
+        0.31
+      ],
+      [
+        "Rubéola e Varicela Congênita",
+        0.08
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Sepse Neonatal",
+        0.24
+      ],
+      [
+        "Aula flash - Sífilis Congênita",
+        0.27
+      ],
+      [
+        "Aula flash - HIV, Hepatite B",
+        0.18
+      ],
+      [
+        "Aula flash - Toxoplasmose, CMV, Rubéola e Varicela",
+        0.25
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+    "medway_name": "Período Neonatal: Doenças do Metabolismo",
+    "curr_hours": 0.54,
+    "final_hours": 0.54,
+    "reg_hours": 0.54,
+    "flash_hours": 0.12,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Período Neonatal: Doenças do Metabolismo",
+        0.54
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Período Neonatal: Doenças do Metabolismo",
+        0.12
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Neonatologia: Desconforto Respiratório e Doença da Membrana Hialina",
+    "medway_name": "Período Neonatal: Doenças Respiratórias",
+    "curr_hours": 0.88,
+    "final_hours": 0.88,
+    "reg_hours": 0.88,
+    "flash_hours": 0.31,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "SDR, TTRN, SAM",
+        0.63
+      ],
+      [
+        "Pneumonia Neonatal Precoce, Hipertensão Pulmonar Persistente e Malformações congênitas pulmonares",
+        0.25
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Período Neonatal: Doenças Respiratórias",
+        0.31
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Neonatologia: Asfixia Perinatal, Encefalopatia e Doenças Neurológicas",
+    "medway_name": "Período Neonatal: Doenças Neurológicas e Sensoriais",
+    "curr_hours": 1.29,
+    "final_hours": 1.29,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Reanimação Neonatal e Assistência em Sala de Parto",
+    "medway_name": "Sala de Parto",
+    "curr_hours": 2.26,
+    "final_hours": 2.0,
+    "reg_hours": 2.0,
+    "flash_hours": 0.41,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Sala de parto e reanimação neonatal",
+        0.77
+      ],
+      [
+        "Principais pegadinhas: diferenças entre os protocolos, mecônio, APGAR e aspectos éticos",
+        0.3
+      ],
+      [
+        "Sala de parto e reanimação neonatal",
+        0.93
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Sala de parto e reanimação neonatal",
+        0.24
+      ],
+      [
+        "Aula flash - Principais pegadinhas: diferenças entre os protocolos, mecônio, APGAR e aspectos éticos",
+        0.17
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+    "medway_name": "Alojamento Conjunto e Testes de Triagem Neonatal",
+    "curr_hours": 1.5,
+    "final_hours": 1.57,
+    "reg_hours": 1.57,
+    "flash_hours": 0.96,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Alojamento Conjunto",
+        0.57
+      ],
+      [
+        "Teste do pezinho e do coraçãozinho",
+        0.71
+      ],
+      [
+        "Teste do orelhinha, olhinho entre outros",
+        0.29
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Alojamento conjunto",
+        0.33
+      ],
+      [
+        "Aula flash - Teste do pezinho e do coraçãozinho",
+        0.35
+      ],
+      [
+        "Aula flash - Teste da orelhinha, olhinho, linguinha, displasia e FOP",
+        0.28
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Convulsão Febril, Epilepsias e Síndromes Convulsivas na Infância",
+    "medway_name": "Epilepsia e Síndromes Convulsivas",
+    "curr_hours": 1.5,
+    "final_hours": 1.39,
+    "reg_hours": 1.39,
+    "flash_hours": 0.81,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Crises Epilépticas e Crise Febril",
+        0.66
+      ],
+      [
+        "Manejo da Crise e Síndromes Eletroclínicas",
+        0.73
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Conceitos gerais de epilepsia e crise febril",
+        0.29
+      ],
+      [
+        "Aula flash - Manejo da crise e estado de mal epiléptico",
+        0.25
+      ],
+      [
+        "Aula flash - Síndromes epilépticas",
+        0.27
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Anemias Carenciais e Distúrbios de Micronutrientes (Ferro, Vitamina D)",
+    "medway_name": "Distúrbios Carenciais",
+    "curr_hours": 1.5,
+    "final_hours": 0.88,
+    "reg_hours": 0.88,
+    "flash_hours": 0.11,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Suplementação de Ferro, Vitamina D e Vitamina B12",
+        0.55
+      ],
+      [
+        "Vitamina A, Zinco, e outras vitaminas",
+        0.33
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Distúrbios Carenciais",
+        0.11
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Aleitamento Materno, Alimentação Complementar e Desnutrição Infantil",
+    "medway_name": "Nutrição na Pediatria",
+    "curr_hours": 1.5,
+    "final_hours": 1.06,
+    "reg_hours": 1.06,
+    "flash_hours": 0.12,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Aleitamento Materno e Refluxogastroesofágico do Lactente",
+        0.64
+      ],
+      [
+        "Introdução alimentar e Desnutrição na Infância",
+        0.42
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Nutrição na Pediatria",
+        0.12
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Afecções de Vias Aéreas Superiores: OMA, Sinusite e Faringoamigdalite",
+    "medway_name": "Nariz, Ouvido e Laringe",
+    "curr_hours": 1.5,
+    "final_hours": 1.21,
+    "reg_hours": 1.21,
+    "flash_hours": 1.01,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Resfriado Comum, Sinusite Bacteriana e Otite Média Aguda",
+        0.66
+      ],
+      [
+        "Tonsilites, Crupe e Suspeita de corpo estranho em nariz e orelha",
+        0.55
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Nariz",
+        0.32
+      ],
+      [
+        "Aula flash - Ouvido",
+        0.34
+      ],
+      [
+        "Aula flash - Laringe (Faringe e Laringe",
+        0.34
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+    "medway_name": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+    "curr_hours": null,
+    "final_hours": 1.65,
+    "reg_hours": 1.65,
+    "flash_hours": 0.15,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Distúrbios Obstrutivos",
+        1.65
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Distúrbios Obstrutivos",
+        0.15
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Segurança Infantil, Prevenção de Acidentes e Maus-Tratos",
+    "medway_name": "Segurança e Violência na Infância",
+    "curr_hours": 1.0,
+    "final_hours": 0.48,
+    "reg_hours": 0.48,
+    "flash_hours": 0.08,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Segurança e Violência na Infância",
+        0.48
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Segurança e Violência na Infância",
+        0.08
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Transtornos do Neurodesenvolvimento (TEA, TDAH) e Saúde Mental na Infância",
+    "medway_name": "Avaliação e Transtornos do Comportamento na Infância e Adolescência",
+    "curr_hours": 1.5,
+    "final_hours": 1.55,
+    "reg_hours": 1.55,
+    "flash_hours": 0.19,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Avaliação e Transtornos do Comportamento na Infância e Adolescência",
+        1.55
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Avaliação e Transtornos do Comportamento na Infância e Adolescência",
+        0.19
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+    "medway_name": "Distúrbios Estaturais e Puberais",
+    "curr_hours": 1.5,
+    "final_hours": 1.67,
+    "reg_hours": 1.67,
+    "flash_hours": 0.13,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Distúrbios Estaturais e Puberais",
+        1.67
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Distúrbios Estaturais e Puberais",
+        0.13
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+    "medway_name": "Crescimento e Desenvolvimento na Infância e Adolescência",
+    "curr_hours": 1.26,
+    "final_hours": 1.26,
+    "reg_hours": 1.26,
+    "flash_hours": 0.17,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Crescimento e Desenvolvimento na Infância e Adolescência",
+        1.26
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Crescimento e Desenvolvimento na Infância e Adolescência",
+        0.17
+      ]
+    ]
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Sepse Pediátrica, Choque e Ressuscitação Hemodinâmica",
+    "medway_name": "Sepse Pediátrica, Choque e Ressuscitação Hemodinâmica",
+    "curr_hours": null,
+    "final_hours": 1.0,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Pediatria",
+    "theme": "Vasculites na Infância (Henoch-Schönlein e Kawasaki)",
+    "medway_name": "Vasculites na Infância (Henoch-Schönlein e Kawasaki)",
+    "curr_hours": null,
+    "final_hours": 1.0,
+    "reg_hours": 0,
+    "flash_hours": 0,
+    "source": "FALLBACK",
+    "reg_videos": [],
+    "flash_videos": []
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Ética Médica, Bioética e Prontuários / Documentos",
+    "medway_name": "Ética médica, Bioética e Documentação",
+    "curr_hours": 1.67,
+    "final_hours": 1.67,
+    "reg_hours": 1.67,
+    "flash_hours": 0.23,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Declaração de Óbito",
+        0.51
+      ],
+      [
+        "Bioética e Conceitos de fim de vida",
+        0.62
+      ],
+      [
+        "Telemedicina, Publicidade médica e Violência",
+        0.55
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Ética Médica, Bioética e Documentação",
+        0.07
+      ],
+      [
+        "Ética médica, Bioética e Documentação (APROFUNDAMENTO)",
+        0.15
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+    "medway_name": "Estudos Epidemiológicos (Análise Estatística e Aplicação)",
+    "curr_hours": 2.0,
+    "final_hours": 1.91,
+    "reg_hours": 1.91,
+    "flash_hours": 0.86,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Estudos Epidemiológicos (Análise Estatística e Aplicação) - parte 1",
+        0.84
+      ],
+      [
+        "Estudos Epidemiológicos (Análise Estatística e Aplicação) - parte 2",
+        1.06
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Conceitos básicos de estatística",
+        0.3
+      ],
+      [
+        "Aula flash - Medidas de associação, medidas de efeito e intervalo de confiança",
+        0.33
+      ],
+      [
+        "Aula flash - Tipos de variáveis e testes estatísticos",
+        0.23
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Delineamentos e Classificação dos Estudos Epidemiológicos",
+    "medway_name": "Estudos Epidemiológicos (Classificação)",
+    "curr_hours": 1.6,
+    "final_hours": 1.6,
+    "reg_hours": 1.6,
+    "flash_hours": 0.82,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Classificação dos estudos epidemiológicos",
+        0.74
+      ],
+      [
+        "Desdobramentos práticos dos estudos epidemiológicos.",
+        0.85
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Classificação dos Estudos Epidemiológicos e Ensaio Clínico",
+        0.3
+      ],
+      [
+        "Aula flash - Vieses, vantagens e desvantagens dos estudos epidemiológicos",
+        0.3
+      ],
+      [
+        "Aula flash - Medicina Baseada em Evidências e Critérios de Hill",
+        0.22
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Indicadores de Saúde e Coeficientes de Morbimortalidade",
+    "medway_name": "Indicadores de Morbimortalidade",
+    "curr_hours": 1.5,
+    "final_hours": 1.37,
+    "reg_hours": 1.37,
+    "flash_hours": 1.62,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Indicadores de Morbimortalidade - Bases para o entendimento, indicadores de morbidade e mortalidade",
+        1.37
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Bases para o entendimento dos indicadores de morbimortalidade",
+        0.3
+      ],
+      [
+        "Aula Flash - Indicadores de mortalidade e letalidade",
+        0.24
+      ],
+      [
+        "Aula flash - Mortalidade proporcional",
+        0.22
+      ],
+      [
+        "Aula Flash - DALY, QALY e APVP",
+        0.18
+      ],
+      [
+        "Indicadores de Morbimortalidade - Mortalidade proporcional, letalidade, DALY e APVP",
+        0.68
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Transição Demográfica e Perfis Populacionais",
+    "medway_name": "Perfis e Indicadores demográficos",
+    "curr_hours": 1.5,
+    "final_hours": 2.0,
+    "reg_hours": 2.0,
+    "flash_hours": 0.88,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Perfis e Indicadores demográficos - Bases para o entendimendo, indicadores e transição demográfica",
+        1.08
+      ],
+      [
+        "Perfis e Indicadores demográficos - Transição epidemiol. e nutricional, SIS, vulnerabilidade e DSS",
+        0.92
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Indicadores demográficos",
+        0.15
+      ],
+      [
+        "Aula flash - Transições demográfica, epidemiológica e nutricional",
+        0.29
+      ],
+      [
+        "Aula flash - Sistemas de informação em saúde",
+        0.2
+      ],
+      [
+        "Aula flash - Vulnerabilidades e determinantes sociais da saúde",
+        0.24
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "História Natural da Doença e Níveis de Prevenção",
+    "medway_name": "Níveis de Prevenção",
+    "curr_hours": 1.9,
+    "final_hours": 1.9,
+    "reg_hours": 1.9,
+    "flash_hours": 0.09,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Níveis de Prevenção - Modelo de Leavell e Clark, prevenção primária e secundária",
+        0.73
+      ],
+      [
+        "Níveis de Prevenção - Rastreamentos, prevenção terciária, quaternária e quinquenária",
+        1.17
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Níveis de Prevenção",
+        0.09
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "História das Políticas de Saúde e Origens do SUS",
+    "medway_name": "Aspectos Históricos do SUS",
+    "curr_hours": 1.5,
+    "final_hours": 2.12,
+    "reg_hours": 2.12,
+    "flash_hours": 0.93,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Tipologias de Sistemas de Saúde, História da Saúde Pré-SUS e Formação do SUS",
+        0.91
+      ],
+      [
+        "Base Legal do SUS e Princípios / Diretrizes",
+        0.64
+      ],
+      [
+        "Saúde Complementar, Vigilância em Saúde, Lei 8142",
+        0.57
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Tipologias dos Sistemas de Saúde, História Pré-SUS e Formação do SUS",
+        0.32
+      ],
+      [
+        "Aula flash - Base Legal e Princípios e Diretrizes",
+        0.3
+      ],
+      [
+        "Aula flash - Saúde Complementar, Vigilância em Saúde e Lei 8142",
+        0.3
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Legislação, Diretrizes e Evolução do SUS",
+    "medway_name": "A Evolução do SUS",
+    "curr_hours": 2.0,
+    "final_hours": 2.04,
+    "reg_hours": 2.04,
+    "flash_hours": 1.22,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "História da Gestão: NOBs, NOAS e Pacto pela Saúde",
+        0.65
+      ],
+      [
+        "Decreto 7508/2011",
+        0.27
+      ],
+      [
+        "Financiamento, Gastos em Saúde e Relações Público-Privadas",
+        0.59
+      ],
+      [
+        "Saúde Suplementar e Políticas e Programas",
+        0.54
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - História da Gestão: NOBs, NOAS e Pacto pela Saúde",
+        0.32
+      ],
+      [
+        "Aula flash - Decreto 7508",
+        0.29
+      ],
+      [
+        "Aula flash - Financiamento, Gastos em Saúde e Relações Público-Privadas",
+        0.3
+      ],
+      [
+        "Aula flash - Saúde Suplementar e Políticas e Programas",
+        0.31
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
+    "medway_name": "Atenção Primária à Saúde",
+    "curr_hours": 2.23,
+    "final_hours": 2.23,
+    "reg_hours": 2.23,
+    "flash_hours": 0.05,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Atenção Primária à Saúde - Atributos, Princípios e Diretrizes da APS e MFC",
+        0.7
+      ],
+      [
+        "Atenção Primária à Saúde - Política Nacional de Atenção Básica",
+        0.48
+      ],
+      [
+        "Atenção Primária à Saúde - Financiamento da APS",
+        0.25
+      ],
+      [
+        "Atenção Primária à Saúde - MCCP, Entrevista Motivacional e RCOP",
+        0.42
+      ],
+      [
+        "Atenção Primária à Saúde - PTS e Ferramentas de abordagem familiar",
+        0.39
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Atenção Primária à Saúde",
+        0.05
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Avaliação de Testes Diagnósticos e Curva ROC",
+    "medway_name": "Estatística de Testes Diagnósticos",
+    "curr_hours": 2.0,
+    "final_hours": 1.91,
+    "reg_hours": 1.91,
+    "flash_hours": 0.6,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Estatística de Testes Diagnósticos - parte 1",
+        0.78
+      ],
+      [
+        "Estatística de Testes Diagnósticos - parte 2",
+        0.72
+      ],
+      [
+        "Estatística de Testes Diagnósticos - parte 3",
+        0.41
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - Propriedades dos testes diagnósticos e aplicações práticas",
+        0.29
+      ],
+      [
+        "Aula flash - Curva ROC e Razões de verossimilhança.",
+        0.31
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Vigilância Epidemiológica: Endemias, Epidemias e Surtos",
+    "medway_name": "Epidemias, Endemias e Pandemias",
+    "curr_hours": 1.5,
+    "final_hours": 2.15,
+    "reg_hours": 2.15,
+    "flash_hours": 0.21,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Epidemias, Endemias e Pandemias - Conceitos de Epidemiologia, Raiva e ILTB",
+        1.33
+      ],
+      [
+        "Epidemias, Endemias e Pandemias - Sífilis, Tétano, Sarampo e Outros Temas Relevantes",
+        0.82
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Epidemias, Endemias e Pandemias",
+        0.21
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Vigilância em Saúde e Notificação Compulsória (SINAN)",
+    "medway_name": "Notificação",
+    "curr_hours": 1.85,
+    "final_hours": 1.85,
+    "reg_hours": 1.85,
+    "flash_hours": 0.79,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Notificação - Bases para o entendimento",
+        0.6
+      ],
+      [
+        "Notificação - A lista",
+        0.89
+      ],
+      [
+        "Notificação - Casos específicos e Vigilância sentinela",
+        0.35
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula Flash - Bases para o entendimento das notificações.",
+        0.24
+      ],
+      [
+        "Aula Flash  - A lista de agravos de notificação compulsória.",
+        0.39
+      ],
+      [
+        "Aula flash - Notificação em unidade sentinela",
+        0.16
+      ]
+    ]
+  },
+  {
+    "area": "Medicina Preventiva",
+    "theme": "Saúde do Trabalhador e Doenças Ocupacionais",
+    "medway_name": "Vigilância em Saúde do Trabalhador",
+    "curr_hours": 1.82,
+    "final_hours": 1.83,
+    "reg_hours": 1.83,
+    "flash_hours": 0.63,
+    "source": "REGULAR",
+    "reg_videos": [
+      [
+        "Vigilância em Saúde do Trabalhador - VISAT e Acidentes de Trabalho",
+        0.58
+      ],
+      [
+        "Vigilância em Saúde do Trabalhador - Fatores Mecânicos e Saúde Mental",
+        0.36
+      ],
+      [
+        "Vigilância em Saúde do Trabalhador - Agentes biológicos, químicos, físicos e outras substâncias",
+        0.57
+      ],
+      [
+        "Vigilância em Saúde do Trabalhador - Metais pesados e agrotóxicos",
+        0.32
+      ]
+    ],
+    "flash_videos": [
+      [
+        "Aula flash - VISAT e Acidentes de Trabalho",
+        0.13
+      ],
+      [
+        "Aula flash - Fatores mecânicos e Saúde Mental",
+        0.16
+      ],
+      [
+        "Aula flash - Agentes biológicos, químicos, físicos e outras substâncias",
+        0.22
+      ],
+      [
+        "Aula flash - Metais pesados e agrotóxicos",
+        0.12
+      ]
+    ]
+  }
+]
