@@ -60,17 +60,26 @@ KNOWN_TAG_RE = re.compile("|".join(KNOWN_TAG_PATTERNS))
 
 
 def classify_institution(tag_zone: str):
+    tag_upper = tag_zone.upper()
+    if "HOSPITAL SÍRIO" in tag_upper or "SÍRIO-LIBANÊS" in tag_upper or "SIRIO" in tag_upper or " HSL" in tag_zone or "- HSL" in tag_zone:
+        return "HSL", "Hospital Sírio-Libanês (HSL)"
+    if "ALBERT EINSTEIN" in tag_upper or "EINSTEIN" in tag_upper or "HIAE" in tag_zone:
+        return "EINSTEIN", "Hospital Israelita Albert Einstein (HIAE)"
+    if "SANTA CASA" in tag_upper or "SCMSP" in tag_zone:
+        return "SCMSP", "Santa Casa de Misericórdia de São Paulo (SCMSP)"
+    if "SUS SP" in tag_upper or "SUS-SP" in tag_upper or "SISTEMA ÚNICO DE SAÚDE" in tag_upper or "STRIX" in tag_upper:
+        return "SUS-SP", "SUS-SP - Seleção Unificada para Residência Médica do Estado de São Paulo"
     if "Hospital de Reabilitação de Anomalias Craniofaciais" in tag_zone or "HRAC" in tag_zone:
         return "HRAC-USP", "USP - Hospital de Reabilitação de Anomalias Craniofaciais (HRAC), Bauru"
-    if "Ribeirão Preto" in tag_zone:
+    if "Ribeirão Preto" in tag_zone or "HCRP" in tag_zone:
         return "USP-RP", "USP - Hospital das Clínicas da Faculdade de Medicina de Ribeirão Preto (HCRP)"
-    if "Faculdade de Medicina da USP" in tag_zone or "USP - SP" in tag_zone:
+    if "Faculdade de Medicina da USP" in tag_zone or "USP - SP" in tag_zone or "FMUSP" in tag_zone:
         return "USP-SP", "USP - Hospital das Clínicas da Faculdade de Medicina da USP (HC-FMUSP)"
     if "USP" in tag_zone:
-        return "USP-outro", "USP (campus não identificado)"
-    if "Campinas" in tag_zone or "Unicamp" in tag_zone:
+        return "USP-SP", "USP - Hospital das Clínicas da Faculdade de Medicina da USP (HC-FMUSP)"
+    if "Campinas" in tag_zone or "Unicamp" in tag_zone or "FCM" in tag_zone:
         return "UNICAMP", "UNICAMP - Hospital de Clínicas da Unicamp (FCM-Unicamp)"
-    if "UNIFESP" in tag_zone:
+    if "UNIFESP" in tag_zone or "Paulista de Medicina" in tag_zone:
         return "UNIFESP", "UNIFESP - Hospital Universitário da UNIFESP"
     return "OUTRO", "Instituição não identificada"
 
