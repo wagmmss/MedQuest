@@ -171,6 +171,11 @@ export const api = {
       a.remove();
       window.URL.revokeObjectURL(downloadUrl);
     },
+    getCalendarFeedUrl: (userId?: string) => {
+      const base = typeof window !== "undefined" ? (API_BASE || window.location.origin) : API_BASE;
+      const uid = userId || (typeof window !== "undefined" ? getLocalOwnerId() : "1");
+      return `${base}/api/planner/calendar/feed?user_id=${encodeURIComponent(uid)}`;
+    },
   },
   questions: {
     getMeta: (filters?: Record<string, string | string[]>) => {

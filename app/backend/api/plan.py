@@ -1,4 +1,4 @@
-"""Blueprint: planejador (config, progresso semanal, revisões, geração de plano)."""
+import urllib.parse
 from datetime import datetime, timedelta, timezone
 
 from flask import Blueprint, Response, g, jsonify, request
@@ -204,15 +204,14 @@ def generate_plan():
     return jsonify(plan)
 
 
-@bp.route("/planner/export/ics", methods=["GET"])
-def export_ics():
-    db = get_db()
-    row = db.execute("SELECT * FROM planner_config WHERE user_id = ?", (g.user_id,)).fetchone()
+def _generate_calendar_ics_content(db, user_id):
+    row = db.execute("SELECT * FROM planner_config WHERE user_id = ?", (user_id,)).fetchone()
     
     if not row or not row["exam_date"]:
         start_date = datetime.now(timezone.utc).isoformat()
         exam_date = (datetime.now(timezone.utc) + timedelta(days=120)).isoformat()
         hours_per_week = 24
+        days = 6
     else:
         start_date = row["start_date"] or datetime.now(timezone.utc).isoformat()
         exam_date = row["exam_date"]
@@ -234,7 +233,7 @@ def export_ics():
         GROUP BY q.subtema
     """
     rows = [dict(r) for r in db.execute(q_query).fetchall()]
-    answered = [dict(r) for r in db.execute(a_query, (g.user_id,)).fetchall()]
+    answered = [dict(r) for r in db.execute(a_query, (user_id,)).fetchall()]
     answered_map = {r["subtema"]: r for r in answered}
 
     plan_result = generate_annual_plan(
@@ -255,6 +254,8 @@ def export_ics():
         "X-WR-TIMEZONE:America/Sao_Paulo",
     ]
 
+    study_days_count = max(1, min(7, days))
+
     for w in plan_weeks:
         w_num = w.get("week")
         w_date_str = w.get("date", "")[:10]
@@ -262,60 +263,127 @@ def export_ics():
             continue
         
         try:
-            w_dt = datetime.strptime(w_date_str, "%Y-%m-%d")
+            week_start_dt = datetime.strptime(w_date_str, "%Y-%m-%d")
         except Exception:
             continue
 
         topics = w.get("topics", [])
-        topic_names = [t.get("subtema", "") for t in topics if t.get("subtema")]
-        subtema_title = topic_names[0] if topic_names else "Revisão Geral"
-        topics_desc = "\\n".join([f"- {t.get('subtema')} ({t.get('area')}): {t.get('estimated_hours', 0)}h" for t in topics]) or "Semana de consolidação."
+        if not topics:
+            start_str = week_start_dt.strftime("%Y%m%dT080000Z")
+            end_str = (week_start_dt + timedelta(hours=3)).strftime("%Y%m%dT110000Z")
+            uid = f"medquest-week-consolidation-{w_num}-{user_id}-{w_date_str}@medquest.app"
+            ics_lines.extend([
+                "BEGIN:VEVENT",
+                f"UID:{uid}",
+                f"DTSTAMP:{now_dt}",
+                f"DTSTART:{start_str}",
+                f"DTEND:{end_str}",
+                f"SUMMARY:[MedQuest] Semana {w_num}: Revisão Geral & Consolidação",
+                f"DESCRIPTION:Semana reservada para consolidação de metas e simulados.\\n\\n🔗 https://medquest.app/planner",
+                "STATUS:CONFIRMED",
+                "END:VEVENT",
+            ])
+            continue
 
-        start_str = w_dt.strftime("%Y%m%dT090000Z")
-        end_str = w_dt.strftime("%Y%m%dT120000Z")
-        uid = f"medquest-week-{w_num}-{g.user_id}-{w_date_str}@medquest.app"
+        for t_idx, topic in enumerate(topics):
+            subtema = topic.get("subtema", "Aula")
+            area = topic.get("area", "Geral")
+            theory_h = topic.get("estimated_theory_hours", 1.0)
+            practice_h = topic.get("estimated_practice_hours", 2.0)
+            total_h = topic.get("estimated_hours", theory_h + practice_h)
+            
+            day_offset = t_idx % study_days_count
+            topic_date = week_start_dt + timedelta(days=day_offset)
+            date_str = topic_date.strftime("%Y%m%d")
+            topic_id_clean = urllib.parse.quote(subtema[:30]).replace("%", "")
 
-        ics_lines.extend([
-            "BEGIN:VEVENT",
-            f"UID:{uid}",
-            f"DTSTAMP:{now_dt}",
-            f"DTSTART:{start_str}",
-            f"DTEND:{end_str}",
-            f"SUMMARY:[MedQuest] Semana {w_num}: {subtema_title}",
-            f"DESCRIPTION:Meta da Semana {w_num} ({w.get('allocated_hours', 0)}h de estudo):\\n{topics_desc}\\n\\n🔗 Acesse em: https://medquest.app/planner",
-            "STATUS:CONFIRMED",
-            "END:VEVENT",
-        ])
+            # Duração REAL da aula (minutos calculados com precisão)
+            duration_minutes = max(30, int(round(total_h * 60)))
+            dt_start = topic_date.replace(hour=8, minute=0, second=0)
+            dt_end = dt_start + timedelta(minutes=duration_minutes)
 
-        rev24_dt = w_dt + timedelta(days=1)
-        ics_lines.extend([
-            "BEGIN:VEVENT",
-            f"UID:medquest-rev24-{w_num}-{g.user_id}-{w_date_str}@medquest.app",
-            f"DTSTAMP:{now_dt}",
-            f"DTSTART:{rev24_dt.strftime('%Y%m%dT190000Z')}",
-            f"DTEND:{rev24_dt.strftime('%Y%m%dT193000Z')}",
-            f"SUMMARY:[MedQuest] 🔄 Revisão 24h: {subtema_title}",
-            f"DESCRIPTION:Revisão rápida de 24h dos temas da Semana {w_num}.\\n\\n🔗 https://medquest.app/revisao-ativa",
-            "STATUS:CONFIRMED",
-            "END:VEVENT",
-        ])
+            start_str = dt_start.strftime("%Y%m%dT%H%M%SZ")
+            end_str = dt_end.strftime("%Y%m%dT%H%M%SZ")
+            uid_lecture = f"medquest-lec-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest.app"
 
-        rev7_dt = w_dt + timedelta(days=7)
-        ics_lines.extend([
-            "BEGIN:VEVENT",
-            f"UID:medquest-rev7-{w_num}-{g.user_id}-{w_date_str}@medquest.app",
-            f"DTSTAMP:{now_dt}",
-            f"DTSTART:{rev7_dt.strftime('%Y%m%dT190000Z')}",
-            f"DTEND:{rev7_dt.strftime('%Y%m%dT193000Z')}",
-            f"SUMMARY:[MedQuest] 🔄 Revisão 7d: {subtema_title}",
-            f"DESCRIPTION:Revisão de 7 dias dos temas da Semana {w_num}.\\n\\n🔗 https://medquest.app/revisao-ativa",
-            "STATUS:CONFIRMED",
-            "END:VEVENT",
-        ])
+            encoded_area = urllib.parse.quote(area)
+            encoded_sub = urllib.parse.quote(subtema)
+            study_url = f"https://medquest.app/estudar?area={encoded_area}&subtema={encoded_sub}"
+
+            ics_lines.extend([
+                "BEGIN:VEVENT",
+                f"UID:{uid_lecture}",
+                f"DTSTAMP:{now_dt}",
+                f"DTSTART:{start_str}",
+                f"DTEND:{end_str}",
+                f"SUMMARY:[MedQuest] 📖 {subtema} ({area})",
+                f"DESCRIPTION:Carga Real: {total_h}h (Teoria: {theory_h}h + Questões: {practice_h}h)\\n\\nSemana {w_num} • {area}\\n\\n🔗 Praticar Questões: {study_url}",
+                "STATUS:CONFIRMED",
+                "END:VEVENT",
+            ])
+
+            # Evento Individual de Revisão 24h (Dia D + 1, às 19:00 - 19:30)
+            rev24_dt = topic_date + timedelta(days=1)
+            rev24_start = rev24_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%SZ")
+            rev24_end = rev24_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%SZ")
+            uid_rev24 = f"medquest-rev24-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest.app"
+
+            ics_lines.extend([
+                "BEGIN:VEVENT",
+                f"UID:{uid_rev24}",
+                f"DTSTAMP:{now_dt}",
+                f"DTSTART:{rev24_start}",
+                f"DTEND:{rev24_end}",
+                f"SUMMARY:[MedQuest] 🔄 Revisão 24h: {subtema}",
+                f"DESCRIPTION:Revisão de fixação de 24h dos conceitos de {subtema}.\\n\\n🔗 Revisar no MedQuest: https://medquest.app/revisao-ativa",
+                "STATUS:CONFIRMED",
+                "END:VEVENT",
+            ])
+
+            # Evento Individual de Revisão 7d (Dia D + 7, às 19:00 - 19:30)
+            rev7_dt = topic_date + timedelta(days=7)
+            rev7_start = rev7_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%SZ")
+            rev7_end = rev7_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%SZ")
+            uid_rev7 = f"medquest-rev7-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest.app"
+
+            ics_lines.extend([
+                "BEGIN:VEVENT",
+                f"UID:{uid_rev7}",
+                f"DTSTAMP:{now_dt}",
+                f"DTSTART:{rev7_start}",
+                f"DTEND:{rev7_end}",
+                f"SUMMARY:[MedQuest] 🔄 Revisão 7d: {subtema}",
+                f"DESCRIPTION:Revisão ativa de 7 dias do tema: {subtema}.\\n\\n🔗 Revisar no MedQuest: https://medquest.app/revisao-ativa",
+                "STATUS:CONFIRMED",
+                "END:VEVENT",
+            ])
+
+            # Evento Individual de Revisão 30d (Dia D + 30, às 19:00 - 19:30)
+            rev30_dt = topic_date + timedelta(days=30)
+            rev30_start = rev30_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%SZ")
+            rev30_end = rev30_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%SZ")
+            uid_rev30 = f"medquest-rev30-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest.app"
+
+            ics_lines.extend([
+                "BEGIN:VEVENT",
+                f"UID:{uid_rev30}",
+                f"DTSTAMP:{now_dt}",
+                f"DTSTART:{rev30_start}",
+                f"DTEND:{rev30_end}",
+                f"SUMMARY:[MedQuest] 🔄 Revisão 30d: {subtema}",
+                f"DESCRIPTION:Consolidação de 30 dias do tema: {subtema}.\\n\\n🔗 Revisar no MedQuest: https://medquest.app/revisao-ativa",
+                "STATUS:CONFIRMED",
+                "END:VEVENT",
+            ])
 
     ics_lines.append("END:VCALENDAR")
-    content = "\r\n".join(ics_lines)
+    return "\r\n".join(ics_lines)
 
+
+@bp.route("/planner/export/ics", methods=["GET"])
+def export_ics():
+    db = get_db()
+    content = _generate_calendar_ics_content(db, g.user_id)
     return Response(
         content,
         mimetype="text/calendar; charset=utf-8",
@@ -323,4 +391,20 @@ def export_ics():
             "Content-Disposition": "attachment; filename=medquest_cronograma.ics"
         }
     )
+
+
+@bp.route("/planner/calendar/feed", methods=["GET"])
+def calendar_feed():
+    db = get_db()
+    user_id = request.args.get("user_id") or getattr(g, "user_id", "1")
+    content = _generate_calendar_ics_content(db, user_id)
+    return Response(
+        content,
+        mimetype="text/calendar; charset=utf-8",
+        headers={
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Content-Disposition": "inline; filename=medquest_feed.ics"
+        }
+    )
+
 

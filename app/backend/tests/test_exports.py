@@ -42,5 +42,17 @@ def test_export_ics_calendar(client):
     assert "BEGIN:VCALENDAR" in text
     assert "VERSION:2.0" in text
     assert "BEGIN:VEVENT" in text
-    assert "SUMMARY:[MedQuest]" in text
+    assert "📖" in text or "Aula:" in text or "Semana" in text
+    assert "Revisão 24h" in text
+    assert "Revisão 7d" in text
+    assert "Revisão 30d" in text
+    assert "END:VCALENDAR" in text
+
+
+def test_calendar_feed_endpoint(client):
+    res = client.get("/api/planner/calendar/feed?user_id=1")
+    assert res.status_code == 200
+    assert "text/calendar" in res.headers.get("Content-Type", "")
+    text = res.get_data(as_text=True)
+    assert "BEGIN:VCALENDAR" in text
     assert "END:VCALENDAR" in text

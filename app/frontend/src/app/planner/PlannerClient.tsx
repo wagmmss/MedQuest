@@ -6,7 +6,7 @@ import Link from "next/link";
 import { PlannerWeek, PlannerProgressMap, PlannerTopic, PlannerConfig } from "@/types/api";
 import { api } from "@/lib/api";
 import { getSubtemaDetails } from "@/lib/plannerData";
-import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play, Flame, Settings2 } from "lucide-react";
+import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play, Flame, Settings2, Copy, Globe, ExternalLink, Download } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/nextjs";
@@ -116,13 +116,30 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
   const [loadingAction, setLoadingAction] = useState<string | null>(null);
   const [checkedTopics, setCheckedTopics] = useState<Record<string, boolean>>({});
   const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [showCalendarModal, setShowCalendarModal] = useState(false);
+  const [copiedFeed, setCopiedFeed] = useState(false);
   const [exportingIcs, setExportingIcs] = useState(false);
+
+  const feedUrl = api.planner.getCalendarFeedUrl(userId || 'guest');
+  const webcalUrl = feedUrl.replace(/^https?:\/\//, "webcal://");
+  const googleCalendarDirectUrl = `https://calendar.google.com/calendar/r/settings/addbyurl?cid=${encodeURIComponent(feedUrl)}`;
+
+  const handleCopyFeed = async () => {
+    try {
+      await navigator.clipboard.writeText(feedUrl);
+      setCopiedFeed(true);
+      toast.success("Link do calendário copiado com sucesso!");
+      setTimeout(() => setCopiedFeed(false), 3000);
+    } catch {
+      toast.error("Não foi possível copiar o link.");
+    }
+  };
 
   const handleExportIcs = async () => {
     setExportingIcs(true);
     try {
       await api.planner.exportIcs();
-      toast.success("Arquivo de calendário (.ics) gerado com sucesso! Abra o arquivo para adicionar ao Google Agenda/Apple Calendar.");
+      toast.success("Arquivo de calendário (.ics) gerado com sucesso!");
     } catch {
       toast.error("Erro ao exportar cronograma.");
     } finally {
@@ -335,13 +352,12 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
             Calibrar Perfil
           </button>
           <button 
-            onClick={handleExportIcs}
-            disabled={exportingIcs}
-            className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80 px-2.5 py-1.5 rounded-lg border border-border transition-colors"
-            title="Exportar cronograma completo para Google Calendar / Apple Calendar (.ics)"
+            onClick={() => setShowCalendarModal(true)}
+            className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-foreground bg-muted hover:bg-muted/80 px-2.5 py-1.5 rounded-lg border border-border transition-colors shadow-sm"
+            title="Sincronizar cronograma com Google Agenda, Apple Calendar ou baixar arquivo .ics"
           >
-            {exportingIcs ? <Loader2 size={15} className="animate-spin" /> : <CalendarDays size={15} />}
-            Exportar Agenda (.ics)
+            <CalendarDays size={15} className="text-primary" />
+            Sincronizar com Agenda
           </button>
           <button 
             onClick={() => setShowResetConfirm(true)}
@@ -508,6 +524,101 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
               onClose={() => setShowSettingsModal(false)}
               isModal
             />
+          </div>
+        </div>
+      )}
+
+      {/* Calendar Sync Modal */}
+      {showCalendarModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowCalendarModal(false)} />
+          <div className="relative bg-card border border-border rounded-2xl shadow-2xl p-6 md:p-8 max-w-lg w-full z-10 animate-in fade-in zoom-in-95 duration-200">
+            <button 
+              onClick={() => setShowCalendarModal(false)} 
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-muted transition-colors text-muted-foreground"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-11 h-11 bg-primary/15 text-primary rounded-xl flex items-center justify-center border border-primary/20 shrink-0">
+                <CalendarDays size={22} />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-foreground">Sincronizar com Calendário</h3>
+                <p className="text-xs text-muted-foreground">Aulas e revisões separadas com a duração real de estudo.</p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {/* Opção 1: Google Agenda Direto */}
+              <div className="border border-border bg-muted/30 rounded-xl p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-md bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold text-xs">
+                      G
+                    </div>
+                    <span className="font-bold text-sm text-foreground">Google Agenda (Direto & Sem Download)</span>
+                  </div>
+                  <span className="text-[10px] uppercase font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-full">
+                    Recomendado
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Sincronização em nuvem: todas as aulas e revisões de 24h, 7d e 30d entram direto na sua conta Google e se atualizam automaticamente.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2 pt-1">
+                  <a
+                    href={googleCalendarDirectUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-2 text-xs shadow-sm"
+                  >
+                    <ExternalLink size={14} />
+                    Adicionar ao Google Agenda
+                  </a>
+                  <button
+                    onClick={handleCopyFeed}
+                    className="bg-card hover:bg-muted text-foreground border border-border font-medium py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-xs"
+                  >
+                    {copiedFeed ? <Check size={14} className="text-success" /> : <Copy size={14} />}
+                    {copiedFeed ? "Copiado!" : "Copiar URL do Feed"}
+                  </button>
+                </div>
+              </div>
+
+              {/* Opção 2: Apple Calendar / Outros Aplicativos */}
+              <div className="border border-border bg-muted/30 rounded-xl p-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <Globe size={18} className="text-primary" />
+                  <span className="font-bold text-sm text-foreground">Apple Calendar / Outlook / Celular</span>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Abra a assinatura direta via WebCal ou baixe o arquivo <code>.ics</code> completo para importar offline.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2 pt-1">
+                  <a
+                    href={webcalUrl}
+                    className="flex-1 bg-muted hover:bg-muted/80 text-foreground font-semibold py-2.5 px-3 rounded-xl border border-border transition-all flex items-center justify-center gap-1.5 text-xs"
+                  >
+                    <CalendarDays size={14} />
+                    Abrir no App de Calendário
+                  </a>
+                  <button
+                    onClick={handleExportIcs}
+                    disabled={exportingIcs}
+                    className="bg-muted hover:bg-muted/80 text-foreground font-medium py-2.5 px-3 rounded-xl border border-border transition-all flex items-center justify-center gap-1.5 text-xs disabled:opacity-50"
+                  >
+                    {exportingIcs ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
+                    Baixar Arquivo (.ics)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-5 text-[11px] text-muted-foreground text-center bg-muted/20 p-2.5 rounded-lg border border-border/50">
+              💡 <strong>Dica:</strong> Seus eventos são distribuídos nos dias que você escolheu estudar, com horários de aula e revisões de 24h, 7d e 30d agendadas às 19:00.
+            </div>
           </div>
         </div>
       )}
