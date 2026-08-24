@@ -655,7 +655,7 @@ export function SimuladoClient({
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">Bancas Incluídas (deixe vazio para todas)</label>
               <div className="flex flex-wrap gap-2">
-                {(meta?.institutions.map(i => i.institution_code) || ['USP-SP', 'USP-RP', 'UNICAMP']).filter(i => !['SUS-SP', 'ENARE'].includes(i)).map(inst => (
+                {(meta?.institutions.map(i => i.institution_code) || ['SCMSP', 'USP-SP', 'SUS-SP', 'USP-RP', 'UNIFESP', 'HSL', 'EINSTEIN', 'UNICAMP', 'HRAC-USP']).map(inst => (
                   <label key={inst} className="flex items-center gap-1.5 bg-background border border-border px-3 py-1.5 rounded-lg text-sm cursor-pointer hover:bg-muted transition-colors">
                     <input 
                       type="checkbox" 

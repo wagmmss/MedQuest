@@ -674,24 +674,97 @@ export function QuizClient({
                 ))}
               </select>
             </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+
             <div className="space-y-2">
               <label className="text-sm font-medium text-foreground flex items-center justify-between">
-                <span>Instituição</span>
+                <span>Ano</span>
                 {isUpdatingMeta && <span className="text-xs text-muted-foreground animate-pulse">Atualizando...</span>}
               </label>
               <select 
                 className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                value={filters.institution || ""}
-                onChange={(e) => setFilters({ ...filters, institution: e.target.value })}
+                value={filters.year || ""}
+                onChange={(e) => setFilters({ ...filters, year: e.target.value })}
               >
-                <option className="bg-background text-foreground" value="">Todas as Instituições</option>
-                {dynamicMeta.institutions.map(i => (
-                  <option className="bg-background text-foreground" key={i.institution_code} value={i.institution_code}>{i.institution_code} ({i.n})</option>
+                <option className="bg-background text-foreground" value="">Todos os Anos</option>
+                {(dynamicMeta.years || []).map(y => (
+                  <option className="bg-background text-foreground" key={y} value={String(y)}>{y}</option>
                 ))}
               </select>
             </div>
+          </div>
+
+          <div className="space-y-3 mt-6">
+            <label className="text-sm font-medium text-foreground flex items-center justify-between">
+              <span>Instituição / Banca</span>
+              {isUpdatingMeta && <span className="text-xs text-muted-foreground animate-pulse">Atualizando...</span>}
+            </label>
+
+            {/* Quick-select interactive chips */}
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  const newFilters = { ...filters };
+                  delete newFilters.institution;
+                  setFilters(newFilters);
+                }}
+                className={clsx(
+                  "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border",
+                  !filters.institution
+                    ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                    : "bg-background border-border text-muted-foreground hover:bg-muted"
+                )}
+              >
+                Todas ({dynamicMeta.total_questions})
+              </button>
+              {dynamicMeta.institutions.map(inst => {
+                const isSelected = filters.institution === inst.institution_code;
+                return (
+                  <button
+                    key={inst.institution_code}
+                    type="button"
+                    onClick={() => {
+                      if (isSelected) {
+                        const newFilters = { ...filters };
+                        delete newFilters.institution;
+                        setFilters(newFilters);
+                      } else {
+                        setFilters({ ...filters, institution: inst.institution_code });
+                      }
+                    }}
+                    className={clsx(
+                      "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border flex items-center gap-1.5",
+                      isSelected
+                        ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                        : "bg-background border-border text-foreground hover:bg-muted hover:border-border/80"
+                    )}
+                    title={inst.institution_label}
+                  >
+                    <span>{inst.institution_code}</span>
+                    <span className={clsx(
+                      "text-[10px] px-1.5 py-0.2 rounded-full font-normal",
+                      isSelected ? "bg-primary-foreground/20 text-primary-foreground" : "bg-muted text-muted-foreground"
+                    )}>
+                      {inst.n}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <select 
+              className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              value={filters.institution || ""}
+              onChange={(e) => setFilters({ ...filters, institution: e.target.value })}
+            >
+              <option className="bg-background text-foreground" value="">Todas as Instituições ({dynamicMeta.total_questions})</option>
+              {dynamicMeta.institutions.map(i => (
+                <option className="bg-background text-foreground" key={i.institution_code} value={i.institution_code}>
+                  {i.institution_code} • {i.institution_label || i.institution_code} ({i.n})
+                </option>
+              ))}
+            </select>
+          </div>
             
             <div className="space-y-2 md:col-span-2 relative">
               <label className="text-sm font-medium text-foreground flex items-center justify-between">
@@ -797,7 +870,6 @@ export function QuizClient({
                 />
               </div>
             </div>
-          </div>
 
           <button 
             type="submit"
