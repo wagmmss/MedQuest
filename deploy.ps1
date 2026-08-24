@@ -4,14 +4,14 @@
 
 .DESCRIPTION
     Realiza o fluxo completo e otimizado de deploy:
-    1. Detecta quais componentes foram alterados (Backend, Frontend ou ambos)
+    1. Verifica alteracoes locais no Git
     2. Realiza git add e git commit com mensagem informativa
     3. Realiza git push para origin main (acionando build ultrarrapido no GitHub Actions)
     4. Conecta via SSH a VPS (136.248.114.130)
     5. Executa git pull origin main no servidor
-    6. Atualiza os containers de forma inteligente:
-       - Tenta baixar as imagens prontas do GitHub Container Registry (5 a 10 segundos)
-       - Fallback: se compilar localmente, executa build seletivo e otimizado sem travar a VPS
+    6. Atualiza os containers:
+       - Tenta baixar as imagens prontas do GitHub Container Registry
+       - Fallback: compila localmente com otimizacoes de memoria do Next.js
     7. Limpa imagens Docker nao utilizadas (prune)
     8. Exibe o status final dos servicos
 
@@ -27,14 +27,14 @@
 .PARAMETER KeyFile
     Caminho da chave SSH (Padrao: sua-chave.key no diretorio do projeto).
 
+.PARAMETER RemoteDir
+    Diretorio do projeto no servidor remoto (Padrao: /home/ubuntu/MedQuest).
+
 .PARAMETER SkipGit
     Pula o commit e push local, executando apenas o deploy remoto na VPS.
 
 .PARAMETER SkipRemote
     Pula o deploy remoto, realizando apenas o commit e push local.
-
-.PARAMETER ForceBuild
-    Forca o build local na VPS em vez de tentar baixar do GHCR.
 
 .EXAMPLE
     deploy
@@ -50,10 +50,9 @@ param(
     [string]$HostName = "136.248.114.130",
     [string]$User = "ubuntu",
     [string]$KeyFile = "",
-    [string]$RemoteDir = "~/MedQuest",
+    [string]$RemoteDir = "/home/ubuntu/MedQuest",
     [switch]$SkipGit,
-    [switch]$SkipRemote,
-    [switch]$ForceBuild
+    [switch]$SkipRemote
 )
 
 $ErrorActionPreference = "Stop"
@@ -118,10 +117,6 @@ if (-not $SshCmd) {
     exit 1
 }
 
-# Variaveis para rastreio de escopo
-$BackendChanged = $true
-$FrontendChanged = $true
-
 # ==============================================================================
 # ETAPA 1: GIT LOCAL (Add, Commit, Push)
 # ==============================================================================
@@ -139,18 +134,6 @@ if (-not $SkipGit) {
     $HasChanges = [bool]($ChangedFiles -and $ChangedFiles.Trim().Length -gt 0)
 
     if ($HasChanges) {
-        # Analise de escopo de mudanca
-        $BackendChanged = [bool]($ChangedFiles | Select-String "app/backend")
-        $FrontendChanged = [bool]($ChangedFiles | Select-String "app/frontend")
-
-        if ($BackendChanged -and -not $FrontendChanged) {
-            Print-Info "Escopo detectado: Apenas Backend (Python/Flask)"
-        } elseif ($FrontendChanged -and -not $BackendChanged) {
-            Print-Info "Escopo detectado: Apenas Frontend (Next.js/React)"
-        } else {
-            Print-Info "Escopo detectado: Completo (Backend + Frontend)"
-        }
-
         # Definir mensagem de commit se nao fornecida
         if (-not $Message) {
             $Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
@@ -198,7 +181,7 @@ if (-not $SkipGit) {
 }
 
 # ==============================================================================
-# ETAPA 2: DEPLOY REMOTO OTIMIZADO NA VPS
+# ETAPA 2: DEPLOY REMOTO NA VPS
 # ==============================================================================
 if (-not $SkipRemote) {
     Print-Step "2/3" "Atualizando servicos na VPS ($User@$HostName)"
@@ -220,36 +203,20 @@ if (-not $SkipRemote) {
     $Target = "$User@$HostName"
     $SshArgs += "$Target"
 
-    $ForceFlag = if ($ForceBuild) { "true" } else { "false" }
-    $OnlyBackend = if ($BackendChanged -and -not $FrontendChanged) { "true" } else { "false" }
-    $OnlyFrontend = if ($FrontendChanged -and -not $BackendChanged) { "true" } else { "false" }
-
-    # Script bash que executa na VPS com estrategia de pull rapido ou build seletivo
-    $RemoteBashScript = @"
+    # Script bash seguro e limpo para execucao remota
+    $RemoteBashScript = @'
 set -e
 echo "  [VPS 1/3] Atualizando repositorio..."
-cd ~/MedQuest
+cd /home/ubuntu/MedQuest
 git pull origin main
 
 echo "  [VPS 2/3] Atualizando containers Docker..."
-FORCE_BUILD="$ForceFlag"
-ONLY_BACKEND="$OnlyBackend"
-ONLY_FRONTEND="$OnlyFrontend"
-
-if [ "\$FORCE_BUILD" != "true" ] && sudo docker-compose pull 2>/dev/null; then
-    echo "  -> Imagens pre-compiladas baixadas com sucesso do GitHub Packages!"
-    sudo docker-compose up -d --force-recreate
+if sudo docker-compose -f /home/ubuntu/MedQuest/docker-compose.yml pull 2>/dev/null; then
+    echo "  -> Imagens pre-compiladas baixadas com sucesso!"
+    sudo docker-compose -f /home/ubuntu/MedQuest/docker-compose.yml up -d --force-recreate
 else
-    if [ "\$ONLY_BACKEND" = "true" ]; then
-        echo "  -> Build rapido seletivo: Backend apenas (~5s)..."
-        sudo docker-compose up -d --build --force-recreate backend
-    elif [ "\$ONLY_FRONTEND" = "true" ]; then
-        echo "  -> Build rapido seletivo: Frontend apenas..."
-        sudo docker-compose up -d --build --force-recreate frontend
-    else
-        echo "  -> Build completo com otimizacoes..."
-        sudo docker-compose up -d --build --force-recreate
-    fi
+    echo "  -> Compilando containers com otimizacoes de memoria..."
+    sudo docker-compose -f /home/ubuntu/MedQuest/docker-compose.yml up -d --build --force-recreate
 fi
 
 echo "  [VPS 3/3] Limpando imagens antigas..."
@@ -257,8 +224,8 @@ sudo docker image prune -f > /dev/null 2>&1 || true
 
 echo ""
 echo "  Status atual dos servicos:"
-sudo docker-compose ps
-"@
+sudo docker-compose -f /home/ubuntu/MedQuest/docker-compose.yml ps
+'@
 
     $SshArgs += "$RemoteBashScript"
 
