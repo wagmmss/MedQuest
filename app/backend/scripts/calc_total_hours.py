@@ -61,11 +61,11 @@ print(f"Total Geral de Estudos: {grand_total:.1f} horas ({grand_total/24:.1f} di
 
 print(f"\n=== DETALHAMENTO POR ÁREA ===")
 for area, s in sorted(area_stats.items(), key=lambda x: x[1]["total_theory_hours"], reverse=True):
-    print(f"\n📌 {area}:")
-    print(f"   • Módulos: {s['module_count']}")
-    print(f"   • Aulas Teóricas: {s['total_theory_hours']} horas ({s['total_theory_hours']/s['module_count']:.2f}h/módulo)")
-    print(f"   • Treino de Questões: {s['total_practice_hours']} horas")
-    print(f"   • Carga Total: {s['total_study_hours']} horas")
+    print(f"\n[+] {area}:")
+    print(f"   - Modulos: {s['module_count']}")
+    print(f"   - Aulas Teoricas: {s['total_theory_hours']} horas ({s['total_theory_hours']/s['module_count']:.2f}h/modulo)")
+    print(f"   - Treino de Questoes: {s['total_practice_hours']} horas")
+    print(f"   - Carga Total: {s['total_study_hours']} horas")
 
 with open("tempo_aulas_report.json", "w", encoding="utf-8") as f:
     json.dump({

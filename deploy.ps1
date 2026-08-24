@@ -204,27 +204,30 @@ if (-not $SkipRemote) {
     $SshArgs += "$Target"
 
     # Script bash seguro e limpo para execucao remota
+    # Estrategia: baixar imagens prontas do GHCR (compiladas pelo GitHub Actions)
+    # e so recriar containers, sem compilar nada localmente na VPS.
     $RemoteBashScript = @'
 set -e
-echo "  [VPS 1/3] Atualizando repositorio..."
-cd /home/ubuntu/MedQuest
+PROJ=/home/ubuntu/MedQuest
+COMPOSE="sudo docker-compose -f $PROJ/docker-compose.yml"
+
+echo "  [VPS 1/4] Atualizando repositorio..."
+cd $PROJ
 git pull origin main
 
-echo "  [VPS 2/3] Atualizando containers Docker..."
-if sudo docker-compose -f /home/ubuntu/MedQuest/docker-compose.yml pull 2>/dev/null; then
-    echo "  -> Imagens pre-compiladas baixadas com sucesso!"
-    sudo docker-compose -f /home/ubuntu/MedQuest/docker-compose.yml up -d --force-recreate
-else
-    echo "  -> Compilando containers com otimizacoes de memoria..."
-    sudo docker-compose -f /home/ubuntu/MedQuest/docker-compose.yml up -d --build --force-recreate
-fi
+echo "  [VPS 2/4] Baixando imagens pre-compiladas do GHCR..."
+sudo docker pull ghcr.io/wagmmss/medquest-backend:latest
+sudo docker pull ghcr.io/wagmmss/medquest-frontend:latest
 
-echo "  [VPS 3/3] Limpando imagens antigas..."
+echo "  [VPS 3/4] Recriando containers com as novas imagens..."
+$COMPOSE up -d --force-recreate --no-build
+
+echo "  [VPS 4/4] Limpando imagens antigas..."
 sudo docker image prune -f > /dev/null 2>&1 || true
 
 echo ""
 echo "  Status atual dos servicos:"
-sudo docker-compose -f /home/ubuntu/MedQuest/docker-compose.yml ps
+$COMPOSE ps
 '@
 
     $SshArgs += "$RemoteBashScript"
