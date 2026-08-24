@@ -67,6 +67,10 @@ class PlannerConfigIn(APIInput):
     days_per_week: int = Field(default=6, ge=1, le=7)
     hours_per_day: int = Field(default=4, ge=1, le=24)
     target_score: float | None = Field(default=None, ge=0, le=100)
+    target_institution: str | None = Field(default=None, max_length=500)
+    target_institutions: list[str] | None = Field(default=None, max_length=50)
+    target_specialty: str | None = Field(default=None, max_length=100)
+
 
 
 class PlannerStudyIn(APIInput):

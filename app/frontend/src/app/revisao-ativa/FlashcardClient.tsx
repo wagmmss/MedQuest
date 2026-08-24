@@ -5,7 +5,7 @@ import { Flashcard } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
 import { localDb, getLocalOwnerId } from "@/lib/db";
 import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
-import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle } from "lucide-react";
+import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle, Download, FileText, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -15,6 +15,19 @@ export function FlashcardClient() {
   const [loading, setLoading] = useState(true);
   const [flipped, setFlipped] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [exportingAnki, setExportingAnki] = useState(false);
+
+  const handleExportAnki = async () => {
+    setExportingAnki(true);
+    try {
+      await api.flashcards.exportAnki(false);
+      toast.success("Arquivo Anki (.txt) gerado com sucesso! Basta importar no Anki.");
+    } catch {
+      toast.error("Erro ao exportar flashcards para o Anki.");
+    } finally {
+      setExportingAnki(false);
+    }
+  };
 
   const fetchDue = useCallback(async (signal?: AbortSignal) => {
     setLoading(true);
@@ -184,13 +197,23 @@ export function FlashcardClient() {
         <p className="text-muted-foreground mb-8 text-lg max-w-md">
           Você não tem nenhum flashcard vencido no momento. Volte a estudar para gerar novos cartões com seus erros e fortalecer a memória.
         </p>
-        <Link
-          href="/estudar"
-          className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:-translate-y-0.5 flex items-center gap-2"
-        >
-          <span className="material-symbols-outlined text-lg" data-icon="menu_book">menu_book</span>
-          Ir para Banco de Questões
-        </Link>
+        <div className="flex items-center gap-3 flex-wrap justify-center">
+          <Link
+            href="/estudar"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:-translate-y-0.5 flex items-center gap-2 text-sm"
+          >
+            <span className="material-symbols-outlined text-lg" data-icon="menu_book">menu_book</span>
+            Ir para Banco de Questões
+          </Link>
+          <button
+            onClick={handleExportAnki}
+            disabled={exportingAnki}
+            className="bg-muted hover:bg-muted/80 text-foreground font-semibold py-3 px-5 rounded-xl border border-border transition-all flex items-center gap-2 text-sm"
+          >
+            {exportingAnki ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
+            Exportar Todos para Anki (.txt)
+          </button>
+        </div>
       </motion.div>
     );
   }
@@ -199,12 +222,23 @@ export function FlashcardClient() {
 
   return (
     <div className="max-w-3xl mx-auto w-full flex flex-col items-center gap-6 pb-12">
-      <div className="w-full flex items-center justify-between mb-2">
+      <div className="w-full flex items-center justify-between mb-2 flex-wrap gap-2">
         <div className="flex items-center gap-2 text-purple-500 font-bold">
           <Sparkles size={20} /> Revisão Ativa (IA)
         </div>
-        <div className="text-sm font-medium text-muted-foreground">
-          {queue.length} card{queue.length > 1 ? "s" : ""} restante{queue.length > 1 ? "s" : ""}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleExportAnki}
+            disabled={exportingAnki}
+            className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80 px-2.5 py-1.5 rounded-lg border border-border transition-all"
+            title="Exportar flashcards para o Anki (.txt)"
+          >
+            {exportingAnki ? <Loader2 size={13} className="animate-spin" /> : <Download size={13} />}
+            Exportar Anki (.txt)
+          </button>
+          <div className="text-sm font-medium text-muted-foreground">
+            {queue.length} card{queue.length > 1 ? "s" : ""} restante{queue.length > 1 ? "s" : ""}
+          </div>
         </div>
       </div>
 

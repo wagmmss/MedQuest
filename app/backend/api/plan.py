@@ -1,7 +1,7 @@
 """Blueprint: planejador (config, progresso semanal, revisões, geração de plano)."""
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
-from flask import Blueprint, g, jsonify, request
+from flask import Blueprint, Response, g, jsonify, request
 
 # planner.py (raiz do backend) — geração do plano anual por pesos históricos USP
 from scripts.planner import generate_annual_plan
@@ -29,6 +29,7 @@ def planner_config_reset():
     invalidate_user_caches(g.user_id)
     return jsonify({"success": True})
 
+
 @bp.route("/planner/config", methods=["GET", "POST"])
 def planner_config():
     db = get_db()
@@ -37,32 +38,48 @@ def planner_config():
             cfg = PlannerConfigIn.model_validate(request.get_json(force=True) or {})
         except ValidationError as e:
             return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+        
+        target_inst = cfg.target_institution
+        if not target_inst and cfg.target_institutions:
+            target_inst = ", ".join(cfg.target_institutions)
+
         with db_transaction(db, immediate=True):
             try:
                 db.execute("""
-                    INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score, target_institution, target_specialty)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                     ON CONFLICT(user_id) DO UPDATE SET
                         exam_date = excluded.exam_date, start_date = excluded.start_date,
                         days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
-                        updated_at = excluded.updated_at, target_score = excluded.target_score
+                        updated_at = excluded.updated_at, target_score = excluded.target_score,
+                        target_institution = excluded.target_institution, target_specialty = excluded.target_specialty
                 """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
-                      datetime.now(timezone.utc).isoformat(), cfg.target_score))
+                      datetime.now(timezone.utc).isoformat(), cfg.target_score, target_inst, cfg.target_specialty))
             except Exception as e:
-                # Se falhar (ex: coluna target_score não existe devido a script de migration manual executado sem restart do app),
-                # tenta adicionar a coluna e executa de novo.
                 err_msg = str(e).lower()
-                if "target_score" in err_msg or "has no column" in err_msg or "no such column" in err_msg:
-                    db.execute("ALTER TABLE planner_config ADD COLUMN target_score REAL")
+                if any(k in err_msg for k in ("target_score", "target_institution", "target_specialty", "has no column", "no such column")):
+                    try:
+                        db.execute("ALTER TABLE planner_config ADD COLUMN target_score REAL")
+                    except Exception:
+                        pass
+                    try:
+                        db.execute("ALTER TABLE planner_config ADD COLUMN target_institution TEXT")
+                    except Exception:
+                        pass
+                    try:
+                        db.execute("ALTER TABLE planner_config ADD COLUMN target_specialty TEXT")
+                    except Exception:
+                        pass
                     db.execute("""
-                        INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                        INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score, target_institution, target_specialty)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                         ON CONFLICT(user_id) DO UPDATE SET
                             exam_date = excluded.exam_date, start_date = excluded.start_date,
                             days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
-                            updated_at = excluded.updated_at, target_score = excluded.target_score
+                            updated_at = excluded.updated_at, target_score = excluded.target_score,
+                            target_institution = excluded.target_institution, target_specialty = excluded.target_specialty
                     """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
-                          datetime.now(timezone.utc).isoformat(), cfg.target_score))
+                          datetime.now(timezone.utc).isoformat(), cfg.target_score, target_inst, cfg.target_specialty))
                 else:
                     raise e
         invalidate_user_caches(g.user_id)
@@ -71,10 +88,16 @@ def planner_config():
     row = db.execute("SELECT * FROM planner_config WHERE user_id = ?", (g.user_id,)).fetchone()
     if not row:
         return jsonify({})
+    row_keys = row.keys() if hasattr(row, 'keys') else []
+    inst_str = row["target_institution"] if "target_institution" in row_keys else None
+    inst_list = [i.strip() for i in inst_str.split(",") if i.strip()] if inst_str else []
     return jsonify({
         "exam_date": row["exam_date"], "start_date": row["start_date"],
         "days_per_week": row["days_per_week"], "hours_per_day": row["questions_per_day"],
-        "target_score": row["target_score"] if "target_score" in row.keys() else None,
+        "target_score": row["target_score"] if "target_score" in row_keys else None,
+        "target_institution": inst_str,
+        "target_institutions": inst_list,
+        "target_specialty": row["target_specialty"] if "target_specialty" in row_keys else None,
     })
 
 
@@ -179,3 +202,125 @@ def generate_plan():
         intensive=data.intensive, user_progress=answered_map
     )
     return jsonify(plan)
+
+
+@bp.route("/planner/export/ics", methods=["GET"])
+def export_ics():
+    db = get_db()
+    row = db.execute("SELECT * FROM planner_config WHERE user_id = ?", (g.user_id,)).fetchone()
+    
+    if not row or not row["exam_date"]:
+        start_date = datetime.now(timezone.utc).isoformat()
+        exam_date = (datetime.now(timezone.utc) + timedelta(days=120)).isoformat()
+        hours_per_week = 24
+    else:
+        start_date = row["start_date"] or datetime.now(timezone.utc).isoformat()
+        exam_date = row["exam_date"]
+        days = row["days_per_week"] or 6
+        hours = row["questions_per_day"] or 4
+        hours_per_week = min(168, days * hours)
+
+    q_query = """
+        SELECT area, subtema, GROUP_CONCAT(DISTINCT topic) as topics, COUNT(id) as q_count 
+        FROM questions 
+        WHERE area IS NOT NULL AND subtema IS NOT NULL
+        GROUP BY area, subtema
+    """
+    a_query = """
+        SELECT q.subtema, COUNT(DISTINCT a.question_id) as ans_count, SUM(a.is_correct) as correct_count, COUNT(a.id) as attempts
+        FROM attempts a
+        JOIN questions q ON q.id = a.question_id
+        WHERE a.user_id = ? AND q.subtema IS NOT NULL
+        GROUP BY q.subtema
+    """
+    rows = [dict(r) for r in db.execute(q_query).fetchall()]
+    answered = [dict(r) for r in db.execute(a_query, (g.user_id,)).fetchall()]
+    answered_map = {r["subtema"]: r for r in answered}
+
+    plan_result = generate_annual_plan(
+        rows, start_date, exam_date, hours_per_week, 
+        intensive=False, user_progress=answered_map
+    )
+
+    plan_weeks = plan_result.get("plan", [])
+    now_dt = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+    ics_lines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//MedQuest//Cronograma de Estudos//PT-BR",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "X-WR-CALNAME:MedQuest - Cronograma de Residência Médica",
+        "X-WR-TIMEZONE:America/Sao_Paulo",
+    ]
+
+    for w in plan_weeks:
+        w_num = w.get("week")
+        w_date_str = w.get("date", "")[:10]
+        if not w_date_str:
+            continue
+        
+        try:
+            w_dt = datetime.strptime(w_date_str, "%Y-%m-%d")
+        except Exception:
+            continue
+
+        topics = w.get("topics", [])
+        topic_names = [t.get("subtema", "") for t in topics if t.get("subtema")]
+        subtema_title = topic_names[0] if topic_names else "Revisão Geral"
+        topics_desc = "\\n".join([f"- {t.get('subtema')} ({t.get('area')}): {t.get('estimated_hours', 0)}h" for t in topics]) or "Semana de consolidação."
+
+        start_str = w_dt.strftime("%Y%m%dT090000Z")
+        end_str = w_dt.strftime("%Y%m%dT120000Z")
+        uid = f"medquest-week-{w_num}-{g.user_id}-{w_date_str}@medquest.app"
+
+        ics_lines.extend([
+            "BEGIN:VEVENT",
+            f"UID:{uid}",
+            f"DTSTAMP:{now_dt}",
+            f"DTSTART:{start_str}",
+            f"DTEND:{end_str}",
+            f"SUMMARY:[MedQuest] Semana {w_num}: {subtema_title}",
+            f"DESCRIPTION:Meta da Semana {w_num} ({w.get('allocated_hours', 0)}h de estudo):\\n{topics_desc}\\n\\n🔗 Acesse em: https://medquest.app/planner",
+            "STATUS:CONFIRMED",
+            "END:VEVENT",
+        ])
+
+        rev24_dt = w_dt + timedelta(days=1)
+        ics_lines.extend([
+            "BEGIN:VEVENT",
+            f"UID:medquest-rev24-{w_num}-{g.user_id}-{w_date_str}@medquest.app",
+            f"DTSTAMP:{now_dt}",
+            f"DTSTART:{rev24_dt.strftime('%Y%m%dT190000Z')}",
+            f"DTEND:{rev24_dt.strftime('%Y%m%dT193000Z')}",
+            f"SUMMARY:[MedQuest] 🔄 Revisão 24h: {subtema_title}",
+            f"DESCRIPTION:Revisão rápida de 24h dos temas da Semana {w_num}.\\n\\n🔗 https://medquest.app/revisao-ativa",
+            "STATUS:CONFIRMED",
+            "END:VEVENT",
+        ])
+
+        rev7_dt = w_dt + timedelta(days=7)
+        ics_lines.extend([
+            "BEGIN:VEVENT",
+            f"UID:medquest-rev7-{w_num}-{g.user_id}-{w_date_str}@medquest.app",
+            f"DTSTAMP:{now_dt}",
+            f"DTSTART:{rev7_dt.strftime('%Y%m%dT190000Z')}",
+            f"DTEND:{rev7_dt.strftime('%Y%m%dT193000Z')}",
+            f"SUMMARY:[MedQuest] 🔄 Revisão 7d: {subtema_title}",
+            f"DESCRIPTION:Revisão de 7 dias dos temas da Semana {w_num}.\\n\\n🔗 https://medquest.app/revisao-ativa",
+            "STATUS:CONFIRMED",
+            "END:VEVENT",
+        ])
+
+    ics_lines.append("END:VCALENDAR")
+    content = "\r\n".join(ics_lines)
+
+    return Response(
+        content,
+        mimetype="text/calendar; charset=utf-8",
+        headers={
+            "Content-Disposition": "attachment; filename=medquest_cronograma.ics"
+        }
+    )
+

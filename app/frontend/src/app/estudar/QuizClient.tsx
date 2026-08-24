@@ -70,13 +70,16 @@ export function QuizClient({
   initialFilters?: Record<string, string>;
 }) {
   const router = useRouter();
-  const [state, setState] = useState<QuizState>(Object.keys(initialFilters).length > 0 ? "LOADING_QUEUE" : "FILTERS");
+  const hasExplicitFilters = Object.keys(initialFilters).filter(k => k !== "resume").length > 0;
+  const [state, setState] = useState<QuizState>(hasExplicitFilters ? "LOADING_QUEUE" : "FILTERS");
   const [filters, setFilters] = useState<Record<string, string | string[]>>({ limit: "50", ...initialFilters });
   const [localLimit, setLocalLimit] = useState<string>(
     typeof filters.limit === "string" ? filters.limit : "50"
   );
   const { isZenMode: zenMode, toggleZenMode } = useZenMode();
   const [subtemaSearch, setSubtemaSearch] = useState("");
+  const [hasSavedState, setHasSavedState] = useState(false);
+  const [savedSessionData, setSavedSessionData] = useState<SavedQuizState | null>(null);
 
   const [studyMode, setStudyMode] = useState<"TUTOR" | "SIMULADO">("TUTOR");
   const [dynamicMeta, setDynamicMeta] = useState<QuestionMeta>(meta || DEFAULT_META);
@@ -185,19 +188,34 @@ export function QuizClient({
   }, [state, queue, currentIndex]);
 
   const loadQueue = useCallback(async (activeFilters: Record<string, string | string[]>) => {
+    removeLearningSession("quiz");
+    setHasSavedState(false);
+    setSavedSessionData(null);
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("medquest_active_quiz", "1");
+    }
     setState("LOADING_QUEUE");
     try {
       const qList = await api.questions.getList(activeFilters);
       if (qList.length > 0) {
         setQueue(qList);
         setCurrentIndex(0);
+        setSessionAnswers({});
+        setSelectedLetter(null);
+        setAttemptResult(null);
         setState("PLAYING");
         loadQuestionDetail(qList[0].id);
       } else {
+        if (typeof window !== "undefined") {
+          sessionStorage.removeItem("medquest_active_quiz");
+        }
         toast.error("Nenhuma questão encontrada com esses filtros.");
         setState("FILTERS");
       }
     } catch (e) {
+      if (typeof window !== "undefined") {
+        sessionStorage.removeItem("medquest_active_quiz");
+      }
       const message = e instanceof Error ? e.message : "Erro desconhecido";
       toast.error(`Erro ao buscar questões: ${message}`);
       setState("FILTERS");
@@ -253,33 +271,98 @@ export function QuizClient({
 
   useEffect(() => {
     if (hasRestored.current) return;
-    const timer = setTimeout(() => {
-      const saved = readLearningSession("quiz", isSavedQuizState);
-      hasRestored.current = true;
+    hasRestored.current = true;
 
-      if (saved) {
-        setQueue(saved.queue);
-        setCurrentIndex(saved.currentIndex);
-        setFilters(saved.filters);
-        setCurrentDetail(saved.currentDetail);
-        setSessionAnswers(saved.sessionAnswers);
-        setSelectedLetter(saved.selectedLetter);
-        setTimeSpent(saved.timeSpent || 0);
-        setState(saved.state);
-        if (saved.currentDetail) {
-          detailsCacheRef.current[saved.currentDetail.id] = saved.currentDetail;
-        } else {
-          loadQuestionDetail(saved.queue[saved.currentIndex].id);
-        }
-        toast.success("Sessão de estudo retomada.");
-      } else if (Object.keys(initialFilters).length > 0 && queue.length === 0 && state === "LOADING_QUEUE") {
-        loadQueue({ limit: "50", ...initialFilters });
+    const saved = readLearningSession("quiz", isSavedQuizState);
+    const isExplicitResume = initialFilters.resume === "true" || initialFilters.resume === "1";
+    const isActiveInSession = typeof window !== "undefined" && sessionStorage.getItem("medquest_active_quiz") === "1";
+    const filterKeys = Object.keys(initialFilters).filter(k => k !== "resume");
+
+    if (saved && (isExplicitResume || isActiveInSession)) {
+      setQueue(saved.queue);
+      setCurrentIndex(saved.currentIndex);
+      setFilters(saved.filters);
+      setCurrentDetail(saved.currentDetail);
+      setSessionAnswers(saved.sessionAnswers);
+      setSelectedLetter(saved.selectedLetter);
+      setTimeSpent(saved.timeSpent || 0);
+      setState(saved.state);
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("medquest_active_quiz", "1");
       }
-      setStorageReady(true);
-    }, 0);
+      if (saved.currentDetail) {
+        detailsCacheRef.current[saved.currentDetail.id] = saved.currentDetail;
+      } else if (saved.queue[saved.currentIndex]) {
+        loadQuestionDetail(saved.queue[saved.currentIndex].id);
+      }
+      toast.success("Sessão de estudo retomada.");
+    } else if (saved && filterKeys.length === 0) {
+      // Sessão salva existente: exibe banner na tela de filtros sem forçar entrada nas questões
+      setHasSavedState(true);
+      setSavedSessionData(saved);
+      setState("FILTERS");
+    } else if (filterKeys.length > 0) {
+      loadQueue({ limit: "50", ...initialFilters });
+    }
+    setStorageReady(true);
+  }, [initialFilters, loadQueue, loadQuestionDetail]);
 
-    return () => clearTimeout(timer);
-  }, [initialFilters, loadQueue, loadQuestionDetail, queue.length, state]);
+  const resumeSavedQuiz = useCallback(() => {
+    const saved = savedSessionData || readLearningSession("quiz", isSavedQuizState);
+    if (saved) {
+      setQueue(saved.queue);
+      setCurrentIndex(saved.currentIndex);
+      setFilters(saved.filters);
+      setCurrentDetail(saved.currentDetail);
+      setSessionAnswers(saved.sessionAnswers);
+      setSelectedLetter(saved.selectedLetter);
+      setTimeSpent(saved.timeSpent || 0);
+      setState(saved.state);
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("medquest_active_quiz", "1");
+      }
+      if (saved.currentDetail) {
+        detailsCacheRef.current[saved.currentDetail.id] = saved.currentDetail;
+      } else if (saved.queue[saved.currentIndex]) {
+        loadQuestionDetail(saved.queue[saved.currentIndex].id);
+      }
+      setHasSavedState(false);
+      toast.success("Sessão de estudo retomada.");
+    }
+  }, [savedSessionData, loadQuestionDetail]);
+
+  const discardSavedQuiz = useCallback(() => {
+    removeLearningSession("quiz");
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem("medquest_active_quiz");
+    }
+    setHasSavedState(false);
+    setSavedSessionData(null);
+    toast("Sessão anterior descartada.", { icon: "🗑️" });
+  }, []);
+
+  const handleBackToFilters = useCallback(() => {
+    removeLearningSession("quiz");
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem("medquest_active_quiz");
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+    setQueue([]);
+    setCurrentIndex(0);
+    setCurrentDetail(null);
+    setSelectedLetter(null);
+    setAttemptResult(null);
+    setSessionAnswers({});
+    setTimeSpent(0);
+    setHasSavedState(false);
+    setSavedSessionData(null);
+    setState("FILTERS");
+  }, []);
+
+  const handleNewSession = useCallback(() => {
+    setBatchFlashcardsResult(null);
+    handleBackToFilters();
+  }, [handleBackToFilters]);
 
   const persistSession = useCallback((nextSelectedLetter = selectedLetter) => {
     if (!storageReady) return;
@@ -321,7 +404,13 @@ export function QuizClient({
     const fetchDynamicMeta = async () => {
       setIsUpdatingMeta(true);
       try {
-        const newMeta = await api.questions.getMeta(filters);
+        // Keep topic options stable while the user selects several of them.
+        // Otherwise each selected subtema narrows the metadata response and
+        // makes the remaining specialties disappear from the tree.
+        const metaFilters = { ...filters };
+        delete metaFilters.subtema;
+        delete metaFilters.topic;
+        const newMeta = await api.questions.getMeta(metaFilters);
         if (isMounted) setDynamicMeta(newMeta);
       } catch {
         console.error("Failed to load dynamic meta");
@@ -596,6 +685,39 @@ export function QuizClient({
           </div>
         </div>
 
+        {hasSavedState && savedSessionData && (
+          <div className="bg-primary/10 border border-primary/30 rounded-xl p-5 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shrink-0 shadow-sm">
+                <RotateCcw size={20} />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-foreground">Sessão de Estudos em Andamento</h3>
+                <p className="text-xs text-muted-foreground">
+                  Você tem uma sessão salva com {savedSessionData.queue.length} questões (Questão {savedSessionData.currentIndex + 1} de {savedSessionData.queue.length}).
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={discardSavedQuiz}
+                className="flex-1 sm:flex-initial px-3 py-2 text-xs font-semibold text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors cursor-pointer"
+              >
+                Descartar
+              </button>
+              <button
+                type="button"
+                onClick={resumeSavedQuiz}
+                className="flex-1 sm:flex-initial px-4 py-2 text-xs font-bold bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02]"
+              >
+                <Play size={14} fill="currentColor" />
+                Continuar Sessão
+              </button>
+            </div>
+          </div>
+        )}
+
         <form onSubmit={handleFilterSubmit} className="flex flex-col gap-6">
           <div className="bg-muted/30 border border-border p-4 rounded-lg flex flex-col sm:flex-row gap-4">
             <button 
@@ -858,15 +980,15 @@ export function QuizClient({
                 <label className="text-sm font-medium text-foreground mb-3 flex items-center justify-between">
                   <span>Subtópicos / Árvore de Temas</span>
                 </label>
-                <SubjectTreeSelector 
-                  selectedSubtemas={Array.isArray(filters.topic) ? filters.topic : (filters.topic ? [filters.topic] : [])} 
+                <SubjectTreeSelector
+                  selectedSubtemas={Array.isArray(filters.subtema) ? filters.subtema : (filters.subtema ? [filters.subtema] : [])}
                   onChange={(newSelection) => {
                     const newFilters = { ...filters };
-                    if (newSelection.length > 0) newFilters.topic = newSelection;
-                    else delete newFilters.topic;
+                    if (newSelection.length > 0) newFilters.subtema = newSelection;
+                    else delete newFilters.subtema;
                     setFilters(newFilters);
                   }}
-                  availableSubtemas={dynamicMeta.topics?.map(t => ({ subtema: t.topic, n: t.n }))}
+                  availableSubtemas={dynamicMeta.subtemas}
                 />
               </div>
             </div>
@@ -958,10 +1080,7 @@ export function QuizClient({
 
         <div className="flex flex-wrap items-center justify-center gap-3 w-full">
           <button 
-            onClick={() => {
-              setBatchFlashcardsResult(null);
-              setState("FILTERS");
-            }}
+            onClick={handleNewSession}
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-xl transition-colors cursor-pointer text-sm shadow-md"
           >
             Nova Sessão de Estudos
@@ -988,8 +1107,8 @@ export function QuizClient({
       <div className="flex flex-wrap items-center justify-between gap-4 bg-card border border-border shadow-1 rounded-xl p-4">
         <div className="flex items-center gap-4">
           <button 
-            onClick={() => setState("FILTERS")}
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            onClick={handleBackToFilters}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
           >
             ← Voltar
           </button>

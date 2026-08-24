@@ -44,7 +44,7 @@ export function DashboardClient({ stats, currentPlannerWeek, firstName, timeline
         (val): val is { state?: string } => typeof val === "object" && val !== null
       );
       if (hasQuiz?.state && hasQuiz.state !== "RESULTS") {
-        window.queueMicrotask(() => setActiveSession({ kind: "quiz", url: "/estudar" }));
+        window.queueMicrotask(() => setActiveSession({ kind: "quiz", url: "/estudar?resume=true" }));
       }
     }
   }, []);

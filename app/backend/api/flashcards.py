@@ -2,7 +2,7 @@ import logging
 import re
 from datetime import datetime, timezone
 
-from flask import Blueprint, g, jsonify, request
+from flask import Blueprint, Response, g, jsonify, request
 
 from . import srs
 from .ai import generate_cloze_flashcard
@@ -406,3 +406,64 @@ def report_flashcard(fid):
         return jsonify({"error": "Internal Server Error"}), 500
 
     return jsonify({"success": True})
+
+
+@bp.route("/flashcards/export/anki", methods=["GET"])
+def export_anki():
+    db = get_db()
+    due_only = request.args.get("due_only", "false").lower() == "true"
+    now = datetime.now(timezone.utc).isoformat()
+
+    if due_only:
+        rows = db.execute("""
+            SELECT f.id, f.front, f.back, f.source_context, q.area, q.subtema, q.topic, q.institution_code
+            FROM flashcards f
+            JOIN questions q ON f.question_id = q.id
+            WHERE f.user_id = ? AND f.next_review_date <= ?
+            ORDER BY f.id ASC
+        """, (g.user_id, now)).fetchall()
+    else:
+        rows = db.execute("""
+            SELECT f.id, f.front, f.back, f.source_context, q.area, q.subtema, q.topic, q.institution_code
+            FROM flashcards f
+            JOIN questions q ON f.question_id = q.id
+            WHERE f.user_id = ?
+            ORDER BY f.id ASC
+        """, (g.user_id,)).fetchall()
+
+    header_lines = [
+        "#separator:tab",
+        "#html:true",
+        "#tags column:3",
+        "#deck:MedQuest::Revisão_Ativa",
+        "#notetype:Cloze",
+    ]
+
+    card_lines = []
+    for r in rows:
+        front = (r["front"] or "").replace("\t", " ").replace("\r\n", "<br>").replace("\n", "<br>")
+        back = (r["back"] or "").replace("\t", " ").replace("\r\n", "<br>").replace("\n", "<br>")
+        
+        tags = ["MedQuest"]
+        if r["area"]:
+            area_tag = re.sub(r"[^\w]+", "_", r["area"]).strip("_")
+            tags.append(f"Area::{area_tag}")
+        if r["subtema"]:
+            sub_tag = re.sub(r"[^\w]+", "_", r["subtema"]).strip("_")
+            tags.append(f"Subtema::{sub_tag}")
+        if r["institution_code"]:
+            inst_tag = re.sub(r"[^\w]+", "_", r["institution_code"]).strip("_")
+            tags.append(f"Banca::{inst_tag}")
+
+        tags_str = " ".join(tags)
+        card_lines.append(f"{front}\t{back}\t{tags_str}")
+
+    content = "\n".join(header_lines + card_lines)
+    return Response(
+        content,
+        mimetype="text/plain; charset=utf-8",
+        headers={
+            "Content-Disposition": "attachment; filename=medquest_flashcards_anki.txt"
+        }
+    )
+

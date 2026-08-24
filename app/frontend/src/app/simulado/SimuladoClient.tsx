@@ -95,7 +95,6 @@ export function SimuladoClient({
     years: [] as string[],
     questions_per_area: 20,
     duration_minutes: 180,
-    force_4_options: false
   });
 
   const [hasSavedState, setHasSavedState] = useState(false);
@@ -120,7 +119,6 @@ export function SimuladoClient({
             years: Array.isArray(parsed.years) ? parsed.years.slice(0, 20) : prev.years,
             questions_per_area: Math.max(1, Math.min(100, Number(parsed.questions_per_area) || prev.questions_per_area)),
             duration_minutes: Math.max(15, Math.min(600, Number(parsed.duration_minutes) || prev.duration_minutes)),
-            force_4_options: Boolean(parsed.force_4_options),
           }));
         }
       } catch {
@@ -208,7 +206,7 @@ export function SimuladoClient({
     setState("LOADING");
     try {
       let qList: QuestionListItem[];
-      let isForce4Options = false;
+      const isForce4Options = false;
       let durationHours = 6;
 
       if (hasCustomFilters) {
@@ -217,7 +215,6 @@ export function SimuladoClient({
         durationHours = (qList.length / 120) * 6;
       } else {
         qList = await api.questions.getCustomSimulado(customConfig);
-        isForce4Options = customConfig.force_4_options;
         durationHours = customConfig.duration_minutes / 60;
       }
 
@@ -730,50 +727,8 @@ export function SimuladoClient({
                 </p>
               </div>
             </div>
-
-            <label className="flex items-center gap-3 cursor-pointer border-t border-border/50 pt-5 mt-2 group">
-              <input 
-                type="checkbox" 
-                checked={customConfig.force_4_options}
-                onChange={(e) => setCustomConfig(prev => ({ ...prev, force_4_options: e.target.checked }))}
-                className="rounded text-primary focus:ring-primary w-5 h-5 cursor-pointer"
-              />
-              <span className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">Forçar 4 Alternativas (Estilo Nova Prova USP)</span>
-            </label>
           </div>
         )}
-        
-        <div className="grid grid-cols-2 gap-4 w-full max-w-lg mb-8 text-left">
-          <div className="bg-muted/50 rounded-xl p-4 border border-border/50">
-            <span className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground uppercase mb-1.5 tracking-wider">
-              <span className="material-symbols-outlined text-[14px]">list_alt</span> Questões
-            </span>
-            <span className="text-lg font-bold text-foreground">
-              {hasCustomFilters ? (initialFilters.limit || "Até 50") : (customConfig.questions_per_area * 5)} <span className="text-sm font-medium text-muted-foreground">un</span>
-            </span>
-          </div>
-          <div className="bg-muted/50 rounded-xl p-4 border border-border/50">
-            <span className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground uppercase mb-1.5 tracking-wider">
-              <span className="material-symbols-outlined text-[14px]">timer</span> Duração
-            </span>
-            <span className="text-lg font-bold text-foreground">
-              {hasCustomFilters 
-                ? `${Math.round((Number(initialFilters.limit || 50) / 120) * 6 * 60)} min` 
-                : `${customConfig.duration_minutes} min`
-              }
-            </span>
-          </div>
-          {!hasCustomFilters && (
-            <div className="bg-muted/50 rounded-xl p-4 col-span-2 border border-border/50">
-              <span className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground uppercase mb-1.5 tracking-wider">
-                <span className="material-symbols-outlined text-[14px]">balance</span> Balanceamento
-              </span>
-              <span className="text-sm font-medium text-foreground">
-                {`${customConfig.questions_per_area} Clínica • ${customConfig.questions_per_area} Cirurgia • ${customConfig.questions_per_area} Pediatria • ${customConfig.questions_per_area} GO • ${customConfig.questions_per_area} Preventiva`}
-              </span>
-            </div>
-          )}
-        </div>
 
         <div className="bg-warning/10 text-warning-foreground border border-warning/20 rounded-xl p-4 flex items-start gap-3 w-full max-w-lg mb-8 text-left text-sm shadow-sm">
           <AlertTriangle size={20} className="shrink-0 mt-0.5 text-warning" />

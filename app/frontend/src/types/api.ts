@@ -163,6 +163,9 @@ export interface PlannerConfig {
   days_per_week?: number;
   hours_per_day?: number;
   target_score?: number;
+  target_institution?: string;
+  target_institutions?: string[];
+  target_specialty?: string;
 }
 
 export interface PlannerTopic {

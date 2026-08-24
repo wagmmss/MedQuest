@@ -9,7 +9,7 @@ import {
 export type { QuestionMeta };
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
-const API_REQUEST_TIMEOUT_MS = 60_000;
+const API_REQUEST_TIMEOUT_MS = process.env.PLAYWRIGHT_TEST ? 1_000 : 5_000;
 
 export function isDynamicServerUsageError(error: unknown): boolean {
   if (!(error instanceof Error)) return false;
@@ -18,6 +18,9 @@ export function isDynamicServerUsageError(error: unknown): boolean {
 }
 
 async function serverFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  if (process.env.PLAYWRIGHT_TEST === "true") {
+    throw new Error("E2E test environment: SSR fetch bypassed in favor of client mocking.");
+  }
   const proxySecret = process.env.FLASK_API_PROXY_SECRET;
   if (!proxySecret) {
     throw new Error("FLASK_API_PROXY_SECRET is not configured on server.");

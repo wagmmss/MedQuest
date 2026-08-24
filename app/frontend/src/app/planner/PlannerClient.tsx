@@ -3,13 +3,14 @@ import { useRouter } from "next/navigation";
 
 import { useState, useEffect, memo } from "react";
 import Link from "next/link";
-import { PlannerWeek, PlannerProgressMap, PlannerTopic } from "@/types/api";
+import { PlannerWeek, PlannerProgressMap, PlannerTopic, PlannerConfig } from "@/types/api";
 import { api } from "@/lib/api";
 import { getSubtemaDetails } from "@/lib/plannerData";
-import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play, Flame } from "lucide-react";
+import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play, Flame, Settings2 } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/nextjs";
+import { PlannerWizard } from "./PlannerWizard";
 
 const getAreaColorClass = (areaName: string) => {
   const name = areaName.toLowerCase();
@@ -103,9 +104,10 @@ interface PlannerClientProps {
   initialProgress: PlannerProgressMap;
   warning?: string;
   isIntensive?: boolean;
+  config?: PlannerConfig | null;
 }
 
-export function PlannerClient({ plan, initialProgress, warning, isIntensive }: PlannerClientProps) {
+export function PlannerClient({ plan, initialProgress, warning, isIntensive, config }: PlannerClientProps) {
   const router = useRouter();
   const { userId } = useAuth();
   const storageKey = `medquest_planner_topics_${userId || 'guest'}`;
@@ -113,6 +115,20 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
   const [progress, setProgress] = useState<PlannerProgressMap>(initialProgress);
   const [loadingAction, setLoadingAction] = useState<string | null>(null);
   const [checkedTopics, setCheckedTopics] = useState<Record<string, boolean>>({});
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [exportingIcs, setExportingIcs] = useState(false);
+
+  const handleExportIcs = async () => {
+    setExportingIcs(true);
+    try {
+      await api.planner.exportIcs();
+      toast.success("Arquivo de calendário (.ics) gerado com sucesso! Abra o arquivo para adicionar ao Google Agenda/Apple Calendar.");
+    } catch {
+      toast.error("Erro ao exportar cronograma.");
+    } finally {
+      setExportingIcs(false);
+    }
+  };
 
   useEffect(() => {
     const saved = localStorage.getItem(storageKey);
@@ -270,9 +286,36 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
             Seu Cronograma de Estudos
           </h2>
           <p className="text-muted-foreground text-sm">Cronograma baseado nos pesos da prova de residência da USP.</p>
+          {config?.target_institution && (
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1.5 flex-wrap">
+              {config.target_institution.split(",").map((instName, idx) => (
+                <span key={idx} className="font-bold text-foreground bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 rounded-md">
+                  {instName.trim()}
+                </span>
+              ))}
+              {config.target_specialty && (
+                <>
+                  <span>•</span>
+                  <span><strong className="text-foreground">Especialidade:</strong> {config.target_specialty}</span>
+                </>
+              )}
+              {config.target_score && (
+                <>
+                  <span>•</span>
+                  <span><strong className="text-foreground">Meta:</strong> {config.target_score}%</span>
+                </>
+              )}
+              {config.days_per_week && config.hours_per_day && (
+                <>
+                  <span>•</span>
+                  <span>{config.days_per_week} dias/sem ({config.hours_per_day}h/dia)</span>
+                </>
+              )}
+            </div>
+          )}
         </div>
-        <div className="flex items-center gap-6 w-full sm:w-auto">
-          <div className="flex-1 sm:w-48">
+        <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto flex-wrap justify-between sm:justify-end">
+          <div className="flex-1 sm:w-44">
             <div className="flex justify-between text-[11px] uppercase tracking-wider font-semibold mb-1">
               <span className="text-muted-foreground">Progresso</span>
               <span className="text-primary">{Object.values(progress).filter(p => p.studied).length} / {plan.length}</span>
@@ -285,11 +328,27 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
             </div>
           </div>
           <button 
+            onClick={() => setShowSettingsModal(true)}
+            className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-primary bg-primary/10 hover:bg-primary/20 border border-primary/25 px-3 py-1.5 rounded-lg transition-colors shadow-sm"
+          >
+            <Settings2 size={15} />
+            Calibrar Perfil
+          </button>
+          <button 
+            onClick={handleExportIcs}
+            disabled={exportingIcs}
+            className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80 px-2.5 py-1.5 rounded-lg border border-border transition-colors"
+            title="Exportar cronograma completo para Google Calendar / Apple Calendar (.ics)"
+          >
+            {exportingIcs ? <Loader2 size={15} className="animate-spin" /> : <CalendarDays size={15} />}
+            Exportar Agenda (.ics)
+          </button>
+          <button 
             onClick={() => setShowResetConfirm(true)}
             disabled={loadingAction === "reset"}
-            className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80 px-3 py-1.5 rounded-md transition-colors"
+            className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80 px-2.5 py-1.5 rounded-lg transition-colors"
           >
-            {loadingAction === "reset" ? <Loader2 size={16} className="animate-spin" /> : <RotateCcw size={16} />}
+            {loadingAction === "reset" ? <Loader2 size={15} className="animate-spin" /> : <RotateCcw size={15} />}
             Refazer
           </button>
         </div>
@@ -435,6 +494,20 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive }: P
                 <button onClick={handleResetConfig} className="flex-1 py-2.5 px-4 rounded-xl bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-colors font-bold text-sm">Sim, Apagar Tudo</button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Settings / Calibration Modal */}
+      {showSettingsModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowSettingsModal(false)} />
+          <div className="relative z-10 max-h-[90vh] overflow-y-auto w-full max-w-2xl animate-in fade-in zoom-in-95 duration-200">
+            <PlannerWizard
+              initialConfig={config}
+              onClose={() => setShowSettingsModal(false)}
+              isModal
+            />
           </div>
         </div>
       )}

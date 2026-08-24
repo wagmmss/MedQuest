@@ -48,6 +48,7 @@ export default async function PlannerPage({ searchParams }: { searchParams: Prom
         initialProgress={progressMap}
         warning={planResponse.warning}
         isIntensive={isIntensive}
+        config={config}
       />
     </div>
   );

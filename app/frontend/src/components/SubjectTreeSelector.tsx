@@ -87,9 +87,9 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
   }
 
   return (
-    <div className="flex flex-col gap-2 mt-3 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+    <div className="flex flex-col gap-2 mt-3 max-h-[500px] overflow-y-auto overscroll-contain pr-2 custom-scrollbar">
       {tree.map(area => (
-        <div key={area.area} className="border border-border rounded-lg overflow-hidden bg-card">
+        <div key={area.area} className="shrink-0 border border-border rounded-lg overflow-hidden bg-card">
           <div 
             className="flex items-center gap-2 px-4 py-3 bg-muted/30 cursor-pointer hover:bg-muted/50 transition-colors select-none"
             onClick={() => toggleArea(area.area)}
@@ -105,17 +105,28 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
             <div className="flex flex-col border-t border-border bg-background">
               {area.macroThemes.map(macro => {
                 const selState = getThemeSelectionState(macro.activeDetails);
-                const isExpanded = expandedThemes[macro.theme];
+                const themeKey = `${area.area}::${macro.theme}`;
+                const isExpanded = expandedThemes[themeKey];
+                // A theme that maps to itself has no useful child level. Render it
+                // as a selectable leaf instead of showing the same name twice.
+                const isDirectTheme = macro.activeDetails.length === 1 && macro.activeDetails[0] === macro.theme;
+                const directThemeCount = isDirectTheme ? availableMap.get(macro.theme) || 0 : 0;
                 
                 return (
                   <div key={macro.theme} className="border-b border-border last:border-0">
                     <div className="flex items-center gap-2 px-4 py-2 hover:bg-muted/20 transition-colors">
-                      <div 
-                        className="cursor-pointer p-1 text-muted-foreground hover:text-foreground"
-                        onClick={() => toggleTheme(macro.theme)}
-                      >
-                        {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
-                      </div>
+                      {isDirectTheme ? (
+                        <div className="w-6 shrink-0" aria-hidden="true" />
+                      ) : (
+                        <button
+                          type="button"
+                          className="cursor-pointer p-1 text-muted-foreground hover:text-foreground"
+                          onClick={() => toggleTheme(themeKey)}
+                          aria-label={isExpanded ? `Recolher ${macro.theme}` : `Expandir ${macro.theme}`}
+                        >
+                          {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                        </button>
+                      )}
                       
                       <label className="flex items-center gap-3 flex-1 cursor-pointer select-none group py-1">
                         <div className="relative flex items-center shrink-0">
@@ -140,6 +151,11 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
                           {macro.theme}
                           {macro.highYield && <span title="Tema de Alto Rendimento" className="text-[10px]">🔥</span>}
                         </span>
+                        {isDirectTheme && (
+                          <span className="text-xs text-muted-foreground/60 shrink-0 tabular-nums">
+                            {directThemeCount} q
+                          </span>
+                        )}
                       </label>
                     </div>
                     

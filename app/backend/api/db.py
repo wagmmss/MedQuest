@@ -200,10 +200,15 @@ def init_db(app):
             db.execute("""CREATE TABLE IF NOT EXISTS planner_config (
                 user_id TEXT PRIMARY KEY, exam_date TEXT, start_date TEXT,
                 days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30, target_score REAL,
+                target_institution TEXT, target_specialty TEXT,
                 updated_at TEXT)""")
             existing_pc_cols = _table_cols(db, "planner_config")
             if "target_score" not in existing_pc_cols:
                 db.execute("ALTER TABLE planner_config ADD COLUMN target_score REAL")
+            if "target_institution" not in existing_pc_cols:
+                db.execute("ALTER TABLE planner_config ADD COLUMN target_institution TEXT")
+            if "target_specialty" not in existing_pc_cols:
+                db.execute("ALTER TABLE planner_config ADD COLUMN target_specialty TEXT")
 
             db.execute("""CREATE TABLE IF NOT EXISTS flashcards (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,

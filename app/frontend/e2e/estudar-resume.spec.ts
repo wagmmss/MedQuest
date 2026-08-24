@@ -60,7 +60,11 @@ async function mockStudyApi(
   });
 }
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, context }) => {
+  await context.addCookies([
+    { name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' },
+    { name: 'medquest_demo', value: '1', domain: '127.0.0.1', path: '/' },
+  ]);
   await page.addInitScript(() => localStorage.setItem('medquest_onboarding_v1', 'done'));
 });
 
@@ -178,4 +182,53 @@ test('remove botão de IA e permite gerar flashcard após erro', async ({ page, 
   await expect(page.getByText('Flashcard Salvo na Revisão Ativa!')).toBeVisible();
   await expect(page.getByText(/conduta indicada é/i)).toBeVisible();
   expect(flashcardGenerated).toBe(true);
+});
+
+test('clicar em voltar limpa a sessão e reload mantém na tela de filtros', async ({ page, context }) => {
+  await context.addCookies([{ name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' }]);
+  await mockStudyApi(page);
+
+  await page.goto('/estudar?area=Cl%C3%ADnica+M%C3%A9dica', { waitUntil: 'domcontentloaded' });
+  await expect(page.getByText('Qual o tratamento inicial')).toBeVisible();
+
+  // Clica em Voltar
+  await page.getByRole('button', { name: '← Voltar' }).click();
+  await expect(page.getByText('Filtros de Estudo')).toBeVisible();
+
+  // Recarrega a página
+  await page.reload({ waitUntil: 'domcontentloaded' });
+
+  // Deve permanecer na tela de filtros sem carregar automaticamente a questão anterior
+  await expect(page.getByText('Filtros de Estudo')).toBeVisible();
+  await expect(page.getByText('Qual o tratamento inicial')).not.toBeVisible();
+});
+
+test('navegar para /estudar com sessão salva exibe banner de retomada na tela de filtros', async ({ page, context }) => {
+  await context.addCookies([{ name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' }]);
+  await mockStudyApi(page);
+
+  // Inicia uma sessão com filtros
+  await page.goto('/estudar?area=Cl%C3%ADnica+M%C3%A9dica', { waitUntil: 'domcontentloaded' });
+  await expect(page.getByText('Qual o tratamento inicial')).toBeVisible();
+  const alternative = page.getByRole('button', { name: /Mudança de estilo de vida/ });
+  await alternative.click();
+  await expect(alternative).toHaveAttribute('aria-pressed', 'true');
+
+  // Limpa sessionStorage (simulando troca de abas/navegação intencional para /estudar)
+  await page.evaluate(() => sessionStorage.removeItem('medquest_active_quiz'));
+
+  // Navega intencionalmente para /estudar
+  await page.goto('/estudar', { waitUntil: 'domcontentloaded' });
+
+  // Deve estar na tela de Filtros de Estudo exibindo o banner de retomada
+  await expect(page.getByText('Filtros de Estudo')).toBeVisible();
+  await expect(page.getByText('Sessão de Estudos em Andamento')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Continuar Sessão' })).toBeVisible();
+
+  // Clica para continuar a sessão anterior
+  await page.getByRole('button', { name: 'Continuar Sessão' }).click();
+
+  // Deve retornar para a questão com a alternativa selecionada
+  await expect(page.getByText('Qual o tratamento inicial')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Mudança de estilo de vida/ })).toHaveAttribute('aria-pressed', 'true');
 });

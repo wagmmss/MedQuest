@@ -104,10 +104,37 @@ export const api = {
   },
   planner: {
     getConfig: () => apiFetch<PlannerConfig>("/api/planner/config", { cache: 'no-store' }),
-    saveConfig: (config: PlannerConfig) => apiFetch<{success: boolean}>("/api/planner/config", {
-      method: "POST",
-      body: JSON.stringify(config),
-    }),
+    saveConfig: async (config: PlannerConfig) => {
+      try {
+        return await apiFetch<{success: boolean}>("/api/planner/config", {
+          method: "POST",
+          body: JSON.stringify(config),
+        });
+      } catch (error) {
+        const usesProfileFields = config.target_institution !== undefined ||
+          config.target_institutions !== undefined ||
+          config.target_specialty !== undefined;
+
+        // Older API instances only accept the original planner fields. Retry
+        // without the optional profile metadata so they do not block the user
+        // from creating a study plan during a rolling deployment.
+        if (!usesProfileFields || !(error instanceof Error) || !error.message.includes("400")) {
+          throw error;
+        }
+
+        const legacyConfig: PlannerConfig = {
+          exam_date: config.exam_date,
+          start_date: config.start_date,
+          days_per_week: config.days_per_week,
+          hours_per_day: config.hours_per_day,
+          target_score: config.target_score,
+        };
+        return apiFetch<{success: boolean}>("/api/planner/config", {
+          method: "POST",
+          body: JSON.stringify(legacyConfig),
+        });
+      }
+    },
     resetConfig: () => apiFetch<{success: boolean}>("/api/planner/config/reset", {
       method: "POST",
     }),
@@ -126,7 +153,24 @@ export const api = {
       apiFetch<{success: boolean}>(`/api/planner/${week}/revision`, {
         method: "POST",
         body: JSON.stringify({ type, checked }),
-      })
+      }),
+    exportIcs: async () => {
+      const url = `${API_BASE}/api/planner/export/ics`;
+      const token = typeof window !== "undefined" ? (window as unknown as { __medquest_token?: string }).__medquest_token : undefined;
+      const headers: Record<string, string> = {};
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+      const res = await fetch(url, { headers });
+      if (!res.ok) throw new Error("Falha ao exportar cronograma para agenda");
+      const blob = await res.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = downloadUrl;
+      a.download = `medquest_cronograma_${new Date().toISOString().split("T")[0]}.ics`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(downloadUrl);
+    },
   },
   questions: {
     getMeta: (filters?: Record<string, string | string[]>) => {
@@ -678,6 +722,23 @@ export const api = {
     report: (id: number, reason: string) => apiFetch<{success: boolean}>(`/api/flashcards/${id}/report`, {
       method: "POST",
       body: JSON.stringify({ reason })
-    })
+    }),
+    exportAnki: async (dueOnly: boolean = false) => {
+      const url = `${API_BASE}/api/flashcards/export/anki${dueOnly ? "?due_only=true" : ""}`;
+      const token = typeof window !== "undefined" ? (window as unknown as { __medquest_token?: string }).__medquest_token : undefined;
+      const headers: Record<string, string> = {};
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+      const res = await fetch(url, { headers });
+      if (!res.ok) throw new Error("Falha ao exportar flashcards para o Anki");
+      const blob = await res.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = downloadUrl;
+      a.download = `medquest_flashcards_anki_${new Date().toISOString().split("T")[0]}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(downloadUrl);
+    },
   }
 };
