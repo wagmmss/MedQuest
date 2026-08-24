@@ -279,9 +279,10 @@ compose ps
 '@
 
     Print-Info "Executando atualizacao dos servicos na VPS..."
-    # 'bash -s -- <diretorio> <tempo>' recebe o script por stdin e preserva seu
-    # conteudo. Os argumentos sao enviados separadamente da logica do script.
-    $RemoteBashScript | & ssh @SshArgs "bash -s -- '$RemoteDir' $ImageWaitSeconds"
+    # O PowerShell pode acrescentar CR ao fim da entrada redirecionada. O `tr`
+    # remove esses caracteres antes de o Bash interpretar o script (por exemplo,
+    # impede que o ultimo comando seja lido como `ps\r`).
+    $RemoteBashScript | & ssh @SshArgs "tr -d '\r' | bash -s -- '$RemoteDir' $ImageWaitSeconds"
 
     if ($LASTEXITCODE -ne 0) {
         Print-Error "Ocorreu um erro durante a execucao do deploy remoto via SSH (Exit code: $LASTEXITCODE)."
