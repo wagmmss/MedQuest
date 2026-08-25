@@ -394,6 +394,7 @@ def main():
     parser.add_argument("--ids", default=None, help="Lista de IDs separados por vírgula")
     parser.add_argument("--apply", action="store_true", help="Aplica as alterações no banco de dados")
     parser.add_argument("--skip-audited", action="store_true", help="Pula questões já auditadas/classificadas")
+    parser.add_argument("--only-noncanonical", action="store_true", help="Classifica apenas questões cujo par área/subtema não pertence à taxonomia oficial")
     parser.add_argument("--out", default=None, help="Arquivo de saída do relatório Markdown")
     parser.add_argument("--provider", default="gemini", choices=["gemini", "deepseek", "openrouter"], help="Provedor de IA")
     args = parser.parse_args()
@@ -402,7 +403,14 @@ def main():
     init_audit_table(conn)
 
     ids = [int(x.strip()) for x in args.ids.split(",")] if args.ids else None
-    questions = fetch_questions(conn, area=args.area, limit=args.limit, offset=args.offset, ids=ids, skip_audited=args.skip_audited)
+    # Apply the canonical filter before the user-facing limit, otherwise an
+    # initial block of already recovered questions can produce an empty run.
+    fetch_limit = None if args.only_noncanonical else args.limit
+    questions = fetch_questions(conn, area=args.area, limit=fetch_limit, offset=args.offset, ids=ids, skip_audited=args.skip_audited)
+    if args.only_noncanonical:
+        questions = [q for q in questions if q["area"] not in CANONICAL_TAXONOMY or q["subtema"] not in CANONICAL_TAXONOMY.get(q["area"], [])]
+        if args.limit is not None:
+            questions = questions[:args.limit]
 
     print(f"==================================================")
     print(f"INICIANDO RECATEGORIZAÇÃO MÉDICA - MEDQUEST")

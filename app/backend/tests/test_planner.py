@@ -18,7 +18,9 @@ def test_intensive_plan_uses_high_yield_catalog():
     )
 
     topics = [topic for week in result["plan"] for topic in week["topics"]]
-    assert [topic["subtema"] for topic in topics] == ["Hipertensão Arterial Sistêmica e Crises Hipertensivas"]
+    topic_names = {topic["subtema"] for topic in topics}
+    assert "Hipertensão Arterial Sistêmica e Crises Hipertensivas" in topic_names
+    assert "Tema sem prioridade cadastrada" not in topic_names
 
 
 def test_plan_uses_curriculum_theory_duration_and_two_hour_practice_block():
@@ -34,7 +36,8 @@ def test_plan_uses_curriculum_theory_duration_and_two_hour_practice_block():
         hours_per_week=10,
     )
 
-    topic = result["plan"][0]["topics"][0]
+    topics = [topic for week in result["plan"] for topic in week["topics"]]
+    topic = next(topic for topic in topics if topic["subtema"] == "Hipertensão Arterial Sistêmica e Crises Hipertensivas")
     assert topic["estimated_theory_hours"] == 2.81
     assert topic["estimated_practice_hours"] == 2.0
     assert topic["estimated_hours"] == 4.81
@@ -42,7 +45,7 @@ def test_plan_uses_curriculum_theory_duration_and_two_hour_practice_block():
     assert topic["course_module"] == "Hipertensão Arterial Sistêmica e Crises Hipertensivas"
 
 
-def test_plan_uses_conservative_fallback_when_course_match_is_uncertain():
+def test_plan_ignores_topics_outside_the_canonical_catalog():
     rows = [
         {"area": "Clínica Médica", "subtema": "Tema sem prioridade cadastrada", "q_count": 12},
     ]
@@ -55,8 +58,8 @@ def test_plan_uses_conservative_fallback_when_course_match_is_uncertain():
         hours_per_week=10,
     )
 
-    topic = result["plan"][0]["topics"][0]
-    assert topic["estimated_theory_hours"] == 1.0
-    assert topic["estimated_practice_hours"] == 2.0
-    assert topic["estimated_hours"] == 3.0
-    assert topic["theory_source"] == "pedagogical_estimate"
+    topics = [topic for week in result["plan"] for topic in week["topics"]]
+    assert topics
+    assert len({topic["subtema"] for topic in topics}) <= 170
+    assert "Tema sem prioridade cadastrada" not in {topic["subtema"] for topic in topics}
+    assert result["total_required_hours"] == 610

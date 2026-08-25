@@ -69,9 +69,12 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         DEFAULT_PRACTICE_HOURS_PER_SUBTEMA,
     )
 
-    # Cria dicionário de subtemas para fácil acesso.
+    # Cria o catálogo canônico de subtemas para fácil acesso.  O banco pode
+    # conter classificações históricas, incompletas ou ainda não migradas; ele
+    # só deve complementar as estatísticas dos temas, nunca definir o edital.
     meta_dict = {}
     for area_group in planner_meta:
+        canonical_area = get_normalized_area(area_group.get("area"))
         for macro in area_group.get("macroThemes", []):
             is_high_yield = macro.get("highYield", False)
             # Fallback pedagógico para subtemas sem correspondência segura no
@@ -81,6 +84,7 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
             for db_subtema in macro.get("dbSubtemas", []):
                 course_match = katomart_subtemas.get(db_subtema)
                 meta_dict[db_subtema] = {
+                    "area": canonical_area,
                     "highYield": is_high_yield,
                     "theory_hours": (
                         course_match.get("theory_hours", fallback_theory_hours)
@@ -91,20 +95,37 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
                     "course_module": course_match.get("module") if course_match else None,
                 }
 
-    # Rows now provided via argument
+    # Consolida as estatísticas do banco apenas para os 170 temas do catálogo.
+    # Isso também protege contra a mesma classificação aparecer em mais de uma
+    # área durante uma migração de dados.
+    row_stats = {
+        subtema: {"q_count": 0, "subtopics": []}
+        for subtema in meta_dict
+    }
+    for row in rows:
+        subtema = row.get("subtema")
+        if subtema not in row_stats:
+            continue
+        stats = row_stats[subtema]
+        try:
+            stats["q_count"] += int(row.get("q_count") or 0)
+        except (TypeError, ValueError):
+            pass
+        topics = row.get("topics")
+        if topics:
+            stats["subtopics"].extend(topic for topic in str(topics).split(",") if topic)
 
-    # Prepara a lista de todos os tópicos disponíveis, calculando as horas de cada um
+    # Prepara exatamente os tópicos canônicos, calculando as horas de cada um.
     all_topics = []
     total_required_hours = 0.0
 
     if user_progress is None:
         user_progress = {}
 
-    for r in rows:
-        raw_area = r['area']
-        norm_area = get_normalized_area(raw_area)
-        subtema = r['subtema']
-        q_count = r['q_count']
+    for subtema, meta in meta_dict.items():
+        stats = row_stats[subtema]
+        norm_area = meta["area"]
+        q_count = stats["q_count"]
         
         prog = user_progress.get(subtema, {"ans_count": 0, "correct_count": 0, "attempts": 0})
         prog_dict = dict(prog) if prog else {}
@@ -114,13 +135,6 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         acc = (correct_count / attempts) if attempts > 0 else 0
         
         remaining_q = max(0, q_count - ans_count)
-        
-        meta = meta_dict.get(subtema, {
-            "highYield": False,
-            "theory_hours": 1.0,
-            "theory_source": "pedagogical_estimate",
-            "course_module": None,
-        })
         
         if intensive and not meta["highYield"]:
             continue
@@ -143,7 +157,7 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         all_topics.append({
             "area": norm_area,
             "subtema": subtema,
-            "subtopics": r.get('topics', '').split(',') if r.get('topics') else [],
+            "subtopics": stats["subtopics"],
             "questions_available": remaining_q,
             "estimated_theory_hours": round(theory_hours, 2),
             "estimated_practice_hours": round(practice_hours, 2),
