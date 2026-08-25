@@ -119,7 +119,7 @@ export function BuscarClient({ initialQuery }: { initialQuery: string }) {
                 className="bg-card border border-border shadow-sm rounded-xl p-5 hover:border-primary/50 hover:shadow-md cursor-pointer transition-all flex flex-col gap-3 group"
               >
                 <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  <span className="bg-primary/10 text-primary px-2 py-1 rounded">{res.institution_code} {res.year}</span>
+                  <span className="bg-primary/10 text-primary px-2 py-1 rounded">{res.institution_code}{res.is_autoral ? " (A)" : ""} {res.year}</span>
                   <span className="bg-muted px-2 py-1 rounded">{res.area}</span>
                   <span className="bg-muted px-2 py-1 rounded">{res.subtema}</span>
                 </div>

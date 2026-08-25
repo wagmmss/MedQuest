@@ -1236,7 +1236,7 @@ export function QuizClient({
                     <span className="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span> Revisado
                   </span>
                 )}
-                <span className="bg-muted px-2 py-1 rounded">{q.institution_code} {q.year}</span>
+                <span className="bg-muted px-2 py-1 rounded">{q.institution_code}{q.is_autoral ? " (A)" : ""} {q.year}</span>
                 <span className="bg-muted px-2 py-1 rounded">{q.area}</span>
                 <span className="bg-muted px-2 py-1 rounded">{q.subtema}</span>
               </div>

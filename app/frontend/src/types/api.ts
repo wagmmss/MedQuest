@@ -234,6 +234,7 @@ export interface QuestionListItem {
   topic: string;
   area: string;
   subtema: string;
+  is_autoral?: boolean;
   adaptive_score?: number;
   adaptive_reasons?: string[];
   retrievability?: number | null;

@@ -221,7 +221,7 @@ export function CommandPalette() {
                       }}
                     >
                       <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                        <span className="bg-primary/10 text-primary px-1.5 py-0.5 rounded">{res.institution_code} {res.year}</span>
+                        <span className="bg-primary/10 text-primary px-1.5 py-0.5 rounded">{res.institution_code}{res.is_autoral ? " (A)" : ""} {res.year}</span>
                         <span>{res.subtema || res.area}</span>
                       </div>
                       <div className="text-sm text-foreground line-clamp-2">

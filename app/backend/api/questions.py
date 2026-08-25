@@ -136,11 +136,15 @@ def simulado_usp():
     placeholders = ",".join("?" * len(all_ids))
     rows = db.execute(
         f"""SELECT q.id, q.source_file, q.source_number, q.year, q.institution_code,
-                   q.institution_label, q.topic, q.area, q.subtema
+                   q.institution_label, q.topic, q.area, q.subtema, q.editorial_status
             FROM questions q WHERE q.id IN ({placeholders})""",
         all_ids,
     ).fetchall()
-    out = [dict(r) for r in rows]
+    out = []
+    for r in rows:
+        d = dict(r)
+        d["is_autoral"] = bool(d.get("editorial_status") == "autoral" or (d.get("source_file") and "AUTORAL" in d.get("source_file").upper()))
+        out.append(d)
     random.shuffle(out)
     return jsonify(out)
 
@@ -186,12 +190,16 @@ def simulado_custom():
     placeholders = ",".join("?" * len(all_ids))
     rows = db.execute(
         f"""SELECT q.id, q.source_file, q.source_number, q.year, q.institution_code,
-                   q.institution_label, q.topic, q.area, q.subtema
+                   q.institution_label, q.topic, q.area, q.subtema, q.editorial_status
             FROM questions q WHERE q.id IN ({placeholders})""",
         all_ids,
     ).fetchall()
     
-    out = [dict(r) for r in rows]
+    out = []
+    for r in rows:
+        d = dict(r)
+        d["is_autoral"] = bool(d.get("editorial_status") == "autoral" or (d.get("source_file") and "AUTORAL" in d.get("source_file").upper()))
+        out.append(d)
     random.shuffle(out)
     return jsonify(out)
 
@@ -230,7 +238,7 @@ def search_questions():
         return jsonify([])
     
     rows = db.execute(f"""
-        SELECT q.id, q.institution_code, q.year, q.area, q.subtema,
+        SELECT q.id, q.institution_code, q.year, q.area, q.subtema, q.source_file, q.editorial_status,
                SUBSTR(q.stem, 1, 150) as stem_snippet,
                SUBSTR(e.explanation_text, 1, 150) as exp_snippet
         FROM questions q
@@ -242,6 +250,7 @@ def search_questions():
     out = []
     for row in rows:
         item = dict(row)
+        item["is_autoral"] = bool(item.get("editorial_status") == "autoral" or (item.get("source_file") and "AUTORAL" in str(item.get("source_file")).upper()))
         item["stem_snippet"] = (item.get("stem_snippet") or "") + "..."
         item["exp_snippet"] = (item.get("exp_snippet") or "") + "..."
         out.append(item)
@@ -355,11 +364,15 @@ def questions():
     placeholders = ",".join("?" * len(ids))
     rows = db.execute(
         f"""SELECT q.id, q.source_file, q.source_number, q.year, q.institution_code,
-                   q.institution_label, q.topic, q.area, q.subtema
+                   q.institution_label, q.topic, q.area, q.subtema, q.editorial_status
             FROM questions q WHERE q.id IN ({placeholders})""",
         ids,
     ).fetchall()
-    out = [dict(r) for r in rows]
+    out = []
+    for r in rows:
+        d = dict(r)
+        d["is_autoral"] = bool(d.get("editorial_status") == "autoral" or (d.get("source_file") and "AUTORAL" in d.get("source_file").upper()))
+        out.append(d)
     random.shuffle(out)
     return jsonify(out)
 
@@ -419,6 +432,7 @@ def question_detail(qid):
         "year": q["year"], "institution_code": q["institution_code"],
         "institution_label": q["institution_label"], "topic": q["topic"],
         "area": q["area"], "subtema": q["subtema"], "stem": q["stem"],
+        "is_autoral": bool(q.get("editorial_status") == "autoral" or (q.get("source_file") and "AUTORAL" in str(q.get("source_file")).upper())),
         "is_verified": bool(q.get("is_verified", 0)),
         "last_updated_at": q.get("last_updated_at"),
         "technical_note": q.get("technical_note"),
@@ -811,6 +825,7 @@ def question_batch_detail():
             "area": q["area"],
             "subtema": q["subtema"],
             "stem": q["stem"],
+            "is_autoral": bool(q.get("editorial_status") == "autoral" or (q.get("source_file") and "AUTORAL" in str(q.get("source_file")).upper())),
             "is_verified": bool(q.get("is_verified", 0)),
             "last_updated_at": q.get("last_updated_at"),
             "technical_note": q.get("technical_note"),

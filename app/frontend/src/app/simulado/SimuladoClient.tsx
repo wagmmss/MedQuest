@@ -1211,7 +1211,7 @@ export function SimuladoClient({
                     <span className="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span> Revisado
                   </span>
                 )}
-                <span className="bg-muted px-2 py-1 rounded">{qDetail.institution_code} {qDetail.year}</span>
+                <span className="bg-muted px-2 py-1 rounded">{qDetail.institution_code}{qDetail.is_autoral ? " (A)" : ""} {qDetail.year}</span>
                 <span className="bg-muted px-2 py-1 rounded">{qDetail.area}</span>
                 <span className="bg-muted px-2 py-1 rounded">{qDetail.subtema}</span>
               </div>
