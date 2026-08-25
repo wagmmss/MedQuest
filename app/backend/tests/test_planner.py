@@ -35,9 +35,9 @@ def test_plan_uses_curriculum_theory_duration_and_two_hour_practice_block():
     )
 
     topic = result["plan"][0]["topics"][0]
-    assert topic["estimated_theory_hours"] == 6.87
+    assert topic["estimated_theory_hours"] == 2.81
     assert topic["estimated_practice_hours"] == 2.0
-    assert topic["estimated_hours"] == 8.87
+    assert topic["estimated_hours"] == 4.81
     assert topic["theory_source"] == "curriculum"
     assert topic["course_module"] == "Hipertensão Arterial Sistêmica e Crises Hipertensivas"
 

@@ -13,7 +13,9 @@ import {
   Send,
   Loader2,
   HelpCircle,
-  Lightbulb
+  Lightbulb,
+  Maximize,
+  X
 } from "lucide-react";
 import { api } from "@/lib/api";
 import toast from "react-hot-toast";
@@ -42,15 +44,41 @@ interface ParsedSection {
 }
 
 /**
- * Helper to render inline markdown text (bold **text**, italic *text*, math $...$)
+ * Helper to render inline markdown text (bold **text**, italic *text*, math $...$, and images ![alt](src))
  */
-function renderInlineFormattedText(text: string) {
+function renderInlineFormattedText(text: string, onImageClick?: (src: string) => void) {
   if (!text) return null;
 
-  // Split by bold tokens **...**
-  const parts = text.split(/(\*\*[^*]+\*\*|\$[^\$]+\$)/g);
+  // Split by markdown image !\[alt\](src), bold **...**, and math $...$
+  const parts = text.split(/(!\[[^\]]*\]\([^)]+\)|\*\*[^*]+\*\*|\$[^\$]+\$)/g);
 
   return parts.map((part, idx) => {
+    const imgMatch = part.match(/^!\[(.*?)\]\((.*?)\)$/);
+    if (imgMatch) {
+      const alt = imgMatch[1] || "Figura Explicativa";
+      const src = imgMatch[2];
+      return (
+        <div key={idx} className="my-3 flex flex-col items-center">
+          <div 
+            onClick={() => onImageClick?.(src)}
+            className="relative group rounded-xl overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all max-w-md w-full"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src={src} 
+              alt={alt}
+              className="w-full h-auto object-contain max-h-[350px] mx-auto hover:scale-[1.02] transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center pointer-events-none">
+              <Maximize size={20} className="text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md" />
+            </div>
+          </div>
+          {alt && alt !== "image.png" && alt !== "Figura Explicativa" && (
+            <span className="text-xs text-muted-foreground mt-1 text-center italic">{alt}</span>
+          )}
+        </div>
+      );
+    }
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
         <strong key={idx} className="font-bold text-foreground">
@@ -84,36 +112,18 @@ function parseExplanation(raw: string): ParsedSection {
     parsed.gabarito = gabaritoMatch[1].trim();
   }
 
-  // 2. Extract Pulo do Gato
-  const puloMatch = clean.match(/(?:\*\*Pulo do Gato\*\*|\*\*Pulo_do_Gato\*\*|Pulo do Gato):\s*([\s\S]*?)(?=(?:\n\s*\*\*(?:Raciocínio Clínico|Alternativa Correta|Alternativa Incorreta|Por que a|Alternativas Incorretas|Distratores)\*\*|\n\s*Raciocínio Clínico|\n\s*Alternativa Correta|\n\s*Alternativas Incorretas|$))/i);
-  if (puloMatch) {
-    parsed.puloDoGato = puloMatch[1].trim();
-  }
+  // Helper to find header positions
+  const distMatch = clean.match(/\n\s*\*\*(?:Análise dos Distratores|Distratores|Alternativas Incorretas|Análise das Alternativas Incorretas|Alternativas Verdadeiras)\*\*:/i);
+  const corrMatch = clean.match(/\n\s*\*\*(?:Por que a Letra [A-E] [eé] a Correta\??|Por que a Letra [A-E] [eé] a Incorreta\??|Alternativa Correta(?:\s*\([A-E]\))?)\*\*:/i);
+  const racMatch = clean.match(/\n\s*\*\*(?:Raciocínio Clínico(?: e Fundamentação)?|Fundamentação Teórica|Discussão do Caso|Comentário do Caso)\*\*:/i);
+  const puloMatch = clean.match(/(?:\*\*Pulo do Gato\*\*|\*\*Pulo_do_Gato\*\*|Pulo do Gato):\s*/i);
 
-  // 3. Extract Raciocínio Clínico (if present)
-  const raciocinioMatch = clean.match(/(?:\*\*Raciocínio Clínico\*\*|Raciocínio Clínico):\s*([\s\S]*?)(?=(?:\n\s*\*\*(?:Alternativa Correta|Alternativa Incorreta|Por que a|Alternativas Incorretas|Distratores)\*\*|\n\s*Alternativa Correta|\n\s*Alternativas Incorretas|$))/i);
-  if (raciocinioMatch) {
-    parsed.raciocinioClinico = raciocinioMatch[1].trim();
-  }
-
-  // 4. Extract Alternativa Correta / Por que é correta
-  const corretaMatch = clean.match(/(?:\*\*(?:Alternativa Correta|Por que a Letra [A-E] é a Correta\??)\*\*(?:\s*\(([A-E])\))?|Alternativa Correta(?:\s*\(([A-E])\))?):\s*([\s\S]*?)(?=(?:\n\s*\*\*(?:Alternativas Incorretas|Distratores|Análise dos Distratores)\*\*|\n\s*Alternativas Incorretas|\n\s*Distratores|$))/i);
-  if (corretaMatch) {
-    const letter = corretaMatch[1] || corretaMatch[2];
-    parsed.alternativaCorreta = {
-      letter: letter ? letter.trim() : undefined,
-      text: corretaMatch[3].trim()
-    };
-  }
-
-  // 5. Extract Distratores / Alternativas Incorretas
-  const incorretasMatch = clean.match(/(?:\*\*(?:Alternativas Incorretas|Distratores|Análise dos Distratores)\*\*|Alternativas Incorretas|Distratores):\s*([\s\S]*)$/i);
-  if (incorretasMatch) {
-    const rawDistratores = incorretasMatch[1].trim();
+  // 2. Extract Distratores
+  if (distMatch && distMatch.index !== undefined) {
+    const rawDistratores = clean.slice(distMatch.index + distMatch[0].length).trim();
     const distratorLines = rawDistratores.split(/\n(?=(?:[-•*]\s*(?:\*\*)?Letra\s+[A-E]|(?:\*\*)?Letra\s+[A-E]))/i);
 
     const distratoresList: Array<{ letter: string; text: string }> = [];
-
     for (const item of distratorLines) {
       const matchItem = item.match(/^(?:[-•*]\s*)?(?:\*\*)?Letra\s+([A-E](?:\s+e\s+[A-E])?)(?:\*\*)?(?:\s*\([^)]+\))?:\s*([\s\S]*)$/i);
       if (matchItem) {
@@ -128,10 +138,56 @@ function parseExplanation(raw: string): ParsedSection {
         });
       }
     }
-
     if (distratoresList.length > 0) {
       parsed.distratores = distratoresList;
     }
+  }
+
+  // 3. Extract Alternativa Correta
+  if (corrMatch && corrMatch.index !== undefined) {
+    const endIdx = distMatch && distMatch.index !== undefined && distMatch.index > corrMatch.index ? distMatch.index : clean.length;
+    const rawCorr = clean.slice(corrMatch.index + corrMatch[0].length, endIdx).trim();
+    const letterMatch = corrMatch[0].match(/([A-E])/i);
+    parsed.alternativaCorreta = {
+      letter: letterMatch ? letterMatch[1] : undefined,
+      text: rawCorr
+    };
+  }
+
+  // 4. Extract Raciocínio Clínico
+  if (racMatch && racMatch.index !== undefined) {
+    let endIdx = clean.length;
+    if (corrMatch && corrMatch.index !== undefined && corrMatch.index > racMatch.index) {
+      endIdx = corrMatch.index;
+    } else if (distMatch && distMatch.index !== undefined && distMatch.index > racMatch.index) {
+      endIdx = distMatch.index;
+    }
+    parsed.raciocinioClinico = clean.slice(racMatch.index + racMatch[0].length, endIdx).trim();
+  }
+
+  // 5. Extract Pulo do Gato
+  if (puloMatch && puloMatch.index !== undefined) {
+    let endIdx = clean.length;
+    if (racMatch && racMatch.index !== undefined && racMatch.index > puloMatch.index) {
+      endIdx = racMatch.index;
+    } else if (corrMatch && corrMatch.index !== undefined && corrMatch.index > puloMatch.index) {
+      endIdx = corrMatch.index;
+    } else if (distMatch && distMatch.index !== undefined && distMatch.index > puloMatch.index) {
+      endIdx = distMatch.index;
+    }
+    let puloText = clean.slice(puloMatch.index + puloMatch[0].length, endIdx).trim();
+    if (puloText.length > 300 || puloText.includes("\n\n")) {
+      const firstSentence = puloText.split(/(?<=[.!?])\s+/)[0];
+      if (firstSentence && firstSentence.length > 20) {
+        puloText = firstSentence.trim();
+      }
+    }
+    parsed.puloDoGato = puloText;
+  }
+
+  // Deduplicate: if raciocinioClinico starts with puloDoGato, remove the duplicate prefix
+  if (parsed.puloDoGato && parsed.raciocinioClinico && parsed.raciocinioClinico.startsWith(parsed.puloDoGato)) {
+    parsed.raciocinioClinico = parsed.raciocinioClinico.slice(parsed.puloDoGato.length).replace(/^[.:,\s-]+/, "").trim();
   }
 
   // Fallback if structure parsing didn't find standard sections
@@ -152,6 +208,7 @@ export function ExplanationViewer({
   const [aiQuestion, setAiQuestion] = useState("");
   const [aiAnswer, setAiAnswer] = useState<string | null>(null);
   const [loadingAi, setLoadingAi] = useState(false);
+  const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
 
   const handleAskPreceptor = async (customPrompt?: string) => {
     const questionText = customPrompt || aiQuestion;
@@ -243,9 +300,37 @@ export function ExplanationViewer({
             <div className="flex items-center gap-1.5 text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-2">
               <Sparkles size={14} /> Resposta do Preceptor Virtual
             </div>
-            {renderInlineFormattedText(aiAnswer)}
+            {renderInlineFormattedText(aiAnswer, setEnlargedImage)}
           </div>
         )}
+      </div>
+    );
+  };
+
+  const renderZoomModal = () => {
+    if (!enlargedImage) return null;
+    return (
+      <div 
+        className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+        onClick={() => setEnlargedImage(null)}
+      >
+        <div className="relative max-w-5xl max-h-[90vh] flex flex-col items-center">
+          <button 
+            type="button"
+            onClick={() => setEnlargedImage(null)}
+            className="absolute -top-12 right-0 text-white/80 hover:text-white bg-black/50 p-2 rounded-full transition-colors cursor-pointer"
+            aria-label="Fechar visualização"
+          >
+            <X size={24} />
+          </button>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img 
+            src={enlargedImage} 
+            alt="Figura Ampliada"
+            className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl border border-white/10"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
       </div>
     );
   };
@@ -258,6 +343,7 @@ export function ExplanationViewer({
           <span>Nenhum comentário oficial disponível para esta questão.</span>
         </div>
         {renderPreceptorWidget()}
+        {renderZoomModal()}
       </div>
     );
   }
@@ -284,7 +370,7 @@ export function ExplanationViewer({
               <span>Pulo do Gato</span>
             </div>
             <div className="text-foreground text-sm md:text-base leading-relaxed font-medium">
-              {renderInlineFormattedText(parsed.puloDoGato)}
+              {renderInlineFormattedText(parsed.puloDoGato, setEnlargedImage)}
             </div>
           </div>
         )}
@@ -297,7 +383,7 @@ export function ExplanationViewer({
               <span>Raciocínio Clínico</span>
             </div>
             <div className="text-foreground text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-              {renderInlineFormattedText(parsed.raciocinioClinico)}
+              {renderInlineFormattedText(parsed.raciocinioClinico, setEnlargedImage)}
             </div>
           </div>
         )}
@@ -312,7 +398,7 @@ export function ExplanationViewer({
               </span>
             </div>
             <div className="text-foreground text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-              {renderInlineFormattedText(parsed.alternativaCorreta.text)}
+              {renderInlineFormattedText(parsed.alternativaCorreta.text, setEnlargedImage)}
             </div>
           </div>
         )}
@@ -335,7 +421,7 @@ export function ExplanationViewer({
                       {dist.letter}
                     </span>
                     <div className="text-sm md:text-base text-foreground leading-relaxed">
-                      {renderInlineFormattedText(dist.text)}
+                      {renderInlineFormattedText(dist.text, setEnlargedImage)}
                     </div>
                   </div>
                 </div>
@@ -359,6 +445,7 @@ export function ExplanationViewer({
 
         {/* Preceptor Clínico IA */}
         {renderPreceptorWidget()}
+        {renderZoomModal()}
       </div>
     );
   }
@@ -367,7 +454,7 @@ export function ExplanationViewer({
   return (
     <div className="space-y-4">
       <div className="text-foreground text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-        {renderInlineFormattedText(parsed.fallbackText || "")}
+        {renderInlineFormattedText(parsed.fallbackText || "", setEnlargedImage)}
       </div>
 
       {medicalReferences && (
@@ -384,6 +471,7 @@ export function ExplanationViewer({
 
       {/* Preceptor Clínico IA */}
       {renderPreceptorWidget()}
+      {renderZoomModal()}
     </div>
   );
 }

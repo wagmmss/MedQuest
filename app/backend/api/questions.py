@@ -994,4 +994,11 @@ def serve_image(filename):
     from flask import send_from_directory
     backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     static_dir = os.path.join(backend_dir, "static")
+    
+    # Check if direct file exists
+    if os.path.exists(os.path.join(static_dir, filename)):
+        return send_from_directory(static_dir, filename)
+    # Check if inside static/images/
+    if os.path.exists(os.path.join(static_dir, "images", filename)):
+        return send_from_directory(os.path.join(static_dir, "images"), filename)
     return send_from_directory(static_dir, filename)
