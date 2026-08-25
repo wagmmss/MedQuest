@@ -17,6 +17,12 @@ export interface OverviewStats {
     policy: "rest_days_preserve_continuity";
   };
   flashcards_due_count?: number;
+  today_answered?: number;
+  daily_target?: number;
+  days_until_exam?: number | null;
+  exam_date?: string | null;
+  target_score?: number | null;
+  target_institution?: string | null;
 }
 
 export interface CoverageSubtema {
@@ -75,6 +81,9 @@ export interface BenchmarkStat {
   target_score_pct: number;
   diff_pct: number | null;
   status_label: "aprovado" | "competitivo" | "em_evolucao" | "iniciando";
+  total_attempts?: number;
+  total_correct?: number;
+  is_reliable_sample?: boolean;
   last7_attempts: number;
   weekly_target_questions: number;
   weekly_progress_pct: number;
@@ -96,6 +105,7 @@ export interface DomainAreaSummary {
   area: string;
   total_subtemas: number;
   mastered_subtemas: number;
+  proficient_subtemas?: number;
   in_progress_subtemas: number;
   not_started_subtemas: number;
   attempts: number;

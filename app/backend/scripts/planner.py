@@ -111,7 +111,7 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
             stats["q_count"] += int(row["q_count"] or 0)
         except (TypeError, ValueError):
             pass
-        topics = row["topics"]
+        topics = row.get("topics") if isinstance(row, dict) else (row["topics"] if "topics" in row.keys() else None)
         if topics:
             stats["subtopics"].extend(topic for topic in str(topics).split(",") if topic)
 

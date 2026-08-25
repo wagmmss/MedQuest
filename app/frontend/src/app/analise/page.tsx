@@ -5,7 +5,7 @@ import { AnalysisClient } from "./AnalysisClient";
 export default async function AnalisePage() {
   // Fazemos fetch paralelo de todos os dados do dashboard analítico
   const results = await Promise.allSettled([
-    serverApi.stats.getTimeline(),
+    serverApi.stats.getTimeline(14),
     serverApi.stats.getWeakTopics(),
     serverApi.stats.getBreakdown("institution"),
     serverApi.stats.getDistractors(),
@@ -13,6 +13,7 @@ export default async function AnalisePage() {
     serverApi.stats.getAtRiskTopics(),
     serverApi.stats.getLearningProfile(),
     serverApi.stats.getExamReadiness(),
+    serverApi.stats.getTimeline(180),
   ]);
 
   const timeline = results[0].status === 'fulfilled' ? results[0].value : [];
@@ -31,6 +32,7 @@ export default async function AnalisePage() {
     institution: null, coverage: 0, answered: 0, available: 0, areas: [],
     disclaimer: 'Ainda não há dados suficientes para este relatório.',
   };
+  const timeline180 = results[8].status === 'fulfilled' ? results[8].value : [];
 
   return (
     <div className="flex flex-col gap-8 animate-in fade-in duration-500">
@@ -64,6 +66,7 @@ export default async function AnalisePage() {
         atRiskTopics={atRiskTopics}
         learningProfile={learningProfile}
         examReadiness={examReadiness}
+        timeline180={timeline180}
       />
 
     </div>

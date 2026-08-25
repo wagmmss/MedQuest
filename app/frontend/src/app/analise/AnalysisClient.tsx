@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { TimelineStat, WeakTopic, BreakdownStat, DistractorStat, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness } from "@/types/api";
@@ -20,7 +20,8 @@ export function AnalysisClient({
   predictiveScore,
   atRiskTopics,
   learningProfile,
-  examReadiness
+  examReadiness,
+  timeline180,
 }: {
   timeline: TimelineStat[];
   weakTopics: WeakTopic[];
@@ -30,6 +31,7 @@ export function AnalysisClient({
   atRiskTopics: AtRiskTopic[];
   learningProfile: LearningProfile;
   examReadiness: ExamReadiness;
+  timeline180?: TimelineStat[];
 }) {
   const [days, setDays] = useState<number>(14);
   const [localTimeline, setLocalTimeline] = useState<TimelineStat[]>(timeline);
@@ -438,6 +440,77 @@ export function AnalysisClient({
                 <p>Dados insuficientes para gerar a linha do tempo.</p>
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Heatmap de Consistência (Últimos 6 meses) */}
+        <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-400 fill-mode-both">
+          <div className="bg-card border border-border shadow-sm rounded-2xl p-6 relative overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <div className="flex items-center gap-2 text-foreground">
+                <span className="material-symbols-outlined text-[20px] text-primary" data-icon="calendar_month">calendar_month</span>
+                <h3 className="text-lg font-bold text-foreground">Histórico de Atividade (Últimos 6 meses)</h3>
+              </div>
+              <span className="text-xs text-muted-foreground hidden sm:inline-block">Consistência e volume diário</span>
+            </div>
+
+            {(() => {
+              const hData = (timeline180 && timeline180.length > 0) ? timeline180 : localTimeline;
+              if (!hData || hData.length === 0) {
+                return (
+                  <p className="text-sm text-muted-foreground py-6 text-center">Nenhuma atividade registrada nos últimos 6 meses.</p>
+                );
+              }
+              const today = new Date();
+              const daysCount = 180;
+              const startDate = new Date(today.getTime() - (daysCount - 1) * 24 * 60 * 60 * 1000);
+              startDate.setDate(startDate.getDate() - startDate.getDay());
+              const totalDays = Math.floor((today.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000)) + 1;
+              
+              const activityMap = new Map<string, number>();
+              hData.forEach(t => {
+                activityMap.set(t.day, t.attempts);
+              });
+
+              const grid = [];
+              for (let i = 0; i < totalDays; i++) {
+                const d = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000);
+                const dateStr = d.toISOString().split('T')[0];
+                const count = activityMap.get(dateStr) || 0;
+                
+                let colorClass = "bg-muted/50 dark:bg-muted/20";
+                if (count > 0 && count <= 10) colorClass = "bg-primary/30";
+                else if (count > 10 && count <= 30) colorClass = "bg-primary/50";
+                else if (count > 30 && count <= 60) colorClass = "bg-primary/70";
+                else if (count > 60) colorClass = "bg-primary";
+                
+                grid.push(
+                  <div 
+                    key={dateStr}
+                    title={`${dateStr}: ${count} questões`}
+                    className={clsx("w-[13px] h-[13px] rounded-[3px] transition-colors hover:ring-2 ring-primary/50", colorClass)}
+                  />
+                );
+              }
+
+              return (
+                <div className="w-full overflow-x-auto pb-2 scrollbar-thin">
+                  <div className="flex flex-col flex-wrap gap-1 h-[105px] min-w-max content-start">
+                    {grid}
+                  </div>
+                  <div className="flex items-center justify-between text-[11px] text-muted-foreground mt-3 pt-2 border-t border-border/50">
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-xs bg-muted/50"></span> 0
+                      <span className="w-2.5 h-2.5 rounded-xs bg-primary/30 ml-2"></span> 1-10
+                      <span className="w-2.5 h-2.5 rounded-xs bg-primary/50 ml-1"></span> 11-30
+                      <span className="w-2.5 h-2.5 rounded-xs bg-primary/70 ml-1"></span> 31-60
+                      <span className="w-2.5 h-2.5 rounded-xs bg-primary ml-1"></span> 60+
+                    </span>
+                    <span>180 dias</span>
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         </section>
       </div>

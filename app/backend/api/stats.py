@@ -165,11 +165,32 @@ def overview():
         "SELECT DISTINCT substr(answered_at, 1, 10) AS day FROM attempts WHERE user_id = ? ORDER BY day DESC", (g.user_id,)
     ).fetchall()
     days_studied = {r["day"] for r in day_rows}
-    config = db.execute(
-        "SELECT days_per_week FROM planner_config WHERE user_id = ?", (g.user_id,)
+    
+    config_row = db.execute(
+        "SELECT * FROM planner_config WHERE user_id = ?", (g.user_id,)
     ).fetchone()
+    config = dict(config_row) if config_row else {}
+
     local_today = (now_utc + timedelta(minutes=tz_offset)).date()
-    streak = responsible_streak(days_studied, local_today, config["days_per_week"] if config else 6)
+    local_today_str = str(local_today)
+    streak = responsible_streak(days_studied, local_today, config.get("days_per_week") or 6)
+
+    # Contagem de questões distintas resolvidas hoje no fuso local
+    today_answered_row = db.execute(
+        "SELECT COUNT(DISTINCT question_id) AS today_answered FROM attempts WHERE user_id = ? AND substr(answered_at, 1, 10) = ?",
+        (g.user_id, local_today_str)
+    ).fetchone()
+    today_answered_count = today_answered_row["today_answered"] if today_answered_row else 0
+
+    daily_target = config.get("questions_per_day") or 20
+    exam_date_str = config.get("exam_date")
+    days_until_exam = None
+    if exam_date_str:
+        try:
+            ed = datetime.fromisoformat(exam_date_str.replace("Z", "+00:00")).date()
+            days_until_exam = (ed - local_today).days
+        except Exception:
+            days_until_exam = None
 
     result = {
         "total_questions": total_q, "distinct_answered": distinct_answered,
@@ -179,6 +200,12 @@ def overview():
         "accuracy_prev7": accuracy_prev7, "streak_days": streak["days"],
         "streak": streak,
         "flashcards_due_count": flashcards_due_count,
+        "today_answered": today_answered_count,
+        "daily_target": daily_target,
+        "days_until_exam": days_until_exam,
+        "exam_date": exam_date_str,
+        "target_score": config.get("target_score"),
+        "target_institution": config.get("target_institution"),
     }
     overview_cache.set(cache_key, result)
     return jsonify(result)
@@ -787,6 +814,9 @@ def benchmark():
         "target_score_pct": target_score_pct,
         "diff_pct": diff_pct,
         "status_label": status_label,
+        "total_attempts": total_attempts,
+        "total_correct": total_correct,
+        "is_reliable_sample": total_attempts >= 20,
         "last7_attempts": last7_attempts,
         "weekly_target_questions": weekly_target_questions,
         "weekly_progress_pct": weekly_progress_pct,
@@ -810,13 +840,19 @@ def bottlenecks():
             MIN(q.area) AS area,
             COUNT(a.id) AS attempts,
             SUM(a.is_correct) AS correct,
-            SUM(CASE WHEN a.is_correct = 0 THEN 1 ELSE 0 END) AS wrong_count
+            SUM(CASE WHEN a.is_correct = 0 THEN 1 ELSE 0 END) AS wrong_count,
+            SUM(CASE WHEN a.answered_at >= date('now', '-60 days') AND a.is_correct = 0 THEN 1 ELSE 0 END) AS recent_wrong_count,
+            SUM(CASE WHEN a.answered_at >= date('now', '-60 days') THEN 1 ELSE 0 END) AS recent_attempts
         FROM attempts a
         JOIN questions q ON q.id = a.question_id
         WHERE a.user_id = ? AND q.subtema IS NOT NULL AND q.subtema != ''
         GROUP BY q.subtema
         HAVING attempts >= 2 AND wrong_count > 0
-        ORDER BY (CAST(wrong_count AS FLOAT) / attempts) DESC, wrong_count DESC, attempts DESC
+        ORDER BY 
+            (CASE WHEN recent_attempts > 0 THEN (CAST(recent_wrong_count AS FLOAT) / recent_attempts) * 1.5 ELSE 0 END) + 
+            (CAST(wrong_count AS FLOAT) / attempts) DESC,
+            wrong_count DESC,
+            attempts DESC
         LIMIT ?
     """, (g.user_id, limit)).fetchall()
 
@@ -862,6 +898,7 @@ def domain_summary():
             "area": area_name,
             "total_subtemas": 0,
             "mastered_subtemas": 0,
+            "proficient_subtemas": 0,
             "in_progress_subtemas": 0,
             "not_started_subtemas": 0,
             "attempts": 0,
@@ -877,6 +914,7 @@ def domain_summary():
                 "area": area,
                 "total_subtemas": 0,
                 "mastered_subtemas": 0,
+                "proficient_subtemas": 0,
                 "in_progress_subtemas": 0,
                 "not_started_subtemas": 0,
                 "attempts": 0,
@@ -896,8 +934,13 @@ def domain_summary():
             item["not_started_subtemas"] += 1
         else:
             acc = cor / att
-            if att >= 5 and acc >= 0.70:
+            # Critério pedagógico robusto:
+            # - Dominado/Consolidado: >= 15 tentativas e acurácia >= 75%
+            # - Proficiente / Sinal de domínio: 5 a 14 tentativas e acurácia >= 70%
+            if att >= 15 and acc >= 0.75:
                 item["mastered_subtemas"] += 1
+            elif att >= 5 and acc >= 0.70:
+                item["proficient_subtemas"] += 1
             else:
                 item["in_progress_subtemas"] += 1
 

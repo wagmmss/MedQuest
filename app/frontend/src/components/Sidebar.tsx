@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { useUser } from "@clerk/nextjs";
 import { AccountModal } from "./AccountModal";
+import { OfflineModal } from "./OfflineModal";
 import { ThemeToggle } from "./ThemeToggle";
 import { useZenMode } from "@/hooks/useZenMode";
 import Image from "next/image";
@@ -24,6 +25,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const { user, isLoaded } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOfflineOpen, setIsOfflineOpen] = useState(false);
   const [shortcut, setShortcut] = useState("Cmd+K");
   const { isZenMode, toggleZenMode } = useZenMode();
 
@@ -81,6 +83,14 @@ export function Sidebar() {
               <kbd className="text-[10px] bg-background px-1.5 py-0.5 rounded border border-border shadow-sm text-muted-foreground">{shortcut}</kbd>
             </button>
             <button
+              onClick={() => setIsOfflineOpen(true)}
+              className="flex items-center justify-center p-2 rounded-md text-muted-foreground hover:bg-surface-variant/50 hover:text-foreground transition-colors text-left cursor-pointer"
+              title="Modo Plantão (Offline)"
+              aria-label="Abrir Modo Plantão"
+            >
+              <span className="material-symbols-outlined text-[18px]" data-icon="cloud_download">cloud_download</span>
+            </button>
+            <button
               onClick={toggleZenMode}
               className="flex items-center justify-center p-2 rounded-md text-muted-foreground hover:bg-surface-variant/50 hover:text-foreground transition-colors text-left cursor-pointer"
               title={isZenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen (Z)"}
@@ -117,6 +127,7 @@ export function Sidebar() {
       </aside>
       
       <AccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <OfflineModal isOpen={isOfflineOpen} onClose={() => setIsOfflineOpen(false)} />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { serverApi } from "@/lib/server-api";
 import { 
-  OverviewStats, PlannerWeek, TimelineStat, BreakdownStat,
+  OverviewStats, PlannerWeek,
   BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary 
 } from "@/types/api";
 import { currentUser } from '@clerk/nextjs/server';
@@ -11,24 +11,18 @@ export default async function Dashboard() {
   const user = await currentUser();
 
   let currentPlannerWeek: PlannerWeek | null = null;
-  let timelineStats: TimelineStat[] = [];
-  let breakdownStats: BreakdownStat[] = [];
   let benchmarkStats: BenchmarkStat | null = null;
   let bottlenecks: BottleneckTopic[] = [];
   let domainSummary: DomainSummaryResponse | null = null;
   let errorNotebook: ErrorNotebookSummary | null = null;
 
   try {
-    const [timeline, breakdown, bench, bnecks, domain, errors] = await Promise.all([
-      serverApi.stats.getTimeline(180).catch(() => []),
-      serverApi.stats.getBreakdown("area").catch(() => []),
+    const [bench, bnecks, domain, errors] = await Promise.all([
       serverApi.stats.getBenchmark().catch(() => null),
       serverApi.stats.getBottlenecks(3).catch(() => []),
       serverApi.stats.getDomainSummary().catch(() => null),
       serverApi.stats.getErrorNotebookSummary().catch(() => null),
     ]);
-    timelineStats = timeline;
-    breakdownStats = breakdown;
     benchmarkStats = bench;
     bottlenecks = bnecks;
     domainSummary = domain;
@@ -72,8 +66,6 @@ export default async function Dashboard() {
       stats={stats} 
       currentPlannerWeek={currentPlannerWeek} 
       firstName={firstName} 
-      timelineStats={timelineStats}
-      breakdownStats={breakdownStats}
       benchmarkStats={benchmarkStats}
       bottlenecks={bottlenecks}
       domainSummary={domainSummary}

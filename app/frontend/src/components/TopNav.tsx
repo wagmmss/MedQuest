@@ -5,6 +5,7 @@ import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { AccountModal } from "./AccountModal";
+import { OfflineModal } from "./OfflineModal";
 import { ThemeToggle } from "./ThemeToggle";
 import { useZenMode } from "@/hooks/useZenMode";
 import Image from "next/image";
@@ -23,6 +24,7 @@ const NAV_ITEMS = [
 export default function TopNav() {
   const { user, isLoaded } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOfflineOpen, setIsOfflineOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -103,6 +105,14 @@ export default function TopNav() {
             aria-pressed={isZenMode}
           >
             <span className="material-symbols-outlined text-[20px]">{isZenMode ? "fullscreen_exit" : "fullscreen"}</span>
+          </button>
+          <button
+            onClick={() => setIsOfflineOpen(true)}
+            className="text-muted-foreground hover:bg-surface-variant/50 rounded-md p-2 transition-colors flex items-center justify-center cursor-pointer"
+            title="Modo Plantão (Offline)"
+            aria-label="Abrir Modo Plantão"
+          >
+            <span className="material-symbols-outlined text-[20px]" data-icon="cloud_download">cloud_download</span>
           </button>
           <div className="scale-90 opacity-80"><ThemeToggle /></div>
           <button 
@@ -187,6 +197,7 @@ export default function TopNav() {
       </div>}
 
       <AccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <OfflineModal isOpen={isOfflineOpen} onClose={() => setIsOfflineOpen(false)} />
     </>
   );
 }

@@ -8,7 +8,7 @@ import { api } from "@/lib/api";
 import { syncManager } from "@/lib/sync";
 import toast from "react-hot-toast";
 
-export function OfflinePanel() {
+export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
   const [isOffline, setIsOffline] = useState(false);
   const [stats, setStats] = useState({ questions: 0, flashcards: 0, queue: 0 });
   const [failedItems, setFailedItems] = useState<SyncItem[]>([]);
