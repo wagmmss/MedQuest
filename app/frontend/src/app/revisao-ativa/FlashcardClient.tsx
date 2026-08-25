@@ -5,7 +5,7 @@ import { Flashcard } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
 import { localDb, getLocalOwnerId } from "@/lib/db";
 import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
-import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle, Download, FileText, Loader2 } from "lucide-react";
+import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle, Download, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import Link from "next/link";

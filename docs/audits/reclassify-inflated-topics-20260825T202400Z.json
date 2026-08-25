@@ -1,0 +1,2343 @@
+{
+  "generated_at": "2026-08-25T20:24:02.849252+00:00",
+  "run_id": "inflated-topics-20260825T202400Z-3bbbad3d",
+  "backup": "C:\\dev\\MedQuest\\backups\\taxonomy-reclassification\\medquest-pre-inflated-topics-20260825T202400Z.db",
+  "questions_examined": 390,
+  "questions_reclassified": 227,
+  "questions_retained": 163,
+  "by_previous_subtema": {
+    "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica": 96,
+    "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares": 47,
+    "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)": 57,
+    "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)": 84,
+    "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas": 62,
+    "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular": 44
+  },
+  "by_destination": [
+    {
+      "area": "Clínica Médica",
+      "subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "questions": 55
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "questions": 48
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "questions": 36
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "questions": 28
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "questions": 20
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "questions": 17
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "questions": 14
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "questions": 12
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "questions": 10
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "questions": 10
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "questions": 9
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "questions": 7
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+      "questions": 7
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "questions": 7
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "questions": 7
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "questions": 6
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "questions": 5
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+      "questions": 5
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+      "questions": 5
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "questions": 5
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+      "questions": 5
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "questions": 4
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+      "questions": 4
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "questions": 4
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "questions": 3
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+      "questions": 3
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+      "questions": 3
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+      "questions": 3
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+      "questions": 3
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "questions": 3
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+      "questions": 3
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+      "questions": 3
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+      "questions": 3
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+      "questions": 3
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "questions": 3
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+      "questions": 2
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+      "questions": 2
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+      "questions": 2
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "questions": 2
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "questions": 2
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Vigilância em Saúde e Notificação Compulsória (SINAN)",
+      "questions": 2
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Cirurgia Torácica Geral e Doenças Pleurais",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Doença Arterial Obstrutiva Periférica e Oclusões Arteriais Agudas",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Leucemias, Linfomas e Mieloma Múltiplo",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+      "questions": 1
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Saúde do Trabalhador e Doenças Ocupacionais",
+      "questions": 1
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Ética Médica, Bioética e Prontuários / Documentos",
+      "questions": 1
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Aleitamento Materno, Alimentação Complementar e Desnutrição Infantil",
+      "questions": 1
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
+      "questions": 1
+    }
+  ],
+  "changes": [
+    {
+      "question_id": 8517,
+      "source_topic": "Transtorno de pânico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+      "changed": true
+    },
+    {
+      "question_id": 8527,
+      "source_topic": "Distúrbios de Hemostasia (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+      "changed": true
+    },
+    {
+      "question_id": 8528,
+      "source_topic": "Pneumonia Adquirida na Comunidade PAC (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+      "changed": true
+    },
+    {
+      "question_id": 8570,
+      "source_topic": "Hiperplasia Adrenal Congênita (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 8579,
+      "source_topic": "Taquiarritmia (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Pediatria",
+      "new_subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "changed": true
+    },
+    {
+      "question_id": 8580,
+      "source_topic": "Icterícia Neonatal (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "changed": true
+    },
+    {
+      "question_id": 8600,
+      "source_topic": "Síndrome Depressiva",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+      "changed": true
+    },
+    {
+      "question_id": 8624,
+      "source_topic": "Anticoncepção - métodos disponíveis",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 8625,
+      "source_topic": "Anticoncepção - situações especiais",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 8640,
+      "source_topic": "Psicofarmacologia (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+      "changed": true
+    },
+    {
+      "question_id": 8649,
+      "source_topic": "Outras Taquiarritmias Atriais (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "changed": true
+    },
+    {
+      "question_id": 8745,
+      "source_topic": "Icterícia Neonatal (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "changed": true
+    },
+    {
+      "question_id": 8875,
+      "source_topic": "UTI - Terapia Intensiva (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 8905,
+      "source_topic": "Clínica Médica Geral",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 8961,
+      "source_topic": "Profilaxia trombótica na gestante cardiopata",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 8977,
+      "source_topic": "Insuficiência Cognitiva : Depressão, Delirium, Demências e Transtorno Cognitivo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 9030,
+      "source_topic": "Osteoartrite (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+      "changed": true
+    },
+    {
+      "question_id": 9031,
+      "source_topic": "Sepse - Abordagem Inicial e Choque Séptico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+      "changed": true
+    },
+    {
+      "question_id": 9162,
+      "source_topic": "Analgesia e Sedação (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+      "changed": true
+    },
+    {
+      "question_id": 9165,
+      "source_topic": "Psiquiatria (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+      "changed": true
+    },
+    {
+      "question_id": 9167,
+      "source_topic": "Otorrino (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "changed": true
+    },
+    {
+      "question_id": 9208,
+      "source_topic": "Síndrome de Guillain Barré e suas variantes (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 9209,
+      "source_topic": "Icterícia Neonatal (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "changed": true
+    },
+    {
+      "question_id": 9224,
+      "source_topic": "Exsudato Linfocítico",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+      "changed": true
+    },
+    {
+      "question_id": 9379,
+      "source_topic": "Porfirias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Vigilância em Saúde e Notificação Compulsória (SINAN)",
+      "changed": true
+    },
+    {
+      "question_id": 9385,
+      "source_topic": "Bloqueios de Ramo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "changed": true
+    },
+    {
+      "question_id": 9386,
+      "source_topic": "COVID (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+      "changed": true
+    },
+    {
+      "question_id": 9392,
+      "source_topic": "Taquiarritmias Venticulares (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 9613,
+      "source_topic": "Bloqueios de Ramo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "changed": true
+    },
+    {
+      "question_id": 9652,
+      "source_topic": "Miscelânea (CIR)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 9686,
+      "source_topic": "Incompatibilidade ABO (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "changed": true
+    },
+    {
+      "question_id": 9747,
+      "source_topic": "Erros Inatos do Metabolismo (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 9782,
+      "source_topic": "Paracoccidiodomicose (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+      "changed": true
+    },
+    {
+      "question_id": 9784,
+      "source_topic": "AVC Isquêmico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 9845,
+      "source_topic": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+      "changed": true
+    },
+    {
+      "question_id": 9938,
+      "source_topic": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 9952,
+      "source_topic": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 10058,
+      "source_topic": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+      "changed": true
+    },
+    {
+      "question_id": 10061,
+      "source_topic": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
+      "changed": true
+    },
+    {
+      "question_id": 10235,
+      "source_topic": "Depressão no idoso (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+      "changed": true
+    },
+    {
+      "question_id": 10237,
+      "source_topic": "Anemia Ferropriva (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+      "changed": true
+    },
+    {
+      "question_id": 10238,
+      "source_topic": "Abuso de Substâncias e Psicose (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+      "changed": true
+    },
+    {
+      "question_id": 10251,
+      "source_topic": "HIV na gestação",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "changed": true
+    },
+    {
+      "question_id": 10283,
+      "source_topic": "Febre Maculosa Brasileira e Doença de Lyme (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Vigilância em Saúde e Notificação Compulsória (SINAN)",
+      "changed": true
+    },
+    {
+      "question_id": 10358,
+      "source_topic": "Doença Renal Crônica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "changed": true
+    },
+    {
+      "question_id": 10371,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 10373,
+      "source_topic": "Icterícia Neonatal (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "changed": true
+    },
+    {
+      "question_id": 10420,
+      "source_topic": "Marcos do Desenvolvimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 10439,
+      "source_topic": "HIV na gestação",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "changed": true
+    },
+    {
+      "question_id": 10509,
+      "source_topic": "Obstrução arterial aguda",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Cirurgia",
+      "new_subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+      "changed": true
+    },
+    {
+      "question_id": 10610,
+      "source_topic": "Exposição Vertical ao HIV (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 10670,
+      "source_topic": "Pielonefrite na gestante",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 10794,
+      "source_topic": "HIV na gestação",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "changed": true
+    },
+    {
+      "question_id": 10843,
+      "source_topic": "Empiema pleural",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Cirurgia",
+      "new_subtema": "Cirurgia Torácica Geral e Doenças Pleurais",
+      "changed": true
+    },
+    {
+      "question_id": 10873,
+      "source_topic": "AVC Isquêmico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 10887,
+      "source_topic": "Pediatria Ambulatorial (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 10892,
+      "source_topic": "Sífilis Congênita (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 10927,
+      "source_topic": "Guillain-Barré (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "changed": true
+    },
+    {
+      "question_id": 10935,
+      "source_topic": "Doença de Graves (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+      "changed": true
+    },
+    {
+      "question_id": 10961,
+      "source_topic": "HIV na gestação",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "changed": true
+    },
+    {
+      "question_id": 11028,
+      "source_topic": "Glomerulopatias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "changed": true
+    },
+    {
+      "question_id": 11033,
+      "source_topic": "Taquiarritmias Venticulares (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 11041,
+      "source_topic": "Escalas Geriátricas, Avaliação Global, Fragilidade e Iatrogenias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 11107,
+      "source_topic": "Esclerose Lateral Amiotrófica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 11110,
+      "source_topic": "Via Aérea e intubação (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+      "changed": true
+    },
+    {
+      "question_id": 11125,
+      "source_topic": "Isquemia de Membros inferiores",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Cirurgia",
+      "new_subtema": "Doença Arterial Obstrutiva Periférica e Oclusões Arteriais Agudas",
+      "changed": true
+    },
+    {
+      "question_id": 11188,
+      "source_topic": "Taquiarritmias Venticulares (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 11201,
+      "source_topic": "Definição e Classificação da IRA - Pré/Pós-renal e Intrinseca(CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "changed": true
+    },
+    {
+      "question_id": 11345,
+      "source_topic": "Diabetes (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 11369,
+      "source_topic": "Esclerose Lateral Amiotrófica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 11370,
+      "source_topic": "Miastenia Gravis (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 11404,
+      "source_topic": "Toxoplasmose Congênita (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 11463,
+      "source_topic": "Antidiabéticos (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 11469,
+      "source_topic": "Miastenia Gravis (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 11497,
+      "source_topic": "Introdução às anemias (G6PD, esferocitose, hemolítica) e transfusões (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11507,
+      "source_topic": "Citomegalovirose Congênita (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 11530,
+      "source_topic": "Insuficiência Aórtica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 11533,
+      "source_topic": "Encefalopatia de Wernicke (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+      "changed": true
+    },
+    {
+      "question_id": 11542,
+      "source_topic": "Gota (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+      "changed": true
+    },
+    {
+      "question_id": 11590,
+      "source_topic": "Fibrose Cística (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+      "changed": true
+    },
+    {
+      "question_id": 11591,
+      "source_topic": "Exposição Vertical ao HIV (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 12017,
+      "source_topic": "Taquiarritmia (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Pediatria",
+      "new_subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "changed": true
+    },
+    {
+      "question_id": 12022,
+      "source_topic": "Hipoglicemia Neonatal (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 12126,
+      "source_topic": "HIV na gestação",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "changed": true
+    },
+    {
+      "question_id": 12323,
+      "source_topic": "Malformações congênitas",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 12362,
+      "source_topic": "Tratamento Farmacológico Diabetes (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 12378,
+      "source_topic": "AVC Isquêmico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 12379,
+      "source_topic": "Escalas Geriátricas, Avaliação Global, Fragilidade e Iatrogenias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 12481,
+      "source_topic": "Anemia Ferropriva (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+      "changed": true
+    },
+    {
+      "question_id": 12588,
+      "source_topic": "Influenza (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 12598,
+      "source_topic": "Guillain-Barré (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "changed": true
+    },
+    {
+      "question_id": 12607,
+      "source_topic": "Amiloidose cardíaca (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "changed": true
+    },
+    {
+      "question_id": 12616,
+      "source_topic": "Clínica Médica Geral",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 12673,
+      "source_topic": "Hiperpotassemia (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 12674,
+      "source_topic": "Hiponatremia (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 12705,
+      "source_topic": "Derrame pleural (CIR)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+      "changed": true
+    },
+    {
+      "question_id": 12801,
+      "source_topic": "Tratamento das Dislipidemias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+      "changed": true
+    },
+    {
+      "question_id": 12889,
+      "source_topic": "Taquiarritmias Venticulares (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 12998,
+      "source_topic": "NMO (neuromielite óptica) (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 13006,
+      "source_topic": "Taquiarritmias Venticulares (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 13018,
+      "source_topic": "Medicina do Adolescente (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 13022,
+      "source_topic": "Teste do Reflexo Vermelho (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 13024,
+      "source_topic": "Sopro Fisiológico (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 13035,
+      "source_topic": "HIV na gestação",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "changed": true
+    },
+    {
+      "question_id": 13051,
+      "source_topic": "Reumatologia (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 13274,
+      "source_topic": "Choque Obstrutivo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 13345,
+      "source_topic": "Sedoanalgesia e Sequência Rápida de Intubação (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 13377,
+      "source_topic": "TEP (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+      "changed": true
+    },
+    {
+      "question_id": 13419,
+      "source_topic": "Dislipidemias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "changed": true
+    },
+    {
+      "question_id": 13487,
+      "source_topic": "Diabetes (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 13504,
+      "source_topic": "Hiperplasia Adrenal Congênita (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 13545,
+      "source_topic": "Guillain-Barré (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "changed": true
+    },
+    {
+      "question_id": 13551,
+      "source_topic": "Tratamento do Hipotireoidismo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+      "changed": true
+    },
+    {
+      "question_id": 13570,
+      "source_topic": "Tuberculose, MNT e Diferenciais  (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 13572,
+      "source_topic": "Morte Encefálica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Ética Médica, Bioética e Prontuários / Documentos",
+      "changed": true
+    },
+    {
+      "question_id": 13576,
+      "source_topic": "Taquiarritmias Venticulares (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 13596,
+      "source_topic": "Taquiarritmia (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Pediatria",
+      "new_subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "changed": true
+    },
+    {
+      "question_id": 13613,
+      "source_topic": "Cistos mamários",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+      "changed": true
+    },
+    {
+      "question_id": 13741,
+      "source_topic": "Teste do Reflexo Vermelho (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 13794,
+      "source_topic": "Pneumoconioses",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Saúde do Trabalhador e Doenças Ocupacionais",
+      "changed": true
+    },
+    {
+      "question_id": 13817,
+      "source_topic": "Fibrose Cística (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+      "changed": true
+    },
+    {
+      "question_id": 13834,
+      "source_topic": "Alterações colpocitológicas",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+      "changed": true
+    },
+    {
+      "question_id": 13899,
+      "source_topic": "HIV na gestação",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "changed": true
+    },
+    {
+      "question_id": 13900,
+      "source_topic": "Exposição Vertical ao HIV (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 13929,
+      "source_topic": "Paracoccidiodomicose (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+      "changed": true
+    },
+    {
+      "question_id": 13932,
+      "source_topic": "Bradiarritmias Malignas e Indicação de Marca-Passo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 14111,
+      "source_topic": "Imunologia (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "changed": true
+    },
+    {
+      "question_id": 14114,
+      "source_topic": "Outros temas em Neurologia (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 14165,
+      "source_topic": "Colestase Neonatal (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "changed": true
+    },
+    {
+      "question_id": 14262,
+      "source_topic": "Mieloma Múltiplo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Leucemias, Linfomas e Mieloma Múltiplo",
+      "changed": true
+    },
+    {
+      "question_id": 14294,
+      "source_topic": "Exposição Vertical ao HIV (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 14297,
+      "source_topic": "Teste do Reflexo Vermelho (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 14436,
+      "source_topic": "Otorrino (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Pediatria",
+      "new_subtema": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+      "changed": true
+    },
+    {
+      "question_id": 14441,
+      "source_topic": "Taquiarritmia (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Pediatria",
+      "new_subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "changed": true
+    },
+    {
+      "question_id": 14447,
+      "source_topic": "Icterícia Neonatal (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "changed": true
+    },
+    {
+      "question_id": 14478,
+      "source_topic": "Antidiabéticos (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 14508,
+      "source_topic": "Taquiarritmia (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Pediatria",
+      "new_subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "changed": true
+    },
+    {
+      "question_id": 14540,
+      "source_topic": "Violências",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 14545,
+      "source_topic": "Abuso de Substâncias e Psicose (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+      "changed": true
+    },
+    {
+      "question_id": 14563,
+      "source_topic": "Diabetes Insipidus (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 14600,
+      "source_topic": "HIV na gestação",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "changed": true
+    },
+    {
+      "question_id": 14645,
+      "source_topic": "Delirium (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 14671,
+      "source_topic": "Síndrome de Guillain Barré e suas variantes (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 14698,
+      "source_topic": "Malformações congênitas",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 14734,
+      "source_topic": "DPOC (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+      "changed": true
+    },
+    {
+      "question_id": 14859,
+      "source_topic": "Fibrose Cística (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+      "changed": true
+    },
+    {
+      "question_id": 14889,
+      "source_topic": "Classificação e Diagnóstico de Dislipidemias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 14900,
+      "source_topic": "Tratamento das Dislipidemias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+      "changed": true
+    },
+    {
+      "question_id": 14904,
+      "source_topic": "ECG Normal e Seus Parâmetros (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 14905,
+      "source_topic": "Anticoagulação (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Cirurgia",
+      "new_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+      "changed": true
+    },
+    {
+      "question_id": 14931,
+      "source_topic": "Anticoagulação (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Cirurgia",
+      "new_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+      "changed": true
+    },
+    {
+      "question_id": 14939,
+      "source_topic": "Síndromes Hipnótica, Sedativa e Narcótica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+      "changed": true
+    },
+    {
+      "question_id": 14943,
+      "source_topic": "Habilidades de Comunicação (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 15045,
+      "source_topic": "Transtorno de Humor e Ansiosos (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 15073,
+      "source_topic": "Glomerulonefrite Pós-Estreptocócica (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+      "changed": true
+    },
+    {
+      "question_id": 15074,
+      "source_topic": "Glomerulonefrite Pós-Estreptocócica (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+      "changed": true
+    },
+    {
+      "question_id": 15176,
+      "source_topic": "Exposição Vertical ao HIV (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 15284,
+      "source_topic": "Taquiarritmia (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Pediatria",
+      "new_subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "changed": true
+    },
+    {
+      "question_id": 15286,
+      "source_topic": "Exposição Vertical ao HIV (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 15375,
+      "source_topic": "Síndrome de Guillain Barré e suas variantes (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 15380,
+      "source_topic": "Sepse Neonatal Precoce (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 15396,
+      "source_topic": "Rastreamento de aneuploidias",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 15426,
+      "source_topic": "Classificação e Diagnóstico de Dislipidemias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 15537,
+      "source_topic": "Síndrome Nefrótica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+      "changed": true
+    },
+    {
+      "question_id": 15613,
+      "source_topic": "Classificação e Diagnóstico de Dislipidemias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 15703,
+      "source_topic": "Ausculta dos batimentos cardíacos fetais",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 15727,
+      "source_topic": "Coronariopatia Crônica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "changed": true
+    },
+    {
+      "question_id": 15768,
+      "source_topic": "Trombocitopenia Imune (Púrpura Trombocitopênica Imune PTI) (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+      "changed": true
+    },
+    {
+      "question_id": 15774,
+      "source_topic": "Hiperplasia Adrenal Congênita (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 15785,
+      "source_topic": "Taquiarritmia (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Pediatria",
+      "new_subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "changed": true
+    },
+    {
+      "question_id": 15830,
+      "source_topic": "Derrame Pleural (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+      "changed": true
+    },
+    {
+      "question_id": 15833,
+      "source_topic": "Microangiopatia Trombótica (MAT) (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 15834,
+      "source_topic": "SIADH (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+      "changed": true
+    },
+    {
+      "question_id": 15844,
+      "source_topic": "Fragilidade (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 15868,
+      "source_topic": "Classificação IMC (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 15942,
+      "source_topic": "Clínica Médica Geral",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 15945,
+      "source_topic": "Cetoacidose Diabética (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 15953,
+      "source_topic": "Avaliação de Líquido Ascítico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+      "changed": true
+    },
+    {
+      "question_id": 16031,
+      "source_topic": "Doença de Alzheimer (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 16032,
+      "source_topic": "Doença de Alzheimer (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 16044,
+      "source_topic": "Exposição Vertical ao HIV (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 16055,
+      "source_topic": "Aleitamento Materno (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Aleitamento Materno, Alimentação Complementar e Desnutrição Infantil",
+      "changed": true
+    },
+    {
+      "question_id": 16128,
+      "source_topic": "Anticoagulação (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Cirurgia",
+      "new_subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+      "changed": true
+    },
+    {
+      "question_id": 16137,
+      "source_topic": "Classificação e Diagnóstico de Dislipidemias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 16273,
+      "source_topic": "Meningite Tuberculosa (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+      "changed": true
+    },
+    {
+      "question_id": 16278,
+      "source_topic": "Complicações Crônicas do Diabetes (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 16285,
+      "source_topic": "Doença de Alzheimer (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 16293,
+      "source_topic": "Exposição Vertical ao HIV (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 16301,
+      "source_topic": "Hiperplasia Adrenal Congênita (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 16303,
+      "source_topic": "Fibrose Cística (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+      "changed": true
+    },
+    {
+      "question_id": 16307,
+      "source_topic": "Taquiarritmia (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Pediatria",
+      "new_subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "changed": true
+    },
+    {
+      "question_id": 16331,
+      "source_topic": "HIV na gestação",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "changed": true
+    },
+    {
+      "question_id": 16358,
+      "source_topic": "Clínica Médica Geral",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 16363,
+      "source_topic": "Púrpura Trombocitopênica Imunológica (PTI) (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+      "changed": true
+    },
+    {
+      "question_id": 16365,
+      "source_topic": "iSGLT2 (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+      "changed": true
+    },
+    {
+      "question_id": 16371,
+      "source_topic": "Esclerose Lateral Amiotrófica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 16400,
+      "source_topic": "IAMSSST (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+      "changed": true
+    },
+    {
+      "question_id": 16409,
+      "source_topic": "Taquiarritmia (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Pediatria",
+      "new_subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "changed": true
+    },
+    {
+      "question_id": 16426,
+      "source_topic": "Fibrose Cística (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+      "changed": true
+    },
+    {
+      "question_id": 16522,
+      "source_topic": "Síndrome Nefrótica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+      "changed": true
+    },
+    {
+      "question_id": 16569,
+      "source_topic": "Rastreamento de aneuploidias",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 16616,
+      "source_topic": "Taquiarritmia (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Pediatria",
+      "new_subtema": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+      "changed": true
+    },
+    {
+      "question_id": 16620,
+      "source_topic": "Hipoglicemia Neonatal (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 16642,
+      "source_topic": "Hiperplasia Adrenal Congênita (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 16722,
+      "source_topic": "Tratamento das Dislipidemias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+      "changed": true
+    },
+    {
+      "question_id": 16729,
+      "source_topic": "AVC Isquêmico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 16755,
+      "source_topic": "Bradiarritmias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "changed": true
+    },
+    {
+      "question_id": 16756,
+      "source_topic": "Amiloidose cardíaca (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "changed": true
+    },
+    {
+      "question_id": 16760,
+      "source_topic": "Valvopatias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "changed": true
+    },
+    {
+      "question_id": 16767,
+      "source_topic": "Abortamentos",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+      "changed": true
+    },
+    {
+      "question_id": 16847,
+      "source_topic": "Síndrome de Guillain Barré e suas variantes (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 16927,
+      "source_topic": "Capnografia, TRE e extubação (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 16932,
+      "source_topic": "Guillain-Barré (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "changed": true
+    },
+    {
+      "question_id": 16941,
+      "source_topic": "Pneumonite de hipersensibilidade (PH) (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+      "changed": true
+    },
+    {
+      "question_id": 16961,
+      "source_topic": "Hiperglicemia Hospitalar (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Cirurgia",
+      "new_subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+      "changed": true
+    },
+    {
+      "question_id": 16981,
+      "source_topic": "HIV na gestação",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+      "changed": true
+    },
+    {
+      "question_id": 17032,
+      "source_topic": "Sífilis Congênita (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 17069,
+      "source_topic": "Diabetes",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 17082,
+      "source_topic": "Embolia Pulmonar e Hipertensão Pulmonar",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+      "changed": true
+    },
+    {
+      "question_id": 17122,
+      "source_topic": "Transtornos Mentais",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 17172,
+      "source_topic": "Hemorragia Digestiva (Cirurgia)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "changed": true
+    },
+    {
+      "question_id": 17249,
+      "source_topic": "Tireoide",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+      "changed": true
+    },
+    {
+      "question_id": 17250,
+      "source_topic": "Geriatria e Demências",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 17255,
+      "source_topic": "Diabetes",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 17277,
+      "source_topic": "Glomerulopatias e Tubulopatias",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+      "changed": true
+    },
+    {
+      "question_id": 17326,
+      "source_topic": "Transtornos por Uso de Substâncias",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+      "changed": true
+    },
+    {
+      "question_id": 17327,
+      "source_topic": "Transtornos por Uso de Substâncias",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+      "changed": true
+    }
+  ]
+}

@@ -1,0 +1,2474 @@
+{
+  "generated_at": "2026-08-25T20:21:35.831592+00:00",
+  "run_id": "inflated-topics-20260825T202133Z-a3553364",
+  "backup": "C:\\dev\\MedQuest\\backups\\taxonomy-reclassification\\medquest-pre-inflated-topics-20260825T202133Z.db",
+  "questions_examined": 526,
+  "questions_reclassified": 239,
+  "questions_retained": 287,
+  "by_previous_subtema": {
+    "Hipertensão Arterial Sistêmica e Crises Hipertensivas": 146,
+    "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana": 118,
+    "Assistência Pré-Natal de Baixo e Alto Risco": 165,
+    "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)": 97
+  },
+  "by_destination": [
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "questions": 103
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "questions": 77
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "questions": 64
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "questions": 54
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "questions": 28
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "questions": 26
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "questions": 19
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "questions": 16
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "questions": 15
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "questions": 11
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "questions": 10
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+      "questions": 6
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+      "questions": 6
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+      "questions": 6
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+      "questions": 6
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "questions": 6
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "questions": 5
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "questions": 4
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "questions": 4
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+      "questions": 3
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+      "questions": 3
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+      "questions": 3
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "questions": 3
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "questions": 3
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Cirurgia Bariátrica e Metabólica",
+      "questions": 2
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+      "questions": 2
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+      "questions": 2
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+      "questions": 2
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "questions": 2
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+      "questions": 2
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Ética Médica, Bioética e Prontuários / Documentos",
+      "questions": 2
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Calendário Vacinal do PNI e Imunizações Especiais",
+      "questions": 2
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Aneurismas de Aorta Abdominal e Torácica",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Câncer de Pulmão, Nódulo Pulmonar Solitário e Tumores do Mediastino",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Fundamentos da Anestesiologia, Farmacologia e Bloqueios",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+      "questions": 1
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos",
+      "questions": 1
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+      "questions": 1
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "questions": 1
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
+      "questions": 1
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+      "questions": 1
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Infecção do Trato Urinário (ITU) e Refluxo Vesicoureteral na Infância",
+      "questions": 1
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "questions": 1
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "questions": 1
+    }
+  ],
+  "changes": [
+    {
+      "question_id": 8510,
+      "source_topic": "USG POCUS",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+      "changed": true
+    },
+    {
+      "question_id": 8514,
+      "source_topic": "Urticária (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+      "changed": true
+    },
+    {
+      "question_id": 8531,
+      "source_topic": "Tratamento Doença Renal Crônica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "changed": true
+    },
+    {
+      "question_id": 8536,
+      "source_topic": "Trauma",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 8554,
+      "source_topic": "Trauma abdominal contuso",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 8558,
+      "source_topic": "Vias aéreas (CIR)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 8608,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 8631,
+      "source_topic": "Avaliação de Líquido Ascítico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+      "changed": true
+    },
+    {
+      "question_id": 8634,
+      "source_topic": "Distúrbios do Sódio (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 8678,
+      "source_topic": "Trauma de Tórax",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+      "changed": true
+    },
+    {
+      "question_id": 8688,
+      "source_topic": "Choque (CIR)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 8689,
+      "source_topic": "Ressuscitação hemostática",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 8720,
+      "source_topic": "Cardiopatias na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "changed": true
+    },
+    {
+      "question_id": 8823,
+      "source_topic": "Distúrbios Metabólicos Neonatais (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 8876,
+      "source_topic": "Capnografia, TRE e extubação (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 8918,
+      "source_topic": "Exame físico obstétrico",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 8921,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 8924,
+      "source_topic": "Imunizações na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 8925,
+      "source_topic": "Gemelaridade",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 8927,
+      "source_topic": "Ultrassonografia em obstetrícia",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 8928,
+      "source_topic": "Conduta na RPMO",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+      "changed": true
+    },
+    {
+      "question_id": 8929,
+      "source_topic": "Ruptura prematura de membranas ovulares (RPMO)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+      "changed": true
+    },
+    {
+      "question_id": 8960,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 8963,
+      "source_topic": "Rastreamento de aneuploidias",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 8975,
+      "source_topic": "TEP (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+      "changed": true
+    },
+    {
+      "question_id": 8981,
+      "source_topic": "Hiperaldosteronismo Primário (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+      "changed": true
+    },
+    {
+      "question_id": 9036,
+      "source_topic": "Hipertensão arterial crônica na gestante",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "changed": true
+    },
+    {
+      "question_id": 9037,
+      "source_topic": "Maturação cervical e indução do parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 9048,
+      "source_topic": "Medidas auxiliares e FAST (CIR)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 9049,
+      "source_topic": "Trauma hepático",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 9164,
+      "source_topic": "Osteoartrite (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+      "changed": true
+    },
+    {
+      "question_id": 9218,
+      "source_topic": "Trauma abdominal penetrante",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 9219,
+      "source_topic": "Atendimento inicial ao trauma",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 9446,
+      "source_topic": "Ressuscitação hemostática",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 9447,
+      "source_topic": "Drenagem de tórax",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+      "changed": true
+    },
+    {
+      "question_id": 9451,
+      "source_topic": "Trauma abdominal contuso",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 9490,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 9604,
+      "source_topic": "Hipertensão arterial crônica na gestante",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "changed": true
+    },
+    {
+      "question_id": 9651,
+      "source_topic": "Miscelânea (CIR)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 9657,
+      "source_topic": "Trauma abdominal contuso",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 9659,
+      "source_topic": "Trauma abdominal penetrante",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 9721,
+      "source_topic": "Pré-Natal na APS",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 9764,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 9871,
+      "source_topic": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 9874,
+      "source_topic": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 9919,
+      "source_topic": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 10260,
+      "source_topic": "Gemelaridade",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 10323,
+      "source_topic": "Testes Diagnósticos",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "changed": true
+    },
+    {
+      "question_id": 10348,
+      "source_topic": "Emergências neurocirúrgicas",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "changed": true
+    },
+    {
+      "question_id": 10403,
+      "source_topic": "Sofrimento fetal agudo",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+      "changed": true
+    },
+    {
+      "question_id": 10404,
+      "source_topic": "Outras doenças infecciosas na gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 10406,
+      "source_topic": "Datação da gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 10407,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 10424,
+      "source_topic": "Vacinação (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Pediatria",
+      "new_subtema": "Calendário Vacinal do PNI e Imunizações Especiais",
+      "changed": true
+    },
+    {
+      "question_id": 10432,
+      "source_topic": "Analgesia e anestesia de parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 10465,
+      "source_topic": "Vacinas e Precauções (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 10500,
+      "source_topic": "Trauma hepático",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 10521,
+      "source_topic": "Tabagismo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+      "changed": true
+    },
+    {
+      "question_id": 10575,
+      "source_topic": "Delirium (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 10608,
+      "source_topic": "Clínica Médica Geral",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 10713,
+      "source_topic": "Vacinas e Precauções (CM)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 10746,
+      "source_topic": "Tratamento Farmacológico Diabetes (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 10762,
+      "source_topic": "Obstrução arterial aguda",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Cirurgia",
+      "new_subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+      "changed": true
+    },
+    {
+      "question_id": 10806,
+      "source_topic": "Anticoncepção - situações especiais",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 10813,
+      "source_topic": "Complicações Crônicas do Diabetes (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 10826,
+      "source_topic": "Nefrolitíase e Infecção Urinária (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Cirurgia",
+      "new_subtema": "Cirurgia Bariátrica e Metabólica",
+      "changed": true
+    },
+    {
+      "question_id": 10976,
+      "source_topic": "Síndrome do Desconforto Respiratório Neonatal (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 10981,
+      "source_topic": "Glomerulonefrite Pós-Estreptocócica (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+      "changed": true
+    },
+    {
+      "question_id": 11025,
+      "source_topic": "Outras doenças infecciosas na gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11128,
+      "source_topic": "Genética (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Pediatria",
+      "new_subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+      "changed": true
+    },
+    {
+      "question_id": 11138,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 11258,
+      "source_topic": "Vitaminas e suplementos na gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11262,
+      "source_topic": "Classificação IOTA/ORADS",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+      "changed": true
+    },
+    {
+      "question_id": 11368,
+      "source_topic": "Citomegalovírus na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11414,
+      "source_topic": "Malformações Congênitas (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11462,
+      "source_topic": "Antidiabéticos (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 11500,
+      "source_topic": "Síndrome do Desconforto Respiratório Neonatal (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11526,
+      "source_topic": "Traumatologia ortopédica",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+      "changed": true
+    },
+    {
+      "question_id": 11546,
+      "source_topic": "Farmacodermias (CM)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Pediatria",
+      "new_subtema": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
+      "changed": true
+    },
+    {
+      "question_id": 11557,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 11562,
+      "source_topic": "Conduta no trabalho de parto prematuro",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11597,
+      "source_topic": "Desconforto Respiratório Neonatal (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11999,
+      "source_topic": "Trauma esplênico",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 12018,
+      "source_topic": "TCE, Hipertensão Intracraniana e Morte Encefálica (PED)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Ética Médica, Bioética e Prontuários / Documentos",
+      "changed": true
+    },
+    {
+      "question_id": 12024,
+      "source_topic": "Clampeamento de Cordão (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 12096,
+      "source_topic": "Sepse - Abordagem Inicial e Choque Séptico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+      "changed": true
+    },
+    {
+      "question_id": 12330,
+      "source_topic": "Insuficiência Cognitiva : Depressão, Delirium, Demências e Transtorno Cognitivo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 12377,
+      "source_topic": "Gasometria Arterial (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 12447,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 12465,
+      "source_topic": "Valvopatias (CM)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+      "changed": true
+    },
+    {
+      "question_id": 12579,
+      "source_topic": "Trauma abdominal penetrante",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 12602,
+      "source_topic": "Fibrose Pulmonar Idiopática (FPI) (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+      "changed": true
+    },
+    {
+      "question_id": 12628,
+      "source_topic": "Avaliação da vitalidade fetal",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+      "changed": true
+    },
+    {
+      "question_id": 12630,
+      "source_topic": "Rastreamento de aneuploidias",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 12639,
+      "source_topic": "Cardiopatias na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "changed": true
+    },
+    {
+      "question_id": 12671,
+      "source_topic": "Sepse - Abordagem Inicial e Choque Séptico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+      "changed": true
+    },
+    {
+      "question_id": 12678,
+      "source_topic": "Hiperaldosteronismo Primário (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+      "changed": true
+    },
+    {
+      "question_id": 12730,
+      "source_topic": "Rastreamento de aneuploidias",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 12734,
+      "source_topic": "Diabetes mellitus gestacional",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 12749,
+      "source_topic": "Rastreamentos",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "changed": true
+    },
+    {
+      "question_id": 12836,
+      "source_topic": "Datação da gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 13144,
+      "source_topic": "Trombofilias na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 13223,
+      "source_topic": "Vacinação (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Pediatria",
+      "new_subtema": "Calendário Vacinal do PNI e Imunizações Especiais",
+      "changed": true
+    },
+    {
+      "question_id": 13229,
+      "source_topic": "Parvovirose na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 13284,
+      "source_topic": "Morte Encefálica (CM)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Ética Médica, Bioética e Prontuários / Documentos",
+      "changed": true
+    },
+    {
+      "question_id": 13368,
+      "source_topic": "Abordagem Inicial da Sepse e Tipos de Choque - Emergências Clínicas (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+      "changed": true
+    },
+    {
+      "question_id": 13369,
+      "source_topic": "Vertigem (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 13398,
+      "source_topic": "Outras doenças infecciosas na gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 13436,
+      "source_topic": "Síndromes aórticas agudas",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Cirurgia",
+      "new_subtema": "Câncer de Pulmão, Nódulo Pulmonar Solitário e Tumores do Mediastino",
+      "changed": true
+    },
+    {
+      "question_id": 13448,
+      "source_topic": "Ventilação com Pressão Positiva Neo (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 13455,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 13484,
+      "source_topic": "Alergias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+      "changed": true
+    },
+    {
+      "question_id": 13493,
+      "source_topic": "Trauma de Tórax",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+      "changed": true
+    },
+    {
+      "question_id": 13539,
+      "source_topic": "Síncope (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 13554,
+      "source_topic": "Ressuscitação hemostática",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 13556,
+      "source_topic": "Trauma de Pelve",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+      "changed": true
+    },
+    {
+      "question_id": 13586,
+      "source_topic": "Intoxicações (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+      "changed": true
+    },
+    {
+      "question_id": 13710,
+      "source_topic": "Feocromocitoma (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+      "changed": true
+    },
+    {
+      "question_id": 13716,
+      "source_topic": "Síncope (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 13722,
+      "source_topic": "Nefrolitíase e Infecção Urinária (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Cirurgia",
+      "new_subtema": "Cirurgia Bariátrica e Metabólica",
+      "changed": true
+    },
+    {
+      "question_id": 13756,
+      "source_topic": "COVID-19 na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "changed": true
+    },
+    {
+      "question_id": 13760,
+      "source_topic": "COVID-19 na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "changed": true
+    },
+    {
+      "question_id": 13763,
+      "source_topic": "Alterações colpocitológicas",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+      "changed": true
+    },
+    {
+      "question_id": 13774,
+      "source_topic": "Estudos Epidemiológicos",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos",
+      "changed": true
+    },
+    {
+      "question_id": 13808,
+      "source_topic": "Trauma",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 13869,
+      "source_topic": "Medidas auxiliares e FAST (CIR)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 13872,
+      "source_topic": "Trauma esplênico",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 13887,
+      "source_topic": "Icterícia Precoce (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "changed": true
+    },
+    {
+      "question_id": 13945,
+      "source_topic": "Ressuscitação hemostática",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 13946,
+      "source_topic": "Trauma hepático",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 14036,
+      "source_topic": "Vias aéreas (CIR)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 14039,
+      "source_topic": "Vias aéreas (CIR)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 14069,
+      "source_topic": "Outras doenças infecciosas na gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 14080,
+      "source_topic": "Diabetes mellitus gestacional",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 14105,
+      "source_topic": "Púrpura Trombocitopênica Trombótica (PTT) (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+      "changed": true
+    },
+    {
+      "question_id": 14126,
+      "source_topic": "Técnicas anestésicas",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Fundamentos da Anestesiologia, Farmacologia e Bloqueios",
+      "changed": true
+    },
+    {
+      "question_id": 14149,
+      "source_topic": "Trauma de Bexiga",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 14157,
+      "source_topic": "Trauma de Pelve",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+      "changed": true
+    },
+    {
+      "question_id": 14166,
+      "source_topic": "Malformações Congênitas (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 14279,
+      "source_topic": "Trauma de Pelve",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+      "changed": true
+    },
+    {
+      "question_id": 14280,
+      "source_topic": "Trauma abdominal contuso",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 14281,
+      "source_topic": "Outras causas de AAO ",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Cirurgia",
+      "new_subtema": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+      "changed": true
+    },
+    {
+      "question_id": 14350,
+      "source_topic": "Ressuscitação hemostática",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 14380,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 14388,
+      "source_topic": "COVID-19 na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "changed": true
+    },
+    {
+      "question_id": 14412,
+      "source_topic": "Hiperparatireoidismo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+      "changed": true
+    },
+    {
+      "question_id": 14414,
+      "source_topic": "DPOC (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+      "changed": true
+    },
+    {
+      "question_id": 14415,
+      "source_topic": "DPOC (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+      "changed": true
+    },
+    {
+      "question_id": 14416,
+      "source_topic": "DPOC (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+      "changed": true
+    },
+    {
+      "question_id": 14420,
+      "source_topic": "Trauma de Tórax",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+      "changed": true
+    },
+    {
+      "question_id": 14424,
+      "source_topic": "Miscelânea (CIR)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 14450,
+      "source_topic": "Interrupção legal da gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+      "changed": true
+    },
+    {
+      "question_id": 14499,
+      "source_topic": "Vias aéreas (CIR)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 14530,
+      "source_topic": "Incompatibilidade ABO-Rh na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 14576,
+      "source_topic": "Choque (CIR)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 14628,
+      "source_topic": "Escalas Geriátricas, Avaliação Global, Fragilidade e Iatrogenias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 14639,
+      "source_topic": "Síncope (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 14643,
+      "source_topic": "Taquiarritmias Venticulares (CM)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 14676,
+      "source_topic": "Classificação do RN (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+      "changed": true
+    },
+    {
+      "question_id": 14677,
+      "source_topic": "Síndrome do Desconforto Respiratório Neonatal (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 14759,
+      "source_topic": "Embolia Gordurosa",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 14801,
+      "source_topic": "Diabetes mellitus gestacional",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 14828,
+      "source_topic": "Atendimento inicial ao trauma",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 14829,
+      "source_topic": "Pneumotórax traumático simples",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+      "changed": true
+    },
+    {
+      "question_id": 14832,
+      "source_topic": "Trauma abdominal contuso",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 14875,
+      "source_topic": "Infecção do trato urinário na mulher",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 14886,
+      "source_topic": "Pós-datismo",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 14930,
+      "source_topic": "Escalas Geriátricas, Avaliação Global, Fragilidade e Iatrogenias (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 14937,
+      "source_topic": "Distúrbios do Cálcio (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+      "changed": true
+    },
+    {
+      "question_id": 14938,
+      "source_topic": "Emergências neurocirúrgicas",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "changed": true
+    },
+    {
+      "question_id": 14959,
+      "source_topic": "Pneumotórax traumático simples",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+      "changed": true
+    },
+    {
+      "question_id": 14960,
+      "source_topic": "Trauma abdominal contuso",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 15040,
+      "source_topic": "Complicações Crônicas do Diabetes (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 15047,
+      "source_topic": "Intoxicações (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+      "changed": true
+    },
+    {
+      "question_id": 15059,
+      "source_topic": "Atendimento inicial ao trauma",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 15062,
+      "source_topic": "Trauma",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 15063,
+      "source_topic": "Atendimento inicial ao trauma",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 15089,
+      "source_topic": "Terapia hormonal (TH)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 15157,
+      "source_topic": "Atendimento inicial ao trauma",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 15159,
+      "source_topic": "Emergências neurocirúrgicas",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "changed": true
+    },
+    {
+      "question_id": 15198,
+      "source_topic": "Infecções congênitas na gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 15258,
+      "source_topic": "Choque (CIR)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 15298,
+      "source_topic": "Datação da gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 15354,
+      "source_topic": "Tratamento não operatório no trauma abdominal",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+      "changed": true
+    },
+    {
+      "question_id": 15357,
+      "source_topic": "Ressuscitação hemostática",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 15461,
+      "source_topic": "Trauma de Pelve",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+      "changed": true
+    },
+    {
+      "question_id": 15498,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 15551,
+      "source_topic": "Trauma de Pelve",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+      "changed": true
+    },
+    {
+      "question_id": 15588,
+      "source_topic": "Datação da gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 15592,
+      "source_topic": "Hipertensão arterial crônica na gestante",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "changed": true
+    },
+    {
+      "question_id": 15609,
+      "source_topic": "COVID-19 na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "changed": true
+    },
+    {
+      "question_id": 15704,
+      "source_topic": "Hipertensão arterial crônica na gestante",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "changed": true
+    },
+    {
+      "question_id": 15730,
+      "source_topic": "Doença Renal Crônica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "changed": true
+    },
+    {
+      "question_id": 15731,
+      "source_topic": "Tratamento Doença Renal Crônica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "changed": true
+    },
+    {
+      "question_id": 15780,
+      "source_topic": "Técnica e Dificuldades no AM (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 15791,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 15793,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 15875,
+      "source_topic": "Infecção de Trato Urinário (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Pediatria",
+      "new_subtema": "Infecção do Trato Urinário (ITU) e Refluxo Vesicoureteral na Infância",
+      "changed": true
+    },
+    {
+      "question_id": 15898,
+      "source_topic": "Hipertensão arterial crônica na gestante",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "changed": true
+    },
+    {
+      "question_id": 15906,
+      "source_topic": "Rastreamento de aneuploidias",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 15936,
+      "source_topic": "Atendimento inicial ao trauma",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 15946,
+      "source_topic": "AVC Isquêmico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 15979,
+      "source_topic": "Rastreamento de aneuploidias",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 16026,
+      "source_topic": "Antibióticos: Antibiogramas e Resistência Bacteriana (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Cirurgia",
+      "new_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+      "changed": true
+    },
+    {
+      "question_id": 16033,
+      "source_topic": "Tratamento Doença Renal Crônica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "changed": true
+    },
+    {
+      "question_id": 16035,
+      "source_topic": "Avaliação de Líquido Ascítico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+      "changed": true
+    },
+    {
+      "question_id": 16049,
+      "source_topic": "Triagem de Cardiopatia Crítica (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Pediatria",
+      "new_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "changed": true
+    },
+    {
+      "question_id": 16062,
+      "source_topic": "Anticoncepção - situações especiais",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 16074,
+      "source_topic": "Diabetes mellitus gestacional",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 16163,
+      "source_topic": "Rastreamento de aneuploidias",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 16164,
+      "source_topic": "Manejo da RCIU",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 16175,
+      "source_topic": "Diabetes mellitus gestacional",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 16180,
+      "source_topic": "Modificações no organismo materno",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 16229,
+      "source_topic": "Urgências ginecológicas",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 16288,
+      "source_topic": "Gota (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+      "changed": true
+    },
+    {
+      "question_id": 16366,
+      "source_topic": "Feocromocitoma (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+      "changed": true
+    },
+    {
+      "question_id": 16374,
+      "source_topic": "Infecção urinária (ITU) (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+      "changed": true
+    },
+    {
+      "question_id": 16380,
+      "source_topic": "Delirium (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 16460,
+      "source_topic": "Seguimento de gestantes aloimunizadas",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 16555,
+      "source_topic": "Feocromocitoma (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+      "changed": true
+    },
+    {
+      "question_id": 16564,
+      "source_topic": "Rastreamento de aneuploidias",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 16689,
+      "source_topic": "Outros aneurismas vasculares",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Cirurgia",
+      "new_subtema": "Aneurismas de Aorta Abdominal e Torácica",
+      "changed": true
+    },
+    {
+      "question_id": 16717,
+      "source_topic": "Síndrome Metabólica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+      "changed": true
+    },
+    {
+      "question_id": 16762,
+      "source_topic": "Avaliação da vitalidade fetal",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+      "changed": true
+    },
+    {
+      "question_id": 16770,
+      "source_topic": "Restrição de crescimento intrauterino (RCIU)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 16839,
+      "source_topic": "Clínica Médica Geral",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 16842,
+      "source_topic": "Ingestão e aspiração de corpo estranho, BRUE (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 16909,
+      "source_topic": "Neonatos",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 16962,
+      "source_topic": "Cálculo da idade gestacional",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 16966,
+      "source_topic": "Rastreamento de aneuploidias",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 16968,
+      "source_topic": "Cardiotocografia anteparto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+      "changed": true
+    },
+    {
+      "question_id": 17035,
+      "source_topic": "Nutrição Neonatal (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+      "changed": true
+    },
+    {
+      "question_id": 17144,
+      "source_topic": "Assistência ao Parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 17153,
+      "source_topic": "Rotura Prematura das Membranas Ovulares e Infecção Ovular",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+      "changed": true
+    },
+    {
+      "question_id": 17156,
+      "source_topic": "Sangramento da Segunda Metade da Gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 17219,
+      "source_topic": "Abordagem Inicial (xABCDE)",
+      "old_area": "Cirurgia",
+      "old_subtema": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 17235,
+      "source_topic": "Sangramento da Primeira Metade da Gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 17264,
+      "source_topic": "Sepse, Choque Séptico e Outros tipos de Choque",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 17267,
+      "source_topic": "Distúrbios Obstrutivos",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    }
+  ]
+}

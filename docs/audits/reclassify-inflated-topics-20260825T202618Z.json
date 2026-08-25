@@ -1,0 +1,2281 @@
+{
+  "generated_at": "2026-08-25T20:26:21.282096+00:00",
+  "run_id": "inflated-topics-20260825T202618Z-3e371f5a",
+  "backup": "C:\\dev\\MedQuest\\backups\\taxonomy-reclassification\\medquest-pre-inflated-topics-20260825T202618Z.db",
+  "questions_examined": 868,
+  "questions_reclassified": 218,
+  "questions_retained": 650,
+  "by_previous_subtema": {
+    "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento": 288,
+    "Endometriose, Adenomiose e Dor Pélvica Crônica": 71,
+    "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias": 307,
+    "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento": 126,
+    "Baixa Estatura, Puberdade Precoce e Atraso Puberal": 76
+  },
+  "by_destination": [
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "questions": 247
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "questions": 233
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "questions": 92
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "questions": 50
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "questions": 49
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "questions": 23
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "questions": 20
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "questions": 18
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "questions": 17
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "questions": 10
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "questions": 9
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "questions": 6
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "questions": 6
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "questions": 5
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+      "questions": 5
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "questions": 5
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+      "questions": 4
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "questions": 4
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "questions": 4
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+      "questions": 4
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "questions": 3
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "questions": 3
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+      "questions": 2
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "questions": 2
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+      "questions": 2
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+      "questions": 2
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+      "questions": 2
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário",
+      "questions": 2
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Investigação e Propêdêutica da Infertilidade Conjugal",
+      "questions": 2
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Massas Anexiais e Neoplasias Ovarianas",
+      "questions": 2
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "questions": 2
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos",
+      "questions": 2
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+      "questions": 2
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Calendário Vacinal do PNI e Imunizações Especiais",
+      "questions": 2
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "questions": 2
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Cirurgia Pediátrica e Malformações Digestivas Neonatais",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Fundamentos da Anestesiologia, Farmacologia e Bloqueios",
+      "questions": 1
+    },
+    {
+      "area": "Cirurgia",
+      "subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Dermatoses Infecciosas, Hanseníase e Leishmanioses",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Infecções Sexualmente Transmissíveis (ISTs) no Adulto",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Meningites, Encefalites e Infecções do SNC",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Políticas de Saúde Mental e Atenção Psicossocial (CAPS)",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+      "questions": 1
+    },
+    {
+      "area": "Clínica Médica",
+      "subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+      "questions": 1
+    },
+    {
+      "area": "Ginecologia e Obstetrícia",
+      "subtema": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+      "questions": 1
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "questions": 1
+    },
+    {
+      "area": "Medicina Preventiva",
+      "subtema": "Indicadores de Saúde e Coeficientes de Morbimortalidade",
+      "questions": 1
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+      "questions": 1
+    },
+    {
+      "area": "Pediatria",
+      "subtema": "Infecção do Trato Urinário (ITU) e Refluxo Vesicoureteral na Infância",
+      "questions": 1
+    }
+  ],
+  "changes": [
+    {
+      "question_id": 8524,
+      "source_topic": "Alergias (CM)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+      "changed": true
+    },
+    {
+      "question_id": 8586,
+      "source_topic": "Estudos Epidemiológicos",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos",
+      "changed": true
+    },
+    {
+      "question_id": 8594,
+      "source_topic": "Saúde da Mulher",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 8606,
+      "source_topic": "Anemia na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "changed": true
+    },
+    {
+      "question_id": 8614,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 8629,
+      "source_topic": "Cardiopatias na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "changed": true
+    },
+    {
+      "question_id": 8733,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 8748,
+      "source_topic": "Triagem de Cardiopatia Crítica (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "changed": true
+    },
+    {
+      "question_id": 8749,
+      "source_topic": "Triagem de Cardiopatia Crítica (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "changed": true
+    },
+    {
+      "question_id": 8872,
+      "source_topic": "USG POCUS",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+      "changed": true
+    },
+    {
+      "question_id": 8892,
+      "source_topic": "Estudos Epidemiológicos",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos",
+      "changed": true
+    },
+    {
+      "question_id": 8909,
+      "source_topic": "Dismenorreia primária",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 8950,
+      "source_topic": "Cistos mamários",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+      "changed": true
+    },
+    {
+      "question_id": 9023,
+      "source_topic": "Vacinação (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Calendário Vacinal do PNI e Imunizações Especiais",
+      "changed": true
+    },
+    {
+      "question_id": 9024,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 9042,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 9043,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 9169,
+      "source_topic": "Distúrbio do Potássio (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 9238,
+      "source_topic": "Dismenorreia primária",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 9432,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 9441,
+      "source_topic": "Vacinação (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Calendário Vacinal do PNI e Imunizações Especiais",
+      "changed": true
+    },
+    {
+      "question_id": 9482,
+      "source_topic": "Infecção puerperal",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 9485,
+      "source_topic": "Imunizações na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 9687,
+      "source_topic": "Citomegalovirose Congênita (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 9690,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 9713,
+      "source_topic": "Saúde da Criança",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 9748,
+      "source_topic": "Infecções Congênitas (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 9758,
+      "source_topic": "Sangramento após a menopausa",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 9767,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 9873,
+      "source_topic": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 9878,
+      "source_topic": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+      "changed": true
+    },
+    {
+      "question_id": 9945,
+      "source_topic": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+      "changed": true
+    },
+    {
+      "question_id": 10081,
+      "source_topic": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+      "changed": true
+    },
+    {
+      "question_id": 10259,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 10262,
+      "source_topic": "Alterações colpocitológicas",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+      "changed": true
+    },
+    {
+      "question_id": 10263,
+      "source_topic": "Mastite aguda",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+      "changed": true
+    },
+    {
+      "question_id": 10270,
+      "source_topic": "Anticoncepção - situações especiais",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 10311,
+      "source_topic": "Infecção de Trato Urinário (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Infecção do Trato Urinário (ITU) e Refluxo Vesicoureteral na Infância",
+      "changed": true
+    },
+    {
+      "question_id": 10316,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 10395,
+      "source_topic": "Amenorreias",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 10402,
+      "source_topic": "Incompatibilidade ABO-Rh na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 10405,
+      "source_topic": "Sífilis primária",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Infecções Sexualmente Transmissíveis (ISTs) no Adulto",
+      "changed": true
+    },
+    {
+      "question_id": 10408,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 10429,
+      "source_topic": "Citomegalovirose Congênita (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 10443,
+      "source_topic": "Mastalgia",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+      "changed": true
+    },
+    {
+      "question_id": 10444,
+      "source_topic": "Tratamento da hiperplasia endometrial",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+      "changed": true
+    },
+    {
+      "question_id": 10449,
+      "source_topic": "Alterações colpocitológicas",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+      "changed": true
+    },
+    {
+      "question_id": 10569,
+      "source_topic": "Fluxo papilar",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+      "changed": true
+    },
+    {
+      "question_id": 10581,
+      "source_topic": "Micoses Superficiais (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Dermatoses Infecciosas, Hanseníase e Leishmanioses",
+      "changed": true
+    },
+    {
+      "question_id": 10668,
+      "source_topic": "Ginecologia Endócrina",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário",
+      "changed": true
+    },
+    {
+      "question_id": 10693,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 10695,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 10807,
+      "source_topic": "Terapia não hormonal climatério",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 10808,
+      "source_topic": "Amenorreias",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 10809,
+      "source_topic": "Fluxo papilar",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+      "changed": true
+    },
+    {
+      "question_id": 10860,
+      "source_topic": "Terapia hormonal (TH)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 11011,
+      "source_topic": "Terapia hormonal (TH)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 11023,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 11085,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 11130,
+      "source_topic": "Sangramento uterino anormal (SUA)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 11145,
+      "source_topic": "Diabetes mellitus gestacional",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 11218,
+      "source_topic": "Doença Renal Crônica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "changed": true
+    },
+    {
+      "question_id": 11255,
+      "source_topic": "Terapia hormonal (TH)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 11263,
+      "source_topic": "Diabetes mellitus gestacional",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 11268,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 11343,
+      "source_topic": "Hipotireoidismo (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+      "changed": true
+    },
+    {
+      "question_id": 11350,
+      "source_topic": "Oncoginecologia",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+      "changed": true
+    },
+    {
+      "question_id": 11362,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 11401,
+      "source_topic": "Tuberculose (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+      "changed": true
+    },
+    {
+      "question_id": 11405,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 11408,
+      "source_topic": "Técnicas anestésicas",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Cirurgia",
+      "new_subtema": "Fundamentos da Anestesiologia, Farmacologia e Bloqueios",
+      "changed": true
+    },
+    {
+      "question_id": 11483,
+      "source_topic": "Anemia na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "changed": true
+    },
+    {
+      "question_id": 11484,
+      "source_topic": "Diabetes mellitus gestacional",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 11501,
+      "source_topic": "Icterícia Precoce (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "changed": true
+    },
+    {
+      "question_id": 11505,
+      "source_topic": "Desenvolvimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11553,
+      "source_topic": "Dismenorreia primária",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11554,
+      "source_topic": "Dismenorreia primária",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 11558,
+      "source_topic": "Avaliação do casal infértil",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "changed": true
+    },
+    {
+      "question_id": 11559,
+      "source_topic": "Anticoncepção - situações especiais",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 12008,
+      "source_topic": "Contactante de Tuberculose (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+      "changed": true
+    },
+    {
+      "question_id": 12041,
+      "source_topic": "Dismenorreia primária",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 12155,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 12166,
+      "source_topic": "Infecções Congênitas (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 12167,
+      "source_topic": "Distúrbios Metabólicos Neonatais (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 12208,
+      "source_topic": "Icterícia Precoce (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+      "changed": true
+    },
+    {
+      "question_id": 12231,
+      "source_topic": "Terapia hormonal (TH)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 12243,
+      "source_topic": "Ética em Ginecologia e Obstetrícia",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 12354,
+      "source_topic": "Níveis de Evidência",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+      "changed": true
+    },
+    {
+      "question_id": 12620,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 12662,
+      "source_topic": "Saúde Mental",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Políticas de Saúde Mental e Atenção Psicossocial (CAPS)",
+      "changed": true
+    },
+    {
+      "question_id": 12722,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 12732,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 12743,
+      "source_topic": "Terapia hormonal (TH)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 12744,
+      "source_topic": "Anticoncepção - situações especiais",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 12833,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 12834,
+      "source_topic": "Cistite na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 12855,
+      "source_topic": "Rastreamento de Câncer de Colo de Útero",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Câncer de Colo Uterino e Lesões Precursoras",
+      "changed": true
+    },
+    {
+      "question_id": 12924,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 13041,
+      "source_topic": "Cistite na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 13112,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 13146,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 13238,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 13243,
+      "source_topic": "Climatério",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 13322,
+      "source_topic": "Gasometria Arterial (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 13323,
+      "source_topic": "Meningite Bacteriana (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Meningites, Encefalites e Infecções do SNC",
+      "changed": true
+    },
+    {
+      "question_id": 13354,
+      "source_topic": "Terapia hormonal (TH)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 13355,
+      "source_topic": "Sangramento uterino anormal (SUA)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 13356,
+      "source_topic": "Incompatibilidade ABO-Rh na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+      "changed": true
+    },
+    {
+      "question_id": 13400,
+      "source_topic": "Tratamento cirúrgico de endometriose",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "changed": true
+    },
+    {
+      "question_id": 13425,
+      "source_topic": "Anemia Megalobástica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+      "changed": true
+    },
+    {
+      "question_id": 13512,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 13516,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 13746,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 13750,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 13765,
+      "source_topic": "Ginecologia Endócrina",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário",
+      "changed": true
+    },
+    {
+      "question_id": 13790,
+      "source_topic": "Definição e Classificação da IRA - Pré/Pós-renal e Intrinseca(CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+      "changed": true
+    },
+    {
+      "question_id": 13828,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 13860,
+      "source_topic": "Hemorragia digestiva baixa",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Cirurgia",
+      "new_subtema": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+      "changed": true
+    },
+    {
+      "question_id": 13902,
+      "source_topic": "Anticoncepção - situações especiais",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 13966,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 13969,
+      "source_topic": "Técnicas de reprodução humana",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Investigação e Propêdêutica da Infertilidade Conjugal",
+      "changed": true
+    },
+    {
+      "question_id": 14073,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 14160,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 14182,
+      "source_topic": "Óbito fetal ",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 14231,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 14236,
+      "source_topic": "Anticoncepção - situações especiais",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 14298,
+      "source_topic": "Torção anexial",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Massas Anexiais e Neoplasias Ovarianas",
+      "changed": true
+    },
+    {
+      "question_id": 14304,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 14309,
+      "source_topic": "Nódulos mamários",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+      "changed": true
+    },
+    {
+      "question_id": 14311,
+      "source_topic": "Anticoncepção - situações especiais",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 14312,
+      "source_topic": "Cistite na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 14365,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 14423,
+      "source_topic": "Miscelânea (CIR)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 14445,
+      "source_topic": "Infecções Congênitas (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 14448,
+      "source_topic": "Torção anexial",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Massas Anexiais e Neoplasias Ovarianas",
+      "changed": true
+    },
+    {
+      "question_id": 14486,
+      "source_topic": "Pneumonia Adquirida na Comunidade PAC (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+      "changed": true
+    },
+    {
+      "question_id": 14492,
+      "source_topic": "Anemia Ferropriva (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+      "changed": true
+    },
+    {
+      "question_id": 14523,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 14594,
+      "source_topic": "Síndrome de Turner (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 14602,
+      "source_topic": "Trombofilias na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 14699,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 14721,
+      "source_topic": "Níveis de Evidência",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+      "changed": true
+    },
+    {
+      "question_id": 14732,
+      "source_topic": "Gota (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+      "changed": true
+    },
+    {
+      "question_id": 14807,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 14865,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 14936,
+      "source_topic": "Emergências Oncológicas (CM)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 14941,
+      "source_topic": "Intoxicações (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+      "changed": true
+    },
+    {
+      "question_id": 15006,
+      "source_topic": "Diabetes mellitus e gravidez",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Diabetes Gestacional e Pré-Gestacional",
+      "changed": true
+    },
+    {
+      "question_id": 15088,
+      "source_topic": "Tratamento da doença inflamatória pélvica aguda",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+      "changed": true
+    },
+    {
+      "question_id": 15093,
+      "source_topic": "Anticoncepção - métodos disponíveis",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 15181,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 15190,
+      "source_topic": "Cistite na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 15201,
+      "source_topic": "Câncer ginecológico na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 15287,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 15297,
+      "source_topic": "Terapia não hormonal climatério",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 15302,
+      "source_topic": "Tromboembolismo na gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "changed": true
+    },
+    {
+      "question_id": 15378,
+      "source_topic": "Genética (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+      "changed": true
+    },
+    {
+      "question_id": 15387,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 15496,
+      "source_topic": "Causas de infertilidade",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Investigação e Propêdêutica da Infertilidade Conjugal",
+      "changed": true
+    },
+    {
+      "question_id": 15501,
+      "source_topic": "Sangramento de segunda metade de gestação",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+      "changed": true
+    },
+    {
+      "question_id": 15502,
+      "source_topic": "Cistite na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+      "changed": true
+    },
+    {
+      "question_id": 15505,
+      "source_topic": "Terapia hormonal (TH)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 15558,
+      "source_topic": "Delirium (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+      "changed": true
+    },
+    {
+      "question_id": 15572,
+      "source_topic": "Triagem de Cardiopatia Crítica (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+      "changed": true
+    },
+    {
+      "question_id": 15585,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 15611,
+      "source_topic": "Testes Diagnósticos",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+      "changed": true
+    },
+    {
+      "question_id": 15685,
+      "source_topic": "Infecções Congênitas (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+      "changed": true
+    },
+    {
+      "question_id": 15773,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 15782,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 15787,
+      "source_topic": "Obesidade (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 15792,
+      "source_topic": "Anemia na gestante",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Condições Clínicas Intercorrentes na Gravidez",
+      "changed": true
+    },
+    {
+      "question_id": 15827,
+      "source_topic": "Hiperglicemia Hospitalar (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Cirurgia",
+      "new_subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+      "changed": true
+    },
+    {
+      "question_id": 15831,
+      "source_topic": "AVC Isquêmico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 15943,
+      "source_topic": "Anemia Megalobástica (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+      "changed": true
+    },
+    {
+      "question_id": 15944,
+      "source_topic": "Clínica Médica Geral",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 15978,
+      "source_topic": "Terapia hormonal (TH)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 16092,
+      "source_topic": "Rastreamentos",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "changed": true
+    },
+    {
+      "question_id": 16132,
+      "source_topic": "Hiperglicemia Hospitalar (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Cirurgia",
+      "new_subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+      "changed": true
+    },
+    {
+      "question_id": 16173,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 16251,
+      "source_topic": "Terapia não hormonal climatério",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 16284,
+      "source_topic": "AVC Isquêmico (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 16295,
+      "source_topic": "Enterocolite Necrosante (PED)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Cirurgia",
+      "new_subtema": "Cirurgia Pediátrica e Malformações Digestivas Neonatais",
+      "changed": true
+    },
+    {
+      "question_id": 16316,
+      "source_topic": "Terapia hormonal (TH)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 16325,
+      "source_topic": "Hemorragia pós parto",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 16334,
+      "source_topic": "Indicadores de Mortalidade",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Indicadores de Saúde e Coeficientes de Morbimortalidade",
+      "changed": true
+    },
+    {
+      "question_id": 16346,
+      "source_topic": "Saúde da Mulher",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 16364,
+      "source_topic": "Hiperparatireoidismo primário",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+      "changed": true
+    },
+    {
+      "question_id": 16392,
+      "source_topic": "SAF (CM)",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 16394,
+      "source_topic": "CPPD (Doença por Deposição de Pirofosfato de Cálcio) (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "changed": true
+    },
+    {
+      "question_id": 16411,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 16520,
+      "source_topic": "AIT (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 16587,
+      "source_topic": "Leiomioma ",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+      "changed": true
+    },
+    {
+      "question_id": 16603,
+      "source_topic": "Tratamento IUE feminina",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+      "changed": true
+    },
+    {
+      "question_id": 16606,
+      "source_topic": "Anticoncepção - situações especiais",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 16607,
+      "source_topic": "Avaliação do casal infértil",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "changed": true
+    },
+    {
+      "question_id": 16608,
+      "source_topic": "Terapia não hormonal climatério",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 16611,
+      "source_topic": "Anticoncepção - métodos disponíveis",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 16659,
+      "source_topic": "Cetoacidose diabética (PED)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Pediatria",
+      "new_subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+      "changed": true
+    },
+    {
+      "question_id": 16744,
+      "source_topic": "DHGNA (CM)",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+      "changed": true
+    },
+    {
+      "question_id": 16783,
+      "source_topic": "Anticoncepção - métodos disponíveis",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+      "changed": true
+    },
+    {
+      "question_id": 16802,
+      "source_topic": "Hiperprolactinemia",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "changed": true
+    },
+    {
+      "question_id": 16858,
+      "source_topic": "Crescimento (PED)",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 16906,
+      "source_topic": "Lesões por pressão",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 16922,
+      "source_topic": "Clínica Médica Geral",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 16931,
+      "source_topic": "Clínica Médica Geral",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 16933,
+      "source_topic": "Clínica Médica Geral",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 16988,
+      "source_topic": "Terapia não hormonal climatério",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 17072,
+      "source_topic": "Distúrbios Hidroeletrolíticos e Acidobásicos",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+      "changed": true
+    },
+    {
+      "question_id": 17076,
+      "source_topic": "Pneumonias e Síndromes Gripais",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "changed": true
+    },
+    {
+      "question_id": 17083,
+      "source_topic": "Sepse, Choque Séptico e Outros tipos de Choque",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Cirurgia",
+      "new_subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+      "changed": true
+    },
+    {
+      "question_id": 17095,
+      "source_topic": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 17151,
+      "source_topic": "Puerpério",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 17205,
+      "source_topic": "Crescimento e Desenvolvimento na Infância e Adolescência",
+      "old_area": "Pediatria",
+      "old_subtema": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+      "new_area": "Pediatria",
+      "new_subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+      "changed": true
+    },
+    {
+      "question_id": 17228,
+      "source_topic": "Puerpério",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+      "changed": true
+    },
+    {
+      "question_id": 17231,
+      "source_topic": "Vulvovaginites",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+      "changed": true
+    },
+    {
+      "question_id": 17237,
+      "source_topic": "Climatério",
+      "old_area": "Ginecologia e Obstetrícia",
+      "old_subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+      "new_area": "Ginecologia e Obstetrícia",
+      "new_subtema": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+      "changed": true
+    },
+    {
+      "question_id": 17244,
+      "source_topic": "AVC",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+      "changed": true
+    },
+    {
+      "question_id": 17265,
+      "source_topic": "Artrites e Diagnósticos Diferenciais",
+      "old_area": "Clínica Médica",
+      "old_subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+      "new_area": "Clínica Médica",
+      "new_subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+      "changed": true
+    }
+  ]
+}

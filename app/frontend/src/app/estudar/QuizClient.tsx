@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff, RotateCcw } from "lucide-react";
+import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff, RotateCcw, Brain, SlidersHorizontal, RefreshCw } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -31,6 +31,8 @@ type SessionAnswer = {
   writtenAnswer?: string; 
   isDiscursive?: boolean; 
 };
+
+type QuizState = "FILTERS" | "LOADING_QUEUE" | "PLAYING" | "FINISHED";
 
 interface SavedQuizState {
   version: number;
@@ -85,6 +87,8 @@ export function QuizClient({
   );
   const { isZenMode: zenMode, toggleZenMode } = useZenMode();
   const [subtemaSearch, setSubtemaSearch] = useState("");
+  const [showCustomSession, setShowCustomSession] = useState(false);
+  const [showTopicTree, setShowTopicTree] = useState(false);
   const [hasSavedState, setHasSavedState] = useState(false);
   const [savedSessionData, setSavedSessionData] = useState<SavedQuizState | null>(null);
 
@@ -200,6 +204,8 @@ export function QuizClient({
     removeLearningSession("quiz");
     setHasSavedState(false);
     setSavedSessionData(null);
+    setFilters(activeFilters);
+    if (typeof activeFilters.limit === "string") setLocalLimit(activeFilters.limit);
     if (typeof window !== "undefined") {
       sessionStorage.setItem("medquest_active_quiz", "1");
     }
@@ -379,6 +385,8 @@ export function QuizClient({
     setAttemptResult(null);
     setSessionAnswers({});
     setTimeSpent(0);
+    setFilters({ limit: "50" });
+    setLocalLimit("50");
     setHasSavedState(false);
     setSavedSessionData(null);
     setState("FILTERS");
@@ -496,6 +504,12 @@ export function QuizClient({
       loadQueue(finalFilters);
     }
   };
+
+  const startRecommendedSession = useCallback((kind: "adaptive" | "review") => {
+    const limit = kind === "review" ? "20" : "30";
+    setStudyMode("TUTOR");
+    loadQueue({ limit, ...(kind === "adaptive" ? { mode: "adaptive" } : { status: "srs_due" }) });
+  }, [loadQueue]);
 
   const handleAttempt = useCallback(async () => {
     if (attemptLockRef.current || attemptResult || isOfflineSaved || submitting || !currentDetail || !selectedLetter) return;
@@ -687,6 +701,17 @@ export function QuizClient({
     }
   }, [currentIndex, queue, loadQuestionDetail]);
 
+  const navigateQuestion = useCallback((direction: "next" | "previous") => {
+    if (direction === "previous") {
+      prevQuestion();
+      return;
+    }
+    if (!attemptResult && !isOfflineSaved && !window.confirm("Pular esta questão? Ela ficará pendente e não contará como respondida na sessão.")) {
+      return;
+    }
+    nextQuestion();
+  }, [attemptResult, isOfflineSaved, nextQuestion, prevQuestion]);
+
   const toggleFavorite = async () => {
     if (!currentDetail || togglingFavorite || favoriteLockRef.current) return;
     favoriteLockRef.current = true;
@@ -763,18 +788,18 @@ export function QuizClient({
       }
 
       // Free navigation with arrows (Requires Ctrl or Alt to prevent accidental jumps while scrolling)
-      if (e.key === "ArrowLeft" && (e.ctrlKey || e.altKey)) {
-        e.preventDefault();
-        prevQuestion();
-      } else if (e.key === "ArrowRight" && (e.ctrlKey || e.altKey)) {
-        e.preventDefault();
-        nextQuestion();
-      }
+        if (e.key === "ArrowLeft" && (e.ctrlKey || e.altKey)) {
+          e.preventDefault();
+          navigateQuestion("previous");
+        } else if (e.key === "ArrowRight" && (e.ctrlKey || e.altKey)) {
+          e.preventDefault();
+          navigateQuestion("next");
+        }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue, selectedLetter, submitting, handleAttempt, handleDiscursiveReveal, handleReviewFSRS, nextQuestion, prevQuestion, selectAlternative]);
+  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue, selectedLetter, submitting, handleAttempt, handleDiscursiveReveal, handleReviewFSRS, nextQuestion, prevQuestion, navigateQuestion, selectAlternative]);
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -828,7 +853,48 @@ export function QuizClient({
           </div>
         )}
 
-        <form onSubmit={handleFilterSubmit} className="flex flex-col gap-6">
+        {!showCustomSession && (
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-base font-bold text-foreground">O que você quer fazer agora?</h3>
+              <p className="text-sm text-muted-foreground mt-1">Comece pela próxima ação útil; você pode personalizar uma sessão quando precisar.</p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => startRecommendedSession("review")}
+                className="text-left rounded-xl border border-primary/30 bg-primary/5 p-5 transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <div className="flex items-center gap-2 text-primary font-bold"><RefreshCw size={18} /> Revisar o que venceu</div>
+                <p className="mt-2 text-sm text-muted-foreground">Até 20 questões com revisão pendente. Prioridade para não deixar a memória expirar.</p>
+              </button>
+              <button
+                type="button"
+                onClick={() => startRecommendedSession("adaptive")}
+                className="text-left rounded-xl border border-border bg-muted/30 p-5 transition-colors hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <div className="flex items-center gap-2 text-foreground font-bold"><Brain size={18} className="text-primary" /> Sessão adaptativa</div>
+                <p className="mt-2 text-sm text-muted-foreground">30 questões priorizadas por lacunas, erros recentes e cobertura.</p>
+              </button>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowCustomSession(true)}
+              className="w-full flex items-center justify-center gap-2 rounded-lg border border-border py-3 text-sm font-semibold text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            >
+              <SlidersHorizontal size={16} /> Montar sessão personalizada
+            </button>
+          </div>
+        )}
+
+        {showCustomSession && <form onSubmit={handleFilterSubmit} className="flex flex-col gap-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="font-bold text-foreground">Sessão personalizada</h3>
+              <p className="text-sm text-muted-foreground">Use filtros apenas quando houver um objetivo específico.</p>
+            </div>
+            <button type="button" onClick={() => setShowCustomSession(false)} className="text-sm font-semibold text-primary hover:underline">Voltar</button>
+          </div>
           <div className="bg-muted/30 border border-border p-4 rounded-lg flex flex-col sm:flex-row gap-4">
             <button 
               type="button"
@@ -930,59 +996,6 @@ export function QuizClient({
               <span>Instituição / Banca</span>
               {isUpdatingMeta && <span className="text-xs text-muted-foreground animate-pulse">Atualizando...</span>}
             </label>
-
-            {/* Quick-select interactive chips */}
-            <div className="flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  const newFilters = { ...filters };
-                  delete newFilters.institution;
-                  setFilters(newFilters);
-                }}
-                className={clsx(
-                  "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border",
-                  !filters.institution
-                    ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                    : "bg-background border-border text-muted-foreground hover:bg-muted"
-                )}
-              >
-                Todas ({dynamicMeta.total_questions})
-              </button>
-              {dynamicMeta.institutions.map(inst => {
-                const isSelected = filters.institution === inst.institution_code;
-                return (
-                  <button
-                    key={inst.institution_code}
-                    type="button"
-                    onClick={() => {
-                      if (isSelected) {
-                        const newFilters = { ...filters };
-                        delete newFilters.institution;
-                        setFilters(newFilters);
-                      } else {
-                        setFilters({ ...filters, institution: inst.institution_code });
-                      }
-                    }}
-                    className={clsx(
-                      "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border flex items-center gap-1.5",
-                      isSelected
-                        ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                        : "bg-background border-border text-foreground hover:bg-muted hover:border-border/80"
-                    )}
-                    title={inst.institution_label}
-                  >
-                    <span>{inst.institution_code}</span>
-                    <span className={clsx(
-                      "text-[10px] px-1.5 py-0.2 rounded-full font-normal",
-                      isSelected ? "bg-primary-foreground/20 text-primary-foreground" : "bg-muted text-muted-foreground"
-                    )}>
-                      {inst.n}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
 
             <select 
               className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
@@ -1086,11 +1099,11 @@ export function QuizClient({
                 </div>
               )}
               
-              <div className="mt-6 pt-4 border-t border-border">
-                <label className="text-sm font-medium text-foreground mb-3 flex items-center justify-between">
-                  <span>Subtópicos / Árvore de Temas</span>
-                </label>
-                <SubjectTreeSelector
+              <div className="mt-5 pt-4 border-t border-border">
+                <button type="button" onClick={() => setShowTopicTree(value => !value)} className="text-sm font-semibold text-primary hover:underline">
+                  {showTopicTree ? "Ocultar árvore de temas" : "Abrir árvore de temas"}
+                </button>
+                {showTopicTree && <div className="mt-3"><SubjectTreeSelector
                   selectedSubtemas={Array.isArray(filters.subtema) ? filters.subtema : (filters.subtema ? [filters.subtema] : [])}
                   onChange={(newSelection) => {
                     const newFilters = { ...filters };
@@ -1099,7 +1112,7 @@ export function QuizClient({
                     setFilters(newFilters);
                   }}
                   availableSubtemas={dynamicMeta.subtemas}
-                />
+                /></div>}
               </div>
             </div>
 
@@ -1110,7 +1123,7 @@ export function QuizClient({
             <Play size={18} fill="currentColor" />
             {studyMode === "TUTOR" ? "Iniciar Sessão de Estudos" : "Iniciar Simulado Personalizado"}
           </button>
-        </form>
+        </form>}
       </div>
     );
   }
@@ -1202,6 +1215,7 @@ export function QuizClient({
 
   // PLAYING STATE
   const q = currentDetail;
+  const completedCount = Object.values(sessionAnswers).filter(answer => answer.result || answer.isOffline).length;
 
   return (
     <div className="max-w-4xl mx-auto w-full flex flex-col gap-6 pb-12 relative">
@@ -1223,15 +1237,15 @@ export function QuizClient({
             ← Voltar
           </button>
           <div className="h-6 w-px bg-border hidden sm:block" />
-          <div className="text-sm font-semibold text-foreground">
-            Questão {currentIndex + 1} de {queue.length}
+            <div className="text-sm font-semibold text-foreground">
+             Respondidas {completedCount}/{queue.length}
           </div>
           <div className="hidden lg:flex items-center gap-2 ml-4 px-3 py-1 bg-muted/50 rounded-full text-xs text-muted-foreground font-medium">
             <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">A-E</kbd> ou <kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">1-5</kbd> Alternativas</span>
             <span className="w-1 h-1 rounded-full bg-border" />
               <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">Enter</kbd> Confirmar</span>
             <span className="w-1 h-1 rounded-full bg-border" />
-            <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">➔</kbd> Próxima</span>
+              <span className="flex items-center gap-1"><kbd className="bg-background border border-border px-1.5 py-0.5 rounded text-[10px]">Ctrl + ➔</kbd> Navegar</span>
           </div>
         </div>
         
@@ -1360,7 +1374,7 @@ export function QuizClient({
               
               <div className="flex items-center gap-3 bg-muted/30 px-3 py-1.5 rounded-lg border border-border">
                 <button 
-                  onClick={prevQuestion} 
+                  onClick={() => navigateQuestion("previous")}
                   disabled={currentIndex === 0 || loadingDetail}
                   className="p-1 hover:bg-background rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
                   title="Questão Anterior (Seta Esquerda)"
@@ -1372,10 +1386,10 @@ export function QuizClient({
                   {currentIndex + 1} / {queue.length}
                 </span>
                 <button 
-                  onClick={nextQuestion} 
-                  disabled={currentIndex === queue.length - 1 || loadingDetail}
+                  onClick={() => navigateQuestion("next")}
+                  disabled={loadingDetail}
                   className="p-1 hover:bg-background rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
-                  title="Próxima Questão (Seta Direita)"
+                  title="Próxima questão (Ctrl + Seta Direita)"
                   aria-label="Próxima Questão"
                 >
                   <ArrowRight size={18} aria-hidden="true" />
@@ -1559,16 +1573,9 @@ export function QuizClient({
                     try {
                       const { syncManager } = await import("@/lib/sync");
                       await syncManager.sync(true);
-                      if (currentDetail && selectedLetter) {
-                        const res = await api.questions.submitAttempt(currentDetail.id, selectedLetter, timeSpent * 1000, "defer");
-                        setAttemptResult(res);
-                        setIsOfflineSaved(false);
-                        setSessionAnswers(prev => ({
-                          ...prev,
-                          [currentDetail.id]: { letter: selectedLetter, result: res, writtenAnswer: userWrittenAnswer }
-                        }));
-                        toast.success("Resposta sincronizada com sucesso!");
-                      }
+                      // The queue dispatches sync-item-success with the original
+                      // idempotency key. Sending a second request here would create
+                      // a duplicate attempt after the queued one succeeds.
                     } catch (e) {
                       if (e instanceof OfflineQueuedError) {
                         toast("Sem conexão com a internet no momento.", { icon: "💾" });

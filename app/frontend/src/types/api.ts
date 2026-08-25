@@ -377,6 +377,7 @@ export interface SearchResult {
   subtema: string;
   stem_snippet: string;
   exp_snippet: string;
+  is_autoral?: boolean;
 }
 
 export interface Flashcard {

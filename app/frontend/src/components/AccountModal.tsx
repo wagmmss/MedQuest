@@ -55,7 +55,8 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
           }
         }
         resetStateAndClose();
-        window.location.href = "/";
+        router.push("/");
+        router.refresh();
       } else {
         setError("Não foi possível resetar o progresso. Tente novamente.");
         setIsLoading(false);

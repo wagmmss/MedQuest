@@ -98,7 +98,6 @@ export function DashboardClient({
     : (bottlenecks.length > 0 ? bottlenecks[0].area : "");
 
   const topBottleneck = bottlenecks.length > 0 ? bottlenecks[0] : null;
-  const hasMultipleBottlenecks = bottlenecks.length > 1;
 
   const totalAttempts = benchmarkStats?.total_attempts || stats.total_attempts || 0;
   const targetScorePct = stats.target_score || benchmarkStats?.target_score_pct || 76;

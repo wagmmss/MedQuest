@@ -1,4 +1,4 @@
-import { PlannerWeek, PlannerTopic } from "@/types/api";
+import { PlannerWeek } from "@/types/api";
 
 declare global {
   interface Window {

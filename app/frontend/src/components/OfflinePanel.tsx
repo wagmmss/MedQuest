@@ -334,6 +334,7 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <Link
                 href="/simulado"
+                onClick={() => onClose?.()}
                 className="flex items-center justify-center gap-2 p-2.5 rounded-lg bg-muted/40 hover:bg-muted text-foreground border border-border font-medium text-xs transition-colors"
               >
                 <Play size={14} className="text-secondary" />
@@ -341,6 +342,7 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
               </Link>
               <Link
                 href="/estudar"
+                onClick={() => onClose?.()}
                 className="flex items-center justify-center gap-2 p-2.5 rounded-lg bg-muted/40 hover:bg-muted text-foreground border border-border font-medium text-xs transition-colors"
               >
                 <BookOpen size={14} className="text-primary" />
@@ -348,6 +350,7 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
               </Link>
               <Link
                 href="/revisao-ativa"
+                onClick={() => onClose?.()}
                 className="flex items-center justify-center gap-2 p-2.5 rounded-lg bg-muted/40 hover:bg-muted text-foreground border border-border font-medium text-xs transition-colors"
               >
                 <Layers size={14} className="text-purple-500" />
