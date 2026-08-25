@@ -232,7 +232,7 @@ export function ExplanationViewer({
         <div className="flex items-center justify-between gap-3 mb-3">
           <div className="flex items-center gap-2 text-purple-700 dark:text-purple-300 font-bold text-sm md:text-base">
             <Bot size={20} className="text-purple-600 dark:text-purple-400" />
-            <span>Preceptor Clínico IA (Gemini 3.7 Flash)</span>
+            <span>Preceptor Clínico IA</span>
           </div>
           <span className="text-[11px] font-semibold text-purple-600 bg-purple-500/10 px-2.5 py-0.5 rounded-full border border-purple-500/20">
             Google AI

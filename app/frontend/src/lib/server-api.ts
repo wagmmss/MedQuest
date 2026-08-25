@@ -3,7 +3,8 @@ import { getGuestSession } from "./session";
 import { 
   OverviewStats, CoverageResponse, QuestionMeta, PlannerConfig,
   TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat,
-  PlannerPlanResponse, PlannerProgressMap, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness
+  PlannerPlanResponse, PlannerProgressMap, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness,
+  BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary
 } from "@/types/api";
 
 export type { QuestionMeta };
@@ -95,6 +96,10 @@ export const serverApi = {
     getExamReadiness: () => serverFetch<ExamReadiness>("/api/stats/exam-readiness", { next: { tags: ['stats'] } }),
     getBreakdown: (by: 'institution' | 'area' | 'year') => 
       serverFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { next: { tags: ['stats'] } }),
+    getBenchmark: () => serverFetch<BenchmarkStat>("/api/stats/benchmark", { next: { tags: ['stats'] } }),
+    getBottlenecks: (limit: number = 3) => serverFetch<BottleneckTopic[]>(`/api/stats/bottlenecks?limit=${limit}`, { next: { tags: ['stats'] } }),
+    getDomainSummary: () => serverFetch<DomainSummaryResponse>("/api/stats/domain-summary", { next: { tags: ['stats'] } }),
+    getErrorNotebookSummary: () => serverFetch<ErrorNotebookSummary>("/api/stats/error-notebook-summary", { next: { tags: ['stats'] } }),
   },
   questions: {
     getMeta: () => serverFetch<QuestionMeta>("/api/meta", { cache: 'no-store' }),

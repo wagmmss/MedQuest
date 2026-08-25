@@ -68,6 +68,55 @@ export interface WeakTopic {
   accuracy: number;
 }
 
+export interface BenchmarkStat {
+  accuracy_overall: number | null;
+  accuracy_last7: number | null;
+  target_score: number;
+  target_score_pct: number;
+  diff_pct: number | null;
+  status_label: "aprovado" | "competitivo" | "em_evolucao" | "iniciando";
+  last7_attempts: number;
+  weekly_target_questions: number;
+  weekly_progress_pct: number;
+  competitors_average_pct: number;
+}
+
+export interface BottleneckTopic {
+  subtema: string;
+  area: string;
+  attempts: number;
+  correct: number;
+  wrong_count: number;
+  accuracy: number;
+  accuracy_pct: number;
+  practice_url: string;
+}
+
+export interface DomainAreaSummary {
+  area: string;
+  total_subtemas: number;
+  mastered_subtemas: number;
+  in_progress_subtemas: number;
+  not_started_subtemas: number;
+  attempts: number;
+  correct: number;
+  accuracy: number | null;
+  domain_pct: number;
+}
+
+export interface DomainSummaryResponse {
+  overall_domain_pct: number;
+  total_mastered: number;
+  total_subtemas: number;
+  areas: DomainAreaSummary[];
+}
+
+export interface ErrorNotebookSummary {
+  ever_wrong_count: number;
+  currently_unresolved_count: number;
+  practice_url: string;
+}
+
 export interface LearningProfileTopic {
   topic: string;
   area: string;

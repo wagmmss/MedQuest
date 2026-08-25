@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 # In-memory TTL cache for semantic search expansions (avoids redundant AI calls)
 _search_cache = {}  # key: normalized query -> (timestamp, result)
 _SEARCH_CACHE_TTL = 300  # 5 minutes
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.7-flash")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
 
 def _clean_option_text(text: str) -> str:
     """Remove prefixos de alternativas como 'A) ', 'B - ', etc."""
@@ -252,7 +252,7 @@ Responda EXCLUSIVAMENTE em JSON válido:
                 system_instruction="Você responde apenas em JSON válido com as chaves front, back e context.",
                 json_mode=True,
                 model=GEMINI_MODEL,
-                timeout=8
+                timeout=15
             )
             result_str = resp.get("text", "").replace("```json", "").replace("```", "").strip()
             parsed = json.loads(result_str)
@@ -394,7 +394,7 @@ def ask_preceptor_ai(
 ) -> dict:
     """
     Atua como um Preceptor Médico Socrático especialista em provas de residência (USP, ENARE, SUS-SP).
-    Responde às dúvidas do aluno com clareza, rigor científico e foco nas armadilhas da banca usando Gemini 3.7 Flash.
+    Gera comentários e explicações clínicas inéditas por IA com alto rigor científico, fisiopatologia e foco em pegadinhas.
     """
     alts_formatted = "\n".join([
         f"{a.get('letter', '')}) {a.get('text', '')}"
@@ -402,9 +402,9 @@ def ask_preceptor_ai(
         if isinstance(a, dict)
     ])
     
-    prompt = f"""Você é o Preceptor Clínico Virtual do MedQuest, especialista em preparação para residência médica de alto nível (USP, ENARE, SUS-SP).
+    prompt = f"""Você é o Preceptor Clínico Virtual do MedQuest, especialista em preparação para residência médica de alto nível (USP, ENARE, SUS-SP, Unifesp, Unicamp).
 
-ÁREA / TEMA: {area} - {subtema}
+ÁREA / TEMA: {area or 'Medicina'} - {subtema or 'Raciocínio Clínico'}
 ENUNCIADO DA QUESTÃO:
 {stem}
 
@@ -412,28 +412,28 @@ ALTERNATIVAS:
 {alts_formatted}
 
 GABARITO OFICIAL: Letra {correct_letter} ({correct_text})
-RESPOSTA MARCADA PELO ALUNO: {f'Letra {user_letter}' if user_letter else 'Ainda não respondeu ou acertou'}
-COMENTÁRIO BASE:
-{explanation or 'Nenhum comentário adicional.'}
+RESPOSTA DO ALUNO: {f'Marcou Letra {user_letter}' if user_letter else 'Ainda não respondeu ou acertou'}
 
-DÚVIDA / PEDIDO DO ALUNO:
-{user_question or 'Por favor, explique o raciocínio clínico da questão, por que a correta é o padrão-ouro e onde está a armadilha do distrator.'}
+DÚVIDA / FOCO SOLICITADO:
+{user_question or 'Explique o raciocínio fisiopatológico da questão, por que a correta é o padrão-ouro e onde está a armadilha do distrator.'}
 
-INSTRUÇÕES DO PRECEPTOR:
-1. Responda em tom encorajador, clínico, didático e direto ao ponto.
-2. Foque no raciocínio fisiopatológico e na conduta padrão-ouro recomendada pelas diretrizes médicas.
-3. Se o aluno marcou uma alternativa incorreta, aponte a pegadinha com precisão.
-4. Finalize com uma '💡 Regra de Ouro' (1 frase memorável para a prova).
-5. Formate a resposta em Markdown claro com tópicos destacados.
+INSTRUÇÕES PEDAGÓGICAS DO PRECEPTOR:
+1. Responda em tom encorajador, clínico, didático e de alta relevância para provas de residência.
+2. Forneça uma explicação clínica ORIGINAL e APROFUNDADA:
+   - Seção 🩺 **Raciocínio Fisiopatológico & Diagnóstico**: Explique o mecanismo fisiopatológico subjacente, os achados clínicos e os critérios diagnósticos.
+   - Seção 🎯 **Conduta Padrão-Ouro**: Justifique a abordagem terapêutica recomendada pelas diretrizes e consensos médicos atuais (SBP, SBC, MS, FEBRASGO, etc.).
+   - Seção ⚠️ **Análise dos Distratores & Pegadinhas**: Se o aluno errou ou pediu distratores, detalhe o porquê das alternativas incorretas serem armadilhas clássicas de banca.
+   - Seção 💡 **Regra de Ouro**: Finalize com uma 'take-home message' mnemônica ou regra de decisão indispensável para a prova.
+3. Formate a resposta em Markdown limpo, com tópicos bem estruturados e ênfase visual.
 """
 
     if gemini_pool.total_keys > 0:
         try:
             resp = gemini_pool.generate_content(
                 prompt=prompt,
-                system_instruction="Você é um preceptor médico de excelência que ensina raciocínio clínico para residência médica.",
+                system_instruction="Você é um preceptor médico de elite que ensina raciocínio clínico para residência médica. Gere comentários originais, aprofundados e didáticos.",
                 model=GEMINI_MODEL,
-                timeout=12
+                timeout=25
             )
             text = resp.get("text", "").strip()
             if text:
@@ -449,15 +449,15 @@ INSTRUÇÕES DO PRECEPTOR:
     if groq_key and not groq_key.lower().startswith(("dummy", "test", "gsk_test")) and len(groq_key) > 15:
         try:
             from groq import Groq
-            client = Groq(api_key=groq_key, timeout=12.0, max_retries=1)
+            client = Groq(api_key=groq_key, timeout=15.0, max_retries=1)
             completion = client.chat.completions.create(
                 messages=[
-                    {"role": "system", "content": "Você é um preceptor médico de excelência que ensina raciocínio clínico para residência médica."},
+                    {"role": "system", "content": "Você é um preceptor médico de elite que ensina raciocínio clínico para residência médica."},
                     {"role": "user", "content": prompt}
                 ],
                 model="llama-3.3-70b-versatile",
                 temperature=0.3,
-                max_tokens=600
+                max_tokens=700
             )
             text = completion.choices[0].message.content.strip()
             if text:
@@ -469,10 +469,14 @@ INSTRUÇÕES DO PRECEPTOR:
         except Exception as e:
             logger.error(f"Erro no preceptor IA via Groq: {e}")
 
+    # Fallback estruturado caso todos os provedores de IA estejam fora do ar
+    clean_pulo = _extract_pulo_do_gato(explanation)
     fallback_response = f"**Raciocínio Clínico Resumido**:\nO gabarito oficial é a Letra **{correct_letter}** ({correct_text}).\n\n"
-    if explanation:
-        fallback_response += f"**Comentário da Questão**:\n{explanation}\n\n"
-    fallback_response += f"💡 **Regra de Ouro**: Em {subtema or area or 'questões clínicas'}, atente-se sempre aos critérios diagnósticos e às contraindicações específicas antes de definir a conduta."
+    if clean_pulo:
+        fallback_response += f"💡 **Pulo do Gato**:\n{clean_pulo}\n\n"
+    elif explanation:
+        fallback_response += f"📚 **Fundamentação Clínica**:\n{explanation}\n\n"
+    fallback_response += f"💡 **Regra de Ouro**: Em {subtema or area or 'questões clínicas de residência'}, priorize sempre a identificação da âncora clínica no enunciado e correlacione com a conduta padrão-ouro das diretrizes vigentes."
     
     return {
         "answer": fallback_response,
@@ -562,7 +566,7 @@ Responda em formato estruturado.
                 prompt=prompt,
                 system_instruction="Você é o diretor pedagógico do MedQuest especialista em aprovação de residência médica.",
                 model=GEMINI_MODEL,
-                timeout=15
+                timeout=25
             )
             text = resp.get("text", "").strip()
             if text:
@@ -603,7 +607,7 @@ def synthesize_question_explanation(
 ) -> dict:
     """
     Sintetiza um comentário médico estruturado e completo (Pulo do Gato, Raciocínio Clínico,
-    Alternativa Correta, Distratores e Referências) para uma questão utilizando Gemini 3.7 Flash.
+    Alternativa Correta, Distratores e Referências) para uma questão utilizando Gemini.
     """
     alts_formatted = "\n".join([
         f"{a.get('letter', '')}) {a.get('text', '')}"
@@ -642,7 +646,7 @@ ESTRUTURA OBRIGATÓRIA DA RESPOSTA (JSON):
                 system_instruction="Você responde exclusivamente em JSON válido.",
                 json_mode=True,
                 model=GEMINI_MODEL,
-                timeout=15
+                timeout=25
             )
             parsed = _extract_json_block(resp.get("text", ""))
             if parsed and "pulo_do_gato" in parsed and "raciocinio_clinico" in parsed:

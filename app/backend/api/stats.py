@@ -725,3 +725,238 @@ def distractors():
            for s, v in by_sub.items()]
     out.sort(key=lambda x: x["total_wrong"], reverse=True)
     return jsonify(out[:20])
+
+
+@bp.route("/stats/benchmark")
+def benchmark():
+    """Inspirado no benchmark de concorrentes/corte da Medway (MedBrain)."""
+    db = get_db()
+    now_utc = datetime.now(timezone.utc)
+    last7_start = (now_utc - timedelta(days=7)).isoformat()
+
+    stats_row = db.execute("""
+        SELECT 
+            COUNT(a.id) AS total_attempts,
+            SUM(a.is_correct) AS total_correct,
+            SUM(CASE WHEN a.answered_at >= ? THEN 1 ELSE 0 END) AS last7_attempts,
+            SUM(CASE WHEN a.answered_at >= ? THEN a.is_correct ELSE 0 END) AS last7_correct
+        FROM attempts a
+        WHERE a.user_id = ?
+    """, (last7_start, last7_start, g.user_id)).fetchone()
+
+    total_attempts = stats_row["total_attempts"] or 0
+    total_correct = stats_row["total_correct"] or 0
+    last7_attempts = stats_row["last7_attempts"] or 0
+    last7_correct = stats_row["last7_correct"] or 0
+
+    accuracy_overall = (total_correct / total_attempts) if total_attempts > 0 else None
+    accuracy_last7 = (last7_correct / last7_attempts) if last7_attempts > 0 else None
+
+    config = None
+    try:
+        config_row = db.execute("SELECT * FROM planner_config WHERE user_id = ?", (g.user_id,)).fetchone()
+        if config_row:
+            config = dict(config_row)
+    except Exception:
+        config = None
+
+    target_score_pct = (config.get("target_score") if config and config.get("target_score") else 76.0)
+    target_score = target_score_pct / 100.0
+
+    weekly_target_questions = 80
+    if config and config.get("days_per_week"):
+        daily_q = config.get("questions_per_day") or 15
+        weekly_target_questions = max(20, config["days_per_week"] * daily_q)
+
+    diff_pct = round((accuracy_overall - target_score) * 100, 1) if accuracy_overall is not None else None
+    weekly_progress_pct = min(100.0, round((last7_attempts / weekly_target_questions) * 100, 1)) if weekly_target_questions > 0 else 0.0
+
+    status_label = "iniciando"
+    if accuracy_overall is not None:
+        if diff_pct >= 0:
+            status_label = "aprovado"
+        elif diff_pct >= -10:
+            status_label = "competitivo"
+        else:
+            status_label = "em_evolucao"
+
+    return jsonify({
+        "accuracy_overall": accuracy_overall,
+        "accuracy_last7": accuracy_last7,
+        "target_score": target_score,
+        "target_score_pct": target_score_pct,
+        "diff_pct": diff_pct,
+        "status_label": status_label,
+        "last7_attempts": last7_attempts,
+        "weekly_target_questions": weekly_target_questions,
+        "weekly_progress_pct": weekly_progress_pct,
+        "competitors_average_pct": 76.0
+    })
+
+
+@bp.route("/stats/bottlenecks")
+def bottlenecks():
+    """Inspirado no worst-tags-performance da Medcof: identifica os principais gargalos."""
+    db = get_db()
+    try:
+        limit = int(request.args.get("limit", 5))
+    except (ValueError, TypeError):
+        limit = 5
+    limit = max(1, min(limit, 20))
+
+    rows = db.execute("""
+        SELECT 
+            q.subtema,
+            MIN(q.area) AS area,
+            COUNT(a.id) AS attempts,
+            SUM(a.is_correct) AS correct,
+            SUM(CASE WHEN a.is_correct = 0 THEN 1 ELSE 0 END) AS wrong_count
+        FROM attempts a
+        JOIN questions q ON q.id = a.question_id
+        WHERE a.user_id = ? AND q.subtema IS NOT NULL AND q.subtema != ''
+        GROUP BY q.subtema
+        HAVING attempts >= 2 AND wrong_count > 0
+        ORDER BY (CAST(wrong_count AS FLOAT) / attempts) DESC, wrong_count DESC, attempts DESC
+        LIMIT ?
+    """, (g.user_id, limit)).fetchall()
+
+    out = []
+    for r in rows:
+        acc = (r["correct"] / r["attempts"]) if r["attempts"] > 0 else 0.0
+        out.append({
+            "subtema": r["subtema"],
+            "area": r["area"],
+            "attempts": r["attempts"],
+            "correct": r["correct"],
+            "wrong_count": r["wrong_count"],
+            "accuracy": round(acc, 3),
+            "accuracy_pct": round(acc * 100, 1),
+            "practice_url": f"/estudar?subtema={r['subtema']}&status=all&limit=10"
+        })
+    return jsonify(out)
+
+
+@bp.route("/stats/domain-summary")
+def domain_summary():
+    """Inspirado no MedBrain da Medway: progresso de domínio de focos/subtemas por Grande Área."""
+    db = get_db()
+    
+    rows = db.execute("""
+        SELECT 
+            q.area,
+            q.subtema,
+            COUNT(DISTINCT q.id) AS total_questions,
+            COUNT(a.id) AS attempts,
+            COALESCE(SUM(a.is_correct), 0) AS correct
+        FROM questions q
+        LEFT JOIN attempts a ON a.question_id = q.id AND a.user_id = ?
+        WHERE q.missing_alts = 0 AND q.area IS NOT NULL AND q.area != '' AND q.subtema IS NOT NULL AND q.subtema != ''
+        GROUP BY q.area, q.subtema
+    """, (g.user_id,)).fetchall()
+
+    areas_map = {}
+    canonical_order = ["Clínica Médica", "Cirurgia", "Ginecologia e Obstetrícia", "Pediatria", "Medicina Preventiva"]
+    
+    for area_name in canonical_order:
+        areas_map[area_name] = {
+            "area": area_name,
+            "total_subtemas": 0,
+            "mastered_subtemas": 0,
+            "in_progress_subtemas": 0,
+            "not_started_subtemas": 0,
+            "attempts": 0,
+            "correct": 0,
+            "accuracy": None,
+            "domain_pct": 0.0
+        }
+
+    for r in rows:
+        area = r["area"]
+        if area not in areas_map:
+            areas_map[area] = {
+                "area": area,
+                "total_subtemas": 0,
+                "mastered_subtemas": 0,
+                "in_progress_subtemas": 0,
+                "not_started_subtemas": 0,
+                "attempts": 0,
+                "correct": 0,
+                "accuracy": None,
+                "domain_pct": 0.0
+            }
+        
+        item = areas_map[area]
+        item["total_subtemas"] += 1
+        att = r["attempts"] or 0
+        cor = r["correct"] or 0
+        item["attempts"] += att
+        item["correct"] += cor
+
+        if att == 0:
+            item["not_started_subtemas"] += 1
+        else:
+            acc = cor / att
+            if att >= 5 and acc >= 0.70:
+                item["mastered_subtemas"] += 1
+            else:
+                item["in_progress_subtemas"] += 1
+
+    result = []
+    for area_name in canonical_order:
+        if area_name in areas_map:
+            item = areas_map[area_name]
+            if item["attempts"] > 0:
+                item["accuracy"] = round(item["correct"] / item["attempts"], 3)
+            if item["total_subtemas"] > 0:
+                item["domain_pct"] = round((item["mastered_subtemas"] / item["total_subtemas"]) * 100, 1)
+            result.append(item)
+
+    for k, item in areas_map.items():
+        if k not in canonical_order:
+            if item["attempts"] > 0:
+                item["accuracy"] = round(item["correct"] / item["attempts"], 3)
+            if item["total_subtemas"] > 0:
+                item["domain_pct"] = round((item["mastered_subtemas"] / item["total_subtemas"]) * 100, 1)
+            result.append(item)
+
+    total_subtemas_all = sum(x["total_subtemas"] for x in result)
+    total_mastered_all = sum(x["mastered_subtemas"] for x in result)
+    overall_domain_pct = round((total_mastered_all / total_subtemas_all) * 100, 1) if total_subtemas_all > 0 else 0.0
+
+    return jsonify({
+        "overall_domain_pct": overall_domain_pct,
+        "total_mastered": total_mastered_all,
+        "total_subtemas": total_subtemas_all,
+        "areas": result
+    })
+
+
+@bp.route("/stats/error-notebook-summary")
+def error_notebook_summary():
+    """Inspirado no ever-answered-wrong da Medcof: contador e resumo de questões erradas."""
+    db = get_db()
+    
+    row = db.execute("""
+        SELECT 
+            COUNT(DISTINCT a.question_id) AS ever_wrong_count,
+            COUNT(DISTINCT CASE WHEN last_attempt.is_correct = 0 THEN a.question_id END) AS currently_unresolved_count
+        FROM attempts a
+        LEFT JOIN (
+            SELECT a1.question_id, a1.is_correct
+            FROM attempts a1
+            WHERE a1.user_id = ? AND a1.id = (
+                SELECT MAX(a2.id) FROM attempts a2 WHERE a2.user_id = ? AND a2.question_id = a1.question_id
+            )
+        ) last_attempt ON last_attempt.question_id = a.question_id
+        WHERE a.user_id = ? AND a.is_correct = 0
+    """, (g.user_id, g.user_id, g.user_id)).fetchone()
+
+    ever_wrong = row["ever_wrong_count"] if row and row["ever_wrong_count"] else 0
+    currently_unresolved = row["currently_unresolved_count"] if row and row["currently_unresolved_count"] else 0
+
+    return jsonify({
+        "ever_wrong_count": ever_wrong,
+        "currently_unresolved_count": currently_unresolved,
+        "practice_url": "/estudar?status=wrong&limit=20"
+    })
+

@@ -17,10 +17,20 @@ import re
 from typing import List, Dict, Any, Optional, Tuple, Callable
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
+
+# Garante que as variáveis de ambiente foram carregadas se gemini_pool for importado diretamente
+_env_path = Path(__file__).resolve().parent.parent / ".env"
+if _env_path.exists():
+    load_dotenv(_env_path)
+else:
+    load_dotenv(find_dotenv())
+
 logger = logging.getLogger(__name__)
 
-DEFAULT_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.7-flash")
-DEFAULT_FALLBACK_MODELS = ("gemini-3.6-flash", "gemini-flash-latest")
+DEFAULT_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
+DEFAULT_FALLBACK_MODELS = ("gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.7-flash")
 
 
 class KeyState:
@@ -78,10 +88,19 @@ class KeyState:
         scope = f" para o modelo {model}" if model else ""
         logger.warning(f"[GeminiPool] Chave #{self.index} em cooldown{scope} por {actual_cooldown:.0f}s: {reason}")
 
-    def mark_error(self, err: str):
+    def mark_error(self, err: str, cooldown_seconds: float = 60.0, model: Optional[str] = None):
         self.total_calls += 1
         self.error_calls += 1
         self.last_error = err
+        err_lower = err.lower()
+        if any(keyword in err_lower for keyword in ["timed out", "timeout", "timedout", "connection", "unavailable", "503", "504", "reset"]):
+            cooldown_until = time.time() + cooldown_seconds
+            if model:
+                self.model_cooldown_until[model] = cooldown_until
+            else:
+                self.cooldown_until = cooldown_until
+            scope = f" para o modelo {model}" if model else ""
+            logger.warning(f"[GeminiPool] Chave #{self.index} em cooldown{scope} por {cooldown_seconds:.0f}s devido a erro: {err}")
 
 
 class GeminiPool:
@@ -274,21 +293,21 @@ class GeminiPool:
                         last_exception = RuntimeError(f"Rate limit na chave #{key_state.index}: {err_body[:200]}")
                         continue
                     if e.code == 404:
-                        key_state.mark_error(f"Modelo indisponível: HTTP {e.code}")
+                        key_state.mark_error(f"Modelo indisponível: HTTP {e.code}", model=target_model)
                         last_exception = RuntimeError(f"Modelo {target_model} indisponível: {err_body[:200]}")
                         break
                     if e.code in (500, 503, 504):
-                        key_state.mark_error(f"HTTP {e.code}")
+                        key_state.mark_error(f"HTTP {e.code}", cooldown_seconds=60.0, model=target_model)
                         last_exception = RuntimeError(f"Erro no servidor Gemini ({e.code}): {err_body[:200]}")
-                        time.sleep(1.0)
+                        time.sleep(0.5)
                         continue
-                    key_state.mark_error(f"HTTP {e.code}: {err_body[:100]}")
+                    key_state.mark_error(f"HTTP {e.code}: {err_body[:100]}", model=target_model)
                     raise RuntimeError(f"Erro na API Gemini ({e.code}): {err_body}")
 
                 except Exception as e:
-                    key_state.mark_error(str(e))
+                    key_state.mark_error(str(e), cooldown_seconds=60.0, model=target_model)
                     last_exception = e
-                    time.sleep(0.5)
+                    time.sleep(0.2)
 
         raise RuntimeError(
             f"Nenhum modelo do pool respondeu após os fallbacks {self._model_candidates(model)}. "
@@ -339,7 +358,7 @@ class GeminiPool:
             )
             t0 = time.time()
             try:
-                with urllib.request.urlopen(req, timeout=10) as resp:
+                with urllib.request.urlopen(req, timeout=5) as resp:
                     latency = (time.time() - t0) * 1000
                     report.append({
                         "key_index": state.index,

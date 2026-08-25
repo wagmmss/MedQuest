@@ -1,5 +1,8 @@
 import { serverApi } from "@/lib/server-api";
-import { OverviewStats, PlannerWeek, TimelineStat, BreakdownStat } from "@/types/api";
+import { 
+  OverviewStats, PlannerWeek, TimelineStat, BreakdownStat,
+  BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary 
+} from "@/types/api";
 import { currentUser } from '@clerk/nextjs/server';
 import { DashboardClient } from "./DashboardClient";
 
@@ -10,15 +13,28 @@ export default async function Dashboard() {
   let currentPlannerWeek: PlannerWeek | null = null;
   let timelineStats: TimelineStat[] = [];
   let breakdownStats: BreakdownStat[] = [];
+  let benchmarkStats: BenchmarkStat | null = null;
+  let bottlenecks: BottleneckTopic[] = [];
+  let domainSummary: DomainSummaryResponse | null = null;
+  let errorNotebook: ErrorNotebookSummary | null = null;
+
   try {
-    const [timeline, breakdown] = await Promise.all([
-      serverApi.stats.getTimeline(180),
-      serverApi.stats.getBreakdown("area")
+    const [timeline, breakdown, bench, bnecks, domain, errors] = await Promise.all([
+      serverApi.stats.getTimeline(180).catch(() => []),
+      serverApi.stats.getBreakdown("area").catch(() => []),
+      serverApi.stats.getBenchmark().catch(() => null),
+      serverApi.stats.getBottlenecks(3).catch(() => []),
+      serverApi.stats.getDomainSummary().catch(() => null),
+      serverApi.stats.getErrorNotebookSummary().catch(() => null),
     ]);
     timelineStats = timeline;
     breakdownStats = breakdown;
+    benchmarkStats = bench;
+    bottlenecks = bnecks;
+    domainSummary = domain;
+    errorNotebook = errors;
   } catch (e) {
-    console.error("Failed to fetch timeline or breakdown for dashboard", e);
+    console.error("Failed to fetch dashboard metrics", e);
   }
 
   try {
@@ -58,6 +74,11 @@ export default async function Dashboard() {
       firstName={firstName} 
       timelineStats={timelineStats}
       breakdownStats={breakdownStats}
+      benchmarkStats={benchmarkStats}
+      bottlenecks={bottlenecks}
+      domainSummary={domainSummary}
+      errorNotebook={errorNotebook}
     />
   );
 }
+

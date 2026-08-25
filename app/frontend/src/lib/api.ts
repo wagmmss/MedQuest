@@ -3,7 +3,8 @@ import {
   BreakdownStat, DistractorStat, PlannerConfig, PlannerProgressMap, PlannerPlanResponse,
   QuestionMeta, SubtemaItem, QuestionListItem, QuestionDetail, AttemptResult, SearchResult,
   BatchAttemptItem, BatchAttemptResult, BatchDetailResponse, Flashcard, FlashcardGenerateResponse,
-  BatchFlashcardGenerateResponse, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness
+  BatchFlashcardGenerateResponse, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness,
+  BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary
 } from "@/types/api";
 
 const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 
@@ -97,6 +98,10 @@ export const api = {
     getExamReadiness: (institution?: string) => apiFetch<ExamReadiness>(`/api/stats/exam-readiness${institution ? `?institution=${encodeURIComponent(institution)}` : ""}`, { cache: 'no-store' }),
     getBreakdown: (by: 'institution' | 'area' | 'year') => 
       apiFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { cache: 'no-store' }),
+    getBenchmark: () => apiFetch<BenchmarkStat>("/api/stats/benchmark", { cache: 'no-store' }),
+    getBottlenecks: (limit: number = 3) => apiFetch<BottleneckTopic[]>(`/api/stats/bottlenecks?limit=${limit}`, { cache: 'no-store' }),
+    getDomainSummary: () => apiFetch<DomainSummaryResponse>("/api/stats/domain-summary", { cache: 'no-store' }),
+    getErrorNotebookSummary: () => apiFetch<ErrorNotebookSummary>("/api/stats/error-notebook-summary", { cache: 'no-store' }),
     resetProgress: () => 
       apiFetch<{success: boolean}>("/api/stats/reset", {
         method: "DELETE",
