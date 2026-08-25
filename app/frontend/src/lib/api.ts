@@ -278,15 +278,24 @@ export const api = {
         throw err;
       }
     },
-    submitAttempt: (id: number, selected_letter: string, time_spent_ms: number, confidence: string = "defer") => 
+    submitAttempt: (id: number, selected_letter: string, time_spent_ms: number, confidence: string = "defer", is_correct?: boolean | null, user_answer_text?: string) => 
       apiFetch<AttemptResult>(`/api/questions/${id}/attempt`, {
         method: "POST",
-        body: JSON.stringify({ selected_letter, time_spent_ms, confidence }),
+        body: JSON.stringify({ 
+          selected_letter, 
+          time_spent_ms, 
+          confidence,
+          ...(is_correct !== undefined && is_correct !== null ? { is_correct } : {}),
+          ...(user_answer_text ? { user_answer_text } : {})
+        }),
       }),
-    reviewFSRS: (id: number, confidence: string) => 
-      apiFetch<{success: boolean, next_review_date: string}>(`/api/questions/${id}/review`, {
+    reviewFSRS: (id: number, confidence: string, is_correct?: boolean) => 
+      apiFetch<{success: boolean, next_review_date: string, is_correct?: boolean}>(`/api/questions/${id}/review`, {
         method: "POST",
-        body: JSON.stringify({ confidence })
+        body: JSON.stringify({ 
+          confidence,
+          ...(is_correct !== undefined ? { is_correct } : {})
+        })
       }),
     toggleFavorite: (id: number) => apiFetch<{is_favorite: boolean}>(`/api/questions/${id}/favorite`, {
       method: "POST"

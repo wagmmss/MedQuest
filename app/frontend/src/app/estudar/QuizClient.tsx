@@ -24,8 +24,13 @@ import {
   writeLearningSession,
 } from "@/lib/sessionState";
 
-type QuizState = "FILTERS" | "LOADING_QUEUE" | "PLAYING" | "FINISHED";
-type SessionAnswer = { letter: string; result?: AttemptResult | null; isOffline?: boolean };
+type SessionAnswer = { 
+  letter: string; 
+  result?: AttemptResult | null; 
+  isOffline?: boolean; 
+  writtenAnswer?: string; 
+  isDiscursive?: boolean; 
+};
 
 interface SavedQuizState {
   version: number;
@@ -36,6 +41,7 @@ interface SavedQuizState {
   currentDetail: QuestionDetail | null;
   sessionAnswers: Record<number, SessionAnswer>;
   selectedLetter: string | null;
+  userWrittenAnswer?: string;
   timeSpent: number;
   savedAt: number;
 }
@@ -96,6 +102,7 @@ export function QuizClient({
   
   // Quiz State
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
+  const [userWrittenAnswer, setUserWrittenAnswer] = useState<string>("");
   const [attemptResult, setAttemptResult] = useState<AttemptResult | null>(null);
   const [isOfflineSaved, setIsOfflineSaved] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -132,6 +139,7 @@ export function QuizClient({
     setDetailError(null);
     setAttemptResult(null);
     setSelectedLetter(null);
+    setUserWrittenAnswer("");
     setIsOfflineSaved(false);
     setFlashcardResult(null);
     setDraftFlashcard(null);
@@ -230,6 +238,7 @@ export function QuizClient({
         setSelectedLetter(ans.letter);
         setAttemptResult(ans.result || null);
         setIsOfflineSaved(!!ans.isOffline);
+        setUserWrittenAnswer(ans.writtenAnswer || "");
       }, 0);
       return () => clearTimeout(timer);
     }
@@ -253,7 +262,7 @@ export function QuizClient({
             setIsOfflineSaved(false);
             setSessionAnswers(prev => ({
               ...prev,
-              [currentDetail.id]: { letter: selectedLetter || attemptRes.correct_letter || "", result: attemptRes }
+              [currentDetail.id]: { letter: selectedLetter || attemptRes.correct_letter || "", result: attemptRes, writtenAnswer: userWrittenAnswer }
             }));
             toast.success("Resposta sincronizada com sucesso!");
           }
@@ -265,7 +274,7 @@ export function QuizClient({
     return () => {
       window.removeEventListener("sync-item-success", handleSyncSuccess);
     };
-  }, [currentDetail, selectedLetter]);
+  }, [currentDetail, selectedLetter, userWrittenAnswer]);
 
   const hasRestored = useRef(false);
   const [storageReady, setStorageReady] = useState(false);
@@ -280,32 +289,45 @@ export function QuizClient({
     const filterKeys = Object.keys(initialFilters).filter(k => k !== "resume");
 
     if (saved && (isExplicitResume || isActiveInSession)) {
-      setQueue(saved.queue);
-      setCurrentIndex(saved.currentIndex);
-      setFilters(saved.filters);
-      setCurrentDetail(saved.currentDetail);
-      setSessionAnswers(saved.sessionAnswers);
-      setSelectedLetter(saved.selectedLetter);
-      setTimeSpent(saved.timeSpent || 0);
-      setState(saved.state);
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("medquest_active_quiz", "1");
-      }
-      if (saved.currentDetail) {
-        detailsCacheRef.current[saved.currentDetail.id] = saved.currentDetail;
-      } else if (saved.queue[saved.currentIndex]) {
-        loadQuestionDetail(saved.queue[saved.currentIndex].id);
-      }
-      toast.success("Sessão de estudo retomada.");
+      setTimeout(() => {
+        setQueue(saved.queue);
+        setCurrentIndex(saved.currentIndex);
+        setFilters(saved.filters);
+        setCurrentDetail(saved.currentDetail);
+        setSessionAnswers(saved.sessionAnswers);
+        setSelectedLetter(saved.selectedLetter);
+        setUserWrittenAnswer(saved.userWrittenAnswer || "");
+        setTimeSpent(saved.timeSpent || 0);
+        setState(saved.state);
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("medquest_active_quiz", "1");
+        }
+        if (saved.currentDetail) {
+          detailsCacheRef.current[saved.currentDetail.id] = saved.currentDetail;
+        } else if (saved.queue[saved.currentIndex]) {
+          loadQuestionDetail(saved.queue[saved.currentIndex].id);
+        }
+        toast.success("Sessão de estudo retomada.");
+        setStorageReady(true);
+      }, 0);
     } else if (saved && filterKeys.length === 0) {
-      // Sessão salva existente: exibe banner na tela de filtros sem forçar entrada nas questões
-      setHasSavedState(true);
-      setSavedSessionData(saved);
-      setState("FILTERS");
+      setTimeout(() => {
+        // Sessão salva existente: exibe banner na tela de filtros sem forçar entrada nas questões
+        setHasSavedState(true);
+        setSavedSessionData(saved);
+        setState("FILTERS");
+        setStorageReady(true);
+      }, 0);
     } else if (filterKeys.length > 0) {
-      loadQueue({ limit: "50", ...initialFilters });
+      setTimeout(() => {
+        loadQueue({ limit: "50", ...initialFilters });
+        setStorageReady(true);
+      }, 0);
+    } else {
+      setTimeout(() => {
+        setStorageReady(true);
+      }, 0);
     }
-    setStorageReady(true);
   }, [initialFilters, loadQueue, loadQuestionDetail]);
 
   const resumeSavedQuiz = useCallback(() => {
@@ -317,6 +339,7 @@ export function QuizClient({
       setCurrentDetail(saved.currentDetail);
       setSessionAnswers(saved.sessionAnswers);
       setSelectedLetter(saved.selectedLetter);
+      setUserWrittenAnswer(saved.userWrittenAnswer || "");
       setTimeSpent(saved.timeSpent || 0);
       setState(saved.state);
       if (typeof window !== "undefined") {
@@ -352,6 +375,7 @@ export function QuizClient({
     setCurrentIndex(0);
     setCurrentDetail(null);
     setSelectedLetter(null);
+    setUserWrittenAnswer("");
     setAttemptResult(null);
     setSessionAnswers({});
     setTimeSpent(0);
@@ -377,13 +401,14 @@ export function QuizClient({
         currentDetail,
         sessionAnswers,
         selectedLetter: nextSelectedLetter,
+        userWrittenAnswer,
         timeSpent: timeSpentSnapshotRef.current,
         savedAt: Date.now(),
       } satisfies SavedQuizState);
     } else if (state === "FILTERS") {
       removeLearningSession("quiz");
     }
-  }, [storageReady, state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter]);
+  }, [storageReady, state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter, userWrittenAnswer]);
 
   useEffect(() => {
     persistSession();
@@ -485,7 +510,7 @@ export function QuizClient({
       setIsOfflineSaved(false);
       setSessionAnswers(prev => ({
         ...prev,
-        [currentDetail.id]: { letter: selectedLetter, result: res }
+        [currentDetail.id]: { letter: selectedLetter, result: res, writtenAnswer: userWrittenAnswer }
       }));
 
     } catch (err) {
@@ -494,7 +519,7 @@ export function QuizClient({
         setIsOfflineSaved(true);
         setSessionAnswers(prev => ({
           ...prev,
-          [currentDetail.id]: { letter: selectedLetter, isOffline: true }
+          [currentDetail.id]: { letter: selectedLetter, isOffline: true, writtenAnswer: userWrittenAnswer }
         }));
       } else {
         toast.error("Erro ao enviar resposta.");
@@ -503,7 +528,58 @@ export function QuizClient({
       attemptLockRef.current = false;
       setSubmitting(false);
     }
-  }, [attemptResult, isOfflineSaved, submitting, currentDetail, selectedLetter, timeSpent]);
+  }, [attemptResult, isOfflineSaved, submitting, currentDetail, selectedLetter, userWrittenAnswer, timeSpent]);
+
+  const handleDiscursiveReveal = useCallback(async () => {
+    if (attemptLockRef.current || attemptResult || isOfflineSaved || submitting || !currentDetail) return;
+    attemptLockRef.current = true;
+    
+    setSubmitting(true);
+    if (timerRef.current) clearInterval(timerRef.current);
+
+    try {
+      const res = await api.questions.submitAttempt(
+        currentDetail.id, 
+        "A", 
+        timeSpent * 1000, 
+        "defer", 
+        null, 
+        userWrittenAnswer
+      );
+      setAttemptResult(res);
+      setSelectedLetter("A");
+      setIsOfflineSaved(false);
+      setSessionAnswers(prev => ({
+        ...prev,
+        [currentDetail.id]: { 
+          letter: "A", 
+          result: res, 
+          writtenAnswer: userWrittenAnswer, 
+          isDiscursive: true 
+        }
+      }));
+
+    } catch (err) {
+      if (err instanceof OfflineQueuedError) {
+        toast("Resposta salva neste dispositivo; será sincronizada quando a conexão voltar.", { icon: "💾" });
+        setIsOfflineSaved(true);
+        setSessionAnswers(prev => ({
+          ...prev,
+          [currentDetail.id]: { 
+            letter: "A", 
+            isOffline: true, 
+            writtenAnswer: userWrittenAnswer, 
+            isDiscursive: true 
+          }
+        }));
+      } else {
+        toast.error("Erro ao enviar resposta.");
+      }
+    } finally {
+      attemptLockRef.current = false;
+      setSubmitting(false);
+    }
+  }, [attemptResult, isOfflineSaved, submitting, currentDetail, userWrittenAnswer, timeSpent]);
 
   const handleGenerateFlashcard = async () => {
     if (!currentDetail) return;
@@ -547,7 +623,7 @@ export function QuizClient({
   const handleGenerateAllWrongFlashcards = async () => {
     const wrongItems = Object.entries(sessionAnswers)
       .filter(([, ans]) => ans.result && !ans.result.is_correct)
-      .map(([qid, ans]) => ({ question_id: Number(qid), wrong_letter: ans.letter }));
+      .map(([qid, ans]) => ({ question_id: Number(qid), wrong_letter: ans.letter || "A" }));
 
     if (wrongItems.length === 0) return;
     setGeneratingBatchFlashcards(true);
@@ -571,18 +647,38 @@ export function QuizClient({
     }
   }, [currentIndex, queue, loadQuestionDetail]);
 
-  const handleReviewFSRS = useCallback(async (conf: string) => {
+  const handleReviewFSRS = useCallback(async (conf: string, explicitIsCorrect?: boolean) => {
     if (!currentDetail || reviewLockRef.current) return;
     reviewLockRef.current = true;
     try {
-      await api.questions.reviewFSRS(currentDetail.id, conf);
+      const res = await api.questions.reviewFSRS(currentDetail.id, conf, explicitIsCorrect);
+      const isCorr = explicitIsCorrect !== undefined ? explicitIsCorrect : (attemptResult?.is_correct ?? false);
+      const updatedResult: AttemptResult = {
+        ...(attemptResult || {
+          correct_letter: currentDetail.institution_code || "A",
+          explanation: null,
+          next_review_date: res.next_review_date,
+        }),
+        is_correct: isCorr,
+        next_review_date: res.next_review_date,
+      };
+      setAttemptResult(updatedResult);
+      setSessionAnswers(prev => ({
+        ...prev,
+        [currentDetail.id]: {
+          letter: selectedLetter || "A",
+          result: updatedResult,
+          writtenAnswer: userWrittenAnswer,
+          isDiscursive: Boolean(currentDetail.is_discursive || currentDetail.alternatives.length <= 1)
+        }
+      }));
     } catch {
       toast.error("Erro ao salvar revisão (FSRS).");
     } finally {
       reviewLockRef.current = false;
       nextQuestion();
     }
-  }, [currentDetail, nextQuestion]);
+  }, [currentDetail, attemptResult, selectedLetter, userWrittenAnswer, nextQuestion]);
 
   const prevQuestion = useCallback(() => {
     if (currentIndex > 0) {
@@ -625,23 +721,36 @@ export function QuizClient({
       if (state !== "PLAYING" || !currentDetail || loadingDetail) return;
 
       const key = e.key.toUpperCase();
+      const isDiscursive = Boolean(currentDetail.is_discursive || currentDetail.alternatives.length <= 1);
       
       if (!attemptResult) {
-        // Alternatives 1-5 or A-E
-        const altIndexMap: Record<string, number> = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, 'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4 };
-        if (key in altIndexMap) {
-          const idx = altIndexMap[key];
-          if (idx < currentDetail.alternatives.length) {
-            selectAlternative(currentDetail.alternatives[idx].letter);
-          }
-        } else if (key === "ENTER" || key === " ") {
-          if (selectedLetter && !submitting) {
+        if (isDiscursive) {
+          if ((e.ctrlKey || e.metaKey) && key === "ENTER") {
             e.preventDefault();
-            handleAttempt();
+            handleDiscursiveReveal();
+          }
+        } else {
+          // Alternatives 1-5 or A-E
+          const altIndexMap: Record<string, number> = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, 'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4 };
+          if (key in altIndexMap) {
+            const idx = altIndexMap[key];
+            if (idx < currentDetail.alternatives.length) {
+              selectAlternative(currentDetail.alternatives[idx].letter);
+            }
+          } else if (key === "ENTER" || key === " ") {
+            if (selectedLetter && !submitting) {
+              e.preventDefault();
+              handleAttempt();
+            }
           }
         }
       } else {
-        if (!attemptResult.next_review_date) {
+        if (attemptResult.is_correct === null) {
+          if (key === "3" || key === "A") { e.preventDefault(); handleReviewFSRS("certeza", true); }
+          else if (key === "2" || key === "ENTER" || key === " ") { e.preventDefault(); handleReviewFSRS("duvida", true); }
+          else if (key === "1") { e.preventDefault(); handleReviewFSRS("chutei", true); }
+          else if (key === "E") { e.preventDefault(); handleReviewFSRS("duvida", false); }
+        } else if (!attemptResult.next_review_date) {
           if (key === "1") handleReviewFSRS("chutei");
           else if (key === "2" || key === "ENTER" || key === " ") { e.preventDefault(); handleReviewFSRS("duvida"); }
           else if (key === "3") handleReviewFSRS("certeza");
@@ -665,7 +774,7 @@ export function QuizClient({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue, selectedLetter, submitting, handleAttempt, handleReviewFSRS, nextQuestion, prevQuestion, selectAlternative]);
+  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue, selectedLetter, submitting, handleAttempt, handleDiscursiveReveal, handleReviewFSRS, nextQuestion, prevQuestion, selectAlternative]);
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -1239,6 +1348,11 @@ export function QuizClient({
                     <span className="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span> Revisado
                   </span>
                 )}
+                {Boolean(q.is_discursive || q.alternatives.length <= 1) && (
+                  <span className="bg-primary/15 text-primary border border-primary/30 px-2 py-1 rounded flex items-center gap-1 font-bold">
+                    Discursiva
+                  </span>
+                )}
                 <span className="bg-muted px-2 py-1 rounded">{q.institution_code}{q.is_autoral ? " (A)" : ""} {q.year}</span>
                 <span className="bg-muted px-2 py-1 rounded">{q.area}</span>
                 <span className="bg-muted px-2 py-1 rounded">{q.subtema}</span>
@@ -1311,71 +1425,117 @@ export function QuizClient({
             )}
           </div>
 
-          {/* Alternatives */}
-          <div className="flex flex-col gap-3">
-            {q.alternatives.map((alt) => {
-              const isSelected = selectedLetter === alt.letter;
-              const isCorrect = attemptResult?.correct_letter === alt.letter || (attemptResult && isSelected && attemptResult.is_correct);
-              const isWrong = attemptResult && isSelected && !attemptResult.is_correct;
-              
-              let altClass = "bg-card border-border hover:bg-muted/50 hover:border-primary/30 cursor-pointer shadow-sm hover:shadow";
-              if (isSelected && !attemptResult) altClass = "bg-primary/5 border-primary/50 cursor-pointer shadow ring-1 ring-primary/20";
-              if (attemptResult) {
-                if (isCorrect) altClass = "bg-success/10 border-success/50 shadow-sm cursor-default ring-1 ring-success/20";
-                else if (isWrong) altClass = "bg-destructive/10 border-destructive/50 shadow-sm cursor-default ring-1 ring-destructive/20";
-                else altClass = "bg-card border-border opacity-40 cursor-default";
-              }
-
-              return (
-                <motion.button
-                  whileTap={!attemptResult ? { scale: 0.98 } : {}}
-                  animate={
-                    attemptResult && isWrong ? { x: [-5, 5, -5, 5, 0], transition: { duration: 0.4 } } : 
-                    attemptResult && isCorrect ? { scale: [1, 1.02, 1], transition: { duration: 0.4 } } : 
-                    {}
-                  }
-                  key={alt.letter}
-                  onClick={() => selectAlternative(alt.letter)}
-                  disabled={!!attemptResult || submitting}
-                  className={clsx(
-                    "text-left p-4 rounded-xl border transition-all flex items-start gap-4 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-                    altClass
-                  )}
-                  aria-pressed={isSelected}
+          {/* Alternatives or Discursive Response */}
+          {Boolean(q.is_discursive || q.alternatives.length <= 1) ? (
+            !attemptResult && (
+              <div className="bg-card border border-border shadow-1 rounded-2xl p-6 md:p-7 flex flex-col gap-4 animate-in fade-in duration-200">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 text-primary font-bold text-base">
+                    <span className="material-symbols-outlined text-[20px]">edit_document</span>
+                    <span>Questão Discursiva (Resposta Aberta)</span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">
+                    Atalho: <kbd className="bg-muted px-1.5 py-0.5 rounded border border-border text-[10px]">Ctrl+Enter</kbd> para confirmar
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Anote seus achados clínicos, hipótese diagnóstica ou conduta antes de revelar o gabarito e padrão oficial da banca:
+                </p>
+                <textarea
+                  value={userWrittenAnswer}
+                  onChange={(e) => setUserWrittenAnswer(e.target.value)}
+                  placeholder="Escreva sua resposta ou hipótese aqui..."
+                  rows={4}
+                  className="w-full bg-input/40 border border-border focus:border-primary/50 focus:bg-background rounded-xl p-4 text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-y text-base font-normal leading-relaxed min-h-[110px]"
+                  onKeyDown={(e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+                      e.preventDefault();
+                      handleDiscursiveReveal();
+                    }
+                  }}
+                />
+                <button
+                  onClick={handleDiscursiveReveal}
+                  disabled={submitting}
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer text-sm disabled:opacity-50"
                 >
-                  <div className={clsx(
-                    "w-8 h-8 shrink-0 flex items-center justify-center rounded-lg font-bold text-sm",
-                    isSelected && !attemptResult ? "bg-primary text-primary-foreground" : 
-                    isCorrect ? "bg-success text-success-foreground" : 
-                    isWrong ? "bg-destructive text-destructive-foreground" : 
-                    "bg-muted text-muted-foreground"
-                  )}>
-                    {submitting && isSelected ? (
-                      <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                    ) : (
-                      alt.letter
-                    )}
-                  </div>
-                  <div className="pt-1.5 text-foreground leading-relaxed flex-1">
-                    {alt.text}
-                  </div>
-                </motion.button>
-              );
-            })}
-          </div>
+                  {submitting ? (
+                    <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <>
+                      <CheckCircle2 size={18} />
+                      Confirmar Resposta & Ver Padrão da Banca
+                    </>
+                  )}
+                </button>
+              </div>
+            )
+          ) : (
+            <div className="flex flex-col gap-3">
+              {q.alternatives.map((alt) => {
+                const isSelected = selectedLetter === alt.letter;
+                const isCorrect = attemptResult?.correct_letter === alt.letter || (attemptResult && isSelected && attemptResult.is_correct);
+                const isWrong = attemptResult && isSelected && !attemptResult.is_correct;
+                
+                let altClass = "bg-card border-border hover:bg-muted/50 hover:border-primary/30 cursor-pointer shadow-sm hover:shadow";
+                if (isSelected && !attemptResult) altClass = "bg-primary/5 border-primary/50 cursor-pointer shadow ring-1 ring-primary/20";
+                if (attemptResult) {
+                  if (isCorrect) altClass = "bg-success/10 border-success/50 shadow-sm cursor-default ring-1 ring-success/20";
+                  else if (isWrong) altClass = "bg-destructive/10 border-destructive/50 shadow-sm cursor-default ring-1 ring-destructive/20";
+                  else altClass = "bg-card border-border opacity-40 cursor-default";
+                }
 
-          {!attemptResult && !isOfflineSaved && selectedLetter && (
-            <button
-              onClick={handleAttempt}
-              disabled={submitting}
-              className="mt-2 w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 rounded-xl transition-all flex items-center justify-center shadow-md animate-in slide-in-from-bottom-2 fade-in duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            >
-              {submitting ? (
-                <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-              ) : (
-                "Confirmar Resposta"
+                return (
+                  <motion.button
+                    whileTap={!attemptResult ? { scale: 0.98 } : {}}
+                    animate={
+                      attemptResult && isWrong ? { x: [-5, 5, -5, 5, 0], transition: { duration: 0.4 } } : 
+                      attemptResult && isCorrect ? { scale: [1, 1.02, 1], transition: { duration: 0.4 } } : 
+                      {}
+                    }
+                    key={alt.letter}
+                    onClick={() => selectAlternative(alt.letter)}
+                    disabled={!!attemptResult || submitting}
+                    className={clsx(
+                      "text-left p-4 rounded-xl border transition-all flex items-start gap-4 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                      altClass
+                    )}
+                    aria-pressed={isSelected}
+                  >
+                    <div className={clsx(
+                      "w-8 h-8 shrink-0 flex items-center justify-center rounded-lg font-bold text-sm",
+                      isSelected && !attemptResult ? "bg-primary text-primary-foreground" : 
+                      isCorrect ? "bg-success text-success-foreground" : 
+                      isWrong ? "bg-destructive text-destructive-foreground" : 
+                      "bg-muted text-muted-foreground"
+                    )}>
+                      {submitting && isSelected ? (
+                        <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        alt.letter
+                      )}
+                    </div>
+                    <div className="pt-1.5 text-foreground leading-relaxed flex-1">
+                      {alt.text}
+                    </div>
+                  </motion.button>
+                );
+              })}
+
+              {!attemptResult && !isOfflineSaved && selectedLetter && (
+                <button
+                  onClick={handleAttempt}
+                  disabled={submitting}
+                  className="mt-2 w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 rounded-xl transition-all flex items-center justify-center shadow-md animate-in slide-in-from-bottom-2 fade-in duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                  {submitting ? (
+                    <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    "Confirmar Resposta"
+                  )}
+                </button>
               )}
-            </button>
+            </div>
           )}
 
           {/* Offline Saved Banner */}
@@ -1405,7 +1565,7 @@ export function QuizClient({
                         setIsOfflineSaved(false);
                         setSessionAnswers(prev => ({
                           ...prev,
-                          [currentDetail.id]: { letter: selectedLetter, result: res }
+                          [currentDetail.id]: { letter: selectedLetter, result: res, writtenAnswer: userWrittenAnswer }
                         }));
                         toast.success("Resposta sincronizada com sucesso!");
                       }
@@ -1434,26 +1594,45 @@ export function QuizClient({
 
           {/* Explanation Block */}
           {attemptResult && (
-            <div className="animate-in slide-in-from-bottom-4 fade-in duration-300">
+            <div className="animate-in slide-in-from-bottom-4 fade-in duration-300 flex flex-col gap-6">
+              {/* If user had written an answer on discursive question, show it prominently */}
+              {Boolean(q.is_discursive || q.alternatives.length <= 1) && userWrittenAnswer && (
+                <div className="bg-card border border-border shadow-1 rounded-2xl p-6 flex flex-col gap-3">
+                  <div className="flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-wider">
+                    <span className="material-symbols-outlined text-[16px]">draw</span>
+                    <span>Sua Resposta Anotada</span>
+                  </div>
+                  <div className="text-foreground text-base leading-relaxed whitespace-pre-wrap bg-muted/40 p-4 rounded-xl border border-border font-medium">
+                    {userWrittenAnswer}
+                  </div>
+                </div>
+              )}
+
               <div className={clsx(
                 "rounded-xl border shadow-1 overflow-hidden",
-                attemptResult.is_correct ? "bg-success/5 border-success/20" : "bg-destructive/5 border-destructive/20"
+                attemptResult.is_correct === true ? "bg-success/5 border-success/20" :
+                attemptResult.is_correct === false ? "bg-destructive/5 border-destructive/20" :
+                "bg-card border-border"
               )}>
                 <div className={clsx(
                   "p-4 border-b flex items-center justify-between",
-                  attemptResult.is_correct ? "border-success/20 bg-success/10" : "border-destructive/20 bg-destructive/10"
+                  attemptResult.is_correct === true ? "border-success/20 bg-success/10" :
+                  attemptResult.is_correct === false ? "border-destructive/20 bg-destructive/10" :
+                  "border-border bg-muted/50"
                 )}>
                   <div className="flex items-center gap-2 font-bold">
-                    {attemptResult.is_correct ? (
+                    {attemptResult.is_correct === true ? (
                       <><CheckCircle2 className="text-success" /> <span className="text-success">Resposta Correta!</span></>
-                    ) : (
+                    ) : attemptResult.is_correct === false ? (
                       <><XCircle className="text-destructive" /> <span className="text-destructive">Resposta Incorreta</span></>
+                    ) : (
+                      <><span className="material-symbols-outlined text-primary text-[20px]">fact_check</span> <span className="text-foreground">Padrão de Resposta Oficial</span></>
                     )}
                   </div>
-                  {!attemptResult.is_correct && attemptResult.next_review_date && (
+                  {attemptResult.is_correct !== null && attemptResult.next_review_date && (
                     <button
                       onClick={nextQuestion}
-                      className="flex items-center gap-2 bg-background border border-border hover:bg-muted font-bold px-4 py-2 rounded-md transition-colors text-sm"
+                      className="flex items-center gap-2 bg-background border border-border hover:bg-muted font-bold px-4 py-2 rounded-md transition-colors text-sm cursor-pointer"
                     >
                       Próxima <ArrowRight size={16} />
                     </button>
@@ -1463,7 +1642,7 @@ export function QuizClient({
                 <div className="p-6 md:p-8">
                   <h3 className="text-lg font-bold text-foreground mb-5 flex items-center gap-2">
                     <BookOpen size={20} className="text-primary" />
-                    Comentário do Professor
+                    {Boolean(q.is_discursive || q.alternatives.length <= 1) ? "Padrão de Resposta da Banca & Comentário" : "Comentário do Professor"}
                   </h3>
                   <ExplanationViewer 
                     explanation={attemptResult.explanation} 
@@ -1479,7 +1658,8 @@ export function QuizClient({
                     </div>
                   ) : null}
                   
-                  {!flashcardResult && !draftFlashcard && (
+                  {/* Flashcard Generation: Available when marked wrong, or on demand */}
+                  {attemptResult.is_correct === false && !flashcardResult && !draftFlashcard && (
                     <div className="mt-6">
                       <button 
                         onClick={handleGenerateFlashcard}
@@ -1522,14 +1702,14 @@ export function QuizClient({
                           <button 
                             onClick={() => setDraftFlashcard(null)}
                             disabled={savingFlashcard}
-                            className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                            className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                           >
                             Cancelar
                           </button>
                           <button 
                             onClick={handleSaveFlashcard}
                             disabled={savingFlashcard}
-                            className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-5 rounded-lg transition-colors text-sm shadow-sm disabled:opacity-50"
+                            className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-5 rounded-lg transition-colors text-sm shadow-sm disabled:opacity-50 cursor-pointer"
                           >
                             {savingFlashcard ? (
                               <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -1571,10 +1751,97 @@ export function QuizClient({
                     </div>
                   )}
 
-                  {attemptResult.next_review_date ? (
-                    <div className="mt-8 pt-4 border-t border-border flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                      <Clock size={16} />
-                      Próxima revisão agendada para: {new Date(attemptResult.next_review_date).toLocaleDateString('pt-BR')}
+                  {/* Self-Assessment / FSRS Block */}
+                  {attemptResult.is_correct === null ? (
+                    <div className="mt-8 pt-6 border-t border-border flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-2">
+                      <div className="flex items-center justify-between flex-wrap gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="material-symbols-outlined text-primary text-[20px]">how_to_reg</span>
+                          <span className="text-base font-bold text-foreground">
+                            Autoavaliação da Resposta Discursiva
+                          </span>
+                        </div>
+                        <span className="text-xs text-muted-foreground">
+                          Compare sua hipótese com o padrão acima e declare:
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-1">
+                        {/* Acertei */}
+                        <div className="bg-success/5 border border-success/30 rounded-xl p-4 flex flex-col gap-3">
+                          <div className="flex items-center gap-2 font-bold text-success text-sm">
+                            <CheckCircle2 size={18} /> Acertei a Questão
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <button
+                              onClick={() => handleReviewFSRS("certeza", true)}
+                              className="w-full text-left bg-card hover:bg-success/15 border border-success/30 hover:border-success text-foreground font-semibold px-3.5 py-2.5 rounded-lg text-xs flex items-center justify-between transition-colors shadow-sm cursor-pointer"
+                            >
+                              <span>🟢 Tinha Certeza</span>
+                              <span className="text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded font-normal">Fácil • Atalho: 3</span>
+                            </button>
+                            <button
+                              onClick={() => handleReviewFSRS("duvida", true)}
+                              className="w-full text-left bg-card hover:bg-success/15 border border-success/30 hover:border-success text-foreground font-semibold px-3.5 py-2.5 rounded-lg text-xs flex items-center justify-between transition-colors shadow-sm cursor-pointer"
+                            >
+                              <span>🟡 Pensei um Pouco</span>
+                              <span className="text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded font-normal">Bom tempo • Atalho: 2</span>
+                            </button>
+                            <button
+                              onClick={() => handleReviewFSRS("chutei", true)}
+                              className="w-full text-left bg-card hover:bg-success/15 border border-success/30 hover:border-success text-foreground font-semibold px-3.5 py-2.5 rounded-lg text-xs flex items-center justify-between transition-colors shadow-sm cursor-pointer"
+                            >
+                              <span>🔴 Acertei no Chute</span>
+                              <span className="text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded font-normal">Difícil • Atalho: 1</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Errei */}
+                        <div className="bg-destructive/5 border border-destructive/30 rounded-xl p-4 flex flex-col gap-3">
+                          <div className="flex items-center gap-2 font-bold text-destructive text-sm">
+                            <XCircle size={18} /> Errei a Questão
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <button
+                              onClick={() => handleReviewFSRS("chutei", false)}
+                              className="w-full text-left bg-card hover:bg-destructive/15 border border-destructive/30 hover:border-destructive text-foreground font-semibold px-3.5 py-2.5 rounded-lg text-xs flex items-center justify-between transition-colors shadow-sm cursor-pointer"
+                            >
+                              <span>🔴 Errei no Chute / Não sabia</span>
+                              <span className="text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded font-normal">Volta amanhã</span>
+                            </button>
+                            <button
+                              onClick={() => handleReviewFSRS("duvida", false)}
+                              className="w-full text-left bg-card hover:bg-destructive/15 border border-destructive/30 hover:border-destructive text-foreground font-semibold px-3.5 py-2.5 rounded-lg text-xs flex items-center justify-between transition-colors shadow-sm cursor-pointer"
+                            >
+                              <span>🟡 Fiquei em Dúvida</span>
+                              <span className="text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded font-normal">Volta em breve • Atalho: E</span>
+                            </button>
+                            <button
+                              onClick={() => handleReviewFSRS("certeza", false)}
+                              className="w-full text-left bg-card hover:bg-destructive/15 border border-destructive/30 hover:border-destructive text-foreground font-semibold px-3.5 py-2.5 rounded-lg text-xs flex items-center justify-between transition-colors shadow-sm cursor-pointer"
+                            >
+                              <span>🟢 Errei com Certeza</span>
+                              <span className="text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded font-normal">Preciso fixar</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : attemptResult.next_review_date ? (
+                    <div className="mt-8 pt-4 border-t border-border flex items-center justify-between flex-wrap gap-2 text-sm font-medium text-muted-foreground">
+                      <div className="flex items-center gap-2">
+                        <Clock size={16} />
+                        Próxima revisão agendada para: {new Date(attemptResult.next_review_date).toLocaleDateString('pt-BR')}
+                      </div>
+                      {Boolean(q.is_discursive || q.alternatives.length <= 1) && (
+                        <button
+                          onClick={() => setAttemptResult(prev => prev ? { ...prev, is_correct: null } : null)}
+                          className="text-xs text-primary hover:underline font-semibold cursor-pointer"
+                        >
+                          Alterar autoavaliação
+                        </button>
+                      )}
                     </div>
                   ) : (
                     <div className="mt-8 pt-4 border-t border-border flex flex-col gap-4">
@@ -1586,30 +1853,30 @@ export function QuizClient({
                       <div className="flex flex-col sm:flex-row gap-3">
                         {attemptResult.is_correct ? (
                           <>
-                            <button title="O algoritmo agendará a revisão desta questão para um intervalo curto (geralmente no dia seguinte) já que você não dominava o conceito original." onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                            <button title="O algoritmo agendará a revisão desta questão para um intervalo curto (geralmente no dia seguinte) já que você não dominava o conceito original." onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1 cursor-pointer">
                               <span>🔴 Acertei no Chute</span>
                               <span className="text-[10px] font-normal opacity-80">Volta amanhã (Difícil) • Atalho: 1</span>
                             </button>
-                            <button title="O algoritmo agendará a revisão com um multiplicador moderado de dias, reforçando a memória sem sobrecarregar sua fila." onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm flex flex-col items-center justify-center gap-1">
+                            <button title="O algoritmo agendará a revisão com um multiplicador moderado de dias, reforçando a memória sem sobrecarregar sua fila." onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm flex flex-col items-center justify-center gap-1 cursor-pointer">
                               <span>🟡 Pensei um Pouco</span>
                               <span className="text-[10px] font-normal opacity-80">Bom tempo • Atalho: 2 / Enter</span>
                             </button>
-                            <button title="O algoritmo entenderá que você domina este assunto e agendará a revisão para o mais longe possível (maior estabilidade de memória)." onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                            <button title="O algoritmo entenderá que você domina este assunto e agendará a revisão para o mais longe possível (maior estabilidade de memória)." onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1 cursor-pointer">
                               <span>🟢 Tinha Certeza</span>
                               <span className="text-[10px] font-normal opacity-80">Revisa mais tarde (Fácil) • Atalho: 3</span>
                             </button>
                           </>
                         ) : (
                           <>
-                            <button title="Você não sabia a resposta e foi pego de surpresa. A revisão ocorrerá o mais breve possível (amanhã)." onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                            <button title="Você não sabia a resposta e foi pego de surpresa. A revisão ocorrerá o mais breve possível (amanhã)." onClick={() => handleReviewFSRS("chutei")} className="flex-1 bg-destructive/10 text-destructive hover:bg-destructive/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1 cursor-pointer">
                               <span>🔴 Errei no Chute</span>
                               <span className="text-[10px] font-normal opacity-80">Volta amanhã • Atalho: 1</span>
                             </button>
-                            <button title="O algoritmo entenderá que você cometeu um erro que exige reforço imediato e agendará a revisão mais próxima para consertar a falha de memória." onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm flex flex-col items-center justify-center gap-1">
+                            <button title="O algoritmo entenderá que você cometeu um erro que exige reforço imediato e agendará a revisão mais próxima para consertar a falha de memória." onClick={() => handleReviewFSRS("duvida")} className="flex-1 bg-warning/10 text-warning hover:bg-warning/20 font-bold py-3 rounded-lg transition-colors text-sm border-2 border-warning/50 shadow-sm flex flex-col items-center justify-center gap-1 cursor-pointer">
                               <span>🟡 Fiquei em Dúvida</span>
                               <span className="text-[10px] font-normal opacity-80">Bom tempo • Atalho: 2 / Enter</span>
                             </button>
-                            <button title="Você sentiu firmeza, mas se confundiu numa 'pegadinha'. O algoritmo agendará a revisão com certa urgência, mas espaçada o suficiente para testar se a confusão persiste." onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1">
+                            <button title="Você sentiu firmeza, mas se confundiu numa 'pegadinha'. O algoritmo agendará a revisão com certa urgência, mas espaçada o suficiente para testar se a confusão persiste." onClick={() => handleReviewFSRS("certeza")} className="flex-1 bg-success/10 text-success hover:bg-success/20 font-bold py-3 rounded-lg transition-colors text-sm flex flex-col items-center justify-center gap-1 cursor-pointer">
                               <span>🟢 Errei com Certeza</span>
                               <span className="text-[10px] font-normal opacity-80">Preciso fixar • Atalho: 3</span>
                             </button>

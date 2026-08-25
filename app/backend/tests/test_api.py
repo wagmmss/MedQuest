@@ -4,7 +4,7 @@
 def test_meta(client):
     r = client.get("/api/meta")
     assert r.status_code == 200
-    assert r.get_json()["total_questions"] == 2
+    assert r.get_json()["total_questions"] == 3
 
 
 def test_meta_cache_preserva_filtros_repetidos(client):
@@ -41,7 +41,7 @@ def test_validacao_letra_invalida(client):
 def test_overview_conta_tentativa(client):
     client.post("/api/questions/1/attempt", json={"selected_letter": "B"})
     ov = client.get("/api/stats/overview").get_json()
-    assert ov["total_questions"] == 2
+    assert ov["total_questions"] == 3
     assert ov["distinct_answered"] == 1
     assert ov["accuracy_latest_attempt"] == 1.0
 
@@ -69,7 +69,7 @@ def test_planner_config_validacao(client):
 def test_questions_limit_invalido_usa_padrao(client):
     r = client.get("/api/questions?limit=nao-e-numero")
     assert r.status_code == 200
-    assert len(r.get_json()) == 2
+    assert len(r.get_json()) == 3
 
 
 def test_questions_limit_negativo_nao_fura_limite(client):
@@ -118,19 +118,58 @@ def test_question_batch_validates_and_deduplicates_ids(client):
 
 
 def test_filters_status_new_e_unanswered(client):
-    # Inicialmente ambas as 2 questões não foram respondidas
+    # Inicialmente as 3 questões não foram respondidas
     r_unanswered = client.get("/api/questions?status=unanswered")
     r_new = client.get("/api/questions?status=new")
-    assert len(r_unanswered.get_json()) == 2
-    assert len(r_new.get_json()) == 2
+    assert len(r_unanswered.get_json()) == 3
+    assert len(r_new.get_json()) == 3
 
     # Responde à questão 1
     client.post("/api/questions/1/attempt", json={"selected_letter": "B"})
 
-    # Ambas as queries agora devem retornar apenas a questão 2 restante
+    # Ambas as queries agora devem retornar as questões restantes (2 e 3)
     r_unanswered_after = client.get("/api/questions?status=unanswered")
     r_new_after = client.get("/api/questions?status=new")
-    assert len(r_unanswered_after.get_json()) == 1
-    assert r_unanswered_after.get_json()[0]["id"] == 2
-    assert len(r_new_after.get_json()) == 1
-    assert r_new_after.get_json()[0]["id"] == 2
+    assert len(r_unanswered_after.get_json()) == 2
+    assert len(r_new_after.get_json()) == 2
+
+
+def test_discursive_question_detail_and_self_assessment(client):
+    # 1. Verifica flag is_discursive
+    res_q1 = client.get("/api/questions/1")
+    assert res_q1.status_code == 200
+    assert res_q1.get_json()["is_discursive"] is False
+
+    res_q3 = client.get("/api/questions/3")
+    assert res_q3.status_code == 200
+    assert res_q3.get_json()["is_discursive"] is True
+
+    # 2. Revela resposta discursiva com defer -> is_correct deve vir None para autoavaliação
+    attempt = client.post(
+        "/api/questions/3/attempt",
+        json={"selected_letter": "A", "confidence": "defer", "user_answer_text": "Raquitismo por falta de vit D"}
+    )
+    assert attempt.status_code == 200
+    data = attempt.get_json()
+    assert data["is_discursive"] is True
+    assert data["is_correct"] is None
+    assert data["explanation"] is not None
+
+    # 3. Autoavaliação de erro (Errei)
+    review = client.post(
+        "/api/questions/3/review",
+        json={"confidence": "duvida", "is_correct": False}
+    )
+    assert review.status_code == 200
+    review_data = review.get_json()
+    assert review_data["success"] is True
+    assert review_data["is_correct"] is False
+    assert review_data["next_review_date"] is not None
+
+    # 4. Autoavaliação de acerto explícito em novo attempt
+    attempt2 = client.post(
+        "/api/questions/3/attempt",
+        json={"selected_letter": "A", "confidence": "certeza", "is_correct": True}
+    )
+    assert attempt2.status_code == 200
+    assert attempt2.get_json()["is_correct"] is True

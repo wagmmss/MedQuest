@@ -433,6 +433,7 @@ def question_detail(qid):
         "institution_label": q["institution_label"], "topic": q["topic"],
         "area": q["area"], "subtema": q["subtema"], "stem": q["stem"],
         "is_autoral": bool(q.get("editorial_status") == "autoral" or (q.get("source_file") and "AUTORAL" in str(q.get("source_file")).upper())),
+        "is_discursive": bool(len(alts) <= 1),
         "is_verified": bool(q.get("is_verified", 0)),
         "last_updated_at": q.get("last_updated_at"),
         "technical_note": q.get("technical_note"),
@@ -473,9 +474,18 @@ def submit_attempt(qid):
                 fail_idempotency(db, g.user_id, lease_token)
             return jsonify({"error": "not found"}), 404
 
+        alts_count = db.execute("SELECT COUNT(*) as n FROM alternatives WHERE question_id = ?", (qid,)).fetchone()["n"]
+        is_discursive = bool(alts_count <= 1)
+
         with db_transaction(db, immediate=True):
-            selected = payload.selected_letter.upper()
-            is_correct = 1 if selected == q["correct_letter"] else 0
+            selected = (payload.selected_letter or "A").upper()
+            if payload.is_correct is not None:
+                is_correct = 1 if payload.is_correct else 0
+            elif is_discursive and payload.confidence == "defer":
+                # For discursive questions with deferred confidence, initialize as 0 pending self-assessment
+                is_correct = 0
+            else:
+                is_correct = 1 if selected == q["correct_letter"] else 0
 
             db.execute(
                 """INSERT INTO attempts (question_id, selected_letter, is_correct, answered_at, time_spent_ms, confidence, user_id)
@@ -497,11 +507,17 @@ def submit_attempt(qid):
                 """, (qid, next_review, card_json, g.user_id))
 
             exp = db.execute("SELECT explanation_text FROM explanations WHERE question_id = ?", (qid,)).fetchone()
+            
+            # If it's a discursive question being revealed (confidence == "defer" and is_correct not explicitly given),
+            # return is_correct: None so frontend enters self-assessment mode.
+            reported_is_correct = None if (is_discursive and payload.confidence == "defer" and payload.is_correct is None) else bool(is_correct)
+            
             resp_data = {
-                "is_correct": bool(is_correct),
+                "is_correct": reported_is_correct,
                 "correct_letter": q["correct_letter"],
                 "explanation": exp["explanation_text"] if exp else None,
                 "next_review_date": next_review,
+                "is_discursive": is_discursive,
             }
 
             if lease_token:
@@ -546,20 +562,28 @@ def review_fsrs(qid):
                     complete_idempotency(db, g.user_id, 400, resp_data, lease_token)
                 return jsonify(resp_data), 400
 
-            db.execute(
-                "UPDATE attempts SET confidence = ? WHERE id = ?",
-                (confidence, last_attempt["id"])
-            )
+            is_correct_for_srs = last_attempt["is_correct"]
+            if data.is_correct is not None:
+                is_correct_for_srs = 1 if data.is_correct else 0
+                db.execute(
+                    "UPDATE attempts SET confidence = ?, is_correct = ? WHERE id = ?",
+                    (confidence, is_correct_for_srs, last_attempt["id"])
+                )
+            else:
+                db.execute(
+                    "UPDATE attempts SET confidence = ? WHERE id = ?",
+                    (confidence, last_attempt["id"])
+                )
 
-            # Evita avanço duplo no FSRS se o cartão já havia sido classificado antes nesta tentativa
-            if last_attempt["confidence"] != "defer" and last_attempt["confidence"] is not None:
+            # Evita avanço duplo no FSRS se o cartão já havia sido classificado antes nesta tentativa (a menos que seja retificação de autoavaliação)
+            if last_attempt["confidence"] != "defer" and last_attempt["confidence"] is not None and data.is_correct is None:
                 resp_data = {"success": True, "warning": "Confiança atualizada, mas FSRS retido na primeira impressão para evitar avanço duplo."}
                 if lease_token:
                     complete_idempotency(db, g.user_id, 200, resp_data, lease_token)
                 return jsonify(resp_data)
 
             sr = db.execute("SELECT fsrs_card FROM spaced_repetition WHERE question_id = ? AND user_id = ?", (qid, g.user_id)).fetchone()
-            card_json, next_review = srs.review(sr["fsrs_card"] if sr else None, last_attempt["is_correct"], confidence)
+            card_json, next_review = srs.review(sr["fsrs_card"] if sr else None, is_correct_for_srs, confidence)
             db.execute("""
                 INSERT INTO spaced_repetition (question_id, next_review_date, fsrs_card, user_id)
                 VALUES (?, ?, ?, ?)
@@ -567,7 +591,7 @@ def review_fsrs(qid):
                     next_review_date = excluded.next_review_date, fsrs_card = excluded.fsrs_card
             """, (qid, next_review, card_json, g.user_id))
 
-            resp_data = {"success": True, "next_review_date": next_review}
+            resp_data = {"success": True, "next_review_date": next_review, "is_correct": bool(is_correct_for_srs)}
             if lease_token:
                 complete_idempotency(db, g.user_id, 200, resp_data, lease_token)
 
@@ -645,8 +669,11 @@ def submit_attempt_batch():
                 if not correct_letter:
                     continue
 
-                selected = item.selected_letter.upper()
-                is_correct = 1 if selected == correct_letter else 0
+                selected = (item.selected_letter or "A").upper()
+                if item.is_correct is not None:
+                    is_correct = 1 if item.is_correct else 0
+                else:
+                    is_correct = 1 if selected == correct_letter else 0
                 conf = item.confidence or "certeza"
 
                 db.execute(
@@ -826,6 +853,7 @@ def question_batch_detail():
             "subtema": q["subtema"],
             "stem": q["stem"],
             "is_autoral": bool(q.get("editorial_status") == "autoral" or (q.get("source_file") and "AUTORAL" in str(q.get("source_file")).upper())),
+            "is_discursive": bool(len(alts) <= 1),
             "is_verified": bool(q.get("is_verified", 0)),
             "last_updated_at": q.get("last_updated_at"),
             "technical_note": q.get("technical_note"),

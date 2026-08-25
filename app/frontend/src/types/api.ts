@@ -235,6 +235,7 @@ export interface QuestionListItem {
   area: string;
   subtema: string;
   is_autoral?: boolean;
+  is_discursive?: boolean;
   adaptive_score?: number;
   adaptive_reasons?: string[];
   retrievability?: number | null;
@@ -270,10 +271,11 @@ export interface QuestionDetail extends QuestionListItem {
 }
 
 export interface AttemptResult {
-  is_correct: boolean;
+  is_correct: boolean | null;
   correct_letter: string;
   explanation: string | null;
   next_review_date: string;
+  is_discursive?: boolean;
 }
 
 export interface BatchAttemptItem {
@@ -281,6 +283,8 @@ export interface BatchAttemptItem {
   selected_letter: string;
   time_spent_ms?: number;
   confidence?: string;
+  is_correct?: boolean;
+  user_answer_text?: string;
 }
 
 export interface BatchAttemptResultItem {
@@ -289,6 +293,7 @@ export interface BatchAttemptResultItem {
   correct_letter: string;
   explanation: string | null;
   next_review_date: string;
+  is_discursive?: boolean;
 }
 
 export interface BatchAttemptResult {

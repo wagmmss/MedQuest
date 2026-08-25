@@ -114,10 +114,10 @@ function parseExplanation(raw: string): ParsedSection {
   }
 
   // Helper to find header positions
-  const distMatch = clean.match(/\n\s*\*\*(?:Análise dos Distratores|Distratores|Alternativas Incorretas|Análise das Alternativas Incorretas|Alternativas Verdadeiras)\*\*:/i);
-  const corrMatch = clean.match(/\n\s*\*\*(?:Por que a Letra [A-E] [eé] a Correta\??|Por que a Letra [A-E] [eé] a Incorreta\??|Alternativa Correta(?:\s*\([A-E]\))?)\*\*:/i);
-  const racMatch = clean.match(/\n\s*\*\*(?:Raciocínio Clínico(?: e Fundamentação)?|Fundamentação Teórica|Discussão do Caso|Comentário do Caso)\*\*:/i);
-  const puloMatch = clean.match(/(?:\*\*Pulo do Gato\*\*|\*\*Pulo_do_Gato\*\*|Pulo do Gato):\s*/i);
+  const distMatch = clean.match(/(?:\n|^)\s*\*\*(?:Análise dos Distratores|Distratores|Alternativas Incorretas|Análise das Alternativas Incorretas|Alternativas Verdadeiras)\*\*:/i);
+  const corrMatch = clean.match(/(?:\n|^)\s*\*\*(?:Por que a Letra [A-E] [eé] a Correta\??|Por que a Letra [A-E] [eé] a Incorreta\??|Alternativa Correta(?:\s*\([A-E]\))?)\*\*:/i);
+  const racMatch = clean.match(/(?:\n|^)\s*\*\*(?:Raciocínio Clínico(?:[^\*:]*)?|Fundamentação Teórica|Discussão do Caso|Comentário do Caso|Padrão de Resposta(?:[^\*:]*)?|Resolução Detalhada(?:[^\*:]*)?)\*\*:/i);
+  const puloMatch = clean.match(/(?:\n|^)\s*(?:\*\*Pulo do Gato\*\*|\*\*Pulo_do_Gato\*\*|Pulo do Gato):\s*/i);
 
   // 2. Extract Distratores
   if (distMatch && distMatch.index !== undefined) {

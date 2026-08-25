@@ -37,10 +37,11 @@ CREATE TABLE attempts(id INTEGER PRIMARY KEY, question_id INTEGER, selected_lett
     is_correct INTEGER, answered_at TEXT, confidence TEXT, user_id INTEGER DEFAULT 1, time_spent_ms INTEGER);
 INSERT INTO questions(id,area,subtema,stem,correct_letter,missing_alts,year,institution_code,institution_label)
   VALUES (1,'Clínica Médica','Hipertensão Arterial Sistêmica','Q1?','B',0,2025,'USP-SP','USP'),
-         (2,'Pediatria','Imunização (PNI)','Q2?','A',0,2025,'USP-RP','USP RP');
+         (2,'Pediatria','Imunização (PNI)','Q2?','A',0,2025,'USP-RP','USP RP'),
+         (3,'Pediatria','Vitaminas','Q3 Discursiva?','A',0,2021,'UNICAMP','UNICAMP');
 INSERT INTO alternatives(question_id,letter,text,is_correct) VALUES
-  (1,'A','a',0),(1,'B','b',1),(2,'A','a',1),(2,'B','b',0);
-INSERT INTO explanations VALUES (1,'explicação da 1','now');
+  (1,'A','a',0),(1,'B','b',1),(2,'A','a',1),(2,'B','b',0),(3,'A','Anote sua hipótese',1);
+INSERT INTO explanations VALUES (1,'explicação da 1','now'), (3,'**Gabarito**: DISSERTATIVA\n**Pulo do Gato**: Raquitismo carencial\n**Raciocínio Clínico**: Deficiência de vitamina D','now');
 """
 
 

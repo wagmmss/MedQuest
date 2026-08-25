@@ -41,16 +41,20 @@ def validation_errors(error: ValidationError) -> list[dict]:
 
 
 class AttemptIn(APIInput):
-    selected_letter: str = Field(pattern=r"^[A-Ea-e]$")
+    selected_letter: str = Field(default="A", pattern=r"^(?:[A-Ea-e]|DISCURSIVA|D)?$")
     time_spent_ms: int | None = Field(default=None, ge=0)
     confidence: Literal["chutei", "duvida", "certeza", "defer"] | None = None
+    is_correct: bool | None = None
+    user_answer_text: str | None = Field(default=None, max_length=10000)
 
 
 class BatchAttemptItem(APIInput):
     question_id: int = Field(gt=0)
-    selected_letter: str = Field(pattern=r"^[A-Ea-e]$")
+    selected_letter: str = Field(default="A", pattern=r"^(?:[A-Ea-e]|DISCURSIVA|D)?$")
     time_spent_ms: int | None = Field(default=None, ge=0)
     confidence: Literal["chutei", "duvida", "certeza", "defer"] | None = None
+    is_correct: bool | None = None
+    user_answer_text: str | None = Field(default=None, max_length=10000)
 
 
 class BatchAttemptIn(APIInput):
@@ -59,6 +63,7 @@ class BatchAttemptIn(APIInput):
 
 class ReviewIn(APIInput):
     confidence: Literal["chutei", "duvida", "certeza"]
+    is_correct: bool | None = None
 
 
 class PlannerConfigIn(APIInput):

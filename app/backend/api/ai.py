@@ -93,21 +93,29 @@ def _extract_medical_cloze_fallback(
     Gera um Cloze Flashcard didático, clínico e de alta qualidade baseado no erro médico,
     com contexto do caso, pergunta clínica focada, Pulo do Gato e análise de distrator.
     """
-    correct_clean = _clean_option_text(correct_text)
-    wrong_clean = _clean_option_text(wrong_text)
-    
-    scenario = _extract_clinical_scenario(stem)
-    q_type = _determine_question_type(stem, correct_clean)
+    is_dummy_text = any(phrase in correct_clean.lower() for phrase in ["anote sua", "questao dissertativa", "questão dissertativa", "padrao de resposta", "padrão de resposta"])
     pulo = _extract_pulo_do_gato(explanation)
+    
+    if is_dummy_text:
+        # Extrai resposta alvo do pulo do gato ou explicação
+        if pulo and len(pulo) < 120:
+            target_cloze = pulo
+        else:
+            target_cloze = "Ver Padrão de Resposta / Pulo do Gato"
+    else:
+        target_cloze = correct_clean
+
+    scenario = _extract_clinical_scenario(stem)
+    q_type = _determine_question_type(stem, target_cloze)
     why_wrong = _extract_why_wrong(explanation, wrong_letter, wrong_clean)
     
     tag_subject = subtema or topic or area or "Caso Clínico"
     header = f"[{tag_subject}]"
     
     if scenario and len(scenario) > 20:
-        front = f"{header} {scenario}\n\n👉 {q_type}: {{{{c1::{correct_clean}}}}}"
+        front = f"{header} {scenario}\n\n👉 {q_type}: {{{{c1::{target_cloze}}}}}"
     else:
-        front = f"{header}\n\n👉 {q_type}: {{{{c1::{correct_clean}}}}}"
+        front = f"{header}\n\n👉 {q_type}: {{{{c1::{target_cloze}}}}}"
         
     back_sections = []
     if pulo:
