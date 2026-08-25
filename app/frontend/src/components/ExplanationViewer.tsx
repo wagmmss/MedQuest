@@ -177,12 +177,6 @@ function parseExplanation(raw: string): ParsedSection {
       endIdx = distMatch.index;
     }
     let puloText = clean.slice(puloMatch.index + puloMatch[0].length, endIdx).trim();
-    if (puloText.length > 300 || puloText.includes("\n\n")) {
-      const firstSentence = puloText.split(/(?<=[.!?])\s+/)[0];
-      if (firstSentence && firstSentence.length > 20) {
-        puloText = firstSentence.trim();
-      }
-    }
     parsed.puloDoGato = puloText;
   }
 
