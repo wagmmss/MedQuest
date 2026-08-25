@@ -34,19 +34,28 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
       const res = await api.stats.resetProgress();
       if (res.success) {
         clearLearningSessions();
+        localStorage.removeItem("medquest_simulado_config");
+        localStorage.removeItem("mq_last_confetti");
+        localStorage.removeItem("medquest_last_offline_download");
         for (const key of Object.keys(localStorage)) {
-          if (key.startsWith("medquest_planner_topics_")) localStorage.removeItem(key);
+          if (key.startsWith("medquest_planner_topics_") || (key.startsWith("medquest_") && key !== "medquest_local_owner" && key !== "theme")) {
+            localStorage.removeItem(key);
+          }
         }
         if (localDb) {
-          const uid = getLocalOwnerId();
-          await Promise.all([
-            localDb.questions.where({ _owner_id: uid }).delete(),
-            localDb.flashcards.where({ _owner_id: uid }).delete(),
-            localDb.syncQueue.where({ owner_id: uid }).delete()
-          ]);
+          try {
+            const uid = getLocalOwnerId();
+            await Promise.all([
+              localDb.questions.where({ _owner_id: uid }).delete(),
+              localDb.flashcards.where({ _owner_id: uid }).delete(),
+              localDb.syncQueue.where({ owner_id: uid }).delete()
+            ]);
+          } catch (dexieErr) {
+            console.warn("Erro ao limpar dados locais no reset:", dexieErr);
+          }
         }
-        router.replace("/");
-        router.refresh();
+        resetStateAndClose();
+        window.location.href = "/";
       } else {
         setError("Não foi possível resetar o progresso. Tente novamente.");
         setIsLoading(false);
