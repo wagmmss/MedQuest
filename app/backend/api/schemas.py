@@ -82,6 +82,11 @@ class PlannerStudyIn(APIInput):
     studied: bool = False
 
 
+class PlannerTopicProgressIn(APIInput):
+    subtema: str = Field(min_length=1, max_length=500)
+    completed: bool = False
+
+
 class PlannerRevisionIn(APIInput):
     type: Literal["rev24h", "rev7d", "rev30d"]
     checked: bool = False
@@ -165,4 +170,3 @@ class PrescribeStudyIn(APIInput):
 
 class SynthesizeExplanationIn(APIInput):
     force_regenerate: bool = False
-

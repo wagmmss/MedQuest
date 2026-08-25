@@ -3,13 +3,12 @@ import { useRouter } from "next/navigation";
 
 import { useState, useEffect, memo } from "react";
 import Link from "next/link";
-import { PlannerWeek, PlannerProgressMap, PlannerTopic, PlannerConfig } from "@/types/api";
+import { PlannerWeek, PlannerProgressMap, PlannerTopic, PlannerConfig, PlannerTopicProgressMap } from "@/types/api";
 import { api } from "@/lib/api";
 import { getSubtemaDetails } from "@/lib/plannerData";
-import { Check, CalendarDays, BookOpen, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play, Flame, Settings2, Copy, Globe, ExternalLink, Download } from "lucide-react";
+import { Check, CalendarDays, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play, Flame, Settings2, Copy, Globe, ExternalLink, Download } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
-import { useAuth } from "@clerk/nextjs";
 import { PlannerWizard } from "./PlannerWizard";
 import { syncPlanToGoogleCalendarDirectly, SyncProgress } from "@/lib/googleCalendar";
 
@@ -29,22 +28,24 @@ const formatHours = (hours: number) => hours.toLocaleString("pt-BR", {
 
 const TopicRow = memo(function TopicRow({ 
   t, 
-  checkedTopics, 
-  toggleTopicCheck,
+  completed,
+  toggleTopic,
+  week,
   weekDate,
   topicIndex,
   daysPerWeek
 }: { 
   t: PlannerTopic; 
-  checkedTopics: Record<string, boolean>; 
-  toggleTopicCheck: (key: string) => void;
+  completed: boolean;
+  toggleTopic: (week: number, subtema: string, completed: boolean) => void;
+  week: number;
   weekDate?: Date;
   topicIndex?: number;
   daysPerWeek?: number;
 }) {
   const info = getSubtemaDetails(t.subtema);
-  const key = `planner-topic-${t.subtema}`;
-  const isChecked = !!checkedTopics[key];
+  const key = `planner-topic-${week}-${t.subtema}`;
+  const isChecked = completed;
 
   // Cálculo de Link 1-Clique para o Google Agenda
   const gcalUrl = (() => {
@@ -76,7 +77,7 @@ const TopicRow = memo(function TopicRow({
           id={key}
           className="peer sr-only"
           checked={isChecked}
-          onChange={() => toggleTopicCheck(key)}
+          onChange={() => toggleTopic(week, t.subtema, isChecked)}
         />
         <label 
           htmlFor={key}
@@ -143,19 +144,17 @@ TopicRow.displayName = "TopicRow";
 interface PlannerClientProps {
   plan: PlannerWeek[];
   initialProgress: PlannerProgressMap;
+  initialTopicProgress: PlannerTopicProgressMap;
   warning?: string;
   isIntensive?: boolean;
   config?: PlannerConfig | null;
 }
 
-export function PlannerClient({ plan, initialProgress, warning, isIntensive, config }: PlannerClientProps) {
+export function PlannerClient({ plan, initialProgress, initialTopicProgress, warning, isIntensive, config }: PlannerClientProps) {
   const router = useRouter();
-  const { userId } = useAuth();
-  const storageKey = `medquest_planner_topics_${userId || 'guest'}`;
-
   const [progress, setProgress] = useState<PlannerProgressMap>(initialProgress);
   const [loadingAction, setLoadingAction] = useState<string | null>(null);
-  const [checkedTopics, setCheckedTopics] = useState<Record<string, boolean>>({});
+  const [topicProgress, setTopicProgress] = useState<PlannerTopicProgressMap>(initialTopicProgress);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showCalendarModal, setShowCalendarModal] = useState(false);
   const [copiedFeed, setCopiedFeed] = useState(false);
@@ -164,7 +163,6 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
   const [googleSyncProgress, setGoogleSyncProgress] = useState<SyncProgress | null>(null);
 
   const feedUrl = api.planner.getCalendarFeedUrl();
-  const webcalUrl = feedUrl.replace(/^https?:\/\//, "webcal://");
   const googleCalendarDirectUrl = `https://calendar.google.com/calendar/r/settings/addbyurl?cid=${encodeURIComponent(feedUrl)}`;
 
   const handleCopyFeed = async () => {
@@ -225,34 +223,27 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
   };
 
   useEffect(() => {
-    const saved = localStorage.getItem(storageKey);
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        const timer = setTimeout(() => {
-          setCheckedTopics(parsed);
-        }, 0);
-        return () => clearTimeout(timer);
-      } catch {
-        console.error("Failed to parse saved planner topics");
-        localStorage.removeItem(storageKey);
-      }
-    }
-  }, [storageKey]);
-
-  useEffect(() => {
     const timer = setTimeout(() => {
       setProgress(initialProgress);
     }, 0);
     return () => clearTimeout(timer);
   }, [initialProgress]);
 
-  const toggleTopicCheck = (key: string) => {
-    setCheckedTopics(prev => {
-      const next = { ...prev, [key]: !prev[key] };
-      localStorage.setItem(storageKey, JSON.stringify(next));
-      return next;
-    });
+  useEffect(() => {
+    const timer = setTimeout(() => setTopicProgress(initialTopicProgress), 0);
+    return () => clearTimeout(timer);
+  }, [initialTopicProgress]);
+
+  const toggleTopic = async (week: number, subtema: string, currentStatus: boolean) => {
+    const key = `${week}:${subtema}`;
+    const completed = !currentStatus;
+    setTopicProgress(prev => ({ ...prev, [key]: completed }));
+    try {
+      await api.planner.markTopic(week, subtema, completed);
+    } catch {
+      setTopicProgress(prev => ({ ...prev, [key]: currentStatus }));
+      toast.error("Erro ao salvar o tema concluído.");
+    }
   };
 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
@@ -310,32 +301,9 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
     }
   };
 
-  const handleToggleRevision = async (week: number, type: 'rev24h' | 'rev7d' | 'rev30d', currentStatus: boolean) => {
-    const actionKey = `${type}-${week}`;
-    if (loadingAction) return;
-    setLoadingAction(actionKey);
-
-    const newStatus = !currentStatus;
-    // Optimistic UI
-    setProgress(prev => ({
-      ...prev,
-      [week.toString()]: { ...prev[week.toString()], [type]: newStatus }
-    }));
-
-    try {
-      await api.planner.markRevision(week, type, newStatus);
-    } catch {
-      toast.error("Erro ao salvar revisão.");
-      setProgress(prev => ({
-        ...prev,
-        [week.toString()]: { ...prev[week.toString()], [type]: currentStatus }
-      }));
-    } finally {
-      setLoadingAction(null);
-    }
-  };
-
   const today = new Date();
+  const totalTopics = plan.reduce((total, week) => total + week.topics.length, 0);
+  const completedTopics = Object.values(topicProgress).filter(Boolean).length;
 
   return (
     <>
@@ -379,7 +347,7 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
             <CalendarDays className="text-primary" size={28} />
             Seu Cronograma de Estudos
           </h2>
-          <p className="text-muted-foreground text-sm">Cronograma baseado nos pesos da prova de residência da USP.</p>
+          <p className="text-muted-foreground text-sm">Cronograma estruturado por carga, cobertura e temas de alta incidência.</p>
           {config?.target_institution && (
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1.5 flex-wrap">
               {config.target_institution.split(",").map((instName, idx) => (
@@ -411,13 +379,13 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
         <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto flex-wrap justify-between sm:justify-end">
           <div className="flex-1 sm:w-44">
             <div className="flex justify-between text-[11px] uppercase tracking-wider font-semibold mb-1">
-              <span className="text-muted-foreground">Progresso</span>
-              <span className="text-primary">{Object.values(progress).filter(p => p.studied).length} / {plan.length}</span>
+              <span className="text-muted-foreground">Temas concluídos</span>
+              <span className="text-primary">{completedTopics} / {totalTopics}</span>
             </div>
             <div className="h-2 w-full bg-muted rounded-full overflow-hidden ring-1 ring-inset ring-black/5 dark:ring-white/5">
               <div 
                 className="h-full bg-primary transition-all duration-500 shadow-inner" 
-                style={{ width: `${(Object.values(progress).filter(p => p.studied).length / Math.max(1, plan.length)) * 100}%` }}
+                style={{ width: `${(completedTopics / Math.max(1, totalTopics)) * 100}%` }}
               />
             </div>
           </div>
@@ -450,6 +418,7 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
       <div className="space-y-4">
         {plan.map((week) => {
           const weekProgress = progress[week.week.toString()] || { studied: false, rev24h: false, rev7d: false, rev30d: false };
+          const completedInWeek = week.topics.filter(topic => topicProgress[`${week.week}:${topic.subtema}`]).length;
           const weekDate = new Date(week.date);
           // Highlight current week if it falls within this week's 7 days
           const isCurrentWeek = weekDate <= today && new Date(weekDate.getTime() + 7 * 24 * 60 * 60 * 1000) > today;
@@ -473,7 +442,7 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
                     <span className="text-sm text-muted-foreground flex items-center gap-2">
                       {weekDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })}
                       <span className="text-xs px-2 py-0.5 rounded-full bg-secondary/50 text-secondary-foreground font-medium">
-                        {week.allocated_hours}h / {week.recommended_hours}h
+                       {week.allocated_hours}h / {week.recommended_hours}h
                       </span>
                     </span>
                     {isCurrentWeek && (
@@ -481,6 +450,7 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
                         <Activity size={12} /> Atual
                       </span>
                     )}
+                    <span className="text-xs text-muted-foreground">{completedInWeek}/{week.topics.length} temas</span>
                   </div>
                 </div>
 
@@ -489,8 +459,9 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
                     <TopicRow 
                       key={idx} 
                       t={t} 
-                      checkedTopics={checkedTopics} 
-                      toggleTopicCheck={toggleTopicCheck}
+                       completed={Boolean(topicProgress[`${week.week}:${t.subtema}`])}
+                       toggleTopic={toggleTopic}
+                       week={week.week}
                       weekDate={weekDate}
                       topicIndex={idx}
                       daysPerWeek={config?.days_per_week || 6}
@@ -504,7 +475,8 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
 
               {/* Right Column (Checklist) */}
               <div className="bg-card-2 p-5 border-t md:border-t-0 md:border-l border-border md:w-72 shrink-0 flex flex-col justify-center">
-                <h3 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">Checklist</h3>
+                <h3 className="text-sm font-semibold text-foreground mb-2 uppercase tracking-wider">Status da semana</h3>
+                <p className="text-xs text-muted-foreground mb-4">As revisões são gerenciadas pela Revisão Ativa conforme o FSRS.</p>
                 <div className="flex flex-col gap-3">
                   
                   {/* Master Study Checkbox */}
@@ -529,44 +501,10 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
                       </div>
                     </div>
                     <span className={clsx("text-sm font-medium select-none", weekProgress.studied ? "text-primary" : "text-foreground")}>
-                      Estudo Teórico
+                      Fechar semana
                     </span>
                   </label>
 
-                  {/* Revisions Checkboxes */}
-                  <div className="flex flex-col gap-2 pl-2">
-                    {[
-                      { key: 'rev24h' as const, label: 'Revisão 24h', icon: <Clock size={14} /> },
-                      { key: 'rev7d' as const, label: 'Revisão 7 Dias', icon: <CalendarDays size={14} /> },
-                      { key: 'rev30d' as const, label: 'Revisão 30 Dias', icon: <BookOpen size={14} /> },
-                    ].map((rev) => (
-                      <label key={rev.key} className={clsx(
-                        "flex items-center gap-3 p-1.5 rounded cursor-pointer group transition-opacity",
-                        !weekProgress.studied ? "opacity-50 pointer-events-none" : "hover:bg-muted/50"
-                      )}>
-                        <div className="relative flex items-center">
-                          <input 
-                            type="checkbox"
-                            className="peer sr-only"
-                            checked={weekProgress[rev.key]}
-                            onChange={() => handleToggleRevision(week.week, rev.key, weekProgress[rev.key])}
-                            disabled={loadingAction === `${rev.key}-${week.week}` || !weekProgress.studied}
-                          />
-                          <div className="w-4 h-4 border border-muted-foreground rounded-sm transition-colors peer-checked:bg-secondary peer-checked:border-secondary flex items-center justify-center">
-                            {loadingAction === `${rev.key}-${week.week}` ? (
-                              <Loader2 size={10} className="text-secondary-foreground animate-spin" />
-                            ) : (
-                              <Check size={12} className={clsx("text-secondary-foreground transition-opacity", weekProgress[rev.key] ? "opacity-100" : "opacity-0")} strokeWidth={3} />
-                            )}
-                          </div>
-                        </div>
-                        <div className={clsx("flex items-center gap-1.5 text-xs select-none", weekProgress[rev.key] ? "text-secondary font-medium" : "text-muted-foreground")}>
-                          {rev.icon}
-                          {rev.label}
-                        </div>
-                      </label>
-                    ))}
-                  </div>
 
                 </div>
               </div>

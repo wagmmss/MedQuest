@@ -202,6 +202,9 @@ export interface DistractorStat {
 export interface PredictiveScore {
   projected_score: number;
   target_score: number | null;
+  is_reliable?: boolean;
+  total_attempts?: number;
+  minimum_attempts_per_area?: number;
   areas: {
     area: string;
     accuracy: number;
@@ -264,6 +267,10 @@ export interface PlannerWeekProgress {
 
 export interface PlannerProgressMap {
   [weekId: string]: PlannerWeekProgress;
+}
+
+export interface PlannerTopicProgressMap {
+  [topicId: string]: boolean;
 }
 
 export interface QuestionMeta {

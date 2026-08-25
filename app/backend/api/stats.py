@@ -278,10 +278,10 @@ def timeline():
 def weak_topics():
     db = get_db()
     try:
-        min_attempts = int(request.args.get("min_attempts", 3))
+        min_attempts = int(request.args.get("min_attempts", 5))
     except (TypeError, ValueError):
         min_attempts = 3
-    min_attempts = max(1, min(min_attempts, 1000))
+    min_attempts = max(5, min(min_attempts, 1000))
     rows = db.execute("""
         SELECT COALESCE(NULLIF(q.subtema, ''), q.topic) AS topic,
                COUNT(a.id) AS attempts, SUM(a.is_correct) AS correct
@@ -485,7 +485,7 @@ def predictive_score():
 
     areas_acc = []
     projected_score_weighted = 0.0
-    total_weights = 0.0
+    area_attempts = {}
 
     for r in areas_stats:
         norm_area = get_normalized_area(r["area"])
@@ -499,20 +499,23 @@ def predictive_score():
             "accuracy": acc_pct,
             "attempts": r["attempts"]
         })
+        area_attempts[norm_area] = r["attempts"]
         
         projected_score_weighted += acc_pct * weight
-        total_weights += weight
 
-    # Se a soma dos pesos for menor que 1 (ex: não respondeu todas as áreas ainda), projetamos proativamente baseando no peso atingido
-    # Ex: se só respondeu Clínica (0.3), projetamos a nota apenas nessa proporção? 
-    # Não, se ele só respondeu clínica, assumimos que as outras são 0 até que ele estude, ou normalizamos?
-    # Para ser realista na prova, o que ele não estudou é 0. Mas para motivação inicial, vamos normalizar.
-    projected_score = round(projected_score_weighted / total_weights, 1) if total_weights > 0 else 0.0
+    # Não normalizamos pelos temas já estudados: isso superestimaria quem
+    # praticou apenas as próprias áreas fortes. A projeção só é considerada
+    # confiável com pelo menos 20 tentativas em cada grande área.
+    projected_score = round(projected_score_weighted, 1)
+    is_reliable = all(area_attempts.get(area, 0) >= 20 for area in USP_WEIGHTS)
 
     return jsonify({
         "projected_score": projected_score,
         "target_score": target_score,
-        "areas": sorted(areas_acc, key=lambda x: x["accuracy"], reverse=True)
+        "areas": sorted(areas_acc, key=lambda x: x["accuracy"], reverse=True),
+        "is_reliable": is_reliable,
+        "total_attempts": total_attempts,
+        "minimum_attempts_per_area": 20,
     })
 
 @bp.route("/stats/at-risk")
@@ -521,15 +524,15 @@ def at_risk():
     
     # Buscar cards de FSRS (questões) do usuário que têm fsrs_card e próxima revisão em breve
     # Como não temos uma tabela explícita unificada, pegamos das questões
-    now_utc = datetime.now(timezone.utc).isoformat()
-    # Pega os 10 mais urgentes
+    # Avalia todos os cartões do usuário antes de selecionar os dez tópicos
+    # de maior risco; limitar antes da análise poderia esconder esquecimentos
+    # mais graves apenas porque a próxima revisão era posterior.
     rows = db.execute("""
         SELECT q.subtema, sr.fsrs_card, sr.next_review_date
         FROM spaced_repetition sr
         JOIN questions q ON sr.question_id = q.id
         WHERE sr.user_id = ? AND sr.fsrs_card IS NOT NULL
         ORDER BY sr.next_review_date ASC
-        LIMIT 50
     """, (g.user_id,)).fetchall()
     
     topics_risk = {}

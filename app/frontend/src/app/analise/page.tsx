@@ -28,11 +28,21 @@ export default async function AnalisePage() {
     topics: [],
     method: { deterministic: true, signals: [] },
   };
-  const examReadiness = results[7].status === 'fulfilled' ? results[7].value : {
+  const fallbackReadiness = results[7].status === 'fulfilled' ? results[7].value : {
     institution: null, coverage: 0, answered: 0, available: 0, areas: [],
     disclaimer: 'Ainda não há dados suficientes para este relatório.',
   };
   const timeline180 = results[8].status === 'fulfilled' ? results[8].value : [];
+  const overview = await serverApi.stats.getOverview().catch(() => null);
+  const examReadiness = overview?.target_institution
+    ? await serverApi.stats.getExamReadiness(overview.target_institution).catch(() => fallbackReadiness)
+    : fallbackReadiness;
+  const institutionOptions = [
+    ...breakdown.map(item => ({ key: item.key, label: item.label })),
+    ...(examReadiness.institution && !breakdown.some(item => item.key === examReadiness.institution)
+      ? [{ key: examReadiness.institution, label: examReadiness.institution }]
+      : []),
+  ];
 
   return (
     <div className="flex flex-col gap-8 animate-in fade-in duration-500">
@@ -45,13 +55,13 @@ export default async function AnalisePage() {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm font-semibold mb-4 border border-secondary/20">
             <Activity size={16} />
-            Inteligência Artificial
+            Análise adaptativa
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-3">
             Análise de Desempenho
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-            Inteligência de dados sobre a sua jornada. Acompanhe a sua evolução ao longo do tempo, receba recomendações personalizadas e ataque ativamente seus pontos fracos.
+            Evidências transparentes para decidir o que estudar: cobertura, desempenho, risco de esquecimento e evolução ao longo do tempo.
           </p>
         </div>
       </section>
@@ -66,6 +76,7 @@ export default async function AnalisePage() {
         atRiskTopics={atRiskTopics}
         learningProfile={learningProfile}
         examReadiness={examReadiness}
+        institutionOptions={institutionOptions}
         timeline180={timeline180}
       />
 

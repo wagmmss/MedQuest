@@ -1,6 +1,6 @@
 import { 
   OverviewStats, CoverageResponse, TimelineStat, WeakTopic, Recommendation, 
-  BreakdownStat, DistractorStat, PlannerConfig, PlannerProgressMap, PlannerPlanResponse,
+  BreakdownStat, DistractorStat, PlannerConfig, PlannerProgressMap, PlannerTopicProgressMap, PlannerPlanResponse,
   QuestionMeta, SubtemaItem, QuestionListItem, QuestionDetail, AttemptResult, SearchResult,
   BatchAttemptItem, BatchAttemptResult, BatchDetailResponse, Flashcard, FlashcardGenerateResponse,
   BatchFlashcardGenerateResponse, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness,
@@ -144,6 +144,7 @@ export const api = {
       method: "POST",
     }),
     getProgress: () => apiFetch<PlannerProgressMap>("/api/planner", { cache: 'no-store' }),
+    getTopicProgress: () => apiFetch<PlannerTopicProgressMap>("/api/planner/topics", { cache: 'no-store' }),
     generatePlan: (data: { start_date?: string; exam_date: string; hours_per_week: number; intensive?: boolean }) => 
       apiFetch<PlannerPlanResponse>("/api/generate_plan", {
         method: "POST",
@@ -153,6 +154,11 @@ export const api = {
       apiFetch<{success: boolean}>(`/api/planner/${week}/study`, {
         method: "POST",
         body: JSON.stringify({ studied }),
+      }),
+    markTopic: (week: number, subtema: string, completed: boolean) =>
+      apiFetch<{success: boolean}>(`/api/planner/${week}/topic`, {
+        method: "POST",
+        body: JSON.stringify({ subtema, completed }),
       }),
     markRevision: (week: number, type: 'rev24h' | 'rev7d' | 'rev30d', checked: boolean) => 
       apiFetch<{success: boolean}>(`/api/planner/${week}/revision`, {

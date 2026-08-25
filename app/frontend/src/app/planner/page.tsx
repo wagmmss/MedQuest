@@ -17,14 +17,15 @@ export default async function PlannerPage({ searchParams }: { searchParams: Prom
   }
 
   // Fazemos fetch paralelo: Gerar o cronograma (on-the-fly) e carregar os ticks já feitos
-  const [planResponse, progressMap] = await Promise.all([
+  const [planResponse, progressMap, topicProgressMap] = await Promise.all([
     serverApi.planner.generatePlan({
       start_date: config.start_date,
       exam_date: config.exam_date,
       hours_per_week: Math.min(168, (config.days_per_week || 5) * (config.hours_per_day || 4)),
       intensive: isIntensive
     }),
-    serverApi.planner.getProgress()
+    serverApi.planner.getProgress(),
+    serverApi.planner.getTopicProgress(),
   ]);
 
   // Se a geração falhar ou retornar array vazio
@@ -46,6 +47,7 @@ export default async function PlannerPage({ searchParams }: { searchParams: Prom
       <PlannerClient 
         plan={planResponse.plan}
         initialProgress={progressMap}
+        initialTopicProgress={topicProgressMap}
         warning={planResponse.warning}
         isIntensive={isIntensive}
         config={config}

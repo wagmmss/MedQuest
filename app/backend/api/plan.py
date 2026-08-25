@@ -13,6 +13,7 @@ from .schemas import (
     PlannerConfigIn,
     PlannerRevisionIn,
     PlannerStudyIn,
+    PlannerTopicProgressIn,
     ValidationError,
     validation_errors,
 )
@@ -26,6 +27,7 @@ def planner_config_reset():
     with db_transaction(db, immediate=True):
         db.execute("DELETE FROM planner_config WHERE user_id = ?", (g.user_id,))
         db.execute("DELETE FROM planner_progress WHERE user_id = ?", (g.user_id,))
+        db.execute("DELETE FROM planner_topic_progress WHERE user_id = ?", (g.user_id,))
     invalidate_user_caches(g.user_id)
     return jsonify({"success": True})
 
@@ -46,18 +48,18 @@ def planner_config():
         with db_transaction(db, immediate=True):
             try:
                 db.execute("""
-                    INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score, target_institution, target_specialty)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, hours_per_day, updated_at, target_score, target_institution, target_specialty)
+                    VALUES (?, ?, ?, ?, 30, ?, ?, ?, ?, ?)
                     ON CONFLICT(user_id) DO UPDATE SET
                         exam_date = excluded.exam_date, start_date = excluded.start_date,
-                        days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
+                        days_per_week = excluded.days_per_week, hours_per_day = excluded.hours_per_day,
                         updated_at = excluded.updated_at, target_score = excluded.target_score,
                         target_institution = excluded.target_institution, target_specialty = excluded.target_specialty
                 """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
                       datetime.now(timezone.utc).isoformat(), cfg.target_score, target_inst, cfg.target_specialty))
             except Exception as e:
                 err_msg = str(e).lower()
-                if any(k in err_msg for k in ("target_score", "target_institution", "target_specialty", "has no column", "no such column")):
+                if any(k in err_msg for k in ("target_score", "target_institution", "target_specialty", "hours_per_day", "has no column", "no such column")):
                     try:
                         db.execute("ALTER TABLE planner_config ADD COLUMN target_score REAL")
                     except Exception:
@@ -70,12 +72,16 @@ def planner_config():
                         db.execute("ALTER TABLE planner_config ADD COLUMN target_specialty TEXT")
                     except Exception:
                         pass
+                    try:
+                        db.execute("ALTER TABLE planner_config ADD COLUMN hours_per_day INTEGER DEFAULT 4")
+                    except Exception:
+                        pass
                     db.execute("""
-                        INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, updated_at, target_score, target_institution, target_specialty)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        INSERT INTO planner_config (user_id, exam_date, start_date, days_per_week, questions_per_day, hours_per_day, updated_at, target_score, target_institution, target_specialty)
+                        VALUES (?, ?, ?, ?, 30, ?, ?, ?, ?, ?)
                         ON CONFLICT(user_id) DO UPDATE SET
                             exam_date = excluded.exam_date, start_date = excluded.start_date,
-                            days_per_week = excluded.days_per_week, questions_per_day = excluded.questions_per_day,
+                            days_per_week = excluded.days_per_week, hours_per_day = excluded.hours_per_day,
                             updated_at = excluded.updated_at, target_score = excluded.target_score,
                             target_institution = excluded.target_institution, target_specialty = excluded.target_specialty
                     """, (g.user_id, cfg.exam_date, cfg.start_date, cfg.days_per_week, cfg.hours_per_day,
@@ -93,7 +99,7 @@ def planner_config():
     inst_list = [i.strip() for i in inst_str.split(",") if i.strip()] if inst_str else []
     return jsonify({
         "exam_date": row["exam_date"], "start_date": row["start_date"],
-        "days_per_week": row["days_per_week"], "hours_per_day": row["questions_per_day"],
+        "days_per_week": row["days_per_week"], "hours_per_day": row["hours_per_day"] if "hours_per_day" in row_keys else row["questions_per_day"],
         "target_score": row["target_score"] if "target_score" in row_keys else None,
         "target_institution": inst_str,
         "target_institutions": inst_list,
@@ -109,6 +115,30 @@ def get_planner():
         "studied": bool(r["studied"]), "studied_at": r["studied_at"],
         "rev24h": bool(r["rev24h"]), "rev7d": bool(r["rev7d"]), "rev30d": bool(r["rev30d"]),
     } for r in rows})
+
+
+@bp.route("/planner/topics")
+def get_planner_topics():
+    db = get_db()
+    rows = db.execute("SELECT week, subtema, completed FROM planner_topic_progress WHERE user_id = ?", (g.user_id,)).fetchall()
+    return jsonify({f"{r['week']}:{r['subtema']}": bool(r["completed"]) for r in rows})
+
+
+@bp.route("/planner/<int:week>/topic", methods=["POST"])
+def planner_topic(week):
+    try:
+        data = PlannerTopicProgressIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+    completed = 1 if data.completed else 0
+    completed_at = datetime.now(timezone.utc).isoformat() if completed else None
+    db = get_db()
+    with db_transaction(db, immediate=True):
+        db.execute("""INSERT INTO planner_topic_progress (week, subtema, completed, completed_at, user_id)
+                      VALUES (?, ?, ?, ?, ?)
+                      ON CONFLICT(week, subtema, user_id) DO UPDATE SET completed = excluded.completed, completed_at = excluded.completed_at""",
+                   (week, data.subtema, completed, completed_at, g.user_id))
+    return jsonify({"success": True, "completed": bool(completed)})
 
 
 @bp.route("/planner/<int:week>/study", methods=["POST"])
@@ -216,7 +246,8 @@ def _generate_calendar_ics_content(db, user_id):
         start_date = row["start_date"] or datetime.now(timezone.utc).isoformat()
         exam_date = row["exam_date"]
         days = row["days_per_week"] or 6
-        hours = row["questions_per_day"] or 4
+        row_keys = row.keys() if hasattr(row, "keys") else []
+        hours = (row["hours_per_day"] if "hours_per_day" in row_keys else row["questions_per_day"]) or 4
         hours_per_week = min(168, days * hours)
 
     q_query = """
@@ -281,9 +312,10 @@ def _generate_calendar_ics_content(db, user_id):
             continue
 
         topics = w.get("topics", [])
+        day_slot_minutes = [0] * study_days_count
         if not topics:
-            start_str = week_start_dt.strftime("%Y%m%dT080000Z")
-            end_str = (week_start_dt + timedelta(hours=3)).strftime("%Y%m%dT110000Z")
+            start_str = week_start_dt.strftime("%Y%m%dT080000")
+            end_str = (week_start_dt + timedelta(hours=3)).strftime("%Y%m%dT110000")
             uid = f"medquest-week-consolidation-{w_num}-{user_id}-{w_date_str}@medquest"
             ics_lines.extend([
                 "BEGIN:VEVENT",
@@ -312,11 +344,13 @@ def _generate_calendar_ics_content(db, user_id):
 
             # Duração REAL da aula (minutos calculados com precisão)
             duration_minutes = max(30, int(round(total_h * 60)))
-            dt_start = topic_date.replace(hour=8, minute=0, second=0)
+            start_minutes = (8 * 60) + day_slot_minutes[day_offset]
+            dt_start = topic_date.replace(hour=start_minutes // 60, minute=start_minutes % 60, second=0)
             dt_end = dt_start + timedelta(minutes=duration_minutes)
+            day_slot_minutes[day_offset] += duration_minutes + 15
 
-            start_str = dt_start.strftime("%Y%m%dT%H%M%SZ")
-            end_str = dt_end.strftime("%Y%m%dT%H%M%SZ")
+            start_str = dt_start.strftime("%Y%m%dT%H%M%S")
+            end_str = dt_end.strftime("%Y%m%dT%H%M%S")
             uid_lecture = f"medquest-lec-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
 
             encoded_sub = urllib.parse.quote(subtema)
@@ -339,8 +373,8 @@ def _generate_calendar_ics_content(db, user_id):
 
             # Evento Individual de Revisão 24h (Dia D + 1, às 19:00 - 19:30)
             rev24_dt = topic_date + timedelta(days=1)
-            rev24_start = rev24_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%SZ")
-            rev24_end = rev24_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%SZ")
+            rev24_start = rev24_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%S")
+            rev24_end = rev24_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%S")
             uid_rev24 = f"medquest-rev24-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
             rev24_url_text = f"\\n\\n🔗 Revisar: {base_url}/revisao-ativa" if base_url else ""
 
@@ -358,8 +392,8 @@ def _generate_calendar_ics_content(db, user_id):
 
             # Evento Individual de Revisão 7d (Dia D + 7, às 19:00 - 19:30)
             rev7_dt = topic_date + timedelta(days=7)
-            rev7_start = rev7_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%SZ")
-            rev7_end = rev7_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%SZ")
+            rev7_start = rev7_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%S")
+            rev7_end = rev7_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%S")
             uid_rev7 = f"medquest-rev7-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
             rev7_url_text = f"\\n\\n🔗 Revisar: {base_url}/revisao-ativa" if base_url else ""
 
@@ -377,8 +411,8 @@ def _generate_calendar_ics_content(db, user_id):
 
             # Evento Individual de Revisão 30d (Dia D + 30, às 19:00 - 19:30)
             rev30_dt = topic_date + timedelta(days=30)
-            rev30_start = rev30_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%SZ")
-            rev30_end = rev30_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%SZ")
+            rev30_start = rev30_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%S")
+            rev30_end = rev30_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%S")
             uid_rev30 = f"medquest-rev30-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
             rev30_url_text = f"\\n\\n🔗 Revisar: {base_url}/revisao-ativa" if base_url else ""
 

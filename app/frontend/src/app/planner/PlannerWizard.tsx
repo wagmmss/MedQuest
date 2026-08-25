@@ -17,7 +17,6 @@ import {
   Sparkles,
   CheckCircle2,
   Globe,
-  CheckSquare,
 } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
@@ -198,7 +197,7 @@ export function PlannerWizard({ initialConfig, onClose, isModal }: PlannerWizard
               </span>
             </h2>
             <p className="text-muted-foreground text-xs md:text-sm mt-0.5">
-              Personalize as bancas do seu cronograma, especialidade e disponibilidade semanal.
+              Defina sua prova, disponibilidade semanal e preferências para simulados e análises.
             </p>
           </div>
         </div>
@@ -216,7 +215,7 @@ export function PlannerWizard({ initialConfig, onClose, isModal }: PlannerWizard
       <div className="bg-primary/10 border border-primary/20 rounded-xl p-3.5 mb-6 text-xs text-primary flex items-center gap-2.5">
         <Globe size={18} className="shrink-0" />
         <div>
-          <strong className="font-semibold">Acesso Universal a Todas as Bancas:</strong> Você terá acesso a todas as questões de todas as bancas do Brasil no banco de questões. A seleção abaixo calibra a distribuição de temas e pesos no seu cronograma.
+          <strong className="font-semibold">Acesso Universal a Todas as Bancas:</strong> Você terá acesso a todas as questões de todas as bancas do Brasil. A seleção abaixo orienta seus simulados e análises; o cronograma usa a matriz nacional de referência até que pesos específicos por banca estejam disponíveis.
         </div>
       </div>
 
@@ -231,7 +230,7 @@ export function PlannerWizard({ initialConfig, onClose, isModal }: PlannerWizard
         <div className="space-y-2.5">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Building2 size={14} className="text-primary" /> 1. Banca(s) Alvo para os Temas do Cronograma
+              <Building2 size={14} className="text-primary" /> 1. Banca(s) Alvo para Simulados e Análises
             </label>
             <span className="text-xs text-muted-foreground">
               {isAllSelected 

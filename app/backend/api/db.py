@@ -232,10 +232,14 @@ def init_db(app):
             db.execute("""CREATE TABLE IF NOT EXISTS planner_progress (
                 week INTEGER, studied INTEGER DEFAULT 0, studied_at TEXT,
                 rev24h INTEGER DEFAULT 0, rev7d INTEGER DEFAULT 0, rev30d INTEGER DEFAULT 0,
-                user_id TEXT DEFAULT '1', PRIMARY KEY (week, user_id))""")
+                 user_id TEXT DEFAULT '1', PRIMARY KEY (week, user_id))""")
+            db.execute("""CREATE TABLE IF NOT EXISTS planner_topic_progress (
+                week INTEGER NOT NULL, subtema TEXT NOT NULL, completed INTEGER DEFAULT 0,
+                completed_at TEXT, user_id TEXT DEFAULT '1',
+                PRIMARY KEY (week, subtema, user_id))""")
             db.execute("""CREATE TABLE IF NOT EXISTS planner_config (
                 user_id TEXT PRIMARY KEY, exam_date TEXT, start_date TEXT,
-                days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30, target_score REAL,
+                days_per_week INTEGER DEFAULT 6, questions_per_day INTEGER DEFAULT 30, hours_per_day INTEGER DEFAULT 4, target_score REAL,
                 target_institution TEXT, target_specialty TEXT,
                 updated_at TEXT)""")
             existing_pc_cols = _table_cols(db, "planner_config")
@@ -245,6 +249,8 @@ def init_db(app):
                 db.execute("ALTER TABLE planner_config ADD COLUMN target_institution TEXT")
             if "target_specialty" not in existing_pc_cols:
                 db.execute("ALTER TABLE planner_config ADD COLUMN target_specialty TEXT")
+            if "hours_per_day" not in existing_pc_cols:
+                db.execute("ALTER TABLE planner_config ADD COLUMN hours_per_day INTEGER DEFAULT 4")
 
             db.execute("""CREATE TABLE IF NOT EXISTS flashcards (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,

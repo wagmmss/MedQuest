@@ -3,7 +3,7 @@ import { getGuestSession } from "./session";
 import { 
   OverviewStats, CoverageResponse, QuestionMeta, PlannerConfig,
   TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat,
-  PlannerPlanResponse, PlannerProgressMap, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness,
+  PlannerPlanResponse, PlannerProgressMap, PlannerTopicProgressMap, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness,
   BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary
 } from "@/types/api";
 
@@ -93,7 +93,7 @@ export const serverApi = {
     getPredictiveScore: () => serverFetch<PredictiveScore>("/api/stats/predictive-score", { next: { tags: ['stats'] } }),
     getAtRiskTopics: () => serverFetch<AtRiskTopic[]>("/api/stats/at-risk", { next: { tags: ['stats'] } }),
     getLearningProfile: () => serverFetch<LearningProfile>("/api/stats/learning-profile", { next: { tags: ['stats'] } }),
-    getExamReadiness: () => serverFetch<ExamReadiness>("/api/stats/exam-readiness", { next: { tags: ['stats'] } }),
+    getExamReadiness: (institution?: string) => serverFetch<ExamReadiness>(`/api/stats/exam-readiness${institution ? `?institution=${encodeURIComponent(institution)}` : ""}`, { next: { tags: ['stats'] } }),
     getBreakdown: (by: 'institution' | 'area' | 'year') => 
       serverFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { next: { tags: ['stats'] } }),
     getBenchmark: () => serverFetch<BenchmarkStat>("/api/stats/benchmark", { next: { tags: ['stats'] } }),
@@ -112,5 +112,6 @@ export const serverApi = {
       cache: 'no-store'
     }),
     getProgress: () => serverFetch<PlannerProgressMap>("/api/planner", { cache: 'no-store' }),
+    getTopicProgress: () => serverFetch<PlannerTopicProgressMap>("/api/planner/topics", { cache: 'no-store' }),
   }
 };

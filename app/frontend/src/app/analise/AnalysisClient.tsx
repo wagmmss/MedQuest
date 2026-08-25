@@ -21,6 +21,7 @@ export function AnalysisClient({
   atRiskTopics,
   learningProfile,
   examReadiness,
+  institutionOptions,
   timeline180,
 }: {
   timeline: TimelineStat[];
@@ -31,12 +32,17 @@ export function AnalysisClient({
   atRiskTopics: AtRiskTopic[];
   learningProfile: LearningProfile;
   examReadiness: ExamReadiness;
+  institutionOptions: { key: string; label: string }[];
   timeline180?: TimelineStat[];
 }) {
   const [days, setDays] = useState<number>(14);
   const [localTimeline, setLocalTimeline] = useState<TimelineStat[]>(timeline);
   const [loadingTimeline, setLoadingTimeline] = useState(false);
+  const [selectedInstitution, setSelectedInstitution] = useState(examReadiness.institution || "");
+  const [localReadiness, setLocalReadiness] = useState(examReadiness);
+  const [loadingReadiness, setLoadingReadiness] = useState(false);
   const isFirstMount = useRef(true);
+  const isFirstReadinessMount = useRef(true);
 
   useEffect(() => {
     if (isFirstMount.current) {
@@ -62,12 +68,26 @@ export function AnalysisClient({
     };
   }, [days]);
 
+  useEffect(() => {
+    if (isFirstReadinessMount.current) {
+      isFirstReadinessMount.current = false;
+      return;
+    }
+    const controller = new AbortController();
+    setLoadingReadiness(true);
+    api.stats.getExamReadiness(selectedInstitution || undefined)
+      .then(data => { if (!controller.signal.aborted) setLocalReadiness(data); })
+      .catch(error => { if (!controller.signal.aborted) console.error("Failed to fetch readiness:", error); })
+      .finally(() => { if (!controller.signal.aborted) setLoadingReadiness(false); });
+    return () => controller.abort();
+  }, [selectedInstitution]);
+
   const chartBreakdown = useMemo(() => {
     if (!Array.isArray(breakdown)) return [];
     return breakdown.slice(0, 8).map(b => ({
       ...b,
       accPct: parseFloat(((b.accuracy || 0) * 100).toFixed(1)),
-      shortLabel: b.label.length > 35 ? b.label.substring(0, 32) + "..." : b.label
+      shortLabel: `${b.label.length > 28 ? b.label.substring(0, 25) + "..." : b.label} (${b.attempts})`
     }));
   }, [breakdown]);
 
@@ -79,6 +99,10 @@ export function AnalysisClient({
       accPct: parseFloat(((t.accuracy || 0) * 100).toFixed(1))
     }));
   }, [localTimeline]);
+
+  const priorityTopic = learningProfile.topics[0];
+  const adaptiveRemainder = Math.max(0, learningProfile.goal.questions_today - learningProfile.goal.reviews_due);
+  const scoreReliable = predictiveScore.is_reliable === true;
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 pb-10">
@@ -98,11 +122,12 @@ export function AnalysisClient({
                 <h2 className="text-xl font-bold text-foreground">Meta adaptativa de hoje</h2>
               </div>
               <p className="text-muted-foreground">
-                {learningProfile.goal.questions_today} questões, incluindo {learningProfile.goal.reviews_due} revisões vencidas.
+                {learningProfile.goal.questions_today} questões: {learningProfile.goal.reviews_due} revisões vencidas e até {adaptiveRemainder} questões adaptativas.
               </p>
-              {learningProfile.topics[0] && (
+              {priorityTopic && (
                 <p className="text-sm text-muted-foreground mt-2">
-                  Prioridade atual: <span className="font-semibold text-foreground">{learningProfile.topics[0].topic}</span>
+                  Prioridade atual: <span className="font-semibold text-foreground">{priorityTopic.topic}</span>
+                  {priorityTopic.reasons.length > 0 && <span> · {priorityTopic.reasons.map(reason => ({ low_accuracy: "baixa acurácia", reviews_due: "revisões vencidas", memory_at_risk: "risco de esquecimento", low_coverage: "baixa cobertura", balanced_practice: "prática equilibrada" }[reason] || reason)).join(", ")}</span>}
                 </p>
               )}
             </div>
@@ -115,7 +140,7 @@ export function AnalysisClient({
           </div>
         </motion.section>
 
-        {/* Exam Readiness by Institution */}
+        {/* Exam readiness with an explicit scope */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -123,27 +148,33 @@ export function AnalysisClient({
         >
           <div className="flex items-start justify-between gap-4 mb-5">
             <div>
-              <h2 className="text-xl font-bold text-foreground">Preparação por edital e instituição</h2>
+              <h2 className="text-xl font-bold text-foreground">Prontidão por instituição</h2>
               <p className="text-sm text-muted-foreground mt-1">
-                Cobertura geral: {Math.round(examReadiness.coverage * 100)}% ({examReadiness.answered} de {examReadiness.available} questões).
+                Cobertura: {Math.round(localReadiness.coverage * 100)}% ({localReadiness.answered} de {localReadiness.available} questões no escopo selecionado).
               </p>
             </div>
-            <Link href="/simulado" className="text-sm font-semibold text-primary hover:underline">Configurar simulado</Link>
+            <label className="text-xs font-semibold text-muted-foreground flex flex-col gap-1">
+              Instituição
+              <select value={selectedInstitution} onChange={(event) => setSelectedInstitution(event.target.value)} className="bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground" aria-label="Selecionar instituição">
+                <option value="">Banco geral</option>
+                {institutionOptions.map(option => <option key={option.key} value={option.key}>{option.label}</option>)}
+              </select>
+            </label>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {examReadiness.areas.slice(0, 6).map(area => (
+            {localReadiness.areas.slice(0, 6).map(area => (
               <Link key={area.area} href={area.action} className="rounded-xl border border-border p-4 hover:border-primary/40 transition-colors">
                 <div className="flex items-center justify-between gap-3">
                   <span className="font-semibold text-foreground">{area.area}</span>
                   <span className="text-sm text-primary">{Math.round(area.coverage * 100)}%</span>
                 </div>
                 <p className="text-xs text-muted-foreground mt-2">
-                  {area.sample === "limited" ? "Amostra limitada — pratique mais para melhorar a estimativa." : `${Math.round((area.accuracy || 0) * 100)}% de acurácia.`}
+                  {area.sample === "limited" ? `${area.attempts} tentativas — amostra limitada.` : `${area.attempts} tentativas · ${Math.round((area.accuracy || 0) * 100)}% de acurácia.`}
                 </p>
               </Link>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground mt-4">{examReadiness.disclaimer}</p>
+          <p className="text-xs text-muted-foreground mt-4">{loadingReadiness ? "Atualizando escopo…" : localReadiness.disclaimer}</p>
         </motion.section>
         
         {/* Predictive Dashboard */}
@@ -166,27 +197,25 @@ export function AnalysisClient({
             <div className="bg-card border border-border shadow-sm rounded-2xl p-6 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-bold text-lg text-foreground">Projeção de Nota</h3>
+                  <h3 className="font-bold text-lg text-foreground">Estimativa de desempenho</h3>
                   <Activity className="text-muted-foreground" size={20} />
                 </div>
                 <p className="text-muted-foreground text-sm mb-6">
-                  Estimativa da sua nota oficial baseada na acurácia atual por área.
+                  Indicador conservador com pesos históricos. Não substitui desempenho em simulados.
                 </p>
               </div>
               
-              <div className="flex items-end gap-4">
-                <div className="text-5xl font-black text-primary">
-                  {predictiveScore.projected_score}<span className="text-2xl text-muted-foreground font-medium">/100</span>
-                </div>
-                {predictiveScore.target_score != null && (
-                  <div className="flex flex-col pb-1">
-                    <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Alvo</span>
-                    <span className="text-lg font-bold text-foreground">{predictiveScore.target_score}</span>
+              {scoreReliable ? <>
+                <div className="flex items-end gap-4">
+                  <div className="text-5xl font-black text-primary">
+                    {predictiveScore.projected_score}<span className="text-2xl text-muted-foreground font-medium">/100</span>
                   </div>
-                )}
-              </div>
-              
-              {predictiveScore.target_score != null && predictiveScore.target_score > 0 && (
+                  {predictiveScore.target_score != null && <div className="flex flex-col pb-1"><span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Alvo</span><span className="text-lg font-bold text-foreground">{predictiveScore.target_score}</span></div>}
+                </div>
+                <p className="text-xs text-muted-foreground mt-3">Amostra: {predictiveScore.total_attempts || 0} tentativas, com representação das cinco grandes áreas.</p>
+              </> : <div className="rounded-xl border border-dashed border-border bg-muted/30 p-4 text-sm text-muted-foreground"><span className="font-semibold text-foreground">Estimativa ainda indisponível.</span><br />São necessárias pelo menos {predictiveScore.minimum_attempts_per_area || 20} tentativas em cada grande área para evitar uma projeção enganosa.</div>}
+
+              {scoreReliable && predictiveScore.target_score != null && predictiveScore.target_score > 0 && (
                 <div className="mt-6 w-full bg-secondary/20 h-3 rounded-full overflow-hidden relative">
                   <div 
                     className={clsx("h-full rounded-full transition-all duration-1000", predictiveScore.projected_score >= predictiveScore.target_score ? "bg-success" : "bg-primary")}
@@ -213,7 +242,7 @@ export function AnalysisClient({
               <div className="flex-1 overflow-y-auto space-y-3 pr-2 custom-scrollbar">
                 {atRiskTopics && atRiskTopics.length > 0 ? (
                   atRiskTopics.map((topic, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-background rounded-lg border border-border">
+                    <Link key={idx} href={`/estudar?subtema=${encodeURIComponent(topic.subtema)}&status=srs_due&limit=20`} className="flex items-center justify-between p-3 bg-background rounded-lg border border-border hover:border-warning/50 transition-colors">
                       <div className="flex flex-col">
                         <span className="font-medium text-sm text-foreground leading-tight line-clamp-1" title={topic.subtema}>{topic.subtema}</span>
                         <span className="text-xs text-muted-foreground mt-0.5">{topic.items_count} cartões em risco</span>
@@ -223,7 +252,7 @@ export function AnalysisClient({
                           {topic.retrievability !== undefined ? `${Math.round(topic.retrievability * 100)}% retenção` : "Baixa retenção"}
                         </span>
                       </div>
-                    </div>
+                    </Link>
                   ))
                 ) : (
                   <div className="h-full flex items-center justify-center text-sm text-muted-foreground text-center p-4 border border-dashed border-border rounded-lg">
@@ -246,7 +275,7 @@ export function AnalysisClient({
               <BarChart3 size={24} className="text-secondary" />
             </div>
             <h2 className="text-2xl font-bold text-foreground">
-              Desempenho por Instituição
+              Desempenho por Instituição e Amostra
             </h2>
           </div>
           <div className="bg-card border border-border shadow-sm rounded-2xl p-6 h-[420px] relative overflow-hidden flex flex-col min-w-0">
@@ -333,7 +362,7 @@ export function AnalysisClient({
                 <TrendingUp size={24} className="text-success" />
               </div>
               <h2 className="text-2xl font-bold text-foreground">
-                Evolução Recente
+                Evolução: volume e acurácia diária
               </h2>
             </div>
             
@@ -356,6 +385,7 @@ export function AnalysisClient({
               ))}
             </div>
           </div>
+          <p className="text-xs text-muted-foreground -mt-3 mb-3">Acurácia por dia oscila com amostras pequenas; use a tendência junto com o volume de questões.</p>
           <div className="bg-card border border-border shadow-sm rounded-2xl p-6 h-[400px] relative overflow-hidden flex flex-col min-w-0">
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-success/5 to-transparent opacity-50 pointer-events-none" />
             {localTimeline.length > 0 ? (
@@ -535,7 +565,7 @@ export function AnalysisClient({
           <div className="bg-card/50 backdrop-blur-xl border border-white/10 shadow-sm rounded-2xl overflow-hidden flex flex-col">
             <div className="p-4 border-b border-border/50 bg-muted/20">
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Tópicos com menor índice de acertos e as alternativas incorretas que você mais assinala. Priorize estudá-los.
+                Ordenados por acurácia, com a amostra visível. Use como sinal de investigação, não como diagnóstico definitivo.
               </p>
             </div>
             <div className="divide-y divide-border/50">
@@ -545,12 +575,12 @@ export function AnalysisClient({
                   const worstChoice = distractor?.wrong_choices?.[0];
                   
                   return (
-                    <Link key={wt.topic} href={`/estudar?subtema=${encodeURIComponent(wt.topic)}&limit=50`} className="p-4 hover:bg-muted/30 transition-colors flex items-center justify-between gap-4 group">
+                    <Link key={wt.topic} href={`/estudar?subtema=${encodeURIComponent(wt.topic)}&status=all&limit=50`} className="p-4 hover:bg-muted/30 transition-colors flex items-center justify-between gap-4 group">
                       <div className="min-w-0 flex-1">
                         <p className="font-medium text-foreground truncate group-hover:text-primary transition-colors" title={wt.topic}>{wt.topic}</p>
-                        <p className="text-xs text-muted-foreground mt-0.5">{wt.correct} acertos de {wt.attempts} totais</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{wt.correct} acertos em {wt.attempts} tentativas{wt.attempts < 10 ? " · amostra inicial" : ""}</p>
                         
-                        {worstChoice && (
+                        {worstChoice && worstChoice.count >= 2 && wt.attempts >= 5 && (
                           <div className="mt-2 flex items-center gap-1.5 flex-wrap bg-destructive/5 w-fit p-1.5 rounded-md border border-destructive/10">
                             <AlertCircle size={12} className="text-destructive" />
                             <span className="text-xs text-muted-foreground">Você costuma errar marcando a</span>
