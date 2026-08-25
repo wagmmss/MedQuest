@@ -29,7 +29,7 @@ export default async function CoberturaPage() {
           </h1>
           <p className="text-muted-foreground text-sm md:text-base max-w-3xl leading-relaxed">
             Acompanhe o seu domínio em cada um dos <span className="font-semibold text-foreground">{totalSubtemas} módulos estruturados</span> das 5 grandes áreas. 
-            Identifique lacunas e priorize os <span className="font-semibold text-orange-500 inline-flex items-center gap-0.5"><Flame size={14} className="fill-current" /> {totalHighYield} temas de alta prevalência (USP-SP / USP-RP)</span>.
+            Identifique lacunas e priorize os <span className="font-semibold text-orange-500 inline-flex items-center gap-0.5"><Flame size={14} className="fill-current" /> {totalHighYield} temas de alta incidência (USP-SP / USP-RP)</span>.
           </p>
         </div>
 
@@ -48,18 +48,18 @@ export default async function CoberturaPage() {
 
           <div className="bg-orange-500/5 border border-orange-500/20 p-3.5 rounded-xl flex flex-col">
             <span className="text-[11px] font-semibold text-orange-600 dark:text-orange-400 uppercase tracking-wider mb-1 flex items-center gap-1">
-              <Flame size={12} className="fill-current" /> Foco USP
+              <Flame size={12} className="fill-current" /> Alta incidência
             </span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-bold text-orange-600 dark:text-orange-400">{totalHighYield}</span>
               <span className="text-xs text-muted-foreground">temas</span>
             </div>
-            <span className="text-[11px] text-muted-foreground mt-1">{highYieldMastered} dominados</span>
+            <span className="text-[11px] text-muted-foreground mt-1">{highYieldMastered} consolidados</span>
           </div>
 
           <div className="bg-muted/40 border border-border p-3.5 rounded-xl flex flex-col col-span-2 sm:col-span-1">
             <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 flex items-center gap-1">
-              <CheckCircle2 size={12} /> Cobertura Geral
+              <CheckCircle2 size={12} /> Cobertura do banco
             </span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-bold text-foreground">{globalProgress.toFixed(1)}%</span>

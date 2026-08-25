@@ -680,11 +680,13 @@ def coverage():
             accuracy = (total_cor / total_att) if total_att > 0 else None
             coverage_pct = (total_ans / total_n_q) if total_n_q > 0 else 0.0
 
+            # Duas questões não são evidência suficiente para afirmar domínio
+            # de um tema; exigimos mais amostra antes de marcar como consolidado.
             if total_ans == 0:
                 status = "not_started"
-            elif total_att >= 2 and accuracy is not None and accuracy >= 0.7 and coverage_pct >= 0.5:
+            elif total_att >= 10 and accuracy is not None and accuracy >= 0.7 and coverage_pct >= 0.5:
                 status = "mastered"
-            elif total_att >= 2 and accuracy is not None and accuracy >= 0.7:
+            elif total_att >= 5 and accuracy is not None and accuracy >= 0.7:
                 status = "proficient"
             else:
                 status = "in_progress"
@@ -1002,4 +1004,3 @@ def error_notebook_summary():
         "currently_unresolved_count": currently_unresolved,
         "practice_url": "/estudar?status=wrong&limit=20"
     })
-
