@@ -1,9 +1,9 @@
 import sqlite3
 import os
 import sys
+import io
 
 if sys.platform == "win32":
-    import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "medquest.db")
@@ -28,7 +28,7 @@ stats = c.fetchone()
 print(f"Total de questões: {stats['total']}")
 print(f"Numeração: {stats['min_num']} até {stats['max_num']} (Únicos: {stats['unique_nums']})")
 
-# 2. Check for missing numbers or duplicates
+# 2. Check for duplicate numbers
 c.execute("""
     SELECT source_number, count(*) as cnt 
     FROM questions 
@@ -48,8 +48,8 @@ c.execute("""
     GROUP BY q.id
 """)
 alt_stats = c.fetchall()
-invalid_alts = [r for r in alt_stats if r['alt_cnt'] < 4 or r['correct_cnt'] != 1]
-print(f"Questões com alternativas incompletas/inválidas: {len(invalid_alts)}")
+invalid_alts = [r for r in alt_stats if r['alt_cnt'] < 4 or r['correct_cnt'] < 1]
+print(f"Questões com alternativas incompletas/sem gabarito: {len(invalid_alts)}")
 
 # 4. Check explanations completeness
 c.execute("""
@@ -74,7 +74,7 @@ c.execute("""
 img_stats = c.fetchone()
 print(f"Questões com imagens vinculadas: {img_stats['q_with_imgs']} (Total de imagens: {img_stats['total_imgs']})")
 
-# 6. Sample question display
+# 6. Sample question 1 display
 print("\n" + "-" * 60)
 print("AMOSTRA DA QUESTÃO 1:")
 c.execute("""
@@ -84,15 +84,33 @@ c.execute("""
     WHERE q.institution_code = 'USP-SP' AND q.year = 2026 AND q.source_number = 1
 """)
 q1 = c.fetchone()
-print(f"ID: {q1['id']} | Número: {q1['source_number']} | Área: {q1['area']} | Tema: {q1['topic']}")
-print(f"Gabarito: {q1['correct_letter']}")
-print(f"Enunciado: {q1['stem'][:150]}...")
-print("\nAlternativas:")
-c.execute("SELECT letter, text, is_correct FROM alternatives WHERE question_id = ? ORDER BY letter", (q1['id'],))
-for a in c.fetchall():
-    mark = "[CORRETA]" if a['is_correct'] else ""
-    print(f"  ({a['letter']}) {a['text']} {mark}")
+if q1:
+    print(f"ID: {q1['id']} | Número: {q1['source_number']} | Área: {q1['area']} | Tema: {q1['topic']}")
+    print(f"Gabarito: {q1['correct_letter']}")
+    print(f"Enunciado: {q1['stem'][:150]}...")
+    print("\nAlternativas:")
+    c.execute("SELECT letter, text, is_correct FROM alternatives WHERE question_id = ? ORDER BY letter", (q1['id'],))
+    for a in c.fetchall():
+        mark = "[CORRETA]" if a['is_correct'] else ""
+        print(f"  ({a['letter']}) {a['text']} {mark}")
+    print(f"\nExplicação (Preview 300 chars):\n{q1['explanation_text'][:300]}...")
 
-print(f"\nExplicação (Preview 300 chars):\n{q1['explanation_text'][:300]}...")
+# 7. Sample question 63 display (Dual Gabarito)
+print("\n" + "-" * 60)
+print("AMOSTRA DA QUESTÃO 63 (GABARITO DUPLO B e C):")
+c.execute("""
+    SELECT q.id, q.source_number, q.institution_code, q.year, q.topic, q.area, q.correct_letter, q.stem, e.explanation_text
+    FROM questions q
+    LEFT JOIN explanations e ON q.id = e.question_id
+    WHERE q.institution_code = 'USP-SP' AND q.year = 2026 AND q.source_number = 63
+""")
+q63 = c.fetchone()
+if q63:
+    print(f"ID: {q63['id']} | Número: {q63['source_number']} | Área: {q63['area']} | Tema: {q63['topic']}")
+    print(f"Gabarito: {q63['correct_letter']}")
+    c.execute("SELECT letter, text, is_correct FROM alternatives WHERE question_id = ? ORDER BY letter", (q63['id'],))
+    for a in c.fetchall():
+        mark = "[CORRETA]" if a['is_correct'] else ""
+        print(f"  ({a['letter']}) {a['text']} {mark}")
 
 conn.close()

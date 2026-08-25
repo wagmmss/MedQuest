@@ -176,7 +176,7 @@ function parseExplanation(raw: string): ParsedSection {
     } else if (distMatch && distMatch.index !== undefined && distMatch.index > puloMatch.index) {
       endIdx = distMatch.index;
     }
-    let puloText = clean.slice(puloMatch.index + puloMatch[0].length, endIdx).trim();
+    const puloText = clean.slice(puloMatch.index + puloMatch[0].length, endIdx).trim();
     parsed.puloDoGato = puloText;
   }
 
