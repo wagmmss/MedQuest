@@ -1,0 +1,35 @@
+import json
+import base64
+import html
+import re
+
+har_path = r"C:\Users\wmors\Downloads\MEDWAYAUTORAL.har"
+with open(har_path, "r", encoding="utf-8", errors="ignore") as f:
+    har = json.load(f)
+
+for entry in har.get("log", {}).get("entries", []):
+    url = entry.get("request", {}).get("url", "")
+    resp = entry.get("response", {})
+    content = resp.get("content", {})
+    text = content.get("text", "")
+    encoding = content.get("encoding", "")
+    if text and encoding == "base64":
+        text = base64.b64decode(text).decode("utf-8", errors="ignore")
+    if not text:
+        continue
+    try:
+        data = json.loads(text)
+        if "api/v3/track/" in url and "questions" in url:
+            print("URL:", url)
+            if isinstance(data, list) and len(data) > 0:
+                print("First question in track/questions:")
+                print(json.dumps(data[0], indent=2)[:800])
+                break
+            elif isinstance(data, dict):
+                res = data.get("results") or data.get("questions") or []
+                if res:
+                    print("First question in results:")
+                    print(json.dumps(res[0], indent=2)[:800])
+                    break
+    except Exception:
+        pass
