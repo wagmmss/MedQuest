@@ -27,7 +27,7 @@ function renderInline(
     const mdImgMatch = part.match(/^!\[(.*?)\]\((.*?)\)$/);
     if (mdImgMatch) {
       const alt = mdImgMatch[1];
-      let src = mdImgMatch[2].trim();
+      let src = mdImgMatch[2].trim().replace(/^\/api\/images\/images\//, "/api/images/");
       if (!src.startsWith("http") && !src.startsWith("/api/") && !src.startsWith("/")) {
         src = `/api/images/${src}`;
       }
@@ -57,7 +57,7 @@ function renderInline(
     // 2. HTML Image: <img src="..." />
     const htmlImgMatch = part.match(/<img\b[^>]*\bsrc\s*=\s*['"]([^'"]+)['"][^>]*>/i);
     if (htmlImgMatch) {
-      let src = htmlImgMatch[1].trim();
+      let src = htmlImgMatch[1].trim().replace(/^\/api\/images\/images\//, "/api/images/");
       if (!src.startsWith("http") && !src.startsWith("/api/") && !src.startsWith("/")) {
         src = `/api/images/${src}`;
       }
@@ -83,9 +83,14 @@ function renderInline(
 
     // 3. Bold: **text**
     if (part.startsWith("**") && part.endsWith("**")) {
+      const inner = part.slice(2, -2);
+      // If bold wraps an image, recurse to render the image properly
+      if (inner.includes("![") || inner.includes("<img")) {
+        return <React.Fragment key={idx}>{renderInline(inner, onImageClick)}</React.Fragment>;
+      }
       return (
         <strong key={idx} className="font-bold text-foreground">
-          {part.slice(2, -2)}
+          {inner}
         </strong>
       );
     }
@@ -125,7 +130,11 @@ function renderInline(
 export function FormattedContent({ content, className = "", onImageClick }: FormattedContentProps) {
   if (!content) return null;
 
-  const raw = content.replace(/\\n/g, "\n").trim();
+  let raw = content.replace(/\\n/g, "\n");
+  // Unwrap **![]()** or **<img>**
+  raw = raw.replace(/\*\*(!\[.*?\]\(.*?\))\*\*/g, "\n\n$1\n\n");
+  raw = raw.replace(/\*\*(<img\b[^>]*>)\*\*/g, "\n\n$1\n\n");
+  raw = raw.replace(/\/api\/images\/images\//g, "/api/images/").trim();
   const lines = raw.split("\n");
 
   const blocks: React.ReactNode[] = [];
