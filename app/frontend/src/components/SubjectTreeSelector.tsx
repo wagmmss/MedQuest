@@ -22,17 +22,22 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
     return map;
   }, [availableSubtemas]);
 
-  // Precompute the tree filtering out empty themes
+  // Keep the complete curricular tree visible. Previously, themes without
+  // questions in the current filter were removed altogether, which made the
+  // catalogue look incomplete and hid useful study-plan context.
   const tree = useMemo(() => {
     return plannerData.map(areaData => {
       const macroThemes = (areaData.macroThemes || []).map(macro => {
-        // Only include details that have available questions (if availableSubtemas is provided)
-        const activeDetails = (macro.dbSubtemas || []).filter(d => !availableSubtemas || availableMap.has(d));
+        const details = macro.dbSubtemas || [];
+        // These are the only details that can be selected: selecting an
+        // unavailable one would start an empty session.
+        const activeDetails = details.filter(d => !availableSubtemas || availableMap.has(d));
         return {
           ...macro,
+          details,
           activeDetails
         };
-      }).filter(macro => macro.activeDetails.length > 0);
+      });
       
       return {
         ...areaData,
@@ -97,7 +102,7 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
             {expandedAreas[area.area] ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
             <span className="font-bold text-foreground text-sm uppercase tracking-wider">{area.area}</span>
             <span className="ml-auto text-xs font-semibold bg-background px-2 py-1 rounded border border-border">
-              {area.macroThemes.reduce((acc, m) => acc + m.activeDetails.length, 0)} tópicos
+              {area.macroThemes.reduce((acc, m) => acc + m.details.length, 0)} tópicos
             </span>
           </div>
           
@@ -109,8 +114,9 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
                 const isExpanded = expandedThemes[themeKey];
                 // A theme that maps to itself has no useful child level. Render it
                 // as a selectable leaf instead of showing the same name twice.
-                const isDirectTheme = macro.activeDetails.length === 1 && macro.activeDetails[0] === macro.theme;
+                const isDirectTheme = macro.details.length === 1 && macro.details[0] === macro.theme;
                 const directThemeCount = isDirectTheme ? availableMap.get(macro.theme) || 0 : 0;
+                const hasAvailableDetails = macro.activeDetails.length > 0;
                 
                 return (
                   <div key={macro.theme} className="border-b border-border last:border-0">
@@ -134,6 +140,7 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
                             type="checkbox"
                             className="sr-only peer"
                             checked={selState === "all"}
+                            disabled={!hasAvailableDetails}
                             ref={input => {
                               if (input) input.indeterminate = selState === "partial";
                             }}
@@ -141,19 +148,23 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
                           />
                           <div className={clsx(
                             "w-4 h-4 border border-muted-foreground/50 rounded transition-colors flex items-center justify-center group-hover:border-primary/50",
-                            (selState === "all" || selState === "partial") ? "bg-primary border-primary" : "bg-card"
+                            (selState === "all" || selState === "partial") ? "bg-primary border-primary" : "bg-card",
+                            !hasAvailableDetails && "opacity-40"
                           )}>
                             {selState === "all" && <Check size={12} className="text-primary-foreground" strokeWidth={4} />}
                             {selState === "partial" && <div className="w-2 h-0.5 bg-primary-foreground rounded-full" />}
                           </div>
                         </div>
-                        <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground transition-colors flex-1 flex items-center gap-2">
+                        <span className={clsx(
+                          "text-sm font-semibold transition-colors flex-1 flex items-center gap-2",
+                          hasAvailableDetails ? "text-foreground/90 group-hover:text-foreground" : "text-muted-foreground/60"
+                        )}>
                           {macro.theme}
                           {macro.highYield && <span title="Tema de Alto Rendimento" className="text-[10px]">🔥</span>}
                         </span>
                         {isDirectTheme && (
                           <span className="text-xs text-muted-foreground/60 shrink-0 tabular-nums">
-                            {directThemeCount} q
+                            {directThemeCount > 0 ? `${directThemeCount} q` : "Sem questões"}
                           </span>
                         )}
                       </label>
@@ -161,15 +172,20 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
                     
                     {isExpanded && (
                       <div className="flex flex-col pl-12 pr-4 py-2 bg-muted/10 gap-1.5 border-t border-border/30">
-                        {macro.activeDetails.map(detail => {
+                        {macro.details.map(detail => {
                           const count = availableMap.get(detail) || 0;
+                          const isAvailable = !availableSubtemas || availableMap.has(detail);
                           return (
-                            <label key={detail} className="flex items-start gap-3 cursor-pointer group/item py-1">
+                            <label key={detail} className={clsx(
+                              "flex items-start gap-3 py-1",
+                              isAvailable ? "cursor-pointer group/item" : "cursor-not-allowed opacity-50"
+                            )}>
                               <div className="relative flex items-center shrink-0 mt-0.5">
                                 <input 
                                   type="checkbox"
                                   className="peer sr-only"
                                   checked={isDetailSelected(detail)}
+                                  disabled={!isAvailable}
                                   onChange={() => toggleDetail(detail)}
                                 />
                                 <div className="w-4 h-4 border border-muted-foreground/30 rounded-sm transition-colors peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center group-hover/item:border-primary/50">
@@ -183,7 +199,7 @@ export function SubjectTreeSelector({ selectedSubtemas, onChange, availableSubte
                                 {detail}
                               </span>
                               <span className="text-xs text-muted-foreground/60 shrink-0 tabular-nums mt-0.5">
-                                {count} q
+                                {count > 0 ? `${count} q` : "Sem questões"}
                               </span>
                             </label>
                           );

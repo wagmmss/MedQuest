@@ -103,15 +103,15 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         for subtema in meta_dict
     }
     for row in rows:
-        subtema = row.get("subtema")
+        subtema = row["subtema"]
         if subtema not in row_stats:
             continue
         stats = row_stats[subtema]
         try:
-            stats["q_count"] += int(row.get("q_count") or 0)
+            stats["q_count"] += int(row["q_count"] or 0)
         except (TypeError, ValueError):
             pass
-        topics = row.get("topics")
+        topics = row["topics"]
         if topics:
             stats["subtopics"].extend(topic for topic in str(topics).split(",") if topic)
 

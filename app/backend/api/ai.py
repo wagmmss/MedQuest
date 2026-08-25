@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 # In-memory TTL cache for semantic search expansions (avoids redundant AI calls)
 _search_cache = {}  # key: normalized query -> (timestamp, result)
 _SEARCH_CACHE_TTL = 300  # 5 minutes
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
 
 def _clean_option_text(text: str) -> str:
     """Remove prefixos de alternativas como 'A) ', 'B - ', etc."""
@@ -93,6 +93,11 @@ def _extract_medical_cloze_fallback(
     Gera um Cloze Flashcard didático, clínico e de alta qualidade baseado no erro médico,
     com contexto do caso, pergunta clínica focada, Pulo do Gato e análise de distrator.
     """
+    # O fallback também é chamado diretamente quando os provedores de IA estão
+    # indisponíveis; portanto, não pode depender da normalização feita pela
+    # função chamadora.
+    correct_clean = _clean_option_text(correct_text)
+    wrong_clean = _clean_option_text(wrong_text)
     is_dummy_text = any(phrase in correct_clean.lower() for phrase in ["anote sua", "questao dissertativa", "questão dissertativa", "padrao de resposta", "padrão de resposta"])
     pulo = _extract_pulo_do_gato(explanation)
     
@@ -607,7 +612,7 @@ def synthesize_question_explanation(
 ) -> dict:
     """
     Sintetiza um comentário médico estruturado e completo (Pulo do Gato, Raciocínio Clínico,
-    Alternativa Correta, Distratores e Referências) para uma questão utilizando Gemini.
+    Alternativa Correta e Distratores) para uma questão utilizando Gemini.
     """
     alts_formatted = "\n".join([
         f"{a.get('letter', '')}) {a.get('text', '')}"
@@ -634,8 +639,7 @@ ESTRUTURA OBRIGATÓRIA DA RESPOSTA (JSON):
   "alternativa_correta": "Por que a alternativa {correct_letter} é a única correta de acordo com as diretrizes.",
   "distratores": [
     {{"letter": "Letra", "explanation": "Por que está errada e qual a pegadinha"}}
-  ],
-  "medical_references": "Diretrizes e consensos médicos de referência (ex: Diretriz SBC, Manual MS, FEBRASGO, etc.)"
+  ]
 }}
 """
 
@@ -671,7 +675,6 @@ ESTRUTURA OBRIGATÓRIA DA RESPOSTA (JSON):
                 return {
                     "explanation_text": full_explanation.strip(),
                     "pulo_do_gato": parsed.get("pulo_do_gato"),
-                    "medical_references": parsed.get("medical_references", "Diretrizes Médicas Brasileiras"),
                     "source": "gemini",
                     "model": resp.get("model", GEMINI_MODEL)
                 }
@@ -689,9 +692,6 @@ A alternativa ({correct_letter}) apresenta a abordagem preconizada para o caso a
     return {
         "explanation_text": fallback_text.strip(),
         "pulo_do_gato": f"Foco nos critérios de {subtema or area}.",
-        "medical_references": "Consensos e Diretrizes das Sociedades Brasileiras de Especialidades.",
         "source": "fallback",
         "model": "deterministic_fallback"
     }
-
-

@@ -284,7 +284,7 @@ export function PlannerWizard({ initialConfig, onClose, isModal }: PlannerWizard
             className="w-full bg-input border border-border rounded-xl py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-colors cursor-pointer"
           >
             {SPECIALTY_PRESETS.map((spec) => (
-              <option key={spec.name} value={spec.name}>
+              <option className="bg-background text-foreground" key={spec.name} value={spec.name}>
                 {spec.name} (Nota de corte média ~{spec.suggestedCutoff}%)
               </option>
             ))}

@@ -6,7 +6,6 @@ import {
   Stethoscope, 
   CheckCircle2, 
   XCircle, 
-  BookOpen, 
   Award,
   AlertCircle,
   Bot,
@@ -23,7 +22,6 @@ import { FormattedContent } from "@/components/FormattedContent";
 
 interface ExplanationViewerProps {
   explanation: string | null | undefined;
-  medicalReferences?: string | null;
   correctLetter?: string | null;
   questionId?: number;
   userLetter?: string;
@@ -42,6 +40,15 @@ interface ParsedSection {
     text: string;
   }>;
   fallbackText?: string;
+}
+
+function withoutReferenceSection(text: string): string {
+  return text
+    .replace(
+      /(?:^|\n)\s*(?:[-*+]\s+)?(?:#{1,6}\s+)?(?:<br\s*\/?\>\s*)?(?:\*\*)?\s*(?:refer[eê]ncias?(?:\s+bibliogr[aá]ficas?)?|bibliografia|fontes?)\s*:?\s*(?:\*\*)?[\s\S]*?(?=\n\s*(?:#{1,6}\s+)?(?:\*\*)?\s*(?:pulo do gato|racioc[ií]nio cl[ií]nico|fundamentação teórica|discussão do caso|comentário do caso|padrão de resposta|resolução detalhada|alternativa correta|por que a letra|análise dos distratores|distratores|alternativas incorretas|gabarito)\b|$)/i,
+      ""
+    )
+    .replace(/(?:\s|<br\s*\/?\>\s*)+$/i, "");
 }
 
 /**
@@ -102,7 +109,7 @@ function renderInlineFormattedText(text: string, onImageClick?: (src: string) =>
  * Parses structured markdown explanations into distinct semantic sections
  */
 function parseExplanation(raw: string): ParsedSection {
-  const clean = raw.replace(/\\n/g, "\n").trim();
+  const clean = withoutReferenceSection(raw.replace(/\\n/g, "\n")).trim();
   if (!clean) return { fallbackText: "Nenhum comentário disponível para esta questão." };
 
   const parsed: ParsedSection = {};
@@ -195,7 +202,6 @@ function parseExplanation(raw: string): ParsedSection {
 
 export function ExplanationViewer({ 
   explanation, 
-  medicalReferences,
   correctLetter,
   questionId,
   userLetter
@@ -214,7 +220,7 @@ export function ExplanationViewer({
       setAiAnswer(res.answer);
       if (!customPrompt) setAiQuestion("");
     } catch {
-      toast.error("Não foi possível consultar o Preceptor IA no momento.");
+      toast.error("O Preceptor IA está temporariamente indisponível. Tente novamente em instantes.");
     } finally {
       setLoadingAi(false);
     }
@@ -425,19 +431,6 @@ export function ExplanationViewer({
           </div>
         )}
 
-        {/* Referências Médicas (se houver) */}
-        {medicalReferences && (
-          <div className="mt-6 pt-5 border-t border-border">
-            <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
-              <BookOpen size={14} />
-              <span>Referências e Diretrizes</span>
-            </div>
-            <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 p-4 rounded-xl border border-border">
-              {medicalReferences}
-            </div>
-          </div>
-        )}
-
         {/* Preceptor Clínico IA */}
         {renderPreceptorWidget()}
         {renderZoomModal()}
@@ -451,18 +444,6 @@ export function ExplanationViewer({
       <div className="text-foreground text-sm md:text-base leading-relaxed">
         <FormattedContent content={parsed.fallbackText || ""} onImageClick={setEnlargedImage} />
       </div>
-
-      {medicalReferences && (
-        <div className="mt-6 pt-5 border-t border-border">
-          <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
-            <BookOpen size={14} />
-            <span>Referências e Diretrizes</span>
-          </div>
-          <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 p-4 rounded-xl border border-border">
-            {medicalReferences}
-          </div>
-        </div>
-      )}
 
       {/* Preceptor Clínico IA */}
       {renderPreceptorWidget()}

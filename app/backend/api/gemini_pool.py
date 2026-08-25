@@ -29,8 +29,11 @@ else:
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
-DEFAULT_FALLBACK_MODELS = ("gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.7-flash")
+# ``gemini-3.5-flash`` can return transient 503s for an entire key pool.  Keep
+# the lightweight model first so interactive features such as the preceptor do
+# not spend their whole request budget waiting for that provider to recover.
+DEFAULT_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
+DEFAULT_FALLBACK_MODELS = ("gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.7-flash")
 
 
 class KeyState:

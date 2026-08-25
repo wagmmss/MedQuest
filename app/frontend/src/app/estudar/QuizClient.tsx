@@ -1646,7 +1646,6 @@ export function QuizClient({
                   </h3>
                   <ExplanationViewer 
                     explanation={attemptResult.explanation} 
-                    medicalReferences={currentDetail?.medical_references}
                     correctLetter={attemptResult.correct_letter}
                     questionId={currentDetail?.id}
                     userLetter={selectedLetter || attemptResult.correct_letter || undefined}

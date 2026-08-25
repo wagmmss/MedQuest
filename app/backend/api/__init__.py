@@ -54,8 +54,7 @@ def create_app(testing=False):
     @require_auth
     def authenticate_request():
         public_image = request.path.startswith(("/api/images/", "/api/v1/images/"))
-        public_feed = request.path.startswith(("/api/planner/calendar/feed", "/api/v1/planner/calendar/feed"))
-        if request.path == "/" or request.method == "OPTIONS" or public_image or public_feed:
+        if request.path == "/" or request.method == "OPTIONS" or public_image:
             return
 
     from werkzeug.exceptions import HTTPException

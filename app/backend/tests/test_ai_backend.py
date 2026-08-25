@@ -1,5 +1,5 @@
 ﻿"""Testes para a suite de Inteligência Artificial Google Gemini 3.7 Flash no Backend."""
-import pytest
+from api import ai
 
 
 def test_ai_health(client):
@@ -20,6 +20,20 @@ def test_ask_ai_endpoint(client):
     assert "answer" in data
     assert "model" in data
     assert len(data["answer"]) > 10
+
+
+def test_ask_ai_endpoint_reports_provider_unavailability(client, monkeypatch):
+    """A fallback nunca deve ser apresentado como resposta gerada pela IA."""
+    monkeypatch.setattr(
+        ai,
+        "ask_preceptor_ai",
+        lambda **_: {"answer": "fallback", "model": "deterministic_fallback", "source": "fallback"},
+    )
+
+    res = client.post("/api/questions/1/ask_ai", json={"user_question": "Explique"})
+
+    assert res.status_code == 503
+    assert "temporariamente indisponível" in res.get_json()["error"]
 
 
 def test_prescribe_study_endpoint(client):
@@ -78,6 +92,21 @@ def test_flashcard_generate_with_wrong_letter(client):
     assert data["question_id"] == 1
     assert "front" in data
     assert "{{c1::" in data["front"]
+
+
+def test_flashcard_fallback_normalizes_options_without_ai(monkeypatch):
+    """The deterministic path must work when every AI provider is unavailable."""
+    monkeypatch.setattr(ai.gemini_pool, "_keys", [])
+    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+
+    card = ai.generate_cloze_flashcard(
+        stem="Paciente com hipertensão. Qual a conduta?",
+        correct_text="B) Iniciar tratamento adequado",
+        wrong_text="A) Não tratar",
+    )
+
+    assert "{{c1::Iniciar tratamento adequado}}" in card["front"]
+    assert "Não tratar" in card["back"]
 
 
 def test_semantic_search_expansion(client):

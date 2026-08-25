@@ -311,7 +311,6 @@ export interface QuestionDetail extends QuestionListItem {
   is_verified?: boolean;
   last_updated_at?: string;
   technical_note?: string;
-  medical_references?: string;
   clinical_case?: ClinicalCase;
   usp_macro?: string;
   usp_micro?: string;

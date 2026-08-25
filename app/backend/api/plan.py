@@ -173,7 +173,7 @@ def generate_plan():
     q_query = """
         SELECT area, subtema, GROUP_CONCAT(DISTINCT topic) as topics, COUNT(id) as q_count 
         FROM questions 
-        WHERE area IS NOT NULL AND subtema IS NOT NULL
+        WHERE area IS NOT NULL AND subtema IS NOT NULL AND missing_alts = 0
         GROUP BY area, subtema
     """
     a_query = """
@@ -222,7 +222,7 @@ def _generate_calendar_ics_content(db, user_id):
     q_query = """
         SELECT area, subtema, GROUP_CONCAT(DISTINCT topic) as topics, COUNT(id) as q_count 
         FROM questions 
-        WHERE area IS NOT NULL AND subtema IS NOT NULL
+        WHERE area IS NOT NULL AND subtema IS NOT NULL AND missing_alts = 0
         GROUP BY area, subtema
     """
     a_query = """
@@ -319,9 +319,11 @@ def _generate_calendar_ics_content(db, user_id):
             end_str = dt_end.strftime("%Y%m%dT%H%M%SZ")
             uid_lecture = f"medquest-lec-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
 
-            encoded_area = urllib.parse.quote(area)
             encoded_sub = urllib.parse.quote(subtema)
-            study_url_text = f"\\n\\n🔗 Questões: {base_url}/estudar?area={encoded_area}&subtema={encoded_sub}" if base_url else ""
+            # O subtema canônico é a chave de associação estável. Não inclua
+            # a área aqui: nomes de área de bases antigas podem divergir da
+            # normalização exibida no planner e zerar indevidamente a fila.
+            study_url_text = f"\\n\\n🔗 Questões: {base_url}/estudar?subtema={encoded_sub}" if base_url else ""
 
             ics_lines.extend([
                 "BEGIN:VEVENT",
@@ -412,8 +414,10 @@ def export_ics():
 @bp.route("/planner/calendar/feed", methods=["GET"])
 def calendar_feed():
     db = get_db()
-    user_id = request.args.get("user_id") or getattr(g, "user_id", "1")
-    content = _generate_calendar_ics_content(db, user_id)
+    # A identidade é definida exclusivamente pelo middleware de autenticação.
+    # Aceitar user_id na URL permitia que um usuário autenticado lesse o plano
+    # de qualquer outro usuário ao trocar o parâmetro.
+    content = _generate_calendar_ics_content(db, g.user_id)
     return Response(
         content,
         mimetype="text/calendar; charset=utf-8",

@@ -63,7 +63,7 @@ const TopicRow = memo(function TopicRow({
 
     const origin = typeof window !== "undefined" ? window.location.origin : "";
     const title = `[MedQuest] 📖 ${t.subtema} (${t.area})`;
-    const details = `📚 Carga: ${t.estimated_hours}h (Teoria: ${t.estimated_theory_hours}h + Questões: ${t.estimated_practice_hours}h)\nSemana ${weekDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })} • ${t.area}${origin ? `\n\n🔗 Questões: ${origin}/estudar?area=${encodeURIComponent(t.area)}&subtema=${encodeURIComponent(t.subtema)}` : ""}`;
+    const details = `📚 Carga: ${t.estimated_hours}h (Teoria: ${t.estimated_theory_hours}h + Questões: ${t.estimated_practice_hours}h)\nSemana ${weekDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })} • ${t.area}${origin ? `\n\n🔗 Questões: ${origin}/estudar?subtema=${encodeURIComponent(t.subtema)}` : ""}`;
 
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startStr}/${endStr}&details=${encodeURIComponent(details)}&location=MedQuest`;
   })();
@@ -116,7 +116,7 @@ const TopicRow = memo(function TopicRow({
 
         <div className="mt-2.5 flex items-center gap-2 flex-wrap">
           <Link 
-            href={`/estudar?area=${encodeURIComponent(t.area)}&subtema=${encodeURIComponent(t.subtema)}`}
+            href={`/estudar?subtema=${encodeURIComponent(t.subtema)}`}
             className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold rounded-lg transition-colors border border-primary/20"
           >
             <Play size={11} className="fill-primary" /> Praticar Questões
@@ -163,7 +163,7 @@ export function PlannerClient({ plan, initialProgress, warning, isIntensive, con
   const [googleSyncing, setGoogleSyncing] = useState(false);
   const [googleSyncProgress, setGoogleSyncProgress] = useState<SyncProgress | null>(null);
 
-  const feedUrl = api.planner.getCalendarFeedUrl(userId || 'guest');
+  const feedUrl = api.planner.getCalendarFeedUrl();
   const webcalUrl = feedUrl.replace(/^https?:\/\//, "webcal://");
   const googleCalendarDirectUrl = `https://calendar.google.com/calendar/r/settings/addbyurl?cid=${encodeURIComponent(feedUrl)}`;
 

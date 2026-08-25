@@ -437,7 +437,6 @@ def question_detail(qid):
         "is_verified": bool(q.get("is_verified", 0)),
         "last_updated_at": q.get("last_updated_at"),
         "technical_note": q.get("technical_note"),
-        "medical_references": q.get("medical_references"),
         "clinical_case": cc,
         "usp_macro": q.get("usp_macro"),
         "usp_micro": q.get("usp_micro"),
@@ -857,7 +856,6 @@ def question_batch_detail():
             "is_verified": bool(q.get("is_verified", 0)),
             "last_updated_at": q.get("last_updated_at"),
             "technical_note": q.get("technical_note"),
-            "medical_references": q.get("medical_references"),
             "clinical_case": cc_map.get(q.get("clinical_case_id")),
             "usp_macro": q.get("usp_macro"),
             "usp_micro": q.get("usp_micro"),
@@ -913,6 +911,15 @@ def ask_question_ai(question_id):
         area=q["area"] or "",
         subtema=q["subtema"] or q["topic"] or ""
     )
+
+    # A resposta determinística é útil internamente como último recurso, mas
+    # não é uma resposta do Preceptor. Retornar sucesso nesse caso fazia a UI
+    # apresentar o texto genérico como se tivesse sido gerado pela IA.
+    if result.get("source") == "fallback":
+        return jsonify({
+            "error": "Preceptor IA temporariamente indisponível. Tente novamente em instantes.",
+            "source": "fallback"
+        }), 503
     
     return jsonify(result)
 
@@ -1009,7 +1016,6 @@ def synthesize_explanation(question_id):
     return jsonify({
         "question_id": question_id,
         "explanation_text": result.get("explanation_text"),
-        "medical_references": result.get("medical_references"),
         "source": result.get("source"),
         "model": result.get("model")
     })

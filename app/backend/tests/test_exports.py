@@ -50,9 +50,25 @@ def test_export_ics_calendar(client):
 
 
 def test_calendar_feed_endpoint(client):
-    res = client.get("/api/planner/calendar/feed?user_id=1")
+    res = client.get("/api/planner/calendar/feed")
     assert res.status_code == 200
     assert "text/calendar" in res.headers.get("Content-Type", "")
     text = res.get_data(as_text=True)
     assert "BEGIN:VCALENDAR" in text
     assert "END:VCALENDAR" in text
+
+
+def test_calendar_feed_ignores_user_id_query_parameter(client, monkeypatch):
+    from api import plan
+
+    captured = {}
+
+    def fake_calendar_content(_db, user_id):
+        captured["user_id"] = user_id
+        return "BEGIN:VCALENDAR\r\nEND:VCALENDAR"
+
+    monkeypatch.setattr(plan, "_generate_calendar_ics_content", fake_calendar_content)
+    res = client.get("/api/planner/calendar/feed?user_id=another-user")
+
+    assert res.status_code == 200
+    assert captured["user_id"] == "1"
