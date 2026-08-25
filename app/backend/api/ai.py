@@ -617,7 +617,7 @@ GABARITO: Letra {correct_letter} ({correct_text})
 
 ESTRUTURA OBRIGATÓRIA DA RESPOSTA (JSON):
 {{
-  "pulo_do_gato": "1-2 frases com a regra de ouro/macete prático para acertar esta questão em 30 segundos.",
+  "pulo_do_gato": "Âncora diagnóstica, mnemônico, síntese prática de alta relevância ou regras de decisão essenciais para fixação imediata do conceito da questão (com o tamanho e profundidade necessários para máxima relevância).",
   "raciocinio_clinico": "Explicação clínica e fisiopatológica detalhada do quadro e critérios de diagnóstico/conduta.",
   "alternativa_correta": "Por que a alternativa {correct_letter} é a única correta de acordo com as diretrizes.",
   "distratores": [

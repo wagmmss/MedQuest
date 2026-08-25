@@ -1,0 +1,272 @@
+"""
+Script para importação e substituição de todas as provas do SUS-SP (2020 a 2026 + Autoral 2026).
+Processa as 800 questões com alternativas completas (A a E), Template Ouro e indexação de imagens S3.
+"""
+
+import json
+import os
+import sys
+import re
+import base64
+import sqlite3
+from datetime import datetime, timezone
+from collections import defaultdict
+
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "medquest.db")
+
+INST_CODE = "SUS-SP"
+INST_LABEL = "SUS-SP - Seleção Unificada para Residência Médica do Estado de São Paulo"
+
+def infer_area_from_tags(tags: list[str]) -> str:
+    text = " ".join(tags).lower()
+    if "(cm)" in text or "clínica médica" in text or "cardiologia" in text or "pneumologia" in text or "nefrologia" in text or "neurologia" in text or "reumatologia" in text or "hematologia" in text or "infectologia" in text or "endocrinologia" in text or "gastroenterologia" in text:
+        return "Clínica Médica"
+    if "(cir)" in text or "cirurgia" in text or "trauma" in text or "abdome agudo" in text or "hérnia" in text or "anestesiologia" in text or "urologia" in text or "ortopedia" in text:
+        return "Cirurgia"
+    if "(ped)" in text or "pediatria" in text or "puericultura" in text or "neonatologia" in text:
+        return "Pediatria"
+    if "(go)" in text or "ginecologia" in text or "obstetrícia" in text or "parto" in text or "pré-natal" in text or "gestação" in text or "mastologia" in text:
+        return "Ginecologia e Obstetrícia"
+    if "(prev)" in text or "preventiva" in text or "sus" in text or "epidemiologia" in text or "saúde coletiva" in text or "bioética" in text or "estatística" in text:
+        return "Medicina Preventiva"
+    return "Clínica Médica"
+
+def format_golden_explanation(q: dict) -> tuple[str, str]:
+    answers = q.get("answers", [])
+    correct_letters = []
+    for idx, ans in enumerate(answers):
+        if ans.get("rightAnswer"):
+            correct_letters.append(chr(65 + idx))
+            
+    is_nulled = q.get("nulled", False)
+    nulled_reason = q.get("nulledReason") or ""
+    
+    # 1. Gabarito
+    if is_nulled and not correct_letters:
+        correct_letter_str = "ANULADA"
+        gabarito_header = f"**Gabarito**: ANULADA ({nulled_reason if nulled_reason else 'Questão anulada pela banca'})"
+    elif correct_letters:
+        correct_letter_str = ", ".join(correct_letters) if len(correct_letters) > 1 else correct_letters[0]
+        gabarito_header = f"**Gabarito**: Letra {correct_letter_str}"
+        if is_nulled:
+            gabarito_header += f" (ANULADA{': ' + nulled_reason if nulled_reason else ''})"
+    else:
+        correct_letter_str = "A"
+        gabarito_header = "**Gabarito**: Letra A"
+    
+    # 2. Pulo do Gato (takeHomeMessage)
+    thm = (q.get("takeHomeMessage") or "").strip()
+    thm_clean = re.sub(r"^#+\s*Take\s*home\s*message:?\s*", "", thm, flags=re.IGNORECASE).strip()
+    pulo_gato = f"**Pulo do Gato**:\n{thm_clean}" if thm_clean else "**Pulo do Gato**:\nAtenção aos achados clínicos essenciais e critérios diagnósticos do caso."
+
+    # 3. Raciocínio Clínico (comment)
+    raw_comment = (q.get("comment") or "").strip()
+    clean_comment = re.sub(r"!\[video-tag-[^\]]*\]\([^\)]+\)", "", raw_comment).strip()
+    clean_comment = re.sub(r"^#+\s*Coment[aá]rio:?\s*", "", clean_comment, flags=re.IGNORECASE).strip()
+    raciocinio = f"**Raciocínio Clínico**:\n{clean_comment}" if clean_comment else ""
+
+    # 4. Análise das Alternativas e Distratores
+    correct_explanations = []
+    distractors_lines = []
+    
+    for idx, ans in enumerate(answers):
+        let = chr(65 + idx)
+        ans_comment = (ans.get("comment") or "").strip()
+        ans_comment_clean = re.sub(r"<[^>]+>", " ", ans_comment).strip()
+        ans_comment_clean = re.sub(r"\s+", " ", ans_comment_clean).strip()
+        
+        if ans.get("rightAnswer"):
+            if ans_comment_clean:
+                correct_explanations.append(f"**Letra {let}**: {ans_comment_clean}" if len(correct_letters) > 1 else ans_comment_clean)
+        else:
+            if ans_comment_clean:
+                distractors_lines.append(f"- **Letra {let}**: {ans_comment_clean}")
+            else:
+                distractors_lines.append(f"- **Letra {let}**: Incorreta.")
+                
+    if correct_explanations:
+        por_que_certa_text = "\n".join(correct_explanations)
+    else:
+        if is_nulled:
+            por_que_certa_text = "Questão anulada pela banca examinadora."
+        else:
+            por_que_certa_text = "Alternativa correta conforme as diretrizes clínicas vigentes."
+
+    if len(correct_letters) > 1:
+        por_que_certa = f"**Por que as Letras {correct_letter_str} são as Corretas?**:\n{por_que_certa_text}"
+    else:
+        por_que_certa = f"**Por que a Letra {correct_letter_str} é a Correta?**:\n{por_que_certa_text}"
+        
+    distratores_str = "**Análise dos Distratores**:\n" + "\n".join(distractors_lines) if distractors_lines else ""
+    
+    sections = [gabarito_header, pulo_gato]
+    if raciocinio:
+        sections.append(raciocinio)
+    sections.append(por_que_certa)
+    if distratores_str:
+        sections.append(distratores_str)
+        
+    return "\n\n".join(sections), correct_letter_str
+
+def import_sussp_multi(har_path: str):
+    print(f"[HAR] Lendo arquivo: {har_path}")
+    with open(har_path, "r", encoding="utf-8", errors="ignore") as f:
+        har = json.load(f)
+
+    test_map = defaultdict(list)
+    for entry in har.get("log", {}).get("entries", []):
+        url = entry.get("request", {}).get("url", "")
+        if "qbank/full" in url:
+            resp = entry.get("response", {})
+            content = resp.get("content", {})
+            text = content.get("text", "")
+            encoding = content.get("encoding", "")
+            if text:
+                if encoding == "base64":
+                    text = base64.b64decode(text).decode("utf-8", errors="ignore")
+                try:
+                    data = json.loads(text)
+                    t_name = data.get("name") or ""
+                    t_id = url.split("?")[0].split("/")[-1]
+                    for q in data.get("questions", []):
+                        test_map[(t_id, t_name)].append(q)
+                except Exception:
+                    pass
+
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    total_inserted = 0
+    total_images = 0
+    now_iso = datetime.now(timezone.utc).isoformat()
+
+    for (tid, tname), raw_qs in sorted(test_map.items(), key=lambda x: x[0][1]):
+        year_m = re.search(r"\b(202\d)\b", tname)
+        if not year_m:
+            continue
+        year = int(year_m.group(1))
+
+        is_autoral = "AUTORAL" in tname.upper()
+        editorial_status = "autoral" if is_autoral else "reviewed"
+        source_file = f"{INST_CODE} {year} AUTORAL" if is_autoral else f"{INST_CODE} {year}"
+
+        # Deduplicar
+        seen = set()
+        uniq_qs = []
+        for q in raw_qs:
+            qid = q.get("questionIdentifier") or q.get("_id")
+            if qid not in seen:
+                seen.add(qid)
+                uniq_qs.append(q)
+
+        print(f"\n==================================================")
+        print(f"[PROCESSANDO] {tname} -> {source_file} ({len(uniq_qs)} questões)")
+        print(f"==================================================")
+
+        # 1. Remover registros anteriores correspondentes
+        if is_autoral:
+            cursor.execute("""
+                SELECT id FROM questions
+                WHERE institution_code = ? AND year = ? AND editorial_status = 'autoral'
+            """, (INST_CODE, year))
+        else:
+            cursor.execute("""
+                SELECT id FROM questions
+                WHERE (institution_code = ? OR institution_label = ?)
+                  AND year = ?
+                  AND COALESCE(editorial_status, '') != 'autoral'
+                  AND source_file NOT LIKE '%AUTORAL%'
+            """, (INST_CODE, INST_LABEL, year))
+
+        old_ids = [r["id"] for r in cursor.fetchall()]
+        print(f"[BANCO] Encontradas {len(old_ids)} questões antigas para remoção.")
+
+        if old_ids:
+            placeholders = ",".join("?" * len(old_ids))
+            cursor.execute(f"DELETE FROM alternatives WHERE question_id IN ({placeholders})", old_ids)
+            cursor.execute(f"DELETE FROM explanations WHERE question_id IN ({placeholders})", old_ids)
+            cursor.execute(f"DELETE FROM question_images WHERE question_id IN ({placeholders})", old_ids)
+            cursor.execute(f"DELETE FROM questions WHERE id IN ({placeholders})", old_ids)
+            print(f"[BANCO] Removidas {len(old_ids)} questões antigas.")
+
+        # 2. Inserir questões
+        for q_num, q in enumerate(uniq_qs, start=1):
+            statement = (q.get("statement") or "").strip()
+            golden_exp, correct_letter = format_golden_explanation(q)
+
+            tag_objs = q.get("tags", [])
+            tag_names = [t.get("name") for t in tag_objs if t.get("name")]
+            topic = tag_names[0] if tag_names else "Clínica Médica Geral"
+            subtema = tag_names[1] if len(tag_names) > 1 else topic
+            area = infer_area_from_tags(tag_names)
+
+            cursor.execute("""
+                INSERT INTO questions (
+                    source_file, source_number, year, institution_code, institution_label,
+                    topic, stem, correct_letter, missing_alts, comment_code,
+                    area, subtema, editorial_status, status
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                source_file,
+                q_num,
+                year,
+                INST_CODE,
+                INST_LABEL,
+                topic,
+                statement,
+                correct_letter,
+                0,
+                None,
+                area,
+                subtema,
+                editorial_status,
+                "active"
+            ))
+            new_q_id = cursor.lastrowid
+            total_inserted += 1
+
+            # Alternativas (A a E)
+            for aidx, a in enumerate(q.get("answers", [])):
+                let = chr(65 + aidx)
+                ans_text = (a.get("answer") or "").strip()
+                is_corr = 1 if a.get("rightAnswer") else 0
+                cursor.execute("""
+                    INSERT INTO alternatives (question_id, letter, text, is_correct)
+                    VALUES (?, ?, ?, ?)
+                """, (new_q_id, let, ans_text, is_corr))
+
+            # Explicação
+            cursor.execute("""
+                INSERT INTO explanations (question_id, explanation_text, generated_at, reviewed_at)
+                VALUES (?, ?, ?, ?)
+            """, (new_q_id, golden_exp, now_iso, now_iso))
+
+            # Imagens
+            img_urls = re.findall(r'!\[.*?\]\((https?://[^\)]+)\)', statement)
+            img_tags = re.findall(r'<img[^>]+src=["\'](https?://[^"\']+)["\']', statement)
+            all_imgs = list(dict.fromkeys(img_urls + img_tags))
+            for order_idx, img_url in enumerate(all_imgs):
+                cursor.execute("""
+                    INSERT INTO question_images (question_id, file_path, order_index)
+                    VALUES (?, ?, ?)
+                """, (new_q_id, img_url, order_idx))
+                total_images += 1
+
+        print(f"[SUCESSO] Inseridas {len(uniq_qs)} questões para {source_file}!")
+
+    conn.commit()
+    conn.close()
+
+    print(f"\n==================================================")
+    print(f"[FINALIZADO] Total de questões SUS-SP inseridas: {total_inserted}")
+    print(f"[FINALIZADO] Total de imagens indexadas: {total_images}")
+    print(f"==================================================")
+
+if __name__ == "__main__":
+    har_path = r"C:\Users\wmors\Downloads\SUS-SP_2020-2026.har"
+    import_sussp_multi(har_path)

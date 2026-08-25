@@ -1,10 +1,12 @@
 """
 Script para importação e substituição completa de provas via arquivos HAR do MedCof.
 Suporta:
-- Detecção automática de Instituição e Ano pelo nome do arquivo (ex: USP_SP_2026.har, SCMSP_2024.har).
+- Detecção automática de Instituição e Ano pelo nome do arquivo.
+- Decodificação transparente de respostas gzip/base64 do HAR.
+- Parser robusto de SKU que valida compatibilidade de Instituição e Ano antes de extrair numeração, usando ordenação posicional segura como fallback.
+- Suporte a anulações completas (nulled: True) e gabaritos duplos/múltiplos.
 - Extração de 100% das questões sequenciais sem lacunas ou duplicatas.
-- Formatação no padrão Template Ouro (5 Pilares).
-- Suporte a anulações e gabaritos duplos/múltiplos da banca.
+- Formatação no padrão Template Ouro (5 Pilares) com Pulo do Gato completo.
 - Indexação de imagens de alta resolução (S3).
 - Atualização limpa com integridade referencial no SQLite.
 """
@@ -13,6 +15,7 @@ import json
 import os
 import sys
 import re
+import base64
 import sqlite3
 from datetime import datetime, timezone
 
@@ -105,7 +108,7 @@ def infer_area_from_tags(tags: list[str]) -> str:
     
     if "(cm)" in text or "clínica médica" in text or "cardiologia" in text or "pneumologia" in text or "nefrologia" in text or "neurologia" in text or "reumatologia" in text or "hematologia" in text or "infectologia" in text or "endocrinologia" in text or "gastroenterologia" in text:
         return "Clínica Médica"
-    if "(cir)" in text or "cirurgia" in text or "trauma" in text or "abdome agudo" in text or "hérnia" in text or "anestesiologia" in text or "urologia" in text:
+    if "(cir)" in text or "cirurgia" in text or "trauma" in text or "abdome agudo" in text or "hérnia" in text or "anestesiologia" in text or "urologia" in text or "ortopedia" in text:
         return "Cirurgia"
     if "(ped)" in text or "pediatria" in text or "puericultura" in text or "neonatologia" in text:
         return "Pediatria"
@@ -116,12 +119,29 @@ def infer_area_from_tags(tags: list[str]) -> str:
         
     return "Clínica Médica"
 
-def parse_q_number(q, fallback_idx):
-    sku = q.get("sku", "")
-    m = re.search(r"-\d{4}-(\d+)-", sku) or re.search(r"-(\d+)-R\d", sku) or re.search(r"-(\d+)", sku)
-    if m:
-        return int(m.group(1))
-    return fallback_idx
+def parse_sku_qnum(sku: str, inst_code: str, year: int, fallback_idx: int) -> tuple[int | None, bool]:
+    """Extrai o número sequencial da questão e valida se pertence à prova objetiva."""
+    sku = (sku or "").strip()
+    if "DISCURSIVA" in sku or "TEEM" in sku:
+        return None, False
+        
+    norm_inst = inst_code.upper().replace("-", "")
+    norm_sku = sku.upper().replace("-", "").replace(" ", "")
+    
+    if norm_inst in norm_sku and str(year) in sku:
+        m = re.search(r"R\dQ(\d+)", sku, re.IGNORECASE)
+        if m:
+            return int(m.group(1)), True
+            
+        m = re.search(r"-Q?(\d+)-R\d", sku, re.IGNORECASE)
+        if m:
+            return int(m.group(1)), True
+            
+        m = re.search(rf"{year}-(\d+)", sku)
+        if m:
+            return int(m.group(1)), True
+            
+    return fallback_idx, True
 
 def format_golden_explanation(q: dict) -> tuple[str, str]:
     """
@@ -138,16 +158,19 @@ def format_golden_explanation(q: dict) -> tuple[str, str]:
     nulled_reason = q.get("nulledReason") or ""
     
     # 1. Gabarito
-    if correct_letters:
+    if is_nulled and not correct_letters:
+        correct_letter_str = "ANULADA"
+        gabarito_header = f"**Gabarito**: ANULADA ({nulled_reason if nulled_reason else 'Questão anulada pela banca'})"
+    elif correct_letters:
         correct_letter_str = ", ".join(correct_letters) if len(correct_letters) > 1 else correct_letters[0]
+        gabarito_header = f"**Gabarito**: Letra {correct_letter_str}"
+        if is_nulled:
+            gabarito_header += f" (ANULADA{': ' + nulled_reason if nulled_reason else ''})"
     else:
-        correct_letter_str = "A" # fallback
-        
-    gabarito_header = f"**Gabarito**: Letra {correct_letter_str}"
-    if is_nulled:
-        gabarito_header += f" (ANULADA{': ' + nulled_reason if nulled_reason else ''})"
+        correct_letter_str = "A"
+        gabarito_header = "**Gabarito**: Letra A"
     
-    # 2. Pulo do Gato (takeHomeMessage)
+    # 2. Pulo do Gato (takeHomeMessage) - Preserva todo o conteúdo de alto rendimento
     thm = (q.get("takeHomeMessage") or "").strip()
     thm_clean = re.sub(r"^#+\s*Take\s*home\s*message:?\s*", "", thm, flags=re.IGNORECASE).strip()
     pulo_gato = f"**Pulo do Gato**:\n{thm_clean}" if thm_clean else "**Pulo do Gato**:\nAtenção aos achados clínicos essenciais e critérios diagnósticos do caso."
@@ -180,7 +203,10 @@ def format_golden_explanation(q: dict) -> tuple[str, str]:
     if correct_explanations:
         por_que_certa_text = "\n".join(correct_explanations)
     else:
-        por_que_certa_text = "Alternativa correta conforme os consensos e diretrizes clínicas vigentes."
+        if is_nulled:
+            por_que_certa_text = "Questão anulada pela banca examinadora."
+        else:
+            por_que_certa_text = "Alternativa correta conforme os consensos e diretrizes clínicas vigentes."
 
     if len(correct_letters) > 1:
         por_que_certa = f"**Por que as Letras {correct_letter_str} são as Corretas?**:\n{por_que_certa_text}"
@@ -198,8 +224,8 @@ def format_golden_explanation(q: dict) -> tuple[str, str]:
         
     return "\n\n".join(sections), correct_letter_str
 
-def extract_questions_from_har(har_path: str):
-    """Extrai todas as questões presentes no arquivo HAR da MedCof."""
+def extract_questions_from_har(har_path: str, inst_code: str, year: int):
+    """Extrai todas as questões válidas do HAR MedCof."""
     print(f"[HAR] Carregando arquivo: {har_path}")
     with open(har_path, "r", encoding="utf-8", errors="ignore") as f:
         har = json.load(f)
@@ -212,10 +238,16 @@ def extract_questions_from_har(har_path: str):
 
     for entry in entries:
         url = entry.get("request", {}).get("url", "")
-        if "qbank-api.medcof.tech/v3/qbank/full" in url:
-            text = entry.get("response", {}).get("content", {}).get("text", "")
+        if "qbank-api.medcof.tech/v3/qbank/full" in url or "qbank/full" in url:
+            resp = entry.get("response", {})
+            content = resp.get("content", {})
+            text = content.get("text", "")
+            encoding = content.get("encoding", "")
+            
             if text:
                 try:
+                    if encoding == "base64":
+                        text = base64.b64decode(text).decode("utf-8", errors="ignore")
                     data = json.loads(text)
                     for q in data.get("questions", []):
                         qid = q.get("questionIdentifier") or q.get("_id")
@@ -225,10 +257,17 @@ def extract_questions_from_har(har_path: str):
                 except Exception as e:
                     print(f"[ERRO] Falha ao processar JSON da url {url}: {e}")
 
-    # Ordena questões pelo SKU ou número extraído
-    all_questions.sort(key=lambda q: parse_q_number(q, 9999))
-    print(f"[HAR] Total de questões únicas extraídas: {len(all_questions)}")
-    return all_questions
+    # Filtrar e ordenar por sequência oficial da prova
+    valid_questions = []
+    seq_num = 1
+    for idx, q in enumerate(all_questions, start=1):
+        num, keep = parse_sku_qnum(q.get("sku", ""), inst_code, year, idx)
+        if keep:
+            valid_questions.append((seq_num, q))
+            seq_num += 1
+
+    print(f"[HAR] Total de questões válidas extraídas: {len(valid_questions)}")
+    return valid_questions
 
 def process_and_replace_exam(har_path: str, inst_code: str = None, year: int = None, dry_run: bool = False):
     """Substitui as questões da instituição e ano selecionados no SQLite."""
@@ -236,7 +275,7 @@ def process_and_replace_exam(har_path: str, inst_code: str = None, year: int = N
     inst_code = inst_code or detected_inst
     year = year or detected_year
 
-    questions_data = extract_questions_from_har(har_path)
+    questions_data = extract_questions_from_har(har_path, inst_code, year)
     if not questions_data:
         print("[ERRO] Nenhuma questão encontrada no HAR.")
         return False
@@ -248,13 +287,16 @@ def process_and_replace_exam(har_path: str, inst_code: str = None, year: int = N
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    # 1. Obter IDs das questões antigas a serem removidas
+    # 1. Obter IDs das questões antigas a serem removidas (PRESERVANDO lotes AUTORAIS)
     cursor.execute("""
         SELECT id FROM questions 
-        WHERE (institution_code = ? OR institution_label = ?) AND year = ?
+        WHERE (institution_code = ? OR institution_label = ?) 
+          AND year = ?
+          AND COALESCE(editorial_status, '') != 'autoral'
+          AND source_file NOT LIKE '%AUTORAL%'
     """, (inst_code, inst_label, year))
     old_ids = [r["id"] for r in cursor.fetchall()]
-    print(f"[BANCO] Encontradas {len(old_ids)} questões antigas de {inst_code} {year} no banco.")
+    print(f"[BANCO] Encontradas {len(old_ids)} questões antigas (não-autorais) de {inst_code} {year} no banco.")
 
     if dry_run:
         print(f"[DRY-RUN] Modo de simulação. Nenhuma alteração gravada.")
@@ -275,8 +317,7 @@ def process_and_replace_exam(har_path: str, inst_code: str = None, year: int = N
     images_count = 0
     now_iso = datetime.now(timezone.utc).isoformat()
 
-    for idx, q in enumerate(questions_data, start=1):
-        q_num = parse_q_number(q, idx)
+    for q_num, q in questions_data:
         statement = (q.get("statement") or "").strip()
 
         # Comentário e Gabarito

@@ -46,7 +46,7 @@ NÃO inclua notas ou raciocínio em inglês. Comece imediatamente com **Gabarito
 [EXEMPLO DE ESTRUTURA PADRÃO]
 **Gabarito**: Letra [X]
 
-**Pulo do Gato**: [1 a 2 frases curtas com a âncora diagnóstica, mnemônico ou regra rápida para fixação em 5 segundos]
+**Pulo do Gato**: [Âncora diagnóstica, mnemônico, síntese prática de alta relevância ou regras de decisão essenciais para a questão. Não precisa se limitar a 1 ou 2 frases; o foco primordial é máxima relevância clínica e valor pedagógico/prático para a prova]
 
 **Raciocínio Clínico**: [Síntese do caso, diagnóstico sindrômico/topográfico e integração fisiopatológica dos dados antes da análise das alternativas]
 
