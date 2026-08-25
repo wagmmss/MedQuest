@@ -14,6 +14,7 @@ import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 import { SubjectTreeSelector } from "@/components/SubjectTreeSelector";
 import { ImageViewer } from "@/components/ImageViewer";
 import { ExplanationViewer } from "@/components/ExplanationViewer";
+import { FormattedContent } from "@/components/FormattedContent";
 import { useZenMode } from "@/hooks/useZenMode";
 import Image from "next/image";
 import {
@@ -1191,9 +1192,11 @@ export function QuizClient({
               <h4 className="text-sm font-bold text-primary uppercase tracking-wider flex items-center gap-2">
                 <BookOpen size={18} /> Caso Clínico
               </h4>
-              <div className="text-foreground text-lg leading-relaxed whitespace-pre-wrap">
-                {q.clinical_case.stem}
-              </div>
+              <FormattedContent 
+                content={q.clinical_case.stem} 
+                onImageClick={setEnlargedImage} 
+                className="text-foreground text-lg leading-relaxed" 
+              />
               {q.clinical_case.images && q.clinical_case.images.length > 0 && (
                 <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-2">
                   {q.clinical_case.images.map((img, i) => (
@@ -1267,9 +1270,11 @@ export function QuizClient({
             </div>
             
 
-            <div className="text-foreground text-lg md:text-xl font-medium leading-relaxed whitespace-pre-wrap">
-              {q.stem}
-            </div>
+            <FormattedContent 
+              content={q.stem} 
+              onImageClick={setEnlargedImage} 
+              className="text-foreground text-lg md:text-xl font-medium leading-relaxed" 
+            />
 
             {q.images && q.images.length > 0 && (
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-6">

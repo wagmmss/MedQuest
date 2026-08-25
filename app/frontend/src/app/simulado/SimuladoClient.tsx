@@ -13,6 +13,7 @@ import { LEARNING_SESSION_VERSION, readLearningSession, writeLearningSession, re
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
 import { ExplanationViewer } from "@/components/ExplanationViewer";
+import { FormattedContent } from "@/components/FormattedContent";
 import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
 import { AutoSizer } from "react-virtualized-auto-sizer";
 import Image from "next/image";
@@ -1220,9 +1221,11 @@ export function SimuladoClient({
               {qDetail.clinical_case && (
                 <div className="bg-muted/30 border-l-4 border-primary rounded-r-xl p-5 mb-6">
                   <h4 className="text-sm font-bold text-primary mb-3 uppercase tracking-wider">Caso Clínico</h4>
-                  <div className="text-foreground text-lg leading-relaxed whitespace-pre-wrap">
-                    {qDetail.clinical_case.stem}
-                  </div>
+                  <FormattedContent 
+                    content={qDetail.clinical_case.stem} 
+                    onImageClick={setEnlargedImage} 
+                    className="text-foreground text-lg leading-relaxed" 
+                  />
                   {qDetail.clinical_case.images && qDetail.clinical_case.images.length > 0 && (
                     <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-4">
                       {qDetail.clinical_case.images.map((img, i) => (
@@ -1246,9 +1249,11 @@ export function SimuladoClient({
                 </div>
               )}
               
-              <div className="text-foreground text-lg leading-relaxed whitespace-pre-wrap mb-8">
-                {qDetail.stem}
-              </div>
+              <FormattedContent 
+                content={qDetail.stem} 
+                onImageClick={setEnlargedImage} 
+                className="text-foreground text-lg leading-relaxed mb-8" 
+              />
 
               {qDetail.images && qDetail.images.length > 0 && (
                 <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">

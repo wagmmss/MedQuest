@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { api } from "@/lib/api";
 import toast from "react-hot-toast";
+import { FormattedContent } from "@/components/FormattedContent";
 
 interface ExplanationViewerProps {
   explanation: string | null | undefined;
@@ -370,7 +371,7 @@ export function ExplanationViewer({
               <span>Pulo do Gato</span>
             </div>
             <div className="text-foreground text-sm md:text-base leading-relaxed font-medium">
-              {renderInlineFormattedText(parsed.puloDoGato, setEnlargedImage)}
+              <FormattedContent content={parsed.puloDoGato} onImageClick={setEnlargedImage} />
             </div>
           </div>
         )}
@@ -382,8 +383,8 @@ export function ExplanationViewer({
               <Stethoscope size={18} className="shrink-0" />
               <span>Raciocínio Clínico</span>
             </div>
-            <div className="text-foreground text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-              {renderInlineFormattedText(parsed.raciocinioClinico, setEnlargedImage)}
+            <div className="text-foreground text-sm md:text-base leading-relaxed">
+              <FormattedContent content={parsed.raciocinioClinico} onImageClick={setEnlargedImage} />
             </div>
           </div>
         )}
@@ -397,8 +398,8 @@ export function ExplanationViewer({
                 Alternativa Correta {parsed.alternativaCorreta.letter ? `(${parsed.alternativaCorreta.letter})` : (correctLetter ? `(${correctLetter})` : "")}
               </span>
             </div>
-            <div className="text-foreground text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-              {renderInlineFormattedText(parsed.alternativaCorreta.text, setEnlargedImage)}
+            <div className="text-foreground text-sm md:text-base leading-relaxed">
+              <FormattedContent content={parsed.alternativaCorreta.text} onImageClick={setEnlargedImage} />
             </div>
           </div>
         )}
@@ -420,8 +421,8 @@ export function ExplanationViewer({
                     <span className="flex h-6 min-w-6 items-center justify-center rounded-md bg-rose-500/15 text-rose-700 dark:text-rose-400 font-bold text-xs shrink-0 mt-0.5">
                       {dist.letter}
                     </span>
-                    <div className="text-sm md:text-base text-foreground leading-relaxed">
-                      {renderInlineFormattedText(dist.text, setEnlargedImage)}
+                    <div className="text-sm md:text-base text-foreground leading-relaxed flex-1">
+                      <FormattedContent content={dist.text} onImageClick={setEnlargedImage} />
                     </div>
                   </div>
                 </div>
@@ -453,8 +454,8 @@ export function ExplanationViewer({
   // Fallback: render formatted raw markdown
   return (
     <div className="space-y-4">
-      <div className="text-foreground text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-        {renderInlineFormattedText(parsed.fallbackText || "", setEnlargedImage)}
+      <div className="text-foreground text-sm md:text-base leading-relaxed">
+        <FormattedContent content={parsed.fallbackText || ""} onImageClick={setEnlargedImage} />
       </div>
 
       {medicalReferences && (
