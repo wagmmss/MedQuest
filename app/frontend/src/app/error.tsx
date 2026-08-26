@@ -1,7 +1,7 @@
 "use client";
 
 import { AlertTriangle, RefreshCcw } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Error({
   error,
@@ -10,6 +10,8 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const [isRetrying, setIsRetrying] = useState(false);
+
   useEffect(() => {
     console.error(error);
     void fetch("/api/logs/error", {
@@ -23,6 +25,14 @@ export default function Error({
     }).catch(() => undefined);
   }, [error]);
 
+  const retry = () => {
+    setIsRetrying(true);
+    reset();
+    // `reset` only retries the current error boundary. Reloading also fetches
+    // fresh route data when the failure originated from a stale request/cache.
+    window.location.reload();
+  };
+
   return (
     <div className="flex-1 flex flex-col items-center justify-center min-h-[400px] p-6 text-center animate-in fade-in duration-300">
       <div className="bg-destructive/10 p-4 rounded-full mb-4">
@@ -33,11 +43,13 @@ export default function Error({
         Não foi possível carregar os dados no momento. Tente novamente em alguns instantes.
       </p>
       <button
-        onClick={() => reset()}
-        className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition-colors font-medium"
+        type="button"
+        onClick={retry}
+        disabled={isRetrying}
+        className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition-colors font-medium disabled:cursor-wait disabled:opacity-70"
       >
-        <RefreshCcw size={16} />
-        Tentar novamente
+        <RefreshCcw className={isRetrying ? "animate-spin" : undefined} size={16} />
+        {isRetrying ? "Recarregando..." : "Tentar novamente"}
       </button>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AlertTriangle, Home, RotateCcw } from "lucide-react";
 import Link from "next/link";
 
@@ -11,6 +11,8 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const [isRetrying, setIsRetrying] = useState(false);
+
   useEffect(() => {
     // Log error to backend
     const logError = async () => {
@@ -31,6 +33,12 @@ export default function GlobalError({
     logError();
   }, [error]);
 
+  const retry = () => {
+    setIsRetrying(true);
+    reset();
+    window.location.reload();
+  };
+
   return (
     <html lang="pt-BR">
       <body className="antialiased bg-background text-foreground h-screen w-screen flex flex-col items-center justify-center p-6">
@@ -49,11 +57,13 @@ export default function GlobalError({
 
           <div className="flex flex-col w-full gap-3">
             <button
-              onClick={() => reset()}
-              className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold py-3 px-4 rounded-xl hover:bg-primary/90 transition-colors"
+              type="button"
+              onClick={retry}
+              disabled={isRetrying}
+              className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold py-3 px-4 rounded-xl hover:bg-primary/90 transition-colors disabled:cursor-wait disabled:opacity-70"
             >
-              <RotateCcw size={18} />
-              Tentar Novamente
+              <RotateCcw className={isRetrying ? "animate-spin" : undefined} size={18} />
+              {isRetrying ? "Recarregando..." : "Tentar Novamente"}
             </button>
             
             <Link
