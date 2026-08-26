@@ -6,7 +6,7 @@ import Link from "next/link";
 import { PlannerWeek, PlannerProgressMap, PlannerTopic, PlannerConfig, PlannerTopicProgressMap } from "@/types/api";
 import { api } from "@/lib/api";
 import { getSubtemaDetails } from "@/lib/plannerData";
-import { Check, CalendarDays, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play, Flame, Settings2, Copy, Globe, ExternalLink, Download } from "lucide-react";
+import { Check, CalendarDays, Clock, Activity, Loader2, RotateCcw, AlertTriangle, Zap, X, Play, Flame, Settings2, ExternalLink, Download } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { PlannerWizard } from "./PlannerWizard";
@@ -157,24 +157,9 @@ export function PlannerClient({ plan, initialProgress, initialTopicProgress, war
   const [topicProgress, setTopicProgress] = useState<PlannerTopicProgressMap>(initialTopicProgress);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showCalendarModal, setShowCalendarModal] = useState(false);
-  const [copiedFeed, setCopiedFeed] = useState(false);
   const [exportingIcs, setExportingIcs] = useState(false);
   const [googleSyncing, setGoogleSyncing] = useState(false);
   const [googleSyncProgress, setGoogleSyncProgress] = useState<SyncProgress | null>(null);
-
-  const feedUrl = api.planner.getCalendarFeedUrl();
-  const googleCalendarDirectUrl = `https://calendar.google.com/calendar/r/settings/addbyurl?cid=${encodeURIComponent(feedUrl)}`;
-
-  const handleCopyFeed = async () => {
-    try {
-      await navigator.clipboard.writeText(feedUrl);
-      setCopiedFeed(true);
-      toast.success("Link do calendário copiado com sucesso!");
-      setTimeout(() => setCopiedFeed(false), 3000);
-    } catch {
-      toast.error("Não foi possível copiar o link.");
-    }
-  };
 
   const handleExportIcs = async () => {
     setExportingIcs(true);
@@ -623,37 +608,6 @@ export function PlannerClient({ plan, initialProgress, initialTopicProgress, war
                   >
                     <Download size={14} />
                     Importar Arquivo (.ics)
-                  </button>
-                </div>
-              </div>
-
-              {/* Opção 2: Assinatura Automática em Nuvem (Somente Leitura) */}
-              <div className="border border-border bg-muted/30 rounded-xl p-4 space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Globe size={18} className="text-muted-foreground" />
-                    <span className="font-bold text-sm text-foreground">Assinatura em Nuvem (Automática / Somente Leitura)</span>
-                  </div>
-                </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Adiciona como agenda externa do MedQuest. O Google atualiza automaticamente, mas os horários ficam fixos/bloqueados para edição pelo próprio Google.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-2 pt-1">
-                  <a
-                    href={googleCalendarDirectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 bg-muted hover:bg-muted/80 text-foreground font-semibold py-2.5 px-3 rounded-xl border border-border transition-all flex items-center justify-center gap-1.5 text-xs"
-                  >
-                    <ExternalLink size={14} />
-                    Assinar no Google Agenda
-                  </a>
-                  <button
-                    onClick={handleCopyFeed}
-                    className="bg-card hover:bg-muted text-foreground border border-border font-medium py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-xs"
-                  >
-                    {copiedFeed ? <Check size={14} className="text-success" /> : <Copy size={14} />}
-                    {copiedFeed ? "Copiado!" : "Copiar Link WebCal"}
                   </button>
                 </div>
               </div>
