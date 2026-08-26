@@ -279,22 +279,33 @@ def get_due_flashcards():
     db = get_db()
     now = datetime.now(timezone.utc).isoformat()
     include_all = request.args.get("all", "false").lower() == "true"
+    scope = request.args.get("scope", "due")
     limit = _bounded_int(request.args.get("limit"), 50, 1, 100)
 
     if include_all:
         rows = db.execute("""
-            SELECT f.id, f.question_id, f.front, f.back, f.next_review_date, q.stem, f.is_ai_generated
-            FROM flashcards f
-            JOIN questions q ON f.question_id = q.id
-            WHERE f.user_id = ?
+            SELECT f.id, f.question_id, f.front, f.back, f.next_review_date,
+                   f.source_context, f.is_ai_generated, q.stem, q.area, q.subtema
+            FROM flashcards f JOIN questions q ON f.question_id = q.id
+            WHERE f.user_id = ? AND (f.report_status IS NULL OR TRIM(f.report_status) = '')
             ORDER BY f.next_review_date ASC LIMIT ?
         """, (g.user_id, limit)).fetchall()
+    elif scope == "upcoming":
+        rows = db.execute("""
+            SELECT f.id, f.question_id, f.front, f.back, f.next_review_date,
+                   f.source_context, f.is_ai_generated, q.stem, q.area, q.subtema
+            FROM flashcards f JOIN questions q ON f.question_id = q.id
+            WHERE f.next_review_date > ? AND f.user_id = ?
+              AND (f.report_status IS NULL OR TRIM(f.report_status) = '')
+            ORDER BY f.next_review_date ASC LIMIT ?
+        """, (now, g.user_id, limit)).fetchall()
     else:
         rows = db.execute("""
-            SELECT f.id, f.question_id, f.front, f.back, f.next_review_date, q.stem, f.is_ai_generated
-            FROM flashcards f
-            JOIN questions q ON f.question_id = q.id
+            SELECT f.id, f.question_id, f.front, f.back, f.next_review_date,
+                   f.source_context, f.is_ai_generated, q.stem, q.area, q.subtema
+            FROM flashcards f JOIN questions q ON f.question_id = q.id
             WHERE f.next_review_date <= ? AND f.user_id = ?
+              AND (f.report_status IS NULL OR TRIM(f.report_status) = '')
             ORDER BY f.next_review_date ASC LIMIT ?
         """, (now, g.user_id, limit)).fetchall()
 
@@ -466,4 +477,3 @@ def export_anki():
             "Content-Disposition": "attachment; filename=medquest_flashcards_anki.txt"
         }
     )
-

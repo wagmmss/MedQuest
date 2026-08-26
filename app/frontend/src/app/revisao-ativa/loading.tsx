@@ -1,11 +1,11 @@
-import { Sparkles } from "lucide-react";
+import { BrainCircuit } from "lucide-react";
 
 export default function LoadingFlashcards() {
   return (
     <div className="max-w-3xl mx-auto w-full flex flex-col items-center gap-6 pb-12 animate-in fade-in duration-500">
       <div className="w-full flex items-center justify-between mb-2 opacity-50">
         <div className="flex items-center gap-2 text-purple-500 font-bold">
-          <Sparkles size={20} /> Revisão Ativa (IA)
+          <BrainCircuit size={20} /> Revisões de hoje
         </div>
         <div className="text-sm font-medium text-muted-foreground">
           Buscando...

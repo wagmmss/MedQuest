@@ -31,12 +31,18 @@ def test_flashcards_generate_and_review(client):
     assert rev_data["id"] == fid
     assert "next_review_date" in rev_data
 
+    # A fila diária não pode reapresentar um cartão recém-agendado.
+    due_after_review = client.get("/api/flashcards/review").get_json()
+    assert not any(card["id"] == fid for card in due_after_review)
+
     # Reporta flashcard
     r_rep = client.post(f"/api/flashcards/{fid}/report", json={
         "reason": "Erro de digitação no enunciado"
     })
     assert r_rep.status_code == 200
     assert r_rep.get_json()["success"] is True
+    all_visible = client.get("/api/flashcards/review?all=true").get_json()
+    assert not any(card["id"] == fid for card in all_visible)
 
 
 def test_flashcards_validation_errors(client):
@@ -95,6 +101,21 @@ def test_flashcards_duplicate_prevention(client):
 
     # Deve reutilizar o mesmo ID sem duplicar o cartão
     assert fid1 == fid2
+
+
+def test_simulado_session_is_saved(client):
+    response = client.post("/api/simulado/sessions", json={
+        "client_session_id": "session-test-123",
+        "planned_duration_seconds": 5400,
+        "elapsed_seconds": 5100,
+        "total_questions": 50,
+        "answered_count": 48,
+        "correct_count": 34,
+        "filters": {"institutions": ["USP-SP"]},
+        "area_results": [{"area": "Pediatria", "correct": 8, "total": 10}],
+    })
+    assert response.status_code == 200
+    assert response.get_json()["success"] is True
 
 
 def test_flashcards_generate_batch(client):

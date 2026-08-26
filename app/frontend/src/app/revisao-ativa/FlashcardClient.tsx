@@ -5,7 +5,7 @@ import { Flashcard } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
 import { localDb, getLocalOwnerId } from "@/lib/db";
 import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
-import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle, Download, Loader2 } from "lucide-react";
+import { Sparkles, CheckCircle2, RotateCcw, BrainCircuit, XCircle, Download, Loader2, AlertTriangle, ExternalLink, CalendarClock } from "lucide-react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -16,6 +16,11 @@ export function FlashcardClient() {
   const [flipped, setFlipped] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [exportingAnki, setExportingAnki] = useState(false);
+  const [initialDueCount, setInitialDueCount] = useState(0);
+  const [upcoming, setUpcoming] = useState<Flashcard[]>([]);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [lastScheduled, setLastScheduled] = useState<string | null>(null);
+  const [showUpcoming, setShowUpcoming] = useState(false);
 
   const handleExportAnki = async () => {
     setExportingAnki(true);
@@ -31,11 +36,17 @@ export function FlashcardClient() {
 
   const fetchDue = useCallback(async (signal?: AbortSignal) => {
     setLoading(true);
+    setLoadError(null);
     try {
-      const cards = await api.flashcards.getDue(true, signal);
+      const [cards, upcomingCards] = await Promise.all([
+        api.flashcards.getDue(false, signal),
+        api.flashcards.getUpcoming(signal),
+      ]);
       if (signal?.aborted) return;
       const normalizedCards = cards.map(normalizeFlashcard);
       setQueue(normalizedCards);
+      setInitialDueCount(normalizedCards.length);
+      setUpcoming(upcomingCards.map(normalizeFlashcard));
 
       // Migração automática de cartões legados no IndexedDB local
       if (typeof window !== "undefined" && localDb) {
@@ -52,7 +63,10 @@ export function FlashcardClient() {
         }
       }
     } catch (error) {
-      if (!signal?.aborted) console.error("Erro ao buscar flashcards", error);
+      if (!signal?.aborted) {
+        console.error("Erro ao buscar flashcards", error);
+        setLoadError("Não foi possível carregar sua fila de revisão.");
+      }
     } finally {
       if (!signal?.aborted) setLoading(false);
     }
@@ -64,9 +78,10 @@ export function FlashcardClient() {
     const currentCard = queue[0];
 
     try {
-      await api.flashcards.review(currentCard.id, confidence);
+      const result = await api.flashcards.review(currentCard.id, confidence);
       setQueue(prev => prev.slice(1));
       setFlipped(false);
+      setLastScheduled(result.next_review_date);
       if (localDb) {
         try {
           const uid = getLocalOwnerId();
@@ -193,17 +208,30 @@ export function FlashcardClient() {
         >
           <CheckCircle2 size={48} />
         </motion.div>
-        <h2 className="text-2xl font-black text-foreground mb-3 tracking-tight">Tudo Revisado!</h2>
+        <h2 className="text-2xl font-black text-foreground mb-3 tracking-tight">
+          {initialDueCount > 0 ? "Revisões de hoje concluídas" : "Nenhuma revisão vencida"}
+        </h2>
         <p className="text-muted-foreground mb-8 text-lg max-w-md">
-          Você não tem nenhum flashcard vencido no momento. Volte a estudar para gerar novos cartões com seus erros e fortalecer a memória.
+          {initialDueCount > 0
+            ? `Você revisou ${initialDueCount} ${initialDueCount === 1 ? "cartão" : "cartões"}.`
+            : "Você não tem flashcards vencidos no momento."}
         </p>
+        {loadError && (
+          <div className="mb-6 w-full rounded-xl border border-destructive/30 bg-destructive/5 p-4 text-left text-sm text-destructive flex items-center gap-2">
+            <AlertTriangle size={18} /> {loadError}
+            <button onClick={() => void fetchDue()} className="ml-auto font-bold underline">Tentar novamente</button>
+          </div>
+        )}
+        {!loadError && upcoming[0] && (
+          <p className="mb-6 text-sm text-muted-foreground flex items-center gap-2"><CalendarClock size={16} /> Próximo cartão: {new Date(upcoming[0].next_review_date).toLocaleDateString("pt-BR")}</p>
+        )}
         <div className="flex items-center gap-3 flex-wrap justify-center">
           <Link
             href="/estudar"
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:-translate-y-0.5 flex items-center gap-2 text-sm"
           >
             <span className="material-symbols-outlined text-lg" data-icon="menu_book">menu_book</span>
-            Ir para Banco de Questões
+              Estudar questões
           </Link>
           <button
             onClick={handleExportAnki}
@@ -224,23 +252,20 @@ export function FlashcardClient() {
     <div className="max-w-3xl mx-auto w-full flex flex-col items-center gap-6 pb-12">
       <div className="w-full flex items-center justify-between mb-2 flex-wrap gap-2">
         <div className="flex items-center gap-2 text-purple-500 font-bold">
-          <Sparkles size={20} /> Revisão Ativa (IA)
+          <BrainCircuit size={20} /> Revisões de hoje
         </div>
         <div className="flex items-center gap-3">
-          <button
-            onClick={handleExportAnki}
-            disabled={exportingAnki}
-            className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80 px-2.5 py-1.5 rounded-lg border border-border transition-all"
-            title="Exportar flashcards para o Anki (.txt)"
-          >
-            {exportingAnki ? <Loader2 size={13} className="animate-spin" /> : <Download size={13} />}
-            Exportar Anki (.txt)
-          </button>
           <div className="text-sm font-medium text-muted-foreground">
-            {queue.length} card{queue.length > 1 ? "s" : ""} restante{queue.length > 1 ? "s" : ""}
+            {queue.length} de {initialDueCount} restante{queue.length > 1 ? "s" : ""}
           </div>
         </div>
       </div>
+
+      {lastScheduled && (
+        <div className="w-full rounded-lg border border-success/30 bg-success/10 px-4 py-2 text-sm font-medium text-success">
+          Cartão agendado para {new Date(lastScheduled).toLocaleDateString("pt-BR")}.
+        </div>
+      )}
 
       {/* Cartão */}
       <div 
@@ -251,9 +276,9 @@ export function FlashcardClient() {
         tabIndex={0}
         aria-label={flipped ? "Flashcard revelado" : "Clique para revelar o flashcard"}
       >
-        {current.is_ai_generated && (
+          {current.is_ai_generated && (
           <div className="absolute top-4 left-4 text-xs font-semibold text-purple-500 bg-purple-500/10 border border-purple-500/20 px-2.5 py-1 rounded-full flex items-center gap-1.5" title="Este flashcard foi gerado e estruturado a partir do seu histórico de erros.">
-            <Sparkles size={12} /> Revisão Ativa MedQuest
+            <Sparkles size={12} /> Criado com assistência de IA
           </div>
         )}
 
@@ -288,6 +313,10 @@ export function FlashcardClient() {
                 Referência: {current.source_context}
               </p>
             )}
+            <div className="mt-4 flex flex-wrap items-center gap-3 text-xs font-semibold text-muted-foreground">
+              {(current.area || current.subtema) && <span>{[current.area, current.subtema].filter(Boolean).join(" · ")}</span>}
+              <Link href={`/estudar?id=${current.question_id}`} className="inline-flex items-center gap-1 text-primary hover:underline"><ExternalLink size={13} /> Ver questão de origem</Link>
+            </div>
           </div>
         )}
 
@@ -342,6 +371,21 @@ export function FlashcardClient() {
             <div className="flex items-center gap-2"><CheckCircle2 size={20} /> Fácil</div>
             <span className="text-[10px] font-normal opacity-80 uppercase tracking-widest mt-1">Revisa depois (3)</span>
           </button>
+        </div>
+      )}
+
+      <div className="w-full border-t border-border pt-5 flex flex-wrap items-center justify-between gap-3 text-sm">
+        <button type="button" onClick={() => setShowUpcoming(value => !value)} className="font-semibold text-primary hover:underline">
+          {showUpcoming ? "Ocultar próximos cartões" : `Ver próximos cartões${upcoming.length ? ` (${upcoming.length})` : ""}`}
+        </button>
+        <button onClick={handleExportAnki} disabled={exportingAnki} className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground">
+          {exportingAnki ? <Loader2 size={13} className="animate-spin" /> : <Download size={13} />} Exportar para Anki
+        </button>
+      </div>
+      {showUpcoming && (
+        <div className="w-full rounded-xl border border-border bg-muted/20 p-4 text-sm">
+          <p className="font-bold text-foreground mb-3">Próximos cartões — consulta apenas</p>
+          {upcoming.length ? <ul className="space-y-2 text-muted-foreground">{upcoming.slice(0, 5).map(card => <li key={card.id} className="flex justify-between gap-3"><span className="truncate">{card.source_context || card.subtema || "Flashcard"}</span><span className="shrink-0">{new Date(card.next_review_date).toLocaleDateString("pt-BR")}</span></li>)}</ul> : <p className="text-muted-foreground">Não há cartões futuros programados.</p>}
         </div>
       )}
     </div>

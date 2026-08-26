@@ -389,6 +389,8 @@ export interface Flashcard {
   stem?: string;
   source_context?: string;
   is_ai_generated?: boolean;
+  area?: string;
+  subtema?: string;
 }
 
 export interface FlashcardGenerateResponse {

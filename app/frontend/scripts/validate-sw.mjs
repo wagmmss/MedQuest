@@ -45,13 +45,21 @@ if (!swContent.includes("NetworkOnly")) {
   hasErrors = true;
 }
 
+// 4. The PWA may cache exactly one navigation shell for /estudar. The
+// questions themselves remain owner-scoped in IndexedDB, never in Workbox.
+if (!swContent.includes("medquest-study-shell")) {
+  console.error("[SW Validator ERROR] Offline study shell cache is missing in sw.js!");
+  hasErrors = true;
+}
+
 if (hasErrors) {
   console.error("[SW Validator FAILED] Service Worker contains invalid or insecure caching configuration.");
   process.exit(1);
 }
 
 console.log("[SW Validator PASSED] Service Worker is verified safe:");
-console.log(" - No user/API/page data caches found.");
+console.log(" - No API or broad page-data caches found.");
 console.log(" - medquest-image-cache present.");
 console.log(" - NetworkOnly for /api/** present.");
+console.log(" - Offline shell for /estudar present.");
 process.exit(0);

@@ -138,6 +138,16 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
 
       setDownloadProgress(100);
       setDownloadStatus("Pacote offline pronto!");
+      // Prime the only cached navigation shell while the device is online.
+      // This is deliberately limited to /estudar; API responses are never
+      // stored by the service worker and continue to use IndexedDB instead.
+      try {
+        await fetch("/estudar", { cache: "reload" });
+      } catch (error) {
+        // The question package is still usable if the shell was already
+        // cached; a transient navigation failure must not discard the download.
+        console.warn("Não foi possível atualizar a tela offline de estudo:", error);
+      }
       const nowStr = new Date().toISOString();
       localStorage.setItem("medquest_last_offline_download", nowStr);
       setLastDownloadDate(nowStr);

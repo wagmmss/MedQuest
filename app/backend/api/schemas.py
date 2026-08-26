@@ -22,6 +22,7 @@ __all__ = [
     "QuestionBatchIn",
     "ReviewIn",
     "SimuladoCustomIn",
+    "SimuladoSessionIn",
     "SynthesizeExplanationIn",
     "ValidationError",
     "validation_errors",
@@ -106,6 +107,17 @@ class SimuladoCustomIn(APIInput):
     # These options are consumed by the frontend after the question IDs are selected.
     duration_minutes: int | None = Field(default=None, ge=1, le=24 * 60)
     force_4_options: bool = False
+
+
+class SimuladoSessionIn(APIInput):
+    client_session_id: str = Field(min_length=8, max_length=100)
+    planned_duration_seconds: int = Field(ge=1, le=24 * 60 * 60)
+    elapsed_seconds: int = Field(ge=0, le=24 * 60 * 60)
+    total_questions: int = Field(ge=1, le=500)
+    answered_count: int = Field(ge=0, le=500)
+    correct_count: int = Field(ge=0, le=500)
+    filters: dict = Field(default_factory=dict)
+    area_results: list[dict] = Field(default_factory=list, max_length=20)
 
 
 class QuestionBatchIn(APIInput):

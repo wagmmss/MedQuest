@@ -264,6 +264,12 @@ def init_db(app):
                 source_context TEXT,
                 is_ai_generated INTEGER DEFAULT 0,
                 report_status TEXT)""")
+            db.execute("""CREATE TABLE IF NOT EXISTS simulado_sessions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT, client_session_id TEXT NOT NULL,
+                planned_duration_seconds INTEGER NOT NULL, elapsed_seconds INTEGER NOT NULL,
+                total_questions INTEGER NOT NULL, answered_count INTEGER NOT NULL, correct_count INTEGER NOT NULL,
+                filters_json TEXT NOT NULL, area_results_json TEXT NOT NULL, completed_at TEXT NOT NULL,
+                user_id TEXT DEFAULT '1', UNIQUE(user_id, client_session_id))""")
             existing_fc_cols = _table_cols(db, "flashcards")
             if "source_context" not in existing_fc_cols:
                 db.execute("ALTER TABLE flashcards ADD COLUMN source_context TEXT")
@@ -311,6 +317,7 @@ def init_db(app):
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_missing_alts ON questions (missing_alts)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_spaced_repetition_review ON spaced_repetition (user_id, next_review_date)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_flashcards_user_review ON flashcards (user_id, next_review_date)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_simulado_sessions_user_completed ON simulado_sessions (user_id, completed_at DESC)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area ON questions (area)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_institution ON questions (institution_code)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_year ON questions (year)")

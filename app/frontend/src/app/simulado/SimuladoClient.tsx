@@ -30,6 +30,8 @@ interface SavedSimuladoState {
   flagged: Record<number, boolean>;
   force4Options: boolean;
   queueId?: string;
+  sessionId?: string;
+  plannedDurationSeconds?: number;
   savedAt: number;
 }
 
@@ -70,6 +72,8 @@ export function SimuladoClient({
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [resultsMap, setResultsMap] = useState<Record<number, BatchAttemptResultItem>>({});
   const [queueId, setQueueId] = useState<string | undefined>(undefined);
+  const [sessionId, setSessionId] = useState<string | undefined>(undefined);
+  const [plannedDurationSeconds, setPlannedDurationSeconds] = useState(0);
   const [isSyncingOffline, setIsSyncingOffline] = useState(false);
   
   // Flashcards
@@ -95,7 +99,8 @@ export function SimuladoClient({
     institutions: [] as string[],
     years: [] as string[],
     questions_per_area: 20,
-    duration_minutes: 180,
+    duration_minutes: 300,
+    force_4_options: false,
   });
 
   const [hasSavedState, setHasSavedState] = useState(false);
@@ -120,6 +125,7 @@ export function SimuladoClient({
             years: Array.isArray(parsed.years) ? parsed.years.slice(0, 20) : prev.years,
             questions_per_area: Math.max(1, Math.min(100, Number(parsed.questions_per_area) || prev.questions_per_area)),
             duration_minutes: Math.max(15, Math.min(600, Number(parsed.duration_minutes) || prev.duration_minutes)),
+            force_4_options: typeof parsed.force_4_options === "boolean" ? parsed.force_4_options : prev.force_4_options,
           }));
         }
       } catch {
@@ -163,6 +169,9 @@ export function SimuladoClient({
       setFlagged(saved.flagged);
       setForce4Options(saved.force4Options);
       setQueueId(saved.queueId);
+      setSessionId(saved.sessionId);
+      setPlannedDurationSeconds(saved.plannedDurationSeconds || Math.max(0, saved.deadlineAt - Date.now()));
+      setShowResultsSummary(saved.state === "RESULTS");
         
       const ids = saved.queue.map((question: QuestionListItem) => question.id);
       api.questions.getBatch(ids, saved.force4Options).then(batchRes => {
@@ -191,10 +200,12 @@ export function SimuladoClient({
         flagged,
         force4Options,
         queueId,
+        sessionId,
+        plannedDurationSeconds,
         savedAt: Date.now(),
       } satisfies SavedSimuladoState);
     }
-  }, [storageReady, state, queue, answers, currentIndex, resultsMap, flagged, force4Options, queueId]);
+  }, [storageReady, state, queue, answers, currentIndex, resultsMap, flagged, force4Options, queueId, sessionId, plannedDurationSeconds]);
 
   // Load Simulado
   const startSimulado = async () => {
@@ -207,7 +218,7 @@ export function SimuladoClient({
     setState("LOADING");
     try {
       let qList: QuestionListItem[];
-      const isForce4Options = false;
+      const isForce4Options = hasCustomFilters ? false : customConfig.force_4_options;
       let durationHours = 6;
 
       if (hasCustomFilters) {
@@ -227,8 +238,10 @@ export function SimuladoClient({
       
       const calcTime = Math.round(durationHours * 60 * 60);
       setTimeLeft(calcTime);
+      setPlannedDurationSeconds(calcTime);
       deadlineRef.current = deadlineFromNow(calcTime);
       setForce4Options(isForce4Options);
+      setSessionId(crypto.randomUUID());
       
       setQueue(qList);
       setCurrentIndex(0);
@@ -298,6 +311,7 @@ export function SimuladoClient({
       });
       setResultsMap(rMap);
       setState("RESULTS");
+      setShowResultsSummary(true);
       setCurrentIndex(0); // Go back to first question to review
 
       removeLearningSession("simulado");
@@ -412,26 +426,11 @@ export function SimuladoClient({
         return;
       }
 
-      if (navigator.onLine) {
-        const res = await api.questions.submitAttemptBatch(attempts);
-        if (res && res.results) {
-          const rMap: Record<number, BatchAttemptResultItem> = {};
-          res.results.forEach(r => {
-            rMap[r.question_id] = r;
-          });
-          setResultsMap(rMap);
-          removeLearningSession("simulado");
-          setHasSavedState(false);
-          setState("RESULTS");
-          setCurrentIndex(0);
-          toast.success("Simulado corrigido com sucesso!");
-          return;
-        }
-      }
-
       const { syncManager } = await import("@/lib/sync");
       await syncManager.sync(true);
-      toast.success("Tentativa de sincronização enviada.");
+      // Reuse the queued request and its idempotency key. Reposting the batch
+      // here would record every answer twice after connectivity returns.
+      toast.success("Sincronização solicitada.");
     } catch (err) {
       if (err instanceof OfflineQueuedError) {
         toast("Ainda sem conexão com a internet. Suas respostas permanecem salvas com segurança.", { icon: "💾" });
@@ -466,6 +465,7 @@ export function SimuladoClient({
           removeLearningSession("simulado");
           setHasSavedState(false);
           setState("RESULTS");
+          setShowResultsSummary(true);
           setCurrentIndex(0);
           toast.success("Simulado sincronizado e corrigido com sucesso!");
         } else {
@@ -608,6 +608,22 @@ export function SimuladoClient({
     return Object.entries(summary).map(([area, data]) => ({ area, ...data }));
   }, [queue, answers]);
 
+  useEffect(() => {
+    if (state !== "RESULTS" || !sessionId || queue.length === 0) return;
+    const correctCount = Object.values(resultsMap).filter(result => result.is_correct).length;
+    const elapsedSeconds = Math.max(0, plannedDurationSeconds - timeLeft);
+    void api.questions.saveSimuladoSession({
+      client_session_id: sessionId,
+      planned_duration_seconds: plannedDurationSeconds || 1,
+      elapsed_seconds: elapsedSeconds,
+      total_questions: queue.length,
+      answered_count: Object.keys(answers).length,
+      correct_count: correctCount,
+      filters: hasCustomFilters ? initialFilters : customConfig,
+      area_results: areaSummary.map(row => ({ ...row, correct: queue.filter(question => question.area === row.area && resultsMap[question.id]?.is_correct).length })),
+    }).catch(() => console.warn("Não foi possível registrar o resumo do simulado."));
+  }, [state, sessionId, queue, resultsMap, answers, plannedDurationSeconds, timeLeft, hasCustomFilters, initialFilters, customConfig, areaSummary]);
+
   const navigateTo = (index: number) => {
     if (index >= 0 && index < queue.length) {
       setCurrentIndex(index);
@@ -728,14 +744,24 @@ export function SimuladoClient({
                 </p>
               </div>
             </div>
+            <div className="flex flex-wrap gap-2">
+              {[{ questions: 25, minutes: 75, label: "25 · 75 min" }, { questions: 50, minutes: 150, label: "50 · 150 min" }, { questions: 100, minutes: 300, label: "100 · 300 min" }].map(preset => (
+                <button key={preset.label} type="button" onClick={() => setCustomConfig(prev => ({ ...prev, questions_per_area: preset.questions / 5, duration_minutes: preset.minutes }))} className="rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted">
+                  {preset.label}
+                </button>
+              ))}
+            </div>
+            <label className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
+              <input type="checkbox" checked={customConfig.force_4_options} onChange={event => setCustomConfig(prev => ({ ...prev, force_4_options: event.target.checked }))} className="rounded text-primary focus:ring-primary" />
+              Adaptar questões para 4 alternativas quando possível
+            </label>
           </div>
         )}
 
         <div className="bg-warning/10 text-warning-foreground border border-warning/20 rounded-xl p-4 flex items-start gap-3 w-full max-w-lg mb-8 text-left text-sm shadow-sm">
           <AlertTriangle size={20} className="shrink-0 mt-0.5 text-warning" />
           <p className="font-medium text-warning-foreground/90">
-            Você não receberá feedback imediato ao clicar nas alternativas. 
-            O resultado e os comentários só serão exibidos ao finalizar a prova.
+            Este é um bloco cronometrado de treino. Você não receberá feedback imediato; resultado e comentários aparecem apenas ao entregar.
           </p>
         </div>
 

@@ -21,6 +21,7 @@ from .schemas import (
     QuestionBatchIn,
     ReviewIn,
     SimuladoCustomIn,
+    SimuladoSessionIn,
     SynthesizeExplanationIn,
     ValidationError,
     validation_errors,
@@ -202,6 +203,30 @@ def simulado_custom():
         out.append(d)
     random.shuffle(out)
     return jsonify(out)
+
+
+@bp.route("/simulado/sessions", methods=["POST"])
+def save_simulado_session():
+    try:
+        data = SimuladoSessionIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+    db = get_db()
+    completed_at = datetime.now(timezone.utc).isoformat()
+    with db_transaction(db, immediate=True):
+        db.execute("""INSERT INTO simulado_sessions
+            (client_session_id, planned_duration_seconds, elapsed_seconds, total_questions, answered_count,
+             correct_count, filters_json, area_results_json, completed_at, user_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(user_id, client_session_id) DO UPDATE SET
+              planned_duration_seconds=excluded.planned_duration_seconds, elapsed_seconds=excluded.elapsed_seconds,
+              total_questions=excluded.total_questions, answered_count=excluded.answered_count,
+              correct_count=excluded.correct_count, filters_json=excluded.filters_json,
+              area_results_json=excluded.area_results_json, completed_at=excluded.completed_at
+        """, (data.client_session_id, data.planned_duration_seconds, data.elapsed_seconds,
+               data.total_questions, data.answered_count, data.correct_count,
+               json.dumps(data.filters), json.dumps(data.area_results), completed_at, g.user_id))
+    return jsonify({"success": True})
 
 
 @bp.route("/search")

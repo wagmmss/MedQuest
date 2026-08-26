@@ -390,6 +390,13 @@ export const api = {
         throw err;
       }
     },
+    saveSimuladoSession: (data: {
+      client_session_id: string; planned_duration_seconds: number; elapsed_seconds: number;
+      total_questions: number; answered_count: number; correct_count: number;
+      filters: Record<string, unknown>; area_results: Array<Record<string, unknown>>;
+    }) => apiFetch<{success: boolean}>("/api/simulado/sessions", {
+      method: "POST", body: JSON.stringify(data),
+    }),
     submitAttemptBatch: (attempts: BatchAttemptItem[]) => apiFetch<BatchAttemptResult>(`/api/attempt/batch`, {
       method: "POST",
       body: JSON.stringify({ attempts })
@@ -716,7 +723,10 @@ export const api = {
         if (typeof window !== "undefined" && localDb) {
           try {
             const uid = getLocalOwnerId();
-            return await localDb.flashcards.where({ _owner_id: uid }).toArray();
+            const cards = await localDb.flashcards.where({ _owner_id: uid }).toArray();
+            if (includeAll) return cards;
+            const now = Date.now();
+            return cards.filter(card => !card.next_review_date || new Date(card.next_review_date).getTime() <= now);
           } catch (e) {
             console.error("Dexie error loading flashcards", e);
             return [];
@@ -739,6 +749,8 @@ export const api = {
         throw err;
       }
     },
+    getUpcoming: async (signal?: AbortSignal) =>
+      apiFetch<Flashcard[]>("/api/flashcards/review?scope=upcoming", { cache: 'no-store', signal }),
     review: (id: number, confidence: string) => apiFetch<{id: number, next_review_date: string}>(`/api/flashcards/${id}/review`, {
       method: "POST",
       body: JSON.stringify({ confidence })
