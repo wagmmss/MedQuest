@@ -1,8 +1,10 @@
 name: Quality, security and performance
 
 on:
-  push:
   pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
