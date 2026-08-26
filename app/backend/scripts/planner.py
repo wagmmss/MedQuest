@@ -175,10 +175,22 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
     if total_required_hours > total_available_hours:
         warning_msg = f"Você tem {total_available_hours} horas disponíveis, mas precisa de {round(total_required_hours)} horas para cobrir {'este plano' if intensive else 'todo o edital'}."
 
-    # Group by area
+    # Group by area, with topics already sorted by priority (High Yield first)
     topics_by_area = {}
     for t in all_topics:
         topics_by_area.setdefault(t['area'], []).append(t)
+
+    # Track allocated hours per area for proportional deficit balancing
+    allocated_by_area = {area: 0.0 for area in topics_by_area}
+    total_area_hours = {
+        area: sum(t["estimated_hours"] for t in topic_list)
+        for area, topic_list in topics_by_area.items()
+    }
+    total_all_hours = sum(total_area_hours.values()) or 1.0
+    target_proportions = {
+        area: total_area_hours[area] / total_all_hours
+        for area in total_area_hours
+    }
 
     plan = []
     
@@ -186,40 +198,56 @@ def generate_annual_plan(rows, start_date_str, exam_date_str, hours_per_week, in
         week_topics = []
         current_week_hours = 0.0
         
-        areas_sorted = sorted(USP_WEIGHTS.keys(), key=lambda x: USP_WEIGHTS[x], reverse=True)
-        for area in topics_by_area:
-            if area not in areas_sorted:
-                areas_sorted.append(area)
-        
-        added_in_cycle = True
-        while added_in_cycle and current_week_hours < hours_per_week:
-            added_in_cycle = False
-            for area in areas_sorted:
-                if len(topics_by_area.get(area, [])) > 0:
-                    topic = topics_by_area[area][0]
-                    # Permite um pequeno estouro de até 1.5h na semana total (não por área!)
-                    if current_week_hours + topic["estimated_hours"] <= hours_per_week + 1.5:
-                        week_topics.append(topic)
-                        current_week_hours += topic["estimated_hours"]
-                        topics_by_area[area].pop(0)
-                        added_in_cycle = True
-                        
-            # Se nenhum tópico coube, mas a semana está menos de 80% cheia, forçamos o menor tópico disponível
-            if not added_in_cycle and current_week_hours < hours_per_week * 0.8:
-                smallest = None
-                smallest_area = None
-                for area in areas_sorted:
-                    if len(topics_by_area.get(area, [])) > 0:
-                        t = topics_by_area[area][0]
-                        if smallest is None or t["estimated_hours"] < smallest["estimated_hours"]:
-                            smallest = t
-                            smallest_area = area
-                
-                if smallest:
-                    week_topics.append(smallest)
-                    current_week_hours += smallest["estimated_hours"]
-                    topics_by_area[smallest_area].pop(0)
-                    added_in_cycle = True
+        while current_week_hours < hours_per_week:
+            active_areas = [a for a, t_list in topics_by_area.items() if len(t_list) > 0]
+            if not active_areas:
+                break
+
+            # Prioritize areas with High Yield / Foco USP topics remaining
+            hy_active_areas = [
+                a for a in active_areas if topics_by_area[a][0]["priority"] >= 100
+            ]
+            candidate_areas = hy_active_areas if hy_active_areas else active_areas
+
+            # Score areas by deficit: how far below their curriculum share they currently are
+            def area_deficit_score(a):
+                curr_allocated = sum(allocated_by_area.values()) + 0.1
+                actual_share = allocated_by_area[a] / curr_allocated
+                target_share = target_proportions.get(a, 0.0)
+                deficit = target_share - actual_share
+                hy_boost = 10.0 if topics_by_area[a][0]["priority"] >= 100 else 0.0
+                return hy_boost + deficit
+
+            sorted_candidates = sorted(candidate_areas, key=area_deficit_score, reverse=True)
+
+            chosen_topic = None
+            chosen_area = None
+            for a in sorted_candidates:
+                t = topics_by_area[a][0]
+                if current_week_hours + t["estimated_hours"] <= hours_per_week + 1.5:
+                    chosen_topic = t
+                    chosen_area = a
+                    break
+
+            # If no topic fits within +1.5h and week is underfilled (<80%), pick the smallest candidate
+            if not chosen_topic:
+                if current_week_hours < hours_per_week * 0.8:
+                    sorted_by_size = sorted(
+                        candidate_areas,
+                        key=lambda a: topics_by_area[a][0]["estimated_hours"]
+                    )
+                    chosen_area = sorted_by_size[0]
+                    chosen_topic = topics_by_area[chosen_area][0]
+                else:
+                    break
+
+            if chosen_topic and chosen_area:
+                week_topics.append(chosen_topic)
+                current_week_hours += chosen_topic["estimated_hours"]
+                allocated_by_area[chosen_area] += chosen_topic["estimated_hours"]
+                topics_by_area[chosen_area].pop(0)
+            else:
+                break
                 
         if not week_topics:
             break

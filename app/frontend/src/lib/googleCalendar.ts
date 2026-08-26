@@ -128,30 +128,6 @@ export async function syncPlanToGoogleCalendarDirectly(
                   start: { dateTime: dtStart.toISOString(), timeZone: "America/Sao_Paulo" },
                   end: { dateTime: dtEnd.toISOString(), timeZone: "America/Sao_Paulo" },
                 });
-
-                // Revisão 24h
-                const rev24Start = new Date(topicDate.getTime() + 86400000);
-                rev24Start.setHours(19, 0, 0, 0);
-                const rev24End = new Date(topicDate.getTime() + 86400000);
-                rev24End.setHours(19, 30, 0, 0);
-                eventsToInsert.push({
-                  summary: `[MedQuest] 🔄 Revisão 24h: ${topic.subtema}`,
-                  description: `🔄 Revisão Ativa de 24h: ${topic.subtema}.${origin ? `\n\n🔗 Revisar: ${origin}/revisao-ativa` : ""}`,
-                  start: { dateTime: rev24Start.toISOString(), timeZone: "America/Sao_Paulo" },
-                  end: { dateTime: rev24End.toISOString(), timeZone: "America/Sao_Paulo" },
-                });
-
-                // Revisão 7d
-                const rev7Start = new Date(topicDate.getTime() + 7 * 86400000);
-                rev7Start.setHours(19, 0, 0, 0);
-                const rev7End = new Date(topicDate.getTime() + 7 * 86400000);
-                rev7End.setHours(19, 30, 0, 0);
-                eventsToInsert.push({
-                  summary: `[MedQuest] 🔄 Revisão 7d: ${topic.subtema}`,
-                  description: `🔄 Revisão Ativa de 7 dias: ${topic.subtema}.${origin ? `\n\n🔗 Revisar: ${origin}/revisao-ativa` : ""}`,
-                  start: { dateTime: rev7Start.toISOString(), timeZone: "America/Sao_Paulo" },
-                  end: { dateTime: rev7End.toISOString(), timeZone: "America/Sao_Paulo" },
-                });
               }
             }
 

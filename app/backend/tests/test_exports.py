@@ -1,4 +1,4 @@
-﻿"""Testes de exportações externas (Anki e iCalendar .ics)."""
+"""Testes de exportações externas (Anki e iCalendar .ics)."""
 import pytest
 
 
@@ -43,9 +43,10 @@ def test_export_ics_calendar(client):
     assert "VERSION:2.0" in text
     assert "BEGIN:VEVENT" in text
     assert "📖" in text or "Aula:" in text or "Semana" in text
-    assert "Revisão 24h" in text
-    assert "Revisão 7d" in text
-    assert "Revisão 30d" in text
+    # As revisões são geradas dinamicamente pelo FSRS e não devem poluir a agenda com eventos estáticos
+    assert "Revisão 24h" not in text
+    assert "Revisão 7d" not in text
+    assert "Revisão 30d" not in text
     assert "END:VCALENDAR" in text
 
 

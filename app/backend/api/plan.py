@@ -371,63 +371,6 @@ def _generate_calendar_ics_content(db, user_id):
                 "END:VEVENT",
             ])
 
-            # Evento Individual de Revisão 24h (Dia D + 1, às 19:00 - 19:30)
-            rev24_dt = topic_date + timedelta(days=1)
-            rev24_start = rev24_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%S")
-            rev24_end = rev24_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%S")
-            uid_rev24 = f"medquest-rev24-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
-            rev24_url_text = f"\\n\\n🔗 Revisar: {base_url}/revisao-ativa" if base_url else ""
-
-            ics_lines.extend([
-                "BEGIN:VEVENT",
-                f"UID:{uid_rev24}",
-                f"DTSTAMP:{now_dt}",
-                f"DTSTART:{rev24_start}",
-                f"DTEND:{rev24_end}",
-                f"SUMMARY:[MedQuest] 🔄 Revisão 24h: {subtema}",
-                f"DESCRIPTION:🔄 Revisão Ativa de 24h: {subtema}.{rev24_url_text}",
-                "STATUS:CONFIRMED",
-                "END:VEVENT",
-            ])
-
-            # Evento Individual de Revisão 7d (Dia D + 7, às 19:00 - 19:30)
-            rev7_dt = topic_date + timedelta(days=7)
-            rev7_start = rev7_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%S")
-            rev7_end = rev7_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%S")
-            uid_rev7 = f"medquest-rev7-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
-            rev7_url_text = f"\\n\\n🔗 Revisar: {base_url}/revisao-ativa" if base_url else ""
-
-            ics_lines.extend([
-                "BEGIN:VEVENT",
-                f"UID:{uid_rev7}",
-                f"DTSTAMP:{now_dt}",
-                f"DTSTART:{rev7_start}",
-                f"DTEND:{rev7_end}",
-                f"SUMMARY:[MedQuest] 🔄 Revisão 7d: {subtema}",
-                f"DESCRIPTION:🔄 Revisão Ativa de 7 dias: {subtema}.{rev7_url_text}",
-                "STATUS:CONFIRMED",
-                "END:VEVENT",
-            ])
-
-            # Evento Individual de Revisão 30d (Dia D + 30, às 19:00 - 19:30)
-            rev30_dt = topic_date + timedelta(days=30)
-            rev30_start = rev30_dt.replace(hour=19, minute=0, second=0).strftime("%Y%m%dT%H%M%S")
-            rev30_end = rev30_dt.replace(hour=19, minute=30, second=0).strftime("%Y%m%dT%H%M%S")
-            uid_rev30 = f"medquest-rev30-{w_num}-{t_idx}-{topic_id_clean}-{user_id}-{date_str}@medquest"
-            rev30_url_text = f"\\n\\n🔗 Revisar: {base_url}/revisao-ativa" if base_url else ""
-
-            ics_lines.extend([
-                "BEGIN:VEVENT",
-                f"UID:{uid_rev30}",
-                f"DTSTAMP:{now_dt}",
-                f"DTSTART:{rev30_start}",
-                f"DTEND:{rev30_end}",
-                f"SUMMARY:[MedQuest] 🔄 Revisão 30d: {subtema}",
-                f"DESCRIPTION:🔄 Revisão Ativa de 30 dias: {subtema}.{rev30_url_text}",
-                "STATUS:CONFIRMED",
-                "END:VEVENT",
-            ])
-
     ics_lines.append("END:VCALENDAR")
     return "\r\n".join(ics_lines)
 
