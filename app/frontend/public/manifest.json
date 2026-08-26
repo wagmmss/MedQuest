@@ -2,7 +2,7 @@
   "name": "MedQuest",
   "short_name": "MedQuest",
   "description": "Seu portal de saúde e gamificação",
-  "start_url": "/estudar",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0ea5e9",

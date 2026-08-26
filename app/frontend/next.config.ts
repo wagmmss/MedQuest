@@ -4,10 +4,10 @@ import withPWAInit from "@ducanh2912/next-pwa";
 const withPWA = withPWAInit({
   dest: "public",
   disable: process.env.NODE_ENV === "development",
-  // The study screen is the PWA's offline entry point. Its HTML contains only
-  // the app shell; questions and attempts remain in IndexedDB/the sync queue.
+  // The study screen is the PWA's offline fallback. Its HTML contains only the
+  // app shell; questions and attempts remain in IndexedDB/the sync queue.
   // Keeping one cached shell lets the client load the downloaded question pack
-  // when the device starts without a network connection.
+  // only after an offline navigation fails.
   cacheStartUrl: false,
   dynamicStartUrl: false,
   cacheOnFrontEndNav: false,
@@ -33,7 +33,6 @@ const withPWA = withPWAInit({
             // downloaded questions are resolved client-side from IndexedDB.
             ignoreSearch: true,
           },
-          networkTimeoutSeconds: 3,
           expiration: {
             maxEntries: 1,
             maxAgeSeconds: 60 * 60 * 24 * 30, // 30 dias
