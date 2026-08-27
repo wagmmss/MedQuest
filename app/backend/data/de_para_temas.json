@@ -1,0 +1,1035 @@
+{
+  "total_temas": 170,
+  "areas": {
+    "Cirurgia": [
+      {
+        "area": "Cirurgia",
+        "nome_original": "Abdome Agudo Inflamatório",
+        "nome_novo": "Abdome Agudo Inflamatório (Apendicite e Diverticulite Aguda)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Abdome Agudo Isquêmico",
+        "nome_novo": "Abdome Agudo Vascular e Isquemia Mesentérica",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Abdome Agudo Obstrutivo",
+        "nome_novo": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Abdome Agudo Perfurativo",
+        "nome_novo": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Abordagem Inicial (xABCDE)",
+        "nome_novo": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Afecções Benignas das Vias Biliares",
+        "nome_novo": "Litíase Biliar, Colecistite, Coledocolitíase e Colangite",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Afecções Pancreáticas",
+        "nome_novo": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Afecções Urológicas Benignas",
+        "nome_novo": "Hiperplasia Prostática Benigna (HPB) e Litíase Urinária",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Anestesia",
+        "nome_novo": "Fundamentos da Anestesiologia, Farmacologia e Bloqueios",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Aneurismas",
+        "nome_novo": "Aneurismas de Aorta Abdominal e Torácica",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Cirurgia da Obesidade",
+        "nome_novo": "Cirurgia Bariátrica e Metabólica",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Cirurgia Pediátrica",
+        "nome_novo": "Cirurgia Pediátrica e Malformações Digestivas Neonatais",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Cirurgia Torácica",
+        "nome_novo": "Cirurgia Torácica Geral e Doenças Pleurais",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Cólon e Reto na cirurgia",
+        "nome_novo": "Coloproctologia: Doenças Orificiais e Afecções Colorretais",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Cuidados e Complicações Pós-Operatórias",
+        "nome_novo": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Doença Inflamatória Intestinal",
+        "nome_novo": "Abordagem Cirúrgica das Doenças Inflamatórias Intestinais (Crohn e RCU)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Cuidados Pré-operatórios",
+        "nome_novo": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Doença arterial periférica",
+        "nome_novo": "Doença Arterial Obstrutiva Periférica e Oclusões Arteriais Agudas",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Doenças Venosas",
+        "nome_novo": "Insuficiência Venosa Crônica e Trombose Venosa Profunda (TVP)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Feridas, Enxertos e Retalhos",
+        "nome_novo": "Cicatrização, Tratamento de Feridas, Enxertos e Retalhos",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Técnica Operatória",
+        "nome_novo": "Técnica Operatória, Diérese, Hemostasia e Síntese (Fios Cirúrgicos)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Hemorragia Digestiva",
+        "nome_novo": "Hemorragia Digestiva Alta e Baixa na Emergência Cirúrgica",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Hérnias",
+        "nome_novo": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Queimaduras",
+        "nome_novo": "Atendimento ao Paciente Queimado e Reposição Volêmica",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Como cai na PED: Queimaduras",
+        "nome_novo": "Particularidades das Queimaduras na Faixa Etária Pediátrica",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Síndrome Disfágica",
+        "nome_novo": "Distúrbios Motores do Esôfago, Megaesôfago e Síndrome Disfágica",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Síndrome Dispéptica",
+        "nome_novo": "Doença do Refluxo Gastroesofágico (DRGE) e Úlcera Péptica",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Trauma Abdominal",
+        "nome_novo": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Trauma Cranioencefálico (TCE)",
+        "nome_novo": "Trauma Cranioencefálico (TCE) e Hipertensão Intracraniana",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Trauma de Face e Pescoço (Trauma Cervical e Fraturas Maxilofaciais)",
+        "nome_novo": "Trauma de Face e Pescoço (Trauma Cervical e Fraturas Maxilofaciais)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Trauma Torácico",
+        "nome_novo": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Tumores Dermatológicos",
+        "nome_novo": "Oncologia Cutânea: Melanoma, CBC e CEC",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Tumores do Aparelho Digestivo",
+        "nome_novo": "Neoplasias do Trato Gastrointestinal (Esôfago, Estômago, Pâncreas e Cólon)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Tumores Urológicos",
+        "nome_novo": "Uro-Oncologia: Câncer de Próstata, Rim, Bexiga e Testículo",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+        "nome_novo": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Ortopedia Pediátrica",
+        "nome_novo": "Ortopedia Pediátrica: Displasia do Quadril, Pé Torto e Epifisiólise",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Luxações/ Lesões Ligamentares",
+        "nome_novo": "Luxações Articulares e Lesões Ligamentares / Meniscais",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Tendinites/ Tenossinovites/ Fasceítes e Bursites",
+        "nome_novo": "Tendinopatias, Bursites e Síndromes por Sobrecarga Musculoesquelética",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Tumores Ortopédicos",
+        "nome_novo": "Neoplasias Ósseas Benignas e Sarcomas Ósseos",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Tumores Pulmonares e Do Mediastino",
+        "nome_novo": "Câncer de Pulmão, Nódulo Pulmonar Solitário e Tumores do Mediastino",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Cirurgia Cardíaca",
+        "nome_novo": "Cirurgia Cardíaca: Revascularização Miocárdica e Cirurgia Valvar",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Outras Afecções Cirurgicas de Cabeça e Pescoço",
+        "nome_novo": "Cirurgia de Cabeça e Pescoço: Afecções Cervicais Benignas e Cistos Congênitos",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Tumores de partes moles",
+        "nome_novo": "Sarcomas de Partes Moles",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Oftalmologia",
+        "nome_novo": "Emergências Oftalmológicas e Patologias Oculares Frequentes",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Polipose intestinal",
+        "nome_novo": "Polipose Adenomatosa Familiar (PAF) e Síndromes Hereditárias",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Trauma da Coluna Vertebral (TRM)",
+        "nome_novo": "Trauma Raquimedular (TRM) e Lesões Vertebrais",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Trauma de membros e extremidades",
+        "nome_novo": "Trauma Ortopédico de Extremidades e Síndrome Compartimental",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Cirurgia",
+        "nome_original": "Tumores de Cabeça e Pescoço",
+        "nome_novo": "Neoplasias de Cabeça e Pescoço e Nódulos Tireoidianos Cirúrgicos",
+        "foco_usp_high_yield": false
+      }
+    ],
+    "Clínica Médica": [
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Saúde Mental no Brasil",
+        "nome_novo": "Políticas de Saúde Mental e Atenção Psicossocial (CAPS)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Arritmias, Síncope e PCR",
+        "nome_novo": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Valvopatias e Cardiomiopatias",
+        "nome_novo": "Valvopatias Adquiridas e Miocardiopatias",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Hipertensão Arterial Sistêmica",
+        "nome_novo": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Insuficiência Cardíaca",
+        "nome_novo": "Insuficiência Cardíaca: Diagnóstico, Estadiamento e Terapia Farmacológica",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Síndrome Coronariana e Diagnósticos Diferenciais",
+        "nome_novo": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Farmacodermias e Dermatoses",
+        "nome_novo": "Dermatologia Clínica: Farmacodermias Graves, Eczemas e Psoríase",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Doenças Infectoparasitárias com Acometimento Dermatológico",
+        "nome_novo": "Dermatoses Infecciosas, Hanseníase e Leishmanioses",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Paratireoides, Suprarrenal e Outras Síndromes Endócrinas",
+        "nome_novo": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Tireoide",
+        "nome_novo": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Diabetes",
+        "nome_novo": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Síndrome Metabólica e Dislipidemia",
+        "nome_novo": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Geriatria e Demências",
+        "nome_novo": "Geriatria: Avaliação Ampla do Idoso, Síndromes Demenciais e Quedas",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Cirrose, Insuficiência Hepática e Complicações",
+        "nome_novo": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Hepatites e Doenças do Metabolismo da Bilirrubina",
+        "nome_novo": "Hepatites Virais (A, B, C) e Icterícias Metabólicas",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Infecções do Sistema Nervoso Central",
+        "nome_novo": "Meningites, Encefalites e Infecções do SNC",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Tuberculose",
+        "nome_novo": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Pneumonias e Síndromes Gripais",
+        "nome_novo": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Doenças Sexualmente Transmissíveis",
+        "nome_novo": "Infecções Sexualmente Transmissíveis (ISTs) no Adulto",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Infecções de Pele, Ossos e Partes Moles",
+        "nome_novo": "Celulite, Erisipela, Osteomielite e Infecções de Partes Moles",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Endocardite e Infecção de Corrente Sanguínea",
+        "nome_novo": "Endocardite Infecciosa e Sepse de Foco Endovascular",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "HIV e AIDS no Adulto Não Gestante",
+        "nome_novo": "Infecção pelo HIV: Diagnóstico, TARV e Infecções Oportunistas",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Síndromes Febris",
+        "nome_novo": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Glomerulopatias e Tubulopatias",
+        "nome_novo": "Síndromes Glomerulares: Nefrítica, Nefrótica e Tubulopatias",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Distúrbios Hidroeletrolíticos e Acidobásicos",
+        "nome_novo": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Insuficiência Renal",
+        "nome_novo": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Cefaleias",
+        "nome_novo": "Cefaleias Primárias (Enxaqueca, Tensional) e Secundárias de Alarme",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Síndromes Neurológicas e Fraqueza Muscular",
+        "nome_novo": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Neurointensivismo e Ética Médica",
+        "nome_novo": "Neurointensivismo, Morte Encefálica e Cuidados Críticos",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "AVC",
+        "nome_novo": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Distúrbios da Hemostasia, Desordens Trombóticas e Transfusão de Hemocomponentes",
+        "nome_novo": "Coagulopatias, Trombofilias, Púrpuras e Hemoterapia",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Onco-Hematologia",
+        "nome_novo": "Leucemias, Linfomas e Mieloma Múltiplo",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Anemias e Hemoglobinopatias",
+        "nome_novo": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Embolia Pulmonar e Hipertensão Pulmonar",
+        "nome_novo": "Tromboembolismo Pulmonar (TEP) e Hipertensão Pulmonar",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Distúrbios Obstrutivos",
+        "nome_novo": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Doenças pulmonares intersticiais",
+        "nome_novo": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Transtornos Mentais",
+        "nome_novo": "Psiquiatria: Transtornos do Humor, Ansiedade e Psicoses",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Abuso de Álcool, Tabaco e Outras Substâncias",
+        "nome_novo": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Artrites e Diagnósticos Diferenciais",
+        "nome_novo": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Colagenoses e Miopatias",
+        "nome_novo": "Lúpus Eritematoso Sistêmico (LES), Esclerose Sistêmica e Miopatias Inflamatórias",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Vasculites",
+        "nome_novo": "Vasculites Sistêmicas dos Grandes, Médios e Pequenos Vasos",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Sepse, Choque Séptico e Outros tipos de Choque",
+        "nome_novo": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Pneumointensivismo",
+        "nome_novo": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Clínica Médica",
+        "nome_original": "Intoxicações Exógenas e Acidentes por Animais Peçonhentos",
+        "nome_novo": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+        "foco_usp_high_yield": false
+      }
+    ],
+    "Ginecologia e Obstetrícia": [
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Tumores do colo uterino",
+        "nome_novo": "Câncer de Colo Uterino e Lesões Precursoras",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Pré-Natal",
+        "nome_novo": "Assistência Pré-Natal de Baixo e Alto Risco",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Rastreamento do Câncer de Colo Uterino",
+        "nome_novo": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Doenças do Corpo Uterino e Endométrio",
+        "nome_novo": "Afecções do Corpo Uterino, Endométrio e Sangramento Pós-Menopausa",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Diabetes mellitus na gravidez",
+        "nome_novo": "Diabetes Gestacional e Pré-Gestacional",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Outras doenças na gestação",
+        "nome_novo": "Condições Clínicas Intercorrentes na Gravidez",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Síndromes Hipertensivas da Gestação",
+        "nome_novo": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Hepatites virais, HIV/AIDS e outras infecções na gestação",
+        "nome_novo": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Ciclo Menstrual",
+        "nome_novo": "Fisiologia do Ciclo Menstrual e Eixo Hipotálamo-Hipófise-Ovário",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Contracepção",
+        "nome_novo": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Climatério",
+        "nome_novo": "Climatério, Menopausa e Terapia de Reposição Hormonal (TRH)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Amenorreias e Síndrome dos Ovários Policísticos",
+        "nome_novo": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Anatomia Pélvica",
+        "nome_novo": "Anatomia Cirúrgica e Estruturas Pélvicas Femininas",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Dor pélvica crônica",
+        "nome_novo": "Endometriose, Adenomiose e Dor Pélvica Crônica",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Doença Inflamatória Pélvica e Violência Sexual",
+        "nome_novo": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Vulvovaginites",
+        "nome_novo": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Infertilidade conjugal",
+        "nome_novo": "Investigação e Propêdêutica da Infertilidade Conjugal",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Doenças Benignas da Mama",
+        "nome_novo": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Tumores Malignos da Mama",
+        "nome_novo": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Medicina Fetal",
+        "nome_novo": "Medicina Fetal: RCIU, Isoimunização Rh e Gemelaridade",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Tumores dos Ovários",
+        "nome_novo": "Massas Anexiais e Neoplasias Ovarianas",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Estática fetal, Pelve e Mecanismo de Parto",
+        "nome_novo": "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Assistência ao Parto",
+        "nome_novo": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Rotura Prematura de Membranas Ovulares e Infecção Ovular",
+        "nome_novo": "Amniorrexe Prematura (RPMO) e Corioamnionite",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Trabalho de parto prematuro",
+        "nome_novo": "Trabalho de Parto Prematuro e Tocólise",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Puerpério",
+        "nome_novo": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Sangramento da Primeira Metade da Gestação",
+        "nome_novo": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Sangramento da Segunda Metade da Gestação",
+        "nome_novo": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "PALM-COEIN",
+        "nome_novo": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Sofrimento Fetal",
+        "nome_novo": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Úlceras genitais",
+        "nome_novo": "Úlceras Genitais e Infecções Sexualmente Transmissíveis na Mulher",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Incontinência Urinária e Prolapsos de Órgãos Pélvicos",
+        "nome_novo": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Patologias da Vulva e Vagina",
+        "nome_novo": "Patologias Benignas e Neoplásicas da Vulva e Vagina",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Conceitos em sexualidade",
+        "nome_novo": "Fundamentos em Sexualidade Humana e Saúde Reprodutiva",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Disfunções sexuais",
+        "nome_novo": "Disfunções Sexuais Femininas e Dispareunia",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Fístulas",
+        "nome_novo": "Fístulas Urogenitais e Retovaginais",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Ginecologia e Obstetrícia",
+        "nome_original": "Morte materna",
+        "nome_novo": "Causas de Mortalidade Materna e Estratégias de Redução",
+        "foco_usp_high_yield": false
+      }
+    ],
+    "Pediatria": [
+      {
+        "area": "Pediatria",
+        "nome_original": "Desordens do Sistema Imune",
+        "nome_novo": "Imunodeficiências, Alergias e Anafilaxia na Infância",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Cardiopatias Congênitas",
+        "nome_novo": "Cardiopatias Congênitas Cianogênicas e Acianogênicas",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+        "nome_novo": "Arritmias, Síncope e Parada Cardiorrespiratória Pediátrica (PALS)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Constipação Intestinal",
+        "nome_novo": "Constipação Intestinal Funcional e Orgânica",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Síndromes Diarreicas e Disabsortivas",
+        "nome_novo": "Diarreia Aguda, Reidratação Oral e Doenças Disabsortivas",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Desordens Genéticas e Erros Inatos do Metabolismo",
+        "nome_novo": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Infecção do Trato Urinário (ITU)",
+        "nome_novo": "Infecção do Trato Urinário (ITU) e Refluxo Vesicoureteral na Infância",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Doenças Exantemáticas",
+        "nome_novo": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Imunizações",
+        "nome_novo": "Calendário Vacinal do PNI e Imunizações Especiais",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Parasitoses",
+        "nome_novo": "Parasitoses Intestinais: Helmintíases e Protozooses",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Período Neonatal: Doenças Hematológicas",
+        "nome_novo": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Período Neonatal: Doenças Infecciosas",
+        "nome_novo": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Período Neonatal: Doenças do Metabolismo",
+        "nome_novo": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Período Neonatal: Doenças Respiratórias",
+        "nome_novo": "Neonatologia: Desconforto Respiratório e Doença da Membrana Hialina",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Período Neonatal: Doenças Neurológicas e Sensoriais",
+        "nome_novo": "Neonatologia: Asfixia Perinatal, Encefalopatia e Doenças Neurológicas",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Sala de Parto",
+        "nome_novo": "Reanimação Neonatal e Assistência em Sala de Parto",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Alojamento Conjunto e Testes de Triagem Neonatal",
+        "nome_novo": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Epilepsia e Síndromes Convulsivas",
+        "nome_novo": "Convulsão Febril, Epilepsias e Síndromes Convulsivas na Infância",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Distúrbios Carenciais",
+        "nome_novo": "Anemias Carenciais e Distúrbios de Micronutrientes (Ferro, Vitamina D)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Nutrição na Pediatria",
+        "nome_novo": "Aleitamento Materno, Alimentação Complementar e Desnutrição Infantil",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Nariz, Ouvido e Laringe",
+        "nome_novo": "Afecções de Vias Aéreas Superiores: OMA, Sinusite e Faringoamigdalite",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+        "nome_novo": "Distúrbios Obstrutivos, Asma e Bronquiolite na Infância",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Segurança e Violência na Infância",
+        "nome_novo": "Segurança Infantil, Prevenção de Acidentes e Maus-Tratos",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Avaliação e Transtornos do Comportamento na Infância e Adolescência",
+        "nome_novo": "Transtornos do Neurodesenvolvimento (TEA, TDAH) e Saúde Mental na Infância",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Distúrbios Estaturais e Puberais",
+        "nome_novo": "Baixa Estatura, Puberdade Precoce e Atraso Puberal",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Crescimento e Desenvolvimento na Infância e Adolescência",
+        "nome_novo": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Sepse Pediátrica, Choque e Ressuscitação Hemodinâmica",
+        "nome_novo": "Sepse Pediátrica, Choque e Ressuscitação Hemodinâmica",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Pediatria",
+        "nome_original": "Vasculites na Infância (Henoch-Schönlein e Kawasaki)",
+        "nome_novo": "Vasculites na Infância (Henoch-Schönlein e Kawasaki)",
+        "foco_usp_high_yield": true
+      }
+    ],
+    "Medicina Preventiva": [
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Ética médica, Bioética e Documentação",
+        "nome_novo": "Ética Médica, Bioética e Prontuários / Documentos",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Estudos Epidemiológicos (Análise Estatística e Aplicação)",
+        "nome_novo": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Estudos Epidemiológicos (Classificação)",
+        "nome_novo": "Delineamentos e Classificação dos Estudos Epidemiológicos",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Indicadores de Morbimortalidade",
+        "nome_novo": "Indicadores de Saúde e Coeficientes de Morbimortalidade",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Perfis e Indicadores demográficos",
+        "nome_novo": "Transição Demográfica e Perfis Populacionais",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Níveis de Prevenção",
+        "nome_novo": "História Natural da Doença e Níveis de Prevenção",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Aspectos Históricos do SUS",
+        "nome_novo": "História das Políticas de Saúde e Origens do SUS",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "A Evolução do SUS",
+        "nome_novo": "Legislação, Diretrizes e Evolução do SUS",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Atenção Primária à Saúde",
+        "nome_novo": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Estatística de Testes Diagnósticos",
+        "nome_novo": "Avaliação de Testes Diagnósticos e Curva ROC",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Epidemias, Endemias e Pandemias",
+        "nome_novo": "Vigilância Epidemiológica: Endemias, Epidemias e Surtos",
+        "foco_usp_high_yield": true
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Notificação",
+        "nome_novo": "Vigilância em Saúde e Notificação Compulsória (SINAN)",
+        "foco_usp_high_yield": false
+      },
+      {
+        "area": "Medicina Preventiva",
+        "nome_original": "Vigilância em Saúde do Trabalhador",
+        "nome_novo": "Saúde do Trabalhador e Doenças Ocupacionais",
+        "foco_usp_high_yield": true
+      }
+    ]
+  }
+}
