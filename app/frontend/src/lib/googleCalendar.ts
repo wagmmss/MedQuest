@@ -131,24 +131,65 @@ export async function syncPlanToGoogleCalendarDirectly(
               }
             }
 
-            // 3. Inserção progressiva dos eventos na conta do Google
+            // 3. Atualização ou inserção inteligente dos eventos na conta do Google
+            let existingEventsMap = new Map<string, string>();
+            try {
+              const existingEventsRes = await fetch(
+                `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(targetCalId)}/events?maxResults=2500`,
+                { headers: { Authorization: `Bearer ${accessToken}` } }
+              );
+              const existingEventsData = await existingEventsRes.json();
+              if (Array.isArray(existingEventsData.items)) {
+                for (const item of existingEventsData.items) {
+                  if (item.summary && item.id) {
+                    existingEventsMap.set(item.summary, item.id);
+                  }
+                }
+              }
+            } catch {
+              existingEventsMap = new Map<string, string>();
+            }
+
             const total = eventsToInsert.length;
             for (let i = 0; i < total; i++) {
               const ev = eventsToInsert[i];
+              const existingEventId = existingEventsMap.get(ev.summary);
+
               onProgress?.({
                 current: i + 1,
                 total,
-                status: `Criando evento ${i + 1} de ${total}: ${ev.summary}...`,
+                status: existingEventId
+                  ? `Atualizando evento ${i + 1} de ${total}: ${ev.summary}...`
+                  : `Criando evento ${i + 1} de ${total}: ${ev.summary}...`,
               });
 
-              await fetch(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(targetCalId)}/events`, {
-                method: "POST",
-                headers: {
-                  Authorization: `Bearer ${accessToken}`,
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(ev),
-              });
+              if (existingEventId) {
+                await fetch(
+                  `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(targetCalId)}/events/${encodeURIComponent(existingEventId)}`,
+                  {
+                    method: "PATCH",
+                    headers: {
+                      Authorization: `Bearer ${accessToken}`,
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      description: ev.description,
+                    }),
+                  }
+                );
+              } else {
+                await fetch(
+                  `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(targetCalId)}/events`,
+                  {
+                    method: "POST",
+                    headers: {
+                      Authorization: `Bearer ${accessToken}`,
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(ev),
+                  }
+                );
+              }
             }
 
             resolve({ success: true, calendarId: targetCalId });
