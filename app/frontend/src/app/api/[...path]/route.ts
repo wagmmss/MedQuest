@@ -3,7 +3,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { getGuestSession } from "@/lib/session";
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
-const UPSTREAM_TIMEOUT_MS = 15_000;
+const UPSTREAM_TIMEOUT_MS = 45_000;
 
 async function handler(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   const requestId = crypto.randomUUID();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
 import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff, RotateCcw, Brain, SlidersHorizontal, RefreshCw, Pencil } from "lucide-react";
@@ -174,9 +174,11 @@ export function QuizClient({
       if (detailRequestRef.current === requestId) {
         setCurrentDetail(detail);
       }
-    } catch {
+    } catch (err) {
+      console.error(`[QUIZ] Erro ao carregar questão ${id}:`, err);
       if (detailRequestRef.current === requestId) {
-        setDetailError("Não foi possível carregar esta questão. Verifique sua conexão e tente novamente.");
+        const msg = err instanceof Error ? err.message : "Verifique sua conexão";
+        setDetailError(`Não foi possível carregar esta questão (${msg}). Clique abaixo para tentar novamente.`);
       }
     } finally {
       if (detailRequestRef.current === requestId) setLoadingDetail(false);
@@ -246,6 +248,13 @@ export function QuizClient({
     }
   }, [loadQuestionDetail]);
 
+  // Salvaguarda: garante que, se estiver no estado PLAYING sem questão carregada ou em erro, carrega a questão atual
+  useEffect(() => {
+    if (state === "PLAYING" && !currentDetail && !loadingDetail && !detailError && queue[currentIndex]) {
+      loadQuestionDetail(queue[currentIndex].id);
+    }
+  }, [state, currentDetail, loadingDetail, detailError, queue, currentIndex, loadQuestionDetail]);
+
   useEffect(() => {
     if (currentDetail && sessionAnswers[currentDetail.id]) {
       const ans = sessionAnswers[currentDetail.id];
@@ -308,7 +317,6 @@ export function QuizClient({
         setQueue(saved.queue);
         setCurrentIndex(saved.currentIndex);
         setFilters(saved.filters);
-        setCurrentDetail(saved.currentDetail);
         setSessionAnswers(saved.sessionAnswers);
         setSelectedLetter(saved.selectedLetter);
         setUserWrittenAnswer(saved.userWrittenAnswer || "");
@@ -317,10 +325,13 @@ export function QuizClient({
         if (typeof window !== "undefined") {
           sessionStorage.setItem("medquest_active_quiz", "1");
         }
-        if (saved.currentDetail) {
+        const targetQ = saved.queue[saved.currentIndex];
+        if (targetQ && saved.currentDetail && saved.currentDetail.id === targetQ.id) {
+          setCurrentDetail(saved.currentDetail);
           detailsCacheRef.current[saved.currentDetail.id] = saved.currentDetail;
-        } else if (saved.queue[saved.currentIndex]) {
-          loadQuestionDetail(saved.queue[saved.currentIndex].id);
+        } else if (targetQ) {
+          setCurrentDetail(null);
+          loadQuestionDetail(targetQ.id);
         }
         toast.success("Sessão de estudo retomada.");
         setStorageReady(true);
@@ -351,7 +362,6 @@ export function QuizClient({
       setQueue(saved.queue);
       setCurrentIndex(saved.currentIndex);
       setFilters(saved.filters);
-      setCurrentDetail(saved.currentDetail);
       setSessionAnswers(saved.sessionAnswers);
       setSelectedLetter(saved.selectedLetter);
       setUserWrittenAnswer(saved.userWrittenAnswer || "");
@@ -360,10 +370,13 @@ export function QuizClient({
       if (typeof window !== "undefined") {
         sessionStorage.setItem("medquest_active_quiz", "1");
       }
-      if (saved.currentDetail) {
+      const targetQ = saved.queue[saved.currentIndex];
+      if (targetQ && saved.currentDetail && saved.currentDetail.id === targetQ.id) {
+        setCurrentDetail(saved.currentDetail);
         detailsCacheRef.current[saved.currentDetail.id] = saved.currentDetail;
-      } else if (saved.queue[saved.currentIndex]) {
-        loadQuestionDetail(saved.queue[saved.currentIndex].id);
+      } else if (targetQ) {
+        setCurrentDetail(null);
+        loadQuestionDetail(targetQ.id);
       }
       setHasSavedState(false);
       toast.success("Sessão de estudo retomada.");
@@ -976,7 +989,7 @@ export function QuizClient({
                 onChange={(e) => setFilters({ ...filters, area: e.target.value })}
               >
                 <option className="bg-background text-foreground" value="">Todas as Áreas</option>
-                {dynamicMeta.areas.map(a => (
+                {(dynamicMeta.areas || []).map(a => (
                   <option className="bg-background text-foreground" key={a.area} value={a.area}>{a.area} ({a.n})</option>
                 ))}
               </select>
@@ -1011,8 +1024,8 @@ export function QuizClient({
               value={filters.institution || ""}
               onChange={(e) => setFilters({ ...filters, institution: e.target.value })}
             >
-              <option className="bg-background text-foreground" value="">Todas as Instituições ({dynamicMeta.total_questions})</option>
-              {dynamicMeta.institutions.map(i => (
+              <option className="bg-background text-foreground" value="">Todas as Instituições ({dynamicMeta?.total_questions ?? 0})</option>
+              {(dynamicMeta.institutions || []).map(i => (
                 <option className="bg-background text-foreground" key={i.institution_code} value={i.institution_code}>
                   {i.institution_code} • {i.institution_label || i.institution_code} ({i.n})
                 </option>
@@ -1120,7 +1133,7 @@ export function QuizClient({
                     else delete newFilters.subtema;
                     setFilters(newFilters);
                   }}
-                  availableSubtemas={dynamicMeta.subtemas}
+                  availableSubtemas={dynamicMeta.subtemas || []}
                 /></div>}
               </div>
             </div>
@@ -1507,7 +1520,7 @@ export function QuizClient({
             )
           ) : (
             <div className="flex flex-col gap-3">
-              {q.alternatives.map((alt) => {
+              {(q.alternatives || []).map((alt) => {
                 const isSelected = selectedLetter === alt.letter;
                 const isCorrect = attemptResult?.correct_letter === alt.letter || (attemptResult && isSelected && attemptResult.is_correct);
                 const isWrong = attemptResult && isSelected && !attemptResult.is_correct;
@@ -1674,9 +1687,10 @@ export function QuizClient({
                   </h3>
                   <ExplanationViewer 
                     explanation={attemptResult.explanation} 
-                    correctLetter={attemptResult.correct_letter}
+                    correctLetter={Boolean(q.is_discursive || q.alternatives.length <= 1) ? null : attemptResult.correct_letter}
                     questionId={currentDetail?.id}
                     userLetter={selectedLetter || attemptResult.correct_letter || undefined}
+                    isDiscursive={Boolean(q.is_discursive || q.alternatives.length <= 1)}
                   />
 
                   {currentDetail?.times_wrong && currentDetail.times_wrong > 0 ? (

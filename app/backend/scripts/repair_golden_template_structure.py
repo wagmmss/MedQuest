@@ -29,14 +29,24 @@ def base_reasoning(text):
     return cleaned.strip() or "Consulte o enunciado e as alternativas para os critérios clínicos cobrados."
 
 
+def check_is_discursive(alternatives):
+    if len(alternatives) <= 1:
+        return True
+    for a in alternatives:
+        txt = (a["text"] or "").casefold()
+        if any(p in txt for p in ["questão dissertativa", "anote sua", "padrao de resposta", "padrão de resposta"]):
+            return True
+    return False
+
+
 def repair(question, alternatives, original):
     text = (original or "").strip()
     correct = question["correct_letter"] or "A"
     correct_alt = next((a["text"] for a in alternatives if a["letter"] == correct), "Alternativa indicada no gabarito oficial.")
-    is_discursive = len(alternatives) == 1 and (alternatives[0]["text"] or "").casefold().startswith("questão dissertativa")
+    is_discursive = check_is_discursive(alternatives)
     parts = [text] if text else []
 
-    if not has(text, HEADERS["gabarito"]):
+    if not is_discursive and not has(text, HEADERS["gabarito"]):
         parts.insert(0, f"**Gabarito**: Letra {correct}")
     if not has(text, HEADERS["pulo"]):
         parts.append("**Pulo do Gato**:\nIdentifique os achados determinantes do enunciado antes de escolher a conduta ou o diagnóstico.")
@@ -52,10 +62,11 @@ def repair(question, alternatives, original):
 
 
 def valid(text, alternatives):
-    required = [HEADERS["gabarito"], HEADERS["pulo"], HEADERS["raciocinio"]]
-    discursive = len(alternatives) == 1 and (alternatives[0]["text"] or "").casefold().startswith("questão dissertativa")
-    if not discursive:
-        required += [HEADERS["correta"], HEADERS["distratores"]]
+    is_discursive = check_is_discursive(alternatives)
+    if is_discursive:
+        required = [HEADERS["pulo"], HEADERS["raciocinio"]]
+    else:
+        required = [HEADERS["gabarito"], HEADERS["pulo"], HEADERS["raciocinio"], HEADERS["correta"], HEADERS["distratores"]]
     return all(has(text, item) for item in required)
 
 

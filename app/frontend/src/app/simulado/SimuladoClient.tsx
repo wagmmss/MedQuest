@@ -1387,9 +1387,10 @@ export function SimuladoClient({
                       </h3>
                       <ExplanationViewer 
                         explanation={resultsMap[qDetail.id].explanation}
-                        correctLetter={resultsMap[qDetail.id].correct_letter}
+                        correctLetter={Boolean(qDetail.is_discursive || qDetail.alternatives.length <= 1) ? null : resultsMap[qDetail.id].correct_letter}
                         questionId={qDetail.id}
                         userLetter={answers[qDetail.id] || undefined}
+                        isDiscursive={Boolean(qDetail.is_discursive || qDetail.alternatives.length <= 1)}
                       />
 
                       {!questionFlashcardsMap[qDetail.id] && !draftFlashcardsMap[qDetail.id] && (

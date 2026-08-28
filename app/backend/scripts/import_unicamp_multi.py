@@ -53,7 +53,7 @@ def format_golden_explanation(q: dict) -> tuple[str, str]:
         gabarito_header = f"**Gabarito**: ANULADA ({nulled_reason if nulled_reason else 'Questão anulada pela banca'})"
     elif is_dissertative:
         correct_letter_str = "A"
-        gabarito_header = "**Gabarito**: DISSERTATIVA / RESPOSTA CURTA (Ver Padrão de Resposta abaixo)"
+        gabarito_header = ""
     elif correct_letters:
         correct_letter_str = ", ".join(correct_letters) if len(correct_letters) > 1 else correct_letters[0]
         gabarito_header = f"**Gabarito**: Letra {correct_letter_str}"
@@ -104,7 +104,10 @@ def format_golden_explanation(q: dict) -> tuple[str, str]:
         por_que_certa = ""
         distratores_str = ""
     
-    sections = [gabarito_header, pulo_gato]
+    sections = []
+    if gabarito_header:
+        sections.append(gabarito_header)
+    sections.append(pulo_gato)
     if raciocinio:
         sections.append(raciocinio)
     if por_que_certa:
