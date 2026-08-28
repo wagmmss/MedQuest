@@ -28,7 +28,7 @@ CREATE TABLE questions(
     id INTEGER PRIMARY KEY, source_file TEXT, source_number INTEGER, year INTEGER,
     institution_code TEXT, institution_label TEXT, topic TEXT, stem TEXT,
     correct_letter TEXT, missing_alts INTEGER DEFAULT 0, area TEXT, subtema TEXT,
-    editorial_status TEXT, status TEXT DEFAULT 'active');
+    subtema_id TEXT, subtema_orig TEXT, editorial_status TEXT, status TEXT DEFAULT 'active');
 CREATE TABLE alternatives(id INTEGER PRIMARY KEY, question_id INTEGER, letter TEXT,
     text TEXT, is_correct INTEGER);
 CREATE TABLE explanations(question_id INTEGER PRIMARY KEY, explanation_text TEXT, generated_at TEXT);

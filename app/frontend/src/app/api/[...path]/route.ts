@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { getGuestSession } from "@/lib/session";
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
@@ -37,9 +37,19 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
   headers.delete("x-internal-proxy-token");
   headers.delete("x-internal-guest-id");
   headers.delete("x-request-id");
+  headers.delete("x-user-email");
 
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
+    try {
+      const user = await currentUser();
+      const email = user?.primaryEmailAddress?.emailAddress || user?.emailAddresses?.[0]?.emailAddress;
+      if (email) {
+        headers.set("X-User-Email", email);
+      }
+    } catch {
+      // Non-blocking if currentUser fails
+    }
   } else if (guestId) {
     headers.set("X-Guest-ID", guestId);
   }

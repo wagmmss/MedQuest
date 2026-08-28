@@ -3,17 +3,19 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, BatchAttemptItem, BatchAttemptResultItem, FlashcardGenerateResponse } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
-import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag, CloudOff, Sparkles, CheckCircle2 } from "lucide-react";
+import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag, CloudOff, Sparkles, CheckCircle2, Pencil } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 
 import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 import { LEARNING_SESSION_VERSION, readLearningSession, writeLearningSession, removeLearningSession, deadlineFromNow } from "@/lib/sessionState";
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
 import { ExplanationViewer } from "@/components/ExplanationViewer";
-import { FormattedContent, normalizeImageSrc } from "@/components/FormattedContent";
+import { QuestionClassificationModal } from "@/components/QuestionClassificationModal";
+import { FormattedContent, normalizeImageSrc, filterExtraImages } from "@/components/FormattedContent";
 import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
 import { AutoSizer } from "react-virtualized-auto-sizer";
 import Image from "next/image";
@@ -61,6 +63,9 @@ export function SimuladoClient({
   initialFilters?: Record<string, string | string[]>;
   meta?: QuestionMeta;
 }) {
+  const { user } = useUser();
+  const isCurator = user?.primaryEmailAddress?.emailAddress?.toLowerCase() === "moraes.wagg@gmail.com";
+  const [isClassificationModalOpen, setIsClassificationModalOpen] = useState(false);
   const [state, setState] = useState<SimuladoState>("START");
   const [queue, setQueue] = useState<QuestionListItem[]>([]);
   
@@ -858,6 +863,8 @@ export function SimuladoClient({
 
   const currentQListItem = queue[currentIndex];
   const qDetail = detailsCache[currentQListItem?.id];
+  const extraCaseImages = useMemo(() => filterExtraImages(qDetail?.clinical_case?.images, qDetail?.clinical_case?.stem), [qDetail?.clinical_case?.images, qDetail?.clinical_case?.stem]);
+  const extraStemImages = useMemo(() => filterExtraImages(qDetail?.images, qDetail?.stem), [qDetail?.images, qDetail?.stem]);
   const isReview = state === "RESULTS";
   const unansweredCount = queue.length - Object.keys(answers).length;
 
@@ -1246,6 +1253,16 @@ export function SimuladoClient({
                 <span className="bg-muted px-2 py-1 rounded">{qDetail.institution_code}{qDetail.is_autoral ? " (A)" : ""} {qDetail.year}</span>
                 <span className="bg-muted px-2 py-1 rounded">{qDetail.area}</span>
                 <span className="bg-muted px-2 py-1 rounded">{qDetail.subtema}</span>
+                {isCurator && (
+                  <button
+                    type="button"
+                    onClick={() => setIsClassificationModalOpen(true)}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded bg-primary/10 hover:bg-primary/20 text-primary border border-primary/25 transition-colors font-bold text-[11px] cursor-pointer shadow-xs"
+                    title="Editar Classificação da Questão (Curadoria)"
+                  >
+                    <Pencil size={11} /> Editar Tema
+                  </button>
+                )}
               </div>
               
               {/* Clinical Case */}
@@ -1257,9 +1274,9 @@ export function SimuladoClient({
                     onImageClick={setEnlargedImage} 
                     className="text-foreground text-lg leading-relaxed" 
                   />
-                  {qDetail.clinical_case.images && qDetail.clinical_case.images.length > 0 && (
+                  {extraCaseImages.length > 0 && (
                     <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-4">
-                      {qDetail.clinical_case.images.map((img, i) => (
+                      {extraCaseImages.map((img, i) => (
                         <div 
                           key={i} 
                           className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-xs"
@@ -1286,9 +1303,9 @@ export function SimuladoClient({
                 className="text-foreground text-lg leading-relaxed mb-8" 
               />
 
-              {qDetail.images && qDetail.images.length > 0 && (
+              {extraStemImages.length > 0 && (
                 <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
-                  {qDetail.images.map((img, i) => (
+                  {extraStemImages.map((img, i) => (
                     <div 
                       key={i} 
                       className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-sm"
@@ -1558,6 +1575,36 @@ export function SimuladoClient({
             </div>
           </div>
         </div>
+      )}
+
+      {isCurator && qDetail && (
+        <QuestionClassificationModal
+          isOpen={isClassificationModalOpen}
+          onClose={() => setIsClassificationModalOpen(false)}
+          questionId={qDetail.id}
+          currentArea={qDetail.area}
+          currentSubtema={qDetail.subtema}
+          currentTopic={qDetail.topic}
+          onSuccess={(updated) => {
+            setDetailsCache((prev) => ({
+              ...prev,
+              [qDetail.id]: {
+                ...prev[qDetail.id],
+                area: updated.area,
+                subtema: updated.subtema,
+                topic: updated.topic,
+              },
+            }));
+            setQueue((prevQueue) =>
+              prevQueue.map((item) =>
+                item.id === qDetail.id
+                  ? { ...item, area: updated.area, subtema: updated.subtema, topic: updated.topic }
+                  : item
+              )
+            );
+            toast.success("Tema da questão atualizado com sucesso!");
+          }}
+        />
       )}
     </div>
   );

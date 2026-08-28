@@ -50,22 +50,29 @@ def is_valid_uuid_v4(val: str | None) -> bool:
 # Global PyJWKClient instance to cache keys and avoid rate limits/timeouts
 jwks_client = jwt.PyJWKClient(JWKS_URL, cache_keys=True, timeout=5) if JWKS_URL else None
 
+CURATOR_EMAILS = {"moraes.wagg@gmail.com"}
+
 def require_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         from flask import current_app
         if current_app.config.get("TESTING"):
             g.user_id = getattr(g, "user_id", "1")
+            g.user_email = getattr(g, "user_email", "moraes.wagg@gmail.com")
             return f(*args, **kwargs)
 
         if request.method == "OPTIONS" or request.path == "/":
             return f(*args, **kwargs)
 
+        proxy_secret = os.environ.get("FLASK_API_PROXY_SECRET", "")
+        proxy_token = request.headers.get("X-Internal-Proxy-Token", "")
+        if proxy_secret and proxy_token and hmac.compare_digest(proxy_secret, proxy_token):
+            g.user_email = (request.headers.get("X-User-Email") or "").strip().lower()
+        else:
+            g.user_email = ""
+
         auth_header = request.headers.get("Authorization")
         if not auth_header or not auth_header.startswith("Bearer ") or auth_header == "Bearer null":
-            proxy_secret = os.environ.get("FLASK_API_PROXY_SECRET", "")
-            proxy_token = request.headers.get("X-Internal-Proxy-Token", "")
-
             if not proxy_secret or not proxy_token:
                 return jsonify({"error": "Unauthorized"}), 401
 
@@ -101,9 +108,32 @@ def require_auth(f):
             if not isinstance(sub, str) or not sub.strip():
                 return jsonify({"error": "Unauthorized"}), 401
             g.user_id = sub.strip()
+            
+            # Extract email if present in JWT claims
+            if not g.user_email:
+                if "email" in data and isinstance(data["email"], str):
+                    g.user_email = data["email"].strip().lower()
+                elif "primary_email" in data and isinstance(data["primary_email"], str):
+                    g.user_email = data["primary_email"].strip().lower()
         except Exception as exc:
             logger.info("JWT validation failed: %s", type(exc).__name__)
             return jsonify({"error": "Unauthorized"}), 401
 
         return f(*args, **kwargs)
     return decorated
+
+
+def require_curator(f):
+    @wraps(f)
+    @require_auth
+    def decorated(*args, **kwargs):
+        from flask import current_app
+        if current_app.config.get("TESTING") and getattr(g, "is_curator", True):
+            return f(*args, **kwargs)
+
+        user_email = (getattr(g, "user_email", None) or "").strip().lower()
+        if user_email not in CURATOR_EMAILS:
+            return jsonify({"error": "Forbidden: Acesso restrito para curadoria de conteúdo"}), 403
+        return f(*args, **kwargs)
+    return decorated
+

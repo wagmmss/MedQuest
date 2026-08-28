@@ -798,7 +798,7 @@
       },
       {
         "theme": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
-        "highYield": false,
+        "highYield": true,
         "dbSubtemas": [
           "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)"
         ],
@@ -838,7 +838,7 @@
       },
       {
         "theme": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
-        "highYield": false,
+        "highYield": true,
         "dbSubtemas": [
           "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)"
         ],

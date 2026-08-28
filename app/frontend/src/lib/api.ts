@@ -203,6 +203,15 @@ export const api = {
       const qs = params.toString();
       return apiFetch<QuestionMeta>(`/api/meta${qs ? `?${qs}` : ''}`, { cache: 'no-store' });
     },
+    getTaxonomy: () => apiFetch<Record<string, Record<string, string>>>("/api/taxonomy", { cache: 'force-cache' }),
+    updateClassification: (qid: number, data: { area: string; subtema: string; topic?: string }) =>
+      apiFetch<{ success: boolean; question: { id: number; area: string; subtema: string; subtema_id: string; topic: string } }>(
+        `/api/questions/${qid}/classification`,
+        {
+          method: "PATCH",
+          body: JSON.stringify(data),
+        }
+      ),
     getSubtemas: (area?: string, q?: string) => {
       const params = new URLSearchParams();
       if (area) params.append("area", area);

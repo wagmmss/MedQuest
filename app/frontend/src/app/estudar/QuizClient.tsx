@@ -3,18 +3,20 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff, RotateCcw, Brain, SlidersHorizontal, RefreshCw } from "lucide-react";
+import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff, RotateCcw, Brain, SlidersHorizontal, RefreshCw, Pencil } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useUser } from "@clerk/nextjs";
 import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 
 import { SubjectTreeSelector } from "@/components/SubjectTreeSelector";
 import { ImageViewer } from "@/components/ImageViewer";
 import { ExplanationViewer } from "@/components/ExplanationViewer";
-import { FormattedContent, normalizeImageSrc } from "@/components/FormattedContent";
+import { QuestionClassificationModal } from "@/components/QuestionClassificationModal";
+import { FormattedContent, normalizeImageSrc, filterExtraImages } from "@/components/FormattedContent";
 import { useZenMode } from "@/hooks/useZenMode";
 import Image from "next/image";
 import {
@@ -83,6 +85,9 @@ export function QuizClient({
   initialFilters?: Record<string, string>;
 }) {
   const router = useRouter();
+  const { user } = useUser();
+  const isCurator = user?.primaryEmailAddress?.emailAddress?.toLowerCase() === "moraes.wagg@gmail.com";
+  const [isClassificationModalOpen, setIsClassificationModalOpen] = useState(false);
   const hasExplicitFilters = Object.keys(initialFilters).filter(k => k !== "resume").length > 0;
   const [state, setState] = useState<QuizState>(hasExplicitFilters ? "LOADING_QUEUE" : "FILTERS");
   const [filters, setFilters] = useState<Record<string, string | string[]>>({ limit: "50", ...initialFilters });
@@ -1220,6 +1225,8 @@ export function QuizClient({
   // PLAYING STATE
   const q = currentDetail;
   const completedCount = Object.values(sessionAnswers).filter(answer => answer.result || answer.isOffline).length;
+  const extraCaseImages = useMemo(() => filterExtraImages(q?.clinical_case?.images, q?.clinical_case?.stem), [q?.clinical_case?.images, q?.clinical_case?.stem]);
+  const extraStemImages = useMemo(() => filterExtraImages(q?.images, q?.stem), [q?.images, q?.stem]);
 
   return (
     <div className="max-w-4xl mx-auto w-full flex flex-col gap-6 pb-12 relative">
@@ -1324,9 +1331,9 @@ export function QuizClient({
                 onImageClick={setEnlargedImage} 
                 className="text-foreground text-lg leading-relaxed" 
               />
-              {q.clinical_case.images && q.clinical_case.images.length > 0 && (
+              {extraCaseImages.length > 0 && (
                 <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-2">
-                  {q.clinical_case.images.map((img, i) => (
+                  {extraCaseImages.map((img, i) => (
                     <div 
                       key={i} 
                       className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-xs"
@@ -1374,6 +1381,16 @@ export function QuizClient({
                 <span className="bg-muted px-2 py-1 rounded">{q.institution_code}{q.is_autoral ? " (A)" : ""} {q.year}</span>
                 <span className="bg-muted px-2 py-1 rounded">{q.area}</span>
                 <span className="bg-muted px-2 py-1 rounded">{q.subtema}</span>
+                {isCurator && (
+                  <button
+                    type="button"
+                    onClick={() => setIsClassificationModalOpen(true)}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded bg-primary/10 hover:bg-primary/20 text-primary border border-primary/25 transition-colors font-bold text-[11px] cursor-pointer shadow-xs"
+                    title="Editar Classificação da Questão (Curadoria)"
+                  >
+                    <Pencil size={11} /> Editar Tema
+                  </button>
+                )}
               </div>
               
               <div className="flex items-center gap-3 bg-muted/30 px-3 py-1.5 rounded-lg border border-border">
@@ -1408,9 +1425,9 @@ export function QuizClient({
               className="text-foreground text-lg md:text-xl font-medium leading-relaxed" 
             />
 
-            {q.images && q.images.length > 0 && (
+            {extraStemImages.length > 0 && (
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-6">
-                {q.images.map((img, i) => (
+                {extraStemImages.map((img, i) => (
                   <div 
                     key={i} 
                     className="relative group rounded-xl overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-sm"
@@ -1901,6 +1918,26 @@ export function QuizClient({
           )}
           </div>
         </div>
+      )}
+
+      {isCurator && q && (
+        <QuestionClassificationModal
+          isOpen={isClassificationModalOpen}
+          onClose={() => setIsClassificationModalOpen(false)}
+          questionId={q.id}
+          currentArea={q.area}
+          currentSubtema={q.subtema}
+          currentTopic={q.topic}
+          onSuccess={(updated) => {
+            setCurrentDetail((prev) => (prev ? { ...prev, area: updated.area, subtema: updated.subtema, topic: updated.topic } : prev));
+            setQueue((prevQueue) =>
+              prevQueue.map((item, idx) =>
+                idx === currentIndex ? { ...item, area: updated.area, subtema: updated.subtema, topic: updated.topic } : item
+              )
+            );
+            toast.success("Tema da questão atualizado com sucesso!");
+          }}
+        />
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 """Blueprint: metadados, listagem/fila de estudo, detalhe, tentativa e favoritos."""
 import json
+import os
 import random
 import re
 import time
@@ -10,6 +11,7 @@ from flask import Blueprint, g, jsonify, request
 
 from . import srs
 from .adaptive import rank_adaptive_candidates
+from .auth import require_curator
 from .db import db_transaction, get_db
 from .filters import question_filter_clauses
 from .idempotency import complete_idempotency, fail_idempotency, reserve_idempotency
@@ -1046,10 +1048,116 @@ def synthesize_explanation(question_id):
     })
 
 
+@bp.route("/taxonomy", methods=["GET"])
+def get_taxonomy():
+    """Retorna a taxonomia canônica oficial dos 170 módulos estruturados por grande área."""
+    import os
+    backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    tax_path = os.path.join(backend_dir, "data", "canonical_taxonomy.json")
+    if os.path.exists(tax_path):
+        with open(tax_path, "r", encoding="utf-8") as f:
+            tax = json.load(f)
+            return jsonify(tax)
+    
+    # Fallback construído diretamente do banco
+    db = get_db()
+    rows = db.execute("""
+        SELECT area, subtema, subtema_id 
+        FROM questions 
+        WHERE subtema IS NOT NULL AND subtema != ''
+        GROUP BY area, subtema
+        ORDER BY area, subtema
+    """).fetchall()
+    fallback_tax = {}
+    for r in rows:
+        area, subtema, sid = r["area"], r["subtema"], r["subtema_id"]
+        if area not in fallback_tax:
+            fallback_tax[area] = {}
+        fallback_tax[area][subtema] = sid
+    return jsonify(fallback_tax)
+
+
+@bp.route("/questions/<int:qid>/classification", methods=["PATCH", "PUT"])
+@require_curator
+def update_question_classification(qid):
+    """Atualiza a classificação (área, subtema, tópico) de uma questão. Acesso restrito a curadoria."""
+    data = request.get_json(force=True) or {}
+    area = (data.get("area") or "").strip()
+    subtema = (data.get("subtema") or "").strip()
+    topic = (data.get("topic") or subtema).strip()
+
+    if not area or not subtema:
+        return jsonify({"error": "Parâmetros 'area' e 'subtema' são obrigatórios"}), 400
+
+    db = get_db()
+    q = db.execute("SELECT id FROM questions WHERE id = ?", (qid,)).fetchone()
+    if not q:
+        return jsonify({"error": "Questão não encontrada"}), 404
+
+    # Resolve subtema_id correspondente a partir da taxonomia canônica
+    subtema_id = None
+    tax_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "canonical_taxonomy.json")
+    if os.path.exists(tax_path):
+        try:
+            with open(tax_path, "r", encoding="utf-8") as f:
+                tax_data = json.load(f)
+                if area in tax_data and subtema in tax_data[area]:
+                    subtema_id = tax_data[area][subtema]
+        except Exception:
+            pass
+
+    cols = {r["name"] for r in db.execute("PRAGMA table_info(questions)").fetchall()}
+    has_subtema_id = "subtema_id" in cols
+    has_subtema_orig = "subtema_orig" in cols
+
+    with db_transaction(db, immediate=True):
+        if has_subtema_id and has_subtema_orig:
+            db.execute("""
+                UPDATE questions
+                SET area = ?,
+                    subtema = ?,
+                    subtema_id = COALESCE(?, subtema_id),
+                    topic = ?,
+                    subtema_orig = ?
+                WHERE id = ?
+            """, (area, subtema, subtema_id, topic, subtema, qid))
+        elif has_subtema_id:
+            db.execute("""
+                UPDATE questions
+                SET area = ?,
+                    subtema = ?,
+                    subtema_id = COALESCE(?, subtema_id),
+                    topic = ?
+                WHERE id = ?
+            """, (area, subtema, subtema_id, topic, qid))
+        else:
+            db.execute("""
+                UPDATE questions
+                SET area = ?,
+                    subtema = ?,
+                    topic = ?
+                WHERE id = ?
+            """, (area, subtema, topic, qid))
+
+    # Invalida todos os caches de metadados
+    meta_cache.cache.clear()
+    invalidate_user_caches(g.user_id)
+
+    return jsonify({
+        "success": True,
+        "question": {
+            "id": qid,
+            "area": area,
+            "subtema": subtema,
+            "subtema_id": subtema_id,
+            "topic": topic
+        }
+    })
+
+
 @bp.route("/images/<path:filename>")
 def serve_image(filename):
     import os
-
     from flask import send_from_directory
     backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     static_dir = os.path.join(backend_dir, "static")
@@ -1061,3 +1169,5 @@ def serve_image(filename):
     if os.path.exists(os.path.join(static_dir, "images", filename)):
         return send_from_directory(os.path.join(static_dir, "images"), filename)
     return send_from_directory(static_dir, filename)
+
+

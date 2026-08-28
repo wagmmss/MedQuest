@@ -24,6 +24,50 @@ export function normalizeImageSrc(url: string | null | undefined): string {
 }
 
 /**
+ * Extracts all image URLs/filenames referenced in a markdown text.
+ */
+export function extractImageUrlsFromMarkdown(text: string | null | undefined): Set<string> {
+  const set = new Set<string>();
+  if (!text) return set;
+  const matches = Array.from(text.matchAll(/!\[.*?\]\((.*?)\)|<img\b[^>]*\bsrc=['"]([^'"]+)['"]/gi));
+  for (const m of matches) {
+    const raw = (m[1] || m[2] || "").trim();
+    if (raw) {
+      set.add(raw);
+      set.add(normalizeImageSrc(raw));
+      const fn = raw.split("/").pop();
+      if (fn) set.add(fn);
+    }
+  }
+  return set;
+}
+
+/**
+ * Filters an array of images, removing those already embedded in the markdown text.
+ */
+export function filterExtraImages(images: string[] | null | undefined, text: string | null | undefined): string[] {
+  if (!images || !Array.isArray(images) || images.length === 0) return [];
+  const textImages = extractImageUrlsFromMarkdown(text);
+  if (textImages.size === 0) return images;
+
+  return images.filter(img => {
+    if (!img) return false;
+    const trimmed = img.trim();
+    const normalized = normalizeImageSrc(trimmed);
+    const fn = trimmed.split("/").pop() || "";
+    if (textImages.has(trimmed) || textImages.has(normalized) || (fn && textImages.has(fn))) {
+      return false;
+    }
+    for (const tImg of Array.from(textImages)) {
+      if (tImg.includes(trimmed) || trimmed.includes(tImg) || (fn && tImg.includes(fn))) {
+        return false;
+      }
+    }
+    return true;
+  });
+}
+
+/**
  * Parses inline formatting: bold (**text**), italic (*text*), math ($math$), links ([text](url)), and inline images.
  */
 function renderInline(
@@ -133,17 +177,84 @@ function renderInline(
   });
 }
 
+export function preprocessMarkdown(content: string): string {
+  if (!content) return "";
+  let raw = content.replace(/\\n/g, "\n");
+  // Unwrap **![]()** or **<img>**
+  raw = raw.replace(/\*\*(!\[.*?\]\(.*?\))\*\*/g, "\n\n$1\n\n");
+  raw = raw.replace(/\*\*(<img\b[^>]*>)\*\*/g, "\n\n$1\n\n");
+  raw = raw.replace(/\/api\/images\/images\//g, "/api/images/").trim();
+
+  // 1. Convert HTML tables if any exist
+  raw = raw.replace(/<table\b[^>]*>[\s\S]*?<\/table>/gi, (tableHtml) => {
+    const t = tableHtml.replace(/<\/?(?:table|tbody|thead)[^>]*>/gi, "");
+    const trMatches = Array.from(t.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi));
+    const rows: string[] = [];
+    if (trMatches.length > 0) {
+      for (const tr of trMatches) {
+        const cellsStr = tr[1].replace(/\s*\n\s*/g, " ").trim();
+        if (cellsStr.includes("|")) {
+          const parts = cellsStr.split("|").map(p => p.trim()).filter(Boolean);
+          rows.push("| " + parts.join(" | ") + " |");
+        } else {
+          const tds = Array.from(cellsStr.matchAll(/<(?:td|th)[^>]*>([\s\S]*?)<\/(?:td|th)>/gi));
+          if (tds.length > 0) {
+            rows.push("| " + tds.map(td => td[1].trim()).join(" | ") + " |");
+          }
+        }
+      }
+    }
+    if (rows.length > 0) {
+      const colsCount = (rows[0].match(/\|/g) || []).length - 1;
+      const hasSep = rows.some(r => /^\|\s*[-:\s|]+\s*\|$/.test(r));
+      if (!hasSep) {
+        const sepRow = "| " + Array(Math.max(1, colsCount)).fill("---").join(" | ") + " |";
+        rows.splice(1, 0, sepRow);
+      }
+      return "\n\n" + rows.join("\n") + "\n\n";
+    }
+    return tableHtml;
+  });
+
+  // 2. Convert HTML headings
+  raw = raw.replace(/<h1\b[^>]*>(.*?)<\/h1>/gi, "\n# $1\n");
+  raw = raw.replace(/<h2\b[^>]*>(.*?)<\/h2>/gi, "\n## $1\n");
+  raw = raw.replace(/<h3\b[^>]*>(.*?)<\/h3>/gi, "\n### $1\n");
+  raw = raw.replace(/<h4\b[^>]*>(.*?)<\/h4>/gi, "\n#### $1\n");
+  raw = raw.replace(/<h5\b[^>]*>(.*?)<\/h5>/gi, "\n##### $1\n");
+  raw = raw.replace(/<h6\b[^>]*>(.*?)<\/h6>/gi, "\n###### $1\n");
+
+  // 3. Convert HTML formatting to Markdown
+  raw = raw.replace(/<(?:strong|b)\b[^>]*>(.*?)<\/(?:strong|b)>/gis, "**$1**");
+  raw = raw.replace(/<(?:em|i)\b[^>]*>(.*?)<\/(?:em|i)>/gis, "*$1*");
+  raw = raw.replace(/<p\b[^>]*>(.*?)<\/p>/gis, "\n\n$1\n\n");
+  raw = raw.replace(/<br\s*\/?>/gi, "\n");
+  raw = raw.replace(/<li\b[^>]*>(.*?)<\/li>/gis, "\n* $1");
+  raw = raw.replace(/<\/?(?:ul|ol)\b[^>]*>/gi, "\n");
+  raw = raw.replace(/<\/?(?:span|div|section|article|font|center)\b[^>]*>/gi, "");
+
+  // 4. HTML Entities
+  raw = raw
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&gt;/gi, ">")
+    .replace(/&lt;/gi, "<")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&amp;/gi, "&");
+
+  // 5. Clean up boilerplate greetings
+  raw = raw.replace(/Bons estudos!Com carinho,\s*equipe pedag[oó]gica/gi, "");
+
+  return raw;
+}
+
 /**
  * Robust markdown block parser supporting tables (Katomart-style), headings, lists, quotes, and paragraphs.
  */
 export function FormattedContent({ content, className = "", onImageClick }: FormattedContentProps) {
   if (!content) return null;
 
-  let raw = content.replace(/\\n/g, "\n");
-  // Unwrap **![]()** or **<img>**
-  raw = raw.replace(/\*\*(!\[.*?\]\(.*?\))\*\*/g, "\n\n$1\n\n");
-  raw = raw.replace(/\*\*(<img\b[^>]*>)\*\*/g, "\n\n$1\n\n");
-  raw = raw.replace(/\/api\/images\/images\//g, "/api/images/").trim();
+  const raw = preprocessMarkdown(content);
   const lines = raw.split("\n");
 
   const blocks: React.ReactNode[] = [];

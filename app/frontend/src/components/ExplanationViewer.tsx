@@ -10,7 +10,7 @@ import {
   AlertCircle,
   X
 } from "lucide-react";
-import { FormattedContent } from "@/components/FormattedContent";
+import { FormattedContent, preprocessMarkdown } from "@/components/FormattedContent";
 
 interface ExplanationViewerProps {
   explanation: string | null | undefined;
@@ -47,7 +47,7 @@ function withoutReferenceSection(text: string): string {
  * Parses structured markdown explanations into distinct semantic sections
  */
 function parseExplanation(raw: string): ParsedSection {
-  const clean = withoutReferenceSection(raw.replace(/\\n/g, "\n")).trim();
+  const clean = withoutReferenceSection(preprocessMarkdown(raw)).trim();
   if (!clean) return { fallbackText: "Nenhum comentário disponível para esta questão." };
 
   const parsed: ParsedSection = {};
