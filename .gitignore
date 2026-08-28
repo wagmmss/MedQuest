@@ -59,3 +59,12 @@ app/backend/medway.har
 playwright-report/
 test-results/
 blob-report/
+
+# Ignore massive cache and garbage JSON files
+/*.json
+!/package.json
+!/tsconfig.json
+!/tslint.json
+classification_*.json
+medway_match_*.json
+medquest.db.backup*

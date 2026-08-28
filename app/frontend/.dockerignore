@@ -1,0 +1,10 @@
+node_modules/
+.next/
+*.tsbuildinfo
+.env
+.env.local
+.vercel
+playwright-report/
+test-results/
+blob-report/
+.DS_Store
