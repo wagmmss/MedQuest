@@ -159,16 +159,55 @@ def sync():
     # Recriar FTS se aplicável
     try:
         print("\n🔍 Recriando índices FTS...")
+        triggers = [
+            "trg_questions_fts_ins", "trg_questions_fts_upd", "trg_questions_fts_del",
+            "trg_explanations_fts_ins", "trg_explanations_fts_upd", "trg_explanations_fts_del"
+        ]
+        for t in triggers:
+            try:
+                execute_pipeline([make_execute(f"DROP TRIGGER IF EXISTS {t}"), make_close()])
+            except Exception:
+                pass
+
         execute_pipeline([
             make_execute("DROP TABLE IF EXISTS questions_fts"),
-            make_execute("CREATE VIRTUAL TABLE IF NOT EXISTS questions_fts USING fts5(topic, stem, area, subtema, content='questions', content_rowid='id')"),
-            make_execute("INSERT INTO questions_fts(rowid, topic, stem, area, subtema) SELECT id, topic, stem, area, subtema FROM questions"),
+            make_execute("CREATE VIRTUAL TABLE questions_fts USING fts5(stem, explanation)"),
+            make_execute("""
+                INSERT INTO questions_fts (rowid, stem, explanation)
+                SELECT q.id, q.stem, e.explanation_text
+                FROM questions q
+                LEFT JOIN explanations e ON q.id = e.question_id
+            """),
             make_execute("PRAGMA foreign_keys=ON"),
             make_close()
         ])
         print("   ✅ Índices FTS recriados com sucesso!")
     except Exception as e:
         print("   Aviso FTS:", e)
+
+    # Validação no Turso
+    print("\n=== VALIDAÇÃO FINAL NO TURSO ===")
+    res = execute_pipeline([
+        make_execute("SELECT COUNT(*) FROM questions"),
+        make_execute("SELECT COUNT(*) FROM alternatives"),
+        make_execute("SELECT COUNT(*) FROM explanations"),
+        make_execute("SELECT COUNT(*) FROM question_images"),
+        make_execute("SELECT COUNT(*) FROM questions_fts"),
+        make_close()
+    ])
+
+    results = res.get("results", [])
+    q_cnt = results[0]["response"]["result"]["rows"][0][0]["value"]
+    alt_cnt = results[1]["response"]["result"]["rows"][0][0]["value"]
+    exp_cnt = results[2]["response"]["result"]["rows"][0][0]["value"]
+    qi_cnt = results[3]["response"]["result"]["rows"][0][0]["value"]
+    fts_cnt = results[4]["response"]["result"]["rows"][0][0]["value"]
+
+    print(f"  - Questões: {q_cnt}")
+    print(f"  - Alternativas: {alt_cnt}")
+    print(f"  - Explicações: {exp_cnt}")
+    print(f"  - Imagens: {qi_cnt}")
+    print(f"  - Índice FTS: {fts_cnt}")
 
     local.close()
     elapsed = time.time() - t0
