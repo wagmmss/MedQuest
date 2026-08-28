@@ -357,7 +357,7 @@ def _generate_calendar_ics_content(db, user_id):
             # O subtema canônico é a chave de associação estável. Não inclua
             # a área aqui: nomes de área de bases antigas podem divergir da
             # normalização exibida no planner e zerar indevidamente a fila.
-            study_url_text = f"\\n\\n🔗 Questões: {base_url}/estudar?subtema={encoded_sub}" if base_url else ""
+            study_url_text = f"\\n\\n🔗 Questões: {base_url}/estudar?subtema={encoded_sub}&limit=25" if base_url else ""
 
             ics_lines.extend([
                 "BEGIN:VEVENT",

@@ -124,7 +124,7 @@ export async function syncPlanToGoogleCalendarDirectly(
                 // Evento de Aula
                 eventsToInsert.push({
                   summary: `[MedQuest] 📖 ${topic.subtema} (${topic.area})`,
-                  description: `📚 Carga: ${topic.estimated_hours}h (Teoria: ${topic.estimated_theory_hours}h + Questões: ${topic.estimated_practice_hours}h)\nSemana ${week.week} • ${topic.area}${origin ? `\n\n🔗 Questões: ${origin}/estudar?subtema=${encodeURIComponent(topic.subtema)}` : ""}`,
+                  description: `📚 Carga: ${topic.estimated_hours}h (Teoria: ${topic.estimated_theory_hours}h + Questões: ${topic.estimated_practice_hours}h)\nSemana ${week.week} • ${topic.area}${origin ? `\n\n🔗 Questões: ${origin}/estudar?subtema=${encodeURIComponent(topic.subtema)}&limit=25` : ""}`,
                   start: { dateTime: dtStart.toISOString(), timeZone: "America/Sao_Paulo" },
                   end: { dateTime: dtEnd.toISOString(), timeZone: "America/Sao_Paulo" },
                 });
