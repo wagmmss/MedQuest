@@ -1,0 +1,7 @@
+{
+  "run_id": "medway_har_20260828-191227",
+  "backup": "C:\\dev\\MedQuest\\backups\\medquest_20260828-191227_pre-medway-har.db",
+  "applied": 60,
+  "report": "C:\\dev\\MedQuest\\docs\\audits\\medway-trilhas-har-dry-run.json",
+  "input_sha256": "f005f9104256bf69a15e6c3836579d3da119f0936bf2911ee8a0943a6512a4bf"
+}

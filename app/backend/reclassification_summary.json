@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-08-28T19:02:24.042610",
+  "dry_run": false,
+  "total_db_questions": 7674,
+  "total_matched": 7212,
+  "total_identical": 7211,
+  "total_divergent": 1,
+  "total_unmatched": 462,
+  "area_migrations": {
+    "Cirurgia -> Medicina Preventiva": 1
+  },
+  "sample_divergences": [
+    {
+      "question_id": 15728,
+      "institution": "HSL",
+      "year": 2025,
+      "number": 2,
+      "stem_preview": "Mulher, 54 anos de idade, trabalha como garçonete, apresenta parestesias e hipoestesia na região do polegar até a metade",
+      "old_area": "Cirurgia",
+      "old_subtema": "Tendinopatias, Bursites e Síndromes por Sobrecarga Musculoesquelética",
+      "old_subtema_id": "CIR-061",
+      "old_topic": "Fisiopatologia da Dor e Síndromes Partes Moles - Bursites, Tendinites e Outras Lesões (CM)",
+      "new_area": "Medicina Preventiva",
+      "new_subtema": "Saúde do Trabalhador e Doenças Ocupacionais",
+      "new_subtema_id": "MED-009",
+      "new_topic": "Vigilância em saúde do trabalhador",
+      "medway_focus": "Vigilância em saúde do trabalhador",
+      "medway_theme": "Vigilância em Saúde",
+      "medway_discipline": "Clínica Médica",
+      "match_method": "pass1_stem_prefix",
+      "source_track": "HSL 2025"
+    }
+  ]
+}
