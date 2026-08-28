@@ -14,7 +14,7 @@ import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 import { SubjectTreeSelector } from "@/components/SubjectTreeSelector";
 import { ImageViewer } from "@/components/ImageViewer";
 import { ExplanationViewer } from "@/components/ExplanationViewer";
-import { FormattedContent } from "@/components/FormattedContent";
+import { FormattedContent, normalizeImageSrc } from "@/components/FormattedContent";
 import { useZenMode } from "@/hooks/useZenMode";
 import Image from "next/image";
 import {
@@ -33,6 +33,10 @@ type SessionAnswer = {
 };
 
 type QuizState = "FILTERS" | "LOADING_QUEUE" | "PLAYING" | "FINISHED";
+
+function resolveImageUrl(img: string | null | undefined): string {
+  return normalizeImageSrc(img);
+}
 
 interface SavedQuizState {
   version: number;
@@ -1222,7 +1226,7 @@ export function QuizClient({
       {/* Fullscreen Image Modal */}
       {enlargedImage && (
         <ImageViewer 
-          src={`/api/images/${enlargedImage}`} 
+          src={resolveImageUrl(enlargedImage)} 
           isOpen={!!enlargedImage} 
           onClose={() => setEnlargedImage(null)} 
         />
@@ -1329,7 +1333,7 @@ export function QuizClient({
                       onClick={() => setEnlargedImage(img)}
                     >
                       <Image
-                        src={`/api/images/${img}`} 
+                        src={resolveImageUrl(img)} 
                         alt={`Imagem do Caso ${i+1}`} 
                         width={800}
                         height={600}
@@ -1413,7 +1417,7 @@ export function QuizClient({
                     onClick={() => setEnlargedImage(img)}
                   >
                     <Image
-                      src={`/api/images/${img}`} 
+                      src={resolveImageUrl(img)} 
                       alt={`Imagem ${i+1}`} 
                       width={800}
                       height={600}

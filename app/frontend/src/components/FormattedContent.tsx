@@ -9,6 +9,20 @@ interface FormattedContentProps {
   onImageClick?: (url: string) => void;
 }
 
+export function normalizeImageSrc(url: string | null | undefined): string {
+  if (!url) return "";
+  let src = url.trim().replace(/^\/api\/images\/images\//, "/api/images/");
+  src = src
+    .replace(/MedQuest-assets\.s3\.sa-east-1\.amazonaws\.com/gi, "medcof-assets.s3.sa-east-1.amazonaws.com")
+    .replace(/MedQuest-assets\.s3\.amazonaws\.com/gi, "medcof-assets.s3.amazonaws.com")
+    .replace(/cdn\.MedQuest\.com\.br/gi, "cdn.medway.com.br")
+    .replace(/www\.MedQuest\.com\.br/gi, "www.medway.com.br");
+  if (!src.startsWith("http://") && !src.startsWith("https://") && !src.startsWith("/api/") && !src.startsWith("/")) {
+    src = `/api/images/${src}`;
+  }
+  return src;
+}
+
 /**
  * Parses inline formatting: bold (**text**), italic (*text*), math ($math$), links ([text](url)), and inline images.
  */
@@ -27,10 +41,8 @@ function renderInline(
     const mdImgMatch = part.match(/^!\[(.*?)\]\((.*?)\)$/);
     if (mdImgMatch) {
       const alt = mdImgMatch[1];
-      let src = mdImgMatch[2].trim().replace(/^\/api\/images\/images\//, "/api/images/");
-      if (!src.startsWith("http") && !src.startsWith("/api/") && !src.startsWith("/")) {
-        src = `/api/images/${src}`;
-      }
+      const src = normalizeImageSrc(mdImgMatch[2]);
+      const isFileNameAlt = !alt || /\.(png|jpe?g|webp|gif|svg|blob)$/i.test(alt) || /^(image|figura|blob|imagem)$/i.test(alt) || alt === "Figura Explicativa";
       return (
         <span key={idx} className="block my-3 text-center">
           <span 
@@ -47,7 +59,7 @@ function renderInline(
               <Maximize size={20} className="text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md" />
             </span>
           </span>
-          {alt && alt !== "image.png" && alt !== "Figura Explicativa" && (
+          {!isFileNameAlt && (
             <span className="block text-xs text-muted-foreground mt-1 text-center italic">{alt}</span>
           )}
         </span>
@@ -57,10 +69,7 @@ function renderInline(
     // 2. HTML Image: <img src="..." />
     const htmlImgMatch = part.match(/<img\b[^>]*\bsrc\s*=\s*['"]([^'"]+)['"][^>]*>/i);
     if (htmlImgMatch) {
-      let src = htmlImgMatch[1].trim().replace(/^\/api\/images\/images\//, "/api/images/");
-      if (!src.startsWith("http") && !src.startsWith("/api/") && !src.startsWith("/")) {
-        src = `/api/images/${src}`;
-      }
+      const src = normalizeImageSrc(htmlImgMatch[1]);
       return (
         <span key={idx} className="block my-3 text-center">
           <span 

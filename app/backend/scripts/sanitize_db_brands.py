@@ -19,6 +19,14 @@ def sanitize_text(text: str) -> str:
     if not text:
         return text
 
+    # Proteger todas as URLs (web links, imagens S3 e CDNs) para não quebrar domínios
+    urls = []
+    def _save_url(m):
+        urls.append(m.group(0))
+        return f"___MEDQUEST_URL_TOKEN_{len(urls)-1}___"
+
+    text = re.sub(r'https?://[^\s\)\"\'>]+', _save_url, text)
+
     # 1. Nome fictício de fármaco em estudos (ex: Q 16041)
     text = re.sub(r'\bMedcofimab\b', 'Investigumab', text)
     text = re.sub(r'\bmedcofimab\b', 'investigumab', text)
@@ -118,6 +126,11 @@ def sanitize_text(text: str) -> str:
 
     result = '\n'.join(cleaned_lines)
     result = re.sub(r'\n{3,}', '\n\n', result).strip()
+
+    # Restaurar as URLs originais intactas
+    for idx, u in enumerate(urls):
+        result = result.replace(f"___MEDQUEST_URL_TOKEN_{idx}___", u)
+
     return result
 
 def main():

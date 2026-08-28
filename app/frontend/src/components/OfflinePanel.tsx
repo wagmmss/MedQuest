@@ -118,10 +118,16 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
             // Coleta URLs de imagens para pré-carregamento offline
             for (const q of questionsList) {
               if (q.images && Array.isArray(q.images)) {
-                allImageUrls.push(...q.images.map(img => `/api/images/${img}`));
+                allImageUrls.push(...q.images.map(img => {
+                  const trimmed = (img || "").trim();
+                  return trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("/api/") ? trimmed : `/api/images/${trimmed}`;
+                }));
               }
               if (q.clinical_case?.images && Array.isArray(q.clinical_case.images)) {
-                allImageUrls.push(...q.clinical_case.images.map(img => `/api/images/${img}`));
+                allImageUrls.push(...q.clinical_case.images.map(img => {
+                  const trimmed = (img || "").trim();
+                  return trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("/api/") ? trimmed : `/api/images/${trimmed}`;
+                }));
               }
             }
           }

@@ -13,11 +13,16 @@ import { LEARNING_SESSION_VERSION, readLearningSession, writeLearningSession, re
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageViewer } from "@/components/ImageViewer";
 import { ExplanationViewer } from "@/components/ExplanationViewer";
-import { FormattedContent } from "@/components/FormattedContent";
+import { FormattedContent, normalizeImageSrc } from "@/components/FormattedContent";
 import { Grid as FixedSizeGrid, CellComponentProps } from "react-window";
 import { AutoSizer } from "react-virtualized-auto-sizer";
 import Image from "next/image";
+
 type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS" | "OFFLINE_SUBMITTED";
+
+function resolveImageUrl(img: string | null | undefined): string {
+  return normalizeImageSrc(img);
+}
 
 interface SavedSimuladoState {
   version: number;
@@ -1228,7 +1233,7 @@ export function SimuladoClient({
               )}
               
               <ImageViewer 
-                src={enlargedImage ? `/api/images/${enlargedImage}` : ""} 
+                src={resolveImageUrl(enlargedImage)} 
                 isOpen={!!enlargedImage} 
                 onClose={() => setEnlargedImage(null)} 
               />
@@ -1261,7 +1266,7 @@ export function SimuladoClient({
                           onClick={() => setEnlargedImage(img)}
                         >
                           <Image
-                            src={`/api/images/${img}`} 
+                            src={resolveImageUrl(img)} 
                             alt={`Imagem do Caso ${i+1}`} 
                             width={800}
                             height={600}
@@ -1290,7 +1295,7 @@ export function SimuladoClient({
                       onClick={() => setEnlargedImage(img)}
                     >
                       <Image
-                        src={`/api/images/${img}`} 
+                        src={resolveImageUrl(img)} 
                         alt={`Imagem ${i+1}`} 
                         width={800}
                         height={600}

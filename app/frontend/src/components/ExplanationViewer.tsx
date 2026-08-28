@@ -64,7 +64,10 @@ function renderInlineFormattedText(text: string, onImageClick?: (src: string) =>
     const imgMatch = part.match(/^!\[(.*?)\]\((.*?)\)$/);
     if (imgMatch) {
       const alt = imgMatch[1] || "Figura Explicativa";
-      const src = imgMatch[2];
+      let src = imgMatch[2].trim().replace(/^\/api\/images\/images\//, "/api/images/");
+      if (!src.startsWith("http://") && !src.startsWith("https://") && !src.startsWith("/api/") && !src.startsWith("/")) {
+        src = `/api/images/${src}`;
+      }
       return (
         <div key={idx} className="my-3 flex flex-col items-center">
           <div 
@@ -155,9 +158,11 @@ function parseExplanation(raw: string): ParsedSection {
   if (corrMatch && corrMatch.index !== undefined) {
     const endIdx = distMatch && distMatch.index !== undefined && distMatch.index > corrMatch.index ? distMatch.index : clean.length;
     const rawCorr = clean.slice(corrMatch.index + corrMatch[0].length, endIdx).trim();
-    const letterMatch = corrMatch[0].match(/([A-E])/i);
+    const letterMatch = corrMatch[0].match(/(?:Letra|\()\s*([A-E])\b/i) || corrMatch[0].match(/Alternativa\s+Correta\s*([A-E])\b/i);
+    const gabLetter = parsed.gabarito?.match(/(?:Letra|\b)\s*([A-E])\b/i)?.[1]?.toUpperCase();
+    const parsedLetter = letterMatch ? letterMatch[1].toUpperCase() : gabLetter;
     parsed.alternativaCorreta = {
-      letter: letterMatch ? letterMatch[1] : undefined,
+      letter: parsedLetter,
       text: rawCorr
     };
   }
