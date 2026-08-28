@@ -578,7 +578,7 @@ export function SimuladoClient({
           const idxMap: Record<string, number> = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, 'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4 };
           if (key in idxMap) {
             const idx = idxMap[key];
-            if (idx < detail.alternatives.length) {
+            if (idx < (detail.alternatives || []).length) {
               handleSelect(detail.alternatives[idx].letter);
             }
           }
@@ -863,8 +863,8 @@ export function SimuladoClient({
 
   const currentQListItem = queue[currentIndex];
   const qDetail = detailsCache[currentQListItem?.id];
-  const extraCaseImages = useMemo(() => filterExtraImages(qDetail?.clinical_case?.images, qDetail?.clinical_case?.stem), [qDetail?.clinical_case?.images, qDetail?.clinical_case?.stem]);
-  const extraStemImages = useMemo(() => filterExtraImages(qDetail?.images, qDetail?.stem), [qDetail?.images, qDetail?.stem]);
+  const extraCaseImages = filterExtraImages(qDetail?.clinical_case?.images, qDetail?.clinical_case?.stem);
+  const extraStemImages = filterExtraImages(qDetail?.images, qDetail?.stem);
   const isReview = state === "RESULTS";
   const unansweredCount = queue.length - Object.keys(answers).length;
 
@@ -1387,10 +1387,10 @@ export function SimuladoClient({
                       </h3>
                       <ExplanationViewer 
                         explanation={resultsMap[qDetail.id].explanation}
-                        correctLetter={Boolean(qDetail.is_discursive || qDetail.alternatives.length <= 1) ? null : resultsMap[qDetail.id].correct_letter}
+                        correctLetter={Boolean(qDetail.is_discursive || (qDetail.alternatives || []).length <= 1) ? null : resultsMap[qDetail.id].correct_letter}
                         questionId={qDetail.id}
                         userLetter={answers[qDetail.id] || undefined}
-                        isDiscursive={Boolean(qDetail.is_discursive || qDetail.alternatives.length <= 1)}
+                        isDiscursive={Boolean(qDetail.is_discursive || (qDetail.alternatives || []).length <= 1)}
                       />
 
                       {!questionFlashcardsMap[qDetail.id] && !draftFlashcardsMap[qDetail.id] && (

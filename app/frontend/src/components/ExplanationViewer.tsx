@@ -129,25 +129,27 @@ function parseExplanation(raw: string, isDiscursive?: boolean): { parsed: Parsed
   // 4. Extract Padrão de Resposta Explícito (se presente como seção própria)
   if (padraoMatch && padraoMatch.index !== undefined) {
     let endIdx = clean.length;
-    const nextCandidates = [corrMatch?.index, distMatch?.index].filter((idx): idx is number => idx !== undefined && idx > padraoMatch.index);
+    const pIdx = padraoMatch.index;
+    const nextCandidates = [corrMatch?.index, distMatch?.index].filter((idx): idx is number => idx !== undefined && idx > pIdx);
     if (nextCandidates.length > 0) {
       endIdx = Math.min(...nextCandidates);
     }
-    parsed.padraoResposta = clean.slice(padraoMatch.index + padraoMatch[0].length, endIdx).trim();
+    parsed.padraoResposta = clean.slice(pIdx + padraoMatch[0].length, endIdx).trim();
   }
 
   // 5. Extract Raciocínio Clínico
   if (racMatch && racMatch.index !== undefined) {
     let endIdx = clean.length;
+    const rIdx = racMatch.index;
     const nextCandidates = [
       padraoMatch?.index,
       corrMatch?.index,
       distMatch?.index,
-    ].filter((idx): idx is number => idx !== undefined && idx > racMatch.index);
+    ].filter((idx): idx is number => idx !== undefined && idx > rIdx);
     if (nextCandidates.length > 0) {
       endIdx = Math.min(...nextCandidates);
     }
-    let racText = clean.slice(racMatch.index + racMatch[0].length, endIdx).trim();
+    let racText = clean.slice(rIdx + racMatch[0].length, endIdx).trim();
     racText = racText.replace(/\n+\s*\*\*Por que a Letra[\s\S]*$/i, "").trim();
     racText = racText.replace(/\n+\s*\*\*Análise dos Distratores[\s\S]*$/i, "").trim();
     parsed.raciocinioClinico = racText;
@@ -156,16 +158,17 @@ function parseExplanation(raw: string, isDiscursive?: boolean): { parsed: Parsed
   // 6. Extract Pulo do Gato
   if (puloMatch && puloMatch.index !== undefined) {
     let endIdx = clean.length;
+    const puIdx = puloMatch.index;
     const nextCandidates = [
       racMatch?.index,
       padraoMatch?.index,
       corrMatch?.index,
       distMatch?.index,
-    ].filter((idx): idx is number => idx !== undefined && idx > puloMatch.index);
+    ].filter((idx): idx is number => idx !== undefined && idx > puIdx);
     if (nextCandidates.length > 0) {
       endIdx = Math.min(...nextCandidates);
     }
-    const puloText = clean.slice(puloMatch.index + puloMatch[0].length, endIdx).trim();
+    const puloText = clean.slice(puIdx + puloMatch[0].length, endIdx).trim();
     parsed.puloDoGato = puloText;
   }
 

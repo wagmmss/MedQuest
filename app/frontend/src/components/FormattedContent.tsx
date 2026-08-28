@@ -225,11 +225,11 @@ export function preprocessMarkdown(content: string): string {
   raw = raw.replace(/<h6\b[^>]*>(.*?)<\/h6>/gi, "\n###### $1\n");
 
   // 3. Convert HTML formatting to Markdown
-  raw = raw.replace(/<(?:strong|b)\b[^>]*>(.*?)<\/(?:strong|b)>/gis, "**$1**");
-  raw = raw.replace(/<(?:em|i)\b[^>]*>(.*?)<\/(?:em|i)>/gis, "*$1*");
-  raw = raw.replace(/<p\b[^>]*>(.*?)<\/p>/gis, "\n\n$1\n\n");
+  raw = raw.replace(/<(?:strong|b)\b[^>]*>([\s\S]*?)<\/(?:strong|b)>/gi, "**$1**");
+  raw = raw.replace(/<(?:em|i)\b[^>]*>([\s\S]*?)<\/(?:em|i)>/gi, "*$1*");
+  raw = raw.replace(/<p\b[^>]*>([\s\S]*?)<\/p>/gi, "\n\n$1\n\n");
   raw = raw.replace(/<br\s*\/?>/gi, "\n");
-  raw = raw.replace(/<li\b[^>]*>(.*?)<\/li>/gis, "\n* $1");
+  raw = raw.replace(/<li\b[^>]*>([\s\S]*?)<\/li>/gi, "\n* $1");
   raw = raw.replace(/<\/?(?:ul|ol)\b[^>]*>/gi, "\n");
   raw = raw.replace(/<\/?(?:span|div|section|article|font|center)\b[^>]*>/gi, "");
 

@@ -705,7 +705,7 @@ export function QuizClient({
           letter: selectedLetter || "A",
           result: updatedResult,
           writtenAnswer: userWrittenAnswer,
-          isDiscursive: Boolean(currentDetail.is_discursive || currentDetail.alternatives.length <= 1)
+          isDiscursive: Boolean(currentDetail.is_discursive || (currentDetail.alternatives || []).length <= 1)
         }
       }));
     } catch {
@@ -768,7 +768,7 @@ export function QuizClient({
       if (state !== "PLAYING" || !currentDetail || loadingDetail) return;
 
       const key = e.key.toUpperCase();
-      const isDiscursive = Boolean(currentDetail.is_discursive || currentDetail.alternatives.length <= 1);
+      const isDiscursive = Boolean(currentDetail.is_discursive || (currentDetail.alternatives || []).length <= 1);
       
       if (!attemptResult) {
         if (isDiscursive) {
@@ -781,7 +781,7 @@ export function QuizClient({
           const altIndexMap: Record<string, number> = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, 'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4 };
           if (key in altIndexMap) {
             const idx = altIndexMap[key];
-            if (idx < currentDetail.alternatives.length) {
+            if (idx < (currentDetail.alternatives || []).length) {
               selectAlternative(currentDetail.alternatives[idx].letter);
             }
           } else if (key === "ENTER" || key === " ") {
@@ -1238,8 +1238,8 @@ export function QuizClient({
   // PLAYING STATE
   const q = currentDetail;
   const completedCount = Object.values(sessionAnswers).filter(answer => answer.result || answer.isOffline).length;
-  const extraCaseImages = useMemo(() => filterExtraImages(q?.clinical_case?.images, q?.clinical_case?.stem), [q?.clinical_case?.images, q?.clinical_case?.stem]);
-  const extraStemImages = useMemo(() => filterExtraImages(q?.images, q?.stem), [q?.images, q?.stem]);
+  const extraCaseImages = filterExtraImages(q?.clinical_case?.images, q?.clinical_case?.stem);
+  const extraStemImages = filterExtraImages(q?.images, q?.stem);
 
   return (
     <div className="max-w-4xl mx-auto w-full flex flex-col gap-6 pb-12 relative">
@@ -1386,7 +1386,7 @@ export function QuizClient({
                     <span className="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span> Revisado
                   </span>
                 )}
-                {Boolean(q.is_discursive || q.alternatives.length <= 1) && (
+                {Boolean(q.is_discursive || (q.alternatives || []).length <= 1) && (
                   <span className="bg-primary/15 text-primary border border-primary/30 px-2 py-1 rounded flex items-center gap-1 font-bold">
                     Discursiva
                   </span>
@@ -1474,7 +1474,7 @@ export function QuizClient({
           </div>
 
           {/* Alternatives or Discursive Response */}
-          {Boolean(q.is_discursive || q.alternatives.length <= 1) ? (
+          {Boolean(q.is_discursive || (q.alternatives || []).length <= 1) ? (
             !attemptResult && (
               <div className="bg-card border border-border shadow-1 rounded-2xl p-6 md:p-7 flex flex-col gap-4 animate-in fade-in duration-200">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -1637,7 +1637,7 @@ export function QuizClient({
           {attemptResult && (
             <div className="animate-in slide-in-from-bottom-4 fade-in duration-300 flex flex-col gap-6">
               {/* If user had written an answer on discursive question, show it prominently */}
-              {Boolean(q.is_discursive || q.alternatives.length <= 1) && userWrittenAnswer && (
+              {Boolean(q.is_discursive || (q.alternatives || []).length <= 1) && userWrittenAnswer && (
                 <div className="bg-card border border-border shadow-1 rounded-2xl p-6 flex flex-col gap-3">
                   <div className="flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-wider">
                     <span className="material-symbols-outlined text-[16px]">draw</span>
@@ -1683,14 +1683,14 @@ export function QuizClient({
                 <div className="p-6 md:p-8">
                   <h3 className="text-lg font-bold text-foreground mb-5 flex items-center gap-2">
                     <BookOpen size={20} className="text-primary" />
-                    {Boolean(q.is_discursive || q.alternatives.length <= 1) ? "Padrão de Resposta da Banca & Comentário" : "Comentário do Professor"}
+                    {Boolean(q.is_discursive || (q.alternatives || []).length <= 1) ? "Padrão de Resposta da Banca & Comentário" : "Comentário do Professor"}
                   </h3>
                   <ExplanationViewer 
                     explanation={attemptResult.explanation} 
-                    correctLetter={Boolean(q.is_discursive || q.alternatives.length <= 1) ? null : attemptResult.correct_letter}
+                    correctLetter={Boolean(q.is_discursive || (q.alternatives || []).length <= 1) ? null : attemptResult.correct_letter}
                     questionId={currentDetail?.id}
                     userLetter={selectedLetter || attemptResult.correct_letter || undefined}
-                    isDiscursive={Boolean(q.is_discursive || q.alternatives.length <= 1)}
+                    isDiscursive={Boolean(q.is_discursive || (q.alternatives || []).length <= 1)}
                   />
 
                   {currentDetail?.times_wrong && currentDetail.times_wrong > 0 ? (
@@ -1875,7 +1875,7 @@ export function QuizClient({
                         <Clock size={16} />
                         Próxima revisão agendada para: {new Date(attemptResult.next_review_date).toLocaleDateString('pt-BR')}
                       </div>
-                      {Boolean(q.is_discursive || q.alternatives.length <= 1) && (
+                      {Boolean(q.is_discursive || (q.alternatives || []).length <= 1) && (
                         <button
                           onClick={() => setAttemptResult(prev => prev ? { ...prev, is_correct: null } : null)}
                           className="text-xs text-primary hover:underline font-semibold cursor-pointer"
