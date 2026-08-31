@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff, RotateCcw, Brain, SlidersHorizontal, RefreshCw, Pencil } from "lucide-react";
+import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff, RotateCcw, Brain, SlidersHorizontal, RefreshCw, Pencil, Stethoscope } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -18,15 +18,19 @@ import { ExplanationViewer } from "@/components/ExplanationViewer";
 import { QuestionClassificationModal } from "@/components/QuestionClassificationModal";
 import { FormattedContent, normalizeImageSrc, filterExtraImages } from "@/components/FormattedContent";
 import { useZenMode } from "@/hooks/useZenMode";
+import { QuizTimer, QuizTimerHandle } from "@/components/QuizTimer";
 import Image from "next/image";
+import { QuizFilters } from "./components/QuizFilters";
 import {
   LEARNING_SESSION_VERSION,
   readLearningSession,
   removeLearningSession,
   writeLearningSession,
-} from "@/lib/sessionState";
 
-type SessionAnswer = { 
+} from "@/lib/sessionState";
+import { useQuizKeyboard } from "./hooks/useQuizKeyboard";
+
+export type SessionAnswer = { 
   letter: string; 
   result?: AttemptResult | null; 
   isOffline?: boolean; 
@@ -40,7 +44,7 @@ function resolveImageUrl(img: string | null | undefined): string {
   return normalizeImageSrc(img);
 }
 
-interface SavedQuizState {
+export interface SavedQuizState {
   version: number;
   state: "PLAYING" | "FINISHED";
   queue: QuestionListItem[];
@@ -125,17 +129,16 @@ export function QuizClient({
   const [draftFlashcard, setDraftFlashcard] = useState<{front: string; back: string; context: string} | null>(null);
   const [generatingBatchFlashcards, setGeneratingBatchFlashcards] = useState(false);
   const [batchFlashcardsResult, setBatchFlashcardsResult] = useState<{ count: number } | null>(null);
+  const [preceptorResponse, setPreceptorResponse] = useState<{ answer: string; model: string; source: string } | null>(null);
+  const [askingPreceptor, setAskingPreceptor] = useState(false);
+  const [preceptorInput, setPreceptorInput] = useState("");
   
   // Timer State
-  const [timeSpent, setTimeSpent] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const timeSpentSnapshotRef = useRef(0);
+  const quizTimerRef = useRef<QuizTimerHandle>(null);
+  const [initialTime, setInitialTime] = useState(0);
 
-  useEffect(() => {
-    timeSpentSnapshotRef.current = timeSpent;
-  }, [timeSpent]);
-  
-  // Image Modal
+  // Expose current time without causing re-renders
+  const getCurrentTime = () => quizTimerRef.current?.getTime() ?? initialTime;
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
 
   const detailsCacheRef = useRef<Record<number, QuestionDetail>>({});
@@ -156,7 +159,9 @@ export function QuizClient({
     setIsOfflineSaved(false);
     setFlashcardResult(null);
     setDraftFlashcard(null);
-    setTimeSpent(0);
+    setPreceptorResponse(null);
+    setPreceptorInput("");
+    setInitialTime(0);
 
     // Se já estiver no cache, carrega instantaneamente sem tela de loading
     const cached = detailsCacheRef.current[id];
@@ -320,7 +325,7 @@ export function QuizClient({
         setSessionAnswers(saved.sessionAnswers);
         setSelectedLetter(saved.selectedLetter);
         setUserWrittenAnswer(saved.userWrittenAnswer || "");
-        setTimeSpent(saved.timeSpent || 0);
+        setInitialTime(saved.timeSpent || 0);
         setState(saved.state);
         if (typeof window !== "undefined") {
           sessionStorage.setItem("medquest_active_quiz", "1");
@@ -365,7 +370,7 @@ export function QuizClient({
       setSessionAnswers(saved.sessionAnswers);
       setSelectedLetter(saved.selectedLetter);
       setUserWrittenAnswer(saved.userWrittenAnswer || "");
-      setTimeSpent(saved.timeSpent || 0);
+      setInitialTime(saved.timeSpent || 0);
       setState(saved.state);
       if (typeof window !== "undefined") {
         sessionStorage.setItem("medquest_active_quiz", "1");
@@ -406,7 +411,7 @@ export function QuizClient({
     setUserWrittenAnswer("");
     setAttemptResult(null);
     setSessionAnswers({});
-    setTimeSpent(0);
+    setInitialTime(0);
     setFilters({ limit: "50" });
     setLocalLimit("50");
     setHasSavedState(false);
@@ -432,17 +437,44 @@ export function QuizClient({
         sessionAnswers,
         selectedLetter: nextSelectedLetter,
         userWrittenAnswer,
-        timeSpent: timeSpentSnapshotRef.current,
+        timeSpent: getCurrentTime(),
         savedAt: Date.now(),
       } satisfies SavedQuizState);
-    } else if (state === "FILTERS") {
+    } else if (state === "FILTERS" && !hasSavedState) {
       removeLearningSession("quiz");
     }
-  }, [storageReady, state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter, userWrittenAnswer]);
+  }, [storageReady, state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter, userWrittenAnswer, hasSavedState]);
 
   useEffect(() => {
     persistSession();
   }, [persistSession]);
+
+  // Persist session before unmounting to prevent losing progress if user navigates away
+  const stateRef = useRef({ state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter, userWrittenAnswer, storageReady });
+  useEffect(() => {
+    stateRef.current = { state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter, userWrittenAnswer, storageReady };
+  }, [state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter, userWrittenAnswer, storageReady]);
+
+  useEffect(() => {
+    return () => {
+      const s = stateRef.current;
+      if (s.storageReady && (s.state === "PLAYING" || s.state === "FINISHED")) {
+        writeLearningSession("quiz", {
+          version: LEARNING_SESSION_VERSION,
+          state: s.state,
+          queue: s.queue,
+          currentIndex: s.currentIndex,
+          filters: s.filters,
+          currentDetail: s.currentDetail,
+          sessionAnswers: s.sessionAnswers,
+          selectedLetter: s.selectedLetter,
+          userWrittenAnswer: s.userWrittenAnswer,
+          timeSpent: getCurrentTime(),
+          savedAt: Date.now(),
+        } satisfies SavedQuizState);
+      }
+    };
+  }, []);
 
   const selectAlternative = useCallback((letter: string) => {
     if (attemptResult || submitting) return;
@@ -483,19 +515,19 @@ export function QuizClient({
     };
   }, [filters, state]);
 
-  // Timer Control
-  useEffect(() => {
-    if (state === "PLAYING" && currentDetail && !attemptResult) {
-      timerRef.current = setInterval(() => {
-        setTimeSpent(prev => prev + 1);
-      }, 1000);
-    } else {
-      if (timerRef.current) clearInterval(timerRef.current);
+
+
+  const updateUrlWithFilters = (finalFilters: Record<string, string | string[]>) => {
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(finalFilters)) {
+      if (Array.isArray(value)) {
+        value.forEach(v => params.append(key, v));
+      } else if (value !== undefined && value !== "") {
+        params.append(key, value as string);
+      }
     }
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [state, currentDetail, attemptResult]);
+    window.history.replaceState(null, "", `/estudar?${params.toString()}`);
+  };
 
   const handleFilterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -523,6 +555,7 @@ export function QuizClient({
       }
       router.push(`/simulado?${params.toString()}`);
     } else {
+      updateUrlWithFilters(finalFilters);
       loadQueue(finalFilters);
     }
   };
@@ -530,7 +563,13 @@ export function QuizClient({
   const startRecommendedSession = useCallback((kind: "adaptive" | "review") => {
     const limit = kind === "review" ? "20" : "30";
     setStudyMode("TUTOR");
-    loadQueue({ limit, ...(kind === "adaptive" ? { mode: "adaptive" } : { status: "srs_due" }) });
+    const activeFilters = { limit, ...(kind === "adaptive" ? { mode: "adaptive" } : { status: "srs_due" }) };
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(activeFilters)) {
+      params.append(key, value as string);
+    }
+    window.history.replaceState(null, "", `/estudar?${params.toString()}`);
+    loadQueue(activeFilters);
   }, [loadQueue]);
 
   const handleAttempt = useCallback(async () => {
@@ -538,10 +577,9 @@ export function QuizClient({
     attemptLockRef.current = true;
     
     setSubmitting(true);
-    if (timerRef.current) clearInterval(timerRef.current);
 
     try {
-      const res = await api.questions.submitAttempt(currentDetail.id, selectedLetter, timeSpent * 1000, "defer");
+      const res = await api.questions.submitAttempt(currentDetail.id, selectedLetter, getCurrentTime() * 1000, "defer");
       setAttemptResult(res);
       setIsOfflineSaved(false);
       setSessionAnswers(prev => ({
@@ -564,50 +602,37 @@ export function QuizClient({
       attemptLockRef.current = false;
       setSubmitting(false);
     }
-  }, [attemptResult, isOfflineSaved, submitting, currentDetail, selectedLetter, userWrittenAnswer, timeSpent]);
+  }, [attemptResult, isOfflineSaved, submitting, currentDetail, selectedLetter, userWrittenAnswer]);
 
   const handleDiscursiveReveal = useCallback(async () => {
     if (attemptLockRef.current || attemptResult || isOfflineSaved || submitting || !currentDetail) return;
     attemptLockRef.current = true;
     
     setSubmitting(true);
-    if (timerRef.current) clearInterval(timerRef.current);
 
     try {
       const res = await api.questions.submitAttempt(
         currentDetail.id, 
         "A", 
-        timeSpent * 1000, 
+        getCurrentTime() * 1000, 
         "defer", 
-        null, 
+        null,
         userWrittenAnswer
       );
       setAttemptResult(res);
-      setSelectedLetter("A");
       setIsOfflineSaved(false);
       setSessionAnswers(prev => ({
         ...prev,
-        [currentDetail.id]: { 
-          letter: "A", 
-          result: res, 
-          writtenAnswer: userWrittenAnswer, 
-          isDiscursive: true 
-        }
+        [currentDetail.id]: { letter: "A", result: res, writtenAnswer: userWrittenAnswer, isDiscursive: true }
       }));
-
-    } catch (err) {
-      if (err instanceof OfflineQueuedError) {
-        toast("Resposta salva neste dispositivo; será sincronizada quando a conexão voltar.", { icon: "💾" });
+    } catch (e: unknown) {
+      if (e instanceof OfflineQueuedError) {
         setIsOfflineSaved(true);
         setSessionAnswers(prev => ({
           ...prev,
-          [currentDetail.id]: { 
-            letter: "A", 
-            isOffline: true, 
-            writtenAnswer: userWrittenAnswer, 
-            isDiscursive: true 
-          }
+          [currentDetail.id]: { letter: "A", isOffline: true, writtenAnswer: userWrittenAnswer, isDiscursive: true }
         }));
+        toast("Resposta salva neste dispositivo; será sincronizada quando a conexão voltar.", { icon: "💾" });
       } else {
         toast.error("Erro ao enviar resposta.");
       }
@@ -615,7 +640,7 @@ export function QuizClient({
       attemptLockRef.current = false;
       setSubmitting(false);
     }
-  }, [attemptResult, isOfflineSaved, submitting, currentDetail, userWrittenAnswer, timeSpent]);
+  }, [attemptResult, isOfflineSaved, submitting, currentDetail, userWrittenAnswer]);
 
   const handleGenerateFlashcard = async () => {
     if (!currentDetail) return;
@@ -671,6 +696,23 @@ export function QuizClient({
       toast.error("Erro ao gerar flashcards em lote.");
     } finally {
       setGeneratingBatchFlashcards(false);
+    }
+  };
+
+  const handleAskPreceptor = async () => {
+    if (!currentDetail) return;
+    setAskingPreceptor(true);
+    try {
+      const res = await api.questions.askAI(
+        currentDetail.id,
+        preceptorInput || undefined,
+        selectedLetter || undefined
+      );
+      setPreceptorResponse(res);
+    } catch (e: any) {
+      toast.error(e.message || "Erro ao perguntar ao preceptor.");
+    } finally {
+      setAskingPreceptor(false);
     }
   };
 
@@ -764,76 +806,23 @@ export function QuizClient({
     }
   };
 
-  // Keyboard Shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const tag = (e.target as HTMLElement).tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-      
-      const isButton = tag === 'BUTTON';
-      const target = e.target as HTMLButtonElement;
-      
-      if (isButton && !target.disabled && (e.key === "Enter" || e.key === " ")) {
-        return;
-      }
-
-      if (state !== "PLAYING" || !currentDetail || loadingDetail) return;
-
-      const key = e.key.toUpperCase();
-      const isDiscursive = Boolean(currentDetail.is_discursive || (currentDetail.alternatives || []).length <= 1);
-      
-      if (!attemptResult) {
-        if (isDiscursive) {
-          if ((e.ctrlKey || e.metaKey) && key === "ENTER") {
-            e.preventDefault();
-            handleDiscursiveReveal();
-          }
-        } else {
-          // Alternatives 1-5 or A-E
-          const altIndexMap: Record<string, number> = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, 'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4 };
-          if (key in altIndexMap) {
-            const idx = altIndexMap[key];
-            if (idx < (currentDetail.alternatives || []).length) {
-              selectAlternative(currentDetail.alternatives[idx].letter);
-            }
-          } else if (key === "ENTER" || key === " ") {
-            if (selectedLetter && !submitting) {
-              e.preventDefault();
-              handleAttempt();
-            }
-          }
-        }
-      } else {
-        if (attemptResult.is_correct === null) {
-          if (key === "3" || key === "A") { e.preventDefault(); handleReviewFSRS("certeza", true); }
-          else if (key === "2" || key === "ENTER" || key === " ") { e.preventDefault(); handleReviewFSRS("duvida", true); }
-          else if (key === "1") { e.preventDefault(); handleReviewFSRS("chutei", true); }
-          else if (key === "E") { e.preventDefault(); handleReviewFSRS("duvida", false); }
-        } else if (!attemptResult.next_review_date) {
-          if (key === "1") handleReviewFSRS("chutei");
-          else if (key === "2" || key === "ENTER" || key === " ") { e.preventDefault(); handleReviewFSRS("duvida"); }
-          else if (key === "3") handleReviewFSRS("certeza");
-        } else {
-          if (key === "ENTER" || key === " " || key === "3" || key === "2" || key === "1") {
-            e.preventDefault();
-            nextQuestion();
-          }
-        }
-      }
-
-      // Free navigation with arrows (Requires Ctrl or Alt to prevent accidental jumps while scrolling)
-        if (e.key === "ArrowLeft" && (e.ctrlKey || e.altKey)) {
-          e.preventDefault();
-          navigateQuestion("previous");
-        } else if (e.key === "ArrowRight" && (e.ctrlKey || e.altKey)) {
-          e.preventDefault();
-          navigateQuestion("next");
-        }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [state, currentDetail, loadingDetail, attemptResult, currentIndex, queue, selectedLetter, submitting, handleAttempt, handleDiscursiveReveal, handleReviewFSRS, nextQuestion, prevQuestion, navigateQuestion, selectAlternative]);
+  useQuizKeyboard({
+    state,
+    currentDetail,
+    loadingDetail,
+    attemptResult,
+    currentIndex,
+    queue,
+    selectedLetter,
+    submitting,
+    handleAttempt,
+    handleDiscursiveReveal,
+    handleReviewFSRS,
+    nextQuestion,
+    prevQuestion,
+    navigateQuestion,
+    selectAlternative
+  });
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -843,325 +832,30 @@ export function QuizClient({
 
   if (state === "FILTERS") {
     return (
-      <div className="bg-card border border-border shadow-1 rounded-xl p-8 max-w-2xl mx-auto w-full">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="w-12 h-12 bg-primary/20 text-primary rounded-xl flex items-center justify-center shrink-0">
-            <Filter size={24} />
-          </div>
-          <div>
-            <h2 className="text-h2 font-bold text-foreground">Filtros de Estudo</h2>
-            <p className="text-muted-foreground text-sm">Monte sua sessão de estudos escolhendo os filtros.</p>
-          </div>
-        </div>
-
-        {hasSavedState && savedSessionData && (
-          <div className="bg-primary/10 border border-primary/30 rounded-xl p-5 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shrink-0 shadow-sm">
-                <RotateCcw size={20} />
-              </div>
-              <div>
-                <h3 className="text-sm font-bold text-foreground">Sessão de Estudos em Andamento</h3>
-                <p className="text-xs text-muted-foreground">
-                  Você tem uma sessão salva com {savedSessionData.queue.length} questões (Questão {savedSessionData.currentIndex + 1} de {savedSessionData.queue.length}).
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 w-full sm:w-auto">
-              <button
-                type="button"
-                onClick={discardSavedQuiz}
-                className="flex-1 sm:flex-initial px-3 py-2 text-xs font-semibold text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors cursor-pointer"
-              >
-                Descartar
-              </button>
-              <button
-                type="button"
-                onClick={resumeSavedQuiz}
-                className="flex-1 sm:flex-initial px-4 py-2 text-xs font-bold bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02]"
-              >
-                <Play size={14} fill="currentColor" />
-                Continuar Sessão
-              </button>
-            </div>
-          </div>
-        )}
-
-        {!showCustomSession && (
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-base font-bold text-foreground">O que você quer fazer agora?</h3>
-              <p className="text-sm text-muted-foreground mt-1">Comece pela próxima ação útil; você pode personalizar uma sessão quando precisar.</p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <button
-                type="button"
-                onClick={() => startRecommendedSession("review")}
-                className="text-left rounded-xl border border-primary/30 bg-primary/5 p-5 transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              >
-                <div className="flex items-center gap-2 text-primary font-bold"><RefreshCw size={18} /> Revisar o que venceu</div>
-                <p className="mt-2 text-sm text-muted-foreground">Até 20 questões com revisão pendente. Prioridade para não deixar a memória expirar.</p>
-              </button>
-              <button
-                type="button"
-                onClick={() => startRecommendedSession("adaptive")}
-                className="text-left rounded-xl border border-border bg-muted/30 p-5 transition-colors hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              >
-                <div className="flex items-center gap-2 text-foreground font-bold"><Brain size={18} className="text-primary" /> Sessão adaptativa</div>
-                <p className="mt-2 text-sm text-muted-foreground">30 questões priorizadas por lacunas, erros recentes e cobertura.</p>
-              </button>
-            </div>
-            <button
-              type="button"
-              onClick={() => setShowCustomSession(true)}
-              className="w-full flex items-center justify-center gap-2 rounded-lg border border-border py-3 text-sm font-semibold text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-            >
-              <SlidersHorizontal size={16} /> Montar sessão personalizada
-            </button>
-          </div>
-        )}
-
-        {showCustomSession && <form onSubmit={handleFilterSubmit} className="flex flex-col gap-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="font-bold text-foreground">Sessão personalizada</h3>
-              <p className="text-sm text-muted-foreground">Use filtros apenas quando houver um objetivo específico.</p>
-            </div>
-            <button type="button" onClick={() => setShowCustomSession(false)} className="text-sm font-semibold text-primary hover:underline">Voltar</button>
-          </div>
-          <div className="bg-muted/30 border border-border p-4 rounded-lg flex flex-col sm:flex-row gap-4">
-            <button 
-              type="button"
-              onClick={() => setStudyMode("TUTOR")}
-              className={clsx(
-                "flex-1 flex flex-col items-center justify-center gap-2 p-4 rounded-md border transition-all",
-                studyMode === "TUTOR" ? "bg-primary/10 border-primary text-primary shadow-sm" : "bg-card border-border text-muted-foreground hover:bg-muted/50"
-              )}
-            >
-              <BookOpenCheck size={24} />
-              <span className="font-bold">Modo Tutor</span>
-              <span className="text-xs text-center">Feedback imediato após cada resposta. Ideal para aprender.</span>
-            </button>
-            <button 
-              type="button"
-              onClick={() => setStudyMode("SIMULADO")}
-              className={clsx(
-                "flex-1 flex flex-col items-center justify-center gap-2 p-4 rounded-md border transition-all",
-                studyMode === "SIMULADO" ? "bg-primary/10 border-primary text-primary shadow-sm" : "bg-card border-border text-muted-foreground hover:bg-muted/50"
-              )}
-            >
-              <FileSignature size={24} />
-              <span className="font-bold">Modo Simulado</span>
-              <span className="text-xs text-center">Foco e resistência. Feedback e correção apenas no final.</span>
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Status</label>
-              <select 
-                className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                value={filters.status || ""}
-                onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-              >
-                <option className="bg-background text-foreground" value="">Todas</option>
-                <option className="bg-background text-foreground" value="unanswered">Não respondidas</option>
-                <option className="bg-background text-foreground" value="srs_due">Para Revisão (Repetição Espaçada)</option>
-                <option className="bg-background text-foreground" value="wrong">Errei anteriormente</option>
-              </select>
-            </div>
-            
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Quantidade de Questões</label>
-              <input 
-                type="number"
-                min="1"
-                max="200"
-                className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                value={localLimit}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setLocalLimit(val);
-                  setFilters((prev) => ({ ...prev, limit: val }));
-                }}
-              />
-              <p className="text-xs text-muted-foreground">Máximo de 200 questões por sessão.</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground flex items-center justify-between">
-                <span>Área</span>
-                {isUpdatingMeta && <span className="text-xs text-muted-foreground animate-pulse">Atualizando...</span>}
-              </label>
-              <select 
-                className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                value={filters.area || ""}
-                onChange={(e) => setFilters({ ...filters, area: e.target.value })}
-              >
-                <option className="bg-background text-foreground" value="">Todas as Áreas</option>
-                {(dynamicMeta.areas || []).map(a => (
-                  <option className="bg-background text-foreground" key={a.area} value={a.area}>{a.area} ({a.n})</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground flex items-center justify-between">
-                <span>Ano</span>
-                {isUpdatingMeta && <span className="text-xs text-muted-foreground animate-pulse">Atualizando...</span>}
-              </label>
-              <select 
-                className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                value={filters.year || ""}
-                onChange={(e) => setFilters({ ...filters, year: e.target.value })}
-              >
-                <option className="bg-background text-foreground" value="">Todos os Anos</option>
-                {(dynamicMeta.years || []).map(y => (
-                  <option className="bg-background text-foreground" key={y} value={String(y)}>{y}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="space-y-3 mt-6">
-            <label className="text-sm font-medium text-foreground flex items-center justify-between">
-              <span>Instituição / Banca</span>
-              {isUpdatingMeta && <span className="text-xs text-muted-foreground animate-pulse">Atualizando...</span>}
-            </label>
-
-            <select 
-              className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-              value={filters.institution || ""}
-              onChange={(e) => setFilters({ ...filters, institution: e.target.value })}
-            >
-              <option className="bg-background text-foreground" value="">Todas as Instituições ({dynamicMeta?.total_questions ?? 0})</option>
-              {(dynamicMeta.institutions || []).map(i => (
-                <option className="bg-background text-foreground" key={i.institution_code} value={i.institution_code}>
-                  {i.institution_code} • {i.institution_label || i.institution_code} ({i.n})
-                </option>
-              ))}
-            </select>
-          </div>
-            
-            <div className="space-y-2 md:col-span-2 relative">
-              <label className="text-sm font-medium text-foreground flex items-center justify-between">
-                <span>Subtemas (Múltipla Escolha)</span>
-                {isUpdatingMeta && <span className="text-xs text-muted-foreground animate-pulse">Atualizando...</span>}
-              </label>
-              
-              {/* Chips of selected subtemas */}
-              {Array.isArray(filters.subtema) && filters.subtema.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {filters.subtema.map(sub => (
-                    <span key={sub} className="bg-primary/10 text-primary border border-primary/20 px-3 py-1.5 rounded-full text-sm flex items-center gap-1.5 animate-in zoom-in-95 duration-200">
-                      <span className="max-w-[200px] truncate">{sub}</span>
-                      <button 
-                        type="button" 
-                        onClick={() => {
-                          const current = (filters.subtema as string[]).filter(x => x !== sub);
-                          const newFilters = { ...filters };
-                          if (current.length > 0) newFilters.subtema = current;
-                          else delete newFilters.subtema;
-                          setFilters(newFilters);
-                        }} 
-                        className="hover:text-destructive hover:bg-destructive/10 rounded-full p-0.5 transition-colors"
-                        aria-label="Remover"
-                      >
-                        <X size={14} />
-                      </button>
-                    </span>
-                  ))}
-                  <button 
-                    type="button" 
-                    onClick={() => {
-                      const newFilters = { ...filters };
-                      delete newFilters.subtema;
-                      setFilters(newFilters);
-                    }}
-                    className="text-xs text-muted-foreground hover:text-foreground underline px-2 py-1.5"
-                  >
-                    Limpar todos
-                  </button>
-                </div>
-              )}
-              
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Buscar subtema para adicionar..."
-                  value={subtemaSearch}
-                  onChange={(e) => setSubtemaSearch(e.target.value)}
-                  className="w-full bg-input border border-border rounded-md py-2.5 px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary pl-9"
-                />
-                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                  <Search size={16} />
-                </div>
-              </div>
-              
-              {subtemaSearch.trim().length > 0 && (
-                <div className="absolute z-50 w-full mt-1 bg-card border border-border rounded-md shadow-lg max-h-60 overflow-y-auto">
-                  {dynamicMeta.subtemas
-                    ?.filter(s => s.subtema.toLowerCase().includes(subtemaSearch.toLowerCase()))
-                    .filter(s => !(Array.isArray(filters.subtema) && filters.subtema.includes(s.subtema)))
-                    .length === 0 && (
-                      <div className="px-4 py-3 text-sm text-muted-foreground italic">
-                        Nenhum subtema disponível encontrado.
-                      </div>
-                  )}
-                  {dynamicMeta.subtemas
-                    ?.filter(s => s.subtema.toLowerCase().includes(subtemaSearch.toLowerCase()))
-                    .filter(s => !(Array.isArray(filters.subtema) && filters.subtema.includes(s.subtema)))
-                    .slice(0, 50)
-                    .map(s => (
-                      <button 
-                        key={s.subtema} 
-                        type="button"
-                        onClick={() => {
-                          const current = Array.isArray(filters.subtema) ? [...filters.subtema] : (filters.subtema ? [filters.subtema as string] : []);
-                          current.push(s.subtema);
-                          setFilters({ ...filters, subtema: current });
-                          setSubtemaSearch("");
-                        }}
-                        className="w-full text-left flex items-center justify-between px-4 py-2.5 hover:bg-muted text-sm border-b border-border/50 last:border-0"
-                      >
-                        <span className="truncate pr-4">{s.subtema}</span>
-                        <span className="text-xs font-medium text-muted-foreground bg-muted px-2 py-0.5 rounded-full shrink-0">{s.n}</span>
-                      </button>
-                  ))}
-                </div>
-              )}
-              
-              <div className="mt-5 pt-4 border-t border-border">
-                <button type="button" onClick={() => setShowTopicTree(value => !value)} className="text-sm font-semibold text-primary hover:underline">
-                  {showTopicTree ? "Ocultar árvore de temas" : "Abrir árvore de temas"}
-                </button>
-                {showTopicTree && <div className="mt-3"><SubjectTreeSelector
-                  selectedSubtemas={Array.isArray(filters.subtema) ? filters.subtema : (filters.subtema ? [filters.subtema] : [])}
-                  onChange={(newSelection) => {
-                    const newFilters = { ...filters };
-                    if (newSelection.length > 0) newFilters.subtema = newSelection;
-                    else delete newFilters.subtema;
-                    setFilters(newFilters);
-                  }}
-                  availableSubtemas={dynamicMeta.subtemas || []}
-                /></div>}
-              </div>
-            </div>
-
-          <button 
-            type="submit"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 rounded-md transition-colors flex items-center justify-center gap-2 w-full mt-2 shadow-sm"
-          >
-            <Play size={18} fill="currentColor" />
-            {studyMode === "TUTOR" ? "Iniciar Sessão de Estudos" : "Iniciar Simulado Personalizado"}
-          </button>
-        </form>}
-      </div>
+      <QuizFilters
+        hasSavedState={hasSavedState}
+        savedSessionData={savedSessionData}
+        discardSavedQuiz={discardSavedQuiz}
+        resumeSavedQuiz={resumeSavedQuiz}
+        showCustomSession={showCustomSession}
+        setShowCustomSession={setShowCustomSession}
+        startRecommendedSession={startRecommendedSession}
+        handleFilterSubmit={handleFilterSubmit}
+        studyMode={studyMode}
+        setStudyMode={setStudyMode}
+        filters={filters}
+        setFilters={setFilters}
+        localLimit={localLimit}
+        setLocalLimit={setLocalLimit}
+        isUpdatingMeta={isUpdatingMeta}
+        dynamicMeta={dynamicMeta}
+        subtemaSearch={subtemaSearch}
+        setSubtemaSearch={setSubtemaSearch}
+        showTopicTree={showTopicTree}
+        setShowTopicTree={setShowTopicTree}
+      />
     );
   }
-
   if (state === "LOADING_QUEUE") {
     return (
       <div className="flex flex-col items-center justify-center h-64 gap-4">
@@ -1302,12 +996,12 @@ export function QuizClient({
               </>
             )}
           </button>
-          <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground w-16">
-            <Clock size={16} />
-            <span className={clsx(timeSpent > 120 && !attemptResult && "text-warning")}>
-              {formatTime(timeSpent)}
-            </span>
-          </div>
+          <QuizTimer 
+            ref={quizTimerRef}
+            isRunning={state === "PLAYING" && !!currentDetail && !attemptResult}
+            initialTime={initialTime}
+            className={clsx("text-sm font-medium w-16", getCurrentTime() > 120 && !attemptResult ? "text-warning" : "text-muted-foreground")}
+          />
           {q && (
             <button 
               onClick={toggleFavorite}
@@ -1728,6 +1422,54 @@ export function QuizClient({
                       </button>
                     </div>
                   )}
+
+                  {/* Preceptor AI Section */}
+                  <div className="mt-8 bg-blue-500/5 border border-blue-500/20 rounded-2xl p-5 md:p-6">
+                    <h4 className="text-blue-700 dark:text-blue-400 font-bold flex items-center gap-2 mb-3 uppercase tracking-wider text-sm">
+                      <Stethoscope size={18} /> Perguntar ao Preceptor (IA)
+                    </h4>
+                    {!preceptorResponse ? (
+                      <div className="flex flex-col gap-3">
+                        <textarea
+                          className="w-full bg-background border border-border rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none min-h-[80px]"
+                          placeholder="Ficou com alguma dúvida sobre esta questão? Pergunte ao preceptor virtual..."
+                          value={preceptorInput}
+                          onChange={(e) => setPreceptorInput(e.target.value)}
+                        />
+                        <div className="flex justify-end">
+                          <button
+                            onClick={handleAskPreceptor}
+                            disabled={askingPreceptor || !preceptorInput.trim()}
+                            className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl shadow-sm transition-all flex items-center gap-2 text-sm"
+                          >
+                            {askingPreceptor ? (
+                              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            ) : (
+                              <Sparkles size={16} />
+                            )}
+                            {askingPreceptor ? "Consultando..." : "Enviar Pergunta"}
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        <div className="bg-background rounded-xl p-4 border border-border relative">
+                          <button 
+                            onClick={() => { setPreceptorResponse(null); setPreceptorInput(""); }}
+                            className="absolute top-2 right-2 text-muted-foreground hover:text-foreground"
+                          >
+                            <X size={16} />
+                          </button>
+                          <div className="text-sm md:text-base text-foreground leading-relaxed">
+                            <FormattedContent content={preceptorResponse.answer} />
+                          </div>
+                          <div className="mt-3 text-xs text-muted-foreground font-mono bg-muted/50 w-fit px-2 py-1 rounded">
+                            Respondido por: {preceptorResponse.model} ({preceptorResponse.source})
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
                   {draftFlashcard && (
                     <div className="mt-6 bg-purple-500/10 border border-purple-500/25 rounded-2xl p-5 animate-in slide-in-from-bottom-2">

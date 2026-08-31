@@ -114,6 +114,19 @@ export const api = {
         method: "DELETE",
       }),
   },
+  sessions: {
+    get: (sessionType: string) => 
+      apiFetch<{data: any, updated_at: string} | {data: null}>(`/api/sessions/${sessionType}`, { cache: 'no-store' }),
+    save: (sessionType: string, data: any) => 
+      apiFetch<{success: boolean}>(`/api/sessions/${sessionType}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+      }),
+    delete: (sessionType: string) => 
+      apiFetch<{success: boolean}>(`/api/sessions/${sessionType}`, {
+        method: "DELETE",
+      }),
+  },
   planner: {
     getConfig: () => apiFetch<PlannerConfig>("/api/planner/config", { cache: 'no-store' }),
     saveConfig: async (config: PlannerConfig) => {

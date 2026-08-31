@@ -38,19 +38,13 @@ export function readLearningSession<T>(
   return null;
 }
 
-export function writeLearningSession(kind: LearningSessionKind, value: unknown): boolean {
-  try {
-    localStorage.setItem(getLearningSessionKey(kind), JSON.stringify(value));
-    return true;
-  } catch (error) {
-    console.error(`Unable to persist ${kind} session`, error);
-    return false;
-  }
-}
-
 export function removeLearningSession(kind: LearningSessionKind): void {
   removeLegacyState(kind);
   localStorage.removeItem(getLearningSessionKey(kind));
+  // Fire and forget cloud delete
+  import("./api").then(({ api }) => {
+    api.sessions.delete(kind).catch(() => {});
+  });
 }
 
 export function clearLearningSessions(): void {
@@ -60,4 +54,56 @@ export function clearLearningSessions(): void {
 
 export function deadlineFromNow(seconds: number): number {
   return Date.now() + seconds * 1000;
+}
+
+// Helper to debounce cloud writes
+const cloudSaveTimeouts: Record<string, ReturnType<typeof setTimeout>> = {};
+
+export function writeLearningSession(kind: LearningSessionKind, value: any): boolean {
+  try {
+    const data = { ...value, savedAt: value.savedAt || Date.now() };
+    localStorage.setItem(getLearningSessionKey(kind), JSON.stringify(data));
+    
+    // Debounce cloud save
+    if (cloudSaveTimeouts[kind]) clearTimeout(cloudSaveTimeouts[kind]);
+    cloudSaveTimeouts[kind] = setTimeout(() => {
+      import("./api").then(({ api }) => {
+        api.sessions.save(kind, data).catch((e) => console.error("Cloud save failed", e));
+      });
+    }, 2000);
+    return true;
+  } catch (error) {
+    console.error(`Unable to persist ${kind} session`, error);
+    return false;
+  }
+}
+
+/**
+ * Async sync session from cloud. Should be called on mount by clients.
+ */
+export async function syncSessionFromCloud<T>(
+  kind: LearningSessionKind, 
+  isValid: (value: unknown) => value is T
+): Promise<T | null> {
+  try {
+    const { api } = await import("./api");
+    const res = await api.sessions.get(kind);
+    if (!res || !res.data) return null;
+    
+    if (isValid(res.data)) {
+      const local = readLearningSession(kind, isValid) as any;
+      const remoteSavedAt = (res.data as any).savedAt || 0;
+      const localSavedAt = local?.savedAt || 0;
+      
+      // Se a nuvem é mais recente, atualiza o local
+      if (remoteSavedAt > localSavedAt) {
+        localStorage.setItem(getLearningSessionKey(kind), JSON.stringify(res.data));
+        return res.data;
+      }
+      return local;
+    }
+  } catch (e) {
+    console.error("Failed to sync session from cloud", e);
+  }
+  return null;
 }

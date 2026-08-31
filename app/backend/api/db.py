@@ -283,6 +283,13 @@ def init_db(app):
                 stem TEXT NOT NULL,
                 images TEXT,
                 medical_references TEXT)""")
+            
+            db.execute("""CREATE TABLE IF NOT EXISTS learning_sessions (
+                user_id TEXT NOT NULL,
+                session_type TEXT NOT NULL,
+                state_json TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
+                PRIMARY KEY (user_id, session_type))""")
 
             db.execute("""CREATE TABLE IF NOT EXISTS idempotency_keys (
                 user_id TEXT NOT NULL,

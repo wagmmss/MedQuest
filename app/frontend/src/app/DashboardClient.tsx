@@ -8,9 +8,12 @@ import {
 import { OfflineModal } from "@/components/OfflineModal";
 import { motion, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { 
+  BarChart3, Brain, Play, Clock, ArrowRight, Target, Sparkles, TrendingUp, AlertTriangle, Lightbulb, RefreshCw, Layers
+} from "lucide-react";
+import { readLearningSession, syncSessionFromCloud } from "@/lib/sessionState";
 import { triggerConfetti } from "@/lib/confetti";
 import clsx from "clsx";
-import { readLearningSession } from "@/lib/sessionState";
 
 interface DashboardClientProps {
   stats: OverviewStats;
@@ -45,21 +48,30 @@ export function DashboardClient({
 
   useEffect(() => {
     // Check for active sessions
-    const hasSimulado = readLearningSession<{ state?: string }>(
-      "simulado",
-      (val): val is { state?: string } => typeof val === "object" && val !== null
-    );
-    if (hasSimulado?.state && hasSimulado.state !== "RESULTS" && hasSimulado.state !== "OFFLINE_SUBMITTED") {
-      window.queueMicrotask(() => setActiveSession({ kind: "simulado", url: "/simulado" }));
-    } else {
-      const hasQuiz = readLearningSession<{ state?: string }>(
-        "quiz",
+    const checkSessions = async () => {
+      // Sincroniza da nuvem de forma assíncrona para não travar o carregamento
+      await Promise.allSettled([
+        syncSessionFromCloud<{ state?: string }>("simulado", (val): val is { state?: string } => typeof val === "object" && val !== null),
+        syncSessionFromCloud<{ state?: string }>("quiz", (val): val is { state?: string } => typeof val === "object" && val !== null)
+      ]);
+
+      const hasSimulado = readLearningSession<{ state?: string }>(
+        "simulado",
         (val): val is { state?: string } => typeof val === "object" && val !== null
       );
-      if (hasQuiz?.state && hasQuiz.state !== "RESULTS") {
-        window.queueMicrotask(() => setActiveSession({ kind: "quiz", url: "/estudar?resume=true" }));
+      if (hasSimulado?.state && hasSimulado.state !== "RESULTS" && hasSimulado.state !== "OFFLINE_SUBMITTED") {
+        setActiveSession({ kind: "simulado", url: "/simulado" });
+      } else {
+        const hasQuiz = readLearningSession<{ state?: string }>(
+          "quiz",
+          (val): val is { state?: string } => typeof val === "object" && val !== null
+        );
+        if (hasQuiz?.state && hasQuiz.state !== "RESULTS") {
+          setActiveSession({ kind: "quiz", url: "/estudar?resume=true" });
+        }
       }
-    }
+    };
+    checkSessions();
   }, []);
 
   // Listen to open-offline-modal custom event
