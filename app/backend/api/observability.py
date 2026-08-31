@@ -8,12 +8,22 @@ import time
 import uuid
 from collections import defaultdict, deque
 from datetime import datetime, timezone
+import contextlib
 
 from flask import g, request
 
 logger = logging.getLogger("medquest.telemetry")
 _latencies = defaultdict(lambda: deque(maxlen=500))
 _status_counts = defaultdict(int)
+
+@contextlib.contextmanager
+def trace_db(operation_name: str):
+    start = time.perf_counter()
+    try:
+        yield
+    finally:
+        duration_ms = round((time.perf_counter() - start) * 1000, 2)
+        emit("db_query", level=logging.DEBUG, operation=operation_name, duration_ms=duration_ms)
 
 
 def configure_logging(app):
