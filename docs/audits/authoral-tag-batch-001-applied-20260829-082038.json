@@ -1,0 +1,67 @@
+{
+  "batch_id": "authoral-tag-batch-001",
+  "applied": 5,
+  "backup": "C:\\dev\\MedQuest\\backups\\medquest_20260829-082038_pre-authoral-tag-batch-001.db",
+  "items": [
+    {
+      "question_id": 16083,
+      "source_tag": "Níveis de Evidência",
+      "before": {
+        "area": "Medicina Preventiva",
+        "subtema": "História Natural da Doença e Níveis de Prevenção"
+      },
+      "after": {
+        "area": "Medicina Preventiva",
+        "subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos"
+      }
+    },
+    {
+      "question_id": 16195,
+      "source_tag": "Educação em Saúde",
+      "before": {
+        "area": "Medicina Preventiva",
+        "subtema": "História Natural da Doença e Níveis de Prevenção"
+      },
+      "after": {
+        "area": "Medicina Preventiva",
+        "subtema": "Legislação, Diretrizes e Evolução do SUS"
+      }
+    },
+    {
+      "question_id": 16349,
+      "source_tag": "DART",
+      "before": {
+        "area": "Medicina Preventiva",
+        "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística"
+      },
+      "after": {
+        "area": "Medicina Preventiva",
+        "subtema": "Saúde do Trabalhador e Doenças Ocupacionais"
+      }
+    },
+    {
+      "question_id": 16741,
+      "source_tag": "Pneumonite de hipersensibilidade (PH) (CM)",
+      "before": {
+        "area": "Medicina Preventiva",
+        "subtema": "Avaliação de Testes Diagnósticos e Curva ROC"
+      },
+      "after": {
+        "area": "Clínica Médica",
+        "subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar"
+      }
+    },
+    {
+      "question_id": 12590,
+      "source_tag": "Clínica Médica Geral",
+      "before": {
+        "area": "Clínica Médica",
+        "subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)"
+      },
+      "after": {
+        "area": "Clínica Médica",
+        "subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias"
+      }
+    }
+  ]
+}

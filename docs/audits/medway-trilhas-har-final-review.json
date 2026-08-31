@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T22:18:17.174669+00:00",
+  "generated_at": "2026-08-29T11:36:23.144352+00:00",
   "mode": "dry_run_no_database_changes",
   "database": "C:\\dev\\MedQuest\\app\\backend\\medquest.db",
   "hars_dir": "C:\\Users\\wmors\\Downloads\\Medway_Trilhas",
@@ -8,10 +8,9 @@
   "medway_duplicate_conflicts": [],
   "database_questions": 7674,
   "status_counts": {
-    "already_aligned": 5780,
+    "already_aligned": 5895,
     "multiple_canonical_destinations": 2,
     "needs_content_review": 233,
-    "proposed_content_match": 115,
     "unmapped_medway_tag": 2,
     "unmatched": 1542
   },
@@ -1220,12 +1219,12 @@
     {
       "question_id": 8558,
       "current": {
-        "area": "Pediatria",
-        "subtema": "Segurança Infantil, Prevenção de Acidentes e Maus-Tratos",
-        "subtema_id": "PED-023",
+        "area": "Clínica Médica",
+        "subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+        "subtema_id": "CLÍ-044",
         "topic": "Segurança e Violência na Infância"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda"
@@ -3394,12 +3393,12 @@
     {
       "question_id": 8646,
       "current": {
-        "area": "Ginecologia e Obstetrícia",
-        "subtema": "Condições Clínicas Intercorrentes na Gravidez",
-        "subtema_id": "GIN-010",
+        "area": "Clínica Médica",
+        "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+        "subtema_id": "CLÍ-030",
         "topic": "Outras Doenças na Gestação"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas"
@@ -3770,11 +3769,11 @@
       "question_id": 8661,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
-        "subtema_id": "MED-004",
+        "subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos",
+        "subtema_id": "MED-003",
         "topic": "Estudos epidemiológicos (análise estatística e aplicação)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos"
@@ -4731,12 +4730,12 @@
     {
       "question_id": 8700,
       "current": {
-        "area": "Pediatria",
-        "subtema": "Reanimação Neonatal e Assistência em Sala de Parto",
-        "subtema_id": "PED-022",
+        "area": "Clínica Médica",
+        "subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos",
+        "subtema_id": "CLÍ-020",
         "topic": "Sala de Parto"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Hipotireoidismo, Hipertireoidismo e Nódulos Tireoidianos"
@@ -4856,12 +4855,12 @@
     {
       "question_id": 8705,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Acidente Vascular Cerebral Isquêmico e Hemorrágico (Janela de Trombólise)",
-        "subtema_id": "CLÍ-001",
+        "area": "Ginecologia e Obstetrícia",
+        "subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)",
+        "subtema_id": "GIN-023",
         "topic": "AVC"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Investigação das Amenorreias e Síndrome dos Ovários Policísticos (SOP)"
@@ -5119,11 +5118,11 @@
       "question_id": 8716,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto",
-        "subtema_id": "GIN-007",
+        "subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+        "subtema_id": "GIN-006",
         "topic": "Estática fetal, Pelve e Mecanismo de Parto"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal"
@@ -5443,12 +5442,12 @@
     {
       "question_id": 8729,
       "current": {
-        "area": "Pediatria",
-        "subtema": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
-        "subtema_id": "PED-011",
+        "area": "Clínica Médica",
+        "subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+        "subtema_id": "CLÍ-033",
         "topic": "Doenças Exantemáticas"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica"
@@ -6344,11 +6343,11 @@
       "question_id": 8825,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
-        "subtema_id": "CLÍ-013",
+        "subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+        "subtema_id": "CLÍ-033",
         "topic": "Distúrbios Hidroeletrolíticos e Acidobásicos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica"
@@ -6419,11 +6418,11 @@
       "question_id": 8828,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Meningites, Encefalites e Infecções do SNC",
-        "subtema_id": "CLÍ-027",
+        "subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
+        "subtema_id": "CLÍ-033",
         "topic": "Infecções do Sistema Nervoso Central"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica"
@@ -6544,11 +6543,11 @@
       "question_id": 8833,
       "current": {
         "area": "Pediatria",
-        "subtema": "Puericultura: Marcos do Desenvolvimento (DNPM) e Curvas de Crescimento",
-        "subtema_id": "PED-021",
+        "subtema": "Calendário Vacinal do PNI e Imunizações Especiais",
+        "subtema_id": "PED-006",
         "topic": "Crescimento e Desenvolvimento na Infância e Adolescência"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Calendário Vacinal do PNI e Imunizações Especiais"
@@ -8292,12 +8291,12 @@
     {
       "question_id": 8904,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
-        "subtema_id": "MED-001",
+        "area": "Clínica Médica",
+        "subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)",
+        "subtema_id": "CLÍ-039",
         "topic": "Determinantes Sociais de Saúde e Doença"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Transtornos por Uso de Substâncias (Álcool, Tabaco e Drogas de Abuso)"
@@ -8668,11 +8667,11 @@
       "question_id": 8919,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto",
-        "subtema_id": "GIN-007",
+        "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+        "subtema_id": "GIN-004",
         "topic": "Bacia obstétrica"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias"
@@ -9804,11 +9803,11 @@
       "question_id": 8966,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Trabalho de Parto Prematuro e Tocólise",
-        "subtema_id": "GIN-034",
+        "subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+        "subtema_id": "GIN-006",
         "topic": "Trabalho de parto prematuro"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal"
@@ -11354,11 +11353,11 @@
       "question_id": 9030,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
-        "subtema_id": "CLÍ-033",
+        "subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas",
+        "subtema_id": "CLÍ-002",
         "topic": "Sepse, Choque Séptico e Outros tipos de Choque"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Artrite Reumatoide, Espondiloartrites e Artrites Microcristalinas"
@@ -11479,11 +11478,11 @@
       "question_id": 9035,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
-        "subtema_id": "GIN-015",
+        "subtema": "Investigação e Propêdêutica da Infertilidade Conjugal",
+        "subtema_id": "GIN-024",
         "topic": "Doença Inflamatória Pélvica e Violência Sexual"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Investigação e Propêdêutica da Infertilidade Conjugal"
@@ -11729,11 +11728,11 @@
       "question_id": 9045,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
-        "subtema_id": "CLÍ-003",
+        "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+        "subtema_id": "CLÍ-030",
         "topic": "Distúrbios Obstrutivos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas"
@@ -14162,11 +14161,11 @@
       "question_id": 9244,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
-        "subtema_id": "GIN-021",
+        "subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
+        "subtema_id": "GIN-030",
         "topic": "Descolamento prematuro de placenta"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto"
@@ -14661,12 +14660,12 @@
     {
       "question_id": 9384,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
-        "subtema_id": "CLÍ-003",
+        "area": "Medicina Preventiva",
+        "subtema": "História Natural da Doença e Níveis de Prevenção",
+        "subtema_id": "MED-005",
         "topic": "Distúrbios Obstrutivos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "História Natural da Doença e Níveis de Prevenção"
@@ -14686,12 +14685,12 @@
     {
       "question_id": 9385,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "História Natural da Doença e Níveis de Prevenção",
-        "subtema_id": "MED-005",
+        "area": "Clínica Médica",
+        "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+        "subtema_id": "CLÍ-037",
         "topic": "Níveis de Prevenção"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)"
@@ -14712,11 +14711,11 @@
       "question_id": 9386,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
-        "subtema_id": "CLÍ-037",
+        "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+        "subtema_id": "CLÍ-030",
         "topic": "Arritmias, Síncope e PCR"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas"
@@ -17050,11 +17049,11 @@
       "question_id": 9481,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Puerpério Fisiológico, Patológico e Hemorragia Pós-Parto",
-        "subtema_id": "GIN-030",
+        "subtema": "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto",
+        "subtema_id": "GIN-007",
         "topic": "Puerpério"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Bacia Obstétrica, Estática Fetal e Mecanismo do Parto"
@@ -17287,11 +17286,11 @@
       "question_id": 9591,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
-        "subtema_id": "GIN-004",
+        "subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
+        "subtema_id": "GIN-015",
         "topic": "Assistência ao Parto"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual"
@@ -18224,11 +18223,11 @@
       "question_id": 9629,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
-        "subtema_id": "CLÍ-029",
+        "subtema": "Meningites, Encefalites e Infecções do SNC",
+        "subtema_id": "CLÍ-027",
         "topic": "Síndromes Neurológicas e Fraqueza Muscular"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Meningites, Encefalites e Infecções do SNC"
@@ -26281,11 +26280,11 @@
       "question_id": 10283,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Dermatoses Infecciosas, Hanseníase e Leishmanioses",
-        "subtema_id": "CLÍ-009",
+        "subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+        "subtema_id": "CLÍ-035",
         "topic": "Doenças Infectoparasitárias com Acometimento Dermatológico"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)"
@@ -31745,12 +31744,12 @@
     {
       "question_id": 10504,
       "current": {
-        "area": "Cirurgia",
-        "subtema": "Atendimento ao Paciente Queimado e Reposição Volêmica",
-        "subtema_id": "CIR-031",
+        "area": "Ginecologia e Obstetrícia",
+        "subtema": "Massas Anexiais e Neoplasias Ovarianas",
+        "subtema_id": "GIN-025",
         "topic": "Atendimento inicial aos queimados"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Massas Anexiais e Neoplasias Ovarianas"
@@ -31921,11 +31920,11 @@
       "question_id": 10511,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Patologias Benignas e Neoplásicas da Vulva e Vagina",
-        "subtema_id": "GIN-029",
+        "subtema": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
+        "subtema_id": "GIN-036",
         "topic": "Patologias da vulva e vagina"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais"
@@ -31996,11 +31995,11 @@
       "question_id": 10514,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
-        "subtema_id": "MED-001",
+        "subtema": "Transição Demográfica e Perfis Populacionais",
+        "subtema_id": "MED-010",
         "topic": "Atenção Primária à Saúde"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Transição Demográfica e Perfis Populacionais"
@@ -32321,11 +32320,11 @@
       "question_id": 10527,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "História Natural da Doença e Níveis de Prevenção",
-        "subtema_id": "MED-005",
+        "subtema": "Vigilância Epidemiológica: Endemias, Epidemias e Surtos",
+        "subtema_id": "MED-011",
         "topic": "Níveis de Prevenção"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Vigilância Epidemiológica: Endemias, Epidemias e Surtos"
@@ -34520,11 +34519,11 @@
       "question_id": 10616,
       "current": {
         "area": "Cirurgia",
-        "subtema": "Distúrbios Motores do Esôfago, Megaesôfago e Síndrome Disfágica",
-        "subtema_id": "CIR-041",
+        "subtema": "Ortopedia Pediátrica: Displasia do Quadril, Pé Torto e Epifisiólise",
+        "subtema_id": "CIR-057",
         "topic": "Síndrome Disfágica"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Ortopedia Pediátrica: Displasia do Quadril, Pé Torto e Epifisiólise"
@@ -34794,12 +34793,12 @@
     {
       "question_id": 10627,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
-        "subtema_id": "CLÍ-010",
+        "area": "Cirurgia",
+        "subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+        "subtema_id": "CIR-058",
         "topic": "Diabetes"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos"
@@ -35319,12 +35318,12 @@
     {
       "question_id": 10648,
       "current": {
-        "area": "Ginecologia e Obstetrícia",
-        "subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
-        "subtema_id": "GIN-012",
+        "area": "Clínica Médica",
+        "subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)",
+        "subtema_id": "CLÍ-035",
         "topic": "Tumores Malignos da Mama"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Síndromes Febris Agudas e Arboviroses (Dengue, Chikungunya, Febre Amarela)"
@@ -35419,12 +35418,12 @@
     {
       "question_id": 10652,
       "current": {
-        "area": "Ginecologia e Obstetrícia",
-        "subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
-        "subtema_id": "GIN-028",
+        "area": "Clínica Médica",
+        "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+        "subtema_id": "CLÍ-003",
         "topic": "Contracepção"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)"
@@ -35844,12 +35843,12 @@
     {
       "question_id": 10669,
       "current": {
-        "area": "Pediatria",
-        "subtema": "Aleitamento Materno, Alimentação Complementar e Desnutrição Infantil",
-        "subtema_id": "PED-002",
+        "area": "Ginecologia e Obstetrícia",
+        "subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+        "subtema_id": "GIN-035",
         "topic": "Nutrição na Pediatria"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital"
@@ -35969,12 +35968,12 @@
     {
       "question_id": 10674,
       "current": {
-        "area": "Pediatria",
-        "subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
-        "subtema_id": "PED-012",
+        "area": "Ginecologia e Obstetrícia",
+        "subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+        "subtema_id": "GIN-005",
         "topic": "Desordens Genéticas e Erros Inatos do Metabolismo"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Assistência Pré-Natal de Baixo e Alto Risco"
@@ -35994,12 +35993,12 @@
     {
       "question_id": 10675,
       "current": {
-        "area": "Pediatria",
-        "subtema": "Aleitamento Materno, Alimentação Complementar e Desnutrição Infantil",
-        "subtema_id": "PED-002",
+        "area": "Ginecologia e Obstetrícia",
+        "subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos",
+        "subtema_id": "GIN-028",
         "topic": "Nutrição na Pediatria"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Métodos Contraceptivos: Hormonais, DIU e Cirúrgicos"
@@ -36519,12 +36518,12 @@
     {
       "question_id": 10696,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
-        "subtema_id": "MED-001",
+        "area": "Pediatria",
+        "subtema": "Segurança Infantil, Prevenção de Acidentes e Maus-Tratos",
+        "subtema_id": "PED-023",
         "topic": "Atenção Primária à Saúde"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Segurança Infantil, Prevenção de Acidentes e Maus-Tratos"
@@ -36595,11 +36594,11 @@
       "question_id": 10699,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Celulite, Erisipela, Osteomielite e Infecções de Partes Moles",
-        "subtema_id": "CLÍ-005",
+        "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+        "subtema_id": "CLÍ-030",
         "topic": "Infecções de Pele, Ossos e Partes Moles"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas"
@@ -36856,12 +36855,12 @@
     {
       "question_id": 10710,
       "current": {
-        "area": "Cirurgia",
-        "subtema": "Distúrbios Motores do Esôfago, Megaesôfago e Síndrome Disfágica",
-        "subtema_id": "CIR-041",
+        "area": "Medicina Preventiva",
+        "subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+        "subtema_id": "MED-002",
         "topic": "Síndrome Disfágica"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Avaliação de Testes Diagnósticos e Curva ROC"
@@ -36945,12 +36944,12 @@
     {
       "question_id": 10714,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "História Natural da Doença e Níveis de Prevenção",
-        "subtema_id": "MED-005",
+        "area": "Clínica Médica",
+        "subtema": "Celulite, Erisipela, Osteomielite e Infecções de Partes Moles",
+        "subtema_id": "CLÍ-005",
         "topic": "Níveis de Prevenção"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Celulite, Erisipela, Osteomielite e Infecções de Partes Moles"
@@ -37095,12 +37094,12 @@
     {
       "question_id": 10720,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "História Natural da Doença e Níveis de Prevenção",
-        "subtema_id": "MED-005",
+        "area": "Clínica Médica",
+        "subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+        "subtema_id": "CLÍ-019",
         "topic": "Níveis de Prevenção"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas"
@@ -37732,12 +37731,12 @@
     {
       "question_id": 10746,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "História Natural da Doença e Níveis de Prevenção",
-        "subtema_id": "MED-005",
+        "area": "Clínica Médica",
+        "subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
+        "subtema_id": "CLÍ-019",
         "topic": "Níveis de Prevenção"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas"
@@ -64397,12 +64396,12 @@
     {
       "question_id": 12194,
       "current": {
-        "area": "Cirurgia",
-        "subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
-        "subtema_id": "CIR-067",
+        "area": "Clínica Médica",
+        "subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
+        "subtema_id": "CLÍ-006",
         "topic": "Pneumotórax traumático simples"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática"
@@ -67335,11 +67334,11 @@
       "question_id": 12318,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
-        "subtema_id": "GIN-012",
+        "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+        "subtema_id": "GIN-004",
         "topic": "Tumores Malignos da Mama"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias"
@@ -68284,11 +68283,11 @@
       "question_id": 12357,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "História Natural da Doença e Níveis de Prevenção",
-        "subtema_id": "MED-005",
+        "subtema": "Ética Médica, Bioética e Prontuários / Documentos",
+        "subtema_id": "MED-013",
         "topic": "Níveis de Prevenção"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Ética Médica, Bioética e Prontuários / Documentos"
@@ -70183,11 +70182,11 @@
       "question_id": 12438,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Hemorragias da Primeira Metade: Abortamento, Ectópica e Mola",
-        "subtema_id": "GIN-020",
+        "subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+        "subtema_id": "GIN-005",
         "topic": "Sangramento da Primeira Metade da Gestação"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Assistência Pré-Natal de Baixo e Alto Risco"
@@ -70986,11 +70985,11 @@
       "question_id": 12471,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Cirrose Hepática, Hipertensão Portal e Insuficiência Hepática",
-        "subtema_id": "CLÍ-006",
+        "subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+        "subtema_id": "CLÍ-013",
         "topic": "Cirrose, Insuficiência Hepática e Complicações"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base"
@@ -73004,11 +73003,11 @@
       "question_id": 12554,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "História Natural da Doença e Níveis de Prevenção",
-        "subtema_id": "MED-005",
+        "subtema": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
+        "subtema_id": "MED-001",
         "topic": "Educação em Saúde"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)"
@@ -73488,11 +73487,11 @@
       "question_id": 12579,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
-        "subtema_id": "CLÍ-010",
+        "subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
+        "subtema_id": "CLÍ-041",
         "topic": "Diabetes"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo"
@@ -73636,8 +73635,8 @@
       "question_id": 12590,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)",
-        "subtema_id": "CLÍ-034",
+        "subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+        "subtema_id": "CLÍ-011",
         "topic": "Clínica Médica Geral"
       },
       "status": "needs_content_review",
@@ -79419,11 +79418,11 @@
       "question_id": 12869,
       "current": {
         "area": "Cirurgia",
-        "subtema": "Uro-Oncologia: Câncer de Próstata, Rim, Bexiga e Testículo",
-        "subtema_id": "CIR-069",
+        "subtema": "Cicatrização, Tratamento de Feridas, Enxertos e Retalhos",
+        "subtema_id": "CIR-033",
         "topic": "Tumores Urológicos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Cicatrização, Tratamento de Feridas, Enxertos e Retalhos"
@@ -79581,11 +79580,11 @@
       "question_id": 12876,
       "current": {
         "area": "Cirurgia",
-        "subtema": "Fundamentos da Anestesiologia, Farmacologia e Bloqueios",
-        "subtema_id": "CIR-045",
+        "subtema": "Distúrbios Motores do Esôfago, Megaesôfago e Síndrome Disfágica",
+        "subtema_id": "CIR-041",
         "topic": "Anestesia"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Distúrbios Motores do Esôfago, Megaesôfago e Síndrome Disfágica"
@@ -79856,11 +79855,11 @@
       "question_id": 12887,
       "current": {
         "area": "Cirurgia",
-        "subtema": "Avaliação Pré-Operatória e Estratificação de Risco Cirúrgico",
-        "subtema_id": "CIR-032",
+        "subtema": "Neoplasias do Trato Gastrointestinal (Esôfago, Estômago, Pâncreas e Cólon)",
+        "subtema_id": "CIR-054",
         "topic": "Cuidados Pré-operatórios"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Neoplasias do Trato Gastrointestinal (Esôfago, Estômago, Pâncreas e Cólon)"
@@ -80881,11 +80880,11 @@
       "question_id": 12930,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Vulvovaginites e Diagnóstico Diferencial dos Corrimentos Vaginais",
-        "subtema_id": "GIN-036",
+        "subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+        "subtema_id": "GIN-022",
         "topic": "Vulvovaginites"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)"
@@ -81444,11 +81443,11 @@
       "question_id": 12954,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
-        "subtema_id": "MED-004",
+        "subtema": "História das Políticas de Saúde e Origens do SUS",
+        "subtema_id": "MED-006",
         "topic": "Estudos epidemiológicos (análise estatística e aplicação)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "História das Políticas de Saúde e Origens do SUS"
@@ -81669,11 +81668,11 @@
       "question_id": 12963,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
-        "subtema_id": "MED-001",
+        "subtema": "Legislação, Diretrizes e Evolução do SUS",
+        "subtema_id": "MED-008",
         "topic": "Atenção Primária à Saúde"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Legislação, Diretrizes e Evolução do SUS"
@@ -81847,11 +81846,11 @@
       "question_id": 12971,
       "current": {
         "area": "Cirurgia",
-        "subtema": "Abordagem Cirúrgica das Doenças Inflamatórias Intestinais (Crohn e RCU)",
-        "subtema_id": "CIR-028",
+        "subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese",
+        "subtema_id": "CIR-071",
         "topic": "Doença Inflamatória Intestinal"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Fraturas Ósseas e Princípios Gerais de Osteossíntese"
@@ -82196,12 +82195,12 @@
     {
       "question_id": 12985,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Hiperplasia Prostática Benigna (HPB) e Litíase Urinária",
-        "subtema_id": "CIR-047",
+        "area": "Cirurgia",
+        "subtema": "Fundamentos da Anestesiologia, Farmacologia e Bloqueios",
+        "subtema_id": "CIR-045",
         "topic": "Afecções Urológicas Benignas"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Fundamentos da Anestesiologia, Farmacologia e Bloqueios"
@@ -83943,12 +83942,12 @@
     {
       "question_id": 13058,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Hipertensão Arterial Sistêmica e Crises Hipertensivas",
-        "subtema_id": "CLÍ-019",
+        "area": "Medicina Preventiva",
+        "subtema": "Vigilância em Saúde e Notificação Compulsória (SINAN)",
+        "subtema_id": "MED-012",
         "topic": "Hipertensão Arterial Sistêmica"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Vigilância em Saúde e Notificação Compulsória (SINAN)"
@@ -84256,11 +84255,11 @@
       "question_id": 13071,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
-        "subtema_id": "CLÍ-029",
+        "subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
+        "subtema_id": "CLÍ-023",
         "topic": "Síndromes Neurológicas e Fraqueza Muscular"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)"
@@ -84517,11 +84516,11 @@
       "question_id": 13083,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Injúria Renal Aguda (IRA) e Doença Renal Crônica (DRC)",
-        "subtema_id": "CLÍ-023",
+        "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+        "subtema_id": "CLÍ-037",
         "topic": "Insuficiência Renal"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)"
@@ -85091,12 +85090,12 @@
     {
       "question_id": 13106,
       "current": {
-        "area": "Cirurgia",
-        "subtema": "Abdome Agudo Obstrutivo (Bridas, Neoplasias e Volvo)",
-        "subtema_id": "CIR-025",
+        "area": "Medicina Preventiva",
+        "subtema": "Ética Médica, Bioética e Prontuários / Documentos",
+        "subtema_id": "MED-013",
         "topic": "Abdome Agudo Obstrutivo"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Ética Médica, Bioética e Prontuários / Documentos"
@@ -86216,11 +86215,11 @@
       "question_id": 13152,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
-        "subtema_id": "MED-001",
+        "subtema": "História Natural da Doença e Níveis de Prevenção",
+        "subtema_id": "MED-005",
         "topic": "Atenção Primária à Saúde"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "História Natural da Doença e Níveis de Prevenção"
@@ -86241,11 +86240,11 @@
       "question_id": 13153,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
-        "subtema_id": "MED-001",
+        "subtema": "Vigilância em Saúde e Notificação Compulsória (SINAN)",
+        "subtema_id": "MED-012",
         "topic": "Atenção Primária à Saúde"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Vigilância em Saúde e Notificação Compulsória (SINAN)"
@@ -86839,12 +86838,12 @@
     {
       "question_id": 13178,
       "current": {
-        "area": "Pediatria",
-        "subtema": "Genética Médica, Cromossomopatias e Erros Inatos do Metabolismo",
-        "subtema_id": "PED-012",
+        "area": "Clínica Médica",
+        "subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+        "subtema_id": "CLÍ-011",
         "topic": "Desordens Genéticas e Erros Inatos do Metabolismo"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias"
@@ -87202,11 +87201,11 @@
       "question_id": 13193,
       "current": {
         "area": "Cirurgia",
-        "subtema": "Trauma Abdominal Fechado e Penetrante (FAST e Laparotomia)",
-        "subtema_id": "CIR-062",
+        "subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)",
+        "subtema_id": "CIR-048",
         "topic": "Trauma Abdominal"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Hérnias da Parede Abdominal (Inguinais, Femorais e Incisionais)"
@@ -87689,11 +87688,11 @@
       "question_id": 13213,
       "current": {
         "area": "Pediatria",
-        "subtema": "Calendário Vacinal do PNI e Imunizações Especiais",
-        "subtema_id": "PED-006",
+        "subtema": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
+        "subtema_id": "PED-011",
         "topic": "Imunizações"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas"
@@ -88288,11 +88287,11 @@
       "question_id": 13238,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
-        "subtema_id": "GIN-032",
+        "subtema": "Hemorragias da Segunda Metade: Placenta Prévia e DPP",
+        "subtema_id": "GIN-021",
         "topic": "PALM-COEIN"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Hemorragias da Segunda Metade: Placenta Prévia e DPP"
@@ -88313,11 +88312,11 @@
       "question_id": 13239,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Massas Anexiais e Neoplasias Ovarianas",
-        "subtema_id": "GIN-025",
+        "subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose",
+        "subtema_id": "GIN-032",
         "topic": "Tumores dos ovários"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Sangramento Uterino Anormal (SUA) e Classificação PALM-COEIN / Miomatose"
@@ -92264,11 +92263,11 @@
       "question_id": 13398,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Condições Clínicas Intercorrentes na Gravidez",
-        "subtema_id": "GIN-010",
+        "subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
+        "subtema_id": "GIN-022",
         "topic": "Outras doenças infecciosas na gravidez"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)"
@@ -92364,11 +92363,11 @@
       "question_id": 13402,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Mastologia Benigna: Fibroadenomas, Cistos e Mastites",
-        "subtema_id": "GIN-026",
+        "subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento",
+        "subtema_id": "GIN-012",
         "topic": "Propedêutica mamária"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Câncer de Mama: Rastreamento, Diagnóstico e Estadiamento"
@@ -95248,11 +95247,11 @@
       "question_id": 13518,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
-        "subtema_id": "GIN-004",
+        "subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+        "subtema_id": "GIN-006",
         "topic": "Partograma"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal"
@@ -95273,11 +95272,11 @@
       "question_id": 13519,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
-        "subtema_id": "GIN-004",
+        "subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal",
+        "subtema_id": "GIN-006",
         "topic": "Parto vaginal operatório"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Avaliação da Vitalidade Fetal, Cardiotocografia e Sofrimento Fetal"
@@ -95623,11 +95622,11 @@
       "question_id": 13533,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Transição Demográfica e Perfis Populacionais",
-        "subtema_id": "MED-010",
+        "subtema": "Saúde do Trabalhador e Doenças Ocupacionais",
+        "subtema_id": "MED-009",
         "topic": "Perfis e Indicadores Demográficos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Saúde do Trabalhador e Doenças Ocupacionais"
@@ -96022,12 +96021,12 @@
     {
       "question_id": 13550,
       "current": {
-        "area": "Cirurgia",
-        "subtema": "Atendimento Inicial ao Politraumatizado (Protocolo xABCDE)",
-        "subtema_id": "CIR-030",
+        "area": "Clínica Médica",
+        "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
+        "subtema_id": "CLÍ-003",
         "topic": "Abordagem Inicial (xABCDE)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)"
@@ -97373,12 +97372,12 @@
     {
       "question_id": 13605,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
-        "subtema_id": "MED-002",
+        "area": "Ginecologia e Obstetrícia",
+        "subtema": "Úlceras Genitais e Infecções Sexualmente Transmissíveis na Mulher",
+        "subtema_id": "GIN-037",
         "topic": "Estatística de testes diagnósticos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Úlceras Genitais e Infecções Sexualmente Transmissíveis na Mulher"
@@ -97448,12 +97447,12 @@
     {
       "question_id": 13608,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
-        "subtema_id": "MED-004",
+        "area": "Ginecologia e Obstetrícia",
+        "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias",
+        "subtema_id": "GIN-004",
         "topic": "Estudos epidemiológicos (análise estatística e aplicação)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Assistência Clínica ao Trabalho de Parto, Partograma e Distocias"
@@ -97523,12 +97522,12 @@
     {
       "question_id": 13611,
       "current": {
-        "area": "Cirurgia",
-        "subtema": "Neoplasias Ósseas Benignas e Sarcomas Ósseos",
-        "subtema_id": "CIR-055",
+        "area": "Ginecologia e Obstetrícia",
+        "subtema": "Condições Clínicas Intercorrentes na Gravidez",
+        "subtema_id": "GIN-010",
         "topic": "Tumores Ortopédicos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Condições Clínicas Intercorrentes na Gravidez"
@@ -97649,11 +97648,11 @@
       "question_id": 13616,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "História Natural da Doença e Níveis de Prevenção",
-        "subtema_id": "MED-005",
+        "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+        "subtema_id": "MED-004",
         "topic": "Níveis de Prevenção"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística"
@@ -97674,11 +97673,11 @@
       "question_id": 13617,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Ética Médica, Bioética e Prontuários / Documentos",
-        "subtema_id": "MED-013",
+        "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
+        "subtema_id": "MED-004",
         "topic": "Ética Médica, Bioética e Documentação"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística"
@@ -97924,11 +97923,11 @@
       "question_id": 13627,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
-        "subtema_id": "MED-004",
+        "subtema": "Saúde do Trabalhador e Doenças Ocupacionais",
+        "subtema_id": "MED-009",
         "topic": "DART"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Saúde do Trabalhador e Doenças Ocupacionais"
@@ -98174,11 +98173,11 @@
       "question_id": 13717,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Diabetes Mellitus: Metas Glicêmicas, Complicações e Tratamento",
-        "subtema_id": "CLÍ-010",
+        "subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
+        "subtema_id": "CLÍ-038",
         "topic": "Diabetes"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos"
@@ -98574,11 +98573,11 @@
       "question_id": 13733,
       "current": {
         "area": "Cirurgia",
-        "subtema": "Doença Arterial Obstrutiva Periférica e Oclusões Arteriais Agudas",
-        "subtema_id": "CIR-042",
+        "subtema": "Abdome Agudo Vascular e Isquemia Mesentérica",
+        "subtema_id": "CIR-027",
         "topic": "Oclusão Arterial Crônica e Vasculites"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Abdome Agudo Vascular e Isquemia Mesentérica"
@@ -101875,12 +101874,12 @@
     {
       "question_id": 13867,
       "current": {
-        "area": "Cirurgia",
-        "subtema": "Cirurgia Pediátrica e Malformações Digestivas Neonatais",
-        "subtema_id": "CIR-036",
+        "area": "Clínica Médica",
+        "subtema": "Valvopatias Adquiridas e Miocardiopatias",
+        "subtema_id": "CLÍ-042",
         "topic": "Cirurgia pediátrica"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Valvopatias Adquiridas e Miocardiopatias"
@@ -103387,11 +103386,11 @@
       "question_id": 13929,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
-        "subtema_id": "CLÍ-030",
+        "subtema": "Dermatoses Infecciosas, Hanseníase e Leishmanioses",
+        "subtema_id": "CLÍ-009",
         "topic": "Paracoccidiodomicose (CM)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Dermatoses Infecciosas, Hanseníase e Leishmanioses"
@@ -104011,12 +104010,12 @@
     {
       "question_id": 13954,
       "current": {
-        "area": "Pediatria",
-        "subtema": "Anemias Carenciais e Distúrbios de Micronutrientes (Ferro, Vitamina D)",
-        "subtema_id": "PED-004",
+        "area": "Clínica Médica",
+        "subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+        "subtema_id": "CLÍ-015",
         "topic": "Desnutrição e Vitaminas (PED)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio"
@@ -106247,11 +106246,11 @@
       "question_id": 14077,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Doença Inflamatória Pélvica (DIP) e Atendimento à Violência Sexual",
-        "subtema_id": "GIN-015",
+        "subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)",
+        "subtema_id": "GIN-033",
         "topic": "Doença Inflamatória Pélvica e Violência Sexual"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Síndromes Hipertensivas na Gravidez (Pré-eclâmpsia e Eclâmpsia)"
@@ -112445,11 +112444,11 @@
       "question_id": 14332,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Dislipidemias, Síndrome Metabólica e Risco Cardiovascular",
-        "subtema_id": "CLÍ-012",
+        "subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias",
+        "subtema_id": "CLÍ-011",
         "topic": "Síndrome Metabólica e Dislipidemia"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias"
@@ -114343,11 +114342,11 @@
       "question_id": 14410,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
-        "subtema_id": "CLÍ-003",
+        "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+        "subtema_id": "CLÍ-037",
         "topic": "Distúrbios Obstrutivos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)"
@@ -114368,11 +114367,11 @@
       "question_id": 14411,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
-        "subtema_id": "CLÍ-003",
+        "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
+        "subtema_id": "CLÍ-037",
         "topic": "Distúrbios Obstrutivos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)"
@@ -120822,11 +120821,11 @@
       "question_id": 14676,
       "current": {
         "area": "Pediatria",
-        "subtema": "Neonatologia: Desconforto Respiratório e Doença da Membrana Hialina",
-        "subtema_id": "PED-016",
+        "subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)",
+        "subtema_id": "PED-003",
         "topic": "Período Neonatal: Doenças Respiratórias"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Alojamento Conjunto e Testes de Triagem Neonatal (Pezinho, Olhinho, Coraçãozinho)"
@@ -124760,11 +124759,11 @@
       "question_id": 14840,
       "current": {
         "area": "Cirurgia",
-        "subtema": "Atendimento ao Paciente Queimado e Reposição Volêmica",
-        "subtema_id": "CIR-031",
+        "subtema": "Trauma Ortopédico de Extremidades e Síndrome Compartimental",
+        "subtema_id": "CIR-065",
         "topic": "Atendimento inicial aos queimados"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Trauma Ortopédico de Extremidades e Síndrome Compartimental"
@@ -127201,11 +127200,11 @@
       "question_id": 14942,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
-        "subtema_id": "CLÍ-038",
+        "subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
+        "subtema_id": "CLÍ-044",
         "topic": "Intoxicações Exógenas e Acidentes por Animais Peçonhentos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda"
@@ -132820,12 +132819,12 @@
     {
       "question_id": 15176,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
-        "subtema_id": "CLÍ-037",
+        "area": "Pediatria",
+        "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+        "subtema_id": "PED-019",
         "topic": "Exposição Vertical ao HIV (PED)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal"
@@ -132845,12 +132844,12 @@
     {
       "question_id": 15177,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Taquiarritmias, Bradiarritmias, Síncope e Suporte Avançado (ACLS)",
-        "subtema_id": "CLÍ-037",
+        "area": "Pediatria",
+        "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+        "subtema_id": "PED-019",
         "topic": "Arritmias, Síncope e PCR"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal"
@@ -134665,12 +134664,12 @@
     {
       "question_id": 15253,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Tuberculose Pulmonar e Extrapulmonar: Diagnóstico e Manejo",
-        "subtema_id": "CLÍ-041",
+        "area": "Cirurgia",
+        "subtema": "Abdome Agudo Vascular e Isquemia Mesentérica",
+        "subtema_id": "CIR-027",
         "topic": "Tuberculose"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Abdome Agudo Vascular e Isquemia Mesentérica"
@@ -138701,11 +138700,11 @@
       "question_id": 15419,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Legislação, Diretrizes e Evolução do SUS",
-        "subtema_id": "MED-008",
+        "subtema": "História Natural da Doença e Níveis de Prevenção",
+        "subtema_id": "MED-005",
         "topic": "Política, planejamento e Gestão em Saúde"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "História Natural da Doença e Níveis de Prevenção"
@@ -139727,12 +139726,12 @@
     {
       "question_id": 15462,
       "current": {
-        "area": "Ginecologia e Obstetrícia",
-        "subtema": "Fístulas Urogenitais e Retovaginais",
-        "subtema_id": "GIN-019",
+        "area": "Cirurgia",
+        "subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco",
+        "subtema_id": "CIR-067",
         "topic": "Fístulas"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Trauma Torácico: Pneumotórax, Hemotórax e Tamponamento Cardíaco"
@@ -141114,11 +141113,11 @@
       "question_id": 15519,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos",
-        "subtema_id": "MED-003",
+        "subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
+        "subtema_id": "MED-002",
         "topic": "Estudos epidemiológicos (classificação)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Avaliação de Testes Diagnósticos e Curva ROC"
@@ -143211,11 +143210,11 @@
       "question_id": 15606,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Infecções Perinatais e Transmissão Vertical (HIV, Sífilis, Hepatites, EGB)",
-        "subtema_id": "GIN-022",
+        "subtema": "Assistência Pré-Natal de Baixo e Alto Risco",
+        "subtema_id": "GIN-005",
         "topic": "Hepatites virais, HIV/AIDS e outras infecções na gestação"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Assistência Pré-Natal de Baixo e Alto Risco"
@@ -143748,11 +143747,11 @@
       "question_id": 15628,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Sepse no Adulto, Choque Séptico e Ressuscitação Hemodinâmica",
-        "subtema_id": "CLÍ-033",
+        "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+        "subtema_id": "CLÍ-030",
         "topic": "USG POCUS"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas"
@@ -143798,11 +143797,11 @@
       "question_id": 15630,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
-        "subtema_id": "CLÍ-003",
+        "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas",
+        "subtema_id": "CLÍ-030",
         "topic": "Asma (CM)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Pneumonia Adquirida na Comunidade (PAC) e Síndromes Respiratórias Agudas"
@@ -147448,11 +147447,11 @@
       "question_id": 15828,
       "current": {
         "area": "Clínica Médica",
-        "subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
-        "subtema_id": "CLÍ-038",
+        "subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares",
+        "subtema_id": "CLÍ-029",
         "topic": "Intoxicações Exógenas e Acidentes por Animais Peçonhentos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Neuropatias Periféricas, Miastenia Gravis e Doenças Neuromusculares"
@@ -148184,11 +148183,11 @@
       "question_id": 15859,
       "current": {
         "area": "Cirurgia",
-        "subtema": "Manejo Pós-Operatório e Tratamento de Complicações Cirúrgicas",
-        "subtema_id": "CIR-052",
+        "subtema": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+        "subtema_id": "CIR-026",
         "topic": "Complicações pós-operatórias gerais"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada"
@@ -148824,12 +148823,12 @@
     {
       "question_id": 15885,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Neurointensivismo, Morte Encefálica e Cuidados Críticos",
-        "subtema_id": "CLÍ-028",
+        "area": "Medicina Preventiva",
+        "subtema": "Ética Médica, Bioética e Prontuários / Documentos",
+        "subtema_id": "MED-013",
         "topic": "Neurointensivismo e Ética Médica"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Ética Médica, Bioética e Prontuários / Documentos"
@@ -150223,11 +150222,11 @@
       "question_id": 15958,
       "current": {
         "area": "Pediatria",
-        "subtema": "Infecção do Trato Urinário (ITU) e Refluxo Vesicoureteral na Infância",
-        "subtema_id": "PED-014",
+        "subtema": "Reanimação Neonatal e Assistência em Sala de Parto",
+        "subtema_id": "PED-022",
         "topic": "Infecção do Trato Urinário (ITU)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Reanimação Neonatal e Assistência em Sala de Parto"
@@ -150272,11 +150271,11 @@
       "question_id": 15961,
       "current": {
         "area": "Pediatria",
-        "subtema": "Doenças Exantemáticas e Diagnóstico Diferencial dos Exantemas",
-        "subtema_id": "PED-011",
+        "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+        "subtema_id": "PED-019",
         "topic": "Doenças Exantemáticas"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal"
@@ -150296,12 +150295,12 @@
     {
       "question_id": 15962,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Ventilação Mecânica, SARA e Insuficiência Respiratória Aguda",
-        "subtema_id": "CLÍ-044",
+        "area": "Pediatria",
+        "subtema": "Afecções de Vias Aéreas Superiores: OMA, Sinusite e Faringoamigdalite",
+        "subtema_id": "PED-001",
         "topic": "Pneumointensivismo"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Afecções de Vias Aéreas Superiores: OMA, Sinusite e Faringoamigdalite"
@@ -150592,11 +150591,11 @@
       "question_id": 15985,
       "current": {
         "area": "Ginecologia e Obstetrícia",
-        "subtema": "Endometriose, Adenomiose e Dor Pélvica Crônica",
-        "subtema_id": "GIN-016",
+        "subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)",
+        "subtema_id": "GIN-031",
         "topic": "Dor Pélvica Crônica"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Rastreamento Citopatológico e Conduta em Lesões Cervicais (HPV)"
@@ -150751,11 +150750,11 @@
       "question_id": 15997,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Atenção Primária à Saúde e Estratégia Saúde da Família (ESF)",
-        "subtema_id": "MED-001",
+        "subtema": "Vigilância Epidemiológica: Endemias, Epidemias e Surtos",
+        "subtema_id": "MED-011",
         "topic": "Atenção Primária à Saúde"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Medicina Preventiva",
         "subtema": "Vigilância Epidemiológica: Endemias, Epidemias e Surtos"
@@ -150789,12 +150788,12 @@
     {
       "question_id": 15999,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
-        "subtema_id": "MED-004",
+        "area": "Cirurgia",
+        "subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos",
+        "subtema_id": "CIR-058",
         "topic": "Estudos epidemiológicos (análise estatística e aplicação)"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Pancreatites Aguda e Crônica e Pseudocistos Pancreáticos"
@@ -151359,12 +151358,12 @@
     {
       "question_id": 16044,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Asma e Doença Pulmonar Obstrutiva Crônica (DPOC)",
-        "subtema_id": "CLÍ-003",
+        "area": "Pediatria",
+        "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+        "subtema_id": "PED-019",
         "topic": "Distúrbios Obstrutivos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal"
@@ -151861,8 +151860,8 @@
       "question_id": 16083,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "História Natural da Doença e Níveis de Prevenção",
-        "subtema_id": "MED-005",
+        "subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos",
+        "subtema_id": "MED-003",
         "topic": "Níveis de Evidência"
       },
       "status": "unmatched",
@@ -152638,9 +152637,9 @@
     {
       "question_id": 16143,
       "current": {
-        "area": "Pediatria",
-        "subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido",
-        "subtema_id": "PED-017",
+        "area": "Clínica Médica",
+        "subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base",
+        "subtema_id": "CLÍ-013",
         "topic": "Distúrbio hidroeletrolítico e Ácido-Básico (PED)"
       },
       "status": "unmatched",
@@ -153299,8 +153298,8 @@
       "question_id": 16195,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "História Natural da Doença e Níveis de Prevenção",
-        "subtema_id": "MED-005",
+        "subtema": "Legislação, Diretrizes e Evolução do SUS",
+        "subtema_id": "MED-008",
         "topic": "Educação em Saúde"
       },
       "status": "unmatched",
@@ -153632,12 +153631,12 @@
     {
       "question_id": 16242,
       "current": {
-        "area": "Pediatria",
-        "subtema": "Neonatologia: Icterícia Neonatal e Doenças Hematológicas",
-        "subtema_id": "PED-018",
+        "area": "Ginecologia e Obstetrícia",
+        "subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital",
+        "subtema_id": "GIN-035",
         "topic": "Período Neonatal: Doenças Hematológicas"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Ginecologia e Obstetrícia",
         "subtema": "Uroginecologia: Incontinência Urinária e Prolapso Genital"
@@ -153988,11 +153987,11 @@
       "question_id": 16270,
       "current": {
         "area": "Cirurgia",
-        "subtema": "Insuficiência Venosa Crônica e Trombose Venosa Profunda (TVP)",
-        "subtema_id": "CIR-049",
+        "subtema": "Cirurgia Pediátrica e Malformações Digestivas Neonatais",
+        "subtema_id": "CIR-036",
         "topic": "Doenças Venosas"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Cirurgia Pediátrica e Malformações Digestivas Neonatais"
@@ -154962,8 +154961,8 @@
       "question_id": 16349,
       "current": {
         "area": "Medicina Preventiva",
-        "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística",
-        "subtema_id": "MED-004",
+        "subtema": "Saúde do Trabalhador e Doenças Ocupacionais",
+        "subtema_id": "MED-009",
         "topic": "DART"
       },
       "status": "unmatched",
@@ -156136,12 +156135,12 @@
     {
       "question_id": 16443,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "Indicadores de Saúde e Coeficientes de Morbimortalidade",
-        "subtema_id": "MED-007",
+        "area": "Pediatria",
+        "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal",
+        "subtema_id": "PED-019",
         "topic": "Indicadores de morbimortalidade"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Pediatria",
         "subtema": "Neonatologia: Infecções Congênitas (TORCH) e Sepse Neonatal"
@@ -156976,12 +156975,12 @@
     {
       "question_id": 16516,
       "current": {
-        "area": "Cirurgia",
-        "subtema": "Cirurgia Torácica Geral e Doenças Pleurais",
-        "subtema_id": "CIR-037",
+        "area": "Clínica Médica",
+        "subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio",
+        "subtema_id": "CLÍ-015",
         "topic": "Cirurgia Torácica"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Clínica Médica",
         "subtema": "Doenças da Suprarrenal, Paratireoides e Distúrbios do Cálcio"
@@ -159166,9 +159165,9 @@
     {
       "question_id": 16741,
       "current": {
-        "area": "Medicina Preventiva",
-        "subtema": "Avaliação de Testes Diagnósticos e Curva ROC",
-        "subtema_id": "MED-002",
+        "area": "Clínica Médica",
+        "subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar",
+        "subtema_id": "CLÍ-014",
         "topic": "Pneumonite de hipersensibilidade (PH) (CM)"
       },
       "status": "unmatched",
@@ -159264,12 +159263,12 @@
     {
       "question_id": 16751,
       "current": {
-        "area": "Clínica Médica",
-        "subtema": "Toxicologia Clínica e Acidentes por Animais Peçonhentos",
-        "subtema_id": "CLÍ-038",
+        "area": "Cirurgia",
+        "subtema": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada",
+        "subtema_id": "CIR-026",
         "topic": "Intoxicações Exógenas e Acidentes por Animais Peçonhentos"
       },
-      "status": "proposed_content_match",
+      "status": "already_aligned",
       "target": {
         "area": "Cirurgia",
         "subtema": "Abdome Agudo Perfurativo e Úlcera Péptica Perfurada"
@@ -169501,5 +169500,5 @@
       "shared_8_word_sequences": 0
     }
   ],
-  "input_sha256": "f14b96d53b05d06c8dc4e904983b486a749de4fd57aff837054f6068cc863897"
+  "input_sha256": "58ebd03fcd22cb6a18e3e954ca76c7cfee0bba3abe67585288aeb25018318559"
 }

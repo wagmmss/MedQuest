@@ -35,6 +35,15 @@ def normalize(value: str | None) -> str:
     return re.sub(r"[^a-z0-9]+", "", value.lower())
 
 
+def tokens(value: str | None) -> list[str]:
+    """Tokens comparáveis; ignora imagens e marcação que não existem nos HARs."""
+    value = re.sub(r"!\[[^]]*\]\([^)]*\)", " ", value or "")
+    value = re.sub(r"<[^>]+>", " ", value)
+    value = unicodedata.normalize("NFKD", value)
+    value = "".join(char for char in value if not unicodedata.combining(char)).lower()
+    return re.findall(r"[a-z0-9]{2,}", value)
+
+
 def load_taxonomy() -> tuple[dict[str, tuple[str, str]], set[tuple[str, str]]]:
     """Returns aliases from the curated de-para and the allowed canonical pairs."""
     canonical = json.loads((BACKEND / "data" / "canonical_taxonomy.json").read_text(encoding="utf-8"))
@@ -143,13 +152,53 @@ def classify_tag(tags: list[str], aliases: dict[str, tuple[str, str]]) -> tuple[
     return destinations.pop(), "mapped"
 
 
+def build_content_index(medway: dict[int, dict[str, Any]]) -> dict[tuple[str, ...], set[int]]:
+    """Indexa sequências de oito palavras: evidência textual, não similaridade vaga."""
+    index: dict[tuple[str, ...], set[int]] = defaultdict(set)
+    for item in medway.values():
+        item_tokens = tokens(item["stem"])
+        for offset in range(len(item_tokens) - 7):
+            index[tuple(item_tokens[offset : offset + 8])].add(item["medway_id"])
+    return index
+
+
+def content_match(stem: str | None, index: dict[tuple[str, ...], set[int]]) -> tuple[int | None, int, list[int]]:
+    """Retorna candidato somente quando ao menos quatro trechos são exclusivos.
+
+    Quatro sequências distintas de oito palavras consecutivas equivalem a pelo
+    menos onze palavras contínuas em comum, mas toleram cabeçalho/imagens
+    inseridos no banco. Casos menores ficam no relatório, nunca são aplicáveis.
+    """
+    votes: Counter[int] = Counter()
+    item_tokens = tokens(stem)
+    for offset in range(len(item_tokens) - 7):
+        for medway_id in index.get(tuple(item_tokens[offset : offset + 8]), set()):
+            votes[medway_id] += 1
+    if not votes:
+        return None, 0, []
+    highest = max(votes.values())
+    winners = sorted(key for key, value in votes.items() if value == highest)
+    return (winners[0] if highest >= 4 and len(winners) == 1 else None), highest, winners[:10]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Dry-run auditável: MedQuest x Medway Trilhas HAR")
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
     parser.add_argument("--hars-dir", type=Path, default=DEFAULT_HARS)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
-    parser.add_argument("--apply", action="store_true", help="Aplica somente propostas elegíveis deste dry-run.")
+    parser.add_argument("--apply", action="store_true", help="Aplica somente propostas com enunciado normalizado idêntico.")
+    parser.add_argument(
+        "--apply-content-matches",
+        action="store_true",
+        help=("Aplica correspondências com candidato único e quatro ou mais sequências "
+              "exclusivas de oito palavras; use apenas após a revisão editorial do relatório."),
+    )
+    parser.add_argument("--batch-size", type=int, default=20, help="Máximo de alterações por execução (padrão: 20).")
     args = parser.parse_args()
+    if args.apply and args.apply_content_matches:
+        raise SystemExit("Escolha apenas uma modalidade de aplicação.")
+    if args.batch_size < 1:
+        raise SystemExit("--batch-size deve ser maior que zero.")
     if not args.db.is_file() or not args.hars_dir.is_dir():
         raise SystemExit("Banco ou diretório de HARs não encontrado.")
 
@@ -158,6 +207,7 @@ def main() -> int:
     by_stem: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for item in medway.values():
         by_stem[item["stem_key"]].append(item)
+    content_index = build_content_index(medway)
 
     db = sqlite3.connect(args.db)
     db.row_factory = sqlite3.Row
@@ -169,6 +219,18 @@ def main() -> int:
     for row in db_rows:
         candidates = by_stem.get(normalize(row["stem"]), [])
         base = {"question_id": row["id"], "current": {key: row[key] for key in ("area", "subtema", "subtema_id", "topic")}}
+        match_method = "exact_normalized_stem"
+        match_score = None
+        if len(candidates) != 1:
+            candidate_id, match_score, top_ids = content_match(row["stem"], content_index)
+            if candidate_id is not None:
+                candidates = [medway[candidate_id]]
+                match_method = "four_or_more_unique_8_word_sequences"
+            else:
+                status = "unmatched" if match_score == 0 else "needs_content_review"
+                records.append({**base, "status": status, "candidate_medway_ids": top_ids, "shared_8_word_sequences": match_score})
+                counts[status] += 1
+                continue
         if len(candidates) != 1:
             status = "unmatched" if not candidates else "ambiguous_medway_match"
             records.append({**base, "status": status, "candidate_medway_ids": [item["medway_id"] for item in candidates]})
@@ -176,13 +238,20 @@ def main() -> int:
             continue
         item = candidates[0]
         target, tag_status = classify_tag(item["tags"], aliases)
-        evidence = {"medway_id": item["medway_id"], "har_files": item["har_files"], "tags": item["tags"], "match": "exact_normalized_stem"}
+        evidence = {"medway_id": item["medway_id"], "har_files": item["har_files"], "tags": item["tags"], "match": match_method, "shared_8_word_sequences": match_score}
         if target is None:
             records.append({**base, "status": tag_status, "evidence": evidence})
             counts[tag_status] += 1
             continue
         target_area, target_subtema = target
-        status = "already_aligned" if (row["area"], row["subtema"]) == target else "eligible_for_apply"
+        if (row["area"], row["subtema"]) == target:
+            status = "already_aligned"
+        elif match_method == "exact_normalized_stem":
+            status = "eligible_for_apply"
+        else:
+            # A correspondência é forte, mas não é identidade textual integral;
+            # requer conferência editorial antes de qualquer escrita.
+            status = "proposed_content_match"
         records.append({**base, "status": status, "target": {"area": target_area, "subtema": target_subtema}, "evidence": evidence})
         counts[status] += 1
 
@@ -200,11 +269,19 @@ def main() -> int:
     print(json.dumps({key: report[key] for key in ("database_questions", "har_files", "medway_questions_unique", "status_counts")}, ensure_ascii=False, indent=2))
     print(f"Relatório: {args.report}")
 
-    if args.apply:
-        changes = [record for record in records if record["status"] == "eligible_for_apply"]
+    if args.apply or args.apply_content_matches:
+        applicable_statuses = {"eligible_for_apply"}
+        model_used = "medway_trilhas_har_exact"
+        match_label = "correspondência exata do enunciado"
+        if args.apply_content_matches:
+            applicable_statuses.add("proposed_content_match")
+            model_used = "medway_trilhas_har_content_verified"
+            match_label = "candidato único confirmado por quatro ou mais sequências exclusivas de oito palavras"
+        changes = [record for record in records if record["status"] in applicable_statuses]
         if not changes:
             print("Nenhuma proposta elegível para aplicar.")
             return 0
+        changes = sorted(changes, key=lambda record: record["question_id"])[:args.batch_size]
         if hashlib.sha256(args.db.read_bytes()).hexdigest() != input_hash:
             raise SystemExit("O banco mudou durante o dry-run; aplicação cancelada.")
 
@@ -241,8 +318,8 @@ def main() -> int:
                        (question_id, old_area, old_subtema, new_area, new_subtema, confidence, rationale, model_used, applied, classified_at)
                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)""",
                     (record["question_id"], old["area"], old["subtema"], target["area"], target["subtema"], 1.0,
-                     f"{run_id}; HAR Medway {record['evidence']['medway_id']}; correspondência exata do enunciado; tags: {', '.join(record['evidence']['tags'])}",
-                     "medway_trilhas_har_exact", datetime.now(timezone.utc).isoformat()),
+                     f"{run_id}; HAR Medway {record['evidence']['medway_id']}; {match_label}; tags: {', '.join(record['evidence']['tags'])}",
+                     model_used, datetime.now(timezone.utc).isoformat()),
                 )
             db.commit()
         except Exception:
@@ -250,7 +327,7 @@ def main() -> int:
             raise
         finally:
             db.close()
-        receipt = {"run_id": run_id, "backup": str(backup), "applied": len(changes), "report": str(args.report), "input_sha256": input_hash}
+        receipt = {"run_id": run_id, "backup": str(backup), "applied": len(changes), "remaining_candidates": max(0, sum(record["status"] in applicable_statuses for record in records) - len(changes)), "report": str(args.report), "input_sha256": input_hash}
         receipt_path = args.report.with_name(f"medway-trilhas-har-apply-{stamp}.json")
         receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2), encoding="utf-8")
         print(json.dumps(receipt, ensure_ascii=False, indent=2))

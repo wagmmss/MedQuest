@@ -1,0 +1,12 @@
+{
+  "batch_id": "authoral-tag-batch-002",
+  "items": [
+    {
+      "question_id": 16143,
+      "source_tag": "Distúrbio hidroeletrolítico e Ácido-Básico (PED)",
+      "expected": {"area": "Pediatria", "subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido"},
+      "target": {"area": "Clínica Médica", "subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base"},
+      "rationale": "O enunciado e a tag cobram a classificação de acidose metabólica com ânion gap em criança de 3 anos; não é conteúdo neonatal."
+    }
+  ]
+}

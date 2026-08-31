@@ -1,0 +1,8 @@
+{
+  "run_id": "medway_har_20260829-083032",
+  "backup": "C:\\dev\\MedQuest\\backups\\medquest_20260829-083032_pre-medway-har.db",
+  "applied": 20,
+  "remaining_candidates": 55,
+  "report": "docs\\audits\\medway-trilhas-har-final-review.json",
+  "input_sha256": "518f27f112d2554914ac1c385ad6c7260bf8b237ef596dda2d90559263f852f7"
+}

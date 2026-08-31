@@ -1,0 +1,40 @@
+{
+  "batch_id": "authoral-tag-batch-001",
+  "items": [
+    {
+      "question_id": 16083,
+      "source_tag": "Níveis de Evidência",
+      "expected": {"area": "Medicina Preventiva", "subtema": "História Natural da Doença e Níveis de Prevenção"},
+      "target": {"area": "Medicina Preventiva", "subtema": "Delineamentos e Classificação dos Estudos Epidemiológicos"},
+      "rationale": "A tag e o enunciado tratam da certeza da evidência segundo GRADE, tema metodológico de delineamentos/evidência; não de história natural da doença."
+    },
+    {
+      "question_id": 16195,
+      "source_tag": "Educação em Saúde",
+      "expected": {"area": "Medicina Preventiva", "subtema": "História Natural da Doença e Níveis de Prevenção"},
+      "target": {"area": "Medicina Preventiva", "subtema": "Legislação, Diretrizes e Evolução do SUS"},
+      "rationale": "O enunciado cobra a Política Nacional de Educação Permanente em Saúde e suas portarias, que pertence ao eixo de diretrizes do SUS."
+    },
+    {
+      "question_id": 16349,
+      "source_tag": "DART",
+      "expected": {"area": "Medicina Preventiva", "subtema": "Estudos Epidemiológicos: Medidas de Associação e Análise Estatística"},
+      "target": {"area": "Medicina Preventiva", "subtema": "Saúde do Trabalhador e Doenças Ocupacionais"},
+      "rationale": "O caso descreve exposição ocupacional ao chumbo em trabalhador de fábrica de baterias."
+    },
+    {
+      "question_id": 16741,
+      "source_tag": "Pneumonite de hipersensibilidade (PH) (CM)",
+      "expected": {"area": "Medicina Preventiva", "subtema": "Avaliação de Testes Diagnósticos e Curva ROC"},
+      "target": {"area": "Clínica Médica", "subtema": "Doenças Pulmonares Intersticiais e Fibrose Pulmonar"},
+      "rationale": "A tag e o enunciado discutem pneumonite de hipersensibilidade/fibrose pulmonar, doença pulmonar intersticial."
+    },
+    {
+      "question_id": 12590,
+      "source_tag": "Clínica Médica Geral",
+      "expected": {"area": "Clínica Médica", "subtema": "Síndromes Coronarianas Agudas (Com e Sem Supra de ST)"},
+      "target": {"area": "Clínica Médica", "subtema": "Diagnóstico Diferencial das Anemias e Hemoglobinopatias"},
+      "rationale": "A questão descreve doença falciforme com provável síndrome torácica aguda; a tag é genérica, então o conteúdo clínico determina o subtema de hemoglobinopatias."
+    }
+  ]
+}

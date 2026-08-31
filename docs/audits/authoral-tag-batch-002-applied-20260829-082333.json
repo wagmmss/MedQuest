@@ -1,0 +1,19 @@
+{
+  "batch_id": "authoral-tag-batch-002",
+  "applied": 1,
+  "backup": "C:\\dev\\MedQuest\\backups\\medquest_20260829-082333_pre-authoral-tag-batch-002.db",
+  "items": [
+    {
+      "question_id": 16143,
+      "source_tag": "Distúrbio hidroeletrolítico e Ácido-Básico (PED)",
+      "before": {
+        "area": "Pediatria",
+        "subtema": "Neonatologia: Distúrbios Metabólicos e Hipoglicemia no Recém-Nascido"
+      },
+      "after": {
+        "area": "Clínica Médica",
+        "subtema": "Distúrbios Eletrolíticos (Sódio, Potássio) e Equilíbrio Ácido-Base"
+      }
+    }
+  ]
+}

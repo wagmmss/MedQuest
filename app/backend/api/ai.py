@@ -5,6 +5,7 @@ import re
 import time
 
 from api.gemini_pool import gemini_pool
+from api.universal_pool import generate_content_with_fallback
 
 logger = logging.getLogger(__name__)
 
@@ -249,51 +250,23 @@ Responda EXCLUSIVAMENTE em JSON válido:
         card["back"] = back
         return card
 
-    # Tenta gerar via Gemini Pool (multi-chaves)
-    if gemini_pool.total_keys > 0:
-        try:
-            resp = gemini_pool.generate_content(
-                prompt=prompt,
-                system_instruction="Você responde apenas em JSON válido com as chaves front, back e context.",
-                json_mode=True,
-                model=GEMINI_MODEL,
-                timeout=15
-            )
-            result_str = resp.get("text", "").replace("```json", "").replace("```", "").strip()
-            parsed = json.loads(result_str)
-            if isinstance(parsed, dict) and "front" in parsed and "{{c1::" in parsed.get("front", ""):
-                if _is_low_quality(parsed):
-                    logger.info("Gemini retornou card de baixa qualidade, usando fallback determinístico.")
-                else:
-                    return _sanitize_ai_card(parsed)
-        except Exception as e:
-            logger.warning(f"Fallback para Groq/Local após falha no Gemini Pool: {e}")
-
-    groq_key = os.environ.get("GROQ_API_KEY")
-    if groq_key and not groq_key.lower().startswith(("dummy", "test", "gsk_test")) and len(groq_key) > 15:
-        try:
-            from groq import Groq
-            client = Groq(api_key=groq_key, timeout=10.0, max_retries=1)
-            chat_completion = client.chat.completions.create(
-                messages=[
-                    {"role": "system", "content": "Você responde apenas em JSON válido com as chaves front, back e context."},
-                    {"role": "user", "content": prompt}
-                ],
-                model="llama-3.3-70b-versatile",
-                temperature=0.3,
-                max_tokens=350,
-                response_format={"type": "json_object"}
-            )
-            result_str = chat_completion.choices[0].message.content
-            result_str = result_str.replace("```json", "").replace("```", "").strip()
-            parsed = json.loads(result_str)
-            if isinstance(parsed, dict) and "front" in parsed and "{{c1::" in parsed.get("front", ""):
-                if _is_low_quality(parsed):
-                    logger.info("Groq retornou card de baixa qualidade, usando fallback determinístico.")
-                else:
-                    return _sanitize_ai_card(parsed)
-        except Exception as e:
-            logger.warning(f"Fallback para gerador local após falha no Groq: {e}")
+    # Tenta gerar via Universal AI Pool
+    try:
+        resp = generate_content_with_fallback(
+            prompt=prompt,
+            system_instruction="Você responde apenas em JSON válido com as chaves front, back e context.",
+            json_mode=True,
+            timeout=15
+        )
+        result_str = resp.get("text", "").replace("```json", "").replace("```", "").strip()
+        parsed = json.loads(result_str)
+        if isinstance(parsed, dict) and "front" in parsed and "{{c1::" in parsed.get("front", ""):
+            if _is_low_quality(parsed):
+                logger.info("IA retornou card de baixa qualidade, usando fallback determinístico.")
+            else:
+                return _sanitize_ai_card(parsed)
+    except Exception as e:
+        logger.warning(f"Falha na geração AI (todos provedores), usando fallback determinístico: {e}")
 
     # Fallback médico determinístico de alta qualidade
     return _extract_medical_cloze_fallback(
@@ -343,45 +316,20 @@ Exemplo para "infarto": ["infarto", "iam", "isquemia miocardica", "sindrome coro
 Responda APENAS com o JSON. Exemplo: {{ "terms": ["...", "..."] }}
 """
 
-    if gemini_pool.total_keys > 0:
-        try:
-            resp = gemini_pool.generate_content(
-                prompt=prompt,
-                system_instruction="Você responde apenas em JSON válido.",
-                json_mode=True,
-                model=GEMINI_MODEL,
-                timeout=6
-            )
-            result_str = resp.get("text", "").replace("```json", "").replace("```", "").strip()
-            data = json.loads(result_str)
-            terms = data.get("terms", [])
-            if terms and isinstance(terms, list):
-                return _cache_and_return(terms)
-        except Exception as e:
-            logger.error(f"Erro na expansão via Gemini Pool: {e}")
-
-    groq_key = os.environ.get("GROQ_API_KEY")
-    if groq_key:
-        try:
-            from groq import Groq
-            client = Groq(api_key=groq_key, timeout=8.0, max_retries=1)
-            completion = client.chat.completions.create(
-                messages=[
-                    {"role": "system", "content": "Você responde apenas em JSON válido."},
-                    {"role": "user", "content": prompt}
-                ],
-                model="llama-3.3-70b-versatile",
-                temperature=0.1,
-                max_tokens=100,
-                response_format={"type": "json_object"}
-            )
-            result_str = completion.choices[0].message.content
-            data = json.loads(result_str)
-            terms = data.get("terms", [])
-            if terms and isinstance(terms, list):
-                return _cache_and_return(terms)
-        except Exception as e:
-            logger.error(f"Erro na expansão via Groq: {e}")
+    try:
+        resp = generate_content_with_fallback(
+            prompt=prompt,
+            system_instruction="Você responde apenas em JSON válido.",
+            json_mode=True,
+            timeout=8
+        )
+        result_str = resp.get("text", "").replace("```json", "").replace("```", "").strip()
+        data = json.loads(result_str)
+        terms = data.get("terms", [])
+        if terms and isinstance(terms, list):
+            return _cache_and_return(terms)
+    except Exception as e:
+        logger.error(f"Erro na expansão via IA Universal: {e}")
 
     return _cache_and_return([query])
 
@@ -432,47 +380,21 @@ INSTRUÇÕES PEDAGÓGICAS DO PRECEPTOR:
 3. Formate a resposta em Markdown limpo, com tópicos bem estruturados e ênfase visual.
 """
 
-    if gemini_pool.total_keys > 0:
-        try:
-            resp = gemini_pool.generate_content(
-                prompt=prompt,
-                system_instruction="Você é um preceptor médico de elite que ensina raciocínio clínico para residência médica. Gere comentários originais, aprofundados e didáticos.",
-                model=GEMINI_MODEL,
-                timeout=25
-            )
-            text = resp.get("text", "").strip()
-            if text:
-                return {
-                    "answer": text,
-                    "model": resp.get("model", GEMINI_MODEL),
-                    "source": "gemini"
-                }
-        except Exception as e:
-            logger.error(f"Erro no preceptor IA via Gemini Pool: {e}")
-
-    groq_key = os.environ.get("GROQ_API_KEY")
-    if groq_key and not groq_key.lower().startswith(("dummy", "test", "gsk_test")) and len(groq_key) > 15:
-        try:
-            from groq import Groq
-            client = Groq(api_key=groq_key, timeout=15.0, max_retries=1)
-            completion = client.chat.completions.create(
-                messages=[
-                    {"role": "system", "content": "Você é um preceptor médico de elite que ensina raciocínio clínico para residência médica."},
-                    {"role": "user", "content": prompt}
-                ],
-                model="llama-3.3-70b-versatile",
-                temperature=0.3,
-                max_tokens=700
-            )
-            text = completion.choices[0].message.content.strip()
-            if text:
-                return {
-                    "answer": text,
-                    "model": "llama-3.3-70b-versatile",
-                    "source": "groq"
-                }
-        except Exception as e:
-            logger.error(f"Erro no preceptor IA via Groq: {e}")
+    try:
+        resp = generate_content_with_fallback(
+            prompt=prompt,
+            system_instruction="Você é um preceptor médico de elite que ensina raciocínio clínico para residência médica. Gere comentários originais, aprofundados e didáticos.",
+            timeout=25
+        )
+        text = resp.get("text", "").strip()
+        if text:
+            return {
+                "answer": text,
+                "model": resp.get("model", "universal"),
+                "source": resp.get("source", "universal")
+            }
+    except Exception as e:
+        logger.error(f"Erro no preceptor IA Universal: {e}")
 
     # Fallback estruturado caso todos os provedores de IA estejam fora do ar
     clean_pulo = _extract_pulo_do_gato(explanation)
@@ -565,23 +487,21 @@ DIRETRIZES:
 Responda em formato estruturado.
 """
 
-    if gemini_pool.total_keys > 0:
-        try:
-            resp = gemini_pool.generate_content(
-                prompt=prompt,
-                system_instruction="Você é o diretor pedagógico do MedQuest especialista em aprovação de residência médica.",
-                model=GEMINI_MODEL,
-                timeout=25
-            )
-            text = resp.get("text", "").strip()
-            if text:
-                return {
-                    "prescription_markdown": text,
-                    "model": resp.get("model", GEMINI_MODEL),
-                    "source": "gemini"
-                }
-        except Exception as e:
-            logger.error(f"Erro na prescrição de estudos via Gemini Pool: {e}")
+    try:
+        resp = generate_content_with_fallback(
+            prompt=prompt,
+            system_instruction="Você é o diretor pedagógico do MedQuest especialista em aprovação de residência médica.",
+            timeout=25
+        )
+        text = resp.get("text", "").strip()
+        if text:
+            return {
+                "prescription_markdown": text,
+                "model": resp.get("model", "universal"),
+                "source": resp.get("source", "universal")
+            }
+    except Exception as e:
+        logger.error(f"Erro na prescrição de estudos via IA Universal: {e}")
 
     fallback_md = f"""### 🩺 Prescrição de Estudo Personalizada
 
@@ -643,23 +563,21 @@ ESTRUTURA OBRIGATÓRIA DA RESPOSTA (JSON):
 }}
 """
 
-    if gemini_pool.total_keys > 0:
-        try:
-            resp = gemini_pool.generate_content(
-                prompt=prompt,
-                system_instruction="Você responde exclusivamente em JSON válido.",
-                json_mode=True,
-                model=GEMINI_MODEL,
-                timeout=25
-            )
-            parsed = _extract_json_block(resp.get("text", ""))
-            if parsed and "pulo_do_gato" in parsed and "raciocinio_clinico" in parsed:
-                # Monta a string estruturada em markdown
-                distratores_md = "\n".join([
-                    f"- **Alternativa ({d.get('letter')})**: {d.get('explanation')}"
-                    for d in parsed.get("distratores", [])
-                ])
-                full_explanation = f"""**Gabarito Oficial**: Letra {correct_letter}
+    try:
+        resp = generate_content_with_fallback(
+            prompt=prompt,
+            system_instruction="Você responde exclusivamente em JSON válido.",
+            json_mode=True,
+            timeout=25
+        )
+        parsed = _extract_json_block(resp.get("text", ""))
+        if parsed and "pulo_do_gato" in parsed and "raciocinio_clinico" in parsed:
+            # Monta a string estruturada em markdown
+            distratores_md = "\n".join([
+                f"- **Alternativa ({d.get('letter')})**: {d.get('explanation')}"
+                for d in parsed.get("distratores", [])
+            ])
+            full_explanation = f"""**Gabarito Oficial**: Letra {correct_letter}
 
 **Pulo do Gato**: {parsed.get('pulo_do_gato')}
 
@@ -672,14 +590,14 @@ ESTRUTURA OBRIGATÓRIA DA RESPOSTA (JSON):
 **Análise dos Distratores**:
 {distratores_md}
 """
-                return {
-                    "explanation_text": full_explanation.strip(),
-                    "pulo_do_gato": parsed.get("pulo_do_gato"),
-                    "source": "gemini",
-                    "model": resp.get("model", GEMINI_MODEL)
-                }
-        except Exception as e:
-            logger.error(f"Erro na síntese de comentário via Gemini Pool: {e}")
+            return {
+                "explanation_text": full_explanation.strip(),
+                "pulo_do_gato": parsed.get("pulo_do_gato"),
+                "source": resp.get("source", "universal"),
+                "model": resp.get("model", "universal")
+            }
+    except Exception as e:
+        logger.error(f"Erro na síntese de comentário via IA Universal: {e}")
 
     # Fallback estruturado
     fallback_text = f"""**Gabarito Oficial**: Letra {correct_letter}
