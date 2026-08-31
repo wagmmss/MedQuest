@@ -77,10 +77,15 @@ export function FlashcardClient() {
     setSubmitting(true);
     const currentCard = queue[0];
 
+    // Atualização Otimista da Interface
+    setQueue(prev => prev.slice(1));
+    setFlipped(false);
+    
+    // Libera o estado de submitting quase imediatamente para não travar a próxima carta
+    setTimeout(() => setSubmitting(false), 50);
+
     try {
       const result = await api.flashcards.review(currentCard.id, confidence);
-      setQueue(prev => prev.slice(1));
-      setFlipped(false);
       setLastScheduled(result.next_review_date);
       if (localDb) {
         try {
@@ -93,8 +98,6 @@ export function FlashcardClient() {
     } catch (err) {
       if (err instanceof OfflineQueuedError) {
         toast("Avaliação salva neste dispositivo e será sincronizada quando a conexão voltar.", { icon: "💾" });
-        setQueue(prev => prev.slice(1));
-        setFlipped(false);
         if (localDb) {
           try {
             const uid = getLocalOwnerId();
@@ -106,8 +109,6 @@ export function FlashcardClient() {
       } else {
         toast.error("Erro ao enviar avaliação.");
       }
-    } finally {
-      setSubmitting(false);
     }
   }, [queue, submitting]);
 

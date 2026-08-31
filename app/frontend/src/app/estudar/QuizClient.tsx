@@ -686,33 +686,45 @@ export function QuizClient({
   const handleReviewFSRS = useCallback(async (conf: string, explicitIsCorrect?: boolean) => {
     if (!currentDetail || reviewLockRef.current) return;
     reviewLockRef.current = true;
+
+    // Snapshot variables for background request
+    const questionId = currentDetail.id;
+    const currentAttemptResult = attemptResult;
+    const currentSelectedLetter = selectedLetter;
+    const currentWrittenAnswer = userWrittenAnswer;
+    const isDiscursive = Boolean(currentDetail.is_discursive || (currentDetail.alternatives || []).length <= 1);
+    const institutionCode = currentDetail.institution_code;
+
+    // Optimistic UI updates - Advance immediately
+    reviewLockRef.current = false;
+    nextQuestion();
+
+    // Call API in background
     try {
-      const res = await api.questions.reviewFSRS(currentDetail.id, conf, explicitIsCorrect);
-      const isCorr = explicitIsCorrect !== undefined ? explicitIsCorrect : (attemptResult?.is_correct ?? false);
+      const res = await api.questions.reviewFSRS(questionId, conf, explicitIsCorrect);
+      const isCorr = explicitIsCorrect !== undefined ? explicitIsCorrect : (currentAttemptResult?.is_correct ?? false);
       const updatedResult: AttemptResult = {
-        ...(attemptResult || {
-          correct_letter: currentDetail.institution_code || "A",
+        ...(currentAttemptResult || {
+          correct_letter: institutionCode || "A",
           explanation: null,
           next_review_date: res.next_review_date,
         }),
         is_correct: isCorr,
         next_review_date: res.next_review_date,
       };
-      setAttemptResult(updatedResult);
+
+      // Only update sessionAnswers (don't update attemptResult to avoid overwriting the next question's state)
       setSessionAnswers(prev => ({
         ...prev,
-        [currentDetail.id]: {
-          letter: selectedLetter || "A",
+        [questionId]: {
+          letter: currentSelectedLetter || "A",
           result: updatedResult,
-          writtenAnswer: userWrittenAnswer,
-          isDiscursive: Boolean(currentDetail.is_discursive || (currentDetail.alternatives || []).length <= 1)
+          writtenAnswer: currentWrittenAnswer,
+          isDiscursive: isDiscursive
         }
       }));
     } catch {
-      toast.error("Erro ao salvar revisão (FSRS).");
-    } finally {
-      reviewLockRef.current = false;
-      nextQuestion();
+      toast.error("Erro ao salvar revisão (FSRS) em background.");
     }
   }, [currentDetail, attemptResult, selectedLetter, userWrittenAnswer, nextQuestion]);
 
