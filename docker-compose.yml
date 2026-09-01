@@ -15,8 +15,28 @@ services:
       - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
       - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
       - FLASK_API_PROXY_SECRET=${FLASK_API_PROXY_SECRET}
+      - AI_PROVIDER_ORDER=${AI_PROVIDER_ORDER:-gemini,groq,openrouter,ollama}
+      - AI_DAILY_QUOTA_COOLDOWN=${AI_DAILY_QUOTA_COOLDOWN:-86400}
+      - AI_GEMINI_TIMEOUT_BUDGET=${AI_GEMINI_TIMEOUT_BUDGET:-20}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_API_KEYS=${GEMINI_API_KEYS}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-3.7-flash}
+      - GEMINI_MODELS=${GEMINI_MODELS:-gemini-3.7-flash,gemini-3.6-flash,gemini-3.5-flash-lite}
+      - GEMINI_ACCOUNT_QUOTA_COOLDOWN=${GEMINI_ACCOUNT_QUOTA_COOLDOWN:-86400}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GROQ_API_KEYS=${GROQ_API_KEYS}
+      - GROQ_MODELS=${GROQ_MODELS:-qwen/qwen3.6-27b,openai/gpt-oss-120b}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_API_KEYS=${OPENROUTER_API_KEYS}
+      - OPENROUTER_MODELS=${OPENROUTER_MODELS:-openrouter/free}
+      - OPENROUTER_SITE_URL=${OPENROUTER_SITE_URL:-https://${DOMAIN}}
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-gemma3}
+      - OLLAMA_MODELS=${OLLAMA_MODELS:-gemma3,llama3.2}
     ports:
       - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   frontend:
     image: ghcr.io/wagmmss/medquest-frontend:latest

@@ -32,8 +32,8 @@ logger = logging.getLogger(__name__)
 # ``gemini-3.5-flash`` can return transient 503s for an entire key pool.  Keep
 # the lightweight model first so interactive features such as the preceptor do
 # not spend their whole request budget waiting for that provider to recover.
-DEFAULT_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
-DEFAULT_FALLBACK_MODELS = ("gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.7-flash")
+DEFAULT_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
+DEFAULT_FALLBACK_MODELS = ("gemini-3.6-flash", "gemini-3.7-flash")
 
 
 class KeyState:
@@ -224,7 +224,8 @@ class GeminiPool:
         model: Optional[str] = None,
         temperature: float = 0.2,
         max_retries: int = 4,
-        timeout: int = 25
+        timeout: int = 25,
+        max_total_seconds: Optional[float] = None,
     ) -> Dict[str, Any]:
         """
         Executa uma chamada ao Gemini com fallback automático entre chaves e modelos.
@@ -243,8 +244,11 @@ class GeminiPool:
 
         body = json.dumps(payload).encode("utf-8")
         last_exception = None
+        deadline = time.monotonic() + max_total_seconds if max_total_seconds else None
 
         for target_model in self._model_candidates(model):
+            if deadline and time.monotonic() >= deadline:
+                break
             url = f"https://generativelanguage.googleapis.com/v1beta/models/{target_model}:generateContent"
             logger.info("[GeminiPool] Tentando modelo %s.", target_model)
 
@@ -252,6 +256,9 @@ class GeminiPool:
             # descartadas apenas porque uma chave anterior atingiu seu limite.
             attempts_for_model = max(max_retries, len(self._keys))
             for _ in range(attempts_for_model):
+                if deadline and time.monotonic() >= deadline:
+                    last_exception = TimeoutError("Orcamento total do provedor Gemini esgotado.")
+                    break
                 # Não aguarda uma chave que já está em cooldown: tenta o próximo modelo.
                 key_state, err_msg = self.get_available_key(max_wait_seconds=0.1, model=target_model)
                 if not key_state:
@@ -266,7 +273,10 @@ class GeminiPool:
                 )
 
                 try:
-                    with urllib.request.urlopen(req, timeout=timeout) as resp:
+                    request_timeout = timeout
+                    if deadline:
+                        request_timeout = max(0.5, min(timeout, deadline - time.monotonic()))
+                    with urllib.request.urlopen(req, timeout=request_timeout) as resp:
                         data = json.loads(resp.read().decode("utf-8"))
                         key_state.mark_success(target_model)
                         candidates = data.get("candidates", [])
@@ -287,7 +297,7 @@ class GeminiPool:
                         # Quota diária/financeira pertence à conta da chave, não ao
                         # modelo. Evita desperdiçar chamadas nos demais fallbacks.
                         if quota_is_global:
-                            cooldown_seconds = max(cooldown_seconds, float(os.environ.get("GEMINI_ACCOUNT_QUOTA_COOLDOWN", "300")))
+                            cooldown_seconds = max(cooldown_seconds, float(os.environ.get("GEMINI_ACCOUNT_QUOTA_COOLDOWN", "86400")))
                         key_state.mark_rate_limit(
                             cooldown_seconds=cooldown_seconds,
                             reason=f"HTTP 429 ({err_body[:100]})",

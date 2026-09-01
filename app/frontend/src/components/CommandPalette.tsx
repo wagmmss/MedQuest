@@ -172,7 +172,7 @@ export function CommandPalette() {
                   {("clínica médica clinica cardiologia nefrologia".includes(query.toLowerCase())) && (
                     <button
                       className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors"
-                      onClick={() => { setOpen(false); router.push("/estudar?area=Clínica Médica"); }}
+                      onClick={() => { setOpen(false); router.push(`/estudar?area=${encodeURIComponent("Clínica Médica")}`); }}
                     >
                       <span className="material-symbols-outlined text-primary text-sm" data-icon="menu_book">menu_book</span>
                       <span>Estudar Clínica Médica</span>
@@ -181,7 +181,7 @@ export function CommandPalette() {
                   {("cirurgia geral trauma".includes(query.toLowerCase())) && (
                     <button
                       className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors"
-                      onClick={() => { setOpen(false); router.push("/estudar?area=Cirurgia"); }}
+                      onClick={() => { setOpen(false); router.push(`/estudar?area=${encodeURIComponent("Cirurgia")}`); }}
                     >
                       <span className="material-symbols-outlined text-primary text-sm" data-icon="menu_book">menu_book</span>
                       <span>Estudar Cirurgia Geral</span>
@@ -190,7 +190,7 @@ export function CommandPalette() {
                   {("pediatria neo".includes(query.toLowerCase())) && (
                     <button
                       className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors"
-                      onClick={() => { setOpen(false); router.push("/estudar?area=Pediatria"); }}
+                      onClick={() => { setOpen(false); router.push(`/estudar?area=${encodeURIComponent("Pediatria")}`); }}
                     >
                       <span className="material-symbols-outlined text-primary text-sm" data-icon="menu_book">menu_book</span>
                       <span>Estudar Pediatria</span>
@@ -199,7 +199,7 @@ export function CommandPalette() {
                   {("preventiva sus epidemiologia".includes(query.toLowerCase())) && (
                     <button
                       className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted text-left text-foreground transition-colors"
-                      onClick={() => { setOpen(false); router.push("/estudar?area=Medicina Preventiva e Social"); }}
+                      onClick={() => { setOpen(false); router.push(`/estudar?area=${encodeURIComponent("Medicina Preventiva e Social")}`); }}
                     >
                       <span className="material-symbols-outlined text-primary text-sm" data-icon="menu_book">menu_book</span>
                       <span>Estudar Preventiva</span>

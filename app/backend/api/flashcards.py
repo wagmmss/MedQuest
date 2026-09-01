@@ -412,6 +412,7 @@ def report_flashcard(fid):
                 SET report_status = ? 
                 WHERE id = ? AND user_id = ?
             """, (reason, fid, g.user_id))
+        invalidate_user_caches(g.user_id)
     except Exception:
         logger.exception("Failed to report flashcard id=%s user_id=%s", fid, g.user_id)
         return jsonify({"error": "Internal Server Error"}), 500

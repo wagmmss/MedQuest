@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { 
-  OverviewStats, PlannerWeek,
+  OverviewStats, PlannerWeek, PlannerTopic,
   BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary 
 } from "@/types/api";
 import { OfflineModal } from "@/components/OfflineModal";
@@ -18,6 +18,10 @@ import clsx from "clsx";
 interface DashboardClientProps {
   stats: OverviewStats;
   currentPlannerWeek: PlannerWeek | null;
+  suggestedPlannerTopic?: PlannerTopic | null;
+  remainingPlannerMetas?: number;
+  totalPlannerMetas?: number;
+  isPlanCompleted?: boolean;
   firstName: string;
   benchmarkStats?: BenchmarkStat | null;
   bottlenecks?: BottleneckTopic[];
@@ -28,6 +32,10 @@ interface DashboardClientProps {
 export function DashboardClient({ 
   stats, 
   currentPlannerWeek, 
+  suggestedPlannerTopic,
+  remainingPlannerMetas,
+  totalPlannerMetas,
+  isPlanCompleted,
   firstName, 
   benchmarkStats,
   bottlenecks = [],
@@ -101,12 +109,12 @@ export function DashboardClient({
   const dailyRemaining = Math.max(0, dailyTarget - todayDone);
   const dailyProgressPct = Math.min(100, Math.round((todayDone / dailyTarget) * 100));
 
-  const sugestaoTema = currentPlannerWeek && currentPlannerWeek.topics.length > 0 
-    ? currentPlannerWeek.topics[0].subtema 
+  const sugestaoTema = suggestedPlannerTopic
+    ? suggestedPlannerTopic.subtema 
     : (bottlenecks.length > 0 ? bottlenecks[0].subtema : "Clínica Médica");
 
-  const sugestaoArea = currentPlannerWeek && currentPlannerWeek.topics.length > 0
-    ? currentPlannerWeek.topics[0].area
+  const sugestaoArea = suggestedPlannerTopic
+    ? suggestedPlannerTopic.area
     : (bottlenecks.length > 0 ? bottlenecks[0].area : "");
 
   const topBottleneck = bottlenecks.length > 0 ? bottlenecks[0] : null;
@@ -117,8 +125,9 @@ export function DashboardClient({
   const diffPct = overallAccPct != null ? parseFloat((overallAccPct - targetScorePct).toFixed(1)) : null;
 
   // Semanas do planner
-  const plannerWeekNum = currentPlannerWeek?.week || null;
-  const plannerMetasCount = currentPlannerWeek?.topics?.length || 0;
+  const plannerWeekNum = suggestedPlannerTopic ? (currentPlannerWeek?.week || null) : null;
+  const plannerMetasCount = remainingPlannerMetas !== undefined ? remainingPlannerMetas : (currentPlannerWeek?.topics?.length || 0);
+  const totalMetasCount = totalPlannerMetas !== undefined ? totalPlannerMetas : (currentPlannerWeek?.topics?.length || 0);
 
   // Subtítulo Contextual Direto
   const subtitleMessage = (() => {
@@ -218,8 +227,10 @@ export function DashboardClient({
 
     // 3. Meta diária de questões novas pendente
     if (dailyRemaining > 0) {
-      const practiceUrl = currentPlannerWeek && currentPlannerWeek.topics.length > 0 
-        ? `/estudar?subtema=${encodeURIComponent(currentPlannerWeek.topics[0].subtema)}&status=new&limit=${Math.min(20, dailyRemaining)}`
+      const practiceUrl = suggestedPlannerTopic
+        ? `/estudar?subtema=${encodeURIComponent(sugestaoTema)}&status=new&limit=${Math.min(20, dailyRemaining)}`
+        : bottlenecks.length > 0
+        ? `/estudar?subtema=${encodeURIComponent(bottlenecks[0].subtema)}&status=new&limit=${Math.min(20, dailyRemaining)}`
         : `/estudar?status=new&limit=${Math.min(20, dailyRemaining)}`;
 
       return (
@@ -502,19 +513,32 @@ export function DashboardClient({
                       <span className="material-symbols-outlined text-[16px]" data-icon="calendar_month">calendar_month</span> Tema Sugerido
                     </span>
                     {plannerWeekNum && <span className="text-[11px] text-muted-foreground">Semana {plannerWeekNum}</span>}
+                    {isPlanCompleted && <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">100% Concluído</span>}
                   </div>
                   <p className="text-base font-bold text-foreground line-clamp-1" title={sugestaoTema}>
-                    {sugestaoTema}
+                    {isPlanCompleted ? "Plano 100% Concluído! 🎉" : sugestaoTema}
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    {currentPlannerWeek ? `${plannerMetasCount} metas no cronograma semanal` : "Baseado nas prioridades do edital"}
+                    {isPlanCompleted
+                      ? "Parabéns! Todas as metas do cronograma foram finalizadas."
+                      : suggestedPlannerTopic
+                      ? `${plannerMetasCount} ${plannerMetasCount === 1 ? "meta restante" : "metas restantes"} no cronograma semanal`
+                      : "Baseado nas prioridades do edital"}
                   </p>
                 </div>
                 <Link 
-                  href={currentPlannerWeek && currentPlannerWeek.topics.length > 0 ? `/estudar?subtema=${encodeURIComponent(currentPlannerWeek.topics[0].subtema)}&limit=20` : "/planner"}
+                  href={
+                    isPlanCompleted
+                      ? "/planner"
+                      : suggestedPlannerTopic
+                      ? `/estudar?subtema=${encodeURIComponent(sugestaoTema)}&limit=20`
+                      : bottlenecks.length > 0
+                      ? `/estudar?subtema=${encodeURIComponent(bottlenecks[0].subtema)}&limit=20`
+                      : "/planner"
+                  }
                   className="w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors"
                 >
-                  Continuar plano &rarr;
+                  {isPlanCompleted ? "Ver cronograma &rarr;" : "Continuar plano &rarr;"}
                 </Link>
               </div>
             </div>

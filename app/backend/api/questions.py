@@ -953,8 +953,15 @@ def ask_question_ai(question_id):
 
 @bp.route("/ai/health", methods=["GET"])
 def ai_health():
-    from .gemini_pool import gemini_pool
-    return jsonify(gemini_pool.health_check())
+    from .universal_pool import provider_status
+
+    status = provider_status()
+    # Mantem os campos legados consumidos por clientes anteriores sem gastar
+    # quota fazendo pings reais em todas as chaves.
+    gemini = status["providers"]["gemini"]
+    status["model"] = gemini["models"][0] if gemini["models"] else None
+    status["total_keys"] = gemini["keys"]
+    return jsonify(status)
 
 
 @bp.route("/ai/prescribe_study", methods=["POST"])
@@ -1169,5 +1176,4 @@ def serve_image(filename):
     if os.path.exists(os.path.join(static_dir, "images", filename)):
         return send_from_directory(os.path.join(static_dir, "images"), filename)
     return send_from_directory(static_dir, filename)
-
 

@@ -384,7 +384,10 @@ INSTRUÇÕES PEDAGÓGICAS DO PRECEPTOR:
         resp = generate_content_with_fallback(
             prompt=prompt,
             system_instruction="Você é um preceptor médico de elite que ensina raciocínio clínico para residência médica. Gere comentários originais, aprofundados e didáticos.",
-            timeout=25
+            timeout=25,
+            # Uma resposta curta/refusal nao deve encerrar a cadeia: o pool
+            # continua no proximo provedor ate obter uma explicacao substancial.
+            response_validator=lambda value: len(value.strip()) >= 80,
         )
         text = resp.get("text", "").strip()
         if text:

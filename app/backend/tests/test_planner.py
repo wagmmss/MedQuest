@@ -119,3 +119,24 @@ def test_proportional_distribution_avoids_end_concentration():
             area_count = sum(1 for t in w["topics"] if t["area"] == area)
             assert area_count <= max(3, int(total_w * 0.65))
 
+
+def test_planner_topic_progress_and_reset(client):
+    # Test marking a topic as completed
+    r = client.post("/api/planner/1/topic", json={"subtema": "Taquiarritmias", "completed": True})
+    assert r.status_code == 200
+    assert r.get_json()["completed"] is True
+
+    # Test getting topic progress
+    r = client.get("/api/planner/topics")
+    assert r.status_code == 200
+    assert r.get_json().get("1:Taquiarritmias") is True
+
+    # Test stats reset clears topic progress
+    r = client.delete("/api/stats/reset")
+    assert r.status_code == 200
+
+    r = client.get("/api/planner/topics")
+    assert r.status_code == 200
+    assert r.get_json().get("1:Taquiarritmias") is None
+
+

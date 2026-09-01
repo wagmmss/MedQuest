@@ -138,6 +138,7 @@ def planner_topic(week):
                       VALUES (?, ?, ?, ?, ?)
                       ON CONFLICT(week, subtema, user_id) DO UPDATE SET completed = excluded.completed, completed_at = excluded.completed_at""",
                    (week, data.subtema, completed, completed_at, g.user_id))
+    invalidate_user_caches(g.user_id)
     return jsonify({"success": True, "completed": bool(completed)})
 
 

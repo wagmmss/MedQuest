@@ -2,7 +2,7 @@ import os
 import json
 import time
 from datetime import datetime, timedelta, timezone
-from urllib.parse import urlencode
+from urllib.parse import urlencode, quote
 
 from flask import Blueprint, g, jsonify, request
 
@@ -10,6 +10,7 @@ from scripts.planner import USP_WEIGHTS, get_normalized_area
 
 from .adaptive import build_learning_profile, fsrs_metrics
 from .db import get_db, db_transaction
+from .questions import invalidate_user_caches
 
 bp = Blueprint("stats", __name__)
 
@@ -574,12 +575,13 @@ def reset_stats():
             db.execute("DELETE FROM spaced_repetition WHERE user_id = ?", (g.user_id,))
             db.execute("DELETE FROM flashcards WHERE user_id = ?", (g.user_id,))
             db.execute("DELETE FROM planner_progress WHERE user_id = ?", (g.user_id,))
+            db.execute("DELETE FROM planner_topic_progress WHERE user_id = ?", (g.user_id,))
             db.execute("DELETE FROM favorites WHERE user_id = ?", (g.user_id,))
             db.execute("DELETE FROM planner_config WHERE user_id = ?", (g.user_id,))
     except Exception:
         raise
         
-    overview_cache.clear_user(g.user_id)
+    invalidate_user_caches(g.user_id)
     return jsonify({"success": True})
 
 
@@ -872,7 +874,7 @@ def bottlenecks():
             "wrong_count": r["wrong_count"],
             "accuracy": round(acc, 3),
             "accuracy_pct": round(acc * 100, 1),
-            "practice_url": f"/estudar?subtema={r['subtema']}&status=all&limit=10"
+            "practice_url": f"/estudar?subtema={quote(r['subtema'])}&status=all&limit=10"
         })
     return jsonify(out)
 
