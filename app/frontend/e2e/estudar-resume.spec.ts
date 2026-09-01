@@ -232,3 +232,23 @@ test('navegar para /estudar com sessão salva exibe banner de retomada na tela d
   await expect(page.getByText('Qual o tratamento inicial')).toBeVisible();
   await expect(page.getByRole('button', { name: /Mudança de estilo de vida/ })).toHaveAttribute('aria-pressed', 'true');
 });
+
+test('iniciar nova sessão com filtros fecha automaticamente a sessão anterior não finalizada', async ({ page, context }) => {
+  await context.addCookies([{ name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' }]);
+  await mockStudyApi(page);
+
+  // Inicia primeira sessão (Clínica Médica)
+  await page.goto('/estudar?area=Cl%C3%ADnica+M%C3%A9dica', { waitUntil: 'domcontentloaded' });
+  await expect(page.getByText('Qual o tratamento inicial')).toBeVisible();
+  const alternative = page.getByRole('button', { name: /Mudança de estilo de vida/ });
+  await alternative.click();
+  await expect(alternative).toHaveAttribute('aria-pressed', 'true');
+
+  // Sem fechar a sessão anterior, navega para uma nova sessão de Cirurgia
+  await page.goto('/estudar?area=Cirurgia', { waitUntil: 'domcontentloaded' });
+
+  // A sessão anterior deve ter sido descartada e a nova carregada
+  await expect(page.getByText('Qual o tratamento inicial')).toBeVisible();
+  // Na nova sessão, a alternativa não deve vir pré-selecionada da sessão anterior
+  await expect(page.getByRole('button', { name: /Mudança de estilo de vida/ })).toHaveAttribute('aria-pressed', 'false');
+});

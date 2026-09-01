@@ -41,6 +41,10 @@ export function readLearningSession<T>(
 export function removeLearningSession(kind: LearningSessionKind): void {
   removeLegacyState(kind);
   localStorage.removeItem(getLearningSessionKey(kind));
+  if (cloudSaveTimeouts[kind]) {
+    clearTimeout(cloudSaveTimeouts[kind]);
+    delete cloudSaveTimeouts[kind];
+  }
   // Fire and forget cloud delete
   import("./api").then(({ api }) => {
     api.sessions.delete(kind).catch(() => {});

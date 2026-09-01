@@ -70,6 +70,39 @@ function isSavedQuizState(value: unknown): value is SavedQuizState {
     typeof saved.sessionAnswers === "object" && saved.sessionAnswers !== null;
 }
 
+function areFiltersEquivalent(
+  initial: Record<string, string | string[]>,
+  saved: Record<string, string | string[]>
+): boolean {
+  const normalize = (f: Record<string, string | string[]>) => {
+    const res: Record<string, string> = {};
+    for (const [k, v] of Object.entries(f)) {
+      if (k === "resume") continue;
+      if (Array.isArray(v)) {
+        if (v.length > 0) {
+          res[k] = [...v].sort().join(",");
+        }
+      } else if (v !== undefined && v !== "") {
+        res[k] = String(v);
+      }
+    }
+    if (!res.limit) res.limit = "50";
+    return res;
+  };
+
+  const normInitial = normalize(initial);
+  const normSaved = normalize(saved);
+
+  const initialKeys = Object.keys(normInitial);
+  const savedKeys = Object.keys(normSaved);
+
+  if (initialKeys.length !== savedKeys.length) return false;
+  for (const k of initialKeys) {
+    if (normInitial[k] !== normSaved[k]) return false;
+  }
+  return true;
+}
+
 const DEFAULT_META: QuestionMeta = {
   total_questions: 0,
   answered_questions: 0,
@@ -316,8 +349,10 @@ export function QuizClient({
     const isExplicitResume = initialFilters.resume === "true" || initialFilters.resume === "1";
     const isActiveInSession = typeof window !== "undefined" && sessionStorage.getItem("medquest_active_quiz") === "1";
     const filterKeys = Object.keys(initialFilters).filter(k => k !== "resume");
+    const isSameFilters = saved ? areFiltersEquivalent(initialFilters, saved.filters) : false;
 
-    if (saved && (isExplicitResume || isActiveInSession)) {
+    // Retomada explícita (?resume=true) OU recarregamento de página (F5) na mesma sessão ativa
+    if (saved && (isExplicitResume || (isActiveInSession && filterKeys.length > 0 && isSameFilters))) {
       setTimeout(() => {
         setQueue(saved.queue);
         setCurrentIndex(saved.currentIndex);
@@ -342,20 +377,22 @@ export function QuizClient({
         setStorageReady(true);
       }, 0);
     } else if (saved && filterKeys.length === 0) {
+      // Acesso direto a /estudar (sem filtros): exibe tela de filtros com banner para retomar ou descartar
       setTimeout(() => {
-        // Sessão salva existente: exibe banner na tela de filtros sem forçar entrada nas questões
         setHasSavedState(true);
         setSavedSessionData(saved);
         setState("FILTERS");
         setStorageReady(true);
       }, 0);
     } else if (filterKeys.length > 0) {
+      // Nova sessão com filtros fornecidos: descarta e fecha automaticamente a anterior
       setTimeout(() => {
         loadQueue({ limit: "50", ...initialFilters });
         setStorageReady(true);
       }, 0);
     } else {
       setTimeout(() => {
+        setState("FILTERS");
         setStorageReady(true);
       }, 0);
     }
@@ -418,6 +455,26 @@ export function QuizClient({
     setSavedSessionData(null);
     setState("FILTERS");
   }, []);
+
+  // Se os filtros mudarem posteriormente via navegação de rota cliente (ex: CommandPalette / Sidebar)
+  const prevFiltersJson = useRef(JSON.stringify(initialFilters));
+  useEffect(() => {
+    const newJson = JSON.stringify(initialFilters);
+    if (!hasRestored.current) return;
+    if (prevFiltersJson.current === newJson) return;
+    prevFiltersJson.current = newJson;
+
+    const filterKeys = Object.keys(initialFilters).filter(k => k !== "resume");
+    const isExplicitResume = initialFilters.resume === "true" || initialFilters.resume === "1";
+
+    if (isExplicitResume) {
+      resumeSavedQuiz();
+    } else if (filterKeys.length > 0) {
+      loadQueue({ limit: "50", ...initialFilters });
+    } else {
+      handleBackToFilters();
+    }
+  }, [initialFilters, loadQueue, resumeSavedQuiz, handleBackToFilters]);
 
   const handleNewSession = useCallback(() => {
     setBatchFlashcardsResult(null);
@@ -1000,7 +1057,7 @@ export function QuizClient({
             ref={quizTimerRef}
             isRunning={state === "PLAYING" && !!currentDetail && !attemptResult}
             initialTime={initialTime}
-            className={clsx("text-sm font-medium w-16", getCurrentTime() > 120 && !attemptResult ? "text-warning" : "text-muted-foreground")}
+            className="text-sm font-medium w-16 text-muted-foreground"
           />
           {q && (
             <button 
