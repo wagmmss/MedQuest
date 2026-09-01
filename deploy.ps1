@@ -10,8 +10,7 @@
     4. Conecta via SSH a VPS (136.248.114.130)
     5. Executa git pull origin main no servidor
     6. Atualiza os containers:
-       - Tenta baixar as imagens prontas do GitHub Container Registry
-       - Fallback: compila localmente com otimizacoes de memoria do Next.js
+       - Baixa em paralelo as imagens prontas do GitHub Container Registry
     7. Limpa imagens Docker nao utilizadas (prune)
     8. Exibe o status final dos servicos
 
@@ -262,15 +261,25 @@ pull_commit_image() {
 }
 
 echo "  [VPS 1/4] Atualizando repositorio..."
-cd $PROJ
+cd "$PROJ"
 git pull --ff-only origin main
 DEPLOY_SHA=$(git rev-parse HEAD)
 BACKEND_IMAGE="ghcr.io/wagmmss/medquest-backend:sha-$DEPLOY_SHA"
 FRONTEND_IMAGE="ghcr.io/wagmmss/medquest-frontend:sha-$DEPLOY_SHA"
 
 echo "  [VPS 2/4] Aguardando e baixando imagens Docker em paralelo do commit $DEPLOY_SHA..."
-pull_commit_image "$BACKEND_IMAGE" "Backend"
-pull_commit_image "$FRONTEND_IMAGE" "Frontend"
+pull_commit_image "$BACKEND_IMAGE" "Backend" &
+backend_pull_pid=$!
+pull_commit_image "$FRONTEND_IMAGE" "Frontend" &
+frontend_pull_pid=$!
+
+pull_failed=0
+wait "$backend_pull_pid" || pull_failed=1
+wait "$frontend_pull_pid" || pull_failed=1
+if (( pull_failed != 0 )); then
+    echo "[ERRO] Nao foi possivel baixar todas as imagens deste deploy." >&2
+    exit 1
+fi
 
 # O arquivo Compose referencia :latest. Atualizamos essa tag local somente apos
 # baixar as imagens imutaveis deste commit, para o Compose recriar com a versao certa.
@@ -278,7 +287,10 @@ sudo docker tag "$BACKEND_IMAGE" ghcr.io/wagmmss/medquest-backend:latest
 sudo docker tag "$FRONTEND_IMAGE" ghcr.io/wagmmss/medquest-frontend:latest
 
 echo "  [VPS 3/4] Recriando containers com as novas imagens..."
-compose up -d --force-recreate --no-build
+# O Compose compara a imagem/configuracao desejada com cada container existente.
+# Sem --force-recreate, servicos inalterados permanecem no ar e somente o que
+# realmente mudou e reiniciado.
+compose up -d --no-build --remove-orphans
 
 # Mantem somente a tag :latest local. As tags sha-* sao usadas para garantir que
 # a imagem correta foi baixada e, em seguida, removidas para o prune liberar as

@@ -9,8 +9,17 @@ env/
 .env
 *.sqlite3
 *.db
+*.db.*
 *.db.backup*
 *.log
+backups/
+data/classification_*.json
 .pytest_cache/
 .coverage
+coverage-final.json
 htmlcov/
+.idea/
+.ruff_cache/
+tests/
+test_*.py
+test_*.json
