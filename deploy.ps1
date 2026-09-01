@@ -245,17 +245,20 @@ compose() {
 
 pull_commit_image() {
     local image="$1"
+    local label="$2"
     local deadline=$((SECONDS + IMAGE_WAIT_SECONDS))
 
+    echo "    [$label] Verificando disponibilidade no GitHub Container Registry..."
     while ! sudo docker pull "$image" >/dev/null 2>&1; do
         if (( SECONDS >= deadline )); then
-            echo "[ERRO] A imagem $image nao foi publicada em ${IMAGE_WAIT_SECONDS}s." >&2
+            echo "[ERRO] A imagem $label ($image) nao foi publicada em ${IMAGE_WAIT_SECONDS}s." >&2
             exit 1
         fi
 
-        echo "    Imagem ainda nao disponivel; aguardando o GitHub Actions..."
-        sleep 15
+        echo "    [$label] Compilando no GitHub Actions... (${SECONDS}s decorridos)"
+        sleep 8
     done
+    echo "    [$label] Imagem pronta e baixada com sucesso!"
 }
 
 echo "  [VPS 1/4] Atualizando repositorio..."
@@ -265,9 +268,9 @@ DEPLOY_SHA=$(git rev-parse HEAD)
 BACKEND_IMAGE="ghcr.io/wagmmss/medquest-backend:sha-$DEPLOY_SHA"
 FRONTEND_IMAGE="ghcr.io/wagmmss/medquest-frontend:sha-$DEPLOY_SHA"
 
-echo "  [VPS 2/4] Aguardando e baixando imagens do commit $DEPLOY_SHA..."
-pull_commit_image "$BACKEND_IMAGE"
-pull_commit_image "$FRONTEND_IMAGE"
+echo "  [VPS 2/4] Aguardando e baixando imagens Docker em paralelo do commit $DEPLOY_SHA..."
+pull_commit_image "$BACKEND_IMAGE" "Backend"
+pull_commit_image "$FRONTEND_IMAGE" "Frontend"
 
 # O arquivo Compose referencia :latest. Atualizamos essa tag local somente apos
 # baixar as imagens imutaveis deste commit, para o Compose recriar com a versao certa.
