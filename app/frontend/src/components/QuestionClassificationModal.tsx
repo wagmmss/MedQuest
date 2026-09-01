@@ -132,9 +132,10 @@ export function QuestionClassificationModal({
       } else {
         setError("Não foi possível atualizar a questão.");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      setError(err?.message || "Erro ao salvar classificação. Verifique suas permissões.");
+      const msg = err instanceof Error ? err.message : "Erro ao salvar classificação. Verifique suas permissões.";
+      setError(msg);
     } finally {
       setSaving(false);
     }

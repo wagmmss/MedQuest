@@ -63,7 +63,7 @@ export function deadlineFromNow(seconds: number): number {
 // Helper to debounce cloud writes
 const cloudSaveTimeouts: Record<string, ReturnType<typeof setTimeout>> = {};
 
-export function writeLearningSession(kind: LearningSessionKind, value: any): boolean {
+export function writeLearningSession(kind: LearningSessionKind, value: Record<string, unknown>): boolean {
   try {
     const data = { ...value, savedAt: value.savedAt || Date.now() };
     localStorage.setItem(getLearningSessionKey(kind), JSON.stringify(data));
@@ -72,7 +72,7 @@ export function writeLearningSession(kind: LearningSessionKind, value: any): boo
     if (cloudSaveTimeouts[kind]) clearTimeout(cloudSaveTimeouts[kind]);
     cloudSaveTimeouts[kind] = setTimeout(() => {
       import("./api").then(({ api }) => {
-        api.sessions.save(kind, data).catch((e) => console.error("Cloud save failed", e));
+        api.sessions.save(kind, data).catch((e: unknown) => console.error("Cloud save failed", e));
       });
     }, 2000);
     return true;
@@ -95,16 +95,16 @@ export async function syncSessionFromCloud<T>(
     if (!res || !res.data) return null;
     
     if (isValid(res.data)) {
-      const local = readLearningSession(kind, isValid) as any;
-      const remoteSavedAt = (res.data as any).savedAt || 0;
-      const localSavedAt = local?.savedAt || 0;
+      const local = readLearningSession(kind, isValid) as Record<string, unknown> | null;
+      const remoteSavedAt = typeof res.data === "object" && res.data && "savedAt" in res.data ? (res.data as Record<string, unknown>).savedAt as number : 0;
+      const localSavedAt = (local?.savedAt as number) || 0;
       
       // Se a nuvem é mais recente, atualiza o local
       if (remoteSavedAt > localSavedAt) {
         localStorage.setItem(getLearningSessionKey(kind), JSON.stringify(res.data));
         return res.data;
       }
-      return local;
+      return local as T | null;
     }
   } catch (e) {
     console.error("Failed to sync session from cloud", e);

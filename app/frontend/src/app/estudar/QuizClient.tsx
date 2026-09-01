@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, AttemptResult, FlashcardGenerateResponse } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
-import { Play, Filter, Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, BookOpenCheck, FileSignature, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, Search, X, CloudOff, RotateCcw, Brain, SlidersHorizontal, RefreshCw, Pencil, Stethoscope } from "lucide-react";
+import { Clock, CheckCircle2, XCircle, BookOpen, Heart, ArrowRight, Sparkles, ArrowLeft, ImageOff, Maximize, Minimize, AlertTriangle, X, CloudOff, RotateCcw, Brain, Pencil, Stethoscope } from "lucide-react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,6 @@ import { motion } from "framer-motion";
 import { useUser } from "@clerk/nextjs";
 import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 
-import { SubjectTreeSelector } from "@/components/SubjectTreeSelector";
 import { ImageViewer } from "@/components/ImageViewer";
 import { ExplanationViewer } from "@/components/ExplanationViewer";
 import { QuestionClassificationModal } from "@/components/QuestionClassificationModal";
@@ -171,7 +170,7 @@ export function QuizClient({
   const [initialTime, setInitialTime] = useState(0);
 
   // Expose current time without causing re-renders
-  const getCurrentTime = () => quizTimerRef.current?.getTime() ?? initialTime;
+  const getCurrentTime = useCallback(() => quizTimerRef.current?.getTime() ?? initialTime, [initialTime]);
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
 
   const detailsCacheRef = useRef<Record<number, QuestionDetail>>({});
@@ -289,7 +288,10 @@ export function QuizClient({
   // Salvaguarda: garante que, se estiver no estado PLAYING sem questão carregada ou em erro, carrega a questão atual
   useEffect(() => {
     if (state === "PLAYING" && !currentDetail && !loadingDetail && !detailError && queue[currentIndex]) {
-      loadQuestionDetail(queue[currentIndex].id);
+      const timer = setTimeout(() => {
+        loadQuestionDetail(queue[currentIndex].id);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [state, currentDetail, loadingDetail, detailError, queue, currentIndex, loadQuestionDetail]);
 
@@ -467,13 +469,16 @@ export function QuizClient({
     const filterKeys = Object.keys(initialFilters).filter(k => k !== "resume");
     const isExplicitResume = initialFilters.resume === "true" || initialFilters.resume === "1";
 
-    if (isExplicitResume) {
-      resumeSavedQuiz();
-    } else if (filterKeys.length > 0) {
-      loadQueue({ limit: "50", ...initialFilters });
-    } else {
-      handleBackToFilters();
-    }
+    const timer = setTimeout(() => {
+      if (isExplicitResume) {
+        resumeSavedQuiz();
+      } else if (filterKeys.length > 0) {
+        loadQueue({ limit: "50", ...initialFilters });
+      } else {
+        handleBackToFilters();
+      }
+    }, 0);
+    return () => clearTimeout(timer);
   }, [initialFilters, loadQueue, resumeSavedQuiz, handleBackToFilters]);
 
   const handleNewSession = useCallback(() => {
@@ -500,7 +505,7 @@ export function QuizClient({
     } else if (state === "FILTERS" && !hasSavedState) {
       removeLearningSession("quiz");
     }
-  }, [storageReady, state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter, userWrittenAnswer, hasSavedState]);
+  }, [storageReady, state, queue, currentIndex, filters, currentDetail, sessionAnswers, selectedLetter, userWrittenAnswer, hasSavedState, getCurrentTime]);
 
   useEffect(() => {
     persistSession();
@@ -531,7 +536,7 @@ export function QuizClient({
         } satisfies SavedQuizState);
       }
     };
-  }, []);
+  }, [getCurrentTime]);
 
   const selectAlternative = useCallback((letter: string) => {
     if (attemptResult || submitting) return;
@@ -659,7 +664,7 @@ export function QuizClient({
       attemptLockRef.current = false;
       setSubmitting(false);
     }
-  }, [attemptResult, isOfflineSaved, submitting, currentDetail, selectedLetter, userWrittenAnswer]);
+  }, [attemptResult, isOfflineSaved, submitting, currentDetail, selectedLetter, userWrittenAnswer, getCurrentTime]);
 
   const handleDiscursiveReveal = useCallback(async () => {
     if (attemptLockRef.current || attemptResult || isOfflineSaved || submitting || !currentDetail) return;
@@ -697,7 +702,7 @@ export function QuizClient({
       attemptLockRef.current = false;
       setSubmitting(false);
     }
-  }, [attemptResult, isOfflineSaved, submitting, currentDetail, userWrittenAnswer]);
+  }, [attemptResult, isOfflineSaved, submitting, currentDetail, userWrittenAnswer, getCurrentTime]);
 
   const handleQuickSaveFlashcard = async () => {
     if (!currentDetail) return;
@@ -782,8 +787,9 @@ export function QuizClient({
         selectedLetter || undefined
       );
       setPreceptorResponse(res);
-    } catch (e: any) {
-      toast.error(e.message || "Erro ao perguntar ao preceptor.");
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Erro ao perguntar ao preceptor.";
+      toast.error(msg);
     } finally {
       setAskingPreceptor(false);
     }
@@ -893,12 +899,6 @@ export function QuizClient({
     navigateQuestion,
     selectAlternative
   });
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return `${m}:${s.toString().padStart(2, '0')}`;
-  };
 
   if (state === "FILTERS") {
     return (

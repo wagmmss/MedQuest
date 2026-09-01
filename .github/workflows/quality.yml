@@ -1,6 +1,9 @@
 name: Quality, security and performance
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -9,39 +12,77 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   backend:
+    name: Backend Pytest & SLA Guardrails
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: app/backend
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
-      - run: pip install -r requirements.txt pip-audit
-      - run: pytest -q
-      - run: pip-audit -r requirements.txt
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: app/backend/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          uv pip install --system -r requirements.txt pip-audit pytest-xdist
+
+      - name: Run Hermetic Pytest Suite (Parallel)
+        run: |
+          pytest -q -n auto
+
+      - name: Run Performance SLA Guardrails
+        run: |
+          python scripts/check_performance_guardrails.py
+
+      - name: Security audit dependencies
+        run: |
+          pip-audit -r requirements.txt
 
   frontend:
+    name: Frontend Lint, TypeCheck & Build
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: app/frontend
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: app/frontend/package-lock.json
-      - run: npm ci
-      - run: npm audit --audit-level=high
-      - run: npm run lint -- --max-warnings=0
-      - run: npx tsc --noEmit
-      - run: npm run build
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Security audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: ESLint Check
+        run: npm run lint -- --max-warnings=0
+
+      - name: TypeScript Strict TypeCheck
+        run: npx tsc --noEmit
+
+      - name: Next.js Production Build & Performance Budgets
+        run: npm run build
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}

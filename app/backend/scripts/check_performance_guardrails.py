@@ -52,7 +52,7 @@ def percentile(data, p):
 
 def run_checks():
     print("================================================================")
-    print("🔍 MEDQUEST CI: VERIFICAÇÃO AUTOMATIZADA DE GUARDRAILS DE SLA")
+    print("[MEDQUEST CI] VERIFICACAO AUTOMATIZADA DE GUARDRAILS DE SLA")
     print("================================================================\n")
 
     app = create_app(testing=True)
@@ -78,7 +78,7 @@ def run_checks():
             res = client.get(url)
             t1 = time.perf_counter()
             if res.status_code != 200:
-                print(f"❌ {name}: HTTP Status {res.status_code} inesperado.")
+                print(f"[FAIL] {name}: HTTP Status {res.status_code} inesperado.")
                 failed = True
                 break
             times.append((t1 - t0) * 1000)
@@ -94,19 +94,19 @@ def run_checks():
         p95_ok = p95 <= max_p95
         payload_ok = kb <= max_kb
 
-        status_str = "✅ PASSOU" if (p95_ok and payload_ok) else "❌ FALHOU"
+        status_str = "[PASS]" if (p95_ok and payload_ok) else "[FAIL]"
         print(f"{status_str} | {name}")
-        print(f"       Latência: P50={p50:.2f}ms | P95={p95:.2f}ms (Teto SLA: {max_p95:.1f}ms)")
+        print(f"       Latencia: P50={p50:.2f}ms | P95={p95:.2f}ms (Teto SLA: {max_p95:.1f}ms)")
         print(f"       Payload:  {kb:.2f} KB (Teto SLA: {max_kb:.1f} KB)\n")
 
         if not p95_ok or not payload_ok:
             failed = True
 
     if failed:
-        print("🚨 ERRO: Regressão de performance detectada! O build foi bloqueado.")
+        print("[ERRO] Regressao de performance detectada! O build foi bloqueado.")
         sys.exit(1)
     else:
-        print("🎉 SUCESSO: Todos os endpoints estão dentro dos SLAs de performance.")
+        print("[SUCESSO] Todos os endpoints estao dentro dos SLAs de performance.")
         sys.exit(0)
 
 

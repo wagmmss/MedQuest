@@ -119,8 +119,8 @@ export const api = {
   },
   sessions: {
     get: (sessionType: string) => 
-      apiFetch<{data: any, updated_at: string} | {data: null}>(`/api/sessions/${sessionType}`, { cache: 'no-store' }),
-    save: (sessionType: string, data: any) => 
+      apiFetch<{data: unknown, updated_at: string} | {data: null}>(`/api/sessions/${sessionType}`, { cache: 'no-store' }),
+    save: (sessionType: string, data: unknown) => 
       apiFetch<{success: boolean}>(`/api/sessions/${sessionType}`, {
         method: "PUT",
         body: JSON.stringify(data),
@@ -129,6 +129,26 @@ export const api = {
       apiFetch<{success: boolean}>(`/api/sessions/${sessionType}`, {
         method: "DELETE",
       }),
+    saveSimulado: async (payload: {
+      client_session_id: string;
+      planned_duration_seconds: number;
+      elapsed_seconds: number;
+      total_questions: number;
+      answered_count: number;
+      correct_count: number;
+      filters?: Record<string, unknown>;
+      area_results?: Array<Record<string, unknown>>;
+    }) => {
+      try {
+        return await apiFetch<{ success: boolean }>(`/api/sessions/simulado`, {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn("Falha ao salvar sessao de simulado no backend:", err);
+        return { success: false };
+      }
+    }
   },
   planner: {
     getConfig: () => apiFetch<PlannerConfig>("/api/planner/config", { cache: 'no-store' }),
@@ -808,28 +828,7 @@ export const api = {
       a.remove();
       window.URL.revokeObjectURL(downloadUrl);
     },
-  },
-  sessions: {
-    saveSimulado: async (payload: {
-      client_session_id: string;
-      planned_duration_seconds: number;
-      elapsed_seconds: number;
-      total_questions: number;
-      answered_count: number;
-      correct_count: number;
-      filters?: Record<string, unknown>;
-      area_results?: Array<Record<string, unknown>>;
-    }) => {
-      try {
-        return await apiFetch<{ success: boolean }>(`/api/sessions/simulado`, {
-          method: "POST",
-          body: JSON.stringify(payload)
-        });
-      } catch (err) {
-        console.warn("Falha ao salvar sessão de simulado no backend:", err);
-        return { success: false };
-      }
-    }
   }
 };
+
 
