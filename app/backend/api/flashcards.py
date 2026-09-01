@@ -163,6 +163,12 @@ def save():
             card_id = cursor.lastrowid
         
     invalidate_user_caches(g.user_id)
+    record_domain_event(
+        "flashcard_created",
+        user_id=g.user_id,
+        question_id=question_id,
+        flashcard_id=card_id,
+    )
     return jsonify({
         "id": card_id,
         "question_id": question_id,
@@ -260,6 +266,13 @@ def generate_batch():
                 })
 
     invalidate_user_caches(g.user_id)
+    for c in created_or_updated:
+        record_domain_event(
+            "flashcard_created",
+            user_id=g.user_id,
+            question_id=c["question_id"],
+            flashcard_id=c["id"],
+        )
     return jsonify({
         "success": True,
         "count": len(created_or_updated),

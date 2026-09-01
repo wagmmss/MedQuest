@@ -57,6 +57,7 @@ class SimpleTTLCache:
                 
 overview_cache = SimpleTTLCache(60)
 _area_totals_cache = SimpleTTLCache(300)
+_q_totals_cache = SimpleTTLCache(300)
 
 def _get_cached_area_totals(db):
     cached = _area_totals_cache.get("area_totals")
@@ -67,6 +68,24 @@ def _get_cached_area_totals(db):
     ).fetchall()
     _area_totals_cache.set("area_totals", totals)
     return totals
+
+def _get_cached_q_totals_map(db):
+    cached = _q_totals_cache.get("q_totals_map")
+    if cached is not None:
+        return cached
+    rows = db.execute("""
+        SELECT area, subtema, COUNT(*) AS n_questions
+        FROM questions
+        WHERE missing_alts = 0 AND area IS NOT NULL AND area != '' AND subtema IS NOT NULL AND subtema != ''
+        GROUP BY area, subtema
+    """).fetchall()
+    q_map = {}
+    for r in rows:
+        norm_a = get_normalized_area(r["area"])
+        sub = r["subtema"]
+        q_map[(norm_a, sub)] = r["n_questions"]
+    _q_totals_cache.set("q_totals_map", q_map)
+    return q_map
 
 
 def responsible_streak(days_studied, today, days_per_week=6):
@@ -614,19 +633,8 @@ def coverage():
     db = get_db()
     planner_meta, kat_subs = _get_planner_metadata()
 
-    # 1. Total de questões por área e subtema
-    q_totals_rows = db.execute("""
-        SELECT area, subtema, COUNT(*) AS n_questions
-        FROM questions
-        WHERE missing_alts = 0 AND area IS NOT NULL AND area != '' AND subtema IS NOT NULL AND subtema != ''
-        GROUP BY area, subtema
-    """).fetchall()
-    
-    q_map = {}
-    for r in q_totals_rows:
-        norm_a = get_normalized_area(r["area"])
-        sub = r["subtema"]
-        q_map[(norm_a, sub)] = r["n_questions"]
+    # 1. Total de questões por área e subtema (em memória/cache)
+    q_map = _get_cached_q_totals_map(db)
 
     # 2. Resoluções do usuário
     user_rows = db.execute("""
