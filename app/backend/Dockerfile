@@ -4,7 +4,16 @@ WORKDIR /app
 COPY requirements.txt .
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt gunicorn
 
-COPY . .
+# Keep the large, rarely-changing image corpus in its own layer. A backend code
+# change can then publish and download only the small source layers below.
+COPY static ./static
+COPY data ./data
+COPY scripts ./scripts
+COPY api ./api
+COPY migrations ./migrations
+COPY *.py ./
+COPY *.json ./
+COPY *.txt ./
 
 ENV PORT=8000
 ENV PYTHONUNBUFFERED=1

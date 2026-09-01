@@ -43,7 +43,7 @@ graph LR
 | Camada | Quando Usar | Como Executar (Cross-Platform) | Windows PowerShell | O que é Validado |
 | :--- | :--- | :--- | :--- | :--- |
 | **`fast`** | **A cada commit local** (Executado automaticamente pelo `pre-commit` hook) | `python scripts/dev_check.py --tier=fast` | `.\validate.ps1 fast` | • Diff de arquivos alterados<br>• Testes unitários do módulo editado<br>• ESLint apenas nos arquivos JS/TS alterados<br>• Bypass instantâneo (<0.1s) se apenas markdown/docs mudou |
-| **`standard`** | **Antes de fazer push para o GitHub** (Executado pelo `pre-push` hook) | `python scripts/dev_check.py --tier=standard` | `.\validate.ps1 standard` | • Suíte completa hermética de backend (`pytest`)<br>• Guardrails de SLAs de P95 (`check_performance_guardrails.py`)<br>• ESLint completo no frontend (`src/`)<br>• Checagem estrita de tipos (`tsc --noEmit`)<br>• Orçamentos de bundle (`check-performance-budgets`) |
+| **`standard`** | **Antes de fazer push para o GitHub** (Executado pelo `pre-push` hook) | `python scripts/dev_check.py --tier=standard` | `.\validate.ps1 standard` | Executa a suíte e os guardrails do backend somente quando o backend mudou; lint, tipos e orçamento de bundle somente quando o frontend mudou. Mudanças exclusivas de infraestrutura/documentação são liberadas imediatamente. |
 | **`full`** | **Antes de abrir PR / No GitHub Actions CI** | `python scripts/dev_check.py --tier=full` | `.\validate.ps1 full` | • Todos os itens da camada standard<br>• Cobertura de testes (`--cov=api`)<br>• Auditoria de segurança de dependências (`pip-audit`, `npm audit`)<br>• Build completo de produção Next.js Webpack (`npm run build`) |
 
 ---

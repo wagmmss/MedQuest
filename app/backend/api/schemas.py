@@ -7,6 +7,7 @@ __all__ = [
     "AttemptIn",
     "BatchAttemptIn",
     "BatchAttemptItem",
+    "CronDispatchIn",
     "FavoriteIn",
     "FlashcardBatchIn",
     "FlashcardGenerateIn",
@@ -15,10 +16,14 @@ __all__ = [
     "FlashcardReviewIn",
     "FlashcardSaveIn",
     "GeneratePlanIn",
+    "NotificationConfigIn",
     "PlannerConfigIn",
     "PlannerRevisionIn",
     "PlannerStudyIn",
     "PrescribeStudyIn",
+    "PushSubscriptionIn",
+    "PushSubscriptionKeys",
+    "PushUnsubscribeIn",
     "QuestionBatchIn",
     "ReviewIn",
     "SimuladoCustomIn",
@@ -182,3 +187,38 @@ class PrescribeStudyIn(APIInput):
 
 class SynthesizeExplanationIn(APIInput):
     force_regenerate: bool = False
+
+
+class NotificationConfigIn(APIInput):
+    enabled: bool = False
+    preferred_hour: int = Field(default=8, ge=0, le=23)
+    days_of_week: list[int] = Field(default=[0, 1, 2, 3, 4, 5, 6], max_length=7)
+    max_daily_reminders: Literal[1] = 1
+
+
+    @model_validator(mode="after")
+    def validate_days(self):
+        for day in self.days_of_week:
+            if not isinstance(day, int) or day < 0 or day > 6:
+                raise ValueError("days_of_week must contain integers from 0 to 6")
+        return self
+
+
+class PushSubscriptionKeys(APIInput):
+    p256dh: str = Field(min_length=1, max_length=500)
+    auth: str = Field(min_length=1, max_length=500)
+
+
+class PushSubscriptionIn(APIInput):
+    endpoint: str = Field(min_length=10, max_length=2000, pattern=r"^https://.*")
+    keys: PushSubscriptionKeys
+    expiration_time: int | None = None
+
+
+class PushUnsubscribeIn(APIInput):
+    endpoint: str | None = Field(default=None, max_length=2000)
+
+
+class CronDispatchIn(APIInput):
+    force_user_id: str | None = Field(default=None, max_length=100)
+    ignore_hour: bool = False

@@ -58,7 +58,8 @@ export const syncManager = {
     try {
       const uid = getLocalOwnerId();
       return await localDb.syncQueue
-        .where({ owner_id: uid })
+        .where('owner_id')
+        .equals(uid)
         .filter((item) => item.status === "pending")
         .toArray();
     } catch {
@@ -71,7 +72,8 @@ export const syncManager = {
     try {
       const uid = getLocalOwnerId();
       return await localDb.syncQueue
-        .where({ owner_id: uid })
+        .where('owner_id')
+        .equals(uid)
         .filter((item) => item.status === "failed")
         .toArray();
     } catch {
@@ -117,7 +119,8 @@ export const syncManager = {
     try {
       const uid = getLocalOwnerId();
       return await localDb.syncQueue
-        .where({ owner_id: uid })
+        .where('owner_id')
+        .equals(uid)
         .filter((item) => item.status === "pending")
         .count();
     } catch {
@@ -136,9 +139,11 @@ export const syncManager = {
     try {
       const uid = getLocalOwnerId();
       const items = await localDb.syncQueue
-        .where({ owner_id: uid })
+        .where('owner_id')
+        .equals(uid)
         .filter((item) => item.status === "pending")
         .toArray();
+
 
       // The provider may have unmounted while IndexedDB was resolving.
       // Do not leave a background timer behind in that case.
@@ -191,9 +196,11 @@ export const syncManager = {
     let items: SyncItem[] = [];
     try {
       items = await localDb.syncQueue
-        .where({ owner_id: uid })
+        .where('owner_id')
+        .equals(uid)
         .filter((item) => item.status === "pending" && (force || item.next_retry_at <= now))
         .toArray();
+
     } catch (err) {
       console.error("[Sync] Erro ao carregar itens da fila:", err);
       return;

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { syncManager } from "@/lib/sync";
 import { localDb } from "@/lib/db";
+import { downloadSimuladoPackage, getReadySimuladoPackage, listSimuladoPackages, deleteSimuladoPackage } from "@/lib/simuladoPackage";
 import { CloudOff } from "lucide-react";
 
 export function SyncProvider() {
@@ -12,7 +13,14 @@ export function SyncProvider() {
     let isActive = true;
     (window as unknown as { syncManager: typeof syncManager }).syncManager = syncManager;
     (window as unknown as { localDb: typeof localDb }).localDb = localDb;
+    (window as unknown as { simuladoPackage: unknown }).simuladoPackage = {
+      downloadSimuladoPackage,
+      getReadySimuladoPackage,
+      listSimuladoPackages,
+      deleteSimuladoPackage,
+    };
     syncManager.init();
+
     
     // Sync UI with queue length
     const handleUpdate = (e: Event) => {

@@ -4,10 +4,11 @@ import {
   OverviewStats, CoverageResponse, QuestionMeta, PlannerConfig,
   TimelineStat, WeakTopic, Recommendation, BreakdownStat, DistractorStat,
   PlannerPlanResponse, PlannerProgressMap, PlannerTopicProgressMap, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness,
-  BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary
+  BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary, InstitutionRadarResponse
 } from "@/types/api";
 
 export type { QuestionMeta };
+
 
 const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
 const API_REQUEST_TIMEOUT_MS = process.env.PLAYWRIGHT_TEST ? 1_000 : 5_000;
@@ -100,7 +101,15 @@ export const serverApi = {
     getBottlenecks: (limit: number = 3) => serverFetch<BottleneckTopic[]>(`/api/stats/bottlenecks?limit=${limit}`, { next: { tags: ['stats'] } }),
     getDomainSummary: () => serverFetch<DomainSummaryResponse>("/api/stats/domain-summary", { next: { tags: ['stats'] } }),
     getErrorNotebookSummary: () => serverFetch<ErrorNotebookSummary>("/api/stats/error-notebook-summary", { next: { tags: ['stats'] } }),
+    getInstitutionRadar: (institution?: string, compareInstitution?: string) => {
+      const params = new URLSearchParams();
+      if (institution) params.append("institution", institution);
+      if (compareInstitution) params.append("compare_institution", compareInstitution);
+      const qs = params.toString();
+      return serverFetch<InstitutionRadarResponse>(`/api/stats/institution-radar${qs ? `?${qs}` : ""}`, { next: { tags: ['stats'] } });
+    },
   },
+
   questions: {
     getMeta: () => serverFetch<QuestionMeta>("/api/meta", { cache: 'no-store' }),
   },

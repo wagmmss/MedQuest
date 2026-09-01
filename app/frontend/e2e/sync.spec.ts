@@ -247,7 +247,7 @@ test.describe('Offline Sync e Resiliência', () => {
     await expect(page.locator('button:has-text("Fácil")')).toBeVisible({ timeout: 5000 });
     await page.click('button:has-text("Fácil")');
 
-    // 4. Confirma que avançou para "Tudo Revisado"
-    await expect(page.locator('text=Tudo Revisado!')).toBeVisible({ timeout: 10000 });
+    // 4. Confirma que avançou para a tela de revisões concluídas
+    await expect(page.getByText(/Revisões de hoje concluídas|Tudo Revisado/i)).toBeVisible({ timeout: 10000 });
   });
 });

@@ -53,7 +53,8 @@ export function FlashcardClient() {
         const uid = getLocalOwnerId();
         for (const card of normalizedCards) {
           localDb.flashcards
-            .where({ _owner_id: uid })
+            .where('_owner_id')
+            .equals(uid)
             .filter(f => f.id === card.id)
             .modify({
               front: card.front,
@@ -90,7 +91,7 @@ export function FlashcardClient() {
       if (localDb) {
         try {
           const uid = getLocalOwnerId();
-          await localDb.flashcards.where({ _owner_id: uid }).filter(f => f.id === currentCard.id).delete();
+          await localDb.flashcards.where('_owner_id').equals(uid).filter(f => f.id === currentCard.id).delete();
         } catch {
           // ignore local cleanup error
         }
@@ -101,13 +102,14 @@ export function FlashcardClient() {
         if (localDb) {
           try {
             const uid = getLocalOwnerId();
-            await localDb.flashcards.where({ _owner_id: uid }).filter(f => f.id === currentCard.id).delete();
+            await localDb.flashcards.where('_owner_id').equals(uid).filter(f => f.id === currentCard.id).delete();
           } catch {
             // ignore local cleanup error
           }
         }
       } else {
         toast.error("Erro ao enviar avaliação.");
+
       }
     }
   }, [queue, submitting]);

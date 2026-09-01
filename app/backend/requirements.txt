@@ -11,5 +11,6 @@ cryptography
 requests
 gunicorn
 fsrs
+pywebpush
 pytest
 pytest-cov

@@ -13,6 +13,7 @@ from .config import Config
 from .db import close_db, init_db
 from .flashcards import bp as flashcards_bp
 from .logs import bp as logs_bp
+from .notifications import bp as notifications_bp
 from .observability import configure_logging, emit, finish_request, start_request
 from .plan import bp as plan_bp
 from .questions import bp as questions_bp
@@ -51,11 +52,15 @@ def create_app(testing=False):
     from .auth import require_auth
     
     @app.before_request
-    @require_auth
     def authenticate_request():
-        public_image = request.path.startswith(("/api/images/", "/api/v1/images/"))
-        if request.path == "/" or request.method == "OPTIONS" or public_image:
+        if request.path == "/" or request.method == "OPTIONS":
             return
+        if request.path.startswith(("/api/images/", "/api/v1/images/")):
+            return
+        if request.path in ("/api/notifications/cron/dispatch", "/api/v1/notifications/cron/dispatch"):
+            return
+        return require_auth(lambda: None)()
+
 
     from werkzeug.exceptions import HTTPException
 
@@ -80,7 +85,7 @@ def create_app(testing=False):
 
     # Cada blueprint é montado em /api (compatibilidade) e em /api/v1.
     from .sessions import bp as sessions_bp
-    for bp in (questions_bp, stats_bp, plan_bp, flashcards_bp, logs_bp, sessions_bp):
+    for bp in (questions_bp, stats_bp, plan_bp, flashcards_bp, logs_bp, sessions_bp, notifications_bp):
         app.register_blueprint(bp, url_prefix="/api")
         app.register_blueprint(bp, url_prefix="/api/v1", name=f"{bp.name}_v1")
 

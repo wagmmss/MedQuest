@@ -46,7 +46,7 @@ INSERT INTO explanations VALUES (1,'explicação da 1','now'), (3,'**Gabarito**:
 
 
 @pytest.fixture()
-def client(tmp_path):
+def app(tmp_path):
     dbfile = tmp_path / "medquest_test.db"
     con = sqlite3.connect(dbfile)
     con.executescript(SCHEMA_AND_SEED)
@@ -55,9 +55,15 @@ def client(tmp_path):
     os.environ["MEDQUEST_DB"] = str(dbfile)
     try:
         app = create_app(testing=True)
-        yield app.test_client()
+        yield app
     finally:
         os.environ.pop("MEDQUEST_DB", None)
+
+
+@pytest.fixture()
+def client(app):
+    return app.test_client()
+
 
 
 @pytest.fixture(autouse=True)

@@ -3,14 +3,18 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { CloudOff, Download, RefreshCw, Database, AlertCircle, Trash2, CheckCircle2, Play, BookOpen, Layers } from "lucide-react";
-import { localDb, getLocalOwnerId, SyncItem } from "@/lib/db";
+
+import { localDb, getLocalOwnerId, SyncItem, SimuladoPackage, isPackageValid } from "@/lib/db";
 import { api } from "@/lib/api";
 import { syncManager } from "@/lib/sync";
+import { downloadSimuladoPackage, getReadySimuladoPackage, listSimuladoPackages, deleteSimuladoPackage } from "@/lib/simuladoPackage";
 import toast from "react-hot-toast";
 
 export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
   const [isOffline, setIsOffline] = useState(false);
   const [stats, setStats] = useState({ questions: 0, flashcards: 0, queue: 0 });
+  const [packages, setPackages] = useState<SimuladoPackage[]>([]);
+  const [activePackage, setActivePackage] = useState<SimuladoPackage | null>(null);
   const [failedItems, setFailedItems] = useState<SyncItem[]>([]);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
@@ -28,12 +32,18 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
     if (!localDb) return;
     try {
       const uid = getLocalOwnerId();
-      const questions = await localDb.questions.where({ _owner_id: uid }).count();
-      const flashcards = await localDb.flashcards.where({ _owner_id: uid }).count();
-      const queue = await localDb.syncQueue.where({ owner_id: uid }).filter(i => i.status === "pending").count();
+      const questions = await localDb.questions.where('_owner_id').equals(uid).count();
+      const flashcards = await localDb.flashcards.where('_owner_id').equals(uid).count();
+      const queue = await localDb.syncQueue.where('owner_id').equals(uid).filter(i => i.status === "pending").count();
       const failed = await syncManager.getFailedItems();
+      const pkgList = await listSimuladoPackages(uid);
+      const readyPkg = await getReadySimuladoPackage(uid);
+
+
       setStats({ questions, flashcards, queue });
       setFailedItems(failed);
+      setPackages(pkgList);
+      setActivePackage(readyPkg);
 
       const savedDate = localStorage.getItem("medquest_last_offline_download");
       if (savedDate) {
@@ -56,113 +66,62 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
     // Initial stats
     const initialStatsTimer = setTimeout(() => void updateStats(), 0);
 
-    // Listen to queue updates
+    // Listen to queue and package updates
     const handleQueueUpdate = () => void updateStats();
+    const handlePackageUpdate = () => void updateStats();
     window.addEventListener("sync-queue-updated", handleQueueUpdate);
+    window.addEventListener("simulado-package-updated", handlePackageUpdate);
 
     return () => {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
       window.removeEventListener("sync-queue-updated", handleQueueUpdate);
+      window.removeEventListener("simulado-package-updated", handlePackageUpdate);
       clearTimeout(initialStatusTimer);
       clearTimeout(initialStatsTimer);
     };
   }, [updateStats]);
 
-  const prefetchImages = async (imageUrls: string[]) => {
-    const uniqueUrls = Array.from(new Set(imageUrls.filter(Boolean)));
-    const imageFetches = uniqueUrls.map(async (url) => {
-      try {
-        const fullUrl = url.startsWith("http") ? url : `${url.startsWith("/") ? "" : "/"}${url}`;
-        await fetch(fullUrl, { cache: "force-cache" });
-      } catch {
-        // Falha no pré-carregamento de imagem individual não interrompe o pacote
-      }
-    });
-    await Promise.allSettled(imageFetches);
-  };
-
-  const downloadForShift = async () => {
-    if (isDownloading) return;
+  const handleDownloadPackage = async () => {
+    if (isDownloading || isOffline) return;
     setIsDownloading(true);
     setDownloadProgress(0);
-    setDownloadStatus("Buscando flashcards...");
+    setDownloadStatus("Iniciando download do pacote...");
+
     try {
+      // Baixar flashcards devidos
+      setDownloadStatus("Buscando flashcards para revisão...");
       setDownloadProgress(10);
       const flashcards = await api.flashcards.getDue(true);
       if (flashcards && flashcards.length > 0 && localDb) {
         const uid = getLocalOwnerId();
         await localDb.flashcards.bulkPut(flashcards.map(f => ({ ...f, _owner_id: uid })));
       }
-      setDownloadProgress(30);
-      setDownloadStatus("Buscando questões do simulado...");
-      
-      const questions = await api.questions.getSimuladoUSP();
-      if (questions && questions.length > 0) {
-        setDownloadProgress(40);
-        const ids = questions.slice(0, questionCount).map(q => q.id);
-        const chunkSize = 10;
-        let loaded = 0;
-        const allImageUrls: string[] = [];
 
-        for (let i = 0; i < ids.length; i += chunkSize) {
-          const chunk = ids.slice(i, i + chunkSize);
-          setDownloadStatus(`Baixando questões (${Math.min(i + chunkSize, ids.length)}/${ids.length})...`);
-          
-          const detailResponse = await api.questions.getBatch(chunk, true);
-          if (detailResponse.questions && localDb) {
-            const uid = getLocalOwnerId();
-            const questionsList = Object.values(detailResponse.questions);
-            await localDb.questions.bulkPut(questionsList.map(q => ({ ...q, _owner_id: uid })));
-
-            // Coleta URLs de imagens para pré-carregamento offline
-            for (const q of questionsList) {
-              if (q.images && Array.isArray(q.images)) {
-                allImageUrls.push(...q.images.map(img => {
-                  const trimmed = (img || "").trim();
-                  return trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("/api/") ? trimmed : `/api/images/${trimmed}`;
-                }));
-              }
-              if (q.clinical_case?.images && Array.isArray(q.clinical_case.images)) {
-                allImageUrls.push(...q.clinical_case.images.map(img => {
-                  const trimmed = (img || "").trim();
-                  return trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("/api/") ? trimmed : `/api/images/${trimmed}`;
-                }));
-              }
-            }
-          }
-          loaded += chunk.length;
-          setDownloadProgress(40 + (loaded / ids.length) * 45);
+      // Baixar pacote de simulado
+      const questionsPerArea = Math.max(5, Math.round(questionCount / 5));
+      await downloadSimuladoPackage(
+        {
+          name: `Simulado USP/Geral (${questionCount} Qs)`,
+          questions_per_area: questionsPerArea,
+          duration_minutes: Math.round((questionCount / 20) * 60),
+          force_4_options: false,
+        },
+        (p) => {
+          setDownloadProgress(p.progress);
+          setDownloadStatus(p.message);
         }
+      );
 
-        if (allImageUrls.length > 0) {
-          setDownloadStatus("Armazenando imagens médicas em cache...");
-          setDownloadProgress(90);
-          await prefetchImages(allImageUrls);
-        }
-      }
-
-      setDownloadProgress(100);
-      setDownloadStatus("Pacote offline pronto!");
-      // Prime the only cached navigation shell while the device is online.
-      // This is deliberately limited to /estudar; API responses are never
-      // stored by the service worker and continue to use IndexedDB instead.
-      try {
-        await fetch("/estudar", { cache: "reload" });
-      } catch (error) {
-        // The question package is still usable if the shell was already
-        // cached; a transient navigation failure must not discard the download.
-        console.warn("Não foi possível atualizar a tela offline de estudo:", error);
-      }
       const nowStr = new Date().toISOString();
       localStorage.setItem("medquest_last_offline_download", nowStr);
       setLastDownloadDate(nowStr);
 
       await updateStats();
-      toast.success("Pacote de Plantão baixado com sucesso!");
+      toast.success("Pacote de Simulado Offline pronto!");
     } catch (e) {
-      console.error("Erro ao baixar dados para o plantão:", e);
-      toast.error("Erro ao baixar pacote. Verifique sua conexão e tente novamente.");
+      console.error("Erro ao baixar pacote offline:", e);
+      toast.error("Erro ao baixar pacote offline. Tente novamente.");
     } finally {
       downloadResetTimerRef.current = setTimeout(() => {
         setIsDownloading(false);
@@ -172,18 +131,31 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
     }
   };
 
+  const handleDeletePackage = async (packageId: string) => {
+    if (!window.confirm("Deseja remover este pacote offline do dispositivo?")) return;
+    try {
+      await deleteSimuladoPackage(packageId);
+      await updateStats();
+      toast.success("Pacote offline removido.");
+    } catch {
+      toast.error("Erro ao remover pacote.");
+    }
+  };
+
   const handleClearOfflineData = async () => {
     if (!localDb) return;
-    if (!window.confirm("Deseja realmente limpar as questões e flashcards salvos neste dispositivo? A fila de envios pendentes não será afetada.")) {
+    if (!window.confirm("Deseja realmente limpar as questões, flashcards e pacotes salvos neste dispositivo? A fila de envios pendentes não será afetada.")) {
       return;
     }
 
     try {
       const uid = getLocalOwnerId();
       await Promise.all([
-        localDb.questions.where({ _owner_id: uid }).delete(),
-        localDb.flashcards.where({ _owner_id: uid }).delete(),
+        localDb.questions.where('_owner_id').equals(uid).delete(),
+        localDb.flashcards.where('_owner_id').equals(uid).delete(),
+        localDb.simuladoPackages.where('owner_id').equals(uid).delete(),
       ]);
+
       localStorage.removeItem("medquest_last_offline_download");
       setLastDownloadDate(null);
       await updateStats();
@@ -225,6 +197,8 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
     minute: "2-digit",
   }) : null;
 
+  const pkgValidity = activePackage ? isPackageValid(activePackage) : { valid: false };
+
   return (
     <div className="bg-card border border-border rounded-xl p-6 shadow-sm flex flex-col gap-6">
       <div>
@@ -245,14 +219,61 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
         </div>
 
         <p className="text-sm text-muted-foreground mb-4">
-          Baixe questões e flashcards com antecedência para estudar sem internet durante seus plantões. Suas respostas serão salvas com segurança e sincronizadas automaticamente quando reconectar.
+          Baixe pacotes completos de simulado e flashcards para realizar sua prova sem internet. Suas respostas serão gravadas no dispositivo e sincronizadas de forma segura e idempotente ao reconectar.
         </p>
 
         {formattedLastDate && (
-          <p className="text-xs text-muted-foreground mb-6 flex items-center gap-1.5 font-medium">
+          <p className="text-xs text-muted-foreground mb-4 flex items-center gap-1.5 font-medium">
             <CheckCircle2 size={14} className="text-success" />
             Última atualização local: <strong className="text-foreground">{formattedLastDate}</strong>
           </p>
+        )}
+
+        {/* Card do Pacote de Simulado Ativo */}
+        {activePackage && (
+          <div className="mb-6 p-4 rounded-xl bg-muted/40 border border-border flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className={`w-2.5 h-2.5 rounded-full ${pkgValidity.valid ? 'bg-success' : 'bg-warning'}`} />
+                <h4 className="text-sm font-bold text-foreground">{activePackage.name}</h4>
+              </div>
+              <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${pkgValidity.valid ? 'bg-success/15 text-success' : 'bg-warning/15 text-warning'}`}>
+                {pkgValidity.valid ? 'Pronto para uso' : activePackage.status}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-muted-foreground">
+              <div>
+                <span className="block font-medium">Questões:</span>
+                <strong className="text-foreground">{activePackage.details_count} / {activePackage.questions_count}</strong>
+              </div>
+              <div>
+                <span className="block font-medium">Imagens em Cache:</span>
+                <strong className="text-foreground">{activePackage.images_count}</strong>
+              </div>
+              <div>
+                <span className="block font-medium">Tamanho Est.:</span>
+                <strong className="text-foreground">
+                  {(activePackage.estimated_size_bytes / 1024).toFixed(0)} KB
+                </strong>
+              </div>
+              <div>
+                <span className="block font-medium">Validade:</span>
+                <strong className="text-foreground">
+                  {new Date(activePackage.expires_at).toLocaleDateString("pt-BR")}
+                </strong>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end gap-2 pt-2 border-t border-border/60">
+              <button
+                onClick={() => handleDeletePackage(activePackage.id)}
+                className="text-xs text-destructive hover:text-destructive/80 flex items-center gap-1 font-medium px-2 py-1 rounded transition-colors"
+              >
+                <Trash2 size={13} /> Remover Pacote
+              </button>
+            </div>
+          </div>
         )}
 
         <div className="grid grid-cols-3 gap-4 mb-6">
@@ -283,7 +304,7 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
         {/* Seleção do tamanho do pacote quando online */}
         {!isOffline && !isDownloading && (
           <div className="flex items-center justify-between gap-4 mb-4 p-3 bg-muted/30 border border-border/60 rounded-lg text-xs">
-            <span className="font-semibold text-muted-foreground">Tamanho do pacote:</span>
+            <span className="font-semibold text-muted-foreground">Tamanho do simulado:</span>
             <div className="flex items-center gap-2">
               {[25, 50, 100].map((count) => (
                 <button
@@ -304,18 +325,18 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
 
         <div className="flex flex-col sm:flex-row gap-3">
           <button
-            onClick={downloadForShift}
+            onClick={handleDownloadPackage}
             disabled={isDownloading || isOffline}
             className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isDownloading ? (
-              <><RefreshCw className="animate-spin" size={20} /> Baixando Carga...</>
+              <><RefreshCw className="animate-spin" size={20} /> Baixando Pacote...</>
             ) : (
-              <><Download size={20} /> Baixar Pacote de Plantão ({questionCount} Qs)</>
+              <><Download size={20} /> Baixar Simulado Offline ({questionCount} Qs)</>
             )}
           </button>
 
-          {(stats.questions > 0 || stats.flashcards > 0) && !isDownloading && (
+          {(stats.questions > 0 || stats.flashcards > 0 || packages.length > 0) && !isDownloading && (
             <button
               onClick={handleClearOfflineData}
               title="Limpar questões e flashcards salvos neste dispositivo"

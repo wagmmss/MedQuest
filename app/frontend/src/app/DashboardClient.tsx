@@ -8,19 +8,16 @@ import {
 import { OfflineModal } from "@/components/OfflineModal";
 import { motion, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { 
-  BarChart3, Brain, Play, Clock, ArrowRight, Target, Sparkles, TrendingUp, AlertTriangle, Lightbulb, RefreshCw, Layers
-} from "lucide-react";
 import { readLearningSession, syncSessionFromCloud } from "@/lib/sessionState";
 import { triggerConfetti } from "@/lib/confetti";
 import clsx from "clsx";
+
 
 interface DashboardClientProps {
   stats: OverviewStats;
   currentPlannerWeek: PlannerWeek | null;
   suggestedPlannerTopic?: PlannerTopic | null;
   remainingPlannerMetas?: number;
-  totalPlannerMetas?: number;
   isPlanCompleted?: boolean;
   firstName: string;
   benchmarkStats?: BenchmarkStat | null;
@@ -34,7 +31,6 @@ export function DashboardClient({
   currentPlannerWeek, 
   suggestedPlannerTopic,
   remainingPlannerMetas,
-  totalPlannerMetas,
   isPlanCompleted,
   firstName, 
   benchmarkStats,
@@ -127,7 +123,6 @@ export function DashboardClient({
   // Semanas do planner
   const plannerWeekNum = suggestedPlannerTopic ? (currentPlannerWeek?.week || null) : null;
   const plannerMetasCount = remainingPlannerMetas !== undefined ? remainingPlannerMetas : (currentPlannerWeek?.topics?.length || 0);
-  const totalMetasCount = totalPlannerMetas !== undefined ? totalPlannerMetas : (currentPlannerWeek?.topics?.length || 0);
 
   // Subtítulo Contextual Direto
   const subtitleMessage = (() => {

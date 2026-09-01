@@ -1,15 +1,18 @@
-import { 
-  OverviewStats, CoverageResponse, TimelineStat, WeakTopic, Recommendation, 
+import {
+  OverviewStats, CoverageResponse, TimelineStat, WeakTopic, Recommendation,
   BreakdownStat, DistractorStat, PlannerConfig, PlannerProgressMap, PlannerTopicProgressMap, PlannerPlanResponse,
   QuestionMeta, SubtemaItem, QuestionListItem, QuestionDetail, AttemptResult, SearchResult,
   BatchAttemptItem, BatchAttemptResult, BatchDetailResponse, Flashcard, FlashcardGenerateResponse,
   BatchFlashcardGenerateResponse, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness,
-  BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary
+  BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary,
+  NotificationConfig, NotificationConfigUpdate, PushSubscriptionPayload,
+  InstitutionRadarResponse
 } from "@/types/api";
 
-const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
+
+const API_BASE = process.env.NEXT_PUBLIC_APP_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` :
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
   (typeof window !== "undefined" ? "" : "http://localhost:3000")));
 
 import { syncManager } from "./sync";
@@ -32,9 +35,9 @@ async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> 
 
   const isMutation = options?.method && ["POST", "PUT", "PATCH", "DELETE"].includes(options.method.toUpperCase());
   const isIdempotentEndpoint = isMutation && (
-    endpoint.includes("/attempt") || 
-    endpoint.includes("/review") || 
-    endpoint.includes("/favorite") || 
+    endpoint.includes("/attempt") ||
+    endpoint.includes("/review") ||
+    endpoint.includes("/favorite") ||
     endpoint.includes("/planner/")
   );
 
@@ -106,26 +109,40 @@ export const api = {
     getAtRiskTopics: () => apiFetch<AtRiskTopic[]>("/api/stats/at-risk", { cache: 'no-store' }),
     getLearningProfile: () => apiFetch<LearningProfile>("/api/stats/learning-profile", { cache: 'no-store' }),
     getExamReadiness: (institution?: string) => apiFetch<ExamReadiness>(`/api/stats/exam-readiness${institution ? `?institution=${encodeURIComponent(institution)}` : ""}`, { cache: 'no-store' }),
-    getBreakdown: (by: 'institution' | 'area' | 'year') => 
+    getBreakdown: (by: 'institution' | 'area' | 'year') =>
       apiFetch<BreakdownStat[]>(`/api/stats/breakdown?by=${by}`, { cache: 'no-store' }),
     getBenchmark: () => apiFetch<BenchmarkStat>("/api/stats/benchmark", { cache: 'no-store' }),
     getBottlenecks: (limit: number = 3) => apiFetch<BottleneckTopic[]>(`/api/stats/bottlenecks?limit=${limit}`, { cache: 'no-store' }),
     getDomainSummary: () => apiFetch<DomainSummaryResponse>("/api/stats/domain-summary", { cache: 'no-store' }),
     getErrorNotebookSummary: () => apiFetch<ErrorNotebookSummary>("/api/stats/error-notebook-summary", { cache: 'no-store' }),
-    resetProgress: () => 
+    getInstitutionRadar: (institution?: string, compareInstitution?: string, signal?: AbortSignal) => {
+      const params = new URLSearchParams();
+      if (institution) params.append("institution", institution);
+      if (compareInstitution) params.append("compare_institution", compareInstitution);
+      const qs = params.toString();
+      return apiFetch<InstitutionRadarResponse>(`/api/stats/institution-radar${qs ? `?${qs}` : ""}`, { cache: 'no-store', signal });
+    },
+    logRadarAction: (action: "study" | "simulado" | "review") =>
+      apiFetch<{success: boolean}>("/api/stats/institution-radar/action", {
+        method: "POST",
+        body: JSON.stringify({ action }),
+      }),
+    resetProgress: () =>
       apiFetch<{success: boolean}>("/api/stats/reset", {
         method: "DELETE",
       }),
+
+
   },
   sessions: {
-    get: (sessionType: string) => 
+    get: (sessionType: string) =>
       apiFetch<{data: unknown, updated_at: string} | {data: null}>(`/api/sessions/${sessionType}`, { cache: 'no-store' }),
-    save: (sessionType: string, data: unknown) => 
+    save: (sessionType: string, data: unknown) =>
       apiFetch<{success: boolean}>(`/api/sessions/${sessionType}`, {
         method: "PUT",
         body: JSON.stringify(data),
       }),
-    delete: (sessionType: string) => 
+    delete: (sessionType: string) =>
       apiFetch<{success: boolean}>(`/api/sessions/${sessionType}`, {
         method: "DELETE",
       }),
@@ -188,12 +205,12 @@ export const api = {
     }),
     getProgress: () => apiFetch<PlannerProgressMap>("/api/planner", { cache: 'no-store' }),
     getTopicProgress: () => apiFetch<PlannerTopicProgressMap>("/api/planner/topics", { cache: 'no-store' }),
-    generatePlan: (data: { start_date?: string; exam_date: string; hours_per_week: number; intensive?: boolean }) => 
+    generatePlan: (data: { start_date?: string; exam_date: string; hours_per_week: number; intensive?: boolean }) =>
       apiFetch<PlannerPlanResponse>("/api/generate_plan", {
         method: "POST",
         body: JSON.stringify(data),
       }),
-    markStudy: (week: number, studied: boolean) => 
+    markStudy: (week: number, studied: boolean) =>
       apiFetch<{success: boolean}>(`/api/planner/${week}/study`, {
         method: "POST",
         body: JSON.stringify({ studied }),
@@ -203,7 +220,7 @@ export const api = {
         method: "POST",
         body: JSON.stringify({ subtema, completed }),
       }),
-    markRevision: (week: number, type: 'rev24h' | 'rev7d' | 'rev30d', checked: boolean) => 
+    markRevision: (week: number, type: 'rev24h' | 'rev7d' | 'rev30d', checked: boolean) =>
       apiFetch<{success: boolean}>(`/api/planner/${week}/revision`, {
         method: "POST",
         body: JSON.stringify({ type, checked }),
@@ -265,7 +282,8 @@ export const api = {
       const getLocalFallback = async () => {
         if (typeof window !== "undefined" && localDb) {
           const uid = getLocalOwnerId();
-          let cached = await localDb.questions.where({ _owner_id: uid }).toArray();
+          let cached = await localDb.questions.where('_owner_id').equals(uid).toArray();
+
           if (filters.area) {
             const area = Array.isArray(filters.area) ? filters.area[0] : filters.area;
             cached = cached.filter(q => q.area === area);
@@ -321,7 +339,8 @@ export const api = {
       const getLocalFallback = async () => {
         if (typeof window !== "undefined" && localDb) {
           const uid = getLocalOwnerId();
-          const cached = await localDb.questions.where({ _owner_id: uid }).filter(q => q.id === id).first();
+          const cached = await localDb.questions.where('_owner_id').equals(uid).filter(q => q.id === id).first();
+
           if (cached) return cached;
         }
         return null;
@@ -340,21 +359,21 @@ export const api = {
         throw err;
       }
     },
-    submitAttempt: (id: number, selected_letter: string, time_spent_ms: number, confidence: string = "defer", is_correct?: boolean | null, user_answer_text?: string) => 
+    submitAttempt: (id: number, selected_letter: string, time_spent_ms: number, confidence: string = "defer", is_correct?: boolean | null, user_answer_text?: string) =>
       apiFetch<AttemptResult>(`/api/questions/${id}/attempt`, {
         method: "POST",
-        body: JSON.stringify({ 
-          selected_letter, 
-          time_spent_ms, 
+        body: JSON.stringify({
+          selected_letter,
+          time_spent_ms,
           confidence,
           ...(is_correct !== undefined && is_correct !== null ? { is_correct } : {}),
           ...(user_answer_text ? { user_answer_text } : {})
         }),
       }),
-    reviewFSRS: (id: number, confidence: string, is_correct?: boolean) => 
+    reviewFSRS: (id: number, confidence: string, is_correct?: boolean) =>
       apiFetch<{success: boolean, next_review_date: string, is_correct?: boolean}>(`/api/questions/${id}/review`, {
         method: "POST",
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           confidence,
           ...(is_correct !== undefined ? { is_correct } : {})
         })
@@ -373,7 +392,7 @@ export const api = {
       const getLocalFallback = async () => {
         if (typeof window !== "undefined" && localDb) {
           const uid = getLocalOwnerId();
-          const cached = await localDb.questions.where({ _owner_id: uid }).toArray();
+          const cached = await localDb.questions.where('_owner_id').equals(uid).toArray();
           if (cached.length > 0) {
             return cached.map(q => ({
               id: q.id,
@@ -408,7 +427,8 @@ export const api = {
       const getLocalFallback = async () => {
         if (typeof window !== "undefined" && localDb) {
           const uid = getLocalOwnerId();
-          const cached = await localDb.questions.where({ _owner_id: uid }).toArray();
+          const cached = await localDb.questions.where('_owner_id').equals(uid).toArray();
+
           if (cached.length > 0) {
             return cached.map(q => ({
               id: q.id,
@@ -491,7 +511,7 @@ export const api = {
   flashcards: {
     preview: async (question_id: number, wrong_letter?: string) => {
       const getLocalFallback = async (): Promise<{ front: string; back: string; context: string } | null> => {
-        // Simple local fallback just to avoid breaking offline mode, 
+        // Simple local fallback just to avoid breaking offline mode,
         // ideally we would format it similarly to backend.
         if (typeof window !== "undefined" && localDb) {
            // We can mock a simple preview
@@ -589,7 +609,7 @@ export const api = {
         const correctClean = (correctAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
         const wrongClean = (wrongAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
         const tag = `[${q.subtema || q.topic || q.area || "Caso Clínico"}]`;
-        
+
         let scenario = (q.stem || "").trim();
         const endMatch = scenario.match(/(?:Diante disso|Diante do exposto|Diante desse quadro|Nesse momento|Nesse caso|Considerando o caso|Em relação ao caso|Sobre o caso descrito|Qual a conduta|Qual o diagnóstico|A melhor conduta|A conduta mais adequada).*$/i);
         if (endMatch && endMatch.index && endMatch.index > 30) {
@@ -680,7 +700,7 @@ export const api = {
         const correctClean = (correctAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
         const wrongClean = (wrongAlt?.text || "").replace(/^[A-Ea-e][\)\.\:\-]\s*/, "").trim();
         const tag = `[${q.subtema || q.topic || q.area || "Caso Clínico"}]`;
-        
+
         let scenario = (q.stem || "").trim();
         const endMatch = scenario.match(/(?:Diante disso|Diante do exposto|Diante desse quadro|Nesse momento|Nesse caso|Considerando o caso|Em relação ao caso|Sobre o caso descrito|Qual a conduta|Qual o diagnóstico|A melhor conduta|A conduta mais adequada).*$/i);
         if (endMatch && endMatch.index && endMatch.index > 30) {
@@ -775,7 +795,8 @@ export const api = {
         if (typeof window !== "undefined" && localDb) {
           try {
             const uid = getLocalOwnerId();
-            const cards = await localDb.flashcards.where({ _owner_id: uid }).toArray();
+            const cards = await localDb.flashcards.where('_owner_id').equals(uid).toArray();
+
             if (includeAll) return cards;
             const now = Date.now();
             return cards.filter(card => !card.next_review_date || new Date(card.next_review_date).getTime() <= now);
@@ -801,8 +822,25 @@ export const api = {
         throw err;
       }
     },
-    getUpcoming: async (signal?: AbortSignal) =>
-      apiFetch<Flashcard[]>("/api/flashcards/review?scope=upcoming", { cache: 'no-store', signal }),
+    getUpcoming: async (signal?: AbortSignal) => {
+      try {
+        return await apiFetch<Flashcard[]>("/api/flashcards/review?scope=upcoming", { cache: 'no-store', signal });
+      } catch (err) {
+        if (signal?.aborted) throw err;
+        if (typeof window !== "undefined" && localDb) {
+          try {
+            const uid = getLocalOwnerId();
+            const cards = await localDb.flashcards.where('_owner_id').equals(uid).toArray();
+            const now = Date.now();
+            return cards.filter(card => card.next_review_date && new Date(card.next_review_date).getTime() > now);
+          } catch {
+            return [];
+          }
+        }
+        return [];
+      }
+    },
+
     review: (id: number, confidence: string) => apiFetch<{id: number, next_review_date: string}>(`/api/flashcards/${id}/review`, {
       method: "POST",
       body: JSON.stringify({ confidence })
@@ -828,7 +866,23 @@ export const api = {
       a.remove();
       window.URL.revokeObjectURL(downloadUrl);
     },
-  }
+  },
+  notifications: {
+    getConfig: () => apiFetch<NotificationConfig>("/api/notifications/config", { cache: "no-store" }),
+    updateConfig: (config: NotificationConfigUpdate) =>
+      apiFetch<NotificationConfigUpdate & { updated_at: string }>("/api/notifications/config", {
+        method: "PUT",
+        body: JSON.stringify(config),
+      }),
+    subscribe: (sub: PushSubscriptionPayload) =>
+      apiFetch<{ success: boolean }>("/api/notifications/subscribe", {
+        method: "POST",
+        body: JSON.stringify(sub),
+      }),
+    unsubscribe: (endpoint?: string) =>
+      apiFetch<{ success: boolean }>("/api/notifications/subscribe", {
+        method: "DELETE",
+        body: JSON.stringify({ endpoint }),
+      }),
+  },
 };
-
-

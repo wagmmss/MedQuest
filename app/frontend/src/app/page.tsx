@@ -15,7 +15,6 @@ export default async function Dashboard() {
   let currentPlannerWeek: PlannerWeek | null = null;
   let suggestedPlannerTopic: PlannerTopic | null = null;
   let remainingPlannerMetas: number = 0;
-  let totalPlannerMetas: number = 0;
   let isPlanCompleted: boolean = false;
   let benchmarkStats: BenchmarkStat | null = null;
   let bottlenecks: BottleneckTopic[] = [];
@@ -60,7 +59,6 @@ export default async function Dashboard() {
             currentPlannerWeek = week;
             suggestedPlannerTopic = pendingTopics[0];
             remainingPlannerMetas = pendingTopics.length;
-            totalPlannerMetas = (week.topics || []).length;
             break;
           }
         }
@@ -84,7 +82,6 @@ export default async function Dashboard() {
       currentPlannerWeek={currentPlannerWeek} 
       suggestedPlannerTopic={suggestedPlannerTopic}
       remainingPlannerMetas={remainingPlannerMetas}
-      totalPlannerMetas={totalPlannerMetas}
       isPlanCompleted={isPlanCompleted}
       firstName={firstName} 
       benchmarkStats={benchmarkStats}
@@ -94,4 +91,3 @@ export default async function Dashboard() {
     />
   );
 }
-

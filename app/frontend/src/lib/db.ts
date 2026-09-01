@@ -46,10 +46,54 @@ export interface SyncItem {
   idempotency_key: string;
 }
 
+export interface SimuladoPackage {
+  id: string;
+  owner_id: string;
+  name: string;
+  config: {
+    institutions?: string[];
+    years?: string[];
+    questions_per_area?: number;
+    duration_minutes?: number;
+    force_4_options?: boolean;
+    [key: string]: unknown;
+  };
+  question_ids: number[];
+  questions_count: number;
+  details_count: number;
+  images_count: number;
+  estimated_size_bytes: number;
+  status: "downloading" | "ready" | "incomplete" | "expired" | "quota_exceeded";
+  download_progress: number;
+  created_at: number;
+  updated_at: number;
+  expires_at: number;
+  version: number;
+  last_error?: string;
+}
+
+export function isPackageValid(pkg: SimuladoPackage | null | undefined): { valid: boolean; reason?: string } {
+  if (!pkg) return { valid: false, reason: "Nenhum pacote encontrado" };
+  if (pkg.status !== "ready") {
+    if (pkg.status === "downloading") return { valid: false, reason: "Download em andamento" };
+    if (pkg.status === "incomplete") return { valid: false, reason: "Pacote incompleto" };
+    if (pkg.status === "quota_exceeded") return { valid: false, reason: "Espaço insuficiente em disco" };
+    return { valid: false, reason: "Pacote não está pronto" };
+  }
+  if (Date.now() > pkg.expires_at) {
+    return { valid: false, reason: "Pacote expirado" };
+  }
+  if (pkg.questions_count === 0 || pkg.details_count < pkg.questions_count) {
+    return { valid: false, reason: "Pacote incompleto ou inconsistente" };
+  }
+  return { valid: true };
+}
+
 export class MedQuestDB extends Dexie {
   questions!: Table<QuestionDetail & { _owner_id: string }, [number, string]>;
   flashcards!: Table<Flashcard & { _owner_id: string }, [number, string]>;
   syncQueue!: Table<SyncItem, string>;
+  simuladoPackages!: Table<SimuladoPackage, string>;
 
   constructor() {
     super("MedQuestDB_v2");
@@ -107,14 +151,14 @@ export class MedQuestDB extends Dexie {
               s.created_at = s.timestamp || Date.now();
               delete s.timestamp;
               s.idempotency_key = s.idempotency_key || crypto.randomUUID();
-              
+
               // v2 bug: loss of method and content-type from options
               if (typeof s.options === "object" && s.options !== null) {
                 const opts = s.options as Record<string, unknown>;
                 s.method = typeof opts.method === "string"
                   ? opts.method.toUpperCase()
                   : (s.method || "POST");
-                
+
                 let cType = "application/json";
                 const oldHeaders = opts.headers;
                 if (oldHeaders instanceof Headers) {
@@ -171,6 +215,14 @@ export class MedQuestDB extends Dexie {
             }
           }
         });
+      });
+
+    this.version(4)
+      .stores({
+        questions: "[id+_owner_id], id, _owner_id, institution_code, year, area, subtema",
+        flashcards: "[id+_owner_id], id, _owner_id, question_id, next_review_date",
+        syncQueue: "id, owner_id, status, next_retry_at, created_at",
+        simuladoPackages: "id, owner_id, status, expires_at, created_at",
       });
   }
 }

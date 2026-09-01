@@ -224,6 +224,22 @@ def init_db(app):
     with app.app_context():
         db = get_db()
         with db_transaction(db, immediate=True):
+            db.execute("""CREATE TABLE IF NOT EXISTS questions(
+                id INTEGER PRIMARY KEY, source_file TEXT, source_number INTEGER, year INTEGER,
+                institution_code TEXT, institution_label TEXT, topic TEXT, stem TEXT,
+                correct_letter TEXT, missing_alts INTEGER DEFAULT 0, area TEXT, subtema TEXT,
+                subtema_id TEXT, subtema_orig TEXT, editorial_status TEXT, status TEXT DEFAULT 'active')""")
+            db.execute("""CREATE TABLE IF NOT EXISTS alternatives(
+                id INTEGER PRIMARY KEY, question_id INTEGER, letter TEXT,
+                text TEXT, is_correct INTEGER)""")
+            db.execute("""CREATE TABLE IF NOT EXISTS explanations(
+                question_id INTEGER PRIMARY KEY, explanation_text TEXT, generated_at TEXT)""")
+            db.execute("""CREATE TABLE IF NOT EXISTS question_images(
+                id INTEGER PRIMARY KEY, question_id INTEGER, file_path TEXT, order_index INTEGER)""")
+            db.execute("""CREATE TABLE IF NOT EXISTS attempts(
+                id INTEGER PRIMARY KEY, question_id INTEGER, selected_letter TEXT,
+                is_correct INTEGER, answered_at TEXT, confidence TEXT, user_id TEXT DEFAULT '1', time_spent_ms INTEGER)""")
+
             db.execute("CREATE TABLE IF NOT EXISTS favorites (question_id INTEGER, user_id TEXT DEFAULT '1', PRIMARY KEY (question_id, user_id))")
             db.execute("""CREATE TABLE IF NOT EXISTS spaced_repetition (
                 question_id INTEGER, efactor REAL, interval INTEGER,
@@ -324,10 +340,38 @@ def init_db(app):
                 created_at TEXT NOT NULL,
                 PRIMARY KEY (date, route, method))""")
 
+            db.execute("""CREATE TABLE IF NOT EXISTS notification_configs (
+                user_id TEXT PRIMARY KEY,
+                enabled INTEGER DEFAULT 0,
+                preferred_hour INTEGER DEFAULT 8,
+                days_of_week TEXT DEFAULT '[0,1,2,3,4,5,6]',
+                max_daily_reminders INTEGER DEFAULT 1,
+                updated_at TEXT)""")
+
+            db.execute("""CREATE TABLE IF NOT EXISTS push_subscriptions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id TEXT NOT NULL,
+                endpoint TEXT NOT NULL,
+                p256dh TEXT NOT NULL,
+                auth TEXT NOT NULL,
+                created_at TEXT NOT NULL,
+                UNIQUE(user_id, endpoint))""")
+
+            db.execute("""CREATE TABLE IF NOT EXISTS notification_dispatches (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id TEXT NOT NULL,
+                dispatch_date TEXT NOT NULL,
+                status TEXT NOT NULL,
+                error_message TEXT,
+                created_at TEXT NOT NULL,
+                UNIQUE(user_id, dispatch_date))""")
+
             # Indexes that reference migrated columns must be created only
             # after every supported legacy schema has those columns.
             db.execute("CREATE INDEX IF NOT EXISTS idx_idempotency_created ON idempotency_keys(created_at)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_idempotency_lease ON idempotency_keys(user_id, lease_expires_at)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_push_subscriptions_user ON push_subscriptions(user_id)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_notification_dispatches_user_date ON notification_dispatches(user_id, dispatch_date)")
 
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_question ON attempts (user_id, question_id)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_question_latest ON attempts (user_id, question_id, id DESC)")

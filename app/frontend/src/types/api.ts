@@ -155,23 +155,59 @@ export interface LearningProfile {
   method: { deterministic: boolean; signals: string[] };
 }
 
+export type EvidenceStatus = "insufficient" | "forming" | "reliable";
+
+export interface EditalProfileData {
+  institution_code: string;
+  institution_label: string;
+  version: string;
+  validity_period: string;
+  curation_source: string;
+  status: "validated" | "experimental";
+  weights: Record<string, number>;
+}
+
+export interface ReadinessKeyFactor {
+  area: string;
+  impact: string;
+  recommendation: string;
+  factor_type: "low_sample" | "low_accuracy" | "strength";
+}
+
+export interface ExamReadinessArea {
+  area: string;
+  available: number;
+  answered: number;
+  coverage: number;
+  attempts: number;
+  correct?: number;
+  accuracy: number | null;
+  posterior_mean?: number;
+  ci_lower?: number;
+  ci_upper?: number;
+  weight?: number;
+  sample: "sufficient" | "limited";
+  sample_status?: "insufficient" | "forming" | "reliable";
+  action: string;
+}
+
 export interface ExamReadiness {
   institution: string | null;
+  institution_label?: string;
   coverage: number;
   answered: number;
   available: number;
-  areas: {
-    area: string;
-    available: number;
-    answered: number;
-    coverage: number;
-    attempts: number;
-    accuracy: number | null;
-    sample: "sufficient" | "limited";
-    action: string;
-  }[];
+  readiness_score?: number;
+  ci_lower?: number;
+  ci_upper?: number;
+  evidence_status?: EvidenceStatus;
+  edital_profile?: EditalProfileData;
+  areas: ExamReadinessArea[];
+  key_factors?: ReadinessKeyFactor[];
+  limitations?: string[];
   disclaimer: string;
 }
+
 
 export interface Recommendation {
   type: string;
@@ -405,4 +441,87 @@ export interface BatchFlashcardGenerateResponse {
   success: boolean;
   count: number;
   flashcards: FlashcardGenerateResponse[];
+}
+
+export interface NotificationConfig {
+  enabled: boolean;
+  preferred_hour: number;
+  days_of_week: number[];
+  max_daily_reminders: number;
+  updated_at: string | null;
+  has_active_subscription: boolean;
+  vapid_public_key: string | null;
+}
+
+export interface NotificationConfigUpdate {
+  enabled: boolean;
+  preferred_hour: number;
+  days_of_week: number[];
+  max_daily_reminders?: number;
+}
+
+export interface PushSubscriptionPayload {
+  endpoint: string;
+  keys: {
+    p256dh: string;
+    auth: string;
+  };
+  expiration_time?: number | null;
+}
+
+export type SampleStatus = "insufficient" | "forming" | "reliable";
+
+export interface RadarTopicGap {
+  subtema: string;
+  available: number;
+  answered: number;
+  attempts: number;
+  correct: number;
+  accuracy: number | null;
+  gap_type: "unanswered" | "low_accuracy" | "low_coverage";
+  study_url: string;
+  simulado_url: string;
+  review_url: string;
+}
+
+export interface RadarAreaStat {
+  area: string;
+  available: number;
+  answered: number;
+  coverage: number;
+  attempts: number;
+  correct: number;
+  accuracy: number | null;
+  ci_lower: number | null;
+  ci_upper: number | null;
+  sample_status: SampleStatus;
+  priority_topics: RadarTopicGap[];
+}
+
+export interface RadarInstitutionData {
+  code: string | null;
+  label: string;
+  total_available: number;
+  total_answered: number;
+  coverage: number;
+  total_attempts: number;
+  total_correct: number;
+  accuracy: number | null;
+  ci_lower: number | null;
+  ci_upper: number | null;
+  sample_status: SampleStatus;
+  areas: RadarAreaStat[];
+}
+
+export interface InstitutionRadarResponse {
+  institution: RadarInstitutionData;
+  comparison: {
+    type: "global" | "institution";
+  } & RadarInstitutionData;
+  disclaimer: string;
+  sample_thresholds: {
+    insufficient: string;
+    forming: string;
+    reliable: string;
+  };
 }

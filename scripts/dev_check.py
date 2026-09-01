@@ -3,7 +3,7 @@
 
 Organiza as validações do repositório em 3 níveis de velocidade e rigor:
 - fast     (Commit Local): Execução incremental baseada em diff (< 15s).
-- standard (Pre-Push / CI Rápido): Suíte completa de testes herméticos e linters (~30-60s).
+- standard (Pre-Push / CI Rápido): Validação do componente alterado (~0-30s).
 - full     (Pull Request / Gate de Merge): Build completo de produção, auditorias e SLAs (~2-3 min).
 
 Uso:
@@ -22,6 +22,12 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 BACKEND_DIR = ROOT_DIR / "app" / "backend"
 FRONTEND_DIR = ROOT_DIR / "app" / "frontend"
+APP_INFRASTRUCTURE_FILES = {
+    "app/backend/Dockerfile",
+    "app/backend/.dockerignore",
+    "app/frontend/Dockerfile",
+    "app/frontend/.dockerignore",
+}
 
 
 def get_git_diff_files():
@@ -69,6 +75,44 @@ def get_git_diff_files():
     return list(files)
 
 
+def get_push_diff_files():
+    """Retorna os arquivos dos commits locais que ainda serao enviados."""
+    try:
+        upstream = subprocess.run(
+            ["git", "rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"],
+            cwd=ROOT_DIR,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        if upstream:
+            res = subprocess.run(
+                ["git", "diff", "--name-only", f"{upstream}...HEAD"],
+                cwd=ROOT_DIR,
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            return [line.strip().replace("\\", "/") for line in res.stdout.splitlines() if line.strip()]
+    except subprocess.CalledProcessError:
+        pass
+
+    # Repositorios sem upstream ainda recebem uma validacao proporcional ao
+    # ultimo commit. Se nem isso existir, o tier completo continua sendo o
+    # fallback seguro.
+    try:
+        res = subprocess.run(
+            ["git", "diff", "--name-only", "HEAD^", "HEAD"],
+            cwd=ROOT_DIR,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        return [line.strip().replace("\\", "/") for line in res.stdout.splitlines() if line.strip()]
+    except subprocess.CalledProcessError:
+        return []
+
+
 def map_backend_tests(changed_files):
     """Mapeia arquivos alterados no backend para seus testes unitários correspondentes."""
     test_files = set()
@@ -97,6 +141,7 @@ def map_backend_tests(changed_files):
             "tests/test_idempotency.py",
             "tests/test_turso_transactions.py",
             "tests/test_auth_isolation.py",
+            "tests/test_bootstrap.py",
         ],
         "app/backend/api/schemas.py": [
             "tests/test_api.py",
@@ -105,10 +150,21 @@ def map_backend_tests(changed_files):
         "app/backend/api/observability.py": [
             "tests/test_observability.py",
         ],
+        "app/backend/scripts/check_performance_guardrails.py": [
+            "tests/test_performance_guardrails.py",
+        ],
+        "app/backend/api/notifications.py": [
+            "tests/test_notifications.py",
+        ],
+        "app/backend/api/webpush.py": [
+            "tests/test_notifications.py",
+        ],
     }
 
     has_backend_changes = False
     for f in changed_files:
+        if f in APP_INFRASTRUCTURE_FILES:
+            continue
         if f.startswith("app/backend/"):
             has_backend_changes = True
             if f in mapping:
@@ -237,7 +293,7 @@ def run_tier_fast():
 
 
 def run_tier_standard():
-    """Camada 2: Standard (Pre-Push / CI Rápido)."""
+    """Camada 2: Standard (Pre-Push proporcional aos componentes alterados)."""
     print("================================================================")
     print("[STANDARD TIER] MEDQUEST DEV-VELOCITY: PRE-PUSH")
     print("================================================================")
@@ -250,37 +306,55 @@ def run_tier_standard():
     timings = []
     all_ok = True
 
+    changed = get_push_diff_files()
+    backend_changed = any(
+        f.startswith("app/backend/") and f not in APP_INFRASTRUCTURE_FILES for f in changed
+    )
+    frontend_changed = any(
+        f.startswith("app/frontend/") and f not in APP_INFRASTRUCTURE_FILES for f in changed
+    )
+
+    print(f"Arquivos a enviar detectados: {len(changed)}")
+    if not backend_changed and not frontend_changed:
+        print("[STANDARD-BYPASS] Apenas infraestrutura/documentacao mudou; testes de aplicacao ja existentes foram preservados.\n")
+
     # 1. Backend: Suíte completa hermética de testes
-    ok, el = run_command([pytest_cmd, "-q"], BACKEND_DIR, "Backend Pytest Suite (Hermetico)")
-    timings.append(("Backend Pytest", el))
-    if not ok:
-        all_ok = False
+    if backend_changed:
+        ok, el = run_command([pytest_cmd, "-q"], BACKEND_DIR, "Backend Pytest Suite (Hermetico)")
+        timings.append(("Backend Pytest", el))
+        if not ok:
+            all_ok = False
+    else:
+        print("[-] Backend: Nenhuma alteracao de aplicacao a enviar. Pulando suite e guardrails.\n")
 
     # 2. Backend: Guardrails de Performance SLA
     guardrail_script = BACKEND_DIR / "scripts" / "check_performance_guardrails.py"
-    if guardrail_script.exists():
+    if backend_changed and guardrail_script.exists():
         ok, el = run_command([py_cmd, str(guardrail_script)], BACKEND_DIR, "Performance SLA Guardrails")
         timings.append(("Performance Guardrails", el))
         if not ok:
             all_ok = False
 
     # 3. Frontend: ESLint (Errors only)
-    ok, el = run_command([npm_cmd, "run", "lint", "--", "--quiet"], FRONTEND_DIR, "Frontend ESLint")
-    timings.append(("Frontend Lint", el))
-    if not ok:
-        all_ok = False
+    if frontend_changed:
+        ok, el = run_command([npm_cmd, "run", "lint", "--", "--quiet"], FRONTEND_DIR, "Frontend ESLint")
+        timings.append(("Frontend Lint", el))
+        if not ok:
+            all_ok = False
 
-    # 4. Frontend: Typecheck incremental
-    ok, el = run_command([npx_cmd, "tsc", "--noEmit"], FRONTEND_DIR, "Frontend TypeCheck (tsc)")
-    timings.append(("Frontend TypeCheck", el))
-    if not ok:
-        all_ok = False
+        # 4. Frontend: Typecheck incremental
+        ok, el = run_command([npx_cmd, "tsc", "--noEmit"], FRONTEND_DIR, "Frontend TypeCheck (tsc)")
+        timings.append(("Frontend TypeCheck", el))
+        if not ok:
+            all_ok = False
 
-    # 5. Frontend: Performance Budgets
-    ok, el = run_command([npm_cmd, "run", "check:performance"], FRONTEND_DIR, "Frontend Bundle Check")
-    timings.append(("Bundle Check", el))
-    if not ok:
-        all_ok = False
+        # 5. Frontend: Performance Budgets
+        ok, el = run_command([npm_cmd, "run", "check:performance"], FRONTEND_DIR, "Frontend Bundle Check")
+        timings.append(("Bundle Check", el))
+        if not ok:
+            all_ok = False
+    else:
+        print("[-] Frontend: Nenhuma alteracao de aplicacao a enviar. Pulando lint, typecheck e bundle.\n")
 
     return all_ok, sum(t[1] for t in timings)
 

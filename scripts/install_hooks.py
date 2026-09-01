@@ -3,7 +3,7 @@
 
 Configura:
 - pre-commit : Executa validação rápida incremental (< 15s)
-- pre-push   : Executa validação standard (~45s) antes do envio para o GitHub
+- pre-push   : Valida apenas os componentes enviados (~0-30s)
 """
 
 import os
@@ -29,7 +29,7 @@ $PYTHON_BIN scripts/dev_check.py --tier=fast
 
 PRE_PUSH_SCRIPT = """#!/usr/bin/env bash
 # MedQuest Pre-Push Hook (Tier: Standard)
-echo "[MedQuest Pre-Push] Executando validacoes completas da camada standard antes do push..."
+echo "[MedQuest Pre-Push] Validando os componentes alterados antes do push..."
 
 PYTHON_BIN="python"
 if [ -f "app/backend/.venv/Scripts/python.exe" ]; then

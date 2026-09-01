@@ -1,33 +1,209 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser, useClerk } from "@clerk/nextjs";
 import { motion, AnimatePresence } from "framer-motion";
 import { api } from "@/lib/api";
+import { NotificationConfig } from "@/types/api";
 import { localDb, getLocalOwnerId } from "@/lib/db";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { clearLearningSessions } from "@/lib/sessionState";
-import { X, Trash2, LogOut, AlertTriangle, User, ShieldAlert } from "lucide-react";
+import {
+  X, Trash2, LogOut, AlertTriangle, User, ShieldAlert,
+  Bell, BellOff, Check, AlertCircle, Loader2, Clock
+} from "lucide-react";
 
 interface AccountModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+const WEEKDAYS = [
+  { id: 0, label: "Seg" },
+  { id: 1, label: "Ter" },
+  { id: 2, label: "Qua" },
+  { id: 3, label: "Qui" },
+  { id: 4, label: "Sex" },
+  { id: 5, label: "Sáb" },
+  { id: 6, label: "Dom" },
+];
+
+function urlBase64ToUint8Array(base64String: string) {
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
 export function AccountModal({ isOpen, onClose }: AccountModalProps) {
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
   const router = useRouter();
-  
+
   const [step, setStep] = useState<"profile" | "confirm_reset">("profile");
   const [confirmText, setConfirmText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Estados de Notificações
+  const [notifConfig, setNotifConfig] = useState<NotificationConfig | null>(null);
+  const [notifStatus, setNotifStatus] = useState<"loading" | "unsupported" | "denied" | "active" | "disabled" | "error">("loading");
+  const [isNotifSubmitting, setIsNotifSubmitting] = useState(false);
+  const [notifMessage, setNotifMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const loadNotificationConfig = async () => {
+      // Verificar suporte a Web Push no navegador
+      if (typeof window === "undefined" || !("serviceWorker" in navigator) || !("PushManager" in window) || !("Notification" in window)) {
+        setNotifStatus("unsupported");
+        return;
+      }
+
+      if (Notification.permission === "denied") {
+        setNotifStatus("denied");
+        return;
+      }
+
+      try {
+        const config = await api.notifications.getConfig();
+        setNotifConfig(config);
+        if (config.enabled && config.has_active_subscription) {
+          setNotifStatus("active");
+        } else {
+          setNotifStatus("disabled");
+        }
+      } catch (err) {
+        console.warn("Erro ao carregar preferências de notificação:", err);
+        setNotifStatus("disabled");
+      }
+    };
+
+    loadNotificationConfig();
+  }, [isOpen]);
+
+  const handleSubscribePush = async () => {
+    setIsNotifSubmitting(true);
+    setNotifMessage(null);
+    try {
+      if (typeof window === "undefined" || !("serviceWorker" in navigator) || !("PushManager" in window)) {
+        setNotifStatus("unsupported");
+        return;
+      }
+
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") {
+        setNotifStatus("denied");
+        setNotifMessage("Permissão de notificações não foi concedida.");
+        return;
+      }
+
+      const reg = await navigator.serviceWorker.ready;
+      let subscription = await reg.pushManager.getSubscription();
+
+      if (!subscription) {
+        const vapidKey = notifConfig?.vapid_public_key;
+        if (vapidKey) {
+          const convertedKey = urlBase64ToUint8Array(vapidKey);
+          subscription = await reg.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: convertedKey,
+          });
+        } else {
+          // Fallback caso VAPID não esteja configurada no backend
+          subscription = await reg.pushManager.subscribe({
+            userVisibleOnly: true,
+          });
+        }
+      }
+
+      const subJson = subscription.toJSON();
+      if (!subJson.endpoint || !subJson.keys?.p256dh || !subJson.keys?.auth) {
+        throw new Error("Dados incompletos da assinatura Web Push.");
+      }
+
+      await api.notifications.subscribe({
+        endpoint: subJson.endpoint,
+        keys: {
+          p256dh: subJson.keys.p256dh,
+          auth: subJson.keys.auth,
+        },
+      });
+
+      const updated = await api.notifications.getConfig();
+      setNotifConfig(updated);
+      setNotifStatus("active");
+      setNotifMessage("Notificações diárias de revisão ativadas com sucesso!");
+    } catch (err) {
+      console.error("Erro ao assinar notificações:", err);
+      setNotifStatus("error");
+      setNotifMessage("Não foi possível ativar as notificações no momento.");
+    } finally {
+      setIsNotifSubmitting(false);
+    }
+  };
+
+  const handleUnsubscribePush = async () => {
+    setIsNotifSubmitting(true);
+    setNotifMessage(null);
+    try {
+      if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+        const reg = await navigator.serviceWorker.ready;
+        const sub = await reg.pushManager.getSubscription();
+        if (sub) {
+          await sub.unsubscribe();
+        }
+      }
+
+      await api.notifications.unsubscribe();
+      const updated = await api.notifications.getConfig();
+      setNotifConfig(updated);
+      setNotifStatus("disabled");
+      setNotifMessage("Notificações revogadas com sucesso.");
+    } catch (err) {
+      console.error("Erro ao revogar notificações:", err);
+      setNotifMessage("Erro ao revogar notificações.");
+    } finally {
+      setIsNotifSubmitting(false);
+    }
+  };
+
+  const handleUpdatePreferences = async (hour: number, days: number[]) => {
+    if (!notifConfig) return;
+    try {
+      await api.notifications.updateConfig({
+        enabled: notifConfig.enabled,
+        preferred_hour: hour,
+        days_of_week: days,
+      });
+      setNotifConfig(prev => prev ? { ...prev, preferred_hour: hour, days_of_week: days } : null);
+    } catch (err) {
+      console.error("Erro ao salvar preferências de notificação:", err);
+    }
+  };
+
+  const toggleDay = (dayId: number) => {
+    if (!notifConfig) return;
+    const current = notifConfig.days_of_week || [0, 1, 2, 3, 4, 5, 6];
+    let next: number[];
+    if (current.includes(dayId)) {
+      if (current.length === 1) return; // Manter pelo menos 1 dia
+      next = current.filter(d => d !== dayId);
+    } else {
+      next = [...current, dayId].sort();
+    }
+    handleUpdatePreferences(notifConfig.preferred_hour, next);
+  };
+
   const handleResetProgress = async () => {
     if (confirmText.toUpperCase() !== "RESETAR") return;
-    
+
     setIsLoading(true);
     setError(null);
     try {
@@ -46,10 +222,12 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
           try {
             const uid = getLocalOwnerId();
             await Promise.all([
-              localDb.questions.where({ _owner_id: uid }).delete(),
-              localDb.flashcards.where({ _owner_id: uid }).delete(),
-              localDb.syncQueue.where({ owner_id: uid }).delete()
+              localDb.questions.where('_owner_id').equals(uid).delete(),
+              localDb.flashcards.where('_owner_id').equals(uid).delete(),
+              localDb.simuladoPackages.where('owner_id').equals(uid).delete(),
+              localDb.syncQueue.where('owner_id').equals(uid).delete()
             ]);
+
           } catch (dexieErr) {
             console.warn("Erro ao limpar dados locais no reset:", dexieErr);
           }
@@ -72,6 +250,7 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
     setStep("profile");
     setConfirmText("");
     setError(null);
+    setNotifMessage(null);
     setIsLoading(false);
     onClose();
   };
@@ -93,12 +272,12 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 15 }}
             transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
-            className="bg-card border border-border rounded-3xl shadow-2xl w-full max-w-md overflow-hidden z-10 flex flex-col relative"
+            className="bg-card border border-border rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto z-10 flex flex-col relative"
             role="dialog"
             aria-modal="true"
             aria-labelledby="account-modal-title"
           >
-            <div className="flex justify-between items-center px-6 py-4 border-b border-border bg-muted/30">
+            <div className="flex justify-between items-center px-6 py-4 border-b border-border bg-muted/30 sticky top-0 bg-card/95 backdrop-blur z-20">
               <h2 id="account-modal-title" className="text-lg font-bold text-foreground">
                 {step === "profile" ? "Minha Conta" : "Resetar Progresso"}
               </h2>
@@ -112,7 +291,7 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
               </button>
             </div>
 
-            <div className="p-6 flex-1 flex flex-col min-h-[220px]">
+            <div className="p-6 flex-1 flex flex-col gap-6">
               <AnimatePresence mode="wait">
                 {step === "profile" ? (
                   <motion.div
@@ -123,6 +302,7 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                     transition={{ duration: 0.2 }}
                     className="flex flex-col gap-6"
                   >
+                    {/* Perfil Header */}
                     <div className="flex items-center gap-4 bg-muted/20 p-4 rounded-2xl border border-border">
                       <div className="relative w-16 h-16 rounded-2xl bg-muted overflow-hidden flex-shrink-0 border-2 border-primary/10 shadow-sm">
                         {isLoaded && user?.imageUrl ? (
@@ -147,6 +327,137 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                       </div>
                     </div>
 
+                    {/* Seção: Notificações PWA / Web Push */}
+                    <div className="flex flex-col gap-3 p-4 rounded-2xl bg-muted/20 border border-border">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2.5">
+                          <div className="p-2 rounded-xl bg-primary/10 text-primary">
+                            <Bell size={18} />
+                          </div>
+                          <div>
+                            <p className="font-bold text-sm text-foreground">Lembretes de Revisão (PWA)</p>
+                            <p className="text-xs text-muted-foreground">Notificações opt-in de revisões FSRS pendentes</p>
+                          </div>
+                        </div>
+
+                        {notifStatus === "active" ? (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                            <Check size={12} /> Ativado
+                          </span>
+                        ) : notifStatus === "denied" ? (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-destructive/10 text-destructive border border-destructive/20">
+                            <AlertCircle size={12} /> Bloqueado
+                          </span>
+                        ) : notifStatus === "unsupported" ? (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-muted text-muted-foreground border border-border">
+                            Indisponível
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-muted text-muted-foreground border border-border">
+                            Desativado
+                          </span>
+                        )}
+                      </div>
+
+                      {notifMessage && (
+                        <p className="text-xs font-medium text-primary bg-primary/10 p-2.5 rounded-xl border border-primary/20">
+                          {notifMessage}
+                        </p>
+                      )}
+
+                      {notifStatus === "denied" && (
+                        <p className="text-xs text-muted-foreground bg-destructive/5 p-2.5 rounded-xl border border-destructive/20 leading-relaxed">
+                          As notificações estão bloqueadas nas configurações do seu navegador. Permita o envio nas permissões do site para reativar.
+                        </p>
+                      )}
+
+                      {notifStatus === "unsupported" && (
+                        <p className="text-xs text-muted-foreground bg-muted/40 p-2.5 rounded-xl border border-border leading-relaxed">
+                          Seu navegador atual não suporta Web Push. Instale o app PWA ou acesse pelo Chrome/Edge/Safari para receber lembretes.
+                        </p>
+                      )}
+
+                      {notifStatus === "active" && notifConfig && (
+                        <div className="flex flex-col gap-3 mt-2 pt-3 border-t border-border/60">
+                          {/* Horário Preferencial */}
+                          <div className="flex items-center justify-between">
+                            <label htmlFor="pref-hour-select" className="text-xs font-bold text-foreground flex items-center gap-1.5">
+                              <Clock size={14} className="text-muted-foreground" /> Horário preferencial:
+                            </label>
+                            <select
+                              id="pref-hour-select"
+                              value={notifConfig.preferred_hour}
+                              onChange={(e) => handleUpdatePreferences(parseInt(e.target.value, 10), notifConfig.days_of_week || [0,1,2,3,4,5,6])}
+                              className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-card border border-border text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
+                            >
+                              {Array.from({ length: 24 }).map((_, i) => (
+                                <option key={i} value={i}>
+                                  {i.toString().padStart(2, "0")}:00
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          {/* Dias da Semana */}
+                          <div className="flex flex-col gap-1.5">
+                            <span className="text-xs font-bold text-foreground">Dias de envio:</span>
+                            <div className="grid grid-cols-7 gap-1">
+                              {WEEKDAYS.map(day => {
+                                const isSelected = (notifConfig.days_of_week || [0,1,2,3,4,5,6]).includes(day.id);
+                                return (
+                                  <button
+                                    key={day.id}
+                                    type="button"
+                                    onClick={() => toggleDay(day.id)}
+                                    className={`py-1.5 text-xs font-bold rounded-lg border transition-all cursor-pointer ${
+                                      isSelected
+                                        ? "bg-primary text-primary-foreground border-primary"
+                                        : "bg-card text-muted-foreground border-border hover:bg-muted"
+                                    }`}
+                                  >
+                                    {day.label}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+
+                          {/* Botão Revogar */}
+                          <button
+                            type="button"
+                            onClick={handleUnsubscribePush}
+                            disabled={isNotifSubmitting}
+                            className="mt-1 flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-bold text-muted-foreground hover:text-destructive hover:bg-destructive/10 border border-border hover:border-destructive/20 transition-colors cursor-pointer disabled:opacity-50"
+                          >
+                            {isNotifSubmitting ? <Loader2 size={14} className="animate-spin" /> : <BellOff size={14} />}
+                            Revogar Notificações neste dispositivo
+                          </button>
+                        </div>
+                      )}
+
+                      {notifStatus === "disabled" && (
+                        <button
+                          type="button"
+                          onClick={handleSubscribePush}
+                          disabled={isNotifSubmitting}
+                          className="mt-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer disabled:opacity-50 shadow-sm"
+                        >
+                          {isNotifSubmitting ? (
+                            <>
+                              <Loader2 size={14} className="animate-spin" />
+                              Configurando...
+                            </>
+                          ) : (
+                            <>
+                              <Bell size={14} />
+                              Ativar Notificações de Revisão
+                            </>
+                          )}
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Ações de Conta */}
                     <div className="flex flex-col gap-3">
                       <button
                         onClick={() => setStep("confirm_reset")}
@@ -185,7 +496,7 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                       <div className="flex flex-col gap-1">
                         <p className="font-bold text-destructive text-sm uppercase tracking-wider">Atenção! Ação irreversível.</p>
                         <p className="text-sm text-foreground/80 leading-relaxed font-medium">
-                          Ao prosseguir, todo o seu histórico de simulados, estatísticas de acertos, favoritos, 
+                          Ao prosseguir, todo o seu histórico de simulados, estatísticas de acertos, favoritos,
                           cronograma de estudos semanal (Planner) e flashcards serão permanentemente excluídos.
                         </p>
                       </div>

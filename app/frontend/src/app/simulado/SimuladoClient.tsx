@@ -3,7 +3,10 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { QuestionMeta, QuestionListItem, QuestionDetail, BatchAttemptItem, BatchAttemptResultItem, FlashcardGenerateResponse } from "@/types/api";
 import { api, OfflineQueuedError } from "@/lib/api";
-import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag, CloudOff, Sparkles, CheckCircle2, Pencil } from "lucide-react";
+import { localDb, getLocalOwnerId, SimuladoPackage, isPackageValid } from "@/lib/db";
+import { getReadySimuladoPackage, downloadSimuladoPackage } from "@/lib/simuladoPackage";
+import { Play, Clock, ChevronLeft, ChevronRight, FileSignature, AlertTriangle, BookOpen, AlertCircle, RotateCcw, Flag, CloudOff, Sparkles, CheckCircle2, Pencil, Download, RefreshCw, Database } from "lucide-react";
+
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import Link from "next/link";
@@ -25,7 +28,6 @@ type SimuladoState = "START" | "LOADING" | "PLAYING" | "SUBMITTING" | "RESULTS" 
 function resolveImageUrl(img: string | null | undefined): string {
   return normalizeImageSrc(img);
 }
-
 interface SavedSimuladoState {
   version: number;
   state: SimuladoState;
@@ -68,7 +70,7 @@ export function SimuladoClient({
   const [isClassificationModalOpen, setIsClassificationModalOpen] = useState(false);
   const [state, setState] = useState<SimuladoState>("START");
   const [queue, setQueue] = useState<QuestionListItem[]>([]);
-  
+
   // Quiz State
   const [currentIndex, setCurrentIndex] = useState(0);
   const [detailsCache, setDetailsCache] = useState<Record<number, QuestionDetail>>({});
@@ -77,7 +79,7 @@ export function SimuladoClient({
   const [showAreaSummary, setShowAreaSummary] = useState(false);
   const [showResultsSummary, setShowResultsSummary] = useState(false);
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
-  
+
   // Answers: question_id -> letter
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [resultsMap, setResultsMap] = useState<Record<number, BatchAttemptResultItem>>({});
@@ -85,7 +87,7 @@ export function SimuladoClient({
   const [sessionId, setSessionId] = useState<string | undefined>(undefined);
   const [plannedDurationSeconds, setPlannedDurationSeconds] = useState(0);
   const [isSyncingOffline, setIsSyncingOffline] = useState(false);
-  
+
   // Flashcards
   const [generatingBatchFlashcards, setGeneratingBatchFlashcards] = useState(false);
   const [batchFlashcardsResult, setBatchFlashcardsResult] = useState<{ count: number } | null>(null);
@@ -93,18 +95,18 @@ export function SimuladoClient({
   const [generatingSingleFlashcard, setGeneratingSingleFlashcard] = useState<number | null>(null);
   const [draftFlashcardsMap, setDraftFlashcardsMap] = useState<Record<number, { front: string; back: string; context: string }>>({});
   const [savingSingleFlashcard, setSavingSingleFlashcard] = useState<number | null>(null);
-  
+
   // Marcar para revisar
   const [flagged, setFlagged] = useState<Record<number, boolean>>({});
   // Filtro da sidebar: 'all' | 'unanswered' | 'flagged'
   const [sidebarFilter, setSidebarFilter] = useState<'all' | 'unanswered' | 'flagged'>('all');
-  
+
   // Duração proporcional: 3 min/questão (120 Qs = 6h), arredondado
   const [timeLeft, setTimeLeft] = useState(6 * 60 * 60);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const deadlineRef = useRef(0);
   const hasCustomFilters = Object.keys(initialFilters).length > 0;
-  
+
   const [customConfig, setCustomConfig] = useState({
     institutions: [] as string[],
     years: [] as string[],
@@ -122,6 +124,49 @@ export function SimuladoClient({
   const detailRequestRef = useRef(0);
   const dialogInitialFocusRef = useRef<HTMLButtonElement>(null);
   const customConfigLoadedRef = useRef(false);
+  const syncResolutionRef = useRef<"idle" | "pending" | "confirmed_results" | "removed_no_results" | "terminal_failed">("idle");
+
+  const [isOffline, setIsOffline] = useState(false);
+
+  const [offlinePackage, setOfflinePackage] = useState<SimuladoPackage | null>(null);
+  const [isDownloadingPackage, setIsDownloadingPackage] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState(0);
+  const [downloadStatus, setDownloadStatus] = useState("");
+
+  const refreshOfflinePackage = useCallback(async () => {
+    if (typeof window === "undefined" || !localDb) return;
+    try {
+      const uid = getLocalOwnerId();
+      const readyPkg = await getReadySimuladoPackage(uid);
+      setOfflinePackage(readyPkg);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+
+    const initialTimer = setTimeout(() => {
+      if (typeof navigator !== "undefined") {
+        setIsOffline(!navigator.onLine);
+      }
+      void refreshOfflinePackage();
+    }, 0);
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+    window.addEventListener("simulado-package-updated", refreshOfflinePackage);
+
+    return () => {
+      clearTimeout(initialTimer);
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+      window.removeEventListener("simulado-package-updated", refreshOfflinePackage);
+    };
+  }, [refreshOfflinePackage]);
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -146,6 +191,7 @@ export function SimuladoClient({
     }, 0);
     return () => clearTimeout(timer);
   }, []);
+
 
   useEffect(() => {
     if (customConfigLoadedRef.current) {
@@ -182,7 +228,7 @@ export function SimuladoClient({
       setSessionId(saved.sessionId);
       setPlannedDurationSeconds(saved.plannedDurationSeconds || Math.max(0, saved.deadlineAt - Date.now()));
       setShowResultsSummary(saved.state === "RESULTS");
-        
+
       const ids = saved.queue.map((question: QuestionListItem) => question.id);
       api.questions.getBatch(ids, saved.force4Options).then(batchRes => {
         const cache: Record<number, QuestionDetail> = {};
@@ -217,6 +263,43 @@ export function SimuladoClient({
     }
   }, [storageReady, state, queue, answers, currentIndex, resultsMap, flagged, force4Options, queueId, sessionId, plannedDurationSeconds]);
 
+  const handleDownloadOfflineSimulado = async () => {
+    if (isDownloadingPackage || isOffline) return;
+    setIsDownloadingPackage(true);
+    setDownloadProgress(0);
+    setDownloadStatus("Iniciando download do pacote...");
+
+    try {
+      const questionsPerArea = customConfig.questions_per_area || 20;
+      const totalQ = questionsPerArea * 5;
+      const pkg = await downloadSimuladoPackage(
+        {
+          name: `Simulado Offline (${totalQ} Qs)`,
+          institutions: customConfig.institutions,
+          years: customConfig.years,
+          questions_per_area: questionsPerArea,
+          duration_minutes: customConfig.duration_minutes,
+          force_4_options: customConfig.force_4_options,
+        },
+        (p) => {
+          setDownloadProgress(p.progress);
+          setDownloadStatus(p.message);
+        }
+      );
+      setOfflinePackage(pkg);
+      toast.success("Simulado offline baixado com sucesso!");
+    } catch (e) {
+      console.error("Erro ao baixar pacote offline:", e);
+      toast.error("Erro ao baixar pacote offline. Verifique sua conexão.");
+    } finally {
+      setTimeout(() => {
+        setIsDownloadingPackage(false);
+        setDownloadProgress(0);
+        setDownloadStatus("");
+      }, 1000);
+    }
+  };
+
   // Load Simulado
   const startSimulado = async () => {
     if (startLockRef.current) return;
@@ -227,6 +310,71 @@ export function SimuladoClient({
     }
     setState("LOADING");
     try {
+      // Se offline ou desconectado, iniciar estritamente a partir do pacote pronto
+      if (typeof navigator !== "undefined" && !navigator.onLine) {
+        const uid = getLocalOwnerId();
+        const readyPkg = await getReadySimuladoPackage(uid);
+        const validity = isPackageValid(readyPkg);
+        if (!validity.valid || !readyPkg) {
+          toast.error(validity.reason || "Nenhum pacote offline pronto. Baixe um simulado quando estiver online.");
+          setState("START");
+          startLockRef.current = false;
+          return;
+        }
+
+        const cachedQuestions = await localDb.questions
+          .where('_owner_id')
+          .equals(uid)
+          .filter(q => readyPkg.question_ids.includes(q.id))
+          .toArray();
+
+
+        if (cachedQuestions.length === 0 || cachedQuestions.length < readyPkg.questions_count) {
+          toast.error("Pacote offline incompleto ou inconsistente. Baixe novamente quando estiver online.");
+          setState("START");
+          startLockRef.current = false;
+          return;
+        }
+
+        const qList: QuestionListItem[] = cachedQuestions.map(q => ({
+          id: q.id,
+          source_file: q.source_file,
+          source_number: q.source_number,
+          year: q.year,
+          institution_code: q.institution_code,
+          institution_label: q.institution_label,
+          topic: q.topic,
+          area: q.area,
+          subtema: q.subtema,
+        }));
+
+        const cache: Record<number, QuestionDetail> = {};
+        for (const q of cachedQuestions) {
+          cache[q.id] = q;
+        }
+        setDetailsCache(cache);
+
+        const durationMinutes = readyPkg.config.duration_minutes || Math.round((qList.length / 20) * 60);
+        const calcTime = Math.round(durationMinutes * 60);
+
+        setTimeLeft(calcTime);
+        setPlannedDurationSeconds(calcTime);
+        deadlineRef.current = deadlineFromNow(calcTime);
+        setForce4Options(readyPkg.config.force_4_options || false);
+        setSessionId(crypto.randomUUID());
+
+        setQueue(qList);
+        setCurrentIndex(0);
+        setAnswers({});
+        setResultsMap({});
+        setFlagged({});
+        setSidebarFilter('all');
+        setState("PLAYING");
+        toast.success(`Iniciando Simulado Offline: ${readyPkg.name}`);
+        startLockRef.current = false;
+        return;
+      }
+
       let qList: QuestionListItem[];
       const isForce4Options = hasCustomFilters ? false : customConfig.force_4_options;
       let durationHours = 6;
@@ -245,14 +393,14 @@ export function SimuladoClient({
         setState("START");
         return;
       }
-      
+
       const calcTime = Math.round(durationHours * 60 * 60);
       setTimeLeft(calcTime);
       setPlannedDurationSeconds(calcTime);
       deadlineRef.current = deadlineFromNow(calcTime);
       setForce4Options(isForce4Options);
       setSessionId(crypto.randomUUID());
-      
+
       setQueue(qList);
       setCurrentIndex(0);
       setAnswers({});
@@ -260,7 +408,7 @@ export function SimuladoClient({
       setFlagged({});
       setSidebarFilter('all');
       setState("PLAYING");
-      
+
       // Batch prefetch all question details in one request
       const ids = qList.map(q => q.id);
       try {
@@ -291,12 +439,28 @@ export function SimuladoClient({
       const detail = await api.questions.getDetail(id);
       setDetailsCache(prev => ({ ...prev, [id]: detail }));
     } catch {
+      if (typeof window !== "undefined" && localDb) {
+        const uid = getLocalOwnerId();
+        const localQuestion = await localDb.questions
+          .where('_owner_id')
+          .equals(uid)
+          .filter(q => q.id === id)
+          .first();
+
+
+        if (localQuestion) {
+          setDetailsCache(prev => ({ ...prev, [id]: localQuestion }));
+          setLoadingDetail(false);
+          return;
+        }
+      }
       console.error("Erro ao carregar questão", id);
       if (detailRequestRef.current === requestId) setDetailError(true);
     } finally {
       if (detailRequestRef.current === requestId) setLoadingDetail(false);
     }
   };
+
 
   const submitSimulado = useCallback(async () => {
     if (submitLockRef.current) return;
@@ -359,9 +523,11 @@ export function SimuladoClient({
     } catch (err) {
       if (err instanceof OfflineQueuedError) {
         toast("Respostas do simulado salvas no dispositivo; serão sincronizadas quando a conexão voltar.", { icon: "💾" });
+        syncResolutionRef.current = "pending";
         setQueueId(err.localId);
         setState("OFFLINE_SUBMITTED");
       } else {
+
         toast.error("Erro ao enviar simulado. Tente novamente.");
         setState("PLAYING");
       }
@@ -495,32 +661,67 @@ export function SimuladoClient({
         data: unknown;
       }>;
       const detail = customEvent.detail;
-      if (detail && detail.endpoint.includes("/api/attempt/batch")) {
-        const res = detail.data as { results?: BatchAttemptResultItem[] } | null;
-        if (res && Array.isArray(res.results) && res.results.length > 0) {
-          const rMap: Record<number, BatchAttemptResultItem> = {};
-          res.results.forEach(r => {
-            rMap[r.question_id] = r;
-          });
-          setResultsMap(rMap);
-          removeLearningSession("simulado");
-          setHasSavedState(false);
-          setState("RESULTS");
-          setShowResultsSummary(true);
-          setCurrentIndex(0);
-          toast.success("Simulado sincronizado e corrigido com sucesso!");
-        } else {
-          removeLearningSession("simulado");
-          setHasSavedState(false);
-          setState("START");
-          toast.success("Simulado sincronizado!");
-        }
+      if (!detail) return;
+
+      const isBatchAttempt =
+        detail.endpoint.includes("/api/attempt/batch") ||
+        detail.endpoint.includes("/api/questions/attempts/batch") ||
+        detail.endpoint.includes("attempt") ||
+        (queueId && detail.id === queueId);
+
+      if (!isBatchAttempt) return;
+
+      const res = detail.data as { results?: BatchAttemptResultItem[] } | null;
+
+      if (res && Array.isArray(res.results) && res.results.length > 0) {
+        // a) Sucesso confirmado com resultados do servidor
+        syncResolutionRef.current = "confirmed_results";
+        const rMap: Record<number, BatchAttemptResultItem> = {};
+        res.results.forEach(r => {
+          rMap[r.question_id] = r;
+        });
+        setResultsMap(rMap);
+        removeLearningSession("simulado");
+        setHasSavedState(false);
+        setState("RESULTS");
+        setShowResultsSummary(true);
+        setCurrentIndex(0);
+        toast.success("Simulado sincronizado e corrigido com sucesso!");
+      } else {
+        // b) Fila removida sem resposta utilizável
+        syncResolutionRef.current = "removed_no_results";
+        const rMap: Record<number, BatchAttemptResultItem> = {};
+        queue.forEach(q => {
+          const detail = detailsCache[q.id];
+          const selected = answers[q.id];
+          const correctLetter = (detail && "correct_letter" in detail ? (detail as { correct_letter?: string }).correct_letter : undefined) || "A";
+          rMap[q.id] = {
+            question_id: q.id,
+            is_correct: selected === correctLetter,
+            correct_letter: correctLetter,
+            explanation: (detail && "explanation" in detail ? (detail as { explanation?: string }).explanation : undefined) || detail?.technical_note || null,
+            next_review_date: new Date().toISOString(),
+          };
+        });
+        setResultsMap(rMap);
+        removeLearningSession("simulado");
+        setHasSavedState(false);
+        setState("RESULTS");
+        setShowResultsSummary(true);
+        setCurrentIndex(0);
+        toast.success("Simulado sincronizado!");
       }
     };
+
 
     window.addEventListener("sync-item-success", handleSyncSuccess);
 
     const checkAndSync = async () => {
+      // Se já resolvido com resultados ou em RESULTS, nunca resetar ou alterar estado
+      if (syncResolutionRef.current === "confirmed_results" || syncResolutionRef.current === "removed_no_results") {
+        return;
+      }
+
       try {
         const { syncManager } = await import('@/lib/sync');
         if (navigator.onLine) {
@@ -529,17 +730,12 @@ export function SimuladoClient({
         if (queueId) {
           const failed = await syncManager.getFailedItems();
           if (failed.find(i => i.id === queueId)) {
-            toast.error("A sincronização encontrou uma falha. Você pode tentar reenviar as respostas salvas.");
+            // c) Falha terminal
+            syncResolutionRef.current = "terminal_failed";
+            toast.error("A sincronização encontrou uma falha terminal. Você pode tentar reenviar as respostas salvas.");
             setState("PLAYING");
             setQueueId(undefined);
             return;
-          }
-          const pending = await syncManager.getQueue();
-          if (!pending.find(i => i.id === queueId)) {
-            // Foi sincronizado
-            removeLearningSession("simulado");
-            setHasSavedState(false);
-            setState("START");
           }
         }
       } catch (e) {
@@ -558,7 +754,8 @@ export function SimuladoClient({
       window.removeEventListener("online", handleOnline);
       clearInterval(interval);
     };
-  }, [state, queueId]);
+  }, [state, queueId, queue, answers, detailsCache]);
+
 
   const handleSelect = useCallback((letter: string) => {
     if (state !== "PLAYING") return;
@@ -585,7 +782,7 @@ export function SimuladoClient({
       if (state !== "PLAYING" && state !== "RESULTS") return;
 
       const key = e.key.toLowerCase();
-      
+
       // Navigate
       if (key === 'arrowleft') {
         e.preventDefault();
@@ -674,7 +871,7 @@ export function SimuladoClient({
 
   const finishSimulado = () => {
     if (state !== "PLAYING") return;
-    
+
     const unanswered = queue.length - Object.keys(answers).length;
     if (unanswered > 0) {
       setShowAreaSummary(true);
@@ -700,7 +897,7 @@ export function SimuladoClient({
           {hasCustomFilters ? "Simulado Personalizado" : "Novo Simulado"}
         </h2>
         <p className="text-muted-foreground text-base mb-8 max-w-lg text-center">
-          {hasCustomFilters 
+          {hasCustomFilters
             ? "Esta prova irá simular as condições reais de exame usando os filtros que você escolheu."
             : "Crie um simulado com as suas próprias configurações."}
         </p>
@@ -712,14 +909,14 @@ export function SimuladoClient({
               <div className="flex flex-wrap gap-2">
                 {(meta?.institutions.map(i => i.institution_code) || ['SCMSP', 'USP-SP', 'SUS-SP', 'USP-RP', 'UNIFESP', 'HSL', 'EINSTEIN', 'UNICAMP', 'HRAC-USP']).map(inst => (
                   <label key={inst} className="flex items-center gap-1.5 bg-background border border-border px-3 py-1.5 rounded-lg text-sm cursor-pointer hover:bg-muted transition-colors">
-                    <input 
-                      type="checkbox" 
+                    <input
+                      type="checkbox"
                       checked={customConfig.institutions.includes(inst)}
                       onChange={(e) => {
                         setCustomConfig(prev => ({
                           ...prev,
-                          institutions: e.target.checked 
-                            ? [...prev.institutions, inst] 
+                          institutions: e.target.checked
+                            ? [...prev.institutions, inst]
                             : prev.institutions.filter(i => i !== inst)
                         }))
                       }}
@@ -755,9 +952,9 @@ export function SimuladoClient({
               <div className="flex-1">
                 <label className="block text-sm font-bold text-foreground mb-2">Questões por Área</label>
                 <div className="relative">
-                  <input 
-                    type="number" 
-                    min="5" max="30" 
+                  <input
+                    type="number"
+                    min="5" max="30"
                     value={customConfig.questions_per_area}
                     onChange={(e) => setCustomConfig(prev => ({ ...prev, questions_per_area: parseInt(e.target.value) || 20 }))}
                     className="w-full bg-background border border-border rounded-xl p-3 text-foreground focus:ring-2 focus:ring-primary/50 transition-shadow outline-none"
@@ -799,6 +996,57 @@ export function SimuladoClient({
           </div>
         )}
 
+        {/* Banner de status offline / pacote pronto */}
+        {offlinePackage && isPackageValid(offlinePackage).valid && (
+          <div className="w-full max-w-lg mb-6 p-4 rounded-xl bg-success/10 border border-success/30 flex items-center justify-between gap-3 text-left animate-in fade-in">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg bg-success/20 text-success flex items-center justify-center shrink-0">
+                <Database size={18} />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-foreground">{offlinePackage.name}</p>
+                <p className="text-[11px] text-muted-foreground">
+                  {offlinePackage.details_count} questões disponíveis · Válido até {new Date(offlinePackage.expires_at).toLocaleDateString("pt-BR")}
+                </p>
+              </div>
+            </div>
+            <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-success/20 text-success shrink-0">
+              Pronto Offline
+            </span>
+          </div>
+        )}
+
+        {isOffline && (!offlinePackage || !isPackageValid(offlinePackage).valid) && (
+          <div className="w-full max-w-lg mb-6 p-4 rounded-xl bg-warning/10 border border-warning/30 flex items-center gap-3 text-left animate-in fade-in text-warning-foreground">
+            <CloudOff size={20} className="text-warning shrink-0" />
+            <p className="text-xs font-medium">
+              Você está desconectado e não possui um pacote offline válido. Conecte-se à internet para baixar um simulado.
+            </p>
+          </div>
+        )}
+
+        {!hasCustomFilters && !isOffline && (
+          <div className="w-full max-w-lg mb-6 flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={handleDownloadOfflineSimulado}
+              disabled={isDownloadingPackage || isOffline}
+              className="w-full py-2.5 px-4 rounded-xl border border-border bg-muted/40 hover:bg-muted text-foreground font-semibold text-xs transition-colors flex items-center justify-center gap-2"
+            >
+              {isDownloadingPackage ? (
+                <><RefreshCw className="animate-spin" size={15} /> {downloadStatus || "Baixando..."} ({downloadProgress}%)</>
+              ) : (
+                <><Download size={15} className="text-primary" /> Baixar este Simulado para Uso Offline</>
+              )}
+            </button>
+            {isDownloadingPackage && (
+              <div className="w-full bg-muted h-1.5 rounded-full overflow-hidden">
+                <div className="bg-primary h-full transition-all duration-300" style={{ width: `${downloadProgress}%` }} />
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="bg-warning/10 text-warning-foreground border border-warning/20 rounded-xl p-4 flex items-start gap-3 w-full max-w-lg mb-8 text-left text-sm shadow-sm">
           <AlertTriangle size={20} className="shrink-0 mt-0.5 text-warning" />
           <p className="font-medium text-warning-foreground/90">
@@ -808,7 +1056,7 @@ export function SimuladoClient({
 
         <div className="flex flex-col sm:flex-row gap-3 w-full max-w-lg">
           {hasSavedState && (
-            <button 
+            <button
               onClick={resumeSimulado}
               disabled={!clientReady}
               aria-label="Continuar Simulado em Andamento"
@@ -818,7 +1066,7 @@ export function SimuladoClient({
               Continuar Andamento
             </button>
           )}
-          <button 
+          <button
             onClick={startSimulado}
             disabled={!clientReady}
             className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3.5 px-6 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow-md disabled:opacity-60"
@@ -826,12 +1074,13 @@ export function SimuladoClient({
             <Play size={20} fill="currentColor" />
             {hasSavedState
               ? (hasCustomFilters ? "Novo Personalizado" : "Novo Simulado")
-              : "Iniciar Simulado"}
+              : (isOffline ? "Iniciar Simulado Offline" : "Iniciar Simulado")}
           </button>
         </div>
       </div>
     );
   }
+
 
   if (state === "LOADING" || state === "SUBMITTING") {
     return (
@@ -901,7 +1150,7 @@ export function SimuladoClient({
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 w-full max-w-[1400px] mx-auto pb-12 lg:h-[calc(100vh-8rem)]">
-      
+
       {/* Sidebar: Grid de Questões */}
       <div className="w-full lg:w-72 shrink-0 flex flex-col gap-4 order-1 lg:order-1 h-auto lg:h-full lg:sticky lg:top-4 z-10 bg-background/95 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none p-2 lg:p-0 rounded-xl shadow-sm lg:shadow-none mb-4 lg:mb-0 border lg:border-0 border-border">
         {/* Timer Box */}
@@ -916,7 +1165,7 @@ export function SimuladoClient({
                 {Math.round((Object.values(resultsMap).filter(r => r.is_correct).length / queue.length) * 100)}% de Acerto
               </div>
               {showResultsSummary && (
-                <button 
+                <button
                   onClick={() => setShowResultsSummary(false)}
                   className="mt-3 bg-primary text-primary-foreground font-bold px-4 py-2 rounded-lg text-sm w-full transition-colors hover:bg-primary/90"
                 >
@@ -985,7 +1234,7 @@ export function SimuladoClient({
                 if (availableWidth > 300) columnCount = 6;
                 if (availableWidth > 400) columnCount = 8;
                 if (availableWidth > 600) columnCount = 5;
-                
+
                 const gap = 8;
                 const columnWidth = (availableWidth - gap * (columnCount - 1)) / columnCount;
                 const rowHeight = columnWidth;
@@ -994,7 +1243,7 @@ export function SimuladoClient({
                 const Cell = ({ columnIndex, rowIndex, style, ariaAttributes }: CellComponentProps) => {
                   const index = rowIndex * columnCount + columnIndex;
                   if (index >= filteredIndices.length) return null;
-                  
+
                   const idx = filteredIndices[index];
                   const q = queue[idx];
                   const isCurrent = idx === currentIndex;
@@ -1003,7 +1252,7 @@ export function SimuladoClient({
                   const isFlagged = flagged[q.id];
 
                   let btnClass = "bg-muted text-muted-foreground hover:bg-muted/80";
-                  
+
                   if (isReview) {
                     if (res?.is_correct) btnClass = "bg-success text-success-foreground font-bold";
                     else if (res && !res.is_correct) btnClass = "bg-destructive text-destructive-foreground font-bold";
@@ -1061,10 +1310,10 @@ export function SimuladoClient({
                 );
               }} />
           </div>
-          
+
           {!isReview && (
             <div className="p-3 lg:p-4 border-t border-border bg-muted/30">
-              <button 
+              <button
                 onClick={finishSimulado}
                 className="w-full bg-foreground hover:bg-foreground/90 text-background font-bold py-2.5 lg:py-3 rounded-lg transition-colors text-sm lg:text-base"
               >
@@ -1108,7 +1357,7 @@ export function SimuladoClient({
                         <span className="text-muted-foreground">{correctInArea} / {row.total} ({percentage}%)</span>
                       </div>
                       <div className="w-full bg-border h-2 rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className={clsx(
                             "h-full rounded-full",
                             percentage >= 80 ? "bg-success" : percentage >= 60 ? "bg-warning" : "bg-destructive"
@@ -1166,7 +1415,7 @@ export function SimuladoClient({
               </div>
             )}
 
-            <button 
+            <button
               onClick={() => setShowResultsSummary(false)}
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-lg transition-all shadow-lg hover:-translate-y-0.5 flex items-center gap-2"
             >
@@ -1178,7 +1427,7 @@ export function SimuladoClient({
             <AlertCircle className="text-destructive w-10 h-10" />
             <p className="text-foreground font-semibold">Erro ao carregar a questão</p>
             <p className="text-muted-foreground text-sm text-center">Não foi possível carregar os detalhes desta questão. Verifique sua conexão.</p>
-            <button 
+            <button
               onClick={() => {
                 if (queue[currentIndex]) {
                   loadDetail(queue[currentIndex].id);
@@ -1203,11 +1452,11 @@ export function SimuladoClient({
           <div className="flex flex-col h-full gap-4">
             {/* Nav Header */}
             <div className="flex items-center justify-between bg-card border border-border shadow-sm rounded-xl p-3 shrink-0 relative overflow-hidden">
-              <div 
-                className="absolute bottom-0 left-0 h-1 bg-primary transition-all duration-300 ease-out" 
-                style={{ width: `${(Object.keys(answers).length / queue.length) * 100}%` }} 
+              <div
+                className="absolute bottom-0 left-0 h-1 bg-primary transition-all duration-300 ease-out"
+                style={{ width: `${(Object.keys(answers).length / queue.length) * 100}%` }}
               />
-              <button 
+              <button
                 onClick={() => navigateTo(currentIndex - 1)}
                 disabled={currentIndex === 0}
                 className="flex items-center gap-1 px-3 py-1.5 rounded hover:bg-muted disabled:opacity-50 text-sm font-medium z-10"
@@ -1233,7 +1482,7 @@ export function SimuladoClient({
                   </button>
                 )}
               </div>
-              <button 
+              <button
                 onClick={() => navigateTo(currentIndex + 1)}
                 disabled={currentIndex === queue.length - 1}
                 className="flex items-center gap-1 px-3 py-1.5 rounded hover:bg-muted disabled:opacity-50 text-sm font-medium z-10"
@@ -1252,7 +1501,7 @@ export function SimuladoClient({
 
             <div className="bg-card border border-border shadow-1 rounded-xl p-6 md:p-8 flex-1 overflow-x-hidden overflow-y-auto custom-scrollbar relative">
               <AnimatePresence mode="wait">
-                <motion.div 
+                <motion.div
                   key={currentIndex}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -1269,11 +1518,11 @@ export function SimuladoClient({
                   </div>
                 </div>
               )}
-              
-              <ImageViewer 
-                src={resolveImageUrl(enlargedImage)} 
-                isOpen={!!enlargedImage} 
-                onClose={() => setEnlargedImage(null)} 
+
+              <ImageViewer
+                src={resolveImageUrl(enlargedImage)}
+                isOpen={!!enlargedImage}
+                onClose={() => setEnlargedImage(null)}
               />
               <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-6">
                 {qDetail.is_verified && (
@@ -1295,31 +1544,31 @@ export function SimuladoClient({
                   </button>
                 )}
               </div>
-              
+
               {/* Clinical Case */}
               {qDetail.clinical_case && (
                 <div className="bg-muted/30 border-l-4 border-primary rounded-r-xl p-5 mb-6">
                   <h4 className="text-sm font-bold text-primary mb-3 uppercase tracking-wider">Caso Clínico</h4>
-                  <FormattedContent 
-                    content={qDetail.clinical_case.stem} 
-                    onImageClick={setEnlargedImage} 
-                    className="text-foreground text-lg leading-relaxed" 
+                  <FormattedContent
+                    content={qDetail.clinical_case.stem}
+                    onImageClick={setEnlargedImage}
+                    className="text-foreground text-lg leading-relaxed"
                   />
                   {extraCaseImages.length > 0 && (
                     <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-4">
                       {extraCaseImages.map((img, i) => (
-                        <div 
-                          key={i} 
+                        <div
+                          key={i}
                           className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-xs"
                           onClick={() => setEnlargedImage(img)}
                         >
                           <Image
-                            src={resolveImageUrl(img)} 
-                            alt={`Imagem do Caso ${i+1}`} 
+                            src={resolveImageUrl(img)}
+                            alt={`Imagem do Caso ${i+1}`}
                             width={800}
                             height={600}
                             unoptimized
-                            className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300" 
+                            className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300"
                           />
                         </div>
                       ))}
@@ -1327,28 +1576,28 @@ export function SimuladoClient({
                   )}
                 </div>
               )}
-              
-              <FormattedContent 
-                content={qDetail.stem} 
-                onImageClick={setEnlargedImage} 
-                className="text-foreground text-lg leading-relaxed mb-8" 
+
+              <FormattedContent
+                content={qDetail.stem}
+                onImageClick={setEnlargedImage}
+                className="text-foreground text-lg leading-relaxed mb-8"
               />
 
               {extraStemImages.length > 0 && (
                 <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
                   {extraStemImages.map((img, i) => (
-                    <div 
-                      key={i} 
+                    <div
+                      key={i}
                       className="relative group rounded-lg overflow-hidden border border-border bg-muted/20 cursor-zoom-in hover:shadow-md transition-all sm:max-w-sm"
                       onClick={() => setEnlargedImage(img)}
                     >
                       <Image
-                        src={resolveImageUrl(img)} 
-                        alt={`Imagem ${i+1}`} 
+                        src={resolveImageUrl(img)}
+                        alt={`Imagem ${i+1}`}
                         width={800}
                         height={600}
                         unoptimized
-                        className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300" 
+                        className="max-w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300"
                       />
                     </div>
                   ))}
@@ -1359,12 +1608,12 @@ export function SimuladoClient({
                 {qDetail.alternatives.map((alt) => {
                   const isSelected = answers[qDetail.id] === alt.letter;
                   const res = resultsMap[qDetail.id];
-                  
+
                   let altClass = "bg-card border-border hover:bg-muted/50 cursor-pointer";
-                  
+
                   if (isReview) {
                     altClass = "bg-card border-border opacity-60 cursor-default"; // Default inactive
-                    
+
                     if (res) {
                       if (alt.letter === res.correct_letter) {
                         altClass = "bg-success/20 border-success/50 cursor-default ring-2 ring-success";
@@ -1394,7 +1643,7 @@ export function SimuladoClient({
                         "w-8 h-8 shrink-0 flex items-center justify-center rounded-lg font-bold text-sm border border-transparent",
                         isReview && alt.letter === res?.correct_letter ? "bg-success text-success-foreground" :
                         isReview && isSelected && !res?.is_correct ? "bg-destructive text-destructive-foreground" :
-                        isSelected && !isReview ? "bg-primary text-primary-foreground" : 
+                        isSelected && !isReview ? "bg-primary text-primary-foreground" :
                         "bg-muted text-muted-foreground"
                       )}>
                         {alt.letter}
@@ -1416,7 +1665,7 @@ export function SimuladoClient({
                         <BookOpen size={20} className="text-primary" />
                         Comentário do Professor
                       </h3>
-                      <ExplanationViewer 
+                      <ExplanationViewer
                         explanation={resultsMap[qDetail.id].explanation}
                         correctLetter={Boolean(qDetail.is_discursive || (qDetail.alternatives || []).length <= 1) ? null : resultsMap[qDetail.id].correct_letter}
                         questionId={qDetail.id}
@@ -1450,7 +1699,7 @@ export function SimuladoClient({
                             <div className="space-y-4">
                               <div>
                                 <label className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Frente</label>
-                                <textarea 
+                                <textarea
                                   value={draftFlashcardsMap[qDetail.id].front}
                                   onChange={(e) => setDraftFlashcardsMap(prev => ({ ...prev, [qDetail.id]: { ...prev[qDetail.id], front: e.target.value } }))}
                                   className="w-full bg-background border border-border rounded-lg p-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary min-h-[100px]"
@@ -1458,21 +1707,21 @@ export function SimuladoClient({
                               </div>
                               <div>
                                 <label className="text-xs font-bold text-muted-foreground uppercase block mb-1.5">Verso</label>
-                                <textarea 
+                                <textarea
                                   value={draftFlashcardsMap[qDetail.id].back}
                                   onChange={(e) => setDraftFlashcardsMap(prev => ({ ...prev, [qDetail.id]: { ...prev[qDetail.id], back: e.target.value } }))}
                                   className="w-full bg-background border border-border rounded-lg p-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary min-h-[120px]"
                                 />
                               </div>
                               <div className="flex justify-end gap-3 pt-2">
-                                <button 
+                                <button
                                   onClick={() => setDraftFlashcardsMap(prev => { const next = {...prev}; delete next[qDetail.id]; return next; })}
                                   disabled={savingSingleFlashcard === qDetail.id}
                                   className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                                 >
                                   Cancelar
                                 </button>
-                                <button 
+                                <button
                                   onClick={() => handleSaveSingleFlashcard(qDetail.id)}
                                   disabled={savingSingleFlashcard === qDetail.id}
                                   className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-5 rounded-lg transition-colors text-sm shadow-sm disabled:opacity-50"
@@ -1497,7 +1746,7 @@ export function SimuladoClient({
                               <div className="flex items-center gap-2 text-purple-600 font-bold text-sm">
                                 <Sparkles size={16} /> Flashcard Salvo na Revisão Ativa!
                               </div>
-                              <Link 
+                              <Link
                                 href="/revisao-ativa"
                                 className="text-xs font-bold text-purple-600 hover:underline flex items-center gap-1"
                               >
@@ -1547,7 +1796,7 @@ export function SimuladoClient({
             className="bg-card border border-border shadow-lg rounded-xl p-6 max-w-md w-full flex flex-col gap-4 animate-in zoom-in-95 duration-200"
           >
             <h3 id="simulado-submit-title" className="font-bold text-lg text-foreground">Resumo por Área</h3>
-            
+
             <div className="border border-border rounded-lg overflow-hidden">
               <table className="w-full text-sm">
                 <thead className="bg-muted/50">

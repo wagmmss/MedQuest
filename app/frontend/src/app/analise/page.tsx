@@ -1,6 +1,6 @@
 import { serverApi } from "@/lib/server-api";
-import { Activity } from "lucide-react";
 import dynamic from "next/dynamic";
+
 
 const AnalysisClient = dynamic(
   () => import("./AnalysisClient").then(mod => mod.AnalysisClient),
@@ -52,7 +52,10 @@ export default async function AnalisePage() {
   const examReadiness = overview?.target_institution
     ? await serverApi.stats.getExamReadiness(overview.target_institution).catch(() => fallbackReadiness)
     : fallbackReadiness;
+  const targetInstitution = overview?.target_institution || (examReadiness.institution || "USP-SP");
+  const institutionRadar = await serverApi.stats.getInstitutionRadar(targetInstitution).catch(() => null);
   const institutionOptions = [
+
     ...breakdown.map(item => ({ key: item.key, label: item.label })),
     ...(examReadiness.institution && !breakdown.some(item => item.key === examReadiness.institution)
       ? [{ key: examReadiness.institution, label: examReadiness.institution }]
@@ -61,17 +64,20 @@ export default async function AnalisePage() {
 
   return (
     <div className="flex flex-col gap-8 animate-in fade-in duration-500">
-      
+
       {/* Header */}
       <section className="bg-card border border-border shadow-sm rounded-2xl p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden isolation-auto">
         <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -z-10" />
         <div className="absolute bottom-0 left-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl -z-10" />
-        
+
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm font-semibold mb-4 border border-secondary/20">
-            <Activity size={16} />
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
             Análise adaptativa
           </div>
+
           <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-3">
             Análise de Desempenho
           </h1>
@@ -82,7 +88,7 @@ export default async function AnalisePage() {
       </section>
 
       {/* Main Content Dashboard */}
-      <AnalysisClient 
+      <AnalysisClient
         timeline={timeline}
         weakTopics={weakTopics}
         breakdown={breakdown}
@@ -93,6 +99,7 @@ export default async function AnalisePage() {
         examReadiness={examReadiness}
         institutionOptions={institutionOptions}
         timeline180={timeline180}
+        institutionRadar={institutionRadar}
       />
 
     </div>

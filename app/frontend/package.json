@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build --webpack",
-    "postbuild": "node scripts/validate-sw.mjs && node scripts/check-performance-budgets.mjs",
+    "postbuild": "node scripts/validate-sw.mjs && node scripts/check-performance-budgets.mjs && node scripts/copy-standalone-assets.mjs",
+
     "start": "next start",
     "lint": "eslint",
     "test:e2e": "playwright test",

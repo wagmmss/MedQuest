@@ -57,9 +57,15 @@ def require_auth(f):
     def decorated(*args, **kwargs):
         from flask import current_app
         if current_app.config.get("TESTING"):
-            g.user_id = getattr(g, "user_id", "1")
+            if "X-User-ID" in request.headers:
+                g.user_id = request.headers["X-User-ID"]
+            elif "X-Guest-ID" in request.headers:
+                g.user_id = request.headers["X-Guest-ID"]
+            else:
+                g.user_id = getattr(g, "user_id", "1")
             g.user_email = getattr(g, "user_email", "moraes.wagg@gmail.com")
             return f(*args, **kwargs)
+
 
         if request.method == "OPTIONS" or request.path == "/":
             return f(*args, **kwargs)

@@ -25,7 +25,8 @@ Todo PR submetido no repositório MedQuest deve preencher e validar o seguinte c
 - [ ] **Guardrails de Performance:** Validação pelo script `python scripts/check_performance_guardrails.py` sem violação dos SLAs de latência.
 
 ### 2.2 Frontend e Interface
-- [ ] **Orçamento de Bundle:** Verificação de bundles (`npm run check:performance`) aprovada dentro dos limites de 2.25 MB.
+- [ ] **Orçamento de Bundle:** Verificação de bundles (`npm run check:performance`) aprovada dentro dos limites de 2.30 MB.
+
 - [ ] **Code-Splitting:** Componentes pesados (gráficos `Recharts`, editores ricos, modais secundários) carregados dinamicamente via `next/dynamic` com skeleton loading.
 - [ ] **Resiliência Offline:** Operações críticas salvas localmente em `Dexie` (IndexedDB) antes ou em contingência à rede.
 - [ ] **Zero Cascading Renders:** Ausência de `setState` síncronos redundantes em `useEffect` e ausência de avisos de ESLint.

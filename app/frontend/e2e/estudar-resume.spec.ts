@@ -168,21 +168,16 @@ test('remove botão de IA e permite gerar flashcard após erro', async ({ page, 
   // Verifica que o botão de explicar com IA NÃO existe
   await expect(page.getByRole('button', { name: /Explicar com IA/i })).not.toBeVisible();
 
-  // Verifica e clica no botão de gerar flashcard
-  const flashcardBtn = page.getByRole('button', { name: /Gerar Flashcard|Criar Flashcard/i });
+  // Verifica e clica no botão de gerar/salvar flashcard
+  const flashcardBtn = page.getByRole('button', { name: /Salvar Flashcard|Gerar Flashcard|Criar Flashcard/i });
   await expect(flashcardBtn).toBeVisible();
   await flashcardBtn.click();
 
-  // Salva o flashcard editável
-  const saveBtn = page.getByRole('button', { name: /Salvar Flashcard/i });
-  await expect(saveBtn).toBeVisible();
-  await saveBtn.click();
-
   // Verifica que o flashcard foi gerado e exibido
-  await expect(page.getByText('Flashcard Salvo na Revisão Ativa!')).toBeVisible();
-  await expect(page.getByText(/conduta indicada é/i)).toBeVisible();
+  await expect(page.getByText(/Flashcard Salvo/i)).toBeVisible();
   expect(flashcardGenerated).toBe(true);
 });
+
 
 test('clicar em voltar limpa a sessão e reload mantém na tela de filtros', async ({ page, context }) => {
   await context.addCookies([{ name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' }]);

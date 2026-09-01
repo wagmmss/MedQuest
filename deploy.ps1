@@ -255,7 +255,9 @@ pull_commit_image() {
         fi
 
         echo "    [$label] Compilando no GitHub Actions... (${SECONDS}s decorridos)"
-        sleep 8
+        # Poll curto: uma imagem publicada logo apos a consulta nao acrescenta
+        # quase dez segundos artificiais ao deploy.
+        sleep 2
     done
     echo "    [$label] Imagem pronta e baixada com sucesso!"
 }

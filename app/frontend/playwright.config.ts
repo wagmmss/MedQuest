@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 import { loadEnvConfig } from '@next/env';
 
 loadEnvConfig(process.cwd());
-const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3100';
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:3100';
 
 export default defineConfig({
   testDir: './e2e',
@@ -30,7 +30,9 @@ export default defineConfig({
       FLASK_API_URL: 'http://127.0.0.1:9999',
       FLASK_API_PROXY_SECRET: 'test-proxy-secret',
       PLAYWRIGHT_TEST: 'true',
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || 'pk_test_mock',
+      // Chave de teste sintática do domínio clerk.example.com; evita que o
+      // middleware do Clerk rejeite o ambiente E2E antes dos mocks de rota.
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || 'pk_test_Y2xlcmsuZXhhbXBsZS5jb20k',
       CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY || 'sk_test_mock',
     },
     // The app shell may depend on an external API, so use a static asset as
@@ -38,5 +40,9 @@ export default defineConfig({
     url: `${baseURL}/favicon.ico`,
     reuseExistingServer: false,
     timeout: 120000,
+
+
+
+
   },
 });
