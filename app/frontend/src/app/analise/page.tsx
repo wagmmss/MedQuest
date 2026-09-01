@@ -1,6 +1,21 @@
 import { serverApi } from "@/lib/server-api";
 import { Activity } from "lucide-react";
-import { AnalysisClient } from "./AnalysisClient";
+import dynamic from "next/dynamic";
+
+const AnalysisClient = dynamic(
+  () => import("./AnalysisClient").then(mod => mod.AnalysisClient),
+  {
+    loading: () => (
+      <div className="flex flex-col gap-6 animate-pulse p-4">
+        <div className="h-64 bg-muted/40 rounded-2xl w-full" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="h-48 bg-muted/40 rounded-2xl" />
+          <div className="h-48 bg-muted/40 rounded-2xl" />
+        </div>
+      </div>
+    ),
+  }
+);
 
 export default async function AnalisePage() {
   // Fazemos fetch paralelo de todos os dados do dashboard analítico

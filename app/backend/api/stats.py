@@ -585,26 +585,34 @@ def reset_stats():
     return jsonify({"success": True})
 
 
+_cached_planner_meta = None
+_cached_kat_subs = None
+
+
+def _get_planner_metadata():
+    global _cached_planner_meta, _cached_kat_subs
+    if _cached_planner_meta is None:
+        planner_data_path = os.path.join(os.path.dirname(__file__), "..", "scripts", "plannerData.json")
+        try:
+            with open(planner_data_path, "r", encoding="utf-8") as f:
+                _cached_planner_meta = json.load(f)
+        except Exception:
+            _cached_planner_meta = []
+    if _cached_kat_subs is None:
+        kat_path = os.path.join(os.path.dirname(__file__), "..", "scripts", "katomartCourseDurations.json")
+        try:
+            with open(kat_path, "r", encoding="utf-8") as f:
+                kat = json.load(f)
+                _cached_kat_subs = kat.get("subtemas", {})
+        except Exception:
+            _cached_kat_subs = {}
+    return _cached_planner_meta, _cached_kat_subs
+
+
 @bp.route("/coverage")
 def coverage():
     db = get_db()
-    
-    # Carrega plannerData.json
-    planner_data_path = os.path.join(os.path.dirname(__file__), "..", "scripts", "plannerData.json")
-    try:
-        with open(planner_data_path, "r", encoding="utf-8") as f:
-            planner_meta = json.load(f)
-    except Exception:
-        planner_meta = []
-
-    # Carrega katomartCourseDurations.json
-    kat_path = os.path.join(os.path.dirname(__file__), "..", "scripts", "katomartCourseDurations.json")
-    try:
-        with open(kat_path, "r", encoding="utf-8") as f:
-            kat = json.load(f)
-    except Exception:
-        kat = {}
-    kat_subs = kat.get("subtemas", {})
+    planner_meta, kat_subs = _get_planner_metadata()
 
     # 1. Total de questões por área e subtema
     q_totals_rows = db.execute("""
@@ -737,6 +745,33 @@ def coverage():
             a["accuracy"] = (a["correct"] / a["attempts"]) if a["attempts"] > 0 else None
             a["subtemas"].sort(key=lambda s: (not s["highYield"], -s["n_questions"]))
             out.append(a)
+
+    area_filter = request.args.get("area", "").strip()
+    summary_only = request.args.get("summary_only", "false").lower() == "true"
+
+    if area_filter:
+        norm_filter = get_normalized_area(area_filter)
+        out = [a for a in out if a["area"] == norm_filter or a["area"] == area_filter]
+
+    if summary_only:
+        summary_out = []
+        for a in out:
+            summary_out.append({
+                "area": a["area"],
+                "n_questions": a["n_questions"],
+                "n_subtemas": a["n_subtemas"],
+                "answered_questions": a["answered_questions"],
+                "attempts": a["attempts"],
+                "correct": a["correct"],
+                "accuracy": a["accuracy"],
+                "mastered": a["mastered"],
+                "proficient": a["proficient"],
+                "in_progress": a["in_progress"],
+                "not_started": a["not_started"],
+                "high_yield_count": a["high_yield_count"],
+                "high_yield_mastered": a["high_yield_mastered"]
+            })
+        return jsonify({"areas": summary_out, "summary": True})
 
     return jsonify({"areas": out})
 

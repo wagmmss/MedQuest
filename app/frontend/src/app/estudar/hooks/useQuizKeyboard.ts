@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { QuestionDetail, AttemptResult } from "@/types/api";
+import { QuestionDetail, AttemptResult, QuestionListItem } from "@/types/api";
 
 interface UseQuizKeyboardProps {
   state: "FILTERS" | "LOADING_QUEUE" | "PLAYING" | "RESULTS" | "FINISHED";
@@ -7,7 +7,7 @@ interface UseQuizKeyboardProps {
   loadingDetail: boolean;
   attemptResult: AttemptResult | null;
   currentIndex: number;
-  queue: Array<any>;
+  queue: Array<QuestionListItem>;
   selectedLetter: string | null;
   submitting: boolean;
   handleAttempt: () => void;

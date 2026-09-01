@@ -312,6 +312,18 @@ def init_db(app):
             if "lease_owner_token" not in existing_cols:
                 db.execute("ALTER TABLE idempotency_keys ADD COLUMN lease_owner_token TEXT")
 
+            db.execute("""CREATE TABLE IF NOT EXISTS telemetry_daily_aggregates (
+                date TEXT NOT NULL,
+                route TEXT NOT NULL,
+                method TEXT NOT NULL,
+                p50_ms REAL NOT NULL,
+                p95_ms REAL NOT NULL,
+                p99_ms REAL NOT NULL,
+                request_count INTEGER NOT NULL,
+                error_count INTEGER NOT NULL,
+                created_at TEXT NOT NULL,
+                PRIMARY KEY (date, route, method))""")
+
             # Indexes that reference migrated columns must be created only
             # after every supported legacy schema has those columns.
             db.execute("CREATE INDEX IF NOT EXISTS idx_idempotency_created ON idempotency_keys(created_at)")
@@ -327,6 +339,7 @@ def init_db(app):
             db.execute("CREATE INDEX IF NOT EXISTS idx_simulado_sessions_user_completed ON simulado_sessions (user_id, completed_at DESC)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area ON questions (area)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_institution ON questions (institution_code)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_questions_inst_code_label ON questions (institution_code, institution_label)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_year ON questions (year)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_source ON questions (source_file)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_answered_at ON attempts (answered_at)")

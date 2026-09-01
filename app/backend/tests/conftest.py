@@ -58,3 +58,35 @@ def client(tmp_path):
         yield app.test_client()
     finally:
         os.environ.pop("MEDQUEST_DB", None)
+
+
+@pytest.fixture(autouse=True)
+def mock_ai_providers_hermetic(monkeypatch, request):
+    """Garante que a suíte de testes seja 100% hermética, rápida e offline por padrão."""
+    if os.environ.get("RUN_LIVE_AI") == "1" or "test_universal_pool" in request.node.nodeid:
+        return
+
+    from api import ai, universal_pool, gemini_pool
+
+    def fake_generate_content_with_fallback(prompt, system_instruction=None, json_mode=False, **kwargs):
+        # Se as chaves do Gemini Pool e Groq foram explicitamente zeradas no teste, simula indisponibilidade
+        if gemini_pool.gemini_pool.total_keys == 0 and not os.environ.get("GROQ_API_KEY") and not os.environ.get("GROQ_API_KEYS"):
+            raise RuntimeError("Todos os provedores de IA falharam (simulando indisponibilidade).")
+
+        if json_mode:
+            return {
+                "text": '{"front": "Paciente com quadro de HAS. 👉 Conduta: {{c1::Iniciar tratamento adequado}}", "back": "💡 Pulo do Gato:\\nEm pacientes com hipertensão, iniciar conduta padrão.", "context": "Clínica Médica > Hipertensão", "why_wrong": "Opção incorreta", "terms": ["hipertensao", "has", "pressao alta"]}',
+                "source": "mock_ai",
+                "model": "mock-flash"
+            }
+        return {
+            "text": "A conduta padrão-ouro é iniciar tratamento adequado.\n\n**Gabarito**: Alternativa B.\n**Pulo do Gato**: Em pacientes de alto risco, iniciar monoterapia ou combinação conforme diretriz.",
+            "source": "mock_ai",
+            "model": "mock-flash"
+        }
+
+    monkeypatch.setattr(universal_pool, "generate_content_with_fallback", fake_generate_content_with_fallback)
+    monkeypatch.setattr(ai, "generate_content_with_fallback", fake_generate_content_with_fallback)
+
+
+

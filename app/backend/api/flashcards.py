@@ -7,6 +7,7 @@ from flask import Blueprint, Response, g, jsonify, request
 from . import srs
 from .ai import generate_cloze_flashcard
 from .db import db_transaction, get_db
+from .observability import record_domain_event
 from .questions import invalidate_user_caches
 from .schemas import (
     FlashcardBatchIn,
@@ -384,6 +385,14 @@ def review_flashcard(fid):
         """, (next_review, card_json, fid, g.user_id))
 
     invalidate_user_caches(g.user_id)
+    record_domain_event(
+        "flashcard_reviewed",
+        user_id=g.user_id,
+        flashcard_id=fid,
+        confidence=confidence,
+        is_correct=is_correct,
+        next_review_date=next_review,
+    )
 
     return jsonify({
         "id": fid,

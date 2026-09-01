@@ -7,6 +7,7 @@ from flask import Blueprint, Response, g, jsonify, request
 from scripts.planner import generate_annual_plan
 
 from .db import db_transaction, get_db
+from .observability import record_domain_event
 from .questions import invalidate_user_caches
 from .schemas import (
     GeneratePlanIn,
@@ -139,6 +140,8 @@ def planner_topic(week):
                       ON CONFLICT(week, subtema, user_id) DO UPDATE SET completed = excluded.completed, completed_at = excluded.completed_at""",
                    (week, data.subtema, completed, completed_at, g.user_id))
     invalidate_user_caches(g.user_id)
+    if completed:
+        record_domain_event("planner_topic_completed", user_id=g.user_id, week=week, subtema=data.subtema)
     return jsonify({"success": True, "completed": bool(completed)})
 
 

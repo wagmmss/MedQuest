@@ -325,6 +325,37 @@ export function SimuladoClient({
       setCurrentIndex(0); // Go back to first question to review
 
       removeLearningSession("simulado");
+
+      // Salva sessão consolidada de simulado para histórico e prontidão de prova
+      const correctCount = res.results.filter(r => r.is_correct).length;
+      const answeredCount = Object.keys(answers).length;
+      const elapsedSeconds = Math.max(1, Math.min(plannedDurationSeconds, Math.round((Date.now() - (deadlineRef.current - plannedDurationSeconds * 1000)) / 1000)));
+
+      const areaStatsMap: Record<string, { total: number; correct: number }> = {};
+      queue.forEach(q => {
+        const area = q.area || "Geral";
+        if (!areaStatsMap[area]) areaStatsMap[area] = { total: 0, correct: 0 };
+        areaStatsMap[area].total++;
+        if (rMap[q.id]?.is_correct) areaStatsMap[area].correct++;
+      });
+
+      const areaResults = Object.entries(areaStatsMap).map(([area, stats]) => ({
+        area,
+        total: stats.total,
+        correct: stats.correct,
+        pct: stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0
+      }));
+
+      api.sessions.saveSimulado({
+        client_session_id: sessionId || crypto.randomUUID(),
+        planned_duration_seconds: plannedDurationSeconds || 3600,
+        elapsed_seconds: elapsedSeconds,
+        total_questions: queue.length || 1,
+        answered_count: answeredCount,
+        correct_count: correctCount,
+        filters: (initialFilters as Record<string, unknown>) || {},
+        area_results: areaResults
+      });
     } catch (err) {
       if (err instanceof OfflineQueuedError) {
         toast("Respostas do simulado salvas no dispositivo; serão sincronizadas quando a conexão voltar.", { icon: "💾" });
@@ -337,7 +368,7 @@ export function SimuladoClient({
     } finally {
       submitLockRef.current = false;
     }
-  }, [answers]);
+  }, [answers, queue, plannedDurationSeconds, sessionId, initialFilters]);
 
   const handleGenerateSingleFlashcard = async (qid: number, wrongLetter: string) => {
     if (generatingSingleFlashcard) return;

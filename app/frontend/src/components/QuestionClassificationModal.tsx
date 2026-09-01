@@ -40,9 +40,11 @@ export function QuestionClassificationModal({
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [prevOpen, setPrevOpen] = useState(isOpen);
 
-  // Sync state when props change
-  useEffect(() => {
+  // Sync state when modal open status changes
+  if (isOpen !== prevOpen) {
+    setPrevOpen(isOpen);
     if (isOpen) {
       setArea(currentArea || CANONICAL_AREAS[1]);
       setSubtema(currentSubtema || "");
@@ -50,15 +52,15 @@ export function QuestionClassificationModal({
       setError(null);
       setSearchFilter("");
     }
-  }, [isOpen, currentArea, currentSubtema, currentTopic]);
+  }
 
   // Load taxonomy from backend
   useEffect(() => {
+    let isMounted = true;
     if (isOpen && Object.keys(taxonomy).length === 0) {
-      setLoading(true);
       api.questions.getTaxonomy()
         .then((data) => {
-          if (data && typeof data === "object") {
+          if (isMounted && data && typeof data === "object") {
             setTaxonomy(data);
           }
         })
@@ -66,9 +68,14 @@ export function QuestionClassificationModal({
           console.warn("Erro ao buscar taxonomia:", err);
         })
         .finally(() => {
-          setLoading(false);
+          if (isMounted) {
+            setLoading(false);
+          }
         });
     }
+    return () => {
+      isMounted = false;
+    };
   }, [isOpen, taxonomy]);
 
   // Available subtemas for selected area

@@ -127,7 +127,7 @@ export function QuizClient({
   const [isClassificationModalOpen, setIsClassificationModalOpen] = useState(false);
   const hasExplicitFilters = Object.keys(initialFilters).filter(k => k !== "resume").length > 0;
   const [state, setState] = useState<QuizState>(hasExplicitFilters ? "LOADING_QUEUE" : "FILTERS");
-  const [filters, setFilters] = useState<Record<string, string | string[]>>({ limit: "50", ...initialFilters });
+  const [filters, setFilters] = useState<Record<string, string | string[]>>({ limit: "50", unanswered_only: "true", ...initialFilters });
   const [localLimit, setLocalLimit] = useState<string>(
     typeof filters.limit === "string" ? filters.limit : "50"
   );
@@ -698,6 +698,22 @@ export function QuizClient({
       setSubmitting(false);
     }
   }, [attemptResult, isOfflineSaved, submitting, currentDetail, userWrittenAnswer]);
+
+  const handleQuickSaveFlashcard = async () => {
+    if (!currentDetail) return;
+    setSavingFlashcard(true);
+    try {
+      const res = await api.flashcards.generate(currentDetail.id, selectedLetter || "A");
+      const normalized = normalizeFlashcard({ ...res, stem: currentDetail.stem });
+      setFlashcardResult(normalized);
+      setDraftFlashcard(null);
+      toast.success("Flashcard adicionado à Revisão Ativa de amanhã!");
+    } catch {
+      toast.error("Erro ao criar flashcard instantâneo.");
+    } finally {
+      setSavingFlashcard(false);
+    }
+  };
 
   const handleGenerateFlashcard = async () => {
     if (!currentDetail) return;
@@ -1459,21 +1475,40 @@ export function QuizClient({
                     </div>
                   ) : null}
                   
-                  {/* Flashcard Generation: Available when marked wrong, or on demand */}
+                  {/* Flashcard Generation 1-Click: Available when marked wrong, or on demand */}
                   {attemptResult.is_correct === false && !flashcardResult && !draftFlashcard && (
-                    <div className="mt-6">
-                      <button 
-                        onClick={handleGenerateFlashcard}
-                        disabled={generatingFlashcard}
-                        className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-sm transition-all disabled:opacity-50 cursor-pointer text-sm"
-                      >
-                        {generatingFlashcard ? (
-                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        ) : (
-                          <Sparkles size={16} />
-                        )}
-                        {generatingFlashcard ? "Gerando Flashcard com IA..." : "Criar Flashcard com IA"}
-                      </button>
+                    <div className="mt-6 p-4 rounded-2xl bg-purple-500/10 border border-purple-500/25 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in slide-in-from-bottom-2">
+                      <div>
+                        <div className="flex items-center gap-2 text-purple-700 dark:text-purple-300 font-bold text-sm">
+                          <Brain size={18} /> Fixe este aprendizado na memória
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Adicione um flashcard com o Pulo do Gato para revisar no momento ideal (FSRS).
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+                        <button 
+                          onClick={handleQuickSaveFlashcard}
+                          disabled={savingFlashcard}
+                          className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl shadow-sm transition-all disabled:opacity-50 cursor-pointer text-sm"
+                        >
+                          {savingFlashcard ? (
+                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          ) : (
+                            <Sparkles size={16} />
+                          )}
+                          {savingFlashcard ? "Salvando..." : "Salvar Flashcard (1-Click)"}
+                        </button>
+                        <button 
+                          onClick={handleGenerateFlashcard}
+                          disabled={generatingFlashcard || savingFlashcard}
+                          title="Personalizar texto antes de salvar"
+                          className="px-3 py-2.5 rounded-xl border border-purple-500/30 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 text-xs font-semibold transition-colors cursor-pointer flex items-center gap-1"
+                        >
+                          <Pencil size={15} />
+                          <span className="hidden md:inline">Editar</span>
+                        </button>
+                      </div>
                     </div>
                   )}
 

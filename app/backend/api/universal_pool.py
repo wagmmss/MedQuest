@@ -224,7 +224,7 @@ def _try_ollama(prompt: str, system_instruction: Optional[str], json_mode: bool,
             headers={"Content-Type": "application/json"},
         )
         try:
-            with urllib.request.urlopen(request, timeout=timeout + 5) as response:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
                 data = json.loads(response.read().decode("utf-8"))
             text = data.get("message", {}).get("content", "")
             if _valid_text(text, validator):
@@ -241,12 +241,23 @@ def generate_content_with_fallback(
     system_instruction: Optional[str] = None,
     json_mode: bool = False,
     temperature: float = 0.2,
-    timeout: int = 25,
+    timeout: Optional[int] = None,
     response_validator: Optional[Callable[[str], bool]] = None,
 ) -> Dict[str, Any]:
-    """Tenta os provedores configurados ate obter uma resposta valida."""
+    """Tenta os provedores configurados ate obter uma resposta valida ou esgotar o budget de tempo."""
     attempts: list[str] = []
+    global_budget = float(os.environ.get("AI_GLOBAL_TIMEOUT_BUDGET", "4.0"))
+    provider_timeout = float(timeout or os.environ.get("AI_PROVIDER_TIMEOUT", "3.0"))
+    start_time = time.perf_counter()
+
     for provider in _provider_order():
+        elapsed = time.perf_counter() - start_time
+        remaining = global_budget - elapsed
+        if remaining <= 0.3:
+            logger.warning("[UniversalPool] Budget global de IA esgotado (%.2fs decorridos).", elapsed)
+            break
+
+        current_timeout = max(1.0, min(provider_timeout, remaining))
         attempts.append(provider)
         if provider == "gemini":
             if gemini_pool.total_keys <= 0:
@@ -254,8 +265,8 @@ def generate_content_with_fallback(
             try:
                 response = gemini_pool.generate_content(
                     prompt=prompt, system_instruction=system_instruction, json_mode=json_mode,
-                    temperature=temperature, timeout=timeout,
-                    max_total_seconds=float(os.environ.get("AI_GEMINI_TIMEOUT_BUDGET", "20")),
+                    temperature=temperature, timeout=int(current_timeout),
+                    max_total_seconds=current_timeout,
                 )
                 text = response.get("text", "")
                 if _valid_text(text, response_validator):
@@ -264,15 +275,15 @@ def generate_content_with_fallback(
             except Exception as error:
                 logger.warning("[UniversalPool] Gemini falhou: %s", error)
         elif provider == "groq":
-            response = _try_groq(prompt, system_instruction, json_mode, temperature, timeout, response_validator)
+            response = _try_groq(prompt, system_instruction, json_mode, temperature, int(current_timeout), response_validator)
             if response:
                 return response
         elif provider == "openrouter":
-            response = _try_openrouter(prompt, system_instruction, json_mode, temperature, timeout, response_validator)
+            response = _try_openrouter(prompt, system_instruction, json_mode, temperature, int(current_timeout), response_validator)
             if response:
                 return response
         elif provider == "ollama":
-            response = _try_ollama(prompt, system_instruction, json_mode, temperature, timeout, response_validator)
+            response = _try_ollama(prompt, system_instruction, json_mode, temperature, int(current_timeout), response_validator)
             if response:
                 return response
     raise RuntimeError(f"Todos os provedores de IA falharam ({', '.join(attempts)}).")

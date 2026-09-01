@@ -70,3 +70,23 @@ def test_performance_indexes_cover_user_timeline_and_latest_attempt(client):
         indexes = {row["name"] for row in get_db().execute("PRAGMA index_list(attempts)").fetchall()}
     assert "idx_attempts_user_question_latest" in indexes
     assert "idx_attempts_user_answered_at" in indexes
+
+
+def test_domain_event_emission_and_p99_metric(client, caplog):
+    from api.observability import record_domain_event
+
+    with caplog.at_level(logging.INFO, logger="medquest.telemetry"):
+        record_domain_event("study_attempt_completed", user_id="test_user", question_id=10, is_correct=True)
+    
+    record = next(json.loads(item.message) for item in caplog.records if '"event":"domain_event"' in item.message)
+    assert record["event_name"] == "study_attempt_completed"
+    assert record["user_id"] == "test_user"
+    assert record["question_id"] == 10
+
+    # Ensure performance snapshot has p99_ms and error_rate_pct
+    snapshot = client.get("/api/metrics/performance").get_json()
+    assert "routes" in snapshot
+    for route in snapshot["routes"]:
+        assert "p99_ms" in route
+        assert "error_rate_pct" in route
+

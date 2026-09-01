@@ -15,6 +15,7 @@ from .auth import require_curator
 from .db import db_transaction, get_db
 from .filters import question_filter_clauses
 from .idempotency import complete_idempotency, fail_idempotency, reserve_idempotency
+from .observability import record_domain_event
 from .schemas import (
     AttemptIn,
     BatchAttemptIn,
@@ -228,7 +229,35 @@ def save_simulado_session():
         """, (data.client_session_id, data.planned_duration_seconds, data.elapsed_seconds,
                data.total_questions, data.answered_count, data.correct_count,
                json.dumps(data.filters), json.dumps(data.area_results), completed_at, g.user_id))
+    record_domain_event(
+        "simulado_completed",
+        user_id=g.user_id,
+        session_id=data.client_session_id,
+        total_questions=data.total_questions,
+        answered_count=data.answered_count,
+        correct_count=data.correct_count,
+        elapsed_seconds=data.elapsed_seconds,
+    )
     return jsonify({"success": True})
+
+
+def _fts5_escape(query_str: str) -> str:
+    tokens = re.findall(r"\w+", query_str, flags=re.UNICODE)
+    valid_tokens = [t for t in tokens if len(t) >= 2]
+    if not valid_tokens:
+        return ""
+    return " AND ".join(f'"{t}"*' for t in valid_tokens[:12])
+
+
+def _fts5_or_query(terms: list[str]) -> str:
+    tokens: list[str] = []
+    for term in terms:
+        for t in re.findall(r"\w+", term, flags=re.UNICODE):
+            if len(t) >= 2 and t not in tokens:
+                tokens.append(t)
+    if not tokens:
+        return ""
+    return " OR ".join(f'"{t}"*' for t in tokens[:16])
 
 
 @bp.route("/search")
@@ -239,48 +268,80 @@ def search_questions():
         return jsonify([])
     semantic = request.args.get("semantic", "false").lower() == "true"
     
-    def make_like_clauses(term_list, joiner="AND"):
-        clauses = []
-        params = []
-        for term in term_list:
-            if not term: continue
-            term_clean = term.replace("%", "").replace("_", "")
-            if len(term_clean) < 2: continue
-            clauses.append("(q.stem LIKE ? OR e.explanation_text LIKE ? OR q.area LIKE ? OR q.subtema LIKE ?)")
-            like_val = f"%{term_clean}%"
-            params.extend([like_val, like_val, like_val, like_val])
-        if not clauses:
-            return "", []
-        return f"({f' {joiner} '.join(clauses)})", params
+    rows = []
+    # 1. Tenta consulta nativa FTS5 (otimização C SQLite)
+    try:
+        if semantic:
+            from .ai import expand_search_query
+            expanded_terms = expand_search_query(q)
+            fts_query = _fts5_or_query(expanded_terms)
+        else:
+            fts_query = _fts5_escape(q)
+            
+        if fts_query:
+            rows = db.execute("""
+                SELECT q.id, q.institution_code, q.year, q.area, q.subtema, q.source_file, q.editorial_status,
+                       snippet(questions_fts, 0, '<b>', '</b>', '...', 25) as stem_snippet,
+                       snippet(questions_fts, 1, '<b>', '</b>', '...', 25) as exp_snippet
+                FROM questions_fts f
+                JOIN questions q ON q.id = f.rowid
+                WHERE questions_fts MATCH ?
+                LIMIT 50
+            """, (fts_query,)).fetchall()
+    except Exception as fts_err:
+        logger.warning("FTS5 indisponivel ou consulta invalida (%s), acionando fallback", fts_err)
+        rows = []
 
-    if semantic:
-        from .ai import expand_search_query
-        expanded_terms = expand_search_query(q)
-        where_sql, params = make_like_clauses(expanded_terms, "OR")
-    else:
-        terms = re.findall(r"\w+", q, flags=re.UNICODE)[:12]
-        where_sql, params = make_like_clauses(terms, "AND")
+    # 2. Fallback resiliente com LIKE caso FTS5 nao encontre resultados ou nao esteja populado
+    if not rows:
+        def make_like_clauses(term_list, joiner="AND"):
+            clauses = []
+            params = []
+            for term in term_list:
+                if not term: continue
+                term_clean = term.replace("%", "").replace("_", "")
+                if len(term_clean) < 2: continue
+                clauses.append("(q.stem LIKE ? OR e.explanation_text LIKE ? OR q.area LIKE ? OR q.subtema LIKE ?)")
+                like_val = f"%{term_clean}%"
+                params.extend([like_val, like_val, like_val, like_val])
+            if not clauses:
+                return "", []
+            return f"({f' {joiner} '.join(clauses)})", params
 
-    if not where_sql:
-        return jsonify([])
-    
-    rows = db.execute(f"""
-        SELECT q.id, q.institution_code, q.year, q.area, q.subtema, q.source_file, q.editorial_status,
-               SUBSTR(q.stem, 1, 150) as stem_snippet,
-               SUBSTR(e.explanation_text, 1, 150) as exp_snippet
-        FROM questions q
-        LEFT JOIN explanations e ON q.id = e.question_id
-        WHERE {where_sql}
-        LIMIT 50
-    """, params).fetchall()
-    
+        if semantic:
+            from .ai import expand_search_query
+            expanded_terms = expand_search_query(q)
+            where_sql, params = make_like_clauses(expanded_terms, "OR")
+        else:
+            terms = re.findall(r"\w+", q, flags=re.UNICODE)[:12]
+            where_sql, params = make_like_clauses(terms, "AND")
+
+        if where_sql:
+            rows = db.execute(f"""
+                SELECT q.id, q.institution_code, q.year, q.area, q.subtema, q.source_file, q.editorial_status,
+                       SUBSTR(q.stem, 1, 150) as stem_snippet,
+                       SUBSTR(e.explanation_text, 1, 150) as exp_snippet
+                FROM questions q
+                LEFT JOIN explanations e ON q.id = e.question_id
+                WHERE {where_sql}
+                LIMIT 50
+            """, params).fetchall()
+
     out = []
     for row in rows:
         item = dict(row)
         item["is_autoral"] = bool(item.get("editorial_status") == "autoral" or (item.get("source_file") and "AUTORAL" in str(item.get("source_file")).upper()))
-        item["stem_snippet"] = (item.get("stem_snippet") or "") + "..."
-        item["exp_snippet"] = (item.get("exp_snippet") or "") + "..."
+        stem_snip = item.get("stem_snippet") or ""
+        if stem_snip and not stem_snip.endswith("..."):
+            stem_snip += "..."
+        item["stem_snippet"] = stem_snip
+        exp_snip = item.get("exp_snippet") or ""
+        if exp_snip and not exp_snip.endswith("..."):
+            exp_snip += "..."
+        item["exp_snippet"] = exp_snip
         out.append(item)
+
+    record_domain_event("search_executed", user_id=g.user_id, query=q, results_count=len(out), semantic=semantic)
     return jsonify(out)
 
 
@@ -494,7 +555,7 @@ def submit_attempt(qid):
                 fail_idempotency(db, g.user_id, lease_token)
             return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
 
-        q = db.execute("SELECT correct_letter FROM questions WHERE id = ?", (qid,)).fetchone()
+        q = db.execute("SELECT correct_letter, area, subtema FROM questions WHERE id = ?", (qid,)).fetchone()
         if not q:
             if lease_token:
                 fail_idempotency(db, g.user_id, lease_token)
@@ -550,6 +611,16 @@ def submit_attempt(qid):
                 complete_idempotency(db, g.user_id, 200, resp_data, lease_token)
 
         invalidate_user_caches(g.user_id)
+        record_domain_event(
+            "study_attempt_completed",
+            user_id=g.user_id,
+            question_id=qid,
+            is_correct=reported_is_correct,
+            confidence=payload.confidence,
+            time_spent_ms=payload.time_spent_ms,
+            area=q["area"] if q else None,
+            subtema=q["subtema"] if q else None,
+        )
         return jsonify(resp_data)
     except Exception:
         if lease_token:

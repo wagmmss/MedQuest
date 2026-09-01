@@ -7,7 +7,8 @@ from urllib.parse import urlsplit
 
 from flask import Blueprint, current_app, g, jsonify, request
 
-from .observability import emit, performance_snapshot
+from .db import db_transaction, get_db
+from .observability import emit, flush_daily_metrics_to_db, performance_snapshot
 
 bp = Blueprint("logs", __name__)
 
@@ -28,7 +29,7 @@ def log_error():
     data = request.get_json(silent=True)
     if not isinstance(data, dict):
         return jsonify({"error": "Invalid JSON body"}), 400
-    message = data.get("error")
+    message = data.get("error") or data.get("message")
     if not isinstance(message, str) or not message.strip():
         return jsonify({"error": "error is required"}), 400
     info = data.get("info") if isinstance(data.get("info"), dict) else {}
@@ -37,7 +38,7 @@ def log_error():
         level=logging.ERROR,
         request_id=getattr(g, "request_id", None),
         owner_scope="guest" if str(g.user_id).startswith("guest:") else "account",
-        path=_safe_path(data.get("url")),
+        path=_safe_path(data.get("url") or data.get("path")),
         message=message.strip()[:1000],
         digest=str(info.get("digest", ""))[:128],
     )
@@ -45,8 +46,8 @@ def log_error():
 
 
 @bp.route("/logs/web-vital", methods=["POST"])
-def web_vital():
-    data = request.get_json(silent=True)
+def ingest_web_vital():
+    data = request.get_json(silent=True) or {}
     if not isinstance(data, dict) or data.get("name") not in WEB_VITAL_NAMES:
         return jsonify({"error": "Unsupported metric"}), 400
     try:
@@ -76,3 +77,39 @@ def metrics_performance():
         if not provided or not hmac.compare_digest(expected, provided):
             return jsonify({"error": "Unauthorized"}), 401
     return jsonify(performance_snapshot())
+
+
+@bp.route("/metrics/consolidate", methods=["POST"])
+def metrics_consolidate():
+    """Consolida os percentis de latência na tabela SQL telemetry_daily_aggregates."""
+    if not current_app.config.get("TESTING"):
+        expected = os.environ.get("METRICS_API_TOKEN", "")
+        provided = request.headers.get("X-Metrics-Token", "")
+        if not expected:
+            return jsonify({"error": "Not Found"}), 404
+        if not provided or not hmac.compare_digest(expected, provided):
+            return jsonify({"error": "Unauthorized"}), 401
+    db = get_db()
+    with db_transaction(db, immediate=True):
+        count = flush_daily_metrics_to_db(db)
+    return jsonify({"success": True, "consolidated_routes": count})
+
+
+@bp.route("/metrics/history")
+def metrics_history():
+    """Retorna o histórico diário consolidado das rotas."""
+    if not current_app.config.get("TESTING"):
+        expected = os.environ.get("METRICS_API_TOKEN", "")
+        provided = request.headers.get("X-Metrics-Token", "")
+        if not expected:
+            return jsonify({"error": "Not Found"}), 404
+        if not provided or not hmac.compare_digest(expected, provided):
+            return jsonify({"error": "Unauthorized"}), 401
+    db = get_db()
+    rows = db.execute("""
+        SELECT date, route, method, p50_ms, p95_ms, p99_ms, request_count, error_count, created_at
+        FROM telemetry_daily_aggregates
+        ORDER BY date DESC, request_count DESC
+        LIMIT 100
+    """).fetchall()
+    return jsonify({"history": [dict(r) for r in rows]})
