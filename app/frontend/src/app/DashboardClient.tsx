@@ -360,7 +360,7 @@ export function DashboardClient({
                 className="flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-2xl px-3.5 py-1.5 text-xs font-bold transition-colors"
               >
                 <span className="material-symbols-outlined text-[16px]" data-icon="calendar_month">calendar_month</span>
-                Definir data da prova &rarr;
+                Definir data da prova →
               </Link>
             )}
           </div>
@@ -469,7 +469,7 @@ export function DashboardClient({
                     href={(stats.flashcards_due_count || 0) > 0 ? "/revisao-ativa" : "/estudar?status=srs_due&limit=100"}
                     className="w-full py-2 bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors"
                   >
-                    Revisar agora &rarr;
+                    Revisar agora →
                   </Link>
                 ) : (
                   <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
@@ -501,7 +501,7 @@ export function DashboardClient({
                   href={`/estudar?status=new&limit=${Math.min(20, Math.max(5, dailyRemaining))}`}
                   className="w-full py-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors"
                 >
-                  {dailyRemaining > 0 ? "Praticar questões &rarr;" : "Fazer questões extras &rarr;"}
+                  {dailyRemaining > 0 ? "Praticar questões →" : "Fazer questões extras →"}
                 </Link>
               </div>
 
@@ -538,7 +538,7 @@ export function DashboardClient({
                   }
                   className="w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors"
                 >
-                  {isPlanCompleted ? "Ver cronograma &rarr;" : "Continuar plano &rarr;"}
+                  {isPlanCompleted ? "Ver cronograma →" : "Continuar plano →"}
                 </Link>
               </div>
             </div>

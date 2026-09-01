@@ -839,11 +839,8 @@ export function QuizClient({
       prevQuestion();
       return;
     }
-    if (!attemptResult && !isOfflineSaved && !window.confirm("Pular esta questão? Ela ficará pendente e não contará como respondida na sessão.")) {
-      return;
-    }
     nextQuestion();
-  }, [attemptResult, isOfflineSaved, nextQuestion, prevQuestion]);
+  }, [nextQuestion, prevQuestion]);
 
   const toggleFavorite = async () => {
     if (!currentDetail || togglingFavorite || favoriteLockRef.current) return;
@@ -1186,7 +1183,7 @@ export function QuizClient({
                   onClick={() => navigateQuestion("next")}
                   disabled={loadingDetail}
                   className="p-1 hover:bg-background rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
-                  title="Próxima questão (Ctrl + Seta Direita)"
+                  title="Próxima questão (Seta Direita)"
                   aria-label="Próxima Questão"
                 >
                   <ArrowRight size={18} aria-hidden="true" />

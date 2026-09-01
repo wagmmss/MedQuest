@@ -92,11 +92,11 @@ export function useQuizKeyboard({
         }
       }
 
-      // Free navigation with arrows (Requires Ctrl or Alt to prevent accidental jumps while scrolling)
-      if (e.key === "ArrowLeft" && (e.ctrlKey || e.altKey)) {
+      // Free navigation with arrows (direto com seta esquerda/direita)
+      if (e.key === "ArrowLeft") {
         e.preventDefault();
         navigateQuestion("previous");
-      } else if (e.key === "ArrowRight" && (e.ctrlKey || e.altKey)) {
+      } else if (e.key === "ArrowRight") {
         e.preventDefault();
         navigateQuestion("next");
       }
