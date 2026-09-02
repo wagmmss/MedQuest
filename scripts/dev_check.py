@@ -276,7 +276,11 @@ def run_tier_fast():
     frontend_ts_files = [
         str((ROOT_DIR / f).resolve())
         for f in changed
-        if (f.startswith("app/frontend/src/") or f.startswith("src/")) and (f.endswith(".ts") or f.endswith(".tsx"))
+        if (f.startswith("app/frontend/src/") or f.startswith("src/"))
+        and (f.endswith(".ts") or f.endswith(".tsx"))
+        # Arquivos removidos também aparecem no diff, mas não podem ser
+        # enviados ao ESLint. Isso é comum ao substituir uma route handler.
+        and (ROOT_DIR / f).is_file()
     ]
 
     if frontend_ts_files:

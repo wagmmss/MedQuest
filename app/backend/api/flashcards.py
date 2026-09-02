@@ -12,7 +12,6 @@ from .db import db_transaction, get_db
 from .observability import record_domain_event
 from .questions import invalidate_user_caches
 from .schemas import (
-    AnkiConnectProxyIn,
     AnkiDeleteDeckIn,
     AnkiImportBatchIn,
     FlashcardBatchIn,
@@ -486,47 +485,6 @@ def delete_deck():
         "deck_name": data.deck_name,
         "deleted_count": deleted_count,
     })
-
-
-@bp.route("/flashcards/ankiconnect/proxy", methods=["POST"])
-def proxy_ankiconnect():
-    import urllib.error
-    import urllib.request
-
-    try:
-        payload = AnkiConnectProxyIn.model_validate(request.get_json(force=True) or {})
-    except ValidationError as e:
-        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
-
-    target_url = payload.url or "http://127.0.0.1:8765"
-    body_data: dict = {
-        "action": payload.action,
-        "version": payload.version,
-        "params": payload.params,
-    }
-    if payload.key:
-        body_data["key"] = payload.key
-
-    req_bytes = json.dumps(body_data).encode("utf-8")
-    req = urllib.request.Request(
-        target_url,
-        data=req_bytes,
-        headers={"Content-Type": "application/json"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=5) as resp:
-            resp_data = json.loads(resp.read().decode("utf-8"))
-            return jsonify(resp_data)
-    except urllib.error.URLError as e:
-        logger.warning("AnkiConnect proxy request to %s failed: %s", target_url, e)
-        return jsonify({
-            "error": f"Não foi possível conectar ao AnkiConnect em {target_url}. Certifique-se de que o Anki está aberto.",
-            "details": str(e)
-        }), 502
-    except Exception as e:
-        logger.exception("AnkiConnect proxy unexpected error: %s", e)
-        return jsonify({"error": str(e)}), 500
 
 
 @bp.route("/flashcards/review", methods=["GET"])

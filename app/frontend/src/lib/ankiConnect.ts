@@ -41,7 +41,9 @@ export async function ankiConnectInvoke<T>(
     bodyPayload.key = options.apiKey.trim();
   }
 
-  // 1. Tenta chamada direta ao AnkiConnect local
+  // O AnkiConnect roda no computador da pessoa usuária. Esta chamada precisa
+  // sair do navegador: em produção, 127.0.0.1 no servidor seria o servidor do
+  // MedQuest, e não a máquina onde o Anki está aberto.
   try {
     const res = await fetch(url, {
       method: "POST",
@@ -52,76 +54,30 @@ export async function ankiConnectInvoke<T>(
       signal: AbortSignal.timeout(4000),
     });
 
-    if (res.ok) {
-      const data = await res.json();
-      if (data.error) {
-        throw new Error(data.error);
+    if (!res.ok) {
+      let detail = `${res.status} ${res.statusText}`;
+      try {
+        const data = await res.json();
+        if (typeof data?.error === "string") detail = data.error;
+      } catch {
+        // Mantém a descrição HTTP quando a resposta não for JSON.
       }
-      return data.result as T;
+      throw new Error(`AnkiConnect respondeu com erro: ${detail}`);
     }
-  } catch (directErr) {
-    // Se não for erro de autenticação explícito, tenta o proxy do servidor
-    const errMsg = String(directErr);
-    if (errMsg.toLowerCase().includes("valid api key")) {
-      throw directErr;
+    const data = await res.json();
+    if (data.error) {
+      throw new Error(data.error);
     }
-  }
-
-  // 2. Fallback automático para o proxy server-side do Next.js (bypassa CORS e PNA)
-  try {
-    const proxyRes = await fetch("/api/ankiconnect/proxy", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...bodyPayload,
-        url,
-      }),
-      signal: AbortSignal.timeout(6000),
-    });
-
-    if (proxyRes.ok) {
-      const data = await proxyRes.json();
-      if (data.error) {
-        throw new Error(data.error);
-      }
-      return data.result as T;
+    return data.result as T;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Erro desconhecido";
+    if (message === "Failed to fetch" || message.includes("NetworkError")) {
+      throw new Error(
+        "Não foi possível acessar o AnkiConnect local. Abra o Anki e permita o site do MedQuest em webCorsOriginList."
+      );
     }
-  } catch {
-    // continua para o fallback final
+    throw error;
   }
-
-  // 3. Fallback para o backend Flask
-  const flaskProxyRes = await fetch("/api/flashcards/ankiconnect/proxy", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ...bodyPayload,
-      url,
-    }),
-    signal: AbortSignal.timeout(6000),
-  });
-
-  if (!flaskProxyRes.ok) {
-    let errDetail = flaskProxyRes.statusText;
-    try {
-      const j = await flaskProxyRes.json();
-      if (j.error) errDetail = j.error;
-    } catch {
-      // ignore
-    }
-    throw new Error(`Falha ao conectar ao AnkiConnect: ${errDetail}`);
-  }
-
-  const flaskData = await flaskProxyRes.json();
-  if (flaskData.error) {
-    throw new Error(flaskData.error);
-  }
-
-  return flaskData.result as T;
 }
 
 export async function checkAnkiConnect(
