@@ -6,6 +6,23 @@ const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_A
   (process.env.NODE_ENV === "development" ? "http://127.0.0.1:5050" : "");
 const UPSTREAM_TIMEOUT_MS = 45_000;
 
+// These headers describe the browser → Next.js connection, not the new
+// Next.js → Flask request.  Forwarding them can make Undici reject streamed
+// POST/PUT requests (for example, due to a stale Content-Length or a
+// Connection/Transfer-Encoding conflict), which surfaced as "Proxy fetch
+// failed" even while GET requests continued to work.
+const HOP_BY_HOP_REQUEST_HEADERS = [
+  "connection",
+  "keep-alive",
+  "proxy-connection",
+  "transfer-encoding",
+  "te",
+  "trailer",
+  "upgrade",
+  "expect",
+  "content-length",
+];
+
 async function handler(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   const requestId = crypto.randomUUID();
   const proxySecret = process.env.FLASK_API_PROXY_SECRET;
@@ -36,7 +53,10 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
 
   const headers = new Headers(req.headers);
   headers.delete("host");
-  // Prevent backend from sending compressed data, let Next/Vercel handle compression
+  for (const header of HOP_BY_HOP_REQUEST_HEADERS) {
+    headers.delete(header);
+  }
+  // Prevent backend from sending compressed data; let Next/Caddy handle compression.
   headers.delete("accept-encoding");
 
   // Remove untrusted or spoofable client-supplied auth headers
