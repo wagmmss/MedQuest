@@ -19,11 +19,15 @@ const LEGACY_CACHES = [
   "cross-origin"
 ];
 
+const OFFLINE_STUDY_SHELL_CACHE = "medquest-study-shell";
+const OFFLINE_STUDY_SHELL_PATH = "/estudar";
+
 // Existing Android installations can retain `/` as their launch target until
-// Chrome refreshes the manifest. When that happens offline, redirect the
-// navigation to the cached study shell instead of letting the browser show its
-// generic offline error page. The Workbox route for `/estudar` then serves the
-// shell from `medquest-study-shell`.
+// Chrome refreshes the manifest. A redirect is not enough here: after a failed
+// navigation Chrome may try to load the redirect target outside this fetch
+// event and show its generic offline page. Return the cached shell itself.
+// New installations start at `/estudar` (see manifest.json), which is handled
+// by Workbox's NetworkFirst route below.
 self.addEventListener("fetch", (rawEvent: Event) => {
   const event = rawEvent as FetchEvent;
   if (event.request.mode !== "navigate") return;
@@ -31,11 +35,15 @@ self.addEventListener("fetch", (rawEvent: Event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin || url.pathname !== "/") return;
 
-  event.respondWith(
-    fetch(event.request).catch(() =>
-      Response.redirect(new URL("/estudar", self.location.origin).href, 302)
-    )
-  );
+  event.respondWith((async () => {
+    try {
+      return await fetch(event.request);
+    } catch {
+      const cache = await caches.open(OFFLINE_STUDY_SHELL_CACHE);
+      const shell = await cache.match(OFFLINE_STUDY_SHELL_PATH, { ignoreSearch: true });
+      return shell || Response.error();
+    }
+  })());
 });
 
 // Clean up any legacy or unwanted caches during ServiceWorker activation

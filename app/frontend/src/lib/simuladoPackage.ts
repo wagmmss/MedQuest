@@ -11,6 +11,8 @@ export const SIMULADO_PACKAGE_VERSION = 1;
 export const SIMULADO_PACKAGE_VALIDITY_DAYS = 30;
 const OFFLINE_STUDY_SHELL_CACHE = "medquest-study-shell";
 const OFFLINE_IMAGE_CACHE = "medquest-image-cache";
+const IMAGE_DOWNLOAD_CONCURRENCY = 4;
+const IMAGE_DOWNLOAD_ATTEMPTS = 3;
 
 export interface SimuladoDownloadProgress {
   step: "list" | "details" | "images" | "complete" | "error";
@@ -39,30 +41,59 @@ async function prefetchImages(imageUrls: string[]): Promise<{ cachedCount: numbe
   let cachedCount = 0;
   const failedUrls: string[] = [];
 
-  const imageFetches = uniqueUrls.map(async (url) => {
-    try {
-      const fullUrl = url.startsWith("http") ? url : `${url.startsWith("/") ? "" : "/"}${url}`;
-      const res = await fetch(fullUrl, { cache: "force-cache" });
-      if (!res.ok) {
-        failedUrls.push(url);
-        return;
+  // A large simulado may reference hundreds of images. Starting every request
+  // at once makes mobile browsers abort otherwise valid downloads, so keep a
+  // small worker pool and retry transient network failures.
+  let nextIndex = 0;
+  const fetchOne = async (url: string): Promise<boolean> => {
+    const fullUrl = url.startsWith("http") ? url : `${url.startsWith("/") ? "" : "/"}${url}`;
+    for (let attempt = 1; attempt <= IMAGE_DOWNLOAD_ATTEMPTS; attempt++) {
+      try {
+        const res = await fetch(fullUrl, { cache: "force-cache" });
+        if (res.ok) {
+          // Fetching alone only reaches Workbox after the service worker has
+          // taken control. Persist the image here too, so a newly opened app
+          // can immediately use the completed package offline.
+          if (typeof caches !== "undefined") {
+            const imageCache = await caches.open(OFFLINE_IMAGE_CACHE);
+            await imageCache.put(fullUrl, res.clone());
+          }
+          return true;
+        }
+
+        // A missing/invalid image is permanent; retries only help temporary
+        // server and connection failures.
+        if (res.status >= 400 && res.status < 500) return false;
+      } catch {
+        // Retry network failures below.
       }
 
-      // Fetching alone only reaches Workbox after the service worker has taken
-      // control of the page. Persist the image here as well, so a package
-      // downloaded immediately after opening the app still works offline.
-      if (typeof caches !== "undefined") {
-        const imageCache = await caches.open(OFFLINE_IMAGE_CACHE);
-        await imageCache.put(fullUrl, res.clone());
+      if (attempt < IMAGE_DOWNLOAD_ATTEMPTS) {
+        await new Promise<void>((resolve) => setTimeout(resolve, attempt * 250));
       }
-      cachedCount++;
-    } catch {
-      failedUrls.push(url);
+    }
+    return false;
+  };
+
+  const workers = Array.from({ length: Math.min(IMAGE_DOWNLOAD_CONCURRENCY, uniqueUrls.length) }, async () => {
+    while (nextIndex < uniqueUrls.length) {
+      const url = uniqueUrls[nextIndex++];
+      if (await fetchOne(url)) cachedCount++;
+      else failedUrls.push(url);
     }
   });
 
-  await Promise.allSettled(imageFetches);
+  await Promise.all(workers);
   return { cachedCount, failedUrls };
+}
+
+async function requestPersistentStorage(): Promise<void> {
+  try {
+    await navigator.storage?.persist?.();
+  } catch {
+    // This is a best-effort request. IndexedDB remains usable if the browser
+    // declines it, but is less likely to evict a completed offline package.
+  }
 }
 
 /**
@@ -94,6 +125,8 @@ export async function downloadSimuladoPackage(
   if (typeof window === "undefined" || !localDb) {
     throw new Error("Armazenamento local (IndexedDB) indisponível neste ambiente.");
   }
+
+  await requestPersistentStorage();
 
   const uid = getLocalOwnerId();
   const packageId = crypto.randomUUID();
@@ -304,7 +337,17 @@ export async function downloadSimuladoPackage(
 
 
 function normalizeImageForCache(img: string): string {
-  const trimmed = (img || "").trim();
+  // Keep this normalization aligned with the question renderer. Previously
+  // `images/foo.png` became `/api/images/images/foo.png` here while the screen
+  // correctly rendered `/api/images/foo.png`, making otherwise valid downloads
+  // fail during image prefetch.
+  const trimmed = (img || "")
+    .trim()
+    .replace(/^\/api\/images\/images\//, "/api/images/")
+    .replace(/MedQuest-assets\.s3\.sa-east-1\.amazonaws\.com/gi, "medcof-assets.s3.sa-east-1.amazonaws.com")
+    .replace(/MedQuest-assets\.s3\.amazonaws\.com/gi, "medcof-assets.s3.amazonaws.com")
+    .replace(/cdn\.MedQuest\.com\.br/gi, "cdn.medway.com.br")
+    .replace(/www\.MedQuest\.com\.br/gi, "www.medway.com.br");
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("/api/")) {
     return trimmed;
   }
