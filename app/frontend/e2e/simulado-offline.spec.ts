@@ -58,8 +58,9 @@ const MOCK_BATCH_DETAILS = {
 
 test.describe('Simulado 100% Offline com Pré-download e Sincronização Posterior', () => {
   test.beforeEach(async ({ context, page }) => {
+    const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:3100';
     await context.addCookies([
-      { name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' }
+      { name: 'medquest_demo', value: '1', url: baseURL }
     ]);
     await page.addInitScript(() => localStorage.setItem('medquest_onboarding_v1', 'done'));
   });
@@ -132,6 +133,11 @@ test.describe('Simulado 100% Offline com Pré-download e Sincronização Posteri
 
     // 4. Aguardar o download concluir e validar exibição do badge "Pronto Offline"
     await expect(page.locator('text=Pronto Offline')).toBeVisible({ timeout: 15000 });
+    const studyShellCached = await page.evaluate(async () => {
+      const cache = await caches.open('medquest-study-shell');
+      return Boolean(await cache.match('/estudar'));
+    });
+    expect(studyShellCached).toBe(true);
 
     // 5. DESLIGAR A REDE (Simular desconexão total de API e serviços)
     isNetworkOnline = false;

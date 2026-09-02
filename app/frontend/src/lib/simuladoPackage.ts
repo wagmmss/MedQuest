@@ -9,6 +9,8 @@ import { QuestionDetail, QuestionListItem } from "@/types/api";
 
 export const SIMULADO_PACKAGE_VERSION = 1;
 export const SIMULADO_PACKAGE_VALIDITY_DAYS = 30;
+const OFFLINE_STUDY_SHELL_CACHE = "medquest-study-shell";
+const OFFLINE_IMAGE_CACHE = "medquest-image-cache";
 
 export interface SimuladoDownloadProgress {
   step: "list" | "details" | "images" | "complete" | "error";
@@ -41,11 +43,19 @@ async function prefetchImages(imageUrls: string[]): Promise<{ cachedCount: numbe
     try {
       const fullUrl = url.startsWith("http") ? url : `${url.startsWith("/") ? "" : "/"}${url}`;
       const res = await fetch(fullUrl, { cache: "force-cache" });
-      if (res.ok) {
-        cachedCount++;
-      } else {
+      if (!res.ok) {
         failedUrls.push(url);
+        return;
       }
+
+      // Fetching alone only reaches Workbox after the service worker has taken
+      // control of the page. Persist the image here as well, so a package
+      // downloaded immediately after opening the app still works offline.
+      if (typeof caches !== "undefined") {
+        const imageCache = await caches.open(OFFLINE_IMAGE_CACHE);
+        await imageCache.put(fullUrl, res.clone());
+      }
+      cachedCount++;
     } catch {
       failedUrls.push(url);
     }
@@ -53,6 +63,25 @@ async function prefetchImages(imageUrls: string[]): Promise<{ cachedCount: numbe
 
   await Promise.allSettled(imageFetches);
   return { cachedCount, failedUrls };
+}
+
+/**
+ * Stores the study screen that Workbox uses as the navigation fallback. The
+ * downloaded questions live in IndexedDB, but without this shell a cold
+ * offline navigation to /estudar cannot render those questions.
+ */
+async function primeOfflineStudyShell(): Promise<void> {
+  try {
+    const response = await fetch("/estudar", { cache: "reload" });
+    if (!response.ok || typeof caches === "undefined") return;
+
+    const studyCache = await caches.open(OFFLINE_STUDY_SHELL_CACHE);
+    await studyCache.put("/estudar", response.clone());
+  } catch (error) {
+    // The question package is still complete and may be used from an already
+    // open study page. Do not discard it because refreshing the shell failed.
+    console.warn("Não foi possível preparar a tela de estudo offline:", error);
+  }
 }
 
 /**
@@ -213,6 +242,8 @@ export async function downloadSimuladoPackage(
       totalBytesEstimated += cachedImages * 50 * 1024; // Estimativa média ~50KB por imagem
     }
 
+    await primeOfflineStudyShell();
+
     // 5. Finalizar e marcar como "ready"
     const readyPackage: SimuladoPackage = {
       id: packageId,
@@ -343,4 +374,3 @@ export async function clearAllSimuladoPackages(ownerId?: string): Promise<void> 
   await localDb.simuladoPackages.where('owner_id').equals(uid).delete();
   window.dispatchEvent(new CustomEvent("simulado-package-updated", { detail: { cleared: true } }));
 }
-
