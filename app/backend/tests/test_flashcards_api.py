@@ -103,6 +103,32 @@ def test_flashcards_duplicate_prevention(client):
     assert fid1 == fid2
 
 
+def test_imported_anki_cards_do_not_require_a_medquest_question(client):
+    payload = {
+        "deck_name": "Revisão Anki",
+        "cards": [{
+            "front": "Pergunta importada",
+            "back": "Resposta importada",
+            "deck_name": "Revisão Anki",
+            "tags": ["anki", "teste"],
+            "anki_nid": 123456,
+        }],
+    }
+
+    imported = client.post("/api/flashcards/import/batch", json=payload)
+    assert imported.status_code == 200
+    assert imported.get_json()["new_cards"] == 1
+
+    # Reimportar a mesma nota deve atualizar o cartão, sem criar duplicata.
+    payload["cards"][0]["back"] = "Resposta atualizada"
+    updated = client.post("/api/flashcards/import/batch", json=payload)
+    assert updated.status_code == 200
+    assert updated.get_json()["new_cards"] == 0
+    cards = client.get("/api/flashcards/review?all=true").get_json()
+    imported_card = next(card for card in cards if card["front"] == "Pergunta importada")
+    assert imported_card["back"] == "Resposta atualizada"
+
+
 def test_simulado_session_is_saved(client):
     response = client.post("/api/simulado/sessions", json={
         "client_session_id": "session-test-123",

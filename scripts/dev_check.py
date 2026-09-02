@@ -169,6 +169,8 @@ def map_backend_tests(changed_files):
             has_backend_changes = True
             if f in mapping:
                 test_files.update(mapping[f])
+            elif f.startswith("app/backend/migrations/"):
+                test_files.update(["tests/test_migrations.py", "tests/test_flashcards_api.py"])
             elif f.startswith("app/backend/tests/"):
                 rel_test = f.replace("app/backend/", "")
                 test_files.add(rel_test)
