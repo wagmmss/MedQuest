@@ -60,6 +60,11 @@ playwright-report/
 test-results/
 blob-report/
 
+# ── Artefatos PWA gerados pelo next-pwa ─────────────────────────────
+app/frontend/public/sw.js
+app/frontend/public/workbox-*.js
+app/frontend/public/worker-*.js
+
 # Ignore massive cache and garbage JSON files
 /*.json
 !/package.json

@@ -20,12 +20,16 @@ from .questions import bp as questions_bp
 from .stats import bp as stats_bp
 
 
-def create_app(testing=False):
+def create_app(testing=False, initialize_db=None):
     app = Flask(__name__)
     app.config.from_object(Config)
     app.config["MAX_CONTENT_LENGTH"] = 1 * 1024 * 1024
     if testing:
         app.config["TESTING"] = True
+    if initialize_db is None:
+        # Testes e o servidor local devem continuar autocontidos. Em produção,
+        # a migração é uma etapa única do entrypoint antes do Gunicorn.
+        initialize_db = testing or app.config["AUTO_MIGRATE"]
     configure_logging(app)
     configured_origins = os.environ.get("FRONTEND_URL")
     origins = (
@@ -90,5 +94,6 @@ def create_app(testing=False):
         app.register_blueprint(bp, url_prefix="/api/v1", name=f"{bp.name}_v1")
 
     app.teardown_appcontext(close_db)
-    init_db(app)
+    if initialize_db:
+        init_db(app)
     return app

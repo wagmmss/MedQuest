@@ -341,7 +341,16 @@ def search_questions():
         item["exp_snippet"] = exp_snip
         out.append(item)
 
-    record_domain_event("search_executed", user_id=g.user_id, query=q, results_count=len(out), semantic=semantic)
+    # Consultas podem conter texto sensível. A telemetria precisa medir uso e
+    # efetividade sem persistir o conteúdo pesquisado em logs.
+    record_domain_event(
+        "search_executed",
+        user_id=g.user_id,
+        query_length=len(q),
+        query_terms=len(re.findall(r"\w+", q, flags=re.UNICODE)),
+        results_count=len(out),
+        semantic=semantic,
+    )
     return jsonify(out)
 
 
@@ -1247,4 +1256,3 @@ def serve_image(filename):
     if os.path.exists(os.path.join(static_dir, "images", filename)):
         return send_from_directory(os.path.join(static_dir, "images"), filename)
     return send_from_directory(static_dir, filename)
-

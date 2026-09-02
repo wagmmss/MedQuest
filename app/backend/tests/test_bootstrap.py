@@ -2,6 +2,7 @@
 import os
 import sqlite3
 from api import create_app
+from api.config import Config
 
 
 def test_empty_database_bootstrap(tmp_path):
@@ -42,3 +43,17 @@ def test_empty_database_bootstrap(tmp_path):
             assert table in tables, f"Tabela '{table}' deveria ter sido criada no bootstrap do banco vazio"
     finally:
         os.environ.pop("MEDQUEST_DB", None)
+
+
+def test_production_worker_skips_bootstrap_after_release_migration(tmp_path, monkeypatch):
+    """Workers de produção não devem disputar DDL depois do bootstrap único."""
+    db_path = tmp_path / "release_managed.db"
+    monkeypatch.setenv("MEDQUEST_DB", str(db_path))
+    monkeypatch.setattr(Config, "AUTO_MIGRATE", False)
+
+    # Com a flag de produção, o worker não executa DDL no boot.
+    create_app()
+    assert not db_path.exists()
+
+    create_app(initialize_db=True)
+    assert db_path.exists()

@@ -857,6 +857,8 @@ def _get_planner_metadata():
 @bp.route("/coverage")
 def coverage():
     db = get_db()
+    area_filter = request.args.get("area", "").strip()
+    summary_only = request.args.get("summary_only", "false").lower() == "true"
     planner_meta, kat_subs = _get_planner_metadata()
 
     # 1. Total de questões por área e subtema (em memória/cache)
@@ -938,20 +940,6 @@ def coverage():
             else:
                 status = "in_progress"
 
-            sub_item = {
-                "subtema": theme,
-                "area": area_name,
-                "n_questions": total_n_q,
-                "answered": total_ans,
-                "attempts": total_att,
-                "correct": total_cor,
-                "accuracy": accuracy,
-                "coverage_pct": round(coverage_pct, 4),
-                "status": status,
-                "highYield": is_high_yield,
-                "theory_hours": theory_hours
-            }
-
             area_obj["n_questions"] += total_n_q
             area_obj["n_subtemas"] += 1
             area_obj["answered_questions"] += total_ans
@@ -963,7 +951,22 @@ def coverage():
                 if status == "mastered":
                     area_obj["high_yield_mastered"] += 1
 
-            area_obj["subtemas"].append(sub_item)
+            # O resumo é usado pelo dashboard e não devolve subtemas. Evitar
+            # montar e ordenar centenas de objetos reduz alocação e latência.
+            if not summary_only:
+                area_obj["subtemas"].append({
+                    "subtema": theme,
+                    "area": area_name,
+                    "n_questions": total_n_q,
+                    "answered": total_ans,
+                    "attempts": total_att,
+                    "correct": total_cor,
+                    "accuracy": accuracy,
+                    "coverage_pct": round(coverage_pct, 4),
+                    "status": status,
+                    "highYield": is_high_yield,
+                    "theory_hours": theory_hours,
+                })
 
     area_order = ["Clínica Médica", "Cirurgia", "Ginecologia e Obstetrícia", "Pediatria", "Medicina Preventiva"]
     out = []
@@ -971,17 +974,16 @@ def coverage():
         if name in areas_dict:
             a = areas_dict[name]
             a["accuracy"] = (a["correct"] / a["attempts"]) if a["attempts"] > 0 else None
-            a["subtemas"].sort(key=lambda s: (not s["highYield"], -s["n_questions"]))
+            if not summary_only:
+                a["subtemas"].sort(key=lambda s: (not s["highYield"], -s["n_questions"]))
             out.append(a)
 
     for k, a in areas_dict.items():
         if k not in area_order:
             a["accuracy"] = (a["correct"] / a["attempts"]) if a["attempts"] > 0 else None
-            a["subtemas"].sort(key=lambda s: (not s["highYield"], -s["n_questions"]))
+            if not summary_only:
+                a["subtemas"].sort(key=lambda s: (not s["highYield"], -s["n_questions"]))
             out.append(a)
-
-    area_filter = request.args.get("area", "").strip()
-    summary_only = request.args.get("summary_only", "false").lower() == "true"
 
     if area_filter:
         norm_filter = get_normalized_area(area_filter)

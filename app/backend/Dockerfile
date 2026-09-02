@@ -17,6 +17,9 @@ COPY *.txt ./
 
 ENV PORT=8000
 ENV PYTHONUNBUFFERED=1
+# As DDLs e migrações são executadas uma vez no entrypoint abaixo, nunca por
+# cada worker Gunicorn.
+ENV MEDQUEST_AUTO_MIGRATE=0
 EXPOSE 8000
 
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "--timeout", "120", "api:create_app()"]
+CMD ["sh", "-c", "python -m scripts.migrate_db && exec gunicorn -w 4 -b 0.0.0.0:8000 --timeout 120 api:create_app()"]

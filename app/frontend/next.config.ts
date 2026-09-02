@@ -86,10 +86,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  typescript: {
-    // Typecheck is run during CI and IDE; skipping during container build saves memory and 2+ minutes
-    ignoreBuildErrors: true,
-  },
   experimental: {
     optimizePackageImports: ["lucide-react", "date-fns", "framer-motion", "recharts"],
   },
