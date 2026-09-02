@@ -1,3 +1,4 @@
+import json
 import logging
 import re
 from datetime import datetime, timezone
@@ -6,10 +7,13 @@ from flask import Blueprint, Response, g, jsonify, request
 
 from . import srs
 from .ai import generate_cloze_flashcard
+from .anki import parse_apkg_bytes, parse_anki_text
 from .db import db_transaction, get_db
 from .observability import record_domain_event
 from .questions import invalidate_user_caches
 from .schemas import (
+    AnkiDeleteDeckIn,
+    AnkiImportBatchIn,
     FlashcardBatchIn,
     FlashcardGenerateIn,
     FlashcardPreviewIn,
@@ -288,6 +292,201 @@ def _bounded_int(value, default, minimum, maximum):
     return max(minimum, min(parsed, maximum))
 
 
+@bp.route("/flashcards/decks", methods=["GET"])
+def get_decks():
+    db = get_db()
+    now = datetime.now(timezone.utc).isoformat()
+    rows = db.execute("""
+        SELECT COALESCE(NULLIF(TRIM(f.deck_name), ''), 'Geral') AS deck_name,
+               COALESCE(NULLIF(TRIM(f.source_type), ''), 'medquest') AS source_type,
+               COUNT(*) AS total_cards,
+               SUM(CASE WHEN f.next_review_date <= ? THEN 1 ELSE 0 END) AS due_cards
+        FROM flashcards f
+        WHERE f.user_id = ? AND (f.report_status IS NULL OR TRIM(f.report_status) = '')
+        GROUP BY COALESCE(NULLIF(TRIM(f.deck_name), ''), 'Geral')
+        ORDER BY deck_name ASC
+    """, (now, g.user_id)).fetchall()
+
+    decks = []
+    total_all = 0
+    due_all = 0
+    for r in rows:
+        t = r["total_cards"] or 0
+        d = r["due_cards"] or 0
+        total_all += t
+        due_all += d
+        decks.append({
+            "name": r["deck_name"],
+            "source_type": r["source_type"],
+            "total_cards": t,
+            "due_cards": d,
+        })
+
+    return jsonify({
+        "total_cards": total_all,
+        "due_cards": due_all,
+        "decks": decks,
+    })
+
+
+@bp.route("/flashcards/import/file", methods=["POST"])
+def import_anki_file():
+    if "file" not in request.files:
+        return jsonify({"error": "Nenhum arquivo enviado no formulário ('file')."}), 400
+    file = request.files["file"]
+    if not file or not file.filename:
+        return jsonify({"error": "Nome de arquivo inválido."}), 400
+
+    target_deck = request.form.get("deck_name", "").strip() or "Anki"
+    content = file.read()
+    if not content:
+        return jsonify({"error": "Arquivo enviado está vazio."}), 400
+
+    filename_lower = file.filename.lower()
+    try:
+        if filename_lower.endswith((".apkg", ".colpkg")):
+            cards = parse_apkg_bytes(content, fallback_deck_name=target_deck)
+        else:
+            text_str = content.decode("utf-8", errors="replace")
+            cards = parse_anki_text(text_str, default_deck_name=target_deck)
+    except Exception as e:
+        logger.exception("Falha ao analisar arquivo Anki %s: %s", file.filename, e)
+        return jsonify({"error": f"Falha ao ler arquivo do Anki: {e}"}), 400
+
+    if not cards:
+        return jsonify({"error": "Nenhum flashcard válido foi encontrado no arquivo."}), 400
+
+    db = get_db()
+    now = datetime.now(timezone.utc).isoformat()
+    imported_count = 0
+    unique_decks = set()
+
+    with db_transaction(db, immediate=True):
+        for c in cards:
+            c_deck = (target_deck if target_deck != "Anki" and target_deck else c.get("deck_name") or "Anki").strip()
+            unique_decks.add(c_deck)
+            c_tags = c.get("tags") or []
+            c_tags_json = json.dumps(c_tags)
+            anki_nid = c.get("anki_nid")
+            source_type = c.get("source_type") or ("anki_apkg" if filename_lower.endswith((".apkg", ".colpkg")) else "anki_txt")
+            source_context = c.get("source_context") or f"Anki: {c_deck}"
+
+            existing = None
+            if anki_nid is not None:
+                existing = db.execute(
+                    "SELECT id FROM flashcards WHERE user_id = ? AND anki_nid = ?",
+                    (g.user_id, anki_nid),
+                ).fetchone()
+
+            if existing:
+                db.execute("""
+                    UPDATE flashcards
+                    SET front = ?, back = ?, deck_name = ?, tags = ?, source_context = ?, source_type = ?
+                    WHERE id = ? AND user_id = ?
+                """, (c["front"], c["back"], c_deck, c_tags_json, source_context, source_type, existing["id"], g.user_id))
+            else:
+                db.execute("""
+                    INSERT INTO flashcards (question_id, front, back, created_at, next_review_date, fsrs_card, user_id, source_context, is_ai_generated, deck_name, tags, source_type, anki_nid)
+                    VALUES (NULL, ?, ?, ?, ?, NULL, ?, ?, 0, ?, ?, ?, ?)
+                """, (c["front"], c["back"], now, now, g.user_id, source_context, c_deck, c_tags_json, source_type, anki_nid))
+                imported_count += 1
+
+    invalidate_user_caches(g.user_id)
+    record_domain_event(
+        "anki_cards_imported",
+        user_id=g.user_id,
+        count=len(cards),
+        new_cards=imported_count,
+        decks=list(unique_decks),
+    )
+
+    return jsonify({
+        "success": True,
+        "total_imported": len(cards),
+        "new_cards": imported_count,
+        "decks": sorted(list(unique_decks)),
+    })
+
+
+@bp.route("/flashcards/import/batch", methods=["POST"])
+def import_anki_batch():
+    try:
+        data = AnkiImportBatchIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+
+    db = get_db()
+    now = datetime.now(timezone.utc).isoformat()
+    imported_count = 0
+    unique_decks = set()
+
+    with db_transaction(db, immediate=True):
+        for c in data.cards:
+            c_deck = (data.deck_name or c.deck_name or "Anki").strip()
+            unique_decks.add(c_deck)
+            c_tags_json = json.dumps(c.tags or [])
+            source_context = c.source_context or f"Anki: {c_deck}"
+
+            existing = None
+            if c.anki_nid is not None:
+                existing = db.execute(
+                    "SELECT id FROM flashcards WHERE user_id = ? AND anki_nid = ?",
+                    (g.user_id, c.anki_nid),
+                ).fetchone()
+
+            if existing:
+                db.execute("""
+                    UPDATE flashcards
+                    SET front = ?, back = ?, deck_name = ?, tags = ?, source_context = ?, source_type = 'anki_connect'
+                    WHERE id = ? AND user_id = ?
+                """, (c.front, c.back, c_deck, c_tags_json, source_context, existing["id"], g.user_id))
+            else:
+                db.execute("""
+                    INSERT INTO flashcards (question_id, front, back, created_at, next_review_date, fsrs_card, user_id, source_context, is_ai_generated, deck_name, tags, source_type, anki_nid)
+                    VALUES (NULL, ?, ?, ?, ?, NULL, ?, ?, 0, ?, ?, 'anki_connect', ?)
+                """, (c.front, c.back, now, now, g.user_id, source_context, c_deck, c_tags_json, c.anki_nid))
+                imported_count += 1
+
+    invalidate_user_caches(g.user_id)
+    record_domain_event(
+        "anki_batch_imported",
+        user_id=g.user_id,
+        count=len(data.cards),
+        new_cards=imported_count,
+        decks=list(unique_decks),
+    )
+
+    return jsonify({
+        "success": True,
+        "total_imported": len(data.cards),
+        "new_cards": imported_count,
+        "decks": sorted(list(unique_decks)),
+    })
+
+
+@bp.route("/flashcards/deck", methods=["DELETE"])
+def delete_deck():
+    try:
+        data = AnkiDeleteDeckIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+
+    db = get_db()
+    with db_transaction(db, immediate=True):
+        cursor = db.execute(
+            "DELETE FROM flashcards WHERE user_id = ? AND deck_name = ?",
+            (g.user_id, data.deck_name),
+        )
+        deleted_count = cursor.rowcount
+
+    invalidate_user_caches(g.user_id)
+    return jsonify({
+        "success": True,
+        "deck_name": data.deck_name,
+        "deleted_count": deleted_count,
+    })
+
+
 @bp.route("/flashcards/review", methods=["GET"])
 def get_due_flashcards():
     db = get_db()
@@ -295,33 +494,50 @@ def get_due_flashcards():
     include_all = request.args.get("all", "false").lower() == "true"
     scope = request.args.get("scope", "due")
     limit = _bounded_int(request.args.get("limit"), 50, 1, 100)
+    deck = request.args.get("deck")
+
+    params = [g.user_id]
+    deck_clause = ""
+    if deck and deck.lower() != "all":
+        deck_clause = " AND f.deck_name = ?"
+        params.append(deck)
 
     if include_all:
-        rows = db.execute("""
+        sql = f"""
             SELECT f.id, f.question_id, f.front, f.back, f.next_review_date,
-                   f.source_context, f.is_ai_generated, q.stem, q.area, q.subtema
-            FROM flashcards f JOIN questions q ON f.question_id = q.id
-            WHERE f.user_id = ? AND (f.report_status IS NULL OR TRIM(f.report_status) = '')
+                   f.source_context, f.is_ai_generated, f.deck_name, f.tags, f.source_type, f.anki_nid,
+                   q.stem, q.area, q.subtema
+            FROM flashcards f LEFT JOIN questions q ON f.question_id = q.id
+            WHERE f.user_id = ? AND (f.report_status IS NULL OR TRIM(f.report_status) = ''){deck_clause}
             ORDER BY f.next_review_date ASC LIMIT ?
-        """, (g.user_id, limit)).fetchall()
+        """
+        params.append(limit)
     elif scope == "upcoming":
-        rows = db.execute("""
+        sql = f"""
             SELECT f.id, f.question_id, f.front, f.back, f.next_review_date,
-                   f.source_context, f.is_ai_generated, q.stem, q.area, q.subtema
-            FROM flashcards f JOIN questions q ON f.question_id = q.id
-            WHERE f.next_review_date > ? AND f.user_id = ?
-              AND (f.report_status IS NULL OR TRIM(f.report_status) = '')
+                   f.source_context, f.is_ai_generated, f.deck_name, f.tags, f.source_type, f.anki_nid,
+                   q.stem, q.area, q.subtema
+            FROM flashcards f LEFT JOIN questions q ON f.question_id = q.id
+            WHERE f.user_id = ? AND f.next_review_date > ?
+              AND (f.report_status IS NULL OR TRIM(f.report_status) = ''){deck_clause}
             ORDER BY f.next_review_date ASC LIMIT ?
-        """, (now, g.user_id, limit)).fetchall()
+        """
+        params.insert(1, now)
+        params.append(limit)
     else:
-        rows = db.execute("""
+        sql = f"""
             SELECT f.id, f.question_id, f.front, f.back, f.next_review_date,
-                   f.source_context, f.is_ai_generated, q.stem, q.area, q.subtema
-            FROM flashcards f JOIN questions q ON f.question_id = q.id
+                   f.source_context, f.is_ai_generated, f.deck_name, f.tags, f.source_type, f.anki_nid,
+                   q.stem, q.area, q.subtema
+            FROM flashcards f LEFT JOIN questions q ON f.question_id = q.id
             WHERE f.next_review_date <= ? AND f.user_id = ?
-              AND (f.report_status IS NULL OR TRIM(f.report_status) = '')
+              AND (f.report_status IS NULL OR TRIM(f.report_status) = ''){deck_clause}
             ORDER BY f.next_review_date ASC LIMIT ?
-        """, (now, g.user_id, limit)).fetchall()
+        """
+        params.insert(0, now)
+        params.append(limit)
+
+    rows = db.execute(sql, tuple(params)).fetchall()
 
     items = []
     for r in rows:
@@ -329,6 +545,18 @@ def get_due_flashcards():
         front = item.get("front", "")
         back = item.get("back", "")
         stem = item.get("stem", "")
+        tags_raw = item.get("tags")
+
+        if tags_raw and isinstance(tags_raw, str):
+            try:
+                item["tags"] = json.loads(tags_raw)
+            except Exception:
+                item["tags"] = [t.strip() for t in tags_raw.split() if t.strip()]
+        else:
+            item["tags"] = tags_raw or []
+
+        if not item.get("deck_name"):
+            item["deck_name"] = "Geral"
 
         if (
             "A alternativa correta era" in front

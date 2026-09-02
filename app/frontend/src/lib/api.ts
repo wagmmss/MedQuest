@@ -6,7 +6,7 @@ import {
   BatchFlashcardGenerateResponse, PredictiveScore, AtRiskTopic, LearningProfile, ExamReadiness,
   BenchmarkStat, BottleneckTopic, DomainSummaryResponse, ErrorNotebookSummary,
   NotificationConfig, NotificationConfigUpdate, PushSubscriptionPayload,
-  InstitutionRadarResponse
+  InstitutionRadarResponse, FlashcardDecksResponse, AnkiImportResult
 } from "@/types/api";
 
 
@@ -743,7 +743,7 @@ export const api = {
                 await localDb.flashcards.put(mockCard);
                 created.push({
                   id: mockCard.id,
-                  question_id: mockCard.question_id,
+                  question_id: item.question_id,
                   front: mockCard.front,
                   back: mockCard.back,
                   context: mockCard.source_context
@@ -790,12 +790,16 @@ export const api = {
         throw err;
       }
     },
-    getDue: async (includeAll: boolean = false, signal?: AbortSignal) => {
+    getDecks: () => apiFetch<FlashcardDecksResponse>("/api/flashcards/decks", { cache: "no-store" }),
+    getDue: async (includeAll: boolean = false, signal?: AbortSignal, deck?: string) => {
       const getLocalFallback = async () => {
         if (typeof window !== "undefined" && localDb) {
           try {
             const uid = getLocalOwnerId();
-            const cards = await localDb.flashcards.where('_owner_id').equals(uid).toArray();
+            let cards = await localDb.flashcards.where('_owner_id').equals(uid).toArray();
+            if (deck && deck !== "all") {
+              cards = cards.filter(c => (c.deck_name || "Geral").toLowerCase() === deck.toLowerCase());
+            }
 
             if (includeAll) return cards;
             const now = Date.now();
@@ -814,7 +818,11 @@ export const api = {
       }
 
       try {
-        return await apiFetch<Flashcard[]>(`/api/flashcards/review${includeAll ? "?all=true" : ""}`, { cache: 'no-store', signal });
+        const params = new URLSearchParams();
+        if (includeAll) params.append("all", "true");
+        if (deck && deck !== "all") params.append("deck", deck);
+        const qs = params.toString();
+        return await apiFetch<Flashcard[]>(`/api/flashcards/review${qs ? `?${qs}` : ""}`, { cache: 'no-store', signal });
       } catch (err) {
         if (signal?.aborted) throw err;
         const local = await getLocalFallback();
@@ -822,15 +830,22 @@ export const api = {
         throw err;
       }
     },
-    getUpcoming: async (signal?: AbortSignal) => {
+    getUpcoming: async (signal?: AbortSignal, deck?: string) => {
       try {
-        return await apiFetch<Flashcard[]>("/api/flashcards/review?scope=upcoming", { cache: 'no-store', signal });
+        const params = new URLSearchParams();
+        params.append("scope", "upcoming");
+        if (deck && deck !== "all") params.append("deck", deck);
+        const qs = params.toString();
+        return await apiFetch<Flashcard[]>(`/api/flashcards/review?${qs}`, { cache: 'no-store', signal });
       } catch (err) {
         if (signal?.aborted) throw err;
         if (typeof window !== "undefined" && localDb) {
           try {
             const uid = getLocalOwnerId();
-            const cards = await localDb.flashcards.where('_owner_id').equals(uid).toArray();
+            let cards = await localDb.flashcards.where('_owner_id').equals(uid).toArray();
+            if (deck && deck !== "all") {
+              cards = cards.filter(c => (c.deck_name || "Geral").toLowerCase() === deck.toLowerCase());
+            }
             const now = Date.now();
             return cards.filter(card => card.next_review_date && new Date(card.next_review_date).getTime() > now);
           } catch {
@@ -839,6 +854,53 @@ export const api = {
         }
         return [];
       }
+    },
+
+    importFile: async (file: File, deckName?: string): Promise<AnkiImportResult> => {
+      const formData = new FormData();
+      formData.append("file", file);
+      if (deckName) formData.append("deck_name", deckName);
+
+      const url = `${API_BASE}/api/flashcards/import/file`;
+      const token = typeof window !== "undefined" ? (window as unknown as { __medquest_token?: string }).__medquest_token : undefined;
+      const headers: Record<string, string> = {};
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+
+      const res = await fetch(url, {
+        method: "POST",
+        headers,
+        body: formData,
+      });
+
+      if (!res.ok) {
+        let errMsg = "Falha ao importar arquivo";
+        try {
+          const json = await res.json();
+          if (json?.error) errMsg = json.error;
+        } catch {
+          // ignore
+        }
+        throw new Error(errMsg);
+      }
+
+      return await res.json();
+    },
+
+    importBatch: async (
+      cards: Array<{ front: string; back: string; deck_name?: string; tags?: string[]; anki_nid?: number }>,
+      deckName?: string
+    ): Promise<AnkiImportResult> => {
+      return apiFetch<AnkiImportResult>("/api/flashcards/import/batch", {
+        method: "POST",
+        body: JSON.stringify({ cards, deck_name: deckName }),
+      });
+    },
+
+    deleteDeck: async (deckName: string): Promise<{ success: boolean; deck_name: string; deleted_count: number }> => {
+      return apiFetch<{ success: boolean; deck_name: string; deleted_count: number }>("/api/flashcards/deck", {
+        method: "DELETE",
+        body: JSON.stringify({ deck_name: deckName }),
+      });
     },
 
     review: (id: number, confidence: string) => apiFetch<{id: number, next_review_date: string}>(`/api/flashcards/${id}/review`, {

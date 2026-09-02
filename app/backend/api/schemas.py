@@ -4,6 +4,9 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 __all__ = [
+    "AnkiDeleteDeckIn",
+    "AnkiImportBatchIn",
+    "AnkiImportCardItem",
     "AttemptIn",
     "BatchAttemptIn",
     "BatchAttemptItem",
@@ -176,6 +179,24 @@ class FlashcardReviewIn(APIInput):
 
 class FlashcardReportIn(APIInput):
     reason: str = Field(min_length=1, max_length=1_000)
+
+
+class AnkiImportCardItem(APIInput):
+    front: str = Field(min_length=1, max_length=50_000)
+    back: str = Field(default="", max_length=50_000)
+    deck_name: str | None = Field(default="Anki", max_length=200)
+    tags: list[str] = Field(default_factory=list, max_length=50)
+    source_context: str | None = Field(default=None, max_length=500)
+    anki_nid: int | None = None
+
+
+class AnkiImportBatchIn(APIInput):
+    cards: list[AnkiImportCardItem] = Field(min_length=1, max_length=1000)
+    deck_name: str | None = Field(default=None, max_length=200)
+
+
+class AnkiDeleteDeckIn(APIInput):
+    deck_name: str = Field(min_length=1, max_length=200)
 
 
 class PrescribeStudyIn(APIInput):

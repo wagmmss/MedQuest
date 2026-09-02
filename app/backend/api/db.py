@@ -272,7 +272,7 @@ def init_db(app):
 
             db.execute("""CREATE TABLE IF NOT EXISTS flashcards (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                question_id INTEGER NOT NULL,
+                question_id INTEGER,
                 front TEXT NOT NULL,
                 back TEXT,
                 created_at TEXT NOT NULL,
@@ -281,7 +281,11 @@ def init_db(app):
                 user_id TEXT DEFAULT '1',
                 source_context TEXT,
                 is_ai_generated INTEGER DEFAULT 0,
-                report_status TEXT)""")
+                report_status TEXT,
+                deck_name TEXT DEFAULT 'Geral',
+                tags TEXT,
+                source_type TEXT DEFAULT 'medquest',
+                anki_nid INTEGER)""")
             db.execute("""CREATE TABLE IF NOT EXISTS simulado_sessions (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, client_session_id TEXT NOT NULL,
                 planned_duration_seconds INTEGER NOT NULL, elapsed_seconds INTEGER NOT NULL,
@@ -295,6 +299,14 @@ def init_db(app):
                 db.execute("ALTER TABLE flashcards ADD COLUMN is_ai_generated INTEGER DEFAULT 0")
             if "report_status" not in existing_fc_cols:
                 db.execute("ALTER TABLE flashcards ADD COLUMN report_status TEXT")
+            if "deck_name" not in existing_fc_cols:
+                db.execute("ALTER TABLE flashcards ADD COLUMN deck_name TEXT DEFAULT 'Geral'")
+            if "tags" not in existing_fc_cols:
+                db.execute("ALTER TABLE flashcards ADD COLUMN tags TEXT")
+            if "source_type" not in existing_fc_cols:
+                db.execute("ALTER TABLE flashcards ADD COLUMN source_type TEXT DEFAULT 'medquest'")
+            if "anki_nid" not in existing_fc_cols:
+                db.execute("ALTER TABLE flashcards ADD COLUMN anki_nid INTEGER")
             
             db.execute("""CREATE TABLE IF NOT EXISTS clinical_cases (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -382,6 +394,8 @@ def init_db(app):
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_missing_alts ON questions (missing_alts)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_spaced_repetition_review ON spaced_repetition (user_id, next_review_date)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_flashcards_user_review ON flashcards (user_id, next_review_date)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_flashcards_user_deck ON flashcards (user_id, deck_name)")
+            db.execute("CREATE INDEX IF NOT EXISTS idx_flashcards_user_anki_nid ON flashcards (user_id, anki_nid)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_simulado_sessions_user_completed ON simulado_sessions (user_id, completed_at DESC)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_area ON questions (area)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_institution ON questions (institution_code)")

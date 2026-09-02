@@ -418,7 +418,7 @@ export interface SearchResult {
 
 export interface Flashcard {
   id: number;
-  question_id: number;
+  question_id?: number | null;
   front: string;
   back: string;
   next_review_date: string;
@@ -427,6 +427,30 @@ export interface Flashcard {
   is_ai_generated?: boolean;
   area?: string;
   subtema?: string;
+  deck_name?: string;
+  tags?: string[];
+  source_type?: string;
+  anki_nid?: number | null;
+}
+
+export interface FlashcardDeck {
+  name: string;
+  source_type: string;
+  total_cards: number;
+  due_cards: number;
+}
+
+export interface FlashcardDecksResponse {
+  total_cards: number;
+  due_cards: number;
+  decks: FlashcardDeck[];
+}
+
+export interface AnkiImportResult {
+  success: boolean;
+  total_imported: number;
+  new_cards: number;
+  decks: string[];
 }
 
 export interface FlashcardGenerateResponse {
