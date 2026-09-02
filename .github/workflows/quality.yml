@@ -46,6 +46,14 @@ jobs:
         run: |
           python scripts/check_performance_guardrails.py
 
+      - name: Verify governed pipeline inventory
+        run: |
+          python scripts/pipeline.py check
+
+      - name: Block embedded credentials
+        run: |
+          python scripts/check_no_embedded_secrets.py
+
       - name: Security audit dependencies
         run: |
           pip-audit -r requirements.txt
@@ -84,3 +92,35 @@ jobs:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
           FLASK_API_PROXY_SECRET: ci-placeholder-not-used-during-build
+
+  frontend-e2e:
+    name: Frontend E2E (hermetic)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build standalone application
+        run: npm run build
+        env:
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+          FLASK_API_PROXY_SECRET: ci-placeholder-not-used-during-build
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run end-to-end tests
+        run: npm run test:e2e

@@ -2,12 +2,20 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { getGuestSession } from "@/lib/session";
 
-const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL || "https://medquest-api.onrender.com";
+const BACKEND_URL = process.env.FLASK_API_URL || process.env.NEXT_PUBLIC_FLASK_API_URL ||
+  (process.env.NODE_ENV === "development" ? "http://127.0.0.1:5050" : "");
 const UPSTREAM_TIMEOUT_MS = 45_000;
 
 async function handler(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   const requestId = crypto.randomUUID();
   const proxySecret = process.env.FLASK_API_PROXY_SECRET;
+  if (!BACKEND_URL) {
+    console.error("[PROXY] FLASK_API_URL is not configured on the server.");
+    return new NextResponse(
+      JSON.stringify({ error: "Server configuration error: missing backend URL" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
   if (!proxySecret) {
     console.error("[PROXY] FLASK_API_PROXY_SECRET is not configured on the server.");
     return new NextResponse(

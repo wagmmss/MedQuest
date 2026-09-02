@@ -50,7 +50,17 @@ def is_valid_uuid_v4(val: str | None) -> bool:
 # Global PyJWKClient instance to cache keys and avoid rate limits/timeouts
 jwks_client = jwt.PyJWKClient(JWKS_URL, cache_keys=True, timeout=5) if JWKS_URL else None
 
-CURATOR_EMAILS = {"moraes.wagg@gmail.com"}
+def configured_curator_emails() -> frozenset[str]:
+    """Read allowlisted curator identities from deployment configuration.
+
+    An empty configuration deliberately denies curator access in production.
+    This is safer than silently granting a role from a source-controlled email.
+    """
+    return frozenset(
+        email.strip().lower()
+        for email in os.environ.get("CURATOR_EMAILS", "").split(",")
+        if email.strip()
+    )
 
 def require_auth(f):
     @wraps(f)
@@ -138,8 +148,7 @@ def require_curator(f):
             return f(*args, **kwargs)
 
         user_email = (getattr(g, "user_email", None) or "").strip().lower()
-        if user_email not in CURATOR_EMAILS:
+        if user_email not in configured_curator_emails():
             return jsonify({"error": "Forbidden: Acesso restrito para curadoria de conteúdo"}), 403
         return f(*args, **kwargs)
     return decorated
-

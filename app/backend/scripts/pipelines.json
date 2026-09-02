@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "default_classification": "legacy",
+  "pipelines": [
+    {
+      "id": "validate-content",
+      "script": "validate.py",
+      "classification": "important",
+      "mutates_data": false,
+      "description": "Read-only audit of content integrity and taxonomy."
+    },
+    {
+      "id": "taxonomy-sync",
+      "script": "taxonomy_sync.py",
+      "classification": "critical",
+      "mutates_data": true,
+      "description": "Deterministic taxonomy compiler; check-only unless --apply."
+    },
+    {
+      "id": "content-repair",
+      "script": "content_repair.py",
+      "classification": "critical",
+      "mutates_data": true,
+      "description": "Transactional metadata repair; requires --backup-dir when --apply."
+    }
+  ],
+  "runtime_modules": [
+    "planner.py"
+  ]
+}

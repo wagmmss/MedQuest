@@ -8,6 +8,8 @@ from threading import local
 from dotenv import load_dotenv
 from flask import g
 
+from .migrations import apply_pending_migrations
+
 load_dotenv()
 
 logger = logging.getLogger(__name__)
@@ -388,6 +390,7 @@ def init_db(app):
             db.execute("CREATE INDEX IF NOT EXISTS idx_questions_source ON questions (source_file)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_answered_at ON attempts (answered_at)")
             db.execute("CREATE INDEX IF NOT EXISTS idx_attempts_user_answered_at ON attempts (user_id, answered_at)")
+            apply_pending_migrations(db)
 
         # FTS is an optional capability and must not invalidate the required schema.
         try:

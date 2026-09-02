@@ -18,8 +18,10 @@ sys.stdout.reconfigure(encoding='utf-8')
 BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOCAL_DB = os.path.join(BACKEND_DIR, "medquest.db")
 
-TURSO_URL = "https://medquest-wagmss.aws-us-east-1.turso.io"
-TURSO_TOKEN = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3ODYyMjYzMjUsImlkIjoiMDE5ZmUzNjItNmUwMS03YTE5LTkyZjctMGRhOTJlZTk5OWQ0Iiwia2lkIjoiTlhsOWVXamdJaXcwVW5vNmhSTGdhSVFsRl9OaVBxSm13eHB6U21hY1hNUSIsInJpZCI6IjJhMjVkMzQ0LWI3ZTctNDA5YS1hMmIzLTVlNWNkMTgxMWE4NCJ9.jOZcgW1n4dCGN1W8SPG-vMFpj734oh0Wn1NDl7lteH6NsD5nqeOXmr1tZm4TEQVhTO-_2aN29LBz1u7o29D1Dw"
+TURSO_URL = os.environ.get("TURSO_DATABASE_URL", "").replace("libsql://", "https://").replace("wss://", "https://")
+TURSO_TOKEN = os.environ.get("TURSO_AUTH_TOKEN", "")
+if not TURSO_URL or not TURSO_TOKEN:
+    raise SystemExit("TURSO_DATABASE_URL e TURSO_AUTH_TOKEN são obrigatórios.")
 
 PIPELINE_URL = f"{TURSO_URL}/v3/pipeline"
 HEADERS = {

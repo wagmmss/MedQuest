@@ -7,6 +7,27 @@ Revisado em 2026-08-23. O diretório contém 192 arquivos: 188 Python, três JSO
 - `planner.py`: importado por `api/plan.py` e `api/stats.py`; faz parte do runtime.
 - `plannerData.json` e `katomartCourseDurations.json`: dados consumidos pelo planejador e pelo endpoint de cobertura.
 
+## Pipelines oficiais
+
+Use `python scripts/pipeline.py list` para listar jobs suportados e
+`python scripts/pipeline.py check` para gerar o inventário verificável. Todo
+arquivo Python não listado em `pipelines.json` nem marcado como runtime é
+classificado como `legacy` automaticamente. O runner nunca importa o script
+alvo e só registra telemetria de job quando recebe um caminho explícito de
+SQLite em `--db`.
+
+Exemplos seguros:
+
+```powershell
+python scripts/pipeline.py run validate-content -- --strict
+python scripts/pipeline.py run taxonomy-sync --
+python scripts/pipeline.py run content-repair -- --db ..\medquest.db
+```
+
+Para um `--apply`, o pipeline mutante exige backup e deve ser executado em
+staging antes da produção. Segredos são obrigatoriamente lidos do ambiente;
+nunca devem ser embutidos em scripts.
+
 ## Manutenção suportada e testada
 
 - `validate.py`: auditoria read-only do dataset.

@@ -112,6 +112,18 @@ def test_integrity_strict_failures_and_missing_alts_warning(tmp_path: Path) -> N
     ro.close()
 
 
+def test_validate_can_block_publication_on_warnings(valid_db: Path) -> None:
+    result = subprocess.run(
+        [sys.executable, str(VALIDATE), "--db", str(valid_db), "--fail-on-warnings"],
+        capture_output=True,
+        text=True,
+    )
+    # The fixture has taxonomy warnings because it is intentionally minimal;
+    # this verifies the publication-mode gate without mutating the database.
+    assert result.returncode == 1
+    assert "Warnings encontrados" in result.stderr
+
+
 def test_all_orphan_types_and_duplicate_origin_are_critical(tmp_path: Path) -> None:
     path = tmp_path / "orphans.db"
     db = create_database(path)

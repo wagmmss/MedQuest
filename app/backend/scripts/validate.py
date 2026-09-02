@@ -174,6 +174,11 @@ def main() -> int:
     parser.add_argument("--low-coverage-limit", type=int, default=20)
     parser.add_argument("--max-details", type=int, default=0, help="Maximum rows per coverage distribution; 0 means unlimited")
     parser.add_argument("--strict", action="store_true", help="Exit 1 when critical failures exist")
+    parser.add_argument(
+        "--fail-on-warnings",
+        action="store_true",
+        help="Exit 1 when warnings exist; use in a publication gate after the warning baseline is remediated",
+    )
     args = parser.parse_args()
     if args.max_details < 0:
         parser.error("--max-details must be >= 0")
@@ -199,6 +204,9 @@ def main() -> int:
         args.md.write_text(generate_markdown(result), encoding="utf-8")
     if args.strict and result["summary"]["critical_failure_records"]:
         print("ERRO: Falhas críticas encontradas na integridade da base.", file=sys.stderr)
+        return 1
+    if args.fail_on_warnings and result["warnings"]:
+        print("ERRO: Warnings encontrados na validação de conteúdo.", file=sys.stderr)
         return 1
     return 0
 

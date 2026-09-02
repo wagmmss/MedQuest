@@ -5,9 +5,17 @@ from types import SimpleNamespace
 import pytest
 
 from api import create_app
+from api.auth import configured_curator_emails
 from tests.conftest import SCHEMA_AND_SEED
 
 PROXY_SECRET = "super-secret-proxy-token-12345"
+
+
+def test_curator_allowlist_is_deployment_configuration(monkeypatch):
+    monkeypatch.setenv("CURATOR_EMAILS", " Curator@example.com,second@example.com ")
+    assert configured_curator_emails() == frozenset({"curator@example.com", "second@example.com"})
+    monkeypatch.delenv("CURATOR_EMAILS")
+    assert configured_curator_emails() == frozenset()
 
 
 @pytest.fixture
