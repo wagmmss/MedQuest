@@ -22,4 +22,4 @@ ENV PYTHONUNBUFFERED=1
 ENV MEDQUEST_AUTO_MIGRATE=0
 EXPOSE 8000
 
-CMD ["sh", "-c", "python -m scripts.migrate_db && exec gunicorn -w 4 -b 0.0.0.0:8000 --timeout 120 api:create_app()"]
+CMD ["sh", "-c", "python -m scripts.migrate_db && exec gunicorn -w 4 -b 0.0.0.0:8000 --timeout 120 'api:create_app()'"]
