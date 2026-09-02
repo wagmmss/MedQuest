@@ -3,7 +3,12 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { FlashcardDeck } from "@/types/api";
 import { api } from "@/lib/api";
-import { checkAnkiConnect, getAnkiDecks, fetchDeckCards } from "@/lib/ankiConnect";
+import {
+  checkAnkiConnect,
+  getAnkiDecks,
+  fetchDeckCards,
+  DEFAULT_ANKICONNECT_URL,
+} from "@/lib/ankiConnect";
 import {
   X,
   UploadCloud,
@@ -17,6 +22,10 @@ import {
   RefreshCw,
   FolderOpen,
   Info,
+  Copy,
+  Settings,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -28,6 +37,17 @@ interface AnkiIntegrationModalProps {
 }
 
 type TabType = "file" | "connect" | "export" | "manage";
+
+const ANKICONNECT_CORS_CONFIG = `{
+    "apiKey": null,
+    "apiLogPath": null,
+    "ignoreOriginList": [],
+    "webBindAddress": "127.0.0.1",
+    "webBindPort": 8765,
+    "webCorsOriginList": [
+        "*"
+    ]
+}`;
 
 export function AnkiIntegrationModal({
   isOpen,
@@ -44,12 +64,26 @@ export function AnkiIntegrationModal({
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // State: AnkiConnect
+  // State: AnkiConnect Config & Status
+  const [ankiUrl, setAnkiUrl] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("medquest_ankiconnect_url") || DEFAULT_ANKICONNECT_URL;
+    }
+    return DEFAULT_ANKICONNECT_URL;
+  });
+  const [ankiApiKey, setAnkiApiKey] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("medquest_ankiconnect_key") || "";
+    }
+    return "";
+  });
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const [ankiConnectStatus, setAnkiConnectStatus] = useState<"idle" | "checking" | "connected" | "disconnected">("idle");
   const [ankiVersion, setAnkiVersion] = useState<number | null>(null);
   const [localDecks, setLocalDecks] = useState<string[]>([]);
   const [selectedLocalDeck, setSelectedLocalDeck] = useState<string>("");
   const [isSyncingAnkiConnect, setIsSyncingAnkiConnect] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // State: Export
   const [isExporting, setIsExporting] = useState(false);
@@ -59,12 +93,25 @@ export function AnkiIntegrationModal({
 
   const testConnection = useCallback(async () => {
     setAnkiConnectStatus("checking");
-    const result = await checkAnkiConnect();
+    setErrorMessage(null);
+    const opts = {
+      url: ankiUrl.trim() || DEFAULT_ANKICONNECT_URL,
+      apiKey: ankiApiKey.trim() || undefined,
+    };
+    const result = await checkAnkiConnect(opts);
     if (result.connected) {
       setAnkiConnectStatus("connected");
       setAnkiVersion(result.version || null);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("medquest_ankiconnect_url", opts.url);
+        if (opts.apiKey) {
+          localStorage.setItem("medquest_ankiconnect_key", opts.apiKey);
+        } else {
+          localStorage.removeItem("medquest_ankiconnect_key");
+        }
+      }
       try {
-        const dNames = await getAnkiDecks();
+        const dNames = await getAnkiDecks(opts);
         setLocalDecks(dNames);
         if (dNames.length > 0 && !selectedLocalDeck) {
           setSelectedLocalDeck(dNames[0]);
@@ -74,8 +121,9 @@ export function AnkiIntegrationModal({
       }
     } else {
       setAnkiConnectStatus("disconnected");
+      setErrorMessage(result.error || "Não foi possível conectar ao AnkiConnect.");
     }
-  }, [selectedLocalDeck]);
+  }, [ankiUrl, ankiApiKey, selectedLocalDeck]);
 
   useEffect(() => {
     if (isOpen && activeTab === "connect") {
@@ -126,7 +174,11 @@ export function AnkiIntegrationModal({
 
     setIsSyncingAnkiConnect(true);
     try {
-      const cards = await fetchDeckCards(selectedLocalDeck, 500);
+      const opts = {
+        url: ankiUrl.trim() || DEFAULT_ANKICONNECT_URL,
+        apiKey: ankiApiKey.trim() || undefined,
+      };
+      const cards = await fetchDeckCards(selectedLocalDeck, 500, opts);
       if (cards.length === 0) {
         toast.error("Nenhuma nota encontrada no baralho selecionado.");
         return;
@@ -141,6 +193,11 @@ export function AnkiIntegrationModal({
     } finally {
       setIsSyncingAnkiConnect(false);
     }
+  };
+
+  const handleCopyConfig = () => {
+    void navigator.clipboard.writeText(ANKICONNECT_CORS_CONFIG);
+    toast.success("Configuração copiada! Cole no Anki (Ferramentas > Complementos > AnkiConnect > Configuração).");
   };
 
   const handleExportAnki = async () => {
@@ -321,10 +378,10 @@ export function AnkiIntegrationModal({
               <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-4 flex gap-3 text-xs text-muted-foreground leading-relaxed">
                 <Info size={16} className="text-blue-500 shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-foreground mb-1">Como exportar do seu Anki Desktop:</p>
-                  <p>1. No Anki, clique no menu <strong>Arquivo &gt; Exportar</strong>.</p>
-                  <p>2. Selecione o formato <strong>Pacote de Baralho do Anki (.apkg)</strong> ou <strong>Notas em Texto (.txt)</strong>.</p>
-                  <p>3. Envie o arquivo aqui para estudar com nosso sistema de repetição espaçada FSRS.</p>
+                  <p className="font-semibold text-foreground mb-1">Como exportar do seu Anki Desktop em 5 segundos:</p>
+                  <p>1. No Anki Desktop, clique no menu <strong>Arquivo &gt; Exportar</strong> (ou clique na engrenagem ao lado do baralho &gt; Exportar).</p>
+                  <p>2. Escolha o formato <strong>Pacote de Baralho do Anki (.apkg)</strong>.</p>
+                  <p>3. Arraste o arquivo exportado para este campo e clique em Importar.</p>
                 </div>
               </div>
 
@@ -372,7 +429,7 @@ export function AnkiIntegrationModal({
                         : "AnkiConnect Desconectado"}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Endpoint: http://127.0.0.1:8765
+                      Endpoint: {ankiUrl || DEFAULT_ANKICONNECT_URL}
                     </p>
                   </div>
                 </div>
@@ -383,8 +440,50 @@ export function AnkiIntegrationModal({
                   className="px-3 py-1.5 rounded-lg border border-border text-xs font-semibold text-foreground hover:bg-muted/50 transition-colors flex items-center gap-1.5"
                 >
                   <RefreshCw size={12} className={ankiConnectStatus === "checking" ? "animate-spin" : ""} />
-                  Testar Conexão
+                  Testar Novamente
                 </button>
+              </div>
+
+              {/* Botão de Configurações Avançadas (URL / API Key) */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setShowAdvanced(!showAdvanced)}
+                  className="text-xs font-semibold text-primary hover:underline flex items-center gap-1"
+                >
+                  <Settings size={12} />
+                  Configurações de Conexão (URL / Chave API)
+                  {showAdvanced ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+                </button>
+
+                {showAdvanced && (
+                  <div className="mt-3 p-4 rounded-xl border border-border bg-muted/10 space-y-3 animate-in fade-in duration-200">
+                    <div>
+                      <label className="text-xs font-semibold text-muted-foreground block mb-1">
+                        URL do AnkiConnect
+                      </label>
+                      <input
+                        type="text"
+                        value={ankiUrl}
+                        onChange={(e) => setAnkiUrl(e.target.value)}
+                        placeholder="http://127.0.0.1:8765"
+                        className="w-full bg-background border border-border rounded-lg px-3 py-2 text-xs font-mono text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-semibold text-muted-foreground block mb-1">
+                        Chave de API (opcional)
+                      </label>
+                      <input
+                        type="password"
+                        value={ankiApiKey}
+                        onChange={(e) => setAnkiApiKey(e.target.value)}
+                        placeholder="Deixe vazio se não configurou apiKey no Anki"
+                        className="w-full bg-background border border-border rounded-lg px-3 py-2 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
 
               {ankiConnectStatus === "connected" ? (
@@ -423,18 +522,47 @@ export function AnkiIntegrationModal({
               ) : (
                 <div className="rounded-xl border border-destructive/20 bg-destructive/5 p-4 space-y-3">
                   <div className="flex items-center gap-2 text-destructive font-bold text-xs">
-                    <AlertCircle size={16} /> Não foi possível comunicar com o Anki local
+                    <AlertCircle size={16} /> Não foi possível comunicar com o AnkiConnect
                   </div>
-                  <div className="text-xs text-muted-foreground space-y-2 leading-relaxed">
-                    <p>Para usar a sincronização direta ao vivo:</p>
-                    <ol className="list-decimal list-inside space-y-1 pl-1">
-                      <li>Abra o aplicativo <strong>Anki</strong> no seu computador.</li>
-                      <li>Instale a extensão <strong>AnkiConnect</strong> (Código: <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-foreground">2055492159</code> no menu Ferramentas &gt; Complementos &gt; Baixar Complementos).</li>
-                      <li>Reinicie o Anki e clique em <strong>Testar Conexão</strong> acima.</li>
-                    </ol>
-                    <p className="pt-1 text-foreground font-semibold">
-                      💡 Alternativa: Você também pode usar a aba <strong>Pacote / Arquivo</strong> para importar arquivos sem precisar da extensão!
+                  {errorMessage && (
+                    <p className="text-[11px] text-destructive/80 font-mono">
+                      {errorMessage}
                     </p>
+                  )}
+
+                  <div className="text-xs text-muted-foreground space-y-2 leading-relaxed">
+                    <p className="font-semibold text-foreground">Como resolver em 3 passos:</p>
+                    <ol className="list-decimal list-inside space-y-1.5 pl-1">
+                      <li>
+                        Abra o <strong>Anki</strong> no seu computador e certifique-se de que o add-on <strong>AnkiConnect</strong> está instalado (Código: <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-foreground">2055492159</code> em <em>Ferramentas &gt; Complementos &gt; Baixar Complementos</em>).
+                      </li>
+                      <li>
+                        No Anki, vá em <strong>Ferramentas &gt; Complementos &gt; AnkiConnect &gt; Configuração</strong> e habilite a permissão de CORS adicionando <code className="bg-muted px-1 rounded font-mono text-foreground">&quot;*&quot;</code> em <code className="bg-muted px-1 rounded font-mono text-foreground">webCorsOriginList</code>:
+                      </li>
+                    </ol>
+
+                    <div className="relative mt-2">
+                      <pre className="bg-muted/80 text-foreground p-3 rounded-xl text-[11px] font-mono overflow-x-auto border border-border">
+                        {ANKICONNECT_CORS_CONFIG}
+                      </pre>
+                      <button
+                        type="button"
+                        onClick={handleCopyConfig}
+                        className="absolute top-2 right-2 px-2.5 py-1 bg-card hover:bg-muted border border-border rounded-lg text-xs font-semibold text-foreground flex items-center gap-1 shadow-sm"
+                      >
+                        <Copy size={12} /> Copiar
+                      </button>
+                    </div>
+
+                    <ol start={3} className="list-decimal list-inside space-y-1 pl-1 pt-1">
+                      <li>
+                        Salve, <strong>reinicie o aplicativo Anki</strong> e clique em <strong>Testar Novamente</strong> acima.
+                      </li>
+                    </ol>
+
+                    <div className="pt-2 border-t border-border/50 text-foreground font-semibold flex items-center gap-2">
+                      💡 <span>Sem paciência para configurar? Use a aba <strong>Pacote / Arquivo (.apkg)</strong> para importar direto sem precisar do AnkiConnect!</span>
+                    </div>
                   </div>
                 </div>
               )}

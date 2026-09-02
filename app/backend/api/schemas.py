@@ -4,6 +4,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 __all__ = [
+    "AnkiConnectProxyIn",
     "AnkiDeleteDeckIn",
     "AnkiImportBatchIn",
     "AnkiImportCardItem",
@@ -197,6 +198,14 @@ class AnkiImportBatchIn(APIInput):
 
 class AnkiDeleteDeckIn(APIInput):
     deck_name: str = Field(min_length=1, max_length=200)
+
+
+class AnkiConnectProxyIn(APIInput):
+    action: str = Field(min_length=1, max_length=100)
+    version: int = Field(default=6)
+    params: dict = Field(default_factory=dict)
+    key: str | None = Field(default=None, max_length=500)
+    url: str | None = Field(default="http://127.0.0.1:8765", max_length=500)
 
 
 class PrescribeStudyIn(APIInput):
