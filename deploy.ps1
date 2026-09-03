@@ -39,10 +39,14 @@
 .PARAMETER SkipRemote
     Pula o deploy remoto, realizando apenas o commit e push local.
 
+.PARAMETER Fast
+    Modo ultrarrapido: pula hooks locais de pre-commit e pre-push (--no-verify).
+
 .EXAMPLE
     deploy
     deploy "Ajustes no planner"
-    deploy -SkipGit
+    deploy -Fast
+    deploy "Hotfix urgente" -Fast
 #>
 
 [CmdletBinding()]
@@ -57,7 +61,8 @@ param(
     [ValidateRange(15, 3600)]
     [int]$ImageWaitSeconds = 600,
     [switch]$SkipGit,
-    [switch]$SkipRemote
+    [switch]$SkipRemote,
+    [switch]$Fast
 )
 
 $ErrorActionPreference = "Stop"
@@ -169,6 +174,9 @@ if (-not $SkipGit) {
             }
         }
 
+        # Reinicia o relogio apos a digitacao para nao computar tempo ocioso do operador
+        $StartTime = Get-Date
+
         Print-Info "Mensagem de commit: '$Message'"
         
         git add -A
@@ -177,7 +185,12 @@ if (-not $SkipGit) {
             exit $LASTEXITCODE
         }
 
-        git commit -m "$Message"
+        if ($Fast) {
+            Print-Info "Modo -Fast ativo: realizando commit com --no-verify..."
+            git commit -m "$Message" --no-verify
+        } else {
+            git commit -m "$Message"
+        }
         if ($LASTEXITCODE -ne 0) {
             Print-Error "Falha ao realizar 'git commit'."
             exit $LASTEXITCODE
@@ -185,11 +198,18 @@ if (-not $SkipGit) {
         Print-Success "Commit realizado com sucesso."
     } else {
         Print-Info "Nenhuma alteracao pendente de commit local."
+        # Reinicia o relogio se nao houve commit interativo
+        $StartTime = Get-Date
     }
 
     # Git Push
     Print-Info "Enviando alteracoes para o GitHub (origin main)..."
-    git push origin main
+    if ($Fast) {
+        Print-Info "Modo -Fast ativo: enviando com --no-verify..."
+        git push origin main --no-verify
+    } else {
+        git push origin main
+    }
     if ($LASTEXITCODE -ne 0) {
         Print-Error "Falha ao enviar alteracoes para o GitHub ('git push origin main')."
         exit $LASTEXITCODE

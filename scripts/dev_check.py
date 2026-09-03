@@ -286,8 +286,13 @@ def run_tier_fast():
     ]
 
     if frontend_ts_files:
-        npx_cmd = "npx.cmd" if os.name == "nt" else "npx"
-        cmd = [npx_cmd, "eslint", "--quiet"] + frontend_ts_files[:10]
+        local_bin = FRONTEND_DIR / "node_modules" / ".bin" / ("eslint.cmd" if os.name == "nt" else "eslint")
+        rel_files = [os.path.relpath(f, FRONTEND_DIR).replace("\\", "/") for f in frontend_ts_files[:10]]
+        if local_bin.exists():
+            cmd = [str(local_bin), "--quiet"] + rel_files
+        else:
+            npx_cmd = "npx.cmd" if os.name == "nt" else "npx"
+            cmd = [npx_cmd, "eslint", "--quiet"] + rel_files
         ok, el = run_command(cmd, FRONTEND_DIR, f"Frontend Incremental Lint ({len(frontend_ts_files)} arquivos)")
         timings.append(("Frontend Incremental Lint", el))
         if not ok:

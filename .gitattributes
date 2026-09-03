@@ -1,10 +1,15 @@
 # Normaliza fim de linha: LF no repositório, nativo no working copy.
-* text=auto
+* text=auto eol=lf
 
 # Sempre LF (scripts que podem rodar em Linux/container no deploy)
 *.py    text eol=lf
 *.sh    text eol=lf
 *.sql   text eol=lf
+
+# Scripts Windows (preserva CRLF)
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
 
 # Binários: nunca tocar
 *.png   binary
