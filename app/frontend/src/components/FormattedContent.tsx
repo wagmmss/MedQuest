@@ -11,7 +11,11 @@ interface FormattedContentProps {
 
 export function normalizeImageSrc(url: string | null | undefined): string {
   if (!url) return "";
-  let src = url.trim().replace(/^\/api\/images\/images\//, "/api/images/");
+  let src = url.trim();
+  if (src.startsWith("data:") || src.startsWith("blob:")) {
+    return src;
+  }
+  src = src.replace(/^\/api\/images\/images\//, "/api/images/");
   // The database has both `images/file.png` and `/images/file.png` records.
   // They are backend-static paths, not Next.js public assets.
   if (src.startsWith("images/")) src = `/api/images/${src.slice("images/".length)}`;

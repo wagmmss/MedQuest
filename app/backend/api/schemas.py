@@ -184,8 +184,8 @@ class FlashcardReportIn(APIInput):
 
 
 class AnkiImportCardItem(APIInput):
-    front: str = Field(min_length=1, max_length=50_000)
-    back: str = Field(default="", max_length=50_000)
+    front: str = Field(min_length=1, max_length=10_000_000)
+    back: str = Field(default="", max_length=10_000_000)
     deck_name: str | None = Field(default="Anki", max_length=200)
     tags: list[str] = Field(default_factory=list, max_length=50)
     source_context: str | None = Field(default=None, max_length=500)

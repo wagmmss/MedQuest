@@ -1,5 +1,6 @@
 """Parser e importador seguro para pacotes e arquivos de exportação do Anki (.apkg, .colpkg, .txt)."""
 
+import base64
 import html
 import io
 import json
@@ -15,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 def clean_anki_html(text: str) -> str:
-    """Converte HTML exportado do Anki para texto limpo e legível mantendo quebras de linha e destaques."""
+    """Converte HTML exportado do Anki para texto limpo e legível mantendo quebras de linha, destaques e imagens."""
     if not text:
         return ""
 
@@ -24,6 +25,13 @@ def clean_anki_html(text: str) -> str:
 
     # Remove comentários HTML
     s = re.sub(r"<!--.*?-->", "", s, flags=re.DOTALL)
+
+    # Converte tags de imagem para Markdown antes de remover tags genéricas
+    def _img_replacer(match: re.Match) -> str:
+        src = match.group(1).strip()
+        return f"\n\n![imagem]({src})\n\n"
+
+    s = re.sub(r'<img\b[^>]*\bsrc=["\']([^"\']+)["\'][^>]*>', _img_replacer, s, flags=re.IGNORECASE)
 
     # Converte quebras de linha HTML comuns
     s = re.sub(r"<br\s*/?>", "\n", s, flags=re.IGNORECASE)
@@ -58,20 +66,20 @@ def parse_anki_tags(tags_str: str) -> list[str]:
     raw_tags = tags_str.strip().split()
     clean_tags = []
     for t in raw_tags:
-        cleaned = t.strip()
-        if cleaned and cleaned not in clean_tags:
-            clean_tags.append(cleaned)
+        clean = t.strip().replace("::", "/").strip("_")
+        if clean and clean not in clean_tags:
+            clean_tags.append(clean)
     return clean_tags
 
 
-def parse_apkg_bytes(file_bytes: bytes, fallback_deck_name: str = "Anki") -> list[dict[str, Any]]:
-    """Extrai notas e baralhos de um arquivo .apkg ou .colpkg em formato ZIP."""
+def parse_apkg_bytes(apkg_bytes: bytes, fallback_deck_name: str = "Anki") -> list[dict[str, Any]]:
+    """Extrai notas e imagens de um arquivo de pacote .apkg / .colpkg em memória."""
     cards_out: list[dict[str, Any]] = []
 
     with tempfile.TemporaryDirectory() as temp_dir:
-        temp_zip_path = os.path.join(temp_dir, "anki_package.zip")
+        temp_zip_path = os.path.join(temp_dir, "package.apkg")
         with open(temp_zip_path, "wb") as f:
-            f.write(file_bytes)
+            f.write(apkg_bytes)
 
         if not zipfile.is_zipfile(temp_zip_path):
             raise ValueError("O arquivo enviado não é um pacote ZIP/APKG válido.")
@@ -90,6 +98,50 @@ def parse_apkg_bytes(file_bytes: bytes, fallback_deck_name: str = "Anki") -> lis
             if not db_name:
                 raise ValueError("Nenhum banco de dados do Anki (collection.anki2) foi encontrado no arquivo .apkg.")
 
+            # Extrai mapeamento de arquivos de mídia se existir
+            media_map: dict[str, str] = {}
+            if "media" in namelist:
+                try:
+                    media_raw = z.read("media").decode("utf-8", errors="ignore")
+                    media_map = json.loads(media_raw)
+                except Exception as e:
+                    logger.warning("Falha ao ler media map do .apkg: %s", e)
+
+            filename_to_key = {fname: key for key, fname in media_map.items()}
+
+            def _resolve_media(text_content: str) -> str:
+                if not text_content or "![" not in text_content:
+                    return text_content
+
+                def _replace_img(m: re.Match) -> str:
+                    alt = m.group(1)
+                    src = m.group(2).strip()
+                    if src.startswith("data:") or src.startswith("http://") or src.startswith("https://"):
+                        return m.group(0)
+
+                    key = filename_to_key.get(src) or filename_to_key.get(os.path.basename(src))
+                    if key and key in namelist:
+                        try:
+                            img_bytes = z.read(key)
+                            ext = os.path.splitext(src)[1].lower().lstrip(".")
+                            mime = "image/png"
+                            if ext in ("jpg", "jpeg"):
+                                mime = "image/jpeg"
+                            elif ext == "gif":
+                                mime = "image/gif"
+                            elif ext == "svg":
+                                mime = "image/svg+xml"
+                            elif ext == "webp":
+                                mime = "image/webp"
+
+                            b64 = base64.b64encode(img_bytes).decode("ascii")
+                            return f"![{alt}](data:{mime};base64,{b64})"
+                        except Exception as err:
+                            logger.warning("Erro ao ler media %s (%s): %s", key, src, err)
+                    return m.group(0)
+
+                return re.sub(r'!\[(.*?)\]\((.*?)\)', _replace_img, text_content)
+
             z.extract(db_name, temp_dir)
             extracted_db_path = os.path.join(temp_dir, db_name)
 
@@ -100,9 +152,8 @@ def parse_apkg_bytes(file_bytes: bytes, fallback_deck_name: str = "Anki") -> lis
             try:
                 # 1. Carrega os baralhos e modelos da tabela 'col'
                 deck_map: dict[int, str] = {}
-                model_map: dict[int, dict[str, Any]] = {}
-
-                col_row = cursor.execute("SELECT decks, models FROM col").fetchone()
+                
+                col_row = cursor.execute("SELECT decks FROM col").fetchone()
                 if col_row:
                     try:
                         decks_data = json.loads(col_row["decks"]) if col_row["decks"] else {}
@@ -115,17 +166,6 @@ def parse_apkg_bytes(file_bytes: bytes, fallback_deck_name: str = "Anki") -> lis
                     except Exception as e:
                         logger.warning("Falha ao analisar decks do col: %s", e)
 
-                    try:
-                        models_data = json.loads(col_row["models"]) if col_row["models"] else {}
-                        for mid_str, minfo in models_data.items():
-                            try:
-                                mid = int(mid_str)
-                                model_map[mid] = minfo
-                            except (ValueError, TypeError):
-                                pass
-                    except Exception as e:
-                        logger.warning("Falha ao analisar models do col: %s", e)
-
                 # 2. Mapeia cada note ID (nid) para seu deck ID (did) através da tabela 'cards'
                 note_to_deck: dict[int, int] = {}
                 card_rows = cursor.execute("SELECT nid, did FROM cards ORDER BY id ASC").fetchall()
@@ -134,11 +174,10 @@ def parse_apkg_bytes(file_bytes: bytes, fallback_deck_name: str = "Anki") -> lis
                         note_to_deck[c["nid"]] = c["did"]
 
                 # 3. Lê as notas da tabela 'notes'
-                notes_rows = cursor.execute("SELECT id, mid, flds, tags FROM notes ORDER BY id ASC").fetchall()
+                notes_rows = cursor.execute("SELECT id, flds, tags FROM notes ORDER BY id ASC").fetchall()
 
                 for n in notes_rows:
                     nid = n["id"]
-                    mid = n["mid"]
                     flds_raw = n["flds"] or ""
                     tags_raw = n["tags"] or ""
 
@@ -159,6 +198,10 @@ def parse_apkg_bytes(file_bytes: bytes, fallback_deck_name: str = "Anki") -> lis
                     back = ""
                     if len(fields) > 1:
                         back = "\n\n".join(f for f in fields[1:] if f.strip())
+
+                    # Resolve imagens locais para base64 data URIs
+                    front = _resolve_media(front)
+                    back = _resolve_media(back)
 
                     # Se a frente for vazia, pula
                     if not front.strip():

@@ -23,7 +23,7 @@ from .stats import bp as stats_bp
 def create_app(testing=False, initialize_db=None):
     app = Flask(__name__)
     app.config.from_object(Config)
-    app.config["MAX_CONTENT_LENGTH"] = 1 * 1024 * 1024
+    app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024
     if testing:
         app.config["TESTING"] = True
     if initialize_db is None:

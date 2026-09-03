@@ -84,6 +84,7 @@ export function AnkiIntegrationModal({
   const [localDecks, setLocalDecks] = useState<string[]>([]);
   const [selectedLocalDeck, setSelectedLocalDeck] = useState<string>("");
   const [isSyncingAnkiConnect, setIsSyncingAnkiConnect] = useState(false);
+  const [syncProgress, setSyncProgress] = useState<string | null>(null);
   const [isPullingAnkiReviews, setIsPullingAnkiReviews] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -175,27 +176,47 @@ export function AnkiIntegrationModal({
     }
 
     setIsSyncingAnkiConnect(true);
+    setSyncProgress("Extraindo notas e preparando imagens do Anki...");
     try {
       const opts = {
         url: ankiUrl.trim() || DEFAULT_ANKICONNECT_URL,
         apiKey: ankiApiKey.trim() || undefined,
       };
-      const cards = await fetchDeckCards(selectedLocalDeck, 500, opts);
+      const cards = await fetchDeckCards(selectedLocalDeck, 500, opts, (curr, tot) => {
+        setSyncProgress(`Baixando imagens do Anki (${curr}/${tot})...`);
+      });
       if (cards.length === 0) {
         toast.error("Nenhuma nota encontrada no baralho selecionado.");
         return;
       }
 
-      const result = await api.flashcards.importBatch(cards, selectedLocalDeck);
-      const states = await getAnkiSchedulingStates(selectedLocalDeck, opts);
-      await api.flashcards.syncAnkiStates(states);
-      toast.success(`Sincronização concluída! ${result.total_imported} flashcards importados com sucesso.`);
+      setSyncProgress(`Salvando ${cards.length} flashcards no MedQuest...`);
+      // Envia em lotes de 25 para garantir velocidade e evitar estouro de timeout
+      const batchSize = 25;
+      let totalImported = 0;
+      for (let i = 0; i < cards.length; i += batchSize) {
+        const chunk = cards.slice(i, i + batchSize);
+        setSyncProgress(`Salvando lote ${Math.floor(i / batchSize) + 1} de ${Math.ceil(cards.length / batchSize)}...`);
+        const result = await api.flashcards.importBatch(chunk, selectedLocalDeck);
+        totalImported += result.total_imported;
+      }
+
+      try {
+        setSyncProgress("Sincronizando agendamento e repetições...");
+        const states = await getAnkiSchedulingStates(selectedLocalDeck, opts);
+        await api.flashcards.syncAnkiStates(states);
+      } catch {
+        // não impede a conclusão caso o Anki não tenha cards agendados
+      }
+
+      toast.success(`Sincronização concluída! ${totalImported} flashcards com imagens importados com sucesso.`);
       onSuccess();
       onClose();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erro ao sincronizar com o AnkiConnect.");
     } finally {
       setIsSyncingAnkiConnect(false);
+      setSyncProgress(null);
     }
   };
 
@@ -527,6 +548,13 @@ export function AnkiIntegrationModal({
                       ))}
                     </select>
                   </div>
+
+                  {syncProgress && (
+                    <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-xl text-xs text-blue-600 font-semibold flex items-center justify-center gap-2 animate-pulse">
+                      <Loader2 size={14} className="animate-spin" />
+                      {syncProgress}
+                    </div>
+                  )}
 
                   <button
                     type="button"

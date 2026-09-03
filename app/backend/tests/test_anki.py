@@ -2,6 +2,7 @@
 
 import io
 import json
+import os
 import sqlite3
 import tempfile
 import zipfile
@@ -154,6 +155,37 @@ def test_parse_apkg_bytes():
     assert card_beck["deck_name"] == "Cardiologia::Arritmias"
     assert "#cardio" in card_beck["tags"]
     assert card_beck["anki_nid"] == 101
+
+
+def test_parse_apkg_with_images():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        db_path = os.path.join(tmpdir, "collection.anki2")
+        conn = sqlite3.connect(db_path)
+        cur = conn.cursor()
+        cur.execute("CREATE TABLE col (id integer primary key, crt integer, mod integer, scm integer, ver integer, dty integer, usn integer, ls integer, conf text, models text, decks text, dconf text, tags text)")
+        cur.execute("CREATE TABLE notes (id integer primary key, guid text, mid integer, mod integer, usn integer, tags text, flds text, sfld text, csum integer, flags integer, data text)")
+        cur.execute("CREATE TABLE cards (id integer primary key, nid integer, did integer, ord integer, mod integer, usn integer, type integer, queue integer, due integer, ivl integer, factor integer, reps integer, lapses integer, left integer, odue integer, odid integer, flags integer, data text)")
+        
+        decks_json = json.dumps({"1": {"id": 1, "name": "ECG"}})
+        cur.execute("INSERT INTO col VALUES (1, 1600000000, 1600000000, 1600000000, 11, 0, 0, 0, '{}', '{}', ?, '{}', '{}')", (decks_json,))
+        
+        # Note com imagem no verso
+        flds = "Qual o diagnóstico do traçado?\x1f<img src=\"ecg_brd.png\"><br>Bloqueio de Ramo Direito"
+        cur.execute("INSERT INTO notes VALUES (301, 'guid3', 1, 1600000000, 0, '', ?, 'sfld', 0, 0, '')", (flds,))
+        cur.execute("INSERT INTO cards VALUES (401, 301, 1, 0, 1600000000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '')")
+        conn.commit()
+        conn.close()
+
+        zip_buf = io.BytesIO()
+        with zipfile.ZipFile(zip_buf, "w", zipfile.ZIP_DEFLATED) as zf:
+            zf.write(db_path, "collection.anki2")
+            zf.writestr("media", json.dumps({"0": "ecg_brd.png"}))
+            zf.writestr("0", b"\x89PNG\r\n\x1a\n\x00fake_image_bytes")
+
+        cards = parse_apkg_bytes(zip_buf.getvalue())
+        assert len(cards) == 1
+        assert "data:image/png;base64," in cards[0]["back"]
+        assert "Bloqueio de Ramo Direito" in cards[0]["back"]
 
 
 def test_anki_endpoints_flow(client):

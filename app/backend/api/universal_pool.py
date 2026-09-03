@@ -185,7 +185,12 @@ def _try_openrouter(prompt: str, system_instruction: Optional[str], json_mode: b
         for key_index, key in enumerate(keys):
             if not _is_available("openrouter", key_index, model):
                 continue
-            payload: Dict[str, Any] = {"model": model, "messages": messages, "temperature": temperature}
+            payload: Dict[str, Any] = {
+                "model": model,
+                "messages": messages,
+                "temperature": temperature,
+                "max_tokens": 2500,
+            }
             if json_mode:
                 payload["response_format"] = {"type": "json_object"}
             request = urllib.request.Request(
@@ -263,7 +268,7 @@ def generate_content_with_fallback(
         1.0,
         float(os.environ.get("AI_PROVIDER_TIMEOUT", str(DEFAULT_PROVIDER_TIMEOUT))),
     )
-    provider_timeout = min(float(timeout), configured_provider_timeout) if timeout is not None else configured_provider_timeout
+    provider_timeout = float(timeout) if timeout is not None else configured_provider_timeout
     providers = [provider for provider in _provider_order() if provider != "ollama" or _ollama_enabled()]
     start_time = time.perf_counter()
 

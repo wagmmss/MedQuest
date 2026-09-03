@@ -6,6 +6,7 @@ import { api, OfflineQueuedError } from "@/lib/api";
 import { localDb, getLocalOwnerId } from "@/lib/db";
 import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 import { AnkiIntegrationModal } from "./components/AnkiIntegrationModal";
+import { FormattedContent } from "@/components/FormattedContent";
 import { answerAnkiCard } from "@/lib/ankiConnect";
 import {
   Sparkles,
@@ -208,11 +209,11 @@ export function FlashcardClient() {
     const hasCloze = parts.some(p => p.startsWith("{{c") && p.endsWith("}}"));
 
     if (!hasCloze) {
-      return <span>{frontText}</span>;
+      return <FormattedContent content={frontText} />;
     }
 
     return (
-      <>
+      <div className="space-y-2">
         {parts.map((part, i) => {
           if (part.startsWith("{{c") && part.endsWith("}}")) {
             const match = part.match(/{{c\d+::(.*?)(?:::([^}]+))?}}/);
@@ -238,9 +239,12 @@ export function FlashcardClient() {
               </span>
             );
           }
+          if (part.includes("![imagem]") || part.includes("<img")) {
+            return <FormattedContent key={i} content={part} />;
+          }
           return <span key={i}>{part}</span>;
         })}
-      </>
+      </div>
     );
   };
 
@@ -409,8 +413,8 @@ export function FlashcardClient() {
                 {/* Conteúdo Verso */}
                 {flipped && current.back && (
                   <div className="mt-4 pt-6 border-t border-border w-full text-left animate-in slide-in-from-bottom-3 fade-in duration-300">
-                    <div className="bg-muted/40 p-4 rounded-xl border border-border/60 text-sm md:text-base text-foreground leading-relaxed whitespace-pre-line">
-                      {current.back}
+                    <div className="bg-muted/40 p-4 rounded-xl border border-border/60 text-sm md:text-base text-foreground leading-relaxed">
+                      <FormattedContent content={current.back} />
                     </div>
 
                     {current.source_context && (

@@ -318,9 +318,15 @@ class GeminiPool:
                     raise RuntimeError(f"Erro na API Gemini ({e.code}): {err_body}")
 
                 except Exception as e:
+                    is_timeout = any(kw in str(e).lower() for kw in ["timed out", "timeout"])
                     key_state.mark_error(str(e), cooldown_seconds=60.0, model=target_model)
                     last_exception = e
                     time.sleep(0.2)
+                    if is_timeout:
+                        # Se o modelo sofreu timeout, avança imediatamente para o próximo
+                        # modelo de fallback da cadeia em vez de esgotar o prazo insistindo no mesmo.
+                        logger.warning("[GeminiPool] Timeout no modelo %s. Tentando próximo modelo de fallback.", target_model)
+                        break
 
         raise RuntimeError(
             f"Nenhum modelo do pool respondeu após os fallbacks {self._model_candidates(model)}. "

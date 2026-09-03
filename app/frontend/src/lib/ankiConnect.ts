@@ -148,6 +148,8 @@ function cleanHtml(html: string): string {
   if (!html) return "";
   let s = html;
   s = s.replace(/<!--[\s\S]*?-->/g, "");
+  // Converte tags <img> para markdown ![imagem](...) antes de remover tags genéricas
+  s = s.replace(/<img\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/gi, (_match, src) => `\n\n![imagem](${src.trim()})\n\n`);
   s = s.replace(/<br\s*\/?>/gi, "\n");
   s = s.replace(/<\/p>/gi, "\n\n");
   s = s.replace(/<\/div>/gi, "\n");
@@ -172,7 +174,8 @@ function cleanHtml(html: string): string {
 export async function fetchDeckCards(
   deckName: string,
   maxNotes: number = 500,
-  options?: AnkiConnectOptions
+  options?: AnkiConnectOptions,
+  onProgress?: (current: number, total: number) => void
 ): Promise<AnkiExtractedCard[]> {
   const query = `deck:"${deckName}"`;
   const noteIds = await ankiConnectInvoke<number[]>("findNotes", { query }, options);
@@ -182,9 +185,34 @@ export async function fetchDeckCards(
   }
 
   const selectedIds = noteIds.slice(0, maxNotes);
-  const notesInfo = await ankiConnectInvoke<AnkiConnectNote[]>("notesInfo", { notes: selectedIds }, options);
+  const notesInfo: AnkiConnectNote[] = [];
+
+  // Busca em blocos de 50 notas para evitar sobrecarga ou quebra por ID deletado
+  const chunkSize = 50;
+  for (let i = 0; i < selectedIds.length; i += chunkSize) {
+    const chunk = selectedIds.slice(i, i + chunkSize);
+    try {
+      const chunkRes = await ankiConnectInvoke<AnkiConnectNote[]>("notesInfo", { notes: chunk }, options);
+      if (Array.isArray(chunkRes)) {
+        notesInfo.push(...chunkRes.filter(Boolean));
+      }
+    } catch {
+      // Se o bloco falhar (ex: por uma nota excluída), tenta nota a nota
+      for (const singleId of chunk) {
+        try {
+          const singleRes = await ankiConnectInvoke<AnkiConnectNote[]>("notesInfo", { notes: [singleId] }, options);
+          if (Array.isArray(singleRes) && singleRes[0]) {
+            notesInfo.push(singleRes[0]);
+          }
+        } catch {
+          // ignora nota corrompida
+        }
+      }
+    }
+  }
 
   const cards: AnkiExtractedCard[] = [];
+  const referencedImages = new Set<string>();
 
   for (const n of notesInfo) {
     if (!n.fields) continue;
@@ -200,6 +228,17 @@ export async function fetchDeckCards(
 
     if (!front) continue;
 
+    // Coleta imagens para busca no AnkiConnect
+    for (const text of [front, back]) {
+      const matches = Array.from(text.matchAll(/!\[.*?\]\((.*?)\)/g));
+      for (const m of matches) {
+        const src = m[1]?.trim();
+        if (src && !src.startsWith("data:") && !src.startsWith("http://") && !src.startsWith("https://")) {
+          referencedImages.add(src);
+        }
+      }
+    }
+
     cards.push({
       front,
       back,
@@ -208,6 +247,44 @@ export async function fetchDeckCards(
       anki_nid: n.noteId,
       anki_cid: n.cards?.[0],
     });
+  }
+
+  // Baixa as imagens referenciadas via AnkiConnect retrieveMediaFile e converte em data URIs
+  if (referencedImages.size > 0) {
+    const mediaCache = new Map<string, string>();
+    const imgList = Array.from(referencedImages);
+    let count = 0;
+
+    for (const imgName of imgList) {
+      try {
+        const b64 = await ankiConnectInvoke<string>("retrieveMediaFile", { filename: imgName }, options);
+        if (b64) {
+          const ext = imgName.split(".").pop()?.toLowerCase() || "png";
+          let mime = "image/png";
+          if (ext === "jpg" || ext === "jpeg") mime = "image/jpeg";
+          else if (ext === "gif") mime = "image/gif";
+          else if (ext === "svg") mime = "image/svg+xml";
+          else if (ext === "webp") mime = "image/webp";
+
+          mediaCache.set(imgName, `data:${mime};base64,${b64}`);
+        }
+      } catch {
+        // ignora falha em imagem específica
+      }
+      count++;
+      if (onProgress) onProgress(count, imgList.length);
+    }
+
+    // Substitui as referências nos cartões
+    if (mediaCache.size > 0) {
+      for (const card of cards) {
+        for (const [imgName, dataUri] of mediaCache.entries()) {
+          const regex = new RegExp(`!\\[(.*?)\\]\\(${imgName.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}\\)`, "g");
+          card.front = card.front.replace(regex, `![$1](${dataUri})`);
+          card.back = card.back.replace(regex, `![$1](${dataUri})`);
+        }
+      }
+    }
   }
 
   return cards;
