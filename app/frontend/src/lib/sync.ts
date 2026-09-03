@@ -217,11 +217,20 @@ export const syncManager = {
           "X-Idempotency-Key": item.idempotency_key,
         };
 
-        const response = await fetch(item.endpoint, {
-          method: item.method,
-          headers: fetchHeaders,
-          body: item.body,
-        });
+        const syncAbortController = new AbortController();
+        const syncTimeoutTimer = setTimeout(() => syncAbortController.abort(), 6000);
+
+        let response: Response;
+        try {
+          response = await fetch(item.endpoint, {
+            method: item.method,
+            headers: fetchHeaders,
+            body: item.body,
+            signal: syncAbortController.signal,
+          });
+        } finally {
+          clearTimeout(syncTimeoutTimer);
+        }
 
         if (response.ok) {
           let responseData: unknown = null;

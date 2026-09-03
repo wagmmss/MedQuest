@@ -22,32 +22,116 @@ const LEGACY_CACHES = [
 const OFFLINE_STUDY_SHELL_CACHE = "medquest-study-shell";
 const OFFLINE_STUDY_SHELL_PATH = "/estudar";
 
-async function getOfflineStudyShell(): Promise<Response> {
-  const cache = await caches.open(OFFLINE_STUDY_SHELL_CACHE);
-  const shell = await cache.match(OFFLINE_STUDY_SHELL_PATH, {
-    ignoreSearch: true,
-    ignoreVary: true,
+function getOfflineFallbackHtml(): Response {
+  const html = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MedQuest - Modo Plantão (Offline)</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card: #131b2e;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --border: rgba(255,255,255,0.1);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --primary: #0284c7;
+        --primary-hover: #0369a1;
+        --border: rgba(0,0,0,0.1);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 32px 24px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    .icon { width: 56px; height: 56px; border-radius: 16px; background: rgba(2,132,199,0.15); color: var(--primary); display: inline-flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 28px; }
+    h1 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+    .btn-group { display: flex; flex-direction: column; gap: 10px; }
+    a.btn, button.btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px; border-radius: 14px; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: rgba(2,132,199,0.1); color: var(--primary); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: rgba(2,132,199,0.2); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">⚡</div>
+    <h1>Modo Plantão Ativo</h1>
+    <p>Você está sem conexão de rede. Você pode continuar resolvendo simulados e questões salvos neste aparelho sem interrupção.</p>
+    <div class="btn-group">
+      <a href="/estudar" class="btn btn-primary">Abrir Questões Offline</a>
+      <a href="/simulado" class="btn btn-secondary">Abrir Simulados Offline</a>
+      <a href="/revisao-ativa" class="btn btn-secondary">Revisar Flashcards Offline</a>
+      <button onclick="window.location.reload()" class="btn btn-secondary" style="margin-top: 6px;">Tentar Reconectar</button>
+    </div>
+  </div>
+</body>
+</html>`;
+
+  return new Response(html, {
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "no-store",
+    },
   });
-  return shell || Response.error();
 }
 
-// Existing Android installations can retain `/` as their launch target until
-// Chrome refreshes the manifest. A redirect is not enough here: after a failed
-// navigation Chrome may try to load the redirect target outside this fetch
-// event and show its generic offline page. Return the cached shell itself.
-// New installations start at `/estudar` (see manifest.json), which is handled
-// by Workbox's NetworkFirst route below.
+async function getOfflineStudyShell(): Promise<Response> {
+  try {
+    const cache = await caches.open(OFFLINE_STUDY_SHELL_CACHE);
+    const shell = await cache.match(OFFLINE_STUDY_SHELL_PATH, {
+      ignoreSearch: true,
+      ignoreVary: true,
+    });
+    if (shell) return shell;
+  } catch {
+    // Cache indisponível
+  }
+  return getOfflineFallbackHtml();
+}
+
+async function fetchNavigationWithTimeout(request: Request, timeoutMs: number = 3000): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(request, { signal: controller.signal });
+    return response;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Intercepta navegações com timeout de 3s para impedir que o celular trave
+// quando a conexão cai ou oscila.
 self.addEventListener("fetch", (rawEvent: Event) => {
   const event = rawEvent as FetchEvent;
   if (event.request.mode !== "navigate") return;
 
   const url = new URL(event.request.url);
-  if (url.origin !== self.location.origin || url.pathname !== "/") return;
+  if (url.origin !== self.location.origin) return;
 
+  // Rotas de estudo/simulado/revisão ou raiz
   event.respondWith((async () => {
     try {
-      return await fetch(event.request);
+      return await fetchNavigationWithTimeout(event.request, 2800);
     } catch {
+      // Se a conexão falhar ou expirar o tempo limite:
+      if (url.pathname === "/estudar" || url.pathname === "/") {
+        const shell = await getOfflineStudyShell();
+        return shell;
+      }
+      // Para outras rotas em modo offline, retorna a casca ou fallback amigável
       return getOfflineStudyShell();
     }
   })());
@@ -70,21 +154,40 @@ self.addEventListener("fetch", (rawEvent: Event) => {
   })());
 });
 
-// Clean up any legacy or unwanted caches during ServiceWorker activation
+async function primeOfflineShellOnActivate(): Promise<void> {
+  try {
+    const cache = await caches.open(OFFLINE_STUDY_SHELL_CACHE);
+    const existing = await cache.match(OFFLINE_STUDY_SHELL_PATH, { ignoreSearch: true, ignoreVary: true });
+    if (!existing) {
+      const response = await fetch(OFFLINE_STUDY_SHELL_PATH);
+      if (response && response.ok) {
+        await cache.put(OFFLINE_STUDY_SHELL_PATH, response);
+        console.log("[ServiceWorker] Casca offline /estudar pré-aquecida com sucesso.");
+      }
+    }
+  } catch (err) {
+    console.warn("[ServiceWorker] Não foi possível pré-aquecer a casca no activate:", err);
+  }
+}
+
+// Clean up any legacy or unwanted caches during ServiceWorker activation and prime study shell
 self.addEventListener("activate", (rawEvent: Event) => {
   const event = rawEvent as ExtendableEvent;
   if (typeof caches !== "undefined") {
     event.waitUntil(
-      caches.keys().then((keys) => {
-        return Promise.all(
-          keys
-            .filter((key) => LEGACY_CACHES.some((legacy) => key.includes(legacy)))
-            .map((key) => {
-              console.log(`[ServiceWorker] Removing legacy cache: ${key}`);
-              return caches.delete(key);
-            })
-        );
-      })
+      Promise.all([
+        caches.keys().then((keys) => {
+          return Promise.all(
+            keys
+              .filter((key) => LEGACY_CACHES.some((legacy) => key.includes(legacy)))
+              .map((key) => {
+                console.log(`[ServiceWorker] Removing legacy cache: ${key}`);
+                return caches.delete(key);
+              })
+          );
+        }),
+        primeOfflineShellOnActivate(),
+      ])
     );
   }
 });

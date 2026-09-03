@@ -8,9 +8,36 @@ import { DashboardClient } from "./DashboardClient";
 
 export const dynamic = "force-dynamic";
 
+const DEFAULT_STATS: OverviewStats = {
+  total_questions: 0,
+  distinct_answered: 0,
+  total_attempts: 0,
+  accuracy_all_attempts: null,
+  accuracy_latest_attempt: null,
+  coverage_pct: null,
+  srs_due_count: 0,
+  accuracy_last7: null,
+  accuracy_prev7: null,
+  streak_days: 0,
+  daily_target: 20,
+  today_answered: 0,
+  flashcards_due_count: 0,
+};
+
 export default async function Dashboard() {
-  const stats: OverviewStats = await serverApi.stats.getOverview();
-  const user = await currentUser();
+  let stats: OverviewStats = DEFAULT_STATS;
+  try {
+    stats = await serverApi.stats.getOverview();
+  } catch (err) {
+    console.warn("[Dashboard SSR] Fallback ativo para dados estatísticos:", err);
+  }
+
+  let user = null;
+  try {
+    user = await currentUser();
+  } catch {
+    // Modo offline ou sem autenticação
+  }
 
   let currentPlannerWeek: PlannerWeek | null = null;
   let suggestedPlannerTopic: PlannerTopic | null = null;

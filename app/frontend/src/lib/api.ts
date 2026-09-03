@@ -28,7 +28,7 @@ export class OfflineQueuedError extends Error {
 }
 
 /**
- * Base fetch function with default headers
+ * Base fetch function with default headers and resilient timeout
  */
 async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE}${endpoint}`;
@@ -53,10 +53,41 @@ async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> 
     headers.set("X-Idempotency-Key", idempotencyKey);
   }
 
+  // Falha rápida se o navegador já estiver sabidamente offline
+  if (typeof window !== "undefined" && typeof navigator !== "undefined" && !navigator.onLine) {
+    if (isIdempotentEndpoint) {
+      console.warn("[API] Offline imediato detectado, enfileirando:", endpoint);
+      const localId = await syncManager.enqueue(url, { ...options, headers }, idempotencyKey!);
+      throw new OfflineQueuedError(localId);
+    }
+    throw new TypeError("Falha de rede: navegador está offline");
+  }
+
+  const timeoutMs = endpoint.includes("/batch") || endpoint.includes("/generate") ? 8000 : 4500;
+  const controller = new AbortController();
+  let isInternalTimeout = false;
+  const timeoutId = setTimeout(() => {
+    isInternalTimeout = true;
+    controller.abort(new Error("Timeout de conexão"));
+  }, timeoutMs);
+
+  if (options?.signal) {
+    if (options.signal.aborted) {
+      clearTimeout(timeoutId);
+      controller.abort(options.signal.reason);
+    } else {
+      options.signal.addEventListener("abort", () => {
+        clearTimeout(timeoutId);
+        controller.abort(options.signal!.reason);
+      }, { once: true });
+    }
+  }
+
   try {
     const response = await fetch(url, {
       ...options,
       headers,
+      signal: controller.signal,
     });
 
     if (!response.ok) {
@@ -72,24 +103,28 @@ async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> 
 
     return await response.json();
   } catch (error) {
-    // An aborted request is an intentional lifecycle event, not an offline
-    // failure. In particular, some browser implementations report it as a
-    // TypeError, which must never be added to the retry queue.
+    // Aborto intencional iniciado pelo chamador
     if (options?.signal?.aborted) {
       throw error;
     }
-    if (typeof window !== "undefined" && isIdempotentEndpoint) {
-      // Browsers use different messages for fetch failures (for example,
-      // "NetworkError" in Firefox). A TypeError produced by fetch is the
-      // portable signal that the request did not reach the server.
-      const isNetworkError = error instanceof TypeError;
-      if (isNetworkError || !navigator.onLine) {
-        console.warn("[API] Network error detected, adding to offline queue:", endpoint);
-        const localId = await syncManager.enqueue(url, { ...options, headers }, idempotencyKey!);
-        throw new OfflineQueuedError(localId);
-      }
+
+    const isNetworkOrTimeout = isInternalTimeout ||
+      error instanceof TypeError ||
+      (typeof navigator !== "undefined" && !navigator.onLine);
+
+    if (typeof window !== "undefined" && isIdempotentEndpoint && isNetworkOrTimeout) {
+      console.warn("[API] Erro de rede ou timeout detectado, adicionando à fila offline:", endpoint);
+      const localId = await syncManager.enqueue(url, { ...options, headers }, idempotencyKey!);
+      throw new OfflineQueuedError(localId);
     }
+
+    if (isInternalTimeout) {
+      throw new TypeError("Tempo limite de conexão excedido");
+    }
+
     throw error;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 

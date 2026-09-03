@@ -87,47 +87,62 @@ export default function TopNav() {
     };
   }, [isMobileMenuOpen]);
 
+  const [isOffline, setIsOffline] = useState(false);
+
+  useEffect(() => {
+    const updateOnlineStatus = () => {
+      if (typeof navigator !== "undefined") {
+        setIsOffline(!navigator.onLine);
+      }
+    };
+    updateOnlineStatus();
+    window.addEventListener("online", updateOnlineStatus);
+    window.addEventListener("offline", updateOnlineStatus);
+    return () => {
+      window.removeEventListener("online", updateOnlineStatus);
+      window.removeEventListener("offline", updateOnlineStatus);
+    };
+  }, []);
+
   return (
     <>
-      <header className="app-top-nav md:hidden flex justify-between items-center w-full px-5 py-3 h-16 bg-surface/50 backdrop-blur-2xl border-b border-border/50 z-10 sticky top-0 transition-all duration-300 shadow-sm">
+      <header className="app-top-nav md:hidden flex justify-between items-center w-full px-4 sm:px-5 py-2.5 h-16 pt-[max(0.625rem,env(safe-area-inset-top,0px))] bg-surface/85 backdrop-blur-2xl border-b border-border/50 z-10 sticky top-0 transition-all duration-300 shadow-xs">
         <h1 className="font-semibold text-lg text-foreground tracking-tight flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-xs shrink-0">
             <span className="material-symbols-outlined text-[16px]" data-icon="local_hospital">local_hospital</span>
           </div>
-          MedQuest
+          <span className="truncate">MedQuest</span>
         </h1>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={toggleZenMode}
-            className="text-muted-foreground hover:bg-surface-variant/50 rounded-md p-2 transition-colors flex items-center justify-center cursor-pointer"
-            title={isZenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen (Z)"}
-            aria-label={isZenMode ? "Sair do modo Zen" : "Entrar no modo Zen"}
-            aria-pressed={isZenMode}
-          >
-            <span className="material-symbols-outlined text-[20px]">{isZenMode ? "fullscreen_exit" : "fullscreen"}</span>
-          </button>
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <button
             onClick={() => setIsOfflineOpen(true)}
-            className="text-muted-foreground hover:bg-surface-variant/50 rounded-md p-2 transition-colors flex items-center justify-center cursor-pointer"
-            title="Modo Plantão (Offline)"
-            aria-label="Abrir Modo Plantão"
+            className={clsx(
+              "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer",
+              isOffline
+                ? "bg-warning/20 text-warning border border-warning/30 animate-pulse"
+                : "text-muted-foreground hover:bg-surface-variant/50 hover:text-foreground"
+            )}
+            title={isOffline ? "Você está no Modo Plantão (Offline)" : "Abrir Modo Plantão (Offline)"}
+            aria-label={isOffline ? "Modo Plantão Offline Ativo" : "Abrir Modo Plantão"}
           >
-            <span className="material-symbols-outlined text-[20px]" data-icon="cloud_download">cloud_download</span>
+            <span className="material-symbols-outlined text-[18px]" data-icon={isOffline ? "cloud_off" : "cloud_download"}>
+              {isOffline ? "cloud_off" : "cloud_download"}
+            </span>
+            <span className="text-[11px] font-bold">{isOffline ? "Offline" : "Plantão"}</span>
           </button>
-          <div className="scale-90 opacity-80"><ThemeToggle /></div>
           <button 
             ref={menuButtonRef}
             onClick={() => setIsMobileMenuOpen(true)}
-            className="text-muted-foreground hover:bg-surface-variant/50 rounded-md p-2 transition-colors flex items-center justify-center cursor-pointer"
+            className="text-muted-foreground hover:bg-surface-variant/50 rounded-lg p-2 transition-colors flex items-center justify-center cursor-pointer"
             aria-label="Abrir menu principal"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-navigation-drawer"
           >
-            <span className="material-symbols-outlined text-[20px]" data-icon="menu">menu</span>
+            <span className="material-symbols-outlined text-[22px]" data-icon="menu">menu</span>
           </button>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="relative w-8 h-8 rounded-full bg-muted overflow-hidden ring-1 ring-border shadow-sm flex items-center justify-center cursor-pointer hover:opacity-85 transition-opacity focus:outline-none focus:ring-primary/50 ml-1"
+            className="relative w-8 h-8 rounded-full bg-muted overflow-hidden ring-1 ring-border shadow-xs flex items-center justify-center cursor-pointer hover:opacity-85 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary/50 shrink-0 ml-0.5"
             aria-label="Abrir minha conta"
           >
             {isLoaded && user?.imageUrl ? (
@@ -154,7 +169,7 @@ export default function TopNav() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="mobile-menu-title"
-        className="fixed top-0 left-0 h-full w-[min(20rem,85vw)] bg-background/95 backdrop-blur-2xl z-50 shadow-2xl md:hidden border-r border-border/50 flex flex-col"
+        className="fixed top-0 left-0 h-full w-[min(20rem,85vw)] bg-background/95 backdrop-blur-2xl z-50 shadow-2xl md:hidden border-r border-border/50 flex flex-col pt-[env(safe-area-inset-top,0px)] pb-[env(safe-area-inset-bottom,0px)]"
       >
         <div className="flex items-center justify-between p-4 border-b border-border/50">
           <div className="flex items-center gap-2">
@@ -166,7 +181,7 @@ export default function TopNav() {
           <button 
             id="mobile-menu-close"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="p-2 rounded-md hover:bg-surface-variant/50 transition-colors text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className="p-2 rounded-md hover:bg-surface-variant/50 transition-colors text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer"
             aria-label="Fechar menu"
           >
             <span className="material-symbols-outlined text-[20px]">close</span>
@@ -194,6 +209,30 @@ export default function TopNav() {
             );
           })}
         </nav>
+        {/* Controles secundários movidos para o rodapé do menu mobile */}
+        <div className="p-4 border-t border-border/50 flex items-center justify-between gap-2 bg-muted/20">
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              onClick={toggleZenMode}
+              className="text-muted-foreground hover:bg-surface-variant/50 rounded-lg p-2 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
+              title={isZenMode ? "Sair do Modo Zen" : "Entrar no Modo Zen (Z)"}
+            >
+              <span className="material-symbols-outlined text-[18px]">{isZenMode ? "fullscreen_exit" : "fullscreen"}</span>
+              <span>{isZenMode ? "Sair Zen" : "Modo Zen"}</span>
+            </button>
+          </div>
+          <button
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              setIsOfflineOpen(true);
+            }}
+            className="flex items-center gap-1 text-xs text-primary font-bold px-2.5 py-1.5 rounded-lg hover:bg-primary/10 transition-colors cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-[16px]" data-icon="cloud_download">cloud_download</span>
+            <span>Plantão</span>
+          </button>
+        </div>
       </div>}
 
       <AccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

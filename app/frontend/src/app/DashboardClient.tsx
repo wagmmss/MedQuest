@@ -85,6 +85,23 @@ export function DashboardClient({
     return () => window.removeEventListener("open-offline-modal", handleOpenOffline);
   }, []);
 
+  const [isOffline, setIsOffline] = useState(false);
+
+  useEffect(() => {
+    const updateOnline = () => {
+      if (typeof navigator !== "undefined") {
+        setIsOffline(!navigator.onLine);
+      }
+    };
+    updateOnline();
+    window.addEventListener("online", updateOnline);
+    window.addEventListener("offline", updateOnline);
+    return () => {
+      window.removeEventListener("online", updateOnline);
+      window.removeEventListener("offline", updateOnline);
+    };
+  }, []);
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
@@ -177,10 +194,10 @@ export function DashboardClient({
       const flashcardsCount = stats.flashcards_due_count || 0;
 
       return (
-        <div className="bg-card border-2 border-purple-500/30 dark:border-purple-500/20 bg-gradient-to-r from-purple-500/5 via-card to-card rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative overflow-hidden">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 ring-1 ring-purple-500/20 flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[26px]" data-icon="psychology">psychology</span>
+        <div className="bg-card border-2 border-purple-500/30 dark:border-purple-500/20 bg-gradient-to-r from-purple-500/5 via-card to-card rounded-2xl p-4 sm:p-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative overflow-hidden">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 ring-1 ring-purple-500/20 flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[22px] sm:text-[26px]" data-icon="psychology">psychology</span>
             </div>
             <div>
               <div className="flex items-center gap-2 mb-0.5">
@@ -189,20 +206,20 @@ export function DashboardClient({
                 </span>
                 <span className="text-xs text-muted-foreground">• ~{estimatedMinutes} min</span>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-foreground">
+              <h3 className="text-base sm:text-xl font-bold text-foreground">
                 {pendentesRevisao} revisões vencidas hoje
               </h3>
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 sm:line-clamp-none">
                 Reforce os conceitos no tempo ideal do FSRS antes de resolver questões inéditas.
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 w-full sm:w-auto">
+          <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto shrink-0">
             {flashcardsCount > 0 && (
               <Link 
                 href="/revisao-ativa" 
-                className="flex-1 sm:flex-initial px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 shadow-xs"
+                className="px-3 sm:px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 shadow-xs"
               >
                 <span className="material-symbols-outlined text-[16px]" data-icon="auto_awesome">auto_awesome</span> Flashcards ({flashcardsCount})
               </Link>
@@ -210,7 +227,7 @@ export function DashboardClient({
             {srsCount > 0 && (
               <Link 
                 href="/estudar?status=srs_due&limit=100" 
-                className="flex-1 sm:flex-initial px-4 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 shadow-xs"
+                className="px-3 sm:px-4 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 shadow-xs"
               >
                 <span className="material-symbols-outlined text-[16px]" data-icon="replay">replay</span> Questões ({srsCount})
               </Link>
@@ -318,32 +335,76 @@ export function DashboardClient({
     <motion.div 
       variants={containerVariants} 
       initial="hidden" 
-      animate="show"
-      className="flex flex-col gap-6 md:gap-8 pt-2 pb-10 max-w-6xl mx-auto"
+      animate="show" 
+      className="flex flex-col gap-4 sm:gap-6 md:gap-8 pt-1 sm:pt-2 pb-10 max-w-6xl mx-auto px-0.5 sm:px-0"
     >
+      {/* Banner de Modo Plantão (Offline) */}
+      {isOffline && (
+        <motion.div 
+          variants={itemVariants}
+          className="bg-amber-500/10 border border-amber-500/30 dark:border-amber-500/20 rounded-2xl p-3.5 sm:p-4 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-foreground animate-in fade-in"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[22px]" data-icon="cloud_off">cloud_off</span>
+            </div>
+            <div>
+              <h4 className="font-bold text-xs sm:text-sm text-foreground flex items-center gap-2">
+                Modo Plantão Ativo (Offline)
+                <span className="text-[10px] uppercase font-extrabold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-400 tracking-wider">Dispositivo</span>
+              </h4>
+              <p className="text-[11px] sm:text-xs text-muted-foreground mt-0.5">
+                Você pode estudar questões e simulados salvos. As respostas serão sincronizadas ao reconectar.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+            <Link
+              href="/estudar"
+              className="flex-1 sm:flex-initial px-3 py-1.5 bg-primary text-primary-foreground font-bold text-xs rounded-xl hover:bg-primary/90 transition-all text-center"
+            >
+              Questões Offline
+            </Link>
+            <Link
+              href="/simulado"
+              className="flex-1 sm:flex-initial px-3 py-1.5 bg-card border border-border text-foreground font-bold text-xs rounded-xl hover:bg-muted transition-all text-center"
+            >
+              Simulados Offline
+            </Link>
+            <button
+              onClick={() => setIsOfflineModalOpen(true)}
+              className="p-1.5 text-xs text-muted-foreground hover:text-foreground font-semibold rounded-xl bg-muted/40 hover:bg-muted transition-colors cursor-pointer"
+              title="Gerenciar pacotes offline"
+            >
+              <span className="material-symbols-outlined text-[18px]" data-icon="settings">settings</span>
+            </button>
+          </div>
+        </motion.div>
+      )}
+
       {/* Header: Saudação & Contagem Regressiva */}
       <motion.section variants={itemVariants} className="flex flex-col gap-1">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 sm:gap-3">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground">
               Olá, {firstName}
             </h2>
-            <p className="text-muted-foreground text-sm md:text-base mt-0.5">
+            <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-0.5">
               {subtitleMessage}
             </p>
           </div>
 
           {/* Badge Contagem Regressiva da Prova */}
-          <div className="self-start sm:self-auto">
+          <div className="self-start sm:self-auto shrink-0">
             {stats.days_until_exam != null ? (
-              <div className="flex items-center gap-2 bg-card border border-border/80 rounded-2xl px-4 py-2 shadow-2xs">
-                <span className="material-symbols-outlined text-primary text-[18px]" data-icon="event">event</span>
+              <div className="flex items-center gap-2 bg-card border border-border/80 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-1.5 sm:py-2 shadow-2xs">
+                <span className="material-symbols-outlined text-primary text-[16px] sm:text-[18px]" data-icon="event">event</span>
                 <span className="text-xs text-muted-foreground font-medium">Prova em:</span>
                 <span className="text-xs font-bold text-foreground">{stats.days_until_exam} dias</span>
               </div>
             ) : stats.exam_date ? (
-              <div className="flex items-center gap-2 bg-card border border-border/80 rounded-2xl px-4 py-2 shadow-2xs">
-                <span className="material-symbols-outlined text-primary text-[18px]" data-icon="flag">flag</span>
+              <div className="flex items-center gap-2 bg-card border border-border/80 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-1.5 sm:py-2 shadow-2xs">
+                <span className="material-symbols-outlined text-primary text-[16px] sm:text-[18px]" data-icon="flag">flag</span>
                 <span className="text-xs text-muted-foreground font-medium">Data-alvo:</span>
                 <span className="text-xs font-bold text-foreground">
                   {new Date(stats.exam_date).toLocaleDateString("pt-BR", { day: "2-digit", month: "short" })}
@@ -352,7 +413,7 @@ export function DashboardClient({
             ) : (
               <Link 
                 href="/planner" 
-                className="flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-2xl px-3.5 py-1.5 text-xs font-bold transition-colors"
+                className="flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-xl sm:rounded-2xl px-3 sm:px-3.5 py-1.5 text-xs font-bold transition-colors"
               >
                 <span className="material-symbols-outlined text-[16px]" data-icon="calendar_month">calendar_month</span>
                 Definir data da prova →
@@ -429,8 +490,8 @@ export function DashboardClient({
           </motion.section>
 
           {/* PLANO DE HOJE (Card Integrado em 3 Pilares) */}
-          <motion.section variants={itemVariants} className="bg-card border border-border/70 rounded-3xl p-5 sm:p-6 shadow-2xs">
-            <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-border/50">
+          <motion.section variants={itemVariants} className="bg-card border border-border/70 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xs">
+            <div className="flex items-center justify-between gap-2 mb-3 sm:mb-4 pb-2.5 sm:pb-3 border-b border-border/50">
               <div className="flex items-center gap-2 text-foreground">
                 <span className="material-symbols-outlined text-primary text-[20px]" data-icon="today">today</span>
                 <h3 className="text-base font-bold tracking-tight">Plano de Hoje</h3>
@@ -438,9 +499,9 @@ export function DashboardClient({
               <span className="text-xs text-muted-foreground">Metas personalizadas diárias</span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
               {/* Pilar 1: Revisões */}
-              <div className="p-4 rounded-2xl bg-muted/20 border border-border/40 flex flex-col justify-between gap-3">
+              <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-muted/20 border border-border/40 flex flex-col justify-between gap-3">
                 <div>
                   <div className="flex items-center justify-between text-xs font-semibold text-purple-600 dark:text-purple-400 mb-1">
                     <span className="flex items-center gap-1">
@@ -452,7 +513,7 @@ export function DashboardClient({
                       </span>
                     )}
                   </div>
-                  <p className="text-2xl font-bold text-foreground tracking-tight">
+                  <p className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
                     {pendentesRevisao > 0 ? `${pendentesRevisao} pendentes` : "Tudo em dia!"}
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
@@ -462,7 +523,7 @@ export function DashboardClient({
                 {pendentesRevisao > 0 ? (
                   <Link 
                     href={(stats.flashcards_due_count || 0) > 0 ? "/revisao-ativa" : "/estudar?status=srs_due&limit=100"}
-                    className="w-full py-2 bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors"
+                    className="w-full py-2 bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors shadow-2xs"
                   >
                     Revisar agora →
                   </Link>
@@ -474,7 +535,7 @@ export function DashboardClient({
               </div>
 
               {/* Pilar 2: Questões Novas */}
-              <div className="p-4 rounded-2xl bg-muted/20 border border-border/40 flex flex-col justify-between gap-3">
+              <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-muted/20 border border-border/40 flex flex-col justify-between gap-3">
                 <div>
                   <div className="flex items-center justify-between text-xs font-semibold text-blue-600 dark:text-blue-400 mb-1">
                     <span className="flex items-center gap-1">
@@ -482,7 +543,7 @@ export function DashboardClient({
                     </span>
                     <span className="text-xs font-bold text-foreground">{todayDone}/{dailyTarget}</span>
                   </div>
-                  <p className="text-2xl font-bold text-foreground tracking-tight">
+                  <p className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
                     {dailyRemaining > 0 ? `${dailyRemaining} restantes` : "Meta batida! 🎉"}
                   </p>
                   <div className="w-full bg-muted rounded-full h-1.5 overflow-hidden mt-2">
@@ -494,14 +555,14 @@ export function DashboardClient({
                 </div>
                 <Link 
                   href={`/estudar?status=new&limit=${Math.min(20, Math.max(5, dailyRemaining))}`}
-                  className="w-full py-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors"
+                  className="w-full py-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors shadow-2xs"
                 >
                   {dailyRemaining > 0 ? "Praticar questões →" : "Fazer questões extras →"}
                 </Link>
               </div>
 
               {/* Pilar 3: Tema Sugerido */}
-              <div className="p-4 rounded-2xl bg-muted/20 border border-border/40 flex flex-col justify-between gap-3">
+              <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-muted/20 border border-border/40 flex flex-col justify-between gap-3">
                 <div>
                   <div className="flex items-center justify-between text-xs font-semibold text-primary mb-1">
                     <span className="flex items-center gap-1">
@@ -513,7 +574,7 @@ export function DashboardClient({
                   <p className="text-base font-bold text-foreground line-clamp-1" title={sugestaoTema}>
                     {isPlanCompleted ? "Plano 100% Concluído! 🎉" : sugestaoTema}
                   </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
+                  <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">
                     {isPlanCompleted
                       ? "Parabéns! Todas as metas do cronograma foram finalizadas."
                       : suggestedPlannerTopic
@@ -531,7 +592,7 @@ export function DashboardClient({
                       ? `/estudar?subtema=${encodeURIComponent(bottlenecks[0].subtema)}&limit=20`
                       : "/planner"
                   }
-                  className="w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors"
+                  className="w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors shadow-2xs"
                 >
                   {isPlanCompleted ? "Ver cronograma →" : "Continuar plano →"}
                 </Link>
@@ -540,15 +601,15 @@ export function DashboardClient({
           </motion.section>
 
           {/* ERROS PRIORITÁRIOS & GARGALOS CRÍTICOS (UNIFICADO) */}
-          <motion.section variants={itemVariants} className="bg-card border border-border/70 rounded-3xl p-5 sm:p-6 shadow-2xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-border/50">
+          <motion.section variants={itemVariants} className="bg-card border border-border/70 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 sm:mb-4 pb-2.5 sm:pb-3 border-b border-border/50">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center ring-1 ring-amber-500/20">
+                <div className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center ring-1 ring-amber-500/20 shrink-0">
                   <span className="material-symbols-outlined text-[18px]" data-icon="report_problem">report_problem</span>
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-foreground">Erros Prioritários & Gargalos de Maior Impacto</h3>
-                  <p className="text-xs text-muted-foreground">Foco estratégico nos temas com maior taxa de erro e questões a reverter</p>
+                  <h3 className="text-base font-bold text-foreground">Erros Prioritários & Gargalos</h3>
+                  <p className="text-xs text-muted-foreground">Foco estratégico nos temas com maior taxa de erro</p>
                 </div>
               </div>
 
@@ -556,7 +617,7 @@ export function DashboardClient({
               {errorNotebook && errorNotebook.currently_unresolved_count > 0 && (
                 <Link 
                   href={errorNotebook.practice_url}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 border border-rose-500/20 text-xs font-bold transition-colors self-start sm:self-auto"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 border border-rose-500/20 text-xs font-bold transition-colors self-start sm:self-auto"
                 >
                   <span className="material-symbols-outlined text-[16px]" data-icon="edit_note">edit_note</span>
                   <span>{errorNotebook.currently_unresolved_count} erros em aberto</span>
@@ -570,19 +631,19 @@ export function DashboardClient({
                 {bottlenecks.slice(0, 3).map((b) => (
                   <div 
                     key={b.subtema}
-                    className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-2xl bg-muted/20 hover:bg-muted/35 border border-border/40 transition-all gap-3"
+                    className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-muted/20 hover:bg-muted/35 border border-border/40 transition-all gap-2.5 sm:gap-3"
                   >
                     <div className="flex flex-col min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="font-bold text-sm text-foreground truncate">{b.subtema}</span>
                         <span className="px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[10px] font-bold shrink-0">{b.area}</span>
                       </div>
-                      <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1">
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground mt-0.5 sm:mt-1">
                         <span>Amostra: <strong className="text-foreground">{b.attempts} tentativas</strong> ({b.wrong_count} erros)</span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 self-end sm:self-center shrink-0">
+                    <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto shrink-0 pt-1.5 sm:pt-0 border-t sm:border-t-0 border-border/30">
                       <span className={clsx(
                         "text-xs font-bold px-2.5 py-1 rounded-lg",
                         b.accuracy_pct < 50 ? "bg-destructive/10 text-destructive" : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
@@ -712,42 +773,40 @@ export function DashboardClient({
           )}
 
           {/* RESUMO DISCRETO DE CONTEXTO (BOTTOM STRIP) */}
-          <motion.section variants={itemVariants} className="bg-card border border-border/60 rounded-2xl px-5 py-3.5 shadow-2xs">
-            <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
-              <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-muted-foreground">
-                <Link href="/cobertura" className="flex items-center gap-1.5 hover:text-primary transition-colors">
-                  <span className="material-symbols-outlined text-[16px] text-emerald-500" data-icon="domain_verification">domain_verification</span>
-                  <span>
-                    Cobertura: <strong className="text-foreground">
-                      {domainSummary ? `${domainSummary.overall_domain_pct}% (${domainSummary.total_mastered}/${domainSummary.total_subtemas} focos)` : (stats.coverage_pct != null ? `${(stats.coverage_pct * 100).toFixed(0)}%` : "--")}
-                    </strong>
+          <motion.section variants={itemVariants} className="bg-card border border-border/60 rounded-2xl p-3.5 sm:px-5 sm:py-3.5 shadow-2xs">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-between gap-3 text-xs">
+              <Link href="/cobertura" className="flex items-center gap-1.5 hover:text-primary transition-colors text-muted-foreground p-1">
+                <span className="material-symbols-outlined text-[16px] text-emerald-500 shrink-0" data-icon="domain_verification">domain_verification</span>
+                <span className="truncate">
+                  Cobertura: <strong className="text-foreground">
+                    {domainSummary ? `${domainSummary.overall_domain_pct}%` : (stats.coverage_pct != null ? `${(stats.coverage_pct * 100).toFixed(0)}%` : "--")}
+                  </strong>
+                </span>
+              </Link>
+
+              {errorNotebook && (
+                <Link href={errorNotebook.practice_url} className="flex items-center gap-1.5 hover:text-rose-500 transition-colors text-muted-foreground p-1">
+                  <span className="material-symbols-outlined text-[16px] text-rose-500 shrink-0" data-icon="edit_note">edit_note</span>
+                  <span className="truncate">
+                    Erros: <strong className="text-foreground">{errorNotebook.currently_unresolved_count}</strong>
                   </span>
                 </Link>
+              )}
 
-                {errorNotebook && (
-                  <Link href={errorNotebook.practice_url} className="flex items-center gap-1.5 hover:text-rose-500 transition-colors">
-                    <span className="material-symbols-outlined text-[16px] text-rose-500" data-icon="edit_note">edit_note</span>
-                    <span>
-                      Caderno de Erros: <strong className="text-foreground">{errorNotebook.currently_unresolved_count} a revisar</strong>
-                    </span>
-                  </Link>
-                )}
-
-                <div className="flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[16px] text-orange-500" data-icon="local_fire_department">local_fire_department</span>
-                  <span>
-                    Sequência: <strong className="text-foreground">{stats.streak_days} dias</strong>
-                  </span>
-                </div>
+              <div className="flex items-center gap-1.5 text-muted-foreground p-1">
+                <span className="material-symbols-outlined text-[16px] text-orange-500 shrink-0" data-icon="local_fire_department">local_fire_department</span>
+                <span>
+                  Sequência: <strong className="text-foreground">{stats.streak_days}d</strong>
+                </span>
               </div>
 
               <button
                 onClick={() => setIsOfflineModalOpen(true)}
-                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground font-semibold px-2.5 py-1 rounded-lg bg-muted/40 hover:bg-muted transition-colors cursor-pointer border border-border/50"
+                className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground hover:text-foreground font-semibold px-2.5 py-1.5 rounded-lg bg-muted/40 hover:bg-muted transition-colors cursor-pointer border border-border/50 col-span-2 sm:col-span-1"
                 title="Abrir gerenciador do Modo Plantão (Offline)"
               >
                 <span className="material-symbols-outlined text-[16px] text-primary" data-icon="cloud_download">cloud_download</span>
-                Modo Plantão (Offline)
+                <span>Modo Plantão</span>
               </button>
             </div>
           </motion.section>
