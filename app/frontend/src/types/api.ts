@@ -431,6 +431,7 @@ export interface Flashcard {
   tags?: string[];
   source_type?: string;
   anki_nid?: number | null;
+  anki_cid?: number | null;
 }
 
 export interface FlashcardDeck {

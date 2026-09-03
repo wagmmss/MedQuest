@@ -6,6 +6,7 @@ import { api, OfflineQueuedError } from "@/lib/api";
 import { localDb, getLocalOwnerId } from "@/lib/db";
 import { normalizeFlashcard } from "@/lib/normalizeFlashcard";
 import { AnkiIntegrationModal } from "./components/AnkiIntegrationModal";
+import { answerAnkiCard } from "@/lib/ankiConnect";
 import {
   Sparkles,
   CheckCircle2,
@@ -105,6 +106,20 @@ export function FlashcardClient() {
     try {
       const result = await api.flashcards.review(currentCard.id, confidence);
       setLastScheduled(result.next_review_date);
+      if (currentCard.anki_cid) {
+        try {
+          const ankiState = await answerAnkiCard(currentCard.anki_cid, confidence);
+          if (ankiState) {
+            await api.flashcards.syncAnkiStates([ankiState]);
+            toast.success("Avaliação sincronizada com o Anki.");
+          }
+        } catch (ankiError) {
+          // The MedQuest review is already saved. The user can retry a pull
+          // from the Anki modal without losing their study progress.
+          console.warn("Falha ao enviar avaliação ao Anki:", ankiError);
+          toast("Avaliação salva no MedQuest; não foi possível enviá-la ao Anki agora.", { icon: "⚠️" });
+        }
+      }
       if (localDb) {
         try {
           const uid = getLocalOwnerId();

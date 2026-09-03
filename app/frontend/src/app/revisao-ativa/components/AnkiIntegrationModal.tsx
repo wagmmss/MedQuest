@@ -7,6 +7,7 @@ import {
   checkAnkiConnect,
   getAnkiDecks,
   fetchDeckCards,
+  getAnkiSchedulingStates,
   DEFAULT_ANKICONNECT_URL,
 } from "@/lib/ankiConnect";
 import {
@@ -83,6 +84,7 @@ export function AnkiIntegrationModal({
   const [localDecks, setLocalDecks] = useState<string[]>([]);
   const [selectedLocalDeck, setSelectedLocalDeck] = useState<string>("");
   const [isSyncingAnkiConnect, setIsSyncingAnkiConnect] = useState(false);
+  const [isPullingAnkiReviews, setIsPullingAnkiReviews] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // State: Export
@@ -185,6 +187,8 @@ export function AnkiIntegrationModal({
       }
 
       const result = await api.flashcards.importBatch(cards, selectedLocalDeck);
+      const states = await getAnkiSchedulingStates(selectedLocalDeck, opts);
+      await api.flashcards.syncAnkiStates(states);
       toast.success(`Sincronização concluída! ${result.total_imported} flashcards importados com sucesso.`);
       onSuccess();
       onClose();
@@ -192,6 +196,25 @@ export function AnkiIntegrationModal({
       toast.error(err instanceof Error ? err.message : "Erro ao sincronizar com o AnkiConnect.");
     } finally {
       setIsSyncingAnkiConnect(false);
+    }
+  };
+
+  const handlePullAnkiReviews = async () => {
+    if (!selectedLocalDeck) return;
+    setIsPullingAnkiReviews(true);
+    try {
+      const opts = {
+        url: ankiUrl.trim() || DEFAULT_ANKICONNECT_URL,
+        apiKey: ankiApiKey.trim() || undefined,
+      };
+      const states = await getAnkiSchedulingStates(selectedLocalDeck, opts);
+      const result = await api.flashcards.syncAnkiStates(states);
+      toast.success(`${result.updated} revisões/agendamentos do Anki atualizados no MedQuest.`);
+      onSuccess();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Não foi possível importar as revisões do Anki.");
+    } finally {
+      setIsPullingAnkiReviews(false);
     }
   };
 
@@ -518,6 +541,18 @@ export function AnkiIntegrationModal({
                     )}
                     Sincronizar Baralho &quot;{selectedLocalDeck}&quot; com MedQuest
                   </button>
+                  <button
+                    type="button"
+                    onClick={handlePullAnkiReviews}
+                    disabled={isPullingAnkiReviews || isSyncingAnkiConnect || !selectedLocalDeck}
+                    className="w-full py-2.5 rounded-xl border border-blue-500/30 text-blue-600 font-bold text-sm hover:bg-blue-500/10 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {isPullingAnkiReviews ? <Loader2 size={16} className="animate-spin" /> : <RefreshCw size={16} />}
+                    Atualizar revisões feitas no Anki
+                  </button>
+                  <p className="text-[11px] text-muted-foreground text-center">
+                    As avaliações feitas no MedQuest são enviadas ao Anki ao revisar; use este botão para trazer avaliações feitas no Anki.
+                  </p>
                 </div>
               ) : (
                 <div className="rounded-xl border border-destructive/20 bg-destructive/5 p-4 space-y-3">

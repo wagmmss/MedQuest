@@ -887,12 +887,20 @@ export const api = {
     },
 
     importBatch: async (
-      cards: Array<{ front: string; back: string; deck_name?: string; tags?: string[]; anki_nid?: number }>,
+      cards: Array<{ front: string; back: string; deck_name?: string; tags?: string[]; anki_nid?: number; anki_cid?: number }>,
       deckName?: string
     ): Promise<AnkiImportResult> => {
       return apiFetch<AnkiImportResult>("/api/flashcards/import/batch", {
         method: "POST",
         body: JSON.stringify({ cards, deck_name: deckName }),
+      });
+    },
+
+    syncAnkiStates: async (cards: Array<{ anki_cid: number; anki_nid?: number; interval: number; reps: number; lapses: number }>) => {
+      if (!cards.length) return { success: true, updated: 0 };
+      return apiFetch<{ success: boolean; updated: number }>("/api/flashcards/anki/sync-state", {
+        method: "POST",
+        body: JSON.stringify({ cards }),
       });
     },
 

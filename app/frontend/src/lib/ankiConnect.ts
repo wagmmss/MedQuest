@@ -8,6 +8,7 @@ export interface AnkiConnectNote {
   modelName: string;
   tags: string[];
   fields: Record<string, { value: string; order: number }>;
+  cards?: number[];
 }
 
 export interface AnkiExtractedCard {
@@ -16,6 +17,23 @@ export interface AnkiExtractedCard {
   deck_name: string;
   tags: string[];
   anki_nid: number;
+  anki_cid?: number;
+}
+
+export interface AnkiSchedulingState {
+  anki_cid: number;
+  anki_nid?: number;
+  interval: number;
+  reps: number;
+  lapses: number;
+}
+
+interface AnkiCardInfo {
+  cardId: number;
+  note?: number;
+  interval?: number;
+  reps?: number;
+  lapses?: number;
 }
 
 export interface AnkiConnectOptions {
@@ -188,8 +206,59 @@ export async function fetchDeckCards(
       deck_name: deckName,
       tags: n.tags || [],
       anki_nid: n.noteId,
+      anki_cid: n.cards?.[0],
     });
   }
 
   return cards;
+}
+
+export async function getAnkiSchedulingStates(
+  deckName: string,
+  options?: AnkiConnectOptions
+): Promise<AnkiSchedulingState[]> {
+  const cardIds = await ankiConnectInvoke<number[]>("findCards", { query: `deck:"${deckName}"` }, options);
+  const states: AnkiSchedulingState[] = [];
+  for (let i = 0; i < cardIds.length; i += 500) {
+    const cards = await ankiConnectInvoke<AnkiCardInfo[]>("cardsInfo", { cards: cardIds.slice(i, i + 500) }, options);
+    for (const card of cards || []) {
+      if (!card?.cardId) continue;
+      states.push({
+        anki_cid: card.cardId,
+        anki_nid: card.note,
+        interval: Number(card.interval || 0),
+        reps: Number(card.reps || 0),
+        lapses: Number(card.lapses || 0),
+      });
+    }
+  }
+  return states;
+}
+
+const CONFIDENCE_TO_ANKI_EASE: Record<string, number> = {
+  errei: 1,
+  duvida: 2,
+  certeza: 4,
+};
+
+export async function answerAnkiCard(
+  cardId: number,
+  confidence: string,
+  options?: AnkiConnectOptions
+): Promise<AnkiSchedulingState | null> {
+  const ease = CONFIDENCE_TO_ANKI_EASE[confidence];
+  if (!ease) return null;
+  const answered = await ankiConnectInvoke<boolean[]>("answerCards", {
+    answers: [{ cardId, ease }],
+  }, options);
+  if (!answered?.[0]) throw new Error("O cartão vinculado não foi encontrado no Anki.");
+  const [card] = await ankiConnectInvoke<AnkiCardInfo[]>("cardsInfo", { cards: [cardId] }, options);
+  if (!card?.cardId) return null;
+  return {
+    anki_cid: card.cardId,
+    anki_nid: card.note,
+    interval: Number(card.interval || 0),
+    reps: Number(card.reps || 0),
+    lapses: Number(card.lapses || 0),
+  };
 }

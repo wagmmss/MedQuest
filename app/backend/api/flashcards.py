@@ -1,7 +1,7 @@
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from flask import Blueprint, Response, g, jsonify, request
 
@@ -14,6 +14,7 @@ from .questions import invalidate_user_caches
 from .schemas import (
     AnkiDeleteDeckIn,
     AnkiImportBatchIn,
+    AnkiSyncStateIn,
     FlashcardBatchIn,
     FlashcardGenerateIn,
     FlashcardPreviewIn,
@@ -437,14 +438,14 @@ def import_anki_batch():
             if existing:
                 db.execute("""
                     UPDATE flashcards
-                    SET front = ?, back = ?, deck_name = ?, tags = ?, source_context = ?, source_type = 'anki_connect'
+                    SET front = ?, back = ?, deck_name = ?, tags = ?, source_context = ?, source_type = 'anki_connect', anki_cid = ?
                     WHERE id = ? AND user_id = ?
-                """, (c.front, c.back, c_deck, c_tags_json, source_context, existing["id"], g.user_id))
+                """, (c.front, c.back, c_deck, c_tags_json, source_context, c.anki_cid, existing["id"], g.user_id))
             else:
                 db.execute("""
-                    INSERT INTO flashcards (question_id, front, back, created_at, next_review_date, fsrs_card, user_id, source_context, is_ai_generated, deck_name, tags, source_type, anki_nid)
-                    VALUES (NULL, ?, ?, ?, ?, NULL, ?, ?, 0, ?, ?, 'anki_connect', ?)
-                """, (c.front, c.back, now, now, g.user_id, source_context, c_deck, c_tags_json, c.anki_nid))
+                    INSERT INTO flashcards (question_id, front, back, created_at, next_review_date, fsrs_card, user_id, source_context, is_ai_generated, deck_name, tags, source_type, anki_nid, anki_cid)
+                    VALUES (NULL, ?, ?, ?, ?, NULL, ?, ?, 0, ?, ?, 'anki_connect', ?, ?)
+                """, (c.front, c.back, now, now, g.user_id, source_context, c_deck, c_tags_json, c.anki_nid, c.anki_cid))
                 imported_count += 1
 
     invalidate_user_caches(g.user_id)
@@ -462,6 +463,52 @@ def import_anki_batch():
         "new_cards": imported_count,
         "decks": sorted(list(unique_decks)),
     })
+
+
+@bp.route("/flashcards/anki/sync-state", methods=["POST"])
+def sync_anki_scheduling_state():
+    """Aplica no MedQuest a agenda calculada pelo Anki local."""
+    try:
+        payload = AnkiSyncStateIn.model_validate(request.get_json(force=True) or {})
+    except ValidationError as e:
+        return jsonify({"error": "invalid input", "details": validation_errors(e)}), 400
+
+    db = get_db()
+    now = datetime.now(timezone.utc)
+    updated = 0
+    with db_transaction(db, immediate=True):
+        for item in payload.cards:
+            row = db.execute(
+                "SELECT id FROM flashcards WHERE user_id = ? AND anki_cid = ?",
+                (g.user_id, item.anki_cid),
+            ).fetchone()
+            if not row and item.anki_nid is not None:
+                row = db.execute(
+                    "SELECT id FROM flashcards WHERE user_id = ? AND anki_nid = ?",
+                    (g.user_id, item.anki_nid),
+                ).fetchone()
+            if not row:
+                continue
+
+            # Anki usa segundos negativos durante aprendizagem e dias positivos
+            # para revisão. Assim a fila do MedQuest passa a refletir a agenda
+            # do Anki sem o servidor acessar a máquina local.
+            next_due = now + (
+                timedelta(seconds=abs(item.interval))
+                if item.interval < 0
+                else timedelta(days=item.interval)
+            )
+            db.execute(
+                """UPDATE flashcards
+                   SET anki_cid = ?, anki_reps = ?, anki_lapses = ?,
+                       anki_synced_at = ?, next_review_date = ?
+                   WHERE id = ? AND user_id = ?""",
+                (item.anki_cid, item.reps, item.lapses, now.isoformat(), next_due.isoformat(), row["id"], g.user_id),
+            )
+            updated += 1
+
+    invalidate_user_caches(g.user_id)
+    return jsonify({"success": True, "updated": updated})
 
 
 @bp.route("/flashcards/deck", methods=["DELETE"])
@@ -505,7 +552,7 @@ def get_due_flashcards():
     if include_all:
         sql = f"""
             SELECT f.id, f.question_id, f.front, f.back, f.next_review_date,
-                   f.source_context, f.is_ai_generated, f.deck_name, f.tags, f.source_type, f.anki_nid,
+                   f.source_context, f.is_ai_generated, f.deck_name, f.tags, f.source_type, f.anki_nid, f.anki_cid,
                    q.stem, q.area, q.subtema
             FROM flashcards f LEFT JOIN questions q ON f.question_id = q.id
             WHERE f.user_id = ? AND (f.report_status IS NULL OR TRIM(f.report_status) = ''){deck_clause}
@@ -515,7 +562,7 @@ def get_due_flashcards():
     elif scope == "upcoming":
         sql = f"""
             SELECT f.id, f.question_id, f.front, f.back, f.next_review_date,
-                   f.source_context, f.is_ai_generated, f.deck_name, f.tags, f.source_type, f.anki_nid,
+                   f.source_context, f.is_ai_generated, f.deck_name, f.tags, f.source_type, f.anki_nid, f.anki_cid,
                    q.stem, q.area, q.subtema
             FROM flashcards f LEFT JOIN questions q ON f.question_id = q.id
             WHERE f.user_id = ? AND f.next_review_date > ?
@@ -527,7 +574,7 @@ def get_due_flashcards():
     else:
         sql = f"""
             SELECT f.id, f.question_id, f.front, f.back, f.next_review_date,
-                   f.source_context, f.is_ai_generated, f.deck_name, f.tags, f.source_type, f.anki_nid,
+                   f.source_context, f.is_ai_generated, f.deck_name, f.tags, f.source_type, f.anki_nid, f.anki_cid,
                    q.stem, q.area, q.subtema
             FROM flashcards f LEFT JOIN questions q ON f.question_id = q.id
             WHERE f.next_review_date <= ? AND f.user_id = ?
@@ -615,7 +662,7 @@ def review_flashcard(fid):
 
     db = get_db()
     with db_transaction(db, immediate=True):
-        card = db.execute("SELECT fsrs_card FROM flashcards WHERE id = ? AND user_id = ?", (fid, g.user_id)).fetchone()
+        card = db.execute("SELECT fsrs_card, anki_cid FROM flashcards WHERE id = ? AND user_id = ?", (fid, g.user_id)).fetchone()
         if not card:
             return jsonify({"error": "Flashcard nao encontrado."}), 404
         card_json, next_review = srs.review(card["fsrs_card"], is_correct, confidence if is_correct else "chutei")
@@ -637,7 +684,8 @@ def review_flashcard(fid):
 
     return jsonify({
         "id": fid,
-        "next_review_date": next_review
+        "next_review_date": next_review,
+        "anki_cid": card["anki_cid"],
     })
 
 
