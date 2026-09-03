@@ -7,7 +7,7 @@ import { localDb, getLocalOwnerId, SimuladoPackage, isPackageValid } from "./db"
 import { api } from "./api";
 import { QuestionDetail, QuestionListItem } from "@/types/api";
 
-export const SIMULADO_PACKAGE_VERSION = 1;
+export const SIMULADO_PACKAGE_VERSION = 2;
 export const SIMULADO_PACKAGE_VALIDITY_DAYS = 30;
 const OFFLINE_STUDY_SHELL_CACHE = "medquest-study-shell";
 const OFFLINE_IMAGE_CACHE = "medquest-image-cache";
@@ -49,8 +49,12 @@ async function prefetchImages(imageUrls: string[]): Promise<{ cachedCount: numbe
     const fullUrl = url.startsWith("http") ? url : `${url.startsWith("/") ? "" : "/"}${url}`;
     for (let attempt = 1; attempt <= IMAGE_DOWNLOAD_ATTEMPTS; attempt++) {
       try {
-        const res = await fetch(fullUrl, { cache: "force-cache" });
-        if (res.ok) {
+        const remoteImage = new URL(fullUrl, window.location.origin).origin !== window.location.origin;
+        const res = await fetch(fullUrl, {
+          cache: "force-cache",
+          ...(remoteImage ? { mode: "no-cors" as RequestMode } : {}),
+        });
+        if (res.ok || (remoteImage && res.type === "opaque")) {
           // Fetching alone only reaches Workbox after the service worker has
           // taken control. Persist the image here too, so a newly opened app
           // can immediately use the completed package offline.
@@ -63,7 +67,7 @@ async function prefetchImages(imageUrls: string[]): Promise<{ cachedCount: numbe
 
         // A missing/invalid image is permanent; retries only help temporary
         // server and connection failures.
-        if (res.status >= 400 && res.status < 500) return false;
+        if (!remoteImage && res.status >= 400 && res.status < 500) return false;
       } catch {
         // Retry network failures below.
       }
@@ -104,14 +108,25 @@ async function requestPersistentStorage(): Promise<void> {
 async function primeOfflineStudyShell(): Promise<void> {
   try {
     const response = await fetch("/estudar", { cache: "reload" });
-    if (!response.ok || typeof caches === "undefined") return;
+    if (!response.ok) {
+      throw new Error(`A tela de estudo retornou ${response.status}.`);
+    }
+    if (typeof caches === "undefined") {
+      throw new Error("Cache Storage não está disponível neste navegador.");
+    }
 
     const studyCache = await caches.open(OFFLINE_STUDY_SHELL_CACHE);
     await studyCache.put("/estudar", response.clone());
+    const cachedShell = await studyCache.match("/estudar", {
+      ignoreSearch: true,
+      ignoreVary: true,
+    });
+    if (!cachedShell) {
+      throw new Error("A tela de estudo não pôde ser confirmada no cache local.");
+    }
   } catch (error) {
-    // The question package is still complete and may be used from an already
-    // open study page. Do not discard it because refreshing the shell failed.
-    console.warn("Não foi possível preparar a tela de estudo offline:", error);
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Não foi possível preparar o aplicativo para abrir offline: ${message}`);
   }
 }
 
@@ -145,6 +160,8 @@ export async function downloadSimuladoPackage(
     details_count: 0,
     images_count: 0,
     estimated_size_bytes: 0,
+    shell_cached: false,
+    image_failures_count: 0,
     status: "downloading",
     download_progress: 5,
     created_at: now,
@@ -164,6 +181,17 @@ export async function downloadSimuladoPackage(
   });
 
   try {
+    // A package is useful only if the PWA can open its study shell after a
+    // cold offline launch. Do this first and treat failure as a download error.
+    onProgress?.({
+      step: "list",
+      progress: 8,
+      message: "Preparando o aplicativo para abrir offline...",
+      loadedQuestions: 0,
+      totalQuestions: 0,
+    });
+    await primeOfflineStudyShell();
+
     // 2. Buscar lista determinística de questões
     let questionsList: QuestionListItem[] = [];
     if (config.institutions?.length || config.years?.length || config.questions_per_area) {
@@ -259,6 +287,7 @@ export async function downloadSimuladoPackage(
 
     // 4. Pré-carregar imagens médicas obrigatórias
     let cachedImages = 0;
+    let failedImageCount = 0;
     if (allImageUrls.length > 0) {
       onProgress?.({
         step: "images",
@@ -268,14 +297,13 @@ export async function downloadSimuladoPackage(
         totalQuestions,
       });
       const { cachedCount, failedUrls } = await prefetchImages(allImageUrls);
-      if (failedUrls.length > 0) {
-        throw new Error(`Falha no download de ${failedUrls.length} imagem(ns) obrigatória(s) do simulado.`);
-      }
       cachedImages = cachedCount;
+      failedImageCount = failedUrls.length;
+      if (failedUrls.length > 0) {
+        console.warn(`Pacote offline concluído com ${failedUrls.length} imagem(ns) indisponível(is):`, failedUrls);
+      }
       totalBytesEstimated += cachedImages * 50 * 1024; // Estimativa média ~50KB por imagem
     }
-
-    await primeOfflineStudyShell();
 
     // 5. Finalizar e marcar como "ready"
     const readyPackage: SimuladoPackage = {
@@ -288,6 +316,8 @@ export async function downloadSimuladoPackage(
       details_count: loadedCount,
       images_count: cachedImages,
       estimated_size_bytes: totalBytesEstimated,
+      shell_cached: true,
+      image_failures_count: failedImageCount,
       status: "ready",
       download_progress: 100,
       created_at: now,

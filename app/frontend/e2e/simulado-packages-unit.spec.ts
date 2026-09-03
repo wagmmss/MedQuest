@@ -10,8 +10,9 @@ const MOCK_META = {
 
 test.describe('Validações Unitárias e de Integridade de Pacotes Offline', () => {
   test.beforeEach(async ({ context, page }) => {
+    const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:3100';
     await context.addCookies([
-      { name: 'medquest_demo', value: '1', domain: 'localhost', path: '/' }
+      { name: 'medquest_demo', value: '1', url: baseURL }
     ]);
     await page.addInitScript(() => localStorage.setItem('medquest_onboarding_v1', 'done'));
   });
@@ -170,7 +171,7 @@ test.describe('Validações Unitárias e de Integridade de Pacotes Offline', () 
     await expect(page.locator('text=Simulado do Usuário Alpha')).not.toBeVisible();
   });
 
-  test('falha no download de imagem marca status incomplete e preserva pacote pronto anterior intacto', async ({ page }) => {
+  test('imagem indisponível não bloqueia pacote de questões e registra aviso', async ({ page }) => {
     const TEST_OWNER = 'user_img_integrity_test';
     await page.addInitScript((owner) => {
       localStorage.setItem('medquest_local_owner', owner);
@@ -211,7 +212,7 @@ test.describe('Validações Unitárias e de Integridade de Pacotes Offline', () 
         });
       }
       if (url.pathname.includes('missing_ecg_scan.png')) {
-        // Simula falha 404/500 no download da imagem obrigatória
+        // A imagem é complementar: uma falha não pode impedir as questões de funcionar offline.
         return route.fulfill({ status: 404, body: 'Image Not Found' });
       }
       return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({}) });
@@ -220,7 +221,7 @@ test.describe('Validações Unitárias e de Integridade de Pacotes Offline', () 
     await page.goto('/simulado');
     await page.waitForFunction(() => typeof (window as unknown as { localDb?: unknown }).localDb !== 'undefined');
 
-    // 1. Grava pacote pronto anterior
+    // 1. Grava um pacote anterior compatível para garantir que o novo download o substitui.
     await page.evaluate(async (ownerId) => {
       const win = window as unknown as { localDb: { simuladoPackages: { put: (item: unknown) => Promise<unknown> } } };
       await win.localDb.simuladoPackages.put({
@@ -238,16 +239,22 @@ test.describe('Validações Unitárias e de Integridade de Pacotes Offline', () 
         created_at: Date.now() - 1000,
         updated_at: Date.now() - 1000,
         expires_at: Date.now() + 86400000,
-        version: 1,
+        version: 2,
+        shell_cached: true,
       });
     }, TEST_OWNER);
 
-    // 2. Executa download via função simuladoPackage que tentará baixar a imagem com falha 404
+    // 2. Executa download que encontrará uma imagem indisponível.
     const downloadResult = await page.evaluate(async () => {
       const sp = (window as unknown as { simuladoPackage: {
         downloadSimuladoPackage: (cfg: unknown) => Promise<unknown>;
         getReadySimuladoPackage: () => Promise<{ id?: string } | null>;
-        listSimuladoPackages: () => Promise<Array<{ id: string; status: string }>>;
+        listSimuladoPackages: () => Promise<Array<{
+          id: string;
+          status: string;
+          shell_cached?: boolean;
+          image_failures_count?: number;
+        }>>;
       } }).simuladoPackage;
 
       let caughtError = '';
@@ -258,16 +265,25 @@ test.describe('Validações Unitárias e de Integridade de Pacotes Offline', () 
       }
       const ready = await sp.getReadySimuladoPackage();
       const all = await sp.listSimuladoPackages();
-      return { caughtError, readyId: ready?.id, totalPackages: all.length, statuses: all.map(p => ({ id: p.id, status: p.status })) };
+      return {
+        caughtError,
+        readyId: ready?.id,
+        totalPackages: all.length,
+        packages: all.map(p => ({
+          id: p.id,
+          status: p.status,
+          shellCached: p.shell_cached,
+          imageFailures: p.image_failures_count,
+        })),
+      };
     });
 
-    // Confirma que o download falhou com erro de imagem
-    expect(downloadResult.caughtError).toContain('imagem');
-    // Confirma que o pacote anterior continua como o pacote ready ativo
-    expect(downloadResult.readyId).toBe('pkg_previous_valid');
-    // Confirma que o novo pacote foi gravado com status incomplete
-    const failedPkg = downloadResult.statuses.find(p => p.id !== 'pkg_previous_valid');
-    expect(failedPkg?.status).toBe('incomplete');
+    expect(downloadResult.caughtError).toBe('');
+    expect(downloadResult.readyId).not.toBe('pkg_previous_valid');
+    const downloadedPkg = downloadResult.packages.find(p => p.id !== 'pkg_previous_valid');
+    expect(downloadedPkg?.status).toBe('ready');
+    expect(downloadedPkg?.shellCached).toBe(true);
+    expect(downloadedPkg?.imageFailures).toBe(1);
   });
 
   test('lote parcial de detalhes não grava status ready e impede início do simulado', async ({ page }) => {

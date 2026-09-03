@@ -20,6 +20,8 @@ DEFAULT_PROVIDER_ORDER = ("gemini", "groq", "openrouter", "ollama")
 DEFAULT_GROQ_MODELS = ("qwen/qwen3.6-27b", "openai/gpt-oss-120b")
 DEFAULT_OPENROUTER_MODELS = ("openrouter/free",)
 DEFAULT_OLLAMA_MODELS = ("gemma3", "llama3.2")
+DEFAULT_GLOBAL_TIMEOUT_BUDGET = 30.0
+DEFAULT_PROVIDER_TIMEOUT = 10.0
 
 _cooldowns: dict[tuple[str, int, str], float] = {}
 _cooldown_lock = threading.Lock()
@@ -47,6 +49,11 @@ def _provider_order() -> list[str]:
         if normalized in DEFAULT_PROVIDER_ORDER and normalized not in valid:
             valid.append(normalized)
     return valid or list(DEFAULT_PROVIDER_ORDER)
+
+
+def _ollama_enabled() -> bool:
+    """Permite desabilitar explicitamente o fallback local em ambientes sem Ollama."""
+    return os.environ.get("OLLAMA_ENABLED", "true").strip().lower() not in {"0", "false", "no", "off"}
 
 
 def _is_available(provider: str, key_index: int, model: str = "*") -> bool:
@@ -244,20 +251,34 @@ def generate_content_with_fallback(
     timeout: Optional[int] = None,
     response_validator: Optional[Callable[[str], bool]] = None,
 ) -> Dict[str, Any]:
-    """Tenta os provedores configurados ate obter uma resposta valida ou esgotar o budget de tempo."""
+    """Tenta os provedores configurados dentro de um orçamento total compartilhado.
+
+    ``timeout`` limita cada provedor, enquanto ``AI_GLOBAL_TIMEOUT_BUDGET``
+    limita a requisição inteira. Cada provedor recebe uma fatia justa do tempo
+    restante, para que uma falha lenta não impeça os fallbacks de serem usados.
+    """
     attempts: list[str] = []
-    global_budget = float(os.environ.get("AI_GLOBAL_TIMEOUT_BUDGET", "4.0"))
-    provider_timeout = float(timeout or os.environ.get("AI_PROVIDER_TIMEOUT", "3.0"))
+    global_budget = max(1.0, float(os.environ.get("AI_GLOBAL_TIMEOUT_BUDGET", str(DEFAULT_GLOBAL_TIMEOUT_BUDGET))))
+    configured_provider_timeout = max(
+        1.0,
+        float(os.environ.get("AI_PROVIDER_TIMEOUT", str(DEFAULT_PROVIDER_TIMEOUT))),
+    )
+    provider_timeout = min(float(timeout), configured_provider_timeout) if timeout is not None else configured_provider_timeout
+    providers = [provider for provider in _provider_order() if provider != "ollama" or _ollama_enabled()]
     start_time = time.perf_counter()
 
-    for provider in _provider_order():
+    for provider_index, provider in enumerate(providers):
         elapsed = time.perf_counter() - start_time
         remaining = global_budget - elapsed
         if remaining <= 0.3:
             logger.warning("[UniversalPool] Budget global de IA esgotado (%.2fs decorridos).", elapsed)
             break
 
-        current_timeout = max(1.0, min(provider_timeout, remaining))
+        providers_left = len(providers) - provider_index
+        # Reserva tempo para os provedores seguintes. Isso é especialmente
+        # importante para o Preceptor, cujo prompt pode demorar alguns segundos.
+        fair_share = remaining / max(1, providers_left)
+        current_timeout = max(1.0, min(provider_timeout, fair_share))
         attempts.append(provider)
         if provider == "gemini":
             if gemini_pool.total_keys <= 0:
@@ -307,8 +328,9 @@ def provider_status() -> Dict[str, Any]:
             for (provider, index, model), until in _cooldowns.items() if until > now
         ]
     ollama_defaults = (os.environ.get("OLLAMA_MODEL", ""), *DEFAULT_OLLAMA_MODELS)
+    active_order = [provider for provider in _provider_order() if provider != "ollama" or _ollama_enabled()]
     return {
-        "order": _provider_order(),
+        "order": active_order,
         "providers": {
             "gemini": {"configured": gemini_pool.total_keys > 0, "keys": gemini_pool.total_keys,
                         "models": list(gemini_pool.models)},
@@ -317,8 +339,12 @@ def provider_status() -> Dict[str, Any]:
             "openrouter": {"configured": bool(openrouter_keys), "keys": len(openrouter_keys),
                            "available_keys": available_count("openrouter", openrouter_keys, openrouter_models),
                            "models": openrouter_models},
-            "ollama": {"configured": True, "host": os.environ.get("OLLAMA_HOST", "http://localhost:11434"),
-                       "models": _csv_env("OLLAMA_MODELS", ollama_defaults)},
+            "ollama": {"configured": _ollama_enabled(), "host": os.environ.get("OLLAMA_HOST", "http://localhost:11434"),
+                       "models": _csv_env("OLLAMA_MODELS", ollama_defaults), "reachable": None},
         },
         "cooldowns": cooldowns,
+        "timeouts": {
+            "global_budget_seconds": max(1.0, float(os.environ.get("AI_GLOBAL_TIMEOUT_BUDGET", str(DEFAULT_GLOBAL_TIMEOUT_BUDGET)))),
+            "provider_timeout_seconds": max(1.0, float(os.environ.get("AI_PROVIDER_TIMEOUT", str(DEFAULT_PROVIDER_TIMEOUT)))),
+        },
     }

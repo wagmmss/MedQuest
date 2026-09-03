@@ -1,21 +1,27 @@
 import os
+import sys
 import sqlite3
 import time
 import requests
 from dotenv import load_dotenv
 
-env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
-load_dotenv(env_path)
+backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+root_dir = os.path.dirname(backend_dir)
 
-TURSO_URL = os.environ.get("TURSO_DATABASE_URL", "").replace("libsql://", "https://").replace("wss://", "https://")
-TURSO_TOKEN = os.environ.get("TURSO_AUTH_TOKEN", "")
-if not TURSO_URL or not TURSO_TOKEN:
-    raise SystemExit("TURSO_DATABASE_URL e TURSO_AUTH_TOKEN são obrigatórios.")
-LOCAL_DB = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "medquest.db")
+# Carrega .env do backend e da raiz se existirem
+load_dotenv(os.path.join(backend_dir, ".env"))
+load_dotenv(os.path.join(root_dir, ".env"))
 
-PIPELINE_URL = f"{TURSO_URL}/v3/pipeline"
+# Permite TURSO_DATABASE_URL ou TURSO_SYNC_DATABASE_URL (para manter Flask local em SQLite)
+raw_url = os.environ.get("TURSO_DATABASE_URL") or os.environ.get("TURSO_SYNC_DATABASE_URL", "")
+TURSO_URL = raw_url.replace("libsql://", "https://").replace("wss://", "https://")
+TURSO_TOKEN = os.environ.get("TURSO_AUTH_TOKEN") or os.environ.get("TURSO_SYNC_AUTH_TOKEN", "")
+
+LOCAL_DB = os.path.join(backend_dir, "medquest.db")
+
+PIPELINE_URL = f"{TURSO_URL}/v3/pipeline" if TURSO_URL else ""
 HEADERS = {
-    "Authorization": f"Bearer {TURSO_TOKEN}",
+    "Authorization": f"Bearer {TURSO_TOKEN}" if TURSO_TOKEN else "",
     "Content-Type": "application/json",
 }
 
@@ -68,6 +74,15 @@ def execute_pipeline(session, requests_list, max_retries=3, timeout=60):
         raise last_err
 
 def sync_incremental():
+    if not TURSO_URL or not TURSO_TOKEN:
+        print("  [i] TURSO_DATABASE_URL ou TURSO_AUTH_TOKEN não configurados no .env.")
+        print("  [i] Sincronização com Turso ignorada, prosseguindo com deploy.")
+        return 2
+
+    if not os.path.exists(LOCAL_DB):
+        print(f"  [i] Banco local não encontrado em {LOCAL_DB}. Sincronização ignorada.")
+        return 2
+
     t0 = time.time()
     print("=== SINCRONIZAÇÃO INCREMENTAL INTELIGENTE (TURSO CLOUD) ===", flush=True)
     session = requests.Session()
@@ -220,6 +235,7 @@ def sync_incremental():
 
     dt = time.time() - t0
     print(f"\n[SUCESSO] Sincronização incremental inteligente concluída em {dt:.2f} segundos!", flush=True)
+    return 0
 
 if __name__ == "__main__":
-    sync_incremental()
+    sys.exit(sync_incremental())

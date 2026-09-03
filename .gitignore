@@ -33,6 +33,8 @@ __pycache__/
 .venv/
 venv/
 .pytest_cache/
+.pytest-*/
+.codex-pytest-*/
 .coverage
 htmlcov/
 
@@ -64,6 +66,7 @@ blob-report/
 app/frontend/public/sw.js
 app/frontend/public/workbox-*.js
 app/frontend/public/worker-*.js
+app/frontend/public/swe-worker-*.js
 
 # Ignore massive cache and garbage JSON files
 /*.json

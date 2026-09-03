@@ -5,12 +5,31 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const swPath = path.resolve(__dirname, "../public/sw.js");
+const manifestPath = path.resolve(__dirname, "../public/manifest.json");
+const requiredIconPaths = [
+  path.resolve(__dirname, "../public/icon-192x192.png"),
+  path.resolve(__dirname, "../public/icon-512x512.png"),
+];
 
 console.log("[SW Validator] Verifying Service Worker security rules in:", swPath);
+
+let hasErrors = false;
 
 if (!fs.existsSync(swPath)) {
   console.error("[SW Validator ERROR] public/sw.js does not exist!");
   process.exit(1);
+}
+
+if (!fs.existsSync(manifestPath)) {
+  console.error("[SW Validator ERROR] public/manifest.json does not exist!");
+  process.exit(1);
+}
+
+for (const iconPath of requiredIconPaths) {
+  if (!fs.existsSync(iconPath) || fs.statSync(iconPath).size === 0) {
+    console.error(`[SW Validator ERROR] Required PWA icon is missing or empty: ${iconPath}`);
+    hasErrors = true;
+  }
 }
 
 const swContent = fs.readFileSync(swPath, "utf-8");
@@ -23,8 +42,6 @@ const forbiddenPatterns = [
   { pattern: /cacheName:\s*["']pages-rsc-prefetch["']/, name: 'cacheName:"pages-rsc-prefetch"' },
   { pattern: /cacheName:\s*["']start-url["']/, name: 'cacheName:"start-url"' },
 ];
-
-let hasErrors = false;
 
 for (const { pattern, name } of forbiddenPatterns) {
   if (pattern.test(swContent)) {
@@ -62,4 +79,5 @@ console.log(" - No API or broad page-data caches found.");
 console.log(" - medquest-image-cache present.");
 console.log(" - NetworkOnly for /api/** present.");
 console.log(" - Offline shell for /estudar present.");
+console.log(" - Manifest bitmap icons present.");
 process.exit(0);

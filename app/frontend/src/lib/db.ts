@@ -63,6 +63,10 @@ export interface SimuladoPackage {
   details_count: number;
   images_count: number;
   estimated_size_bytes: number;
+  /** The app shell was verified in Cache Storage before this package was released. */
+  shell_cached?: boolean;
+  /** Images can be unavailable without preventing question text from working offline. */
+  image_failures_count?: number;
   status: "downloading" | "ready" | "incomplete" | "expired" | "quota_exceeded";
   download_progress: number;
   created_at: number;
@@ -85,6 +89,9 @@ export function isPackageValid(pkg: SimuladoPackage | null | undefined): { valid
   }
   if (pkg.questions_count === 0 || pkg.details_count < pkg.questions_count) {
     return { valid: false, reason: "Pacote incompleto ou inconsistente" };
+  }
+  if (pkg.shell_cached !== true) {
+    return { valid: false, reason: "Atualize o pacote para preparar o aplicativo offline" };
   }
   return { valid: true };
 }

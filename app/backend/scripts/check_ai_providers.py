@@ -11,9 +11,11 @@ from api.universal_pool import generate_content_with_fallback
 
 def main() -> None:
     original_order = os.environ.get("AI_PROVIDER_ORDER")
-    original_gemini_budget = os.environ.get("AI_GEMINI_TIMEOUT_BUDGET")
+    original_global_budget = os.environ.get("AI_GLOBAL_TIMEOUT_BUDGET")
+    original_provider_timeout = os.environ.get("AI_PROVIDER_TIMEOUT")
     try:
-        os.environ["AI_GEMINI_TIMEOUT_BUDGET"] = "6"
+        os.environ["AI_GLOBAL_TIMEOUT_BUDGET"] = "6"
+        os.environ["AI_PROVIDER_TIMEOUT"] = "5"
         for provider in ("gemini", "groq", "openrouter", "ollama"):
             os.environ["AI_PROVIDER_ORDER"] = provider
             try:
@@ -26,10 +28,14 @@ def main() -> None:
             os.environ.pop("AI_PROVIDER_ORDER", None)
         else:
             os.environ["AI_PROVIDER_ORDER"] = original_order
-        if original_gemini_budget is None:
-            os.environ.pop("AI_GEMINI_TIMEOUT_BUDGET", None)
+        if original_global_budget is None:
+            os.environ.pop("AI_GLOBAL_TIMEOUT_BUDGET", None)
         else:
-            os.environ["AI_GEMINI_TIMEOUT_BUDGET"] = original_gemini_budget
+            os.environ["AI_GLOBAL_TIMEOUT_BUDGET"] = original_global_budget
+        if original_provider_timeout is None:
+            os.environ.pop("AI_PROVIDER_TIMEOUT", None)
+        else:
+            os.environ["AI_PROVIDER_TIMEOUT"] = original_provider_timeout
 
 
 if __name__ == "__main__":

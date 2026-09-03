@@ -22,6 +22,15 @@ const LEGACY_CACHES = [
 const OFFLINE_STUDY_SHELL_CACHE = "medquest-study-shell";
 const OFFLINE_STUDY_SHELL_PATH = "/estudar";
 
+async function getOfflineStudyShell(): Promise<Response> {
+  const cache = await caches.open(OFFLINE_STUDY_SHELL_CACHE);
+  const shell = await cache.match(OFFLINE_STUDY_SHELL_PATH, {
+    ignoreSearch: true,
+    ignoreVary: true,
+  });
+  return shell || Response.error();
+}
+
 // Existing Android installations can retain `/` as their launch target until
 // Chrome refreshes the manifest. A redirect is not enough here: after a failed
 // navigation Chrome may try to load the redirect target outside this fetch
@@ -39,10 +48,25 @@ self.addEventListener("fetch", (rawEvent: Event) => {
     try {
       return await fetch(event.request);
     } catch {
-      const cache = await caches.open(OFFLINE_STUDY_SHELL_CACHE);
-      const shell = await cache.match(OFFLINE_STUDY_SHELL_PATH, { ignoreSearch: true });
-      return shell || Response.error();
+      return getOfflineStudyShell();
     }
+  })());
+});
+
+// Question images served from third-party CDNs are stored explicitly while a
+// package is downloaded. Workbox's same-origin API rule cannot serve those
+// entries on a later offline render, so answer them from that cache here.
+self.addEventListener("fetch", (rawEvent: Event) => {
+  const event = rawEvent as FetchEvent;
+  if (event.request.destination !== "image") return;
+
+  const url = new URL(event.request.url);
+  if (url.origin === self.location.origin) return;
+
+  event.respondWith((async () => {
+    const imageCache = await caches.open("medquest-image-cache");
+    const cached = await imageCache.match(event.request);
+    return cached || fetch(event.request);
   })());
 });
 

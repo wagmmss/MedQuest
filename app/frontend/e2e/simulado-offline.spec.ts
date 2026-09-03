@@ -135,7 +135,7 @@ test.describe('Simulado 100% Offline com Pré-download e Sincronização Posteri
     await expect(page.locator('text=Pronto Offline')).toBeVisible({ timeout: 15000 });
     const studyShellCached = await page.evaluate(async () => {
       const cache = await caches.open('medquest-study-shell');
-      return Boolean(await cache.match('/estudar'));
+      return Boolean(await cache.match('/estudar', { ignoreVary: true }));
     });
     expect(studyShellCached).toBe(true);
 
@@ -187,5 +187,48 @@ test.describe('Simulado 100% Offline com Pré-download e Sincronização Posteri
     await expect(page.locator('text=Nota Final')).toBeVisible({ timeout: 10000 });
     await expect(page.locator('text=100% de Acerto')).toBeVisible();
     expect(attemptReceivedCount).toBe(1); // Exatamente 1 lote enviado ao backend (idempotente)
+  });
+
+  test('abre /estudar em uma navegação nova sem rede depois de preparar o pacote', async ({ context, page }) => {
+    await page.route('**/api/**', async (route) => {
+      const url = new URL(route.request().url());
+      if (url.pathname.endsWith('/api/meta')) {
+        return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_META) });
+      }
+      if (url.pathname.includes('/simulado/usp') || url.pathname.includes('/simulado/custom') || url.pathname.endsWith('/api/questions')) {
+        return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_SIMULADO_QUESTIONS) });
+      }
+      if (url.pathname.endsWith('/api/questions/batch')) {
+        return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(MOCK_BATCH_DETAILS) });
+      }
+      if (url.pathname.endsWith('/api/images/cardio_ecg_sample.png')) {
+        return route.fulfill({ status: 200, contentType: 'image/png', body: Buffer.from('') });
+      }
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({}) });
+    });
+
+    await page.goto('/simulado');
+    await expect(page.locator('button:has-text("Baixar este Simulado para Uso Offline")')).toBeVisible();
+    await page.click('button:has-text("Baixar este Simulado para Uso Offline")');
+    await expect(page.locator('text=Pronto Offline')).toBeVisible({ timeout: 15000 });
+
+    await page.waitForFunction(async () => {
+      const registration = await navigator.serviceWorker.ready;
+      return Boolean(registration.active && navigator.serviceWorker.controller);
+    });
+    const cachedShell = await page.evaluate(async () => {
+      const cache = await caches.open('medquest-study-shell');
+      return Boolean(await cache.match('/estudar', { ignoreSearch: true, ignoreVary: true }));
+    });
+    expect(cachedShell).toBe(true);
+
+    await context.setOffline(true);
+    try {
+      await page.goto('/estudar', { waitUntil: 'domcontentloaded', timeout: 15000 });
+      await expect(page.locator('#conteudo-principal')).toBeVisible({ timeout: 10000 });
+      await expect(page.locator('text=Você está off-line')).not.toBeVisible();
+    } finally {
+      await context.setOffline(false);
+    }
   });
 });

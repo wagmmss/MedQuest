@@ -3,6 +3,7 @@ import { loadEnvConfig } from '@next/env';
 
 loadEnvConfig(process.cwd());
 const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:3100';
+const testServerPort = new URL(baseURL).port || '3100';
 
 export default defineConfig({
   testDir: './e2e',
@@ -25,7 +26,7 @@ export default defineConfig({
   webServer: {
     command: 'node .next/standalone/server.js',
     env: {
-      PORT: '3100',
+      PORT: testServerPort,
       HOSTNAME: '0.0.0.0',
       FLASK_API_URL: 'http://127.0.0.1:9999',
       FLASK_API_PROXY_SECRET: 'test-proxy-secret',

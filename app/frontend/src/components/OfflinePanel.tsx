@@ -121,7 +121,8 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
       toast.success("Pacote de Simulado Offline pronto!");
     } catch (e) {
       console.error("Erro ao baixar pacote offline:", e);
-      toast.error("Erro ao baixar pacote offline. Tente novamente.");
+      const message = e instanceof Error ? e.message : "Erro desconhecido";
+      toast.error(`Não foi possível concluir o pacote: ${message}`);
     } finally {
       downloadResetTimerRef.current = setTimeout(() => {
         setIsDownloading(false);
@@ -264,6 +265,12 @@ export function OfflinePanel({ onClose }: { onClose?: () => void } = {}) {
                 </strong>
               </div>
             </div>
+
+            {(activePackage.image_failures_count || 0) > 0 && (
+              <p className="text-xs text-warning">
+                {activePackage.image_failures_count} imagem(ns) não ficou(aram) disponível(is) offline; as questões continuam utilizáveis.
+              </p>
+            )}
 
             <div className="flex items-center justify-end gap-2 pt-2 border-t border-border/60">
               <button

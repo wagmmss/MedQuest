@@ -10,7 +10,10 @@ const withPWA = withPWAInit({
   // only after an offline navigation fails.
   cacheStartUrl: false,
   dynamicStartUrl: false,
-  cacheOnFrontEndNav: false,
+  // Cache the study shell as soon as the user reaches it. A package download
+  // verifies this separately, but this also makes an already-open study screen
+  // survive a connection loss before the first package is downloaded.
+  cacheOnFrontEndNav: true,
   aggressiveFrontEndNavCaching: false,
   extendDefaultRuntimeCaching: false,
   // The question bank contains thousands of images. Cache them on demand via
@@ -32,7 +35,12 @@ const withPWA = withPWAInit({
             // A cached shell may safely boot any study filter; the filters and
             // downloaded questions are resolved client-side from IndexedDB.
             ignoreSearch: true,
+            // The package download fetches this shell programmatically and a
+            // later cold launch is a navigation. Next adds Vary headers to
+            // those requests, but both represent this owner-neutral shell.
+            ignoreVary: true,
           },
+          networkTimeoutSeconds: 3,
           expiration: {
             maxEntries: 1,
             maxAgeSeconds: 60 * 60 * 24 * 30, // 30 dias

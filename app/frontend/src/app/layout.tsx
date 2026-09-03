@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MedQuest",
     description: "A melhor plataforma de estudos para a Residência Médica da USP, com planejamento anual inteligente.",
-    url: "https://medquest.com.br",
+    url: "https://medquest.live",
     siteName: "MedQuest",
     locale: "pt_BR",
     type: "website",

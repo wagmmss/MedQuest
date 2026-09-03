@@ -133,8 +133,10 @@ if (-not $SkipGit) {
         uv run --with requests --with python-dotenv python $SyncScript
         if ($LASTEXITCODE -eq 0) {
             Print-Success "Turso Cloud em sincronia com banco local."
+        } elseif ($LASTEXITCODE -eq 2) {
+            Print-Info "Sincronizacao com Turso ignorada (credenciais nao configuradas no .env)."
         } else {
-            Print-Info "Aviso: Sincronizacao com Turso ignorada ou falhou, prosseguindo com deploy."
+            Print-Info "Aviso: Sincronizacao com Turso falhou, prosseguindo com deploy."
         }
     }
 

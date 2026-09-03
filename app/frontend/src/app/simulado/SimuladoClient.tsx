@@ -290,7 +290,8 @@ export function SimuladoClient({
       toast.success("Simulado offline baixado com sucesso!");
     } catch (e) {
       console.error("Erro ao baixar pacote offline:", e);
-      toast.error("Erro ao baixar pacote offline. Verifique sua conexão.");
+      const message = e instanceof Error ? e.message : "Erro desconhecido";
+      toast.error(`Não foi possível concluir o pacote: ${message}`);
     } finally {
       setTimeout(() => {
         setIsDownloadingPackage(false);
