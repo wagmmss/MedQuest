@@ -61,7 +61,9 @@ def check_integrity(db: sqlite3.Connection) -> dict:
         if not str(question["stem"] or "").strip():
             empty_statements.append(qid)
         correct = _clean_letter(question["correct_letter"])
-        if correct not in VALID_LETTERS:
+        valid_candidates = {c.strip() for c in correct.split(",") if c.strip()}
+        is_anulada = (correct == "ANULADA")
+        if not (is_anulada or (valid_candidates and valid_candidates.issubset(VALID_LETTERS))):
             invalid_correct_letters.append({"question_id": qid, "value": question["correct_letter"]})
 
         alts = alts_by_question.get(qid, [])
@@ -70,24 +72,32 @@ def check_integrity(db: sqlite3.Connection) -> dict:
         duplicated = sorted(letter for letter, count in Counter(letters).items() if count > 1)
         if duplicated:
             duplicate_letters.append({"question_id": qid, "letters": duplicated})
-        if correct in VALID_LETTERS and correct not in letters:
-            answer_without_alternative.append({"question_id": qid, "correct_letter": correct, "available": sorted(letters)})
+        if valid_candidates and valid_candidates.issubset(VALID_LETTERS):
+            if not any(cand in letters for cand in valid_candidates):
+                answer_without_alternative.append({"question_id": qid, "correct_letter": correct, "available": sorted(letters)})
 
-        structurally_complete = (
-            len(alts) in (4, 5)
-            and len(set(letters)) == len(letters)
-            and all(letter in VALID_LETTERS for letter in letters)
-            and all(str(alt["text"] or "").strip() for alt in alts)
-            and correct in letters
-        )
+        is_discursive = len(alts) <= 1
+        if is_discursive:
+            structurally_complete = all(str(alt["text"] or "").strip() for alt in alts)
+        else:
+            structurally_complete = (
+                len(alts) in (4, 5)
+                and len(set(letters)) == len(letters)
+                and all(letter in VALID_LETTERS for letter in letters)
+                and all(str(alt["text"] or "").strip() for alt in alts)
+                and (is_anulada or any(cand in letters for cand in valid_candidates))
+            )
         if question["missing_alts"] == 0 and not structurally_complete:
             missing_alts_0_incomplete.append({"question_id": qid, "alternatives": len(alts), "letters": letters})
-        elif question["missing_alts"] == 1 and structurally_complete:
+        elif question["missing_alts"] == 1 and structurally_complete and not is_discursive:
             missing_alts_1_complete.append(qid)
 
         if "is_correct" in acols:
             marked = sorted(_clean_letter(alt["letter"]) for alt in alts if bool(alt.get("is_correct")))
-            expected = [correct] if correct in VALID_LETTERS else []
+            if is_anulada:
+                expected = marked
+            else:
+                expected = sorted(cand for cand in valid_candidates if cand in VALID_LETTERS)
             if marked != expected:
                 is_correct_mismatches.append({"question_id": qid, "correct_letter": correct, "marked": marked})
 

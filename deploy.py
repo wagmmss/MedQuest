@@ -16,9 +16,9 @@ import subprocess
 import sys
 import time
 
-HOST_DEFAULT = "136.248.114.130"
-USER_DEFAULT = "ubuntu"
-REMOTE_DIR_DEFAULT = "~/MedQuest"
+HOST_DEFAULT = os.environ.get("MEDQUEST_DEPLOY_HOST", "136.248.114.130")
+USER_DEFAULT = os.environ.get("MEDQUEST_DEPLOY_USER", "ubuntu")
+REMOTE_DIR_DEFAULT = os.environ.get("MEDQUEST_DEPLOY_DIR", "~/MedQuest")
 
 
 def run_command(cmd, shell=False, check=True):
@@ -33,6 +33,10 @@ def run_command(cmd, shell=False, check=True):
 def resolve_ssh_key(custom_key=None):
     if custom_key and os.path.exists(custom_key):
         return custom_key
+
+    env_key = os.environ.get("MEDQUEST_DEPLOY_KEY")
+    if env_key and os.path.exists(env_key):
+        return env_key
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
     local_key = os.path.join(script_dir, "sua-chave.key")

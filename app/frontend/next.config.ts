@@ -24,6 +24,7 @@ const withPWA = withPWAInit({
     cleanupOutdatedCaches: true,
     skipWaiting: true,
     clientsClaim: true,
+    exclude: [/\.map$/, /_next\/static\/media\/.*\.woff2?$/],
     runtimeCaching: [
       {
         urlPattern: ({ sameOrigin, url: { pathname } }: { sameOrigin: boolean; url: { pathname: string } }) =>

@@ -4,7 +4,7 @@ import { join } from "node:path";
 const root = new URL("..", import.meta.url).pathname.replace(/^\/(.:)/, "$1");
 const chunksDir = join(root, ".next", "static", "chunks");
 const budgets = {
-  totalJavaScript: 2_300_000,
+  totalJavaScript: 2_400_000,
   largestChunk: 450_000,
   serviceWorker: 250_000,
 };

@@ -77,6 +77,29 @@ def invalidate_user_caches(user_id):
     overview_cache.clear_user(user_id)
 
 
+def check_is_correct(selected: str, correct_letter: str | None, alts_correct: set[str] | None = None) -> int:
+    """Verifica se a alternativa selecionada pelo aluno é considerada correta.
+
+    Suporta:
+    - Letras únicas (ex: 'A', 'B')
+    - Múltiplas alternativas válidas / aceitas pós-recurso (ex: 'B, C', 'A, B')
+    - Questões anuladas pela banca (ex: 'ANULADA'), onde todos os candidatos pontuam
+    - Verificação direta contra alternativas marcadas com is_correct=1
+    """
+    sel = (selected or "").strip().upper()
+    if not sel:
+        return 0
+    if alts_correct and sel in alts_correct:
+        return 1
+    corr = (correct_letter or "").strip().upper()
+    if not corr:
+        return 0
+    if corr == "ANULADA":
+        return 1
+    valid_letters = {c.strip() for c in corr.split(",") if c.strip()}
+    return 1 if sel in valid_letters else 0
+
+
 def _sample_ids(db, where_clause, params, limit):
     """Amostragem rápida por faixa de IDs, evitando ORDER BY RANDOM().
 
@@ -573,6 +596,11 @@ def submit_attempt(qid):
         alts_count = db.execute("SELECT COUNT(*) as n FROM alternatives WHERE question_id = ?", (qid,)).fetchone()["n"]
         is_discursive = bool(alts_count <= 1)
 
+        correct_alts_rows = db.execute(
+            "SELECT letter FROM alternatives WHERE question_id = ? AND is_correct = 1", (qid,)
+        ).fetchall()
+        correct_alts_set = {r["letter"].strip().upper() for r in correct_alts_rows}
+
         with db_transaction(db, immediate=True):
             selected = (payload.selected_letter or "A").upper()
             if payload.is_correct is not None:
@@ -581,7 +609,7 @@ def submit_attempt(qid):
                 # For discursive questions with deferred confidence, initialize as 0 pending self-assessment
                 is_correct = 0
             else:
-                is_correct = 1 if selected == q["correct_letter"] else 0
+                is_correct = check_is_correct(selected, q["correct_letter"], correct_alts_set)
 
             db.execute(
                 """INSERT INTO attempts (question_id, selected_letter, is_correct, answered_at, time_spent_ms, confidence, user_id)
@@ -742,6 +770,7 @@ def submit_attempt_batch():
         CHUNK_SIZE = 500
         q_map = {}
         exp_map = {}
+        correct_alts_map = {}
 
         for i in range(0, len(q_ids), CHUNK_SIZE):
             chunk = q_ids[i:i + CHUNK_SIZE]
@@ -750,6 +779,10 @@ def submit_attempt_batch():
             qs = db.execute(f"SELECT id, correct_letter FROM questions WHERE id IN ({placeholders})", chunk).fetchall()
             for q in qs:
                 q_map[q["id"]] = q["correct_letter"]
+
+            alts_rows = db.execute(f"SELECT question_id, letter FROM alternatives WHERE question_id IN ({placeholders}) AND is_correct = 1", chunk).fetchall()
+            for a in alts_rows:
+                correct_alts_map.setdefault(a["question_id"], set()).add(a["letter"].strip().upper())
                 
             exps = db.execute(f"SELECT question_id, explanation_text FROM explanations WHERE question_id IN ({placeholders})", chunk).fetchall()
             for e in exps:
@@ -779,7 +812,7 @@ def submit_attempt_batch():
                 if item.is_correct is not None:
                     is_correct = 1 if item.is_correct else 0
                 else:
-                    is_correct = 1 if selected == correct_letter else 0
+                    is_correct = check_is_correct(selected, correct_letter, correct_alts_map.get(item.question_id))
                 conf = item.confidence or "certeza"
 
                 db.execute(

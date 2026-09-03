@@ -173,3 +173,63 @@ def test_discursive_question_detail_and_self_assessment(client):
     )
     assert attempt2.status_code == 200
     assert attempt2.get_json()["is_correct"] is True
+
+
+def test_attempt_gabarito_duplo_e_anulada(client):
+    from api.db import get_db
+    with client.application.app_context():
+        db = get_db()
+        # Questão com recurso deferido e gabarito duplo (B ou C)
+        db.execute("INSERT INTO questions(id, correct_letter, stem) VALUES (4, 'B, C', 'Questão dupla')")
+        db.execute("INSERT INTO alternatives(question_id, letter, text, is_correct) VALUES (4, 'A', 'alt a', 0), (4, 'B', 'alt b', 1), (4, 'C', 'alt c', 1), (4, 'D', 'alt d', 0)")
+        
+        # Questão anulada pela banca
+        db.execute("INSERT INTO questions(id, correct_letter, stem) VALUES (5, 'ANULADA', 'Questão anulada')")
+        db.execute("INSERT INTO alternatives(question_id, letter, text, is_correct) VALUES (5, 'A', 'alt a', 1), (5, 'B', 'alt b', 1)")
+        db.commit()
+
+    # Tentativa na questão 4 com letra B (deve ser correta)
+    r_b = client.post("/api/questions/4/attempt", json={"selected_letter": "B"})
+    assert r_b.status_code == 200
+    assert r_b.get_json()["is_correct"] is True
+
+    # Tentativa na questão 4 com letra C (também deve ser correta)
+    r_c = client.post("/api/questions/4/attempt", json={"selected_letter": "C"})
+    assert r_c.status_code == 200
+    assert r_c.get_json()["is_correct"] is True
+
+    # Tentativa na questão 4 com letra A (deve ser incorreta)
+    r_a = client.post("/api/questions/4/attempt", json={"selected_letter": "A"})
+    assert r_a.status_code == 200
+    assert r_a.get_json()["is_correct"] is False
+
+    # Tentativa na questão 5 anulada (qualquer alternativa pontua como correta)
+    r_anulada = client.post("/api/questions/5/attempt", json={"selected_letter": "A"})
+    assert r_anulada.status_code == 200
+    assert r_anulada.get_json()["is_correct"] is True
+
+
+def test_pulo_do_gato_extraction_preserves_depth():
+    from api.ai import _extract_pulo_do_gato, _extract_why_wrong
+    explanation = """**Gabarito Oficial**: Letra A
+
+**Pulo do Gato**: A otite média aguda requer identificação de abaulamento da membrana timpânica.
+- Âncoras: início agudo (< 48h), febre e otalgia.
+- Conduta: amoxicilina 90 mg/kg/dia se menor de 2 anos ou otite grave.
+
+**Raciocínio Clínico**:
+O quadro clínico detalhado aborda...
+
+**Análise dos Distratores**:
+- **Alternativa (B)**: Não se faz conduta expectante em lactente menor de 6 meses.
+- **Alternativa (C)**: Ciprofloxacino não é a primeira linha em otite aguda não supurada.
+"""
+    pulo = _extract_pulo_do_gato(explanation)
+    assert "abaulamento da membrana" in pulo
+    assert "- Âncoras:" in pulo
+    assert "- Conduta: amoxicilina 90 mg/kg/dia" in pulo
+    assert "Raciocínio Clínico" not in pulo
+
+    why_b = _extract_why_wrong(explanation, "B", "")
+    assert "Não se faz conduta expectante" in why_b
+    assert "Alternativa (C)" not in why_b

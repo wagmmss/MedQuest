@@ -43,7 +43,12 @@ def generate():
     if not q:
         return jsonify({"error": "Questao nao encontrada."}), 404
         
-    correct_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (question_id, q["correct_letter"])).fetchone()
+    corr_letters = [c.strip().upper() for c in (q["correct_letter"] or "").split(",") if c.strip()]
+    first_letter = corr_letters[0] if corr_letters else ""
+    correct_alt = db.execute(
+        "SELECT text, letter FROM alternatives WHERE question_id = ? AND (is_correct = 1 OR letter = ? OR letter = ?) ORDER BY is_correct DESC, letter ASC LIMIT 1",
+        (question_id, q["correct_letter"], first_letter)
+    ).fetchone()
     wrong_alt = None
     if wrong_letter:
         wrong_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (question_id, wrong_letter)).fetchone()
@@ -106,7 +111,12 @@ def preview():
     if not q:
         return jsonify({"error": "Questao nao encontrada."}), 404
         
-    correct_alt = db.execute("SELECT text FROM alternatives WHERE question_id = ? AND letter = ?", (question_id, q["correct_letter"])).fetchone()
+    corr_letters = [c.strip().upper() for c in (q["correct_letter"] or "").split(",") if c.strip()]
+    first_letter = corr_letters[0] if corr_letters else ""
+    correct_alt = db.execute(
+        "SELECT text, letter FROM alternatives WHERE question_id = ? AND (is_correct = 1 OR letter = ? OR letter = ?) ORDER BY is_correct DESC, letter ASC LIMIT 1",
+        (question_id, q["correct_letter"], first_letter)
+    ).fetchone()
     
     wrong_alt = None
     if wrong_letter:
@@ -221,7 +231,14 @@ def generate_batch():
         q = question_map.get(qid)
         if not q:
             continue
-        correct_text = alternative_map.get((qid, q["correct_letter"].upper()))
+        corr_letters = [c.strip().upper() for c in (q["correct_letter"] or "").split(",") if c.strip()]
+        correct_text = None
+        for cl in corr_letters:
+            if (qid, cl) in alternative_map:
+                correct_text = alternative_map[(qid, cl)]
+                break
+        if not correct_text and q["correct_letter"]:
+            correct_text = alternative_map.get((qid, q["correct_letter"].upper()))
         wrong_text = alternative_map.get((qid, wrong_letter))
         if not correct_text or not wrong_text:
             continue

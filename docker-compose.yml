@@ -37,7 +37,7 @@ services:
       - OLLAMA_MODELS=${OLLAMA_MODELS:-gemma3,llama3.2}
       - OLLAMA_ENABLED=${OLLAMA_ENABLED:-true}
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -55,7 +55,7 @@ services:
       - FLASK_API_PROXY_SECRET=${FLASK_API_PROXY_SECRET}
       - FLASK_API_URL=http://backend:8000
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     depends_on:
       - backend
 

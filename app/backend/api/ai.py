@@ -24,25 +24,33 @@ def _clean_option_text(text: str) -> str:
 def _extract_pulo_do_gato(explanation: str) -> str:
     if not explanation:
         return ""
-    match = re.search(r'\*\*Pulo do Gato\*\*:\s*([^\n\r]+(?:\n[^\n\r*]+)?)', explanation, re.IGNORECASE)
+    # Captura a seção inteira do Pulo do Gato até o próximo cabeçalho estruturado ou fim do texto,
+    # garantindo máxima relevância clínica e profundidade médica sem truncamento artificial (Guardrail 5).
+    match = re.search(
+        r'\*\*Pulo do Gato\*\*:\s*([\s\S]*?)(?=(?:\n\s*\n\s*(?:\*\*[A-ZÀ-Úa-zà-ú0-9#]|###)|\Z))',
+        explanation,
+        re.IGNORECASE
+    )
     if match:
         pulo = match.group(1).strip()
-        return re.sub(r'\*\*', '', pulo)
+        if pulo:
+            return pulo
+    match_fallback = re.search(r'\*\*Pulo do Gato\*\*:\s*([^\n\r]+)', explanation, re.IGNORECASE)
+    if match_fallback:
+        return match_fallback.group(1).strip()
     return ""
 
 
 def _extract_why_wrong(explanation: str, wrong_letter: str, wrong_text: str) -> str:
-    if not explanation:
+    if not explanation or not wrong_letter:
         return ""
-    if wrong_letter:
-        pattern = rf'\*\*Alternativa[^\n]*\({re.escape(wrong_letter)}\)[^\n]*\*\*:\s*([^\n\r]+(?:\n[^\n\r*]+)?)'
-        match = re.search(pattern, explanation, re.IGNORECASE)
-        if not match:
-            pattern2 = rf'\*\*Alternativa\s+{re.escape(wrong_letter)}[^\n]*\*\*:\s*([^\n\r]+(?:\n[^\n\r*]+)?)'
-            match = re.search(pattern2, explanation, re.IGNORECASE)
-        if match:
-            why = match.group(1).strip()
-            return re.sub(r'\*\*', '', why)
+    pattern = rf'(?:-\s*)?\*\*Alternativa[^\n]*\({re.escape(wrong_letter)}\)[^\n]*\*\*:\s*([\s\S]*?)(?=(?:\n\s*(?:-\s*\*\*|\*\*|###)|\Z))'
+    match = re.search(pattern, explanation, re.IGNORECASE)
+    if not match:
+        pattern2 = rf'(?:-\s*)?\*\*Alternativa\s+{re.escape(wrong_letter)}[^\n]*\*\*:\s*([\s\S]*?)(?=(?:\n\s*(?:-\s*\*\*|\*\*|###)|\Z))'
+        match = re.search(pattern2, explanation, re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
     return ""
 
 
